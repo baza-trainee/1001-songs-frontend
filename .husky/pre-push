@@ -1,5 +1,17 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+current_branch=$(git symbolic-ref --short HEAD)
+
+# Перевірка, чи гілка test була створена з гілки dev
+if [ "$current_branch" = "test" ] && git merge-base --is-ancestor dev HEAD; then
+  # Перевірка, чи гілка dev оновлена з dev на віддаленому репозиторії
+  git fetch origin dev
+  if git diff --quiet dev origin/dev; then
+    echo "Branch 'dev' is not up to date. Pushing 'test' branch is not allowed."
+    exit 1
+  fi
+fi
+
 npm run stylelint
 ng test --watch=false --progress=false --browsers=ChromeHeadless
