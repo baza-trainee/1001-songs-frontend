@@ -11,7 +11,7 @@
 **/.hg
 .angular
 .vscode
-/docs
+docs/
 .prettierignore
 *.md
 *

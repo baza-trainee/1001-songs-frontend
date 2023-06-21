@@ -17,11 +17,11 @@ else
   exit 1
 fi
 # Перевірити, чи локальна гілка оновлена з головною гілкою
-if git diff --quiet $current_branch pull/origin/$dev_branch; then
-  echo "Гілка $current_branch оновлена з головною гілкою $dev_branch. Можна продовжити пуш."
-else
-  echo "Гілка $current_branch не оновлена з головною гілкою $dev_branch. Будь ласка, оновіть перед пушем."
-  git pull origin dev
-fi
+# if git diff --quiet $current_branch pull/origin/$dev_branch; then
+#   echo "Гілка $current_branch оновлена з головною гілкою $dev_branch. Можна продовжити пуш."
+# else
+#   echo "Гілка $current_branch не оновлена з головною гілкою $dev_branch. Будь ласка, оновіть перед пушем."
+#   git pull origin dev
+# fi
 npm run stylelint
 ng test --watch=false --progress=false --browsers=ChromeHeadless
