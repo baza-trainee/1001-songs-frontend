@@ -29,6 +29,6 @@ jobs:
         if: github.event.pull_request.merged == true
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: main
+          branch: dev
           folder: docs/
 
