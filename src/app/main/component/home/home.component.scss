@@ -64,6 +64,8 @@
       column-gap: 9.5px;
       transition: all 0.2s linear;
       cursor: pointer;
+      width: 244px;
+      justify-content: center;
 
       @include button-desktop;
 
@@ -158,6 +160,7 @@
 
       &-button {
         justify-content: center;
+        width: 100%;
 
         @include button-mobile;
       }

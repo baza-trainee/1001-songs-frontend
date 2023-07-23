@@ -23,9 +23,18 @@
    "footer": {
       "stub": "Block Footer in development"
    },
-   "home": {
-      "stub": "Main page under development"
-   },
+  "home": {
+    "home-info": {
+      "songs-link": "1000+ songs",
+      "donate-link": "Education support",
+      "title": "1000 & 1 song",
+      "subtitle": "We have collected authentic ukrainian songs from all regions and various genres. Let's popularize Ukraine together"
+    },
+    "actions": {
+      "button-donate": "Donate",
+      "button-share": "Share"
+    }
+  },
    "about": {
       "stub": "The 'About the project' page is under development"
    },

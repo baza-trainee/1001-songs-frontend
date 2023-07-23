@@ -1,6 +1,3 @@
-<!--<div> -->
-<!--   <p>{{ 'home.stub' | translate }}</p>-->
-<!--</div>-->
 <section class="home">
   <div class="container">
     <div class="home__inner">
@@ -8,19 +5,19 @@
         <div class="home__info-links">
           <ul class="home__info-list">
             <li class="home__info-item">
-              <a routerLink="" class="home__info-link">1000+ пісень</a>
-              <a routerLink="" class="home__info-link">Підтримка освіти</a>
+              <a routerLink="" class="home__info-link">{{ 'home.home-info.songs-link' | translate }}</a>
+              <a routerLink="" class="home__info-link">{{ 'home.home-info.donate-link' | translate }}</a>
             </li>
           </ul>
         </div>
         <div class="home__info-desc">
-          <h1 class="home__info-title">1000 і 1 пісня</h1>;
-          <p class="home__info-subtitle">У нас зібрані українські автентичні пісні з усіх регіонів та різних жанрів. Популяризуймо Україну разом
+          <h1 class="home__info-title">{{ 'home.home-info.title' | translate }}</h1>;
+          <p class="home__info-subtitle">{{ 'home.home-info.subtitle' | translate }}
           <img class="home__info-img" [src]="HomepageFlag.flagIcon" alt="flag of Ukraine"></p>
         </div>
         <div class="home__info-actions">
-          <a class="home__info-button"><img [src]="HomepageDonate.donateIcon" alt="img-donate">Підтримати проект</a>
-          <a class="home__info-button"><img [src]="HomepageShare.shareIcon" alt="img-share">Поділитись сайтом</a>
+          <a class="home__info-button"><img [src]="HomepageDonate.donateIcon" alt="img-donate">{{ 'home.actions.button-donate' | translate }}</a>
+          <a class="home__info-button"><img [src]="HomepageShare.shareIcon" alt="img-share">{{ 'home.actions.button-share' | translate }}</a>
         </div>
       </div>
     </div>
