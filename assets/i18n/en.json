@@ -41,6 +41,12 @@
       "button-share": "Share"
     }
   },
+  "tapes": {
+    "tapes-wrap": {
+      "knowUkraine": "know Ukrainian singing",
+      "places": "record spaces"
+    }
+  },
    "about": {
       "stub": "The 'About the project' page is under development"
    },
