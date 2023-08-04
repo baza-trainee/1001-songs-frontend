@@ -78,5 +78,7 @@ jobs:
       # env:
       #   ITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: |
+        npm ci
         npm install
-        ng deploy --no-silent
+        npm install -g @angular/cli
+        git config --global
