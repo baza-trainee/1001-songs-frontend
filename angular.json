@@ -112,7 +112,6 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://baza-trainee.github.io/1001-songs-frontend/",
             "name": "Baza Trainee Ukraine",
             "email": "baza.trainee@gmail.com"
           }
