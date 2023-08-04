@@ -26,6 +26,7 @@ jobs:
       run: |
         npm ci
         npm install
+        npm install -g @angular/cli
 
     # - name: Builds 🚀🚀🚀🚀
       # env:
