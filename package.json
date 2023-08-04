@@ -10,7 +10,8 @@
     "stylelint": "npx stylelint \"src/**/*.scss\"",
     "precommit": "lint-staged",
     "prepare": "husky install~",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy": "ng deploy --base-href=/1001-songs-frontend/"
   },
   "private": true,
   "dependencies": {
