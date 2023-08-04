@@ -75,8 +75,8 @@ jobs:
     #     npm install -g @angular/cli
 
     - name: Deploy 🚀
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         npm ci
         npm install
