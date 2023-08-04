@@ -21,12 +21,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
+          npm i
 
-      # - name: TS Lint
-      #   run: npm run lint
+      - name: TS Lint
+        run: npm run lint
 
-      # # - name: SCSS Linter
-      # #   run: npm run stylelint
+      - name: SCSS Linter
+        run: npm run stylelint
 
-      # # - name: Unit Tests
-      # #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
+      - name: Unit Tests
+        run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
