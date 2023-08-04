@@ -81,4 +81,4 @@ jobs:
         npm ci
         npm install
         npm install -g @angular/cli
-        ng deploy --no-silent
+        ng deploy --no-silent --repo=https://github.com/baza-trainee/1001-songs-frontend.git
