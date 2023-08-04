@@ -77,4 +77,8 @@ jobs:
     - name: Deploy 🚀
       env:
         ITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
+      run: |
+        git config --global user.email "baza.trainee@gmail.com"
+        git config --global user.name "baza-trainee"
+        git clone https://github.com/baza-trainee/1001-songs-frontend.git
+        ng deploy --no-silent
