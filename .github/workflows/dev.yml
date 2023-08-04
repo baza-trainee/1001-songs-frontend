@@ -41,5 +41,5 @@ jobs:
         with:
           branch: dev
           folder: docs
-        permissions:
-          contents: write
+        # permissions:
+        #   contents: write
