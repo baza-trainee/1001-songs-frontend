@@ -81,4 +81,4 @@ jobs:
         npm ci
         npm install
         npm install -g @angular/cli
-        git config --global
+        ng deploy --no-silent
