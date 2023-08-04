@@ -11,7 +11,7 @@
     "precommit": "lint-staged",
     "prepare": "husky install~",
     "lint": "ng lint",
-    "deploy": "ng deploy --base-href=/1001-songs-frontend/ --cname=https://baza-trainee.github.io/1001-songs-frontend/ --name=baza-trainee --email=baza.trainee@gmail.com --no-silent"
+    "deploy": "ng deploy --base-href=/1001-songs-frontend/ --name=baza-trainee --email=baza.trainee@gmail.com --no-silent"
   },
   "private": true,
   "dependencies": {
