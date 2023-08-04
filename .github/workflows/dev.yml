@@ -82,4 +82,4 @@ jobs:
         npm install
         npm install -g @angular/cli
         git clone https://github.com/baza-trainee/1001-songs-frontend.git
-        ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="AlexW8719" --email=baza.trainee@gmail.com  --no-silent
+        ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="AlexW8719" --email=vynnyk87@gmail.com  --no-silent
