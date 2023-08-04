@@ -23,6 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.16.0
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
@@ -43,6 +44,7 @@ jobs:
       #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
 
       - name: Deploy 🚀
-        run: ng deploy --no-silent --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com
         env:
-          SECRET_KEY: ${{ secrets.DEPLOY_PASSWORD }}
+          ITHUB_TOKEN: ${{ secrets.DEPLOY_PASSWORD }}
+        run: npm run ng -- deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com  --no-silent
+
