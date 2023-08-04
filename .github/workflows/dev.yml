@@ -24,7 +24,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm install
 
       # - name: TS Lint
       #   run: npm run lint
