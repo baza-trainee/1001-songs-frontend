@@ -62,13 +62,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use Node.js 16.x
+    - name: Use Node.js 18.x
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
         cache: 'npm'
 
-    - name: Prepare and deploy
+    - name: Deploy 🚀
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --base-href=/1001-songs-frontend/ --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
+      run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
