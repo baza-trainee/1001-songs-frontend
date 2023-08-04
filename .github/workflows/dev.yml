@@ -46,5 +46,8 @@ jobs:
       - name: Deploy 🚀
         env:
           ITHUB_TOKEN: ${{ secrets.DEPLOY_PASSWORD }}
-        run: npm run ng -- deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com  --no-silent
+        run: |
+          git config --global user.email "baza.trainee@gmail.com"
+          git config --global user.name "Baza Trainee Ukraine"
+          ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com  --no-silent
 
