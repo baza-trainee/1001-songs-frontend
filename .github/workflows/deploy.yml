@@ -27,13 +27,13 @@ jobs:
         npm install
         npm install -g @angular/cli
 
-    - name: Buils 🚀🚀🚀🚀
+    - name: Builds 🚀🚀🚀🚀
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: build
+      with:
+        branch: gh-pages
+        folder: docs
 
     - name: Deploy 🚀🚀🚀🚀
       env:
