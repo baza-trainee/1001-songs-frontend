@@ -40,12 +40,8 @@ jobs:
       #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
 
       - name: Deploy 🚀
-        # uses: JamesIves/github-pages-deploy-action@v4
-        # with:
-        #   branch: gh-pages
-        #   folder: docs
-        run: ng deploy
-        env:
-          ACCESS_TOKEN: ${{ secrets.DEPLOY_EMAIL }}
-          API_KEY: ${{ secrets.DEPLOY_NAME }}
-          PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+        uses: AhsanAyaz/angular-deploy-gh-pages-actions@latest
+          with:
+            github_access_token: ${{ secrets.DEPLOY_EMAIL }}
+            build_configuration: ng build --prod
+            deploy_branch: gh-pages
