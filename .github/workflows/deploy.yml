@@ -30,7 +30,7 @@ jobs:
         npm install -g @angular/cli
         npm run build
 
-    - name: Builds 🚀🚀🚀🚀
+    # - name: Builds 🚀🚀🚀🚀
       # env:
       #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       # uses: JamesIves/github-pages-deploy-action@v4
