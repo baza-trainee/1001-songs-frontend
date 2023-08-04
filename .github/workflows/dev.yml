@@ -81,5 +81,5 @@ jobs:
         npm ci
         npm install
         npm install -g @angular/cli
-        git config --global url.https://github.com/baza-trainee/1001-songs-frontend@github.com/.insteadOf https://github.com/
-        ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --no-silent
+        git config --global url.https://github.com/baza-trainee/1001-songs-frontend.git@github.com/.insteadOf https://github.com/
+        ng deploy --no-silent
