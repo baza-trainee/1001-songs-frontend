@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }}
+    # concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
 
     steps:
@@ -28,10 +28,13 @@ jobs:
         run: |
           npm ci
           npm install
-          npm run build
           npm install -g @angular/cli
-      # - name: TS Lint
-      #   run: npm run lint
+
+      - name: Build
+        run: npm run build -- --prod
+
+      - name: TS Lint
+        run: npm run lint
 
       # - name: SCSS Linter
       #   run: npm run stylelint
@@ -40,6 +43,6 @@ jobs:
       #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
 
       - name: Deploy 🚀
-        run: npm run deploy
+        run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com
         env:
           SECRET_KEY: ${{ secrets.DEPLOY_PASSWORD }}
