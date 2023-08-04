@@ -68,6 +68,12 @@ jobs:
         node-version: 18.x
         cache: 'npm'
 
+    - name: Install dependencies
+      run: |
+        npm ci
+        npm install
+        npm install -g @angular/cli
+
     - name: Deploy 🚀
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
