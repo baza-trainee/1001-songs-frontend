@@ -75,11 +75,13 @@ jobs:
     #     npm install -g @angular/cli
 
     - name: Deploy 🚀
-      env:
-        ITHUB_TOKEN: ${{ secrets.TOKEN }}
+      # env:
+      #   ITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: |
         npm ci
         npm install
         npm install -g @angular/cli
+        git config --global user.email "vynnyk87@gmail.comm"
+        git config --global user.name "AlexW8719"
         git clone https://github.com/baza-trainee/1001-songs-frontend.git
         ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="AlexW8719" --email=vynnyk87@gmail.com  --no-silent
