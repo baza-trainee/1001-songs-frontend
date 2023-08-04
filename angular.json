@@ -110,11 +110,7 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "name": "Baza Trainee Ukraine",
-            "email": "baza.trainee@gmail.com"
-          }
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
