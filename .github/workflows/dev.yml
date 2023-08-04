@@ -76,5 +76,5 @@ jobs:
 
     - name: Deploy 🚀
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
+        ITHUB_TOKEN: ${{ secrets.TOKEN }}
+      run: ng deploy --repo=./1001-songs-frontend --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
