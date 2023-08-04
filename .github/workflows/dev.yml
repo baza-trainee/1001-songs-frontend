@@ -5,14 +5,12 @@ on:
     branches: [master, dev]
 
   push:
-    branches: [dev]
+    branches: [master, dev]
 
 jobs:
-  build:
+  build and deploy:
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
 
     steps:
       - name: Checkout
@@ -21,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18.16.0'
 
       - name: Install dependencies
         run: |
@@ -41,7 +39,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
+          branch: dev
           folder: docs
         permissions:
           contents: write
