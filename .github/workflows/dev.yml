@@ -81,7 +81,5 @@ jobs:
         npm ci
         npm install
         npm install -g @angular/cli
-        git config --global user.email "baza.trainee@gmail.com"
-        git config --global user.name "baza-trainee"
         git clone https://github.com/baza-trainee/1001-songs-frontend.git
-        ng deploy --no-silent
+        ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="AlexW8719" --email=baza.trainee@gmail.com  --no-silent
