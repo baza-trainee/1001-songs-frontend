@@ -1,53 +1,74 @@
-name: ci-cd
+# name: ci-cd
 
-on:
-  pull_request:
-    branches: [master, dev]
+# on:
+#   pull_request:
+#     branches: [master, dev]
 
-  push:
-    branches: [master, dev]
+#   push:
+#     branches: [master, dev]
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
+
+# jobs:
+#   build-and-deploy:
+#     # concurrency: ci-${{ github.ref }}
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+      
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 18.16.0
+#           cache: 'npm'
+
+#       - name: Install dependencies
+#         run: |
+#           npm ci
+#           npm install
+#           npm install -g @angular/cli
+
+#       # - name: Build
+#       #   run: npm run build -- --prod
+
+#       # - name: TS Lint
+#       #   run: npm run lint
+
+#       # - name: SCSS Linter
+#       #   run: npm run stylelint
+
+#       # - name: Unit Tests
+#       #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
+
+#       - name: Deploy 🚀
+#         env:
+#           ITHUB_TOKEN: ${{ secrets.DEPLOY_PASSWORD }}
+#         run: |
+
+#           ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com  --no-silent
+
+name: Deploy to GitHub Pages via angular-cli-ghpages
+
+on: [push]
 
 jobs:
   build-and-deploy:
-    # concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.16.0
-          cache: 'npm'
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          npm ci
-          npm install
-          npm install -g @angular/cli
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
 
-      # - name: Build
-      #   run: npm run build -- --prod
-
-      # - name: TS Lint
-      #   run: npm run lint
-
-      # - name: SCSS Linter
-      #   run: npm run stylelint
-
-      # - name: Unit Tests
-      #   run: npx ng test --watch=false --progress=false --browsers=ChromeHeadless
-
-      - name: Deploy 🚀
-        env:
-          ITHUB_TOKEN: ${{ secrets.DEPLOY_PASSWORD }}
-        run: |
-          git config --global user.email "baza.trainee@gmail.com"
-          git config --global user.name "Baza Trainee Ukraine"
-          ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --name="Baza Trainee Ukraine" --email=baza.trainee@gmail.com  --no-silent
-
+    - name: Prepare and deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      run: ng deploy --repo=https://github.com/baza-trainee/1001-songs-frontend.git --base-href=/1001-songs-frontend/ --name="baza-trainee" --email="baza.trainee@gmail.com" --no-silent
