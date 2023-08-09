@@ -20,8 +20,7 @@
     max-height: 260px;
     position: absolute;
     top: 400px;
-    align-items: center;
-    left: 80px;
+    left: 0;
 
     &-desc {
       display: flex;
@@ -105,20 +104,28 @@
   }
 }
 
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
+  }
+}
+
   @media (width <=1024px) {
-    .home {
-      &__info {
-        position: absolute;
-        left: 48px;
-      }
+    .container {
+      margin: 0 48px;
     }
   }
 
   @media (width <=768px) {
+    .container {
+      margin: 0 32px;
+    }
+
     .home {
       &__info {
         max-height: 220px;
-        inset: 420px 32px 60px;
+        inset: 420px 0 60px;
         width: auto;
         position: absolute;
 
@@ -146,6 +153,10 @@
   }
 
   @media (width <=675px) {
+    .container {
+      margin: 0 32px;
+    }
+
     .home {
       &__info {
         top: 390px;
@@ -181,6 +192,10 @@
   }
 
   @media (width <=465px) {
+    .container {
+      margin: 0 16px;
+    }
+
     .home {
       &__info {
         &-actions {
@@ -195,7 +210,7 @@
       &__info {
         max-width: 358px;
         position: absolute;
-        inset: 344px 16px 48px;
+        inset: 344px 0 48px;
 
         &-title {
           margin: 0 0 20px;
