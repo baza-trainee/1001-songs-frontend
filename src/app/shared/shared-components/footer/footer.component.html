@@ -15,6 +15,7 @@
 
    <section class="footer__block2">
       <div class="footer__partners">
+         <p>Наші партнери</p>
          <a href="#">
             <img src="./assets/img/partners/partner-1.png" alt="partner logo 1" class="partners__logo">
          </a>
@@ -33,17 +34,25 @@
                <li><a routerLink = "#" routerLinkActive="active"> {{ 'footer.rules.terms' | translate }} </a></li>
             </ul>
          </div>
-         <div class="rules__rights">
-            <p> {{ 'footer.rules.copyright' | translate }} 44</p>
+      </div>
+      <div class="footer__contact">
+         <h3>Контакти</h3>
+         <div class="contact__mail">
+            <a href="mailto:clientsupport@gmail.com">clientsupport@gmail.com</a>
+         </div>
+         <div class="footer__social">
+            <a href="#" class="sotial__item">
+               <img src="./assets/img/social/facebook.svg" alt="">
+            </a>
+            <a href="#" class="sotial__item">
+               <img src="./assets/img/social/youtube.svg" alt="">
+            </a>
          </div>
       </div>
-      <div class="footer__social">
-         <a href="#" class="sotial__item">
-            <img src="./assets/img/social/facebook.svg" alt="">
-         </a>
-         <a href="#" class="sotial__item">
-            <img src="./assets/img/social/youtube.svg" alt="">
-         </a>
+   </section>
+   <section class="footer__block3">
+      <div class="footer__rights">
+         <p>{{ 'footer.rules.copyright' | translate }}</p>
       </div>
    </section>
 </div>

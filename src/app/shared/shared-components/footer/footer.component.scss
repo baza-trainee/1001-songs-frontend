@@ -10,7 +10,7 @@ footer {
       margin: 0 auto;
       padding: 80px 80px 32px;
       max-width: 1440px;
-      min-height: 337px;
+      min-height: 441px;
 
       &__block1 {
          margin-bottom: 16px;
@@ -88,7 +88,7 @@ footer {
       &__block2 {
          margin: 32px 0;
          display: flex;
-         flex-flow: row nowrap;
+         flex-flow: row wrap;
          justify-content: space-between;
          align-items: center;
 
@@ -98,6 +98,12 @@ footer {
             min-width: 294px;
             margin-right: 24px;
 
+            p {
+               margin-bottom: 24px;
+
+               @include link-desktop($color: var(--text-color-secondary));
+            }
+
             img {
                width: 64px;
                height: 64px;
@@ -106,20 +112,16 @@ footer {
          }
 
          .footer__rules {
-            min-height: 68px;
             margin-right: auto;
-            height: 100%;
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: space-between;
+            // margin-left: auto;
 
             .rules__legal {
                ul {
                   display: flex;
-                  flex-flow: row wrap;
+                  flex-flow: column;
 
                   li {
-                     @include caption-small-desktop($color: $color-secondary);
+                     @include copyright-desktop($color: rgba(221, 221, 221, 100%));
 
                      margin-bottom: 24px;
                      margin-right: 32px;
@@ -131,22 +133,34 @@ footer {
                   }
                }
             }
-
-            .rules__rights {
-               width: fit-content;
-
-               @include copyright-desktop($color: $color-extra-2);
-            }
          }
 
-         .footer__social {
+         .footer__contact {
+            @include copyright-desktop($color: $color-extra-2);
+
             min-width: 128px;
-            text-align: right;
+            text-align: left;
 
-            .sotial__item {
-               margin-left: 24px;
+            h3 {
+               margin-bottom: 24px;
+            }
+
+            .contact__mail {
+               @include link-desktop;
+            }
+
+            .footer__social {
+               margin-top: 32px;
+
+               .sotial__item {
+                  margin-right: 24px;
+               }
             }
          }
+      }
+
+      &__block3 {
+         @include copyright-desktop($color: $color-extra-2);
       }
    }
 }
