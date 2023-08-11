@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -6,8 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
     templateUrl: './expeditions.component.html',
     styleUrls: ['./expeditions.component.scss'],
     standalone: true,
-    imports: [TranslateModule]
+    imports: [CommonModule, TranslateModule]
 })
 export class ExpeditionsComponent {
+    gallery: number[] = [...Array(10)]
+    imgUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-bargjHS0bbEvbcmCkoUHD649_T1AfqU6tQ&usqp=CAU'
 
 }
