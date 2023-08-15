@@ -4,6 +4,7 @@
   display: flex;
   padding-top: 148px;
   min-height: 90vh;
+  margin-bottom: 80px;
 }
 
 .expeditions {
@@ -50,7 +51,7 @@
       }
       // TODO: remove $font-family param after 
       &__name {
-        @include h6-desktop($font-size: 24px, $line-height: 45px, $font-family: 'Helvetica');
+        @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: 'Helvetica');
       }
       &__description {
         @include body-desktop($font-family: 'Helvetica');
