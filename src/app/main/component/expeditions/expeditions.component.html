@@ -10,16 +10,16 @@
             <li *ngFor=" let category of categories"> <a href="#"> {{category}}</a></li>
          </ul>
       </div>
-      <div class="expeditions__gallery">
-        <div *ngFor="let img of gallery" class="expeditions__item">
+      <div class="expeditions__gallery" *ngIf="$expeditions | async as expeditions">
+        <div *ngFor="let event of expeditions" class="expeditions__item">
          <img 
-           [src]="imgUrl" 
+           [src]="event.imgUrl" 
            alt="Expedition image"  
            >
-           <span class="expeditions__item__date">{{ date | date : 'MMM d, y'}}</span>
-           <span class="expeditions__item__name">Назва експедиції</span>
-           <span class="expeditions__item__description">Короткий опис</span>
-           <span class="expeditions__item__location">Локація</span>
+           <span class="expeditions__item__date">{{ event.eventDate | date : 'MMM d, y'}}</span>
+           <span class="expeditions__item__name">{{ event.name }}</span>
+           <span class="expeditions__item__description">{{ event.shortDescription }}</span>
+           <span class="expeditions__item__location">{{ event.location }}</span>
          </div>
       </div>
    </div>

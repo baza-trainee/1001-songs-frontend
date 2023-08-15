@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { ExpeditionsService, IExpediton } from 'src/app/shared/services/expeditions/expeditions.service';
 
 @Component({
     selector: 'app-expeditions',
@@ -10,9 +12,13 @@ import { TranslateModule } from '@ngx-translate/core';
     imports: [CommonModule, TranslateModule]
 })
 export class ExpeditionsComponent {
-    gallery: number[] = [...Array(10)]
-    imgUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-bargjHS0bbEvbcmCkoUHD649_T1AfqU6tQ&usqp=CAU'
-    categories: string [] = ['Усі','Розвідка','Стаціонарні','Міждисциплінарна',  'Тематична','Відеозапис обряду','Цифровий запис']
-    date = new Date();
+
+    $expeditions: Observable<IExpediton[]>;
+    categories: string [];
+
+    constructor(private expeditionsService : ExpeditionsService){
+      this.categories = this.expeditionsService.getCategories();
+      this.$expeditions = this.expeditionsService.getExpeditions();
+     }
 
 }
