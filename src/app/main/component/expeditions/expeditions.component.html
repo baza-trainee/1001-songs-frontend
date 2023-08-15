@@ -14,9 +14,8 @@
         <div *ngFor="let img of gallery" class="expeditions__item">
          <img 
            [src]="imgUrl" 
-           alt="" 
-           height="180" 
-           width="300">
+           alt="Expedition image"  
+           >
            <span class="expeditions__item__date">{{ date | date : 'MMM d, y'}}</span>
            <span class="expeditions__item__name">Назва експедиції</span>
            <span class="expeditions__item__description">Короткий опис</span>

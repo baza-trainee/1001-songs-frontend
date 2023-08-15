@@ -18,7 +18,7 @@
       //  margin-bottom: 20px;
     }
     &__categories {
-      border:1px solid red;
+      // border:1px solid red;
       display: flex;
       align-items: center;
       gap: 24px;
@@ -35,12 +35,15 @@
       gap: 24px;
       img {
         border-radius: 8px;
+        width: 302px;
+        height: 180px;
       }
     }
     &__item {
       height: 350px;
       display: flex;
       flex-direction: column;
+      background-color: aquamarine;
       &__date {
         @include caption-desktop($font-family: 'Helvetica');
         margin-top: 24px;
@@ -58,9 +61,32 @@
       }
     }
 }
-@media (width <=1024px) {
+@media (width < 1025px) {
   .container {
     margin: 0 48px;
-    border: 2px solid blue;
+  }
+  .expeditions__gallery {
+    gap: 24px;
+  }
+  .expeditions__item {
+    img {
+      width: 293px;
+    }
+  }
+}
+
+@media (width < 769px) {
+  .container {
+    margin: 0 32px;
+    // border: 1px solid blue;
+  }
+  .expeditions__gallery {
+    gap: 24px;
+  }
+  .expeditions__item {
+    img {
+      width: 340px;
+      height: 200px;
+    }
   }
 }
