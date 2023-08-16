@@ -9,8 +9,8 @@
     </p>
     <div>
       <ul class="expeditions__categories">
-        <li *ngFor="let category of categories">
-          <a href="#" [ngStyle]="{ 'font-weight': category == 'Усі' ? '600' : '400' }"> {{ category }}</a>
+        <li *ngFor="let category of categories; let i = index" (click)="selectCategory(i)">
+          <a [class.selected-category]="i === selectedCategory"> {{ category }}</a>
         </li>
       </ul>
     </div>
