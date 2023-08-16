@@ -12,55 +12,55 @@
 
 .expeditions {
   width: 100%;
-    &__title {
-      @include h2-desktop($line-height: 65px);
+  &__title {
+    @include h2-desktop($line-height: 65px);
+  }
+  &__description {
+    @include body-desktop($font-family: 'Open Sans');
+    width: 628px;
+    padding-top: 5px;
+  }
+  &__categories {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 120px;
+    // TODO: remove $font-family param after
+    li {
+      @include link-desktop($font-family: 'Open Sans');
+      display: inline;
+    }
+  }
+  &__gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    img {
+      border-radius: 8px;
+      width: 302px;
+      height: 180px;
+    }
+  }
+  &__item {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    &__date {
+      @include caption-desktop($font-family: 'Open Sans');
+      margin-top: 24px;
+    }
+    // TODO: remove $font-family param after
+    &__name {
+      @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: 'Open Sans');
     }
     &__description {
-      @include body-desktop( $font-family: 'Open Sans');
-        width: 628px;
-        padding-top: 5px;
+      @include body-desktop($font-family: 'Open Sans');
     }
-    &__categories {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      height: 120px;
-      // TODO: remove $font-family param after
-      li {
-         @include link-desktop( $font-family: 'Open Sans');
-         display: inline;
-      }
+    &__location {
+      @include caption-desktop($font-family: 'Open Sans');
+      margin-top: 8px;
     }
-    &__gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      img {
-        border-radius: 8px;
-        width: 302px;
-        height: 180px;
-      }
-    }
-    &__item {
-      height: 350px;
-      display: flex;
-      flex-direction: column;
-      &__date {
-        @include caption-desktop($font-family: 'Open Sans');
-        margin-top: 24px;
-      }
-      // TODO: remove $font-family param after 
-      &__name {
-        @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: 'Open Sans');
-      }
-      &__description {
-        @include body-desktop($font-family: 'Open Sans');
-      }
-      &__location {
-        @include caption-desktop($font-family: 'Open Sans');
-        margin-top: 8px;
-      }
-    }
+  }
 }
 
 @media (width < 1025px) {
@@ -100,7 +100,7 @@
       height: 88px;
     }
     &__gallery {
-       gap: 24px;
+      gap: 24px;
     }
     &__item {
       img {
@@ -115,7 +115,7 @@
   .container {
     max-width: 358px;
     margin-top: 105px;
-    margin-bottom: 48px;   
+    margin-bottom: 48px;
   }
 
   .expeditions {
@@ -127,7 +127,7 @@
       height: 78px;
     }
     &__gallery {
-      gap: 16px; 
+      gap: 16px;
     }
     &__item {
       height: 338px;
@@ -141,7 +141,7 @@
         margin-top: 6px;
       }
       img {
-         width: 358px;
+        width: 358px;
       }
     }
   }

@@ -6,16 +6,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ExpeditionsService {
-  
-  private  URL: string = 'http://localhost:3000/expeditions';
-  categories: string [] = ['Усі','Розвідка','Стаціонарна','Міждисциплінарна',  'Тематична','Відеозапис обряду','Цифровий запис']
+  private URL: string = 'http://localhost:3000/expeditions';
+  categories: string[] = ['Усі', 'Розвідка', 'Стаціонарна', 'Міждисциплінарна', 'Тематична', 'Відеозапис обряду', 'Цифровий запис'];
   $expeditons: BehaviorSubject<IExpediton[]> = new BehaviorSubject([{} as IExpediton]);
 
-  constructor( private http: HttpClient) {
-      this.uploadExpeditions();
-   }
+  constructor(private http: HttpClient) {
+    this.uploadExpeditions();
+  }
 
-  getExpeditions(){
+  getExpeditions() {
     return this.$expeditons;
   }
 
@@ -23,17 +22,15 @@ export class ExpeditionsService {
     return this.categories;
   }
 
-  private uploadExpeditions(){
-    this.http.get(this.URL)
-     .subscribe(
-       data => this.$expeditons.next(data as IExpediton[]),
-       error => {
-         this.$expeditons.next([{} as IExpediton]),
-         console.error(error.message);
-        } 
-      )
+  private uploadExpeditions() {
+    this.http.get(this.URL).subscribe(
+      (data) => this.$expeditons.next(data as IExpediton[]),
+      (error) => {
+        this.$expeditons.next([{} as IExpediton]);
+        console.error(error.message);
+      }
+    );
   }
-
 }
 export interface IExpediton {
   name: string;
