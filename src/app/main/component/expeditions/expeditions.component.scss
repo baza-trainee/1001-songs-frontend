@@ -1,9 +1,12 @@
 @import '../../../../typography/typography';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap');
 
 .container {
   display: flex;
-  padding-top: 148px;
   min-height: 90vh;
+  margin: 0 auto;
+  max-width: 1280px;
+  margin-top: 148px;
   margin-bottom: 80px;
 }
 
@@ -13,20 +16,18 @@
       @include h2-desktop($line-height: 65px);
     }
     &__description {
-      @include body-desktop( $font-family: 'Helvetica');
-      width: 628px;
-       padding-top: 5px;
-      //  margin-bottom: 20px;
+      @include body-desktop( $font-family: 'Open Sans');
+        width: 628px;
+        padding-top: 5px;
     }
     &__categories {
-      // border:1px solid red;
       display: flex;
       align-items: center;
       gap: 24px;
       height: 120px;
-      // TODO: set  $font-family: $primary-fonts
+      // TODO: remove $font-family param after
       li {
-         @include link-desktop( $font-family: 'Helvetica');
+         @include link-desktop( $font-family: 'Open Sans');
          display: inline;
       }
     }
@@ -44,50 +45,104 @@
       height: 350px;
       display: flex;
       flex-direction: column;
-      background-color: aquamarine;
       &__date {
-        @include caption-desktop($font-family: 'Helvetica');
+        @include caption-desktop($font-family: 'Open Sans');
         margin-top: 24px;
       }
       // TODO: remove $font-family param after 
       &__name {
-        @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: 'Helvetica');
+        @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: 'Open Sans');
       }
       &__description {
-        @include body-desktop($font-family: 'Helvetica');
+        @include body-desktop($font-family: 'Open Sans');
       }
       &__location {
-        @include caption-desktop($font-family: 'Helvetica');
+        @include caption-desktop($font-family: 'Open Sans');
         margin-top: 8px;
       }
     }
 }
+
 @media (width < 1025px) {
   .container {
-    margin: 0 48px;
+    max-width: 928px;
+    margin-top: 148px;
+    margin-bottom: 80px;
   }
-  .expeditions__gallery {
-    gap: 24px;
-  }
-  .expeditions__item {
-    img {
-      width: 293px;
+  .expeditions {
+    &__gallery {
+      gap: 24px;
+    }
+    &__item {
+      img {
+        width: 293px;
+      }
     }
   }
 }
 
 @media (width < 769px) {
   .container {
-    margin: 0 32px;
-    // border: 1px solid blue;
+    max-width: 704px;
+    margin-top: 130px;
+    margin-bottom: 80px;
   }
-  .expeditions__gallery {
-    gap: 24px;
+  .expeditions {
+    width: 100%;
+    &__title {
+      @include h2-desktop($line-height: 35px);
+    }
+    &__description {
+      width: 100%;
+    }
+    &__categories {
+      overflow: hidden;
+      height: 88px;
+    }
+    &__gallery {
+       gap: 24px;
+    }
+    &__item {
+      img {
+        width: 340px;
+        height: 200px;
+      }
+    }
   }
-  .expeditions__item {
-    img {
-      width: 340px;
-      height: 200px;
+}
+
+@media (width < 391px) {
+  .container {
+    max-width: 358px;
+    margin-top: 105px;
+    margin-bottom: 48px;   
+  }
+
+  .expeditions {
+    &__title {
+      @include h2-mobile($line-height: 35px);
+    }
+    &__categories {
+      overflow: hidden;
+      height: 78px;
+    }
+    &__gallery {
+      gap: 16px; 
+    }
+    &__item {
+      height: 338px;
+      &__date {
+        margin-top: 18px;
+      }
+      &__name {
+        @include h6-mobile($font-family: 'Open Sans', $line-height: 30px);
+      }
+      &__location {
+        margin-top: 6px;
+      }
+      img {
+         width: 358px;
+      }
     }
   }
 }

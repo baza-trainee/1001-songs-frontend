@@ -3,11 +3,14 @@
    <div class="expeditions">
       <h2 class="expeditions__title"> Експедиції</h2>
       <p class="expeditions__description">
-         Пріоритети експедицій – заповнення «білих плям» на фольклористичній карті України (східна Волинь, Наддніпрянщина, південна Чернігівщина, Сумщина, Берестейщина та інші території) та спеціалізовані регіональні програми з видання пісенних збірок за матеріалами певних етнографічних локусів.
+         Пріоритети сучасних експедицій сучасних експедицій – заповнення «білих плям» на фольклористичній карті України (східна Волинь, Наддніпрянщина, південна Чернігівщина, Сумщина, Берестейщина та інші території) та спеціалізовані регіональні програми з видання пісенних збірок за матеріалами певних етнографічних локусів.
       </p>
       <div >
-         <ul class="expeditions__categories">
-            <li *ngFor=" let category of categories"> <a href="#"> {{category}}</a></li>
+         <ul class="expeditions__categories" >
+            <li *ngFor=" let category of categories">
+                <a href="#" [ngStyle]="{'font-weight': (category=='Усі') ? '600' : '400'}"
+                > {{category}}</a>
+            </li>
          </ul>
       </div>
       <div class="expeditions__gallery" *ngIf="$expeditions | async as expeditions">
