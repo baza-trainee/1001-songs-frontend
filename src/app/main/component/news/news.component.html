@@ -1,3 +1,25 @@
-<div style="display: flex; justify-content: center; align-items: center;"> 
-   <p style="padding: 10px; color: azure; font-size: larger; background-color: #1a1a1a;">{{ 'news.stub' | translate }}</p>
-</div>
+<section class="news">
+  <div class="news__container">
+    <div class="news__title">
+      {{"Новини" | translate}}
+    </div>
+    <div class="news__nav">
+      <a class="news__nav-item"> Усі</a>
+
+      <a class="news__nav-item"> Зустрічі</a>
+
+      <a class="news__nav-item"> Лекції</a>
+
+      <a class="news__nav-item"> Публікації</a>
+
+      <a class="news__nav-item"> Майстер-класи</a>
+
+      <a class="news__nav-item"> Концерти</a>
+
+      <a class="news__nav-item"> Конференції</a>
+    </div>
+    <div class="news__card-articles">
+      <app-articles></app-articles>
+    </div>
+  </div>
+</section>

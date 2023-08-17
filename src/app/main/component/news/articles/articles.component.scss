@@ -1,0 +1,51 @@
+@use '../../../../../typography/typography';
+.card {
+  border-top: 1px solid var(--text-color-primary);
+    width: 1280px;
+    height: auto;
+    margin-top: 16px;
+    margin-bottom: 32px;
+
+    &__header{
+      @include typography.link-desktop;
+
+      font-family: "Open Sans";
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
+
+    &__body{
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &__image {
+      margin-right: 24px;
+      width: 628px;
+      height: 320px;
+      border-radius: 12px;
+      background-image: url("../mockData/img.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    &__title-name {
+      font-family: "Yeseva One";
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 36px;
+      color: var(--text-color-primary);
+    }
+
+    &__title-place {
+      margin-top: 16px;
+      /* Desktop/Yeseva One/Overline */
+      font-family: "Yeseva One";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      color: var(--neutrals-600, #666);
+    }
+}

@@ -1,0 +1,18 @@
+<ng-container *ngFor="let article of articles$ | async">
+  <div class="card">
+    <div class="card__header">
+      {{article.eventDate}}
+    </div>
+    <div class="card__body">
+      <div class="card__image">
+        <!-- <img src="../mockData/img.png" alt="image from event"> -->
+      </div>
+      <div class="card__title">
+        <p class="card__title-name">{{article.title}}</p>
+        <p class="card__title-place"> ({{article.location}}) </p>
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>

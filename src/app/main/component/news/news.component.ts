@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { ArticlesComponent } from './articles/articles.component';
 
 @Component({
     selector: 'app-news',
     templateUrl: './news.component.html',
     styleUrls: ['./news.component.scss'],
     standalone: true,
-    imports: [TranslateModule]
+    imports: [TranslateModule, ArticlesComponent]
 })
 export class NewsComponent {
 
