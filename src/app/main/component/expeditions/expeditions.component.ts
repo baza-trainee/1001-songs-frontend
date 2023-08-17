@@ -21,7 +21,7 @@ export class ExpeditionsComponent {
     this.$expeditions = this.expeditionsService.getExpeditions();
   }
 
-  selectCategory(id: any) {
+  selectCategory(id: number) {
     this.selectedCategory = id;
   }
 }

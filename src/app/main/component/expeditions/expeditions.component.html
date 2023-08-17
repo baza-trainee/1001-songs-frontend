@@ -7,9 +7,15 @@
       Наддніпрянщина, південна Чернігівщина, Сумщина, Берестейщина та інші території) та спеціалізовані регіональні програми з видання
       пісенних збірок за матеріалами певних етнографічних локусів.
     </p>
-    <div>
+    <div ke>
       <ul class="expeditions__categories">
-        <li *ngFor="let category of categories; let i = index" (click)="selectCategory(i)">
+        <li
+          *ngFor="let category of categories; let i = index"
+          tabindex="0"
+          role="button"
+          (click)="selectCategory(i)"
+          (keypress)="selectCategory(i)"
+        >
           <a [class.selected-category]="i === selectedCategory"> {{ category }}</a>
         </li>
       </ul>
