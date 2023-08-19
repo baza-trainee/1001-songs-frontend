@@ -4,12 +4,14 @@
 
 .news {
   display: flex;
-  justify-content: center;
-  margin-top: 156px;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 108px;
   height: 90vh;
 
   &__container {
     width: 1279px;
+    padding-top: 80px;
   }
 
 
@@ -17,7 +19,7 @@
     /* Desktop/Yeseva One/Heading 2 */
     @include typography.h2-desktop;
 
-    margin-bottom: 16px;
+    padding-bottom: 16px;
   }
 
   // &__nav {

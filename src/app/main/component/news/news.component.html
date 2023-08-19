@@ -4,7 +4,7 @@
       {{"Новини" | translate}}
     </div>
     <div class="news__nav">
-      <a class="news__nav-item"> Усі</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'all'}]"> Усі</a>
 
       <a class="news__nav-item"> Зустрічі</a>
 
@@ -19,7 +19,7 @@
       <a class="news__nav-item"> Конференції</a>
     </div>
     <div class="news__card-articles">
-      <app-articles></app-articles>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </section>

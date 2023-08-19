@@ -1,14 +1,16 @@
 @use '../../../../../typography/typography';
 .card {
   border-top: 1px solid var(--text-color-primary);
-    width: 1280px;
-    height: auto;
-    margin-top: 16px;
-    margin-bottom: 32px;
+  width: 1280px;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 32px;
 
     &__header{
       @include typography.link-desktop;
 
+      display: flex;
+      justify-content: space-between;
       font-family: "Open Sans";
       margin-bottom: 16px;
       margin-top: 16px;

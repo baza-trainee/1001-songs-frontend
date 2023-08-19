@@ -1,5 +1,5 @@
-<!--
-<div class="card">
+
+<ng-container class="card" *ngIf="article">
   <div class="card-header">
     <span>{{article.eventDate}}</span>
     <span> {{article.location}} </span>
@@ -13,9 +13,9 @@
   <div class="card__text">
     {{article.text[0]}}
   </div>
-  <div class="card__image">
+  <ng-container *ngIf="article.images[1]" class="card__image">
     <img [src]="article.images[1]" alt="image from event">
-  </div>
+  </ng-container>
   <div class="card__text">
     {{article.text[1]}}
   </div>
@@ -30,5 +30,5 @@
     </div>
   </div>
 </div>
-</div>
--->
+</ng-container>
+
