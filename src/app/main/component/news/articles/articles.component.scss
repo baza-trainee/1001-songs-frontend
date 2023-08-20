@@ -3,8 +3,11 @@
   border-top: 1px solid var(--text-color-primary);
   width: 1282px;
   height: 320px;
-  margin-top: 16px;
-  margin-bottom: 32px;
+  contain: strict;
+  &:nth-child(odd) {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
 
     &__header{
       @include typography.link-desktop;
@@ -12,28 +15,33 @@
       display: flex;
       justify-content: space-between;
       font-family: "Open Sans";
-      margin-bottom: 16px;
-      margin-top: 16px;
+      padding: 16px 0;
     }
 
     &__body{
       display: flex;
       align-items: flex-start;
+      gap: 24px;
     }
 
     &__image {
-      margin-right: 24px;
       width: 628px;
       height: 320px;
       border-radius: 12px;
       background-image: url("../mockData/img.png");
-      background-size: cover;
-      background-repeat: no-repeat;
+      // background-size: cover;
+      // background-repeat: no-repeat;
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
     }
 
     &__title-name {
       width: 629px;
-      height: 151px;
       font-family: "Yeseva One";
       font-size: 28px;
       font-style: normal;
@@ -41,9 +49,7 @@
       line-height: 36px;
       color: var(--text-color-primary);
 
-      p {
-        margin: 0;
-      }
+      
     }
 
     &__title-place {
