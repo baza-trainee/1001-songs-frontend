@@ -24,13 +24,12 @@
       gap: 24px;
     }
 
-    &__image {
+    &__image-item {
       width: 628px;
       height: 320px;
       border-radius: 12px;
-      background-image: url("../mockData/img.png");
-      // background-size: cover;
-      // background-repeat: no-repeat;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     &__title {
@@ -62,4 +61,8 @@
       line-height: 28px;
       color: var(--neutrals-600, #666);
     }
+}
+
+.text-bold {
+  font-weight: bold;
 }

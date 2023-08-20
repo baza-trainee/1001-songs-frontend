@@ -11,7 +11,11 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [CommonModule, ArticleComponent, RouterLink],
+  imports: [
+    CommonModule,
+    ArticleComponent,
+    RouterLink
+  ],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })

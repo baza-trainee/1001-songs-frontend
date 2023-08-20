@@ -29,11 +29,13 @@
     padding-bottom: 16px;
   }
 
-  // &__nav {
-  // }
+  &__filter {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+  }
 
-  &__nav-item{
-    margin-right: 48px;
+  &__filter-item{
     font-family: "Open Sans";
     font-size: 16px;
     font-style: normal;
@@ -41,8 +43,9 @@
     line-height: 24px;
     color: var(--text-color-primary);
   }
+
+  &__filter-selected {
+    font-weight: 600;
+  }
 }
 
-.active__link {
-  font-weight: 700;
-}

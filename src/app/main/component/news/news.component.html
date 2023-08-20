@@ -3,20 +3,15 @@
     <div class="news__title">
       {{"Новини" | translate}}
     </div>
-    <div class="news__nav">
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'all'}]" routerLinkActive="active__link"> Усі</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'meetings'}]" routerLinkActive="active__link"> Зустрічі</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'lectures'}]" routerLinkActive="active__link"> Лекції</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'published'}]" routerLinkActive="active-link"> Публікації</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'master'}]" routerLinkActive="active__link"> Майстер-класи</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'concert'}]" routerLinkActive="active__link"> Концерти</a>
-
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'conference'}]" routerLinkActive="active__link"> Конференції</a>
+    <div class="news__filter">
+      <div 
+        class="news__filter-item"
+        *ngFor="let filter of filters"
+        (click)="filterArticles(filter)"
+        [class.news__filter-selected]="filter === selectedFilter"
+      > 
+        {{filter}}
+      </div>
     </div>
     <div class="news__card-articles">
       <router-outlet></router-outlet>
