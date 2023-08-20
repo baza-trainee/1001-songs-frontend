@@ -9,3 +9,20 @@
     padding-bottom: 80px;
   }
 }
+
+.btn{
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+  &-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #666666;
+}}

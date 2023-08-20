@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Article } from '../mockData/mockData';
 import { ArticlesService } from '../services/articles.service';
-import { ActivatedRoute,  } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment,  } from '@angular/router';
 
 
 @Component({
@@ -14,18 +14,23 @@ import { ActivatedRoute,  } from '@angular/router';
 })
 export class ArticleComponent implements OnInit{
   public article!:Article;
+  public isId!: UrlSegment;
 
 
-  constructor(private articlesService: ArticlesService, private route: ActivatedRoute){}
+  constructor(private articlesService: ArticlesService, private router: Router, private route: ActivatedRoute){}
 
   // use switchMap here
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id)
-    if (id) {
-      this.articlesService.getArcticle(id).subscribe(item => {
+    this.isId = this.route.snapshot.url[1];
+    
+    if (this.isId) {
+      this.articlesService.getArcticle(Number(this.isId)).subscribe(item => {
         this.article = item
       })
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/news']);
   }
 }
