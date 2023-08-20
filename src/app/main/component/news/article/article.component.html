@@ -19,15 +19,15 @@
   <div class="card__text">
     {{article.text[1]}}
   </div>
-<div class="card__footer">
-  <div class="card__footer-title">Матеріал підготували</div>
-  <div class="card__footer-subtitle">
-    <div *ngFor="let author of article.authors">
-      <div>{{author.seekers}}</div>
-      <div>{{author.editor}}</div>
-      <div>{{author.video}}</div>
-      <div>{{author.records}}</div>
-    </div>
+  <div class="card__footer">
+    <div class="card__footer-title">Матеріал підготували</div>
+    <div class="card__footer-subtitle">
+      <div *ngFor="let author of article.authors">
+        <div>{{author.seekers}}</div>
+        <div>{{author.editor}}</div>
+        <div>{{author.video}}</div>
+        <div>{{author.records}}</div>
+      </div>
   </div>
 </div>
 </ng-container>

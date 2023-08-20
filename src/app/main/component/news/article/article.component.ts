@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Article } from '../mockData/mockData';
 import { ArticlesService } from '../services/articles.service';
 import { ActivatedRoute,  } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
 
 
 @Component({

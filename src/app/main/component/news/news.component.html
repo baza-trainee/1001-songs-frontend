@@ -4,19 +4,19 @@
       {{"Новини" | translate}}
     </div>
     <div class="news__nav">
-      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'all'}]"> Усі</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'all'}]" routerLinkActive="active__link"> Усі</a>
 
-      <a class="news__nav-item"> Зустрічі</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'meetings'}]" routerLinkActive="active__link"> Зустрічі</a>
 
-      <a class="news__nav-item"> Лекції</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'lectures'}]" routerLinkActive="active__link"> Лекції</a>
 
-      <a class="news__nav-item"> Публікації</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'published'}]" routerLinkActive="active-link"> Публікації</a>
 
-      <a class="news__nav-item"> Майстер-класи</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'master'}]" routerLinkActive="active__link"> Майстер-класи</a>
 
-      <a class="news__nav-item"> Концерти</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'concert'}]" routerLinkActive="active__link"> Концерти</a>
 
-      <a class="news__nav-item"> Конференції</a>
+      <a class="news__nav-item" [routerLink]="['/news', {filterBy: 'conference'}]" routerLinkActive="active__link"> Конференції</a>
     </div>
     <div class="news__card-articles">
       <router-outlet></router-outlet>
