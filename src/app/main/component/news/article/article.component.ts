@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Article } from '../mockData/mockData';
 import { ArticlesService } from '../services/articles.service';
-import { ActivatedRoute, Router, UrlSegment,  } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlSegment,  } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { ActivatedRoute, Router, UrlSegment,  } from '@angular/router';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit{
-  public article!:Article;
+  public article$!: Observable<Article>;
   public isId!: UrlSegment;
 
 
@@ -22,11 +23,18 @@ export class ArticleComponent implements OnInit{
   // use switchMap here
   ngOnInit(): void {
     this.isId = this.route.snapshot.url[1];
-    
+
     if (this.isId) {
-      this.articlesService.getArcticle(Number(this.isId)).subscribe(item => {
-        this.article = item
-      })
+
+      this.article$ = this.route.params.pipe(
+        switchMap((params: Params) => {
+          return this.articlesService.getArcticle(params['id'])
+        })
+      )
+
+      // this.articlesService.getArcticle(Number(this.isId)).subscribe(item => {
+        // this.article = item
+      // })
     }
   }
 

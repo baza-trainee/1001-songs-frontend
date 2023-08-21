@@ -7,7 +7,7 @@
     </div>
   </div>
 </ng-container>
-<ng-container class="card" *ngIf="article">
+<ng-container class="card" *ngIf="article$ | async as article">
   <div class="card-header">
     <span>{{article.eventDate}}</span>
     <span> {{article.location}} </span>

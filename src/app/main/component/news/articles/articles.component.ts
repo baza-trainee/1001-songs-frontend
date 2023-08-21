@@ -29,7 +29,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   constructor(private articlesService: ArticlesService, private router: Router,){}
 
   ngOnInit(): void {
-    this.unsub = this.articlesService.getArticles().subscribe(articles => this.articles = articles);
+    this.unsub = this.articlesService.getArticles().subscribe(articles => this.articles = articles.slice(0, 3));
 
   }
 
