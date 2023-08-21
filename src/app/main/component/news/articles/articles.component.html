@@ -1,5 +1,12 @@
-<ng-container *ngFor="let article of articles$ | async">
-  <div class="card">
+<div class="news__container">
+  <div class="news__title">
+    {{"Новини" | translate}}
+  </div>
+  <app-filter
+    (filteredArticles)="filteredArticles($event)"
+    ></app-filter>
+<ng-container *ngIf="articles" >
+  <div class="card" *ngFor="let article of articles">
     <div class="card__header">
       <div class="card__header-event">
         {{article.eventDate}}

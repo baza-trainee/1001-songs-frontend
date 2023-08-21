@@ -10,12 +10,12 @@ import {Article} from '../mockData/mockData'
 })
 export class ArticlesService{
   private readonly articlesPathUrl = 'http://localhost:3000/articles';
-  
+
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
 
-  getMockArticles(): Observable<Article[]> {
+  getArticles(): Observable<Article[]> {
     return this.http.get<Article[]>(this.articlesPathUrl)
   }
 

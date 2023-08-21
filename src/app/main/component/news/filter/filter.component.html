@@ -1,0 +1,10 @@
+<div class="news__filter">
+  <div
+    class="news__filter-item"
+    *ngFor="let filter of filters"
+    (click)="filterArticles(filter)"
+    [class.news__filter-selected]="filter === selectedFilter"
+  >
+    {{filter}}
+  </div>
+</div>
