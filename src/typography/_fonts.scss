@@ -1,7 +1,8 @@
-@font-face {
-   font-family: 'Work Sans';
-   src: url('../assets/fonts/WorkSans/WorkSans-VariableFont_wght.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap');
+// @font-face {
+//    font-family: 'Work Sans';
+//    src: url('../assets/fonts/WorkSans/WorkSans-VariableFont_wght.ttf') format('truetype');
+// }
 
 @font-face {
    font-family: 'Yeseva One';
@@ -9,8 +10,8 @@
 }
 
 :root {
-   --primary-font: 'Work Sans';
+   --primary-font: 'Open Sans';
    --secondary-font: 'Yeseva One';
-   --tertiary-font: 'Work Sans';
+   --tertiary-font: 'Open Sans';
    --quaternary-font: 'Yeseva One', sans-serif;
 }

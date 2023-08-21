@@ -1,6 +1,4 @@
 @import '../../../../typography/typography';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap');
-$open-sans : 'Open Sans';
 
 .container {
   display: flex;
@@ -17,7 +15,7 @@ $open-sans : 'Open Sans';
     @include h2-desktop($line-height: 65px);
   }
   &__description {
-    @include body-desktop($font-family: $open-sans);
+    @include body-desktop;
     width: 628px;
     padding-top: 5px;
   }
@@ -26,9 +24,8 @@ $open-sans : 'Open Sans';
     align-items: center;
     gap: 24px;
     height: 120px;
-    // TODO: remove $font-family param after
     li {
-      @include link-desktop($font-family: $open-sans);
+      @include link-desktop($font-family: $primary-fonts);
       display: inline;
       cursor: pointer;
     }
@@ -48,18 +45,17 @@ $open-sans : 'Open Sans';
     display: flex;
     flex-direction: column;
     &__date {
-      @include caption-desktop($font-family: $open-sans);
+      @include caption-desktop();
       margin-top: 24px;
     }
-    // TODO: remove $font-family param after
     &__name {
-      @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $open-sans);
+      @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $primary-fonts);
     }
     &__description {
-      @include body-desktop($font-family: $open-sans);
+      @include body-desktop;
     }
     &__location {
-      @include caption-desktop($font-family: $open-sans);
+      @include caption-desktop;
       margin-top: 8px;
     }
   }
@@ -141,7 +137,7 @@ $open-sans : 'Open Sans';
         margin-top: 18px;
       }
       &__name {
-        @include h6-mobile($font-family: 'Open Sans', $line-height: 30px);
+        @include h6-mobile( $line-height: 30px, $font-family: $primary-fonts);
       }
       &__location {
         margin-top: 6px;
