@@ -34,16 +34,22 @@
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
-    img {
-      border-radius: 8px;
-      width: 302px;
-      height: 180px;
-    }
   }
   &__item {
     height: 350px;
     display: flex;
     flex-direction: column;
+    &__media {
+      width: 302px;
+      height: 180px;
+      overflow: hidden;
+      display: flex;
+      border-radius: 8px;
+      .frame-video {
+        width: 100%;
+      }
+    }
+
     &__date {
       @include caption-desktop();
       margin-top: 24px;
@@ -76,7 +82,7 @@
       gap: 24px;
     }
     &__item {
-      img {
+      &__media {
         width: 293px;
       }
     }
@@ -105,7 +111,7 @@
       gap: 24px;
     }
     &__item {
-      img {
+      &__media {
         width: 340px;
         height: 200px;
       }
@@ -137,12 +143,12 @@
         margin-top: 18px;
       }
       &__name {
-        @include h6-mobile( $line-height: 30px, $font-family: $primary-fonts);
+        @include h6-mobile($line-height: 30px, $font-family: $primary-fonts);
       }
       &__location {
         margin-top: 6px;
       }
-      img {
+      &__media {
         width: 358px;
       }
     }

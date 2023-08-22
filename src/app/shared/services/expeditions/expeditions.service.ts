@@ -33,9 +33,10 @@ export class ExpeditionsService {
   }
 }
 export interface IExpediton {
+  id:string;
   name: string;
   shortDescription: string;
-  imgUrl: string;
+  mediaSrc: string;
   eventDate: Date;
   location: string;
 }
