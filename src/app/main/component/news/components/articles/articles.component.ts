@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { ArticleComponent } from '../article/article.component';
 import { ArticlesService } from '../../services/articles.service';
@@ -23,18 +23,18 @@ import {FilterComponent} from '../filter/filter.component';
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
-  public articles!: Article[];
+  public articles$!: Observable<Article[]>;
   private unsub!: Subscription;
 
   constructor(private articlesService: ArticlesService, private router: Router,){}
 
   ngOnInit(): void {
-    this.unsub = this.articlesService.getArticles().subscribe(articles => this.articles = articles.slice(0, 3));
+    this.articles$ = this.articlesService.getArticles();
 
   }
 
   filteredArticles(articles: Article[]): void {
-    this.articles = articles;
+    this.articles$ = articles;
 
   };
 

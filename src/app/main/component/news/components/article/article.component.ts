@@ -5,12 +5,13 @@ import { Observable, switchMap } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
+import { LatestNewsComponent } from '../latest-news/latest-news.component';
 
 
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LatestNewsComponent],
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })

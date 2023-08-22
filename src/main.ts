@@ -4,7 +4,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
 
@@ -30,7 +30,10 @@ bootstrapApplication(AppComponent, {
             },
             { path: '404', component: ErrorComponent },
             { path: '**', redirectTo: '404' }
-            ])
+            ],
+            // for scroll to top when go to another page
+            withInMemoryScrolling({scrollPositionRestoration: 'enabled'})
+          )
 
     ]
 })

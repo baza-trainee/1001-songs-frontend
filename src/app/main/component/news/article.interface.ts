@@ -6,7 +6,8 @@ export interface Article {
   location: string,
   eventDate: string,
   authors: Author[],
-  category: string
+  category: string,
+  date?: string
 }
 
 export interface Author {

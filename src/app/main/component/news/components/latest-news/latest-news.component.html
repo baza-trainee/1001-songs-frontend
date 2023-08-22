@@ -1,0 +1,21 @@
+<section class="news-latest">
+  <div class="news-latest__title">
+    Останні новини
+  </div>
+  <div class="news-latest__card" *ngFor="let article of articles">
+    <div class="news-latest__card-image">
+      <img src="" alt="">
+    </div>
+    <div class="news-latest__card-subtitle"></div>
+    <div class="news-latest__card-title"></div>
+    <div class="news-latest__card-title"></div>
+    <div class="news-latest__card-title"></div>
+    {{article | sortByDate}}
+  </div>
+  <div class="news-latest__nav">
+    <div class="news-latest__nav-pages"></div>
+    <div class="news-latest__btn-previous"></div>
+    <div class="news-latest__btn-next"></div>
+  </div>
+
+</section>
