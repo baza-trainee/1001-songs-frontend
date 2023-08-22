@@ -1,0 +1,85 @@
+@import '../../../../typography/typography';
+
+.event {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  &__media {
+    width: 302px;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    border-radius: 8px;
+    &::before {
+      content: 'HELLO';
+      color: yellow;
+      z-index: 9999;
+      position: absolute;
+    }
+    .frame-video {
+      width: 100%;
+    }
+  }
+  &__date {
+    @include caption-desktop();
+    margin-top: 24px;
+  }
+  &__name {
+    @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $primary-fonts);
+  }
+  &__description {
+    @include body-desktop;
+  }
+  &__location {
+    @include caption-desktop;
+    margin-top: 8px;
+  }
+}
+
+.selected-category {
+  font-weight: 600;
+}
+
+@media (width < 1025px) {
+  .event {
+    width: 293px;
+  }
+}
+
+@media (width < 769px) {
+  .container {
+    max-width: 704px;
+    margin-top: 130px;
+    margin-bottom: 80px;
+  }
+  .event {
+    &__media {
+      width: 340px;
+      height: 200px;
+    }
+  }
+}
+
+@media (width < 391px) {
+  .container {
+    max-width: 358px;
+    margin-top: 105px;
+    margin-bottom: 48px;
+  }
+
+  .event {
+    height: 338px;
+    &__date {
+      margin-top: 18px;
+    }
+    &__name {
+      @include h6-mobile($line-height: 30px, $font-family: $primary-fonts);
+    }
+    &__location {
+      margin-top: 6px;
+    }
+    &__media {
+      width: 358px;
+    }
+  }
+}
