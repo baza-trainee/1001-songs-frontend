@@ -4,8 +4,10 @@
   height: 350px;
   display: flex;
   flex-direction: column;
+  width: 302px;
   &__media {
     height: 180px;
+    // width: 302px;
     overflow: hidden;
     border-radius: 8px;
     //border: 1px dotted red;
@@ -59,6 +61,7 @@
 @media (width < 391px) {
   .event {
     height: 338px;
+    width: 358px;
     &__date {
       margin-top: 18px;
     }
@@ -67,9 +70,6 @@
     }
     &__location {
       margin-top: 6px;
-    }
-    &__media {
-      width: 358px;
     }
   }
 }
