@@ -1,4 +1,3 @@
-
 export interface Article {
   id: number,
   title: string,
@@ -16,4 +15,3 @@ export interface Author {
   video: string,
   records:string
 }
-

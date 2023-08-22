@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Article } from '../mockData/mockData';
-import { ArticlesService } from '../services/articles.service';
 import { Subscription } from 'rxjs';
+
+import { Article } from '../../article.interface';
+import { ArticlesService } from '../../services/articles.service';
 
 @Component({
   selector: 'app-filter',
@@ -40,7 +41,7 @@ export class FilterComponent implements OnInit, OnDestroy{
       } else {
         this.filterdBy = this.articles.filter(article => article.category === filter).slice(0, 3);
         this.filteredArticles.emit(this.filterdBy);
-        
+
       }
 
 

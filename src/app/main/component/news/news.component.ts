@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ArticlesComponent } from './articles/articles.component';
+import { ArticlesComponent } from './components/articles/articles.component';
 
 
 @Component({

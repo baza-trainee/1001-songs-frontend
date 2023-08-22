@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticleComponent } from '../article/article.component';
-import { ArticlesService } from '../services/articles.service';
-import { Article } from '../mockData/mockData';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {FilterComponent} from '../filter/filter.component';
 import { Subscription } from 'rxjs';
 
+import { ArticleComponent } from '../article/article.component';
+import { ArticlesService } from '../../services/articles.service';
+import { Article } from '../../article.interface';
+import {FilterComponent} from '../filter/filter.component';
 
 @Component({
   selector: 'app-articles',
@@ -39,7 +39,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   };
 
 
-  showArticle(id: number) {
+  showArticle(id: number): void {
 
     this.router.navigate(['/article', id])
   }

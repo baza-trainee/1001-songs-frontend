@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Article } from '../mockData/mockData';
-import { ArticlesService } from '../services/articles.service';
 import { ActivatedRoute, Params, Router, UrlSegment,  } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
+
+import { Article } from '../../article.interface';
+import { ArticlesService } from '../../services/articles.service';
 
 
 @Component({

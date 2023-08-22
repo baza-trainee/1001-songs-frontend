@@ -5,8 +5,8 @@ import { MapComponent } from "./component/map/map.component";
 import { NewsComponent } from "./component/news/news.component";
 import { ExpeditionsComponent } from "./component/expeditions/expeditions.component";
 import { ScienceComponent } from "./component/science/science.component";
-import { ArticleComponent } from "./component/news/article/article.component";
-import { ArticlesComponent } from "./component/news/articles/articles.component";
+import { ArticleComponent } from "./component/news/components/article/article.component";
+import { ArticlesComponent } from "./component/news/components/articles/articles.component";
 
 export const MAIN_ROUTES: Routes = [
    {path: 'about', component: AboutComponent},
