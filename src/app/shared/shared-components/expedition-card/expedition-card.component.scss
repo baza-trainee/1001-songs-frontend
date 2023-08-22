@@ -5,19 +5,19 @@
   display: flex;
   flex-direction: column;
   &__media {
-    width: 302px;
     height: 180px;
     overflow: hidden;
-    display: flex;
     border-radius: 8px;
-    &::before {
-      content: 'HELLO';
-      color: yellow;
-      z-index: 9999;
-      position: absolute;
-    }
+    //border: 1px dotted red;
+    // &::before {
+    //   content: 'HELLO';
+    //   color: yellow;
+    //   z-index: 9999;
+    //   position: absolute;
+    // }
     .frame-video {
       width: 100%;
+      height: 100%;
     }
   }
   &__date {
@@ -29,6 +29,7 @@
   }
   &__description {
     @include body-desktop;
+    overflow: hidden;
   }
   &__location {
     @include caption-desktop;
@@ -47,26 +48,15 @@
 }
 
 @media (width < 769px) {
-  .container {
-    max-width: 704px;
-    margin-top: 130px;
-    margin-bottom: 80px;
-  }
   .event {
+    width: 340px;
     &__media {
-      width: 340px;
       height: 200px;
     }
   }
 }
 
 @media (width < 391px) {
-  .container {
-    max-width: 358px;
-    margin-top: 105px;
-    margin-bottom: 48px;
-  }
-
   .event {
     height: 338px;
     &__date {
