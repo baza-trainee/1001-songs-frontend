@@ -12,8 +12,8 @@ export class SafeMediaUrlPipe implements PipeTransform {
     const service = 'https://www.youtube.com/embed/';
     if (url) {
       const mediaSrcId = url.split('/').pop();
-      const final = `${service}${mediaSrcId}`;
-      return this.sanitizer.bypassSecurityTrustResourceUrl(final);
+      const newUrlSrc = `${service}${mediaSrcId}?rel=0&autohide=I`; 
+      return this.sanitizer.bypassSecurityTrustResourceUrl(newUrlSrc);
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(service);
   }

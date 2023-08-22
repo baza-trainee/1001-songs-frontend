@@ -45,6 +45,12 @@
       overflow: hidden;
       display: flex;
       border-radius: 8px;
+      &::before{
+        content: 'HELLO';
+        color: yellow;
+        z-index: 9999;
+        position: absolute;
+      }
       .frame-video {
         width: 100%;
       }
