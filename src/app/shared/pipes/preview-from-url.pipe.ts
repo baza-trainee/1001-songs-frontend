@@ -11,9 +11,6 @@ export class PreviewFromUrlPipe implements PipeTransform {
     const service = 'http://img.youtube.com/vi/';
     if (url) {
       const delimeter = /[\/\?]/;
-      // console.log('-> ', url.split(delimeter));
-      // console.log('-> ', url);
-
       const mediaSrcId = url.split(delimeter)[3];
       const previewUrl = `${service}${mediaSrcId}/0.jpg`;
       return this.sanitizer.bypassSecurityTrustResourceUrl(previewUrl);

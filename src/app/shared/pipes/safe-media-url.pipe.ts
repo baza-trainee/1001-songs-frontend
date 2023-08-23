@@ -13,7 +13,6 @@ export class SafeMediaUrlPipe implements PipeTransform {
     const delimeter = /[\/\?]/;
     if (url) {
       const mediaSrcId = url.split(delimeter)[3];
-      console.log(mediaSrcId);
       const newUrlSrc = `${service}${mediaSrcId}?rel=0&autohide=I`;
       return this.sanitizer.bypassSecurityTrustResourceUrl(newUrlSrc);
     }

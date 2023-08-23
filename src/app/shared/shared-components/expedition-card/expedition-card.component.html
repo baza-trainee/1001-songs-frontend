@@ -1,6 +1,7 @@
 <div class="event">
   <div class="event__media">
-    <img *ngIf="isPreviewDisplayed" [src]="event.mediaSrc | previewFromUrl" alt="Expedition image" (click)="playVideo()" />
+    <img *ngIf="isPreviewDisplayed" [src]="event.mediaSrc | previewFromUrl" alt="Expedition image" />
+    <button *ngIf="isPreviewDisplayed" (click)="playVideo()" class="event__media__control"></button>
     <iframe
       #player
       class="event__media__iframe"
