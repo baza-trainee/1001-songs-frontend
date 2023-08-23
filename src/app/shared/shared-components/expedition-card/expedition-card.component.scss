@@ -7,10 +7,16 @@
   width: 302px;
   &__media {
     height: 180px;
-    // width: 302px;
     overflow: hidden;
     border-radius: 8px;
-    //border: 1px dotted red;
+    img {
+      position: absolute;
+      width: 302px;
+      height: 180px;
+      border-radius: 8px;
+      object-fit: cover;
+      filter:  sepia(70%);
+    }
     // &::before {
     //   content: 'HELLO';
     //   color: yellow;
