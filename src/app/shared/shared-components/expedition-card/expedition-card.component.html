@@ -1,7 +1,14 @@
 <div class="event">
   <div class="event__media">
     <img *ngIf="isPreviewDisplayed" [src]="event.mediaSrc | previewFromUrl" alt="Expedition image" (click)="playVideo()" />
-    <iframe #player class="frame-video" [src]="event.mediaSrc | safeMediaUrl" frameborder="0" allowfullscreen></iframe>
+    <iframe
+      #player
+      class="event__media__iframe"
+      [src]="event.mediaSrc | safeMediaUrl"
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <span class="event__date">{{ validDate | date: 'MMM d, y' }}</span>
