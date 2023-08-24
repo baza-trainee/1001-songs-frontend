@@ -16,6 +16,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should create', () => {
+    console.log('hi');
     expect(component).toBeTruthy();
   });
 });

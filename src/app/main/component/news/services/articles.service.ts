@@ -1,24 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, } from '@angular/core';
-import { Observable, } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
-import {Article} from '../article.interface';
+import { Article } from '../article.interface';
+import { articles } from '../mock-data/mock-data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticlesService{
-  private readonly articlesPathUrl = 'http://localhost:3000/articles';
-
-
-  constructor(private http: HttpClient) { }
-
+export class ArticlesService {
+  private readonly articlesPathUrl = null;
 
   getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.articlesPathUrl)
+    return of(articles);
   }
 
   getArticle(id: number): Observable<Article> {
-    return this.http.get<Article>(`${this.articlesPathUrl}/${id}`)
+    return of(...articles.filter((article: Article) => article.id === id));
   }
 }

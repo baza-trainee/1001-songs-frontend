@@ -1,7 +1,11 @@
+@function px-to-rem($px) {
+  @return calc($px * 0.063rem);
+}
+
 .news {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 108px;
-  padding-bottom: 80px;
+  padding-top: px-to-rem(48);
+  padding-bottom: px-to-rem(80);
 }
