@@ -18,7 +18,7 @@ export class ArticlesService{
     return this.http.get<Article[]>(this.articlesPathUrl)
   }
 
-  getArcticle(id: number): Observable<Article> {
+  getArticle(id: number): Observable<Article> {
     return this.http.get<Article>(`${this.articlesPathUrl}/${id}`)
   }
 }

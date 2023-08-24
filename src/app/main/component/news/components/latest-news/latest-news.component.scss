@@ -1,0 +1,139 @@
+.news-latest {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+
+
+  &__title {
+    font-family: "Yeseva One";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+    color: var(--neutrals-900, #131313);
+  }
+
+  &__card {
+    display: flex;
+    width: 302px;
+    padding-bottom: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    gap: 24px;
+    flex-shrink: 0;
+
+  }
+
+  &__card-image {
+    width: 302px;
+    height: 180px;
+    align-self: stretch;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  &__card-date {
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--neutrals-700, #454545);
+  }
+
+  &__card-title {
+    align-self: stretch;
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    color: var(--neutrals-900, #131313);
+  }
+
+  &__card-subtitle {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    align-self: stretch;
+    color: var(--neutrals-900, #131313);
+  }
+
+  &__card-location{
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--neutrals-700, #454545);
+  }
+
+  &__wrap {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__controlls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+  }
+
+  &__controlls-pages {
+    font-family: "Open Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px; /* 140% */
+    color: var(--neutrals-900, #131313);
+  }
+
+  &__controlls-arrows {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__btn {
+    display: flex;
+    width: 40px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 100px;
+    border: 1px solid var(--neutrals-900, #131313);
+  }
+}
+
+.arrow {
+  &__prev {
+    background-image: url('../../pisc/arrow_back.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  &__next{
+    background-image: url('../../pisc/arrow_forward.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+}

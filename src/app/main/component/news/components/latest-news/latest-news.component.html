@@ -1,21 +1,28 @@
-<section class="news-latest">
-  <div class="news-latest__title">
-    Останні новини
-  </div>
-  <div class="news-latest__card" *ngFor="let article of articles">
-    <div class="news-latest__card-image">
-      <img src="" alt="">
-    </div>
-    <div class="news-latest__card-subtitle"></div>
-    <div class="news-latest__card-title"></div>
-    <div class="news-latest__card-title"></div>
-    <div class="news-latest__card-title"></div>
-    {{article | sortByDate}}
-  </div>
-  <div class="news-latest__nav">
-    <div class="news-latest__nav-pages"></div>
-    <div class="news-latest__btn-previous"></div>
-    <div class="news-latest__btn-next"></div>
-  </div>
 
-</section>
+  <div class="news-latest container">
+
+    <div class="news-latest__title">
+      Останні новини
+    </div>
+    <div class="news-latest__wrap">
+
+      <div class="news-latest__card" *ngFor="let article of articles">
+        <div class="news-latest__card-wrap"  >
+          <div class="news-latest__card-image" [style.background-image]="'url(' + article.images[0] + ')'">
+          </div>
+          <div class="news-latest__card-date">{{article.date}}</div>
+          <div class="news-latest__card-title">{{article.title}}</div>
+          <div class="news-latest__card-subtitle">{{article.text | cutText: 10}}</div>
+          <div class="news-latest__card-location">{{article.location}}</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="news-latest__controlls">
+      <div class="news-latest__controlls-pages">1/10</div>
+      <div class="news-latest__controlls-arrows">
+        <div class="news-latest__btn arrow__prev"></div>
+        <div class="news-latest__btn arrow__next"></div>
+      </div>
+    </div>
+  </div>

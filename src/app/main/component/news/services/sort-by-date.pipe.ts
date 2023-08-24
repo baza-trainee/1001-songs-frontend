@@ -1,14 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+
+
 @Pipe({
-  name: 'sortByDate',
+  name: 'cutText',
   standalone: true
 })
-export class SortByDatePipe implements PipeTransform {
+export class CutText implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    console.log(value, args);
-    return null;
+  transform(value: string[], ...args: number[] ): string {
+    return value.join(' ').split(' ').splice(0, args[0]).join(' ') + "...";
+
   }
 
 }

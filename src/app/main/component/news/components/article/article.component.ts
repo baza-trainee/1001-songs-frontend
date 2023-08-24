@@ -22,7 +22,6 @@ export class ArticleComponent implements OnInit{
 
   constructor(private articlesService: ArticlesService, private router: Router, private route: ActivatedRoute){}
 
-  // use switchMap here
   ngOnInit(): void {
     this.isId = this.route.snapshot.url[1];
 
@@ -30,13 +29,9 @@ export class ArticleComponent implements OnInit{
 
       this.article$ = this.route.params.pipe(
         switchMap((params: Params) => {
-          return this.articlesService.getArcticle(params['id'])
+          return this.articlesService.getArticle(params['id'])
         })
       )
-
-      // this.articlesService.getArcticle(Number(this.isId)).subscribe(item => {
-        // this.article = item
-      // })
     }
   }
 
