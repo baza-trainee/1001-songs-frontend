@@ -68,6 +68,10 @@
     width: 340px;
     &__media {
       height: 200px;
+      img {
+        width: 340px;
+        height: 200px;
+      }
     }
   }
 }
@@ -76,6 +80,11 @@
   .event {
     height: 338px;
     width: 358px;
+    &__media {
+      img {
+        width: 358px;
+      }
+    }
     &__date {
       margin-top: 18px;
     }

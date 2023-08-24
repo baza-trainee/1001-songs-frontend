@@ -4,13 +4,17 @@
   display: flex;
   min-height: 90vh;
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1440px;
   margin-top: 148px;
   margin-bottom: 80px;
+
+  // border: 1px solid red;
 }
 
 .expeditions {
   width: 100%;
+  margin-right: 80px;
+  margin-left: 80px;
   &__title {
     @include h2-desktop($line-height: 65px);
   }
@@ -42,20 +46,25 @@
 
 @media (width < 1025px) {
   .container {
-    margin-left: 48px;
-    margin-right: 48px;
+    // margin-left: 48px;
+    // margin-right: 48px;
     margin-top: 148px;
     margin-bottom: 80px;
+  }
+  .expeditions {
+    margin-right: 48px;
+    margin-left: 48px;
   }
 }
 
 @media (width < 769px) {
   .container {
-    max-width: 704px;
     margin-top: 130px;
     margin-bottom: 80px;
   }
   .expeditions {
+    margin-right: 32px;
+    margin-left: 32px;
     width: 100%;
     &__title {
       @include h2-desktop($line-height: 35px);
@@ -75,11 +84,13 @@
 
 @media (width < 391px) {
   .container {
-    max-width: 358px;
+    // max-width: 358px;
     margin-top: 105px;
     margin-bottom: 48px;
   }
   .expeditions {
+    margin-right: 16px;
+    margin-left: 16px;
     &__title {
       @include h2-mobile($line-height: 35px);
     }

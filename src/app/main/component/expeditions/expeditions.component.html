@@ -20,7 +20,7 @@
       </ul>
     </div>
     <div class="expeditions__gallery" *ngIf="$expeditions | async as expeditions">
-      <div *ngFor="let event of expeditions" class="expeditions__item">
+      <div *ngFor="let event of expeditions" class="expeditions__gallery__item">
         <app-expedition-card [event]="event"></app-expedition-card>
       </div>
     </div>
