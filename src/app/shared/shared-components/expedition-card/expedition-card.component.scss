@@ -18,9 +18,10 @@
       border-style: none;
       top: calc(50% - 24px);
       left: calc(50% - 24px);
+      padding-bottom: 2px;
       &::before {
         content: '\25BA';
-        margin-left: 2px;
+        margin-left: 3px;
         font-size: 0.9rem;
       }
     }
@@ -60,6 +61,11 @@
 @media (width < 1025px) {
   .event {
     width: 293px;
+    &__media {
+      img {
+        width: 293px;
+      }
+    }
   }
 }
 
