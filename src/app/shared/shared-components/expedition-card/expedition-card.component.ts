@@ -15,7 +15,7 @@ export class ExpeditionCardComponent {
   @Input() event: IExpediton = {} as IExpediton;
   @ViewChild('player') player: any;
   isPreviewDisplayed = true;
-  validDate: Date = new Date();
+  //validDate: Date = new Date();
 
   playVideo() {
     this.isPreviewDisplayed = false;
