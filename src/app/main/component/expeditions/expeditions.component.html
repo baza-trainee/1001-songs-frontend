@@ -15,7 +15,7 @@
           (click)="selectCategory(i)"
           (keypress)="selectCategory(i)"
         >
-          <a [class.selected-category]="i === selectedCategory"> {{ category }}</a>
+          <a [class.selected-category]="i === selectedCategory"> {{ category | translate }}</a>
         </li>
       </ul>
     </div>

@@ -7,7 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ExpeditionsService {
   private URL: string = 'http://localhost:3000/expeditions';
-  categories: string[] = ['Усі', 'Розвідка', 'Стаціонарна', 'Міждисциплінарна', 'Тематична', 'Відеозапис обряду', 'Цифровий запис'];
+  categories: string[] = [
+    'expeditions.categories.all',
+    'expeditions.categories.exploring',
+    'expeditions.categories.static',
+    'expeditions.categories.interdisciplinary',
+    'expeditions.categories.thematic',
+    'expeditions.categories.video-of-ritual',
+    'expeditions.categories.digital-rcord'
+  ];
   $expeditons: BehaviorSubject<IExpediton[]> = new BehaviorSubject([{} as IExpediton]);
 
   constructor(private http: HttpClient) {

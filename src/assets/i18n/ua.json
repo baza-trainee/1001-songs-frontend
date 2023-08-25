@@ -1,33 +1,33 @@
 {
-   "header": {
-      "nav-menu": {
-         "about": "Про проект",
-         "map": "Мапа",
-         "educational-section": "Освітній розділ",
-         "news": "Новини",
-         "expedition": "Експедиції"
-      },
-      "actions": {
-         "button-donate":"Підтримати"
-      },
-      "pop-up-menu":{
-         "title": "Популяризуємо автентичні пісні з усієї України",
-         "nav-menu-subtitle": "1000 і 1 пісня",
-         "call-to-action": "Слідкуйте",
-         "ruls":"Правила та умови використання",
-         "privacy-policy":"Політика приватності",
-         "reporting":"Зітність"
-      }
-   },
-   "footer": {
-      "button": "Підтримати проект",
-      "rules": {
-         "reporting":"Звітність",
-         "policy": "Політика приватності",
-         "terms": "Правила та умови використання",
-         "copyright": "Copyright © 2023. All rights reserved"
-      }
-   },
+  "header": {
+    "nav-menu": {
+      "about": "Про проект",
+      "map": "Мапа",
+      "educational-section": "Освітній розділ",
+      "news": "Новини",
+      "expedition": "Експедиції"
+    },
+    "actions": {
+      "button-donate": "Підтримати"
+    },
+    "pop-up-menu": {
+      "title": "Популяризуємо автентичні пісні з усієї України",
+      "nav-menu-subtitle": "1000 і 1 пісня",
+      "call-to-action": "Слідкуйте",
+      "ruls": "Правила та умови використання",
+      "privacy-policy": "Політика приватності",
+      "reporting": "Зітність"
+    }
+  },
+  "footer": {
+    "button": "Підтримати проект",
+    "rules": {
+      "reporting": "Звітність",
+      "policy": "Політика приватності",
+      "terms": "Правила та умови використання",
+      "copyright": "Copyright © 2023. All rights reserved"
+    }
+  },
   "home": {
     "home-info": {
       "songs-link": "1000+ пісень",
@@ -46,22 +46,31 @@
       "places": "місця записів"
     }
   },
-   "about": {
-      "stub": "Сторінка 'Про проект' у розробці"
-   },
-   "map":{
-      "stub": "Сторінка 'Мапа' у розробці"
-   },
-   "news":{
-      "stub": "Сторінка 'Новини' у розробці"
-   },
-   "expeditions":{
-      "stub": "Сторінка 'Експедиції' у розробці",
-      "title": "Експедиції"
-   },
-   "science":{
-      "stub": "Сторінка 'Освітній розділ' у розробці"
-   },
+  "about": {
+    "stub": "Сторінка 'Про проект' у розробці"
+  },
+  "map": {
+    "stub": "Сторінка 'Мапа' у розробці"
+  },
+  "news": {
+    "stub": "Сторінка 'Новини' у розробці"
+  },
+  "expeditions": {
+    "stub": "Сторінка 'Експедиції' у розробці",
+    "title": "Експедиції",
+    "categories": {
+      "all": "Усі",
+      "exploring": "Розвідка",
+      "static": "Статичний",
+      "interdisciplinary": "Міждисциплінарна",
+      "thematic": "Тематична",
+      "video-of-ritual": "Відеозапис обряду",
+      "digital-rcord": "Цифровий запис"
+    }
+  },
+  "science": {
+    "stub": "Сторінка 'Освітній розділ' у розробці"
+  },
   "error": {
     "error-inner": {
       "title": "404",
