@@ -13,7 +13,7 @@
   </div>
 
   <span class="event__date">{{ event.eventDate }}</span>
-  <span class="event__name">{{ event.name | slice: 0 : 20 }}</span>
+  <span class="event__name">{{ event.name | slice: 0 : 22 }}{{ (event.name).length > 22 ? '...' : '' }}</span>
   <span class="event__description">{{ event.shortDescription | slice: 0 : 30 }} </span>
   <span class="event__location">{{ event.location | slice: 0 : 30 }}</span>
 </div>
