@@ -7,10 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PreviewFromUrlPipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
-  transform(url: string, ...args: unknown[]): unknown {
+  transform(url: string): unknown {
     const service = 'http://img.youtube.com/vi/';
     if (url) {
-      const delimeter = /[\/\?]/;
+      const delimeter = /[/?]/;
       const mediaSrcId = url.split(delimeter)[3];
       const previewUrl = `${service}${mediaSrcId}/0.jpg`;
       return this.sanitizer.bypassSecurityTrustResourceUrl(previewUrl);

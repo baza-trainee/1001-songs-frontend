@@ -18,12 +18,8 @@
       border-style: none;
       top: calc(50% - 24px);
       left: calc(50% - 24px);
-      padding-bottom: 2px;
-      &::before {
-        content: '\25BA';
-        margin-left: 3px;
-        font-size: 0.9rem;
-      }
+      padding-left: 2px;
+      font-size: 0.8rem;
     }
     img {
       position: absolute;

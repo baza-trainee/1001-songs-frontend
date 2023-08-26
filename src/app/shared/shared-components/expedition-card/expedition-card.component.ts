@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IExpediton } from '../../services/expeditions/expeditions.service';
 import { SafeMediaUrlPipe } from '../../pipes/safe-media-url.pipe';
@@ -13,11 +13,12 @@ import { PreviewFromUrlPipe } from '../../pipes/preview-from-url.pipe';
 })
 export class ExpeditionCardComponent {
   @Input() event: IExpediton = {} as IExpediton;
-  @ViewChild('player') player: any;
+  @ViewChild('player') player!: ElementRef;
   isPreviewDisplayed = true;
 
   playVideo() {
     this.isPreviewDisplayed = false;
+    console.log(this.player);
     const url = this.player.nativeElement.src;
     this.player.nativeElement.src = url + '&autoplay=1';
   }

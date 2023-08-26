@@ -8,9 +8,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SafeMediaUrlPipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
 
-  transform(url: string, ...args: unknown[]): unknown {
+  transform(url: string): unknown {
     const service = 'https://www.youtube.com/embed/';
-    const delimeter = /[\/\?]/;
+    const delimeter = /[/?]/;
     if (url) {
       const mediaSrcId = url.split(delimeter)[3];
       const newUrlSrc = `${service}${mediaSrcId}?rel=0&autohide=I`;
