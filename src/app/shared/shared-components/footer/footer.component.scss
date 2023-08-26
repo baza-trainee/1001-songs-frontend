@@ -13,7 +13,6 @@ footer {
       min-height: 337px;
 
       &__block1 {
-         margin-bottom: 16px;
          width: 100%;
          min-height: 96px;
          display: flex;
@@ -24,14 +23,14 @@ footer {
          .footer__logo {
             width: 24%;
             max-width: 302px;
-            min-width: 294px;
+            min-width: 302px;
             margin-right: 24px;
             height: initial;
             overflow: hidden;
 
             img {
-               width: 102px;
-               height: 96px;
+               width: 85px;
+               height: 80px;
             }
          }
 
@@ -54,7 +53,7 @@ footer {
                   margin-right: 24px;
                   margin-bottom: 32px;
 
-                  &:hover {
+                  a:hover {
                      color: var(--text-color-accent);
                   }
 
@@ -70,7 +69,7 @@ footer {
             button {
                width: 100%;
                max-width: 302px;
-               min-width: 293px;
+               min-width: 300px;
                height: 48px;
                background-color: var(--bg-color-accent);
                border-radius: 100px;
@@ -98,11 +97,19 @@ footer {
             min-width: 294px;
             margin-right: 24px;
 
-            img {
+           .partners__title {
+              @include link-desktop($color: $color-extra-2);
+             margin-bottom: 24px;
+           }
+
+           .partners__items {
+
+             img {
                width: 64px;
                height: 64px;
                margin-right: 32px;
-            }
+             }
+           }
          }
 
          .footer__rules {

@@ -20,12 +20,13 @@
       }
    },
    "footer": {
-      "button": "Підтримати проект",
+      "button": "Підтримати проєкт",
+      "partners": "Наші партнери",
       "rules": {
          "reporting":"Звітність",
          "policy": "Політика приватності",
          "terms": "Правила та умови використання",
-         "copyright": "Copyright © 2023. All rights reserved"
+         "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
       }
    },
   "home": {
