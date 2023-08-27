@@ -23,6 +23,10 @@
    "footer": {
       "button": "Support the project",
       "partners": "Our partners",
+     "contacts" : {
+       "title" : "Contacts",
+       "email" : "clientsupport@gmail.com"
+     },
       "rules": {
          "reporting":"Reporting",
          "policy": "Privacy policy",

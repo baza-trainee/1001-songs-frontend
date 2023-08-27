@@ -22,6 +22,10 @@
    "footer": {
       "button": "Підтримати проєкт",
       "partners": "Наші партнери",
+      "contacts" : {
+        "title" : "Контакти",
+        "email" : "clientsupport@gmail.com"
+      },
       "rules": {
          "reporting":"Звітність",
          "policy": "Політика приватності",
