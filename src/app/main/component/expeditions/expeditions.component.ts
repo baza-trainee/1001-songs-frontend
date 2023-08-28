@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { ExpeditionsService, IExpediton } from 'src/app/shared/services/expeditions/expeditions.service';
+import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { SafeMediaUrlPipe } from "../../../shared/pipes/safe-media-url.pipe";
 import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedition-card/expedition-card.component';
+import Iexpediton from 'src/app/shared/interfaces/expedition.interface';
 
 @Component({
     selector: 'app-expeditions',
@@ -14,7 +15,7 @@ import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedi
     imports: [CommonModule, TranslateModule, SafeMediaUrlPipe, ExpeditionCardComponent]
 })
 export class ExpeditionsComponent {
-  $expeditions: Observable<IExpediton[]>;
+  $expeditions: Observable<Iexpediton[]>;
   categories: string[];
   selectedCategory: number = 0;
 

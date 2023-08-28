@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import IExpediton from '../../interfaces/expedition.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -39,12 +40,4 @@ export class ExpeditionsService {
       }
     );
   }
-}
-export interface IExpediton {
-  id: string;
-  name: string;
-  shortDescription: string;
-  mediaSrc: string;
-  eventDate: Date | string;
-  location: string;
 }

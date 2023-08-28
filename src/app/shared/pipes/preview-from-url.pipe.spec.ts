@@ -21,7 +21,6 @@ describe('PreviewFromUrlPipe', () => {
     const url = 'https://youtu.be/T_vrh-QXLik';
     const domSanitizer = TestBed.get(DomSanitizer);
     const pipe = new PreviewFromUrlPipe(domSanitizer);
-
     const transformed = pipe.transform(url) as string;
     const previewUrl = transformed.toString().split(' ')[4];
     expect(previewUrl).toBe('http://img.youtube.com/vi/T_vrh-QXLik/0.jpg');

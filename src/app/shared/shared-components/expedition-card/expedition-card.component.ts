@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IExpediton } from '../../services/expeditions/expeditions.service';
 import { SafeMediaUrlPipe } from '../../pipes/safe-media-url.pipe';
 import { PreviewFromUrlPipe } from '../../pipes/preview-from-url.pipe';
+import Iexpediton from '../../interfaces/expedition.interface';
 
 @Component({
   selector: 'app-expedition-card',
@@ -12,7 +12,7 @@ import { PreviewFromUrlPipe } from '../../pipes/preview-from-url.pipe';
   imports: [CommonModule, SafeMediaUrlPipe, PreviewFromUrlPipe]
 })
 export class ExpeditionCardComponent {
-  @Input() event: IExpediton = {} as IExpediton;
+  @Input() event: Iexpediton = {} as Iexpediton;
   @ViewChild('player') player!: ElementRef;
   isPreviewDisplayed = true;
 
