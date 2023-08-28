@@ -37,12 +37,12 @@ describe('HeaderComponent', () => {
 
   
   it('should toggle language and change translation', () => {
-    const initialLang = 'Укр';
+    const initialLang = 'Eng';
     expect(component.changeLang).toBeTrue();
     expect(component.lang).toEqual(initialLang);
     component.selectLang();
     expect(component.changeLang).toBeFalse();
-    expect(component.lang).toEqual('Eng');
+    expect(component.lang).toEqual('Укр');
     expect(translateService.currentLang).toEqual('en');
   });
 
@@ -59,13 +59,13 @@ describe('HeaderComponent', () => {
   });
 
   it('should switch language between "Укр" and "Eng" on each click', () => {
-    expect(component.lang).toEqual('Укр');
-    component.selectLang();
-    fixture.detectChanges();
     expect(component.lang).toEqual('Eng');
     component.selectLang();
     fixture.detectChanges();
-    expect(component.lang).toEqual('Укр'); 
+    expect(component.lang).toEqual('Укр');
+    component.selectLang();
+    fixture.detectChanges();
+    expect(component.lang).toEqual('Eng'); 
   });
 
   it('should set changeLang to true if currentLang is not "en"', () => {
@@ -85,7 +85,7 @@ describe('HeaderComponent', () => {
     spyOn(translateService, 'use');
     component.receivedData(value);
     expect(component.changeLang).toBeFalse();
-    expect(component.lang).toEqual('Eng');
+    expect(component.lang).toEqual('Укр');
     expect(translateService.use).toHaveBeenCalledWith('en');
   });
 
@@ -94,7 +94,7 @@ describe('HeaderComponent', () => {
     spyOn(translateService, 'use');
     component.receivedData(value);
     expect(component.changeLang).toBeTruthy();
-    expect(component.lang).toEqual('Укр');
+    expect(component.lang).toEqual('Eng');
     expect(translateService.use).toHaveBeenCalledWith('ua');
   });
 

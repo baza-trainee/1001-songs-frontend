@@ -10,7 +10,8 @@
     "stylelint": "npx stylelint \"src/**/*.scss\"",
     "precommit": "lint-staged",
     "prepare": "husky install~",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy": "ng deploy --base-href=/1001-songs-frontend/ --name=baza-trainee --email=baza.trainee@gmail.com --no-silent"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +25,7 @@
     "@angular/router": "^16.1.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "angular-cli-ghpages": "^1.0.6",
     "e2e": "0.0.8",
     "lint-staged": "^13.2.2",
     "package": "^1.0.1",

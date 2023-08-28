@@ -21,11 +21,32 @@
       }
    },
    "footer": {
-      "stub": "Block Footer in development"
+      "button": "Support the project",
+      "rules": {
+         "reporting":"Reporting",
+         "policy": "Privacy policy",
+         "terms": "Terms and conditions of use",
+         "copyright": "Copyright © 2023. All rights reserved"
+      }
    },
-   "home": {
-      "stub": "Main page under development"
-   },
+  "home": {
+    "home-info": {
+      "songs-link": "1000+ songs",
+      "donate-link": "Education support",
+      "title": "1000 & 1 song",
+      "subtitle": "We have collected traditional Ukrainian songs of various genres from all regions. Let's popularize Ukraine together"
+    },
+    "actions": {
+      "button-donate": "Donate",
+      "button-share": "Share"
+    }
+  },
+  "tapes": {
+    "tapes-wrap": {
+      "knowUkraine": "know Ukrainian singing",
+      "places": "record spaces"
+    }
+  },
    "about": {
       "stub": "The 'About the project' page is under development"
    },
@@ -40,7 +61,16 @@
    },
    "science":{
       "stub": "Page 'Educational Section' under development"
-   }
+   },
+  "error": {
+    "error-inner": {
+      "title": "404",
+      "text": "Oops! It looks like the page you are looking for is currently unavailable"
+    },
+    "actions": {
+      "block-btn": "To the main page"
+    }
+  }
 }
 
 

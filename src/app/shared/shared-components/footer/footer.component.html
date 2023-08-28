@@ -1,3 +1,50 @@
 <footer>
-   <p style="margin: 5px; color: white; font-size: larger;">{{'footer.stub' | translate}}</p>
+<div class="footer">
+   <section class="footer__block1">
+      <div class="footer__logo"><a href="#"><img src="./assets/img/logo/logo-footer.png" alt="footer logo"></a></div>
+      <div class="footer__nav">
+         <ul class="nav__list">
+            <li class="nav__item" *ngFor="let link of navLinks"><a  [routerLink] = "link.route" routerLinkActive="active">{{ link.name | translate }}</a></li>
+         </ul>
+      </div>
+      <div class="footer__donate">
+         <button> {{ 'footer.button' | translate }} </button>
+      </div>
+      </section>
+   <hr>
+
+   <section class="footer__block2">
+      <div class="footer__partners">
+         <a href="#">
+            <img src="./assets/img/partners/partner-1.png" alt="partner logo 1" class="partners__logo">
+         </a>
+         <a href="#">
+            <img src="./assets/img/partners/partner-2.png" alt="partner logo 1" class="partners__logo">
+         </a>
+         <a href="#">
+            <img src="./assets/img/partners/partner-3.png" alt="partner logo 1" class="partners__logo">
+         </a>
+      </div>
+      <div class="footer__rules">
+         <div class="rules__legal">
+            <ul>
+               <li><a routerLink = "#" routerLinkActive="active"> {{ 'footer.rules.reporting' | translate }} </a></li>
+               <li><a routerLink = "#" routerLinkActive="active"> {{ 'footer.rules.policy' | translate }} </a></li>
+               <li><a routerLink = "#" routerLinkActive="active"> {{ 'footer.rules.terms' | translate }} </a></li>
+            </ul>
+         </div>
+         <div class="rules__rights">
+            <p> {{ 'footer.rules.copyright' | translate }} </p>
+         </div>
+      </div>
+      <div class="footer__social">
+         <a href="#" class="sotial__item">
+            <img src="./assets/img/social/facebook.svg" alt="">
+         </a>
+         <a href="#" class="sotial__item">
+            <img src="./assets/img/social/youtube.svg" alt="">
+         </a>
+      </div>
+   </section>
+</div>
 </footer>

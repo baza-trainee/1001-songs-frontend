@@ -2,7 +2,14 @@
 
 .home {
   background: url("../../../../assets/img/home/Header-min.png") no-repeat center/cover;
-  height: 100vh;
+  height: 740px;
+  position: relative;
+
+  &__tape{
+    position: absolute;
+    bottom: 17px;
+    width: 100%
+  }
 
   &__inner {
     position: relative;
@@ -10,38 +17,27 @@
 
   &__info {
     max-width: 630px;
-    max-height: 320px;
+    max-height: 260px;
     position: absolute;
+    top: 400px;
     left: 0;
-    top: 340px;
-    align-items: center;
 
-    &-item {
-      @include overline-desktop;
-
-      color: #FFE600;
-    }
-
-    &-link {
-      margin-right: 32px;
-      border-bottom: 1px solid #FFE600;
-      transition: all 0.2s linear;
-    }
-
-    &-link:hover {
-      border: none;
+    &-desc {
+      display: flex;
+      flex-direction: column;
     }
 
     &-title {
-      margin: 32px 0;
+      margin: 0 0 32px;
 
       @include h1-desktop;
+
     }
 
     &-subtitle {
-      @include subtitle-desktop;
+      @include paragraph-desktop;
 
-      color: #FEFEFE;
+      font-size: 23px;
     }
 
     &-img {
@@ -51,116 +47,202 @@
     &-actions {
       margin-top: 32px;
       display: flex;
+      flex-wrap: wrap;
       column-gap: 16px;
     }
 
     &-button {
       padding: 12px 24px;
-      border: 2px solid #FFE600;
       border-radius: 100px;
-      background: #FFE600;
-      color: #131313;
+      background: var(--bg-color-accent);
       display: flex;
       column-gap: 9.5px;
       transition: all 0.2s linear;
       cursor: pointer;
+      width: 244px;
+      height: 48px;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
 
       @include button-desktop;
 
+      font-size: 18px;
+      color: var(--text-color-primary);
+
+      &:hover {
+        background-color: var(--bg-color-yellow);
       }
 
-    &-button:hover {
-      background-color: #754F31;
-      color: #FFE600;
-      border: 2px solid  #754F31;
-    }
+      &:last-child {
+        background: transparent;
+        transition: all 0.2s linear;
+        border: 2px solid var(--text-color-accent);
 
-    &-button:last-child {
-      background: transparent;
-      color: #FFE600;
-      transition: all 0.2s linear;
-    }
+        svg {
+          fill: #FFE600;
+        }
 
-    &-button:last-child:hover {
-      border: 2px solid  #754F31;
-    }
-  }
-}
+        &:hover {
+          svg {
+            fill: var(--text-color-yellow);
+          }
+        }
 
-@media (width <=1024px) {
-  .home {
-    &__info {
-      position: absolute;
-      left: 48px;
-    }
-  }
-}
+        @include button-desktop;
 
-@media (width <=768px) {
-  .home {
-    &__info {
-      max-height: 272px;
-      position: absolute;
-      left: 32px;
-      top: 368px;
+        font-size: 18px;
+        color: var(--text-color-accent);
 
-      &-title {
-        margin: 24px 0;
-
-        @include h1-tablet;
-      }
-
-      &-link {
-        margin-right: 24px;
-      }
-
-      &-actions {
-        margin-top: 24px;
+        &:last-child:hover {
+          border: 2px solid var(--bg-color-yellow);
+          color: var(--text-color-yellow);
+          background-color: var(--bg-color-transparent-yellow);
+        }
       }
     }
   }
 }
 
-@media (width <=390px) {
-  .home {
-    &__info {
-      max-height: 312px;
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      top: 300px;
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
+  }
+}
 
-      &-link {
-        margin-right: 20px;
+  @media (width <=1024px) {
+    .container {
+      margin: 0 48px;
+    }
+  }
 
-        @include overline-mobile;
-      }
+  @media (width <=768px) {
+    .container {
+      margin: 0 32px;
+    }
 
-      &-title {
-        margin: 20px 0;
+    .home {
+      &__info {
+        max-height: 220px;
+        inset: 420px 0 60px;
+        width: auto;
+        position: absolute;
 
-        @include h1-mobile;
+        &-title {
+          margin: 0 0 24px;
 
-        color: #FEFEFE;
-      }
+          @include h1-tablet;
 
-      &-subtitle {
-        @include body-mobile;
+        }
 
-        color: #FEFEFE;
-      }
+        &-subtitle {
+          margin-right: 32px;
+        }
 
-      &-actions {
-        margin-top: 20px;
-        flex-direction: column;
-        row-gap: 8px;
-      }
+        &-actions {
+          margin-top: 24px;
+          gap: 8px;
+        }
 
-      &-button {
-        justify-content: center;
-
-        @include button-mobile;
+        &-button {
+          justify-content: center;
+        }
       }
     }
   }
-}
+
+  @media (width <=675px) {
+    .container {
+      margin: 0 32px;
+    }
+
+    .home {
+      &__info {
+        top: 390px;
+        bottom: 32px;
+        height: 220px;
+        width: 400px;
+
+        &-title {
+          margin: 0 0 20px;
+
+          @include h1-mobile;
+
+          color: var(--text-color-secondary);
+        }
+
+        &-subtitle {
+          @include body-desktop;
+
+          color: var(--text-color-secondary);
+        }
+
+        &-actions {
+          margin-top: 24px;
+          gap: 8px;
+        }
+
+        &-button {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (width <=465px) {
+    .container {
+      margin: 0 16px;
+    }
+
+    .home {
+      &__info {
+        &-actions {
+          max-width: 350px;
+        }
+      }
+    }
+  }
+
+  @media (width <=420px) {
+    .home {
+      &__info {
+        max-width: 358px;
+        position: absolute;
+        inset: 344px 0 48px;
+
+        &-title {
+          margin: 0 0 20px;
+
+          @include h1-mobile;
+
+          color: var(--text-color-secondary);
+        }
+
+        &-subtitle {
+          @include body-desktop;
+
+          color: var(--text-color-secondary);
+        }
+
+        &-actions {
+          flex-direction: column;
+          row-gap: 8px;
+          max-width: 358px;
+
+          &-button {
+            justify-content: center;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media (width <=389px) {
+    .home__info {
+      width: auto;
+    }
+  }
+

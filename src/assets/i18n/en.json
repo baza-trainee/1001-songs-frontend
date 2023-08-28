@@ -1,40 +1,70 @@
 {
-  "header": {
-    "nav-menu": {
-      "about": "About",
-      "map": "Map",
-      "educational-section": "Educational Section",
-      "news": "News",
-      "expedition": "Expeditions"
+   "header": {
+      "nav-menu": {
+         "about": "About",
+         "map": "Map",
+         "educational-section": "Educational Section",
+         "news": "News",
+         "expedition": "Expeditions"
+      },
+      "actions": {
+         "button-donate": "Donate"
+      },
+     "pop-up-menu": {
+       "title": "Share the project of Ukrainian cultural heritage with the world.",
+       "copy": "Copy"
+     }
+   },
+   "footer": {
+      "button": "Support the project",
+      "rules": {
+         "reporting":"Reporting",
+         "policy": "Privacy policy",
+         "terms": "Terms and conditions of use",
+         "copyright": "Copyright © 2023. All rights reserved"
+      }
+   },
+  "home": {
+    "home-info": {
+      "songs-link": "1000+ songs",
+      "donate-link": "Education support",
+      "title": "1000 & 1 song",
+      "subtitle": "We have collected traditional Ukrainian songs of various genres from all regions. Let's popularize Ukraine together"
     },
     "actions": {
-      "button-donate": "Donate"
-    },
-    "pop-up-menu": {
-      "title": "Share the project of Ukrainian cultural heritage with the world.",
-      "copy": "Copy"
+      "button-donate": "Donate",
+      "button-share": "Share"
     }
   },
-  "footer": {
-    "stub": "Block Footer in development"
+  "tapes": {
+    "tapes-wrap": {
+      "knowUkraine": "know Ukrainian singing",
+      "places": "record spaces"
+    }
   },
-  "home": {
-    "stub": "Main page under development"
-  },
-  "about": {
-    "stub": "The 'About the project' page is under development"
-  },
-  "map": {
-    "stub": "Page 'Map' under development"
-  },
-  "news": {
-    "stub": "Page 'News' under development"
-  },
-  "expeditions": {
-    "stub": "Page 'Expeditions' under development"
-  },
-  "science": {
-    "stub": "Page 'Educational Section' under development"
+   "about": {
+      "stub": "The 'About the project' page is under development"
+   },
+   "map":{
+      "stub": "Page 'Map' under development"
+   },
+   "news":{
+      "stub": "Page 'News' under development"
+   },
+   "expeditions":{
+      "stub": "Page 'Expeditions' under development"
+   },
+   "science":{
+      "stub": "Page 'Educational Section' under development"
+   },
+  "error": {
+    "error-inner": {
+      "title": "404",
+      "text": "Oops! It looks like the page you are looking for is currently unavailable"
+    },
+    "actions": {
+      "block-btn": "To the main page"
+    }
   }
 }
 

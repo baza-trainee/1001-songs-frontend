@@ -1,0 +1,52 @@
+@import '../../../../typography/typography';
+
+.container{
+  padding: 0 10px;
+}
+
+.error {
+  position: relative;
+  background: url("../../../../assets/img/home/Header-min.png") no-repeat center/cover;
+  opacity: 0.4;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__block-title {
+    margin: 0 0 48px;
+
+    @include h1-desktop;
+
+  }
+
+  &__block-text {
+    max-width: 846px;
+    margin-bottom: 56px;
+
+    @include h2-desktop;
+
+    color: var(--text-color-secondary);
+  }
+
+  &__block-btn {
+    padding: 12px 103.5px;
+    border: 2px solid var(--text-color-accent);
+    border-radius: 100px;
+    background: transparent;
+    text-align: center;
+
+    @include button-desktop;
+
+    color: var(--text-color-accent);
+  }
+
+  &__block-btn:hover {
+    cursor: pointer;
+  }
+}
+

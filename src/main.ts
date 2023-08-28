@@ -6,6 +6,7 @@ import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
+import { ErrorComponent } from './app/shared/shared-components/error/error.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,7 +28,8 @@ bootstrapApplication(AppComponent, {
             {
                 path: '', component: MainComponent, loadChildren: () => import('./app/main/main.routes').then(rm => rm.MAIN_ROUTES)
             },
-                {path: '**', redirectTo: ''}
+            { path: '404', component: ErrorComponent },
+            { path: '**', redirectTo: '404' }
             ])
 
     ]

@@ -7,10 +7,10 @@ import { ExpeditionsComponent } from "./component/expeditions/expeditions.compon
 import { ScienceComponent } from "./component/science/science.component";
 
 export const MAIN_ROUTES: Routes = [
-   {path: '', component: HomeComponent},
    {path: 'about', component: AboutComponent},
    {path: 'map', component: MapComponent},
    {path: 'news', component: NewsComponent},
    {path: 'expeditions', component: ExpeditionsComponent},
-   {path: 'science', component: ScienceComponent}
+   {path: 'science', component: ScienceComponent},
+   {path: '', component: HomeComponent}
 ]

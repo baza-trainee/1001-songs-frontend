@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FooterComponent } from './footer.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +9,18 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [TranslateModule.forRoot(), FooterComponent]
+    imports: [TranslateModule.forRoot(), FooterComponent],
+    providers: [TranslateService,
+      {
+        provide: ActivatedRoute,
+        useValue: {
+          snapshot: {
+            data: {
+            }
+          }
+        }
+      }
+    ]
 });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
