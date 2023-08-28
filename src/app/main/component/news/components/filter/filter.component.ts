@@ -25,7 +25,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   constructor(private articleService: ArticlesService) {}
 
   ngOnInit(): void {
-    this.unSub = this.articleService.getArticles().subscribe((articles) => (this.articles = articles));
+    this.articleService.getArticles().subscribe((articles) => (this.articles = articles));
   }
 
   filterArticles(category: string) {
