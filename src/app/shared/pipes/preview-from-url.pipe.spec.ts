@@ -9,11 +9,9 @@ describe('PreviewFromUrlPipe', () => {
   });
 
   it('https://youtu.be/T_vrh-QXLik become a http://img.youtube.com/vi/T_vrh-QXLik/0.jpg', () => {
-    console.log('KKKKKKKKKKKKKKK')
     const url = 'https://youtu.be/T_vrh-QXLik';
     const pipe = new PreviewFromUrlPipe(sanitizer);
     const transformed = pipe.transform(url);
-    console.log('-------> ', transformed);
     expect(transformed).toBe('http://img.youtube.com/vi/T_vrh-QXLik/0.jpg');
   });
 });
