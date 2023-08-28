@@ -1,17 +1,29 @@
+import { TestBed } from '@angular/core/testing';
 import { PreviewFromUrlPipe } from './preview-from-url.pipe';
-import { DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 
 describe('PreviewFromUrlPipe', () => {
-  let sanitizer: DomSanitizer;
+  // let sanitizer: DomSanitizer;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [BrowserModule]
+    });
+  });
+
   it('create an instance', () => {
-    const pipe = new PreviewFromUrlPipe(sanitizer);
+    const domSanitizer = TestBed.get(DomSanitizer);
+    const pipe = new PreviewFromUrlPipe(domSanitizer);
     expect(pipe).toBeTruthy();
   });
 
-  it('https://youtu.be/T_vrh-QXLik become a http://img.youtube.com/vi/T_vrh-QXLik/0.jpg', () => {
+  it('string should be changed', () => {
     const url = 'https://youtu.be/T_vrh-QXLik';
-    const pipe = new PreviewFromUrlPipe(sanitizer);
-    const transformed = pipe.transform(url);
-    expect(transformed).toBe('http://img.youtube.com/vi/T_vrh-QXLik/0.jpg');
+    const domSanitizer = TestBed.get(DomSanitizer);
+    const pipe = new PreviewFromUrlPipe(domSanitizer);
+
+    const transformed = pipe.transform(url) as string;
+    const previewUrl = transformed.toString().split(' ')[4];
+    expect(previewUrl).toBe('http://img.youtube.com/vi/T_vrh-QXLik/0.jpg');
   });
 });
