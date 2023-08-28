@@ -15,12 +15,14 @@ import { Router } from '@angular/router';
 })
 export class LatestNewsComponent implements OnInit {
   public articles!: Article[];
-  currentChunk: Article[] = [];
+  public currentChunk: Article[] = [];
+  public currentIdx: number = 0;
+  public translateX: number = 0;
+  public total: number = 0;
+  public isNextBtnActive: boolean = false;
+  public isPrevBtnActive: boolean = false;
+  private step: number = 4;
 
-  currentIdx: number = 0;
-  translateX: number = 0;
-  step: number = 4;
-  total: number = 0;
 
   constructor(
     private articledService: ArticlesService,
@@ -53,12 +55,18 @@ export class LatestNewsComponent implements OnInit {
     if (this.currentIdx + 4 < this.articles.length) {
       this.currentIdx++;
       this.updateVisibleArticles();
+      this.isNextBtnActive = true;
+    } else {
+      this.isNextBtnActive = false;
     }
   }
   previousArticle() {
     if (this.currentIdx > 0) {
       this.currentIdx--;
       this.updateVisibleArticles();
+      this.isPrevBtnActive = true;
+    } else {
+      this.isPrevBtnActive = false;
     }
   }
 }

@@ -119,7 +119,6 @@
 
 .arrow {
   &__prev {
-    background-image: url('../../pisc/arrow_back.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -127,7 +126,7 @@
     height: 24px;
     flex-shrink: 0;
     cursor: pointer;
-    fill: #989898;
+    fill: #000;
   }
 
   &__next {
