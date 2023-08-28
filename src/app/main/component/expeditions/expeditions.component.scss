@@ -33,7 +33,7 @@
 
     li {
       @include link-desktop($font-family: $primary-fonts);
-      
+
       display: inline;
       cursor: pointer;
     }
@@ -44,10 +44,10 @@
     flex-wrap: wrap;
     gap: 24px;
   }
-}
 
-.selected-category {
-  font-weight: 600;
+  &__selected-category {
+    font-weight: 600;
+  }
 }
 
 @media (width < 1025px) {
@@ -101,7 +101,6 @@
   }
 
   .expeditions {
-    margin-left: 0px;
     overflow: visible;
 
     &__title {
