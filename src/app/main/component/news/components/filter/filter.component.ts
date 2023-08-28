@@ -12,44 +12,39 @@ import { ArticlesService } from '../../services/articles.service';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
+export class FilterComponent implements OnInit, OnDestroy {
+  public readonly categories: string[] = ['Усі', 'Зустрічі', 'Лекції', 'Публікації', 'Майстер-класи', 'Концерти', 'Коференції'];
 
-export class FilterComponent implements OnInit, OnDestroy{
-  public readonly filters: string[] = ["Усі", "Зустрічі", "Лекції", "Публікації", "Майстер-класи", "Концерти", "Коференції"];
-
-  public selectedFilter: string = "Усі";
-  public filterdBy!: Article[];
+  public selectedFilter: string = 'Усі';
+  private filteredArticle!: Article[];
   private articles!: Article[];
-  private unsub!: Subscription;
+  private unSub!: Subscription;
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
 
-  constructor(private articleService: ArticlesService){}
+  constructor(private articleService: ArticlesService) {}
 
   ngOnInit(): void {
-    this.articleService.getArticles().subscribe(articles => this.articles = articles);
+    this.articleService.getArticles().subscribe((articles) => (this.articles = articles));
   }
 
-  filterArticles(filter: string) {
+  filterArticles(category: string) {
+    if (category) {
+      this.selectedFilter = category;
 
-    if(filter) {
-      this.selectedFilter = filter;
-
-      if(filter === "Усі") {
-        this.filterdBy = this.articles.slice(0, 3);
-        this.filteredArticles.emit(this.filterdBy);
-
+      if (category === 'Усі') {
+        this.filteredArticle = this.articles.slice(0, 3);
+        this.filteredArticles.emit(this.filteredArticle);
       } else {
-        this.filterdBy = this.articles.filter(article => article.category === filter).slice(0, 3);
-        this.filteredArticles.emit(this.filterdBy);
-
+        this.filteredArticle = this.articles.filter((article) => article.category === category).slice(0, 3);
+        this.filteredArticles.emit(this.filteredArticle);
       }
-
-
     }
-
   }
 
   ngOnDestroy(): void {
-    this.unsub;
+    if (this.unSub) {
+      this.unSub.unsubscribe();
+    }
   }
 }

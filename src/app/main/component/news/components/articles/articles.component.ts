@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { FilterComponent } from '../filter/filter.component';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [TranslateModule, CommonModule, ArticleComponent, RouterLink, FilterComponent],
+  imports: [TranslateModule, NgFor, ArticleComponent, RouterLink, FilterComponent],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
@@ -33,7 +33,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     this.articles = articles;
   }
 
-  showArticle(id: number): void {
+  redirectToArticle(id: number) {
     this.router.navigate(['/article', id]);
   }
 
