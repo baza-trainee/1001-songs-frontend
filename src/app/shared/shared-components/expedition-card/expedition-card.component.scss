@@ -40,7 +40,8 @@
   }
 
   &__date {
-    @include caption-desktop();
+    @include caption-desktop;
+
     margin-top: 24px;
   }
 
@@ -50,11 +51,13 @@
 
   &__description {
     @include body-desktop;
+
     overflow: hidden;
   }
 
   &__location {
     @include caption-desktop;
+
     margin-top: 8px;
   }
 }
@@ -78,8 +81,10 @@
 @media (width < 769px) {
   .event {
     width: 340px;
+
     &__media {
       height: 200px;
+
       img {
         width: 340px;
         height: 200px;
@@ -92,17 +97,21 @@
   .event {
     height: 338px;
     width: 358px;
+
     &__media {
       img {
         width: 358px;
       }
     }
+    
     &__date {
       margin-top: 18px;
     }
+
     &__name {
       @include h6-mobile($line-height: 30px, $font-family: $primary-fonts);
     }
+
     &__location {
       margin-top: 6px;
     }

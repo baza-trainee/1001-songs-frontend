@@ -20,6 +20,7 @@
 
   &__description {
     @include body-desktop;
+
     width: 628px;
     padding-top: 5px;
   }
@@ -32,6 +33,7 @@
 
     li {
       @include link-desktop($font-family: $primary-fonts);
+      
       display: inline;
       cursor: pointer;
     }
