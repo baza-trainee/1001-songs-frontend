@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit{
   public menuSwitcherOff: boolean = true;
   public navLinks = navLinksHeader;
 
-  public lang = 'Укр';
+  public lang = 'Eng';
 
   constructor(
     private _translate: TranslateService
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit{
 
   selectLang(){
     this.changeLang = !this.changeLang;
-    this.lang = this.changeLang ? 'Укр' : 'Eng';
+    this.lang = this.changeLang ? 'Eng' : 'Укр';
     this._translate.use(this.changeLang ? 'ua' : 'en');
   }
 
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit{
 
   receivedData(value:boolean){
     this.changeLang = value ? false : true;
-    this.lang = this.changeLang ? 'Укр' : 'Eng';
+    this.lang = this.changeLang ? 'Eng' : 'Укр';
     this._translate.use(this.changeLang ? 'ua' : 'en');
   }
 

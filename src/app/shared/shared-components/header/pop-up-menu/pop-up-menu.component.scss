@@ -83,6 +83,7 @@
 
           &__list li {
             @include h2-mobile($font-size: 28px, $color: var(--text-color-popup-menu));
+
             margin-bottom: 32px;
 
             &:last-child {
@@ -93,8 +94,8 @@
               position: relative;
               padding: 7px 0;
 
-              &:before,
-              &:after {
+              &::before,
+              &::after {
                 content: "";
                 position: absolute;
                 width: 0;
@@ -105,7 +106,7 @@
                 transition: width .2s linear;
               }
 
-              &:after {
+              &::after {
                 left: 0;
               }
 
@@ -114,8 +115,8 @@
                 outline: none;
                 color: var(--text-color-primary);
 
-                &:before,
-                &:after {
+                &::before,
+                &::after {
                   width: 50%;
                 }
               }
@@ -129,6 +130,7 @@
 
         &__span {
           @include link-mobile($color: var(--text-color-popup-menu));
+
           margin-bottom: 32px;
         }
 
@@ -143,7 +145,7 @@
           position: relative;
           padding-left: 40px;
 
-          &:before {
+          &::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -154,19 +156,19 @@
           }
         }
 
-        &__fb:before {
+        &__fb::before {
           background: url("../../../../../assets/img/header/logos_facebook.svg") no-repeat center/cover;
         }
 
-        &__inst:before {
+        &__inst::before {
           background: url("../../../../../assets/img/header/skill-icons_instagram.svg") no-repeat center/cover;
         }
 
-        &__tg:before {
+        &__tg::before {
           background: url("../../../../../assets/img/header/logos_telegram.svg") no-repeat center/cover;
         }
 
-        &__copy:before {
+        &__copy::before {
           background: url("../../../../../assets/img/header/solar_copy-bold.svg") no-repeat center/cover;
         }
       }
@@ -190,6 +192,7 @@
 
     .main {
       margin-bottom: 0;
+
       .lang {
         display: flex;
 
@@ -221,7 +224,9 @@
 
         .links {
           border: none;
+
           @include h2-mobile($font-size: 24px, $color: var(--text-color-popup-menu));
+
           margin-bottom: 28px;
 
           &:last-child {
@@ -244,6 +249,7 @@
             display: flex;
             gap: 28px;
           }
+
           &__item {
             margin-bottom: 0;
           }

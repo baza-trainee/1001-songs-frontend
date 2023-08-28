@@ -1,0 +1,253 @@
+@import '../../../../typography/typography';
+
+.tapes {
+  overflow-x: clip;
+
+  .xxl {
+    display: none;
+  }
+
+  &__wrap {
+    max-width: 100%;
+    position: relative;
+
+    &-block {
+      display: flex;
+      overflow: hidden;
+      background-color: var(--bg-color-footer);
+      height: 72px;
+      position: absolute;
+      left: -1vw;
+      width: 104vw;
+    }
+
+    &-items {
+      min-width: 100%;
+      display: flex;
+      justify-content: space-around ;
+      align-items: center;
+      animation: scroll 45s linear infinite;
+    }
+
+    &-item {
+      padding: 16px 0;
+
+      @include h3-desktop;
+
+    }
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100%));
+  }
+}
+
+@media (width <= 1940px) {
+  .xxl {
+    display: flex;
+  }
+
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 130vw;
+      }
+    }
+  }
+}
+
+@media (width <= 1805px) {
+  .xxl {
+    display: flex;
+  }
+
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 150vw;
+      }
+    }
+  }
+}
+
+@media (width <= 1560px) {
+  .xxl {
+    display: flex;
+  }
+
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 170vw;
+      }
+    }
+  }
+}
+
+@media (width <= 1350px) {
+  .xxl {
+    display: none;
+  }
+
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 120vw;
+      }
+    }
+  }
+}
+
+@media (width <= 1160px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 140vw;
+      }
+    }
+  }
+}
+
+@media (width <= 1120px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 145vw;
+      }
+    }
+  }
+}
+
+@media (width <= 940px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 175vw;
+      }
+    }
+  }
+}
+
+@media (width <= 790px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 190vw;
+      }
+    }
+  }
+}
+
+@media (width <= 760px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 210vw;
+      }
+    }
+  }
+}
+
+@media (width <= 690px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 225vw;
+      }
+    }
+  }
+}
+
+@media (width <= 600px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 240vw;
+        height: 52px;
+      }
+
+      &-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8px 0;
+
+        @include h3-mobile;
+
+        color: var(--text-color-accent);
+      }
+
+      &-image {
+        height: 36px;
+        width: 36px;
+      }
+    }
+  }
+}
+
+@media (width <= 530px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 245vw;
+      }
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 280vw;
+      }
+    }
+  }
+}
+
+@media (width <= 450px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 310vw;
+      }
+    }
+  }
+}
+
+@media (width <= 400px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 335vw;
+      }
+    }
+  }
+}
+
+@media (width <= 355px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 360vw;
+      }
+    }
+  }
+}
+
+@media (width <= 330px) {
+  .tapes {
+    &__wrap{
+      &-block{
+        width: 380vw;
+      }
+    }
+  }
+}
