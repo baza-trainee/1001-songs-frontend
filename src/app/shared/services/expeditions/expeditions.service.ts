@@ -17,14 +17,14 @@ export class ExpeditionsService {
     'expeditions.categories.video-of-ritual',
     'expeditions.categories.digital-rcord'
   ];
-  $expeditons: BehaviorSubject<IExpediton[]> = new BehaviorSubject([{} as IExpediton]);
+  $expeditions: BehaviorSubject<IExpediton[]> = new BehaviorSubject([{} as IExpediton]);
 
   constructor(private http: HttpClient) {
     this.uploadExpeditions();
   }
 
   getExpeditions() {
-    return this.$expeditons;
+    return this.$expeditions;
   }
 
   getCategories() {
@@ -33,9 +33,9 @@ export class ExpeditionsService {
 
   private uploadExpeditions() {
     this.http.get(this.URL).subscribe(
-      (data) => this.$expeditons.next(data as IExpediton[]),
+      (data) => this.$expeditions.next(data as IExpediton[]),
       (error) => {
-        this.$expeditons.next([{} as IExpediton]);
+        this.$expeditions.next([{} as IExpediton]);
         console.error(error.message);
       }
     );
