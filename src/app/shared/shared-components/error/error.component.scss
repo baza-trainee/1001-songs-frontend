@@ -1,24 +1,31 @@
 @import '../../../../typography/typography';
 
-.container{
-  padding: 0 10px;
-}
-
 .error {
   position: relative;
-  background: url("../../../../assets/img/home/Header-min.png") no-repeat center/cover;
-  opacity: 0.4;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-image: url("../../../../assets/img/home/Header-min.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: 30%;
+  background-position-y: -63%;
+  opacity: 0.6;
+  height: 100%;
 
-  &__inner {
+  .container{
+    padding: 0 10px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding-top: calc(108px + 91px);
+    padding-bottom: 191px;
   }
 
   &__block-title {
-    margin: 0 0 48px;
+    margin-bottom: 48px;
 
     @include h1-desktop;
 
@@ -35,6 +42,7 @@
 
   &__block-btn {
     padding: 12px 103.5px;
+    width: 302px;
     border: 2px solid var(--text-color-accent);
     border-radius: 100px;
     background: transparent;
@@ -47,6 +55,87 @@
 
   &__block-btn:hover {
     cursor: pointer;
+    border: 2px solid var(--bg-color-footer);
   }
 }
 
+@media screen and (max-width: 1140px) {
+  .error{
+    height: 644px;
+    &__block{
+      padding-top: 202px;
+
+      &-text{
+        margin-bottom: 72px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .error{
+    height: 100%;
+    background-position-x: 0;
+    &__block{
+      padding-top: 202px;
+      padding-bottom: 172px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .error{
+    height: 100%;
+    background-position-x: 35%;
+    &__block{
+      padding-top: 276px;
+      padding-bottom: 96px;
+      &-title{
+        margin-bottom: 43px;
+
+        @include h1-tablet;
+      }
+
+      &-text{
+        margin-bottom: 97px;
+
+        @include h4-desktop;
+
+        color: var(--text-color-secondary);
+        line-height: 36px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .error {
+    background-position: 50%;
+    &__block{
+      padding-top: 250px;
+      &-title{
+        margin-bottom: 59px;
+
+        @include h1-mobile;
+
+        color: var(--text-color-secondary);
+      }
+      &-text{
+        margin-bottom: 99px;
+
+        @include h5-mobile;
+
+        color: var(--text-color-secondary);
+      }
+      &-btn{
+        width: 358px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .error {
+    background-position-x: 47%;
+  }
+}

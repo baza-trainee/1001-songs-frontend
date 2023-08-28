@@ -1,8 +1,8 @@
 @import '../../../../typography/typography';
 
 .home {
-  background: url("../../../../assets/img/home/Header-min.png") no-repeat center/cover;
-  height: 740px;
+  background: linear-gradient(13deg, rgba(18, 9, 1, 0.44) 16.50%, rgba(18, 9, 1, 0.00) 73.04%), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
+  height: 812px;
   position: relative;
 
   &__tape{
@@ -37,7 +37,7 @@
     &-subtitle {
       @include paragraph-desktop;
 
-      font-size: 23px;
+      font-size: 21px;
     }
 
     &-img {
@@ -67,11 +67,22 @@
 
       @include button-desktop;
 
-      font-size: 18px;
       color: var(--text-color-primary);
 
+      svg {
+        fill: var(--text-color-primary);
+      }
+
       &:hover {
-        background-color: var(--bg-color-yellow);
+        background-color: var(--bg-color-footer);
+        color: var(--text-color-accent);
+
+        &:hover {
+          svg {
+            fill: var(--text-color-accent);
+            transition: all 0.2s linear;
+          }
+        }
       }
 
       &:last-child {
@@ -79,25 +90,13 @@
         transition: all 0.2s linear;
         border: 2px solid var(--text-color-accent);
 
-        svg {
-          fill: #FFE600;
-        }
-
-        &:hover {
-          svg {
-            fill: var(--text-color-yellow);
-          }
-        }
-
         @include button-desktop;
 
-        font-size: 18px;
         color: var(--text-color-accent);
 
         &:last-child:hover {
-          border: 2px solid var(--bg-color-yellow);
-          color: var(--text-color-yellow);
-          background-color: var(--bg-color-transparent-yellow);
+          border: 2px solid var(--bg-color-footer);
+          color: var(--text-color-accent);
         }
       }
     }
@@ -115,6 +114,9 @@
     .container {
       margin: 0 48px;
     }
+    .home{
+      background-position-x: 12%;
+    }
   }
 
   @media (width <=768px) {
@@ -123,6 +125,9 @@
     }
 
     .home {
+      height: 772px;
+      background-position-x: 45%;
+
       &__info {
         max-height: 220px;
         inset: 420px 0 60px;
@@ -158,6 +163,8 @@
     }
 
     .home {
+      background-position-x: 50%;
+
       &__info {
         top: 390px;
         bottom: 32px;
@@ -197,6 +204,8 @@
     }
 
     .home {
+      background-position-x: 50%;
+
       &__info {
         &-actions {
           max-width: 350px;
@@ -207,6 +216,8 @@
 
   @media (width <=420px) {
     .home {
+      height: 712px;
+      background-position-x: 50%;
       &__info {
         max-width: 358px;
         position: absolute;
@@ -241,8 +252,12 @@
   }
 
   @media (width <=389px) {
-    .home__info {
-      width: auto;
+    .home{
+      background-position-x: 45%;
+
+      &__info{
+        width: auto;
+      }
     }
   }
 
