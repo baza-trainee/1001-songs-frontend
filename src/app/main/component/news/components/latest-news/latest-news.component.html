@@ -1,28 +1,26 @@
-
-  <div class="news-latest container">
-
-    <div class="news-latest__title">
-      Останні новини
-    </div>
-    <div class="news-latest__wrap">
-
-      <div class="news-latest__card" *ngFor="let article of articles">
-        <div class="news-latest__card-wrap"  >
-          <div class="news-latest__card-image" [style.background-image]="'url(' + article.images[0] + ')'">
+<div class="news-latest container">
+  <div class="news-latest__title">Останні новини</div>
+  <div class="news-latest__wrap">
+    <div class="slide">
+      <div class="slide__wrap" [style.transform]="'translateX(' + translateX + 'px)'">
+        <div class="news-latest__card slide__items" *ngFor="let article of currentChunk">
+          <div class="news-latest__card-wrap btn-link" (click)="showDetail(article.id)">
+            <div class="news-latest__card-image" [style.background-image]="'url(' + article.images[0] + ')'"></div>
+            <div class="news-latest__card-date">{{ article.date }}</div>
+            <div class="news-latest__card-title">{{ article.title }}</div>
+            <div class="news-latest__card-subtitle">{{ article.text | cutText: 10 }}</div>
+            <div class="news-latest__card-location">{{ article.location }}</div>
           </div>
-          <div class="news-latest__card-date">{{article.date}}</div>
-          <div class="news-latest__card-title">{{article.title}}</div>
-          <div class="news-latest__card-subtitle">{{article.text | cutText: 10}}</div>
-          <div class="news-latest__card-location">{{article.location}}</div>
         </div>
-
-      </div>
-    </div>
-    <div class="news-latest__controlls">
-      <div class="news-latest__controlls-pages">1/10</div>
-      <div class="news-latest__controlls-arrows">
-        <div class="news-latest__btn arrow__prev"></div>
-        <div class="news-latest__btn arrow__next"></div>
       </div>
     </div>
   </div>
+  <!--make colors of buttons-->
+  <div class="news-latest__controlls">
+    <div class="news-latest__controlls-pages">{{ currentIdx }}/{{ total }}</div>
+    <div class="news-latest__controlls-arrows">
+      <button class="news-latest__btn arrow__prev active" [ngClass]="{ active: this.currentIdx > 0 }" (click)="previousArticle()"></button>
+      <button class="news-latest__btn arrow__next" (click)="nextArticle()"></button>
+    </div>
+  </div>
+</div>

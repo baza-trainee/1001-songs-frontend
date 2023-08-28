@@ -6,9 +6,8 @@
   align-items: flex-start;
   gap: 48px;
 
-
   &__title {
-    font-family: "Yeseva One";
+    font-family: 'Yeseva One';
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
@@ -26,7 +25,6 @@
     border-radius: 8px;
     gap: 24px;
     flex-shrink: 0;
-
   }
 
   &__card-image {
@@ -38,7 +36,7 @@
     background-position: center;
   }
   &__card-date {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -48,7 +46,7 @@
 
   &__card-title {
     align-self: stretch;
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -57,7 +55,7 @@
   }
 
   &__card-subtitle {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -66,8 +64,8 @@
     color: var(--neutrals-900, #131313);
   }
 
-  &__card-location{
-    font-family: "Open Sans";
+  &__card-location {
+    font-family: 'Open Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -88,7 +86,7 @@
   }
 
   &__controlls-pages {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -110,6 +108,11 @@
     align-items: center;
     gap: 8px;
     border-radius: 100px;
+    border: 1px solid var(--neutrals-500, #989898);
+  }
+
+  &__btn-active {
+    border-radius: 100px;
     border: 1px solid var(--neutrals-900, #131313);
   }
 }
@@ -124,9 +127,10 @@
     height: 24px;
     flex-shrink: 0;
     cursor: pointer;
+    fill: #989898;
   }
 
-  &__next{
+  &__next {
     background-image: url('../../pisc/arrow_forward.svg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -136,4 +140,29 @@
     flex-shrink: 0;
     cursor: pointer;
   }
+}
+
+.btn-link {
+  cursor: pointer;
+}
+
+.slide {
+  overflow: hidden;
+  position: relative;
+
+  &__wrap {
+    display: flex;
+    flex-shrink: 0;
+    gap: 24px;
+    transition: transform 0.5s ease;
+  }
+
+  &__items {
+    flex: 0 0 25%;
+    padding: 10px;
+  }
+}
+
+.active {
+  fill: #000;
 }

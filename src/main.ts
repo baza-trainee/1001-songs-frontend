@@ -9,32 +9,35 @@ import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
 
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  }
-
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule, TranslateModule.forRoot({
-            defaultLanguage: 'ua',
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        })),
-        provideHttpClient(withInterceptorsFromDi()),
-        provideRouter([
-            {
-                path: '', component: MainComponent, loadChildren: () => import('./app/main/main.routes').then(rm => rm.MAIN_ROUTES)
-            },
-            { path: '404', component: ErrorComponent },
-            { path: '**', redirectTo: '404' }
-            ],
-            // for scroll to top when go to another page
-            withInMemoryScrolling({scrollPositionRestoration: 'enabled'})
-          )
-
-    ]
-})
-  .catch(err => console.error(err));
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      TranslateModule.forRoot({
+        defaultLanguage: 'ua',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient]
+        }
+      })
+    ),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(
+      [
+        {
+          path: '',
+          component: MainComponent,
+          loadChildren: () => import('./app/main/main.routes').then((rm) => rm.MAIN_ROUTES)
+        },
+        { path: '404', component: ErrorComponent },
+        { path: '**', redirectTo: '404' }
+      ],
+      // for scroll to top when go to another page
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+    )
+  ]
+}).catch((err) => console.error(err));

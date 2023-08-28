@@ -7,45 +7,37 @@ import { Subscription } from 'rxjs';
 import { ArticleComponent } from '../article/article.component';
 import { ArticlesService } from '../../services/articles.service';
 import { Article } from '../../article.interface';
-import {FilterComponent} from '../filter/filter.component';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    ArticleComponent,
-    RouterLink,
-    FilterComponent
-  ],
+  imports: [TranslateModule, CommonModule, ArticleComponent, RouterLink, FilterComponent],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   public articles!: Article[];
-  private unsub!: Subscription;
+  private unSub!: Subscription;
 
-  constructor(private articlesService: ArticlesService, private router: Router,){}
+  constructor(
+    private articlesService: ArticlesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.unsub = this.articlesService.getArticles().subscribe(articles => this.articles = articles.slice(0, 3));
-
+    this.unSub = this.articlesService.getArticles().subscribe((articles) => (this.articles = articles));
   }
 
   filteredArticles(articles: Article[]): void {
     this.articles = articles;
-
-  };
-
+  }
 
   showArticle(id: number): void {
-
-    this.router.navigate(['/article', id])
+    this.router.navigate(['/article', id]);
   }
 
   ngOnDestroy(): void {
-    this.unsub;
+    if (this.unSub) this.unSub.unsubscribe();
   }
-
 }
