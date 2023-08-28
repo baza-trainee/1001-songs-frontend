@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Pipe({
   name: 'previewFromUrl',
@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PreviewFromUrlPipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
-  transform(url: string): unknown {
+  transform(url: string): SafeResourceUrl  {
     const service = 'http://img.youtube.com/vi/';
     if (url) {
       const delimeter = /[/?]/;

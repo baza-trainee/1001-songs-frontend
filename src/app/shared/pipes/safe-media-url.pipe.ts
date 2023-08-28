@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Pipe({
   name: 'safeMediaUrl',
@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SafeMediaUrlPipe implements PipeTransform {
   constructor(protected sanitizer: DomSanitizer) {}
 
-  transform(url: string): unknown {
+  transform(url: string): SafeResourceUrl  {
     const service = 'https://www.youtube.com/embed/';
     const delimeter = /[/?]/;
     if (url) {

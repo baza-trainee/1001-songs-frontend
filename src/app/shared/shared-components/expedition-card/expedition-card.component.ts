@@ -18,7 +18,6 @@ export class ExpeditionCardComponent {
 
   playVideo() {
     this.isPreviewDisplayed = false;
-    console.log(this.player);
     const url = this.player.nativeElement.src;
     this.player.nativeElement.src = url + '&autoplay=1';
   }
