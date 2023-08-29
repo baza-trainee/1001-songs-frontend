@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
 import Iexpediton from '../../interfaces/expedition.interface';
 import { environment } from 'src/environments/environment';
 import { StatEndpoints } from '../../config/endpoints/stat-endpoints';
@@ -18,7 +18,7 @@ export class ExpeditionsService {
     'expeditions.categories.video-of-ritual',
     'expeditions.categories.digital-rcord'
   ];
-  $expeditions: BehaviorSubject<Iexpediton[]> = new BehaviorSubject([{} as Iexpediton]);
+  $expeditions: Observable<any> = new BehaviorSubject([{}]);
 
   constructor(private http: HttpClient) {
     this.uploadExpeditions();
@@ -33,13 +33,12 @@ export class ExpeditionsService {
   }
 
   private uploadExpeditions() {
-    const URL = `${environment.baseUrl}${StatEndpoints.expeditions}`
-    this.http.get(URL).subscribe(
-      (data) => this.$expeditions.next(data as Iexpediton[]),
-      (error) => {
-        this.$expeditions.next([{} as Iexpediton]);
-        console.error(error.message);
-      }
+    const URL = `${environment.baseUrl}${StatEndpoints.expeditions}`;
+    this.$expeditions = this.http.get(URL).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error)
+        return of([{} as Iexpediton]);
+      })
     );
   }
 }
