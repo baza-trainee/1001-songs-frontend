@@ -10,10 +10,10 @@ a {
   color: var(--text-color-primary);
 }
 
-.icon:hover {
+.icon {
+  padding: 3px 14px;
   cursor: pointer;
 }
-
 
 .header {
    width: 100vw;
@@ -345,7 +345,14 @@ a {
         }
       }
     }
-
   }
 
+  .icon {
+    padding: 3px 9px;
+
+    &__close {
+      width: 15px;
+      height: 15px;
+    }
+  }
 }

@@ -20,7 +20,7 @@
   z-index: 9999;
 
   &__header {
-    padding-top: 10px;
+    padding-top: 18px;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -32,8 +32,8 @@
   }
 
   .header__logo {
-    width: 51px;
-    height: 48px;
+    width: 68px;
+    height: 64px;
 
     &:hover {
       cursor: pointer;
@@ -41,13 +41,17 @@
   }
 
   .main {
-    margin: 48px 0;
     flex-flow: column nowrap;
     justify-content: space-between;
+    padding-top: 63px;
+    height: calc(100% - 80px);
+
+    .action {
+      margin-bottom: 46px;
+    }
 
     .lang {
       display: flex;
-      margin-bottom: 40px;
 
       &__item {
         width: 48px;
@@ -55,7 +59,7 @@
         border: 1px solid transparent;
         border-radius: 50%;
         text-align: center;
-        margin-right: 20px;
+        margin-right: 31px;
         text-transform: uppercase;
 
         @include button-desktop($line-height: 48px);
@@ -68,12 +72,12 @@
     }
 
     .nav {
-      height: 100%;
+      height: 82%;
       display: flex;
       justify-content: space-between;
 
       &__menu {
-        width: 59.5%;
+        width: 58.6%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -84,15 +88,15 @@
           &__list li {
             @include h2-mobile($font-size: 28px, $color: var(--text-color-popup-menu));
 
-            margin-bottom: 32px;
+            margin-bottom: 29px;
 
             &:last-child {
               margin-bottom: 0;
             }
 
             a {
-              position: relative;
               padding: 7px 0;
+              position: relative;
 
               &::before,
               &::after {
@@ -126,16 +130,17 @@
       }
 
       .social {
-        width: 35%;
+        width: 31.6%;
 
         &__span {
           @include link-mobile($color: var(--text-color-popup-menu));
 
-          margin-bottom: 32px;
+          padding: 4px 0;
+          margin-bottom: 30px;
         }
 
         &__item {
-          margin-bottom: 32px;
+          margin-bottom: 36px;
         }
 
         &__fb,
@@ -188,10 +193,15 @@
 
 @media (width <=768px) {
   .wrapper {
-    padding: 16px 16px 35px;
+    padding: 0 31px 35px;
 
     .main {
+      padding-top: 74px;
       margin-bottom: 0;
+
+      .action {
+        margin-bottom: 59px;
+      }
 
       .lang {
         display: flex;
@@ -202,7 +212,7 @@
           border: 1px solid transparent;
           border-radius: 50%;
           text-align: center;
-          margin-right: 20px;
+          margin-right: 33px;
 
           @include button-desktop($line-height: 48px);
 
@@ -218,13 +228,9 @@
       }
 
       .nav {
-        height: auto;
-        flex-direction: column;
-        justify-content: flex-start;
+        height: 86.6%;
 
         .links {
-          border: none;
-
           @include h2-mobile($font-size: 24px, $color: var(--text-color-popup-menu));
 
           margin-bottom: 28px;
@@ -236,34 +242,21 @@
 
         &__menu {
           height: initial;
-          width: 100%;
-          border-bottom: 1px solid var(--bg-color-header-1);
           padding-bottom: 16px;
         }
 
         .social {
-          width: 100%;
-          margin-top: 16px;
-
-          &__list {
-            display: flex;
-            gap: 28px;
-          }
-
-          &__item {
-            margin-bottom: 0;
-          }
+          width: 31.2%;
 
           &__fb,
           &__inst,
           &__tg,
           &__copy {
             display: inline-block;
-            text-indent: -999px;
           }
 
           &__span {
-            margin-bottom: 28px;
+            margin-bottom: 30px;
           }
 
           .networks {
@@ -283,3 +276,85 @@
     }
   }
 }
+
+@media (width <=421px) {
+  .wrapper {
+    padding: 0 16px 35px;
+
+    &__header {
+      padding-top: 4px;
+    }
+
+    .header__logo {
+      width: 51px;
+      height: 48px;
+    }
+
+    .main {
+      padding-top: 31px;
+
+      .action {
+        margin-bottom: 49px;
+      }
+
+      .nav__menu {
+        width: 100%;
+      }
+
+      .nav {
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .links {
+          margin-bottom: 46px;
+          border: none;
+
+          li {
+            @include h2-mobile($font-size: 24px, $line-height: 32px, $color: var(--text-color-popup-menu));
+
+          }
+        }
+
+        .social {
+          width: 100%;
+
+          &__span {
+            padding: 12px 0;
+            margin-bottom: 22px;
+          }
+
+          &__list {
+            display: flex;
+            gap: 20px;
+          }
+
+          &__item {
+            margin-bottom: 0;
+          }
+
+          &__fb,
+          &__inst,
+          &__tg,
+          &__copy {
+            text-indent: -999px;
+
+            &::before {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+      }
+
+
+      &__menu {
+        width: 100%;
+        border-bottom: 1px solid var(--bg-color-header-1);
+      }
+
+
+    }
+  }
+
+}
+
