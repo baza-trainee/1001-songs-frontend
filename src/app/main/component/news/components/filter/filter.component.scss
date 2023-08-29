@@ -1,22 +1,27 @@
-.news {
+@use '../../../../../../typography/typography';
 
+@function px-to-rem($px) {
+  @return calc($px * 0.063rem);
+}
+
+.news {
   &__filter {
     display: flex;
     align-items: flex-start;
-    gap: 48px;
+    gap: px-to-rem(48);
   }
 
-  &__filter-item{
-    font-family: "Open Sans";
-    font-size: 16px;
+  &__filter-item {
+    font-family: 'Open Sans';
+    font-size: px-to-rem(16);
     font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    color: var(--text-color-primary);
+    font-weight: typography.$font-weight-regular;
+    line-height: px-to-rem(24);
+    color: typography.$color-primary;
     cursor: pointer;
   }
 
   &__filter-selected {
-    font-weight: 600;
+    font-weight: typography.$font-weight-semibolt;
   }
 }

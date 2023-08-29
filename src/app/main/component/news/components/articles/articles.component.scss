@@ -1,9 +1,19 @@
 @use '/src/typography/typography';
 
+@function px-to-rem($px) {
+  @return calc($px * 0.063rem);
+}
+
+.gap-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 .news {
   &__container {
-    width: 1279px;
-    padding-top: 80px;
+    width: px-to-rem(1282);
+    padding-top: px-to-rem(80);
   }
 
   &__card-articles {
@@ -15,19 +25,18 @@
   &__title {
     @include typography.h2-desktop;
 
-    padding-bottom: 16px;
+    padding-bottom: px-to-rem(16);
   }
 }
 
 .card {
   border-top: 1px solid typography.$color-primary;
-  width: 1282px;
-  height: 320px;
+  max-width: px-to-rem(1282);
+  height: px-to-rem(320);
   contain: strict;
   cursor: pointer;
   &:nth-child(odd) {
-    margin-top: 16px;
-    margin-bottom: 32px;
+    margin-top: px-to-rem(16);
   }
 
   &__header {
@@ -36,20 +45,20 @@
     display: flex;
     justify-content: space-between;
     font-family: 'Open Sans';
-    padding: 16px 0;
+    padding: px-to-rem(16) 0;
   }
 
   &__body {
     display: flex;
     align-items: flex-start;
-    gap: 24px;
+    gap: px-to-rem(24);
   }
 
   &__image-item {
-    width: 628px;
-    height: 320px;
-    border-radius: 12px;
-    background-size: cover;
+    width: px-to-rem(628);
+    height: px-to-rem(320);
+    border-radius: px-to-rem(12);
+    background-size: contain;
     background-repeat: no-repeat;
   }
 
@@ -57,16 +66,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: px-to-rem(16);
   }
 
   &__title-name {
-    width: 629px;
+    width: px-to-rem(629);
     font-family: typography.$secondary-fonts;
-    font-size: 28px;
+    font-size: px-to-rem(28);
     font-style: normal;
     font-weight: typography.$font-weight-regular;
-    line-height: 36px;
+    line-height: px-to-rem(36);
     color: typography.$color-primary;
   }
 
@@ -74,10 +83,10 @@
     margin: 0;
     /* Desktop/Yeseva One/Overline */
     font-family: typography.$secondary-fonts;
-    font-size: 20px;
+    font-size: px-to-rem(20);
     font-style: normal;
     font-weight: typography.$font-weight-regular;
-    line-height: 28px;
+    line-height: px-to-rem(28);
     color: #666666;
   }
 }
@@ -88,4 +97,71 @@
 
 .arrow__icon {
   cursor: pointer;
+}
+
+@media (width < 1920px) {
+  .news__container {
+    width: 1280px;
+  }
+
+  .card {
+    &__image-item {
+      width: 629px;
+      height: 320px;
+    }
+  }
+}
+
+@media (width < 1440px) {
+  .news {
+    &__container {
+      width: 928px;
+    }
+    &__title {
+      font-size: 40px;
+    }
+  }
+
+  .card {
+    &__image-item {
+      width: 452px;
+      height: 236px;
+    }
+
+    &__title-name {
+      width: 452px;
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: typography.$font-weight-regular;
+    }
+  }
+}
+
+@media (width < 1024px) {
+  .news {
+    &__container {
+      width: 704px;
+    }
+  }
+
+  .card {
+    height: 179px;
+
+    &__image-item {
+      width: 339px;
+      height: 179px;
+    }
+
+    &__title-name {
+      width: 338px;
+      font-size: 18px;
+    }
+
+    &__title-place {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (width < 768px) {
 }
