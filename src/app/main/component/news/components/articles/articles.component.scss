@@ -13,7 +13,6 @@
 .news {
   &__container {
     width: px-to-rem(1282);
-    padding-top: px-to-rem(80);
   }
 
   &__card-articles {
@@ -137,7 +136,7 @@
   }
 }
 
-@media (width < 1024px) {
+@media (width <= 768px) {
   .news {
     &__container {
       width: 704px;
@@ -163,5 +162,29 @@
   }
 }
 
-@media (width < 768px) {
+@media (width <= 390px) {
+  .news {
+    &__container {
+      width: 358px;
+      padding-top: 48px;
+    }
+  }
+
+  .card {
+    height: 179px;
+
+    &__image-item {
+      width: 358px;
+      height: 181px;
+    }
+
+    &__title-name {
+      width: 338px;
+      font-size: 18px;
+    }
+
+    &__title-place {
+      font-size: 16px;
+    }
+  }
 }
