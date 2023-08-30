@@ -3,6 +3,8 @@ import {TranslateModule} from "@ngx-translate/core";
 
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {CommonModule} from "@angular/common";
+import {HeaderComponent} from "../header/header.component";
+import {FooterComponent} from "../footer/footer.component";
 
 
 @Component({
@@ -10,8 +12,9 @@ import {CommonModule} from "@angular/common";
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss'],
   standalone: true,
-  imports: [TranslateModule, RouterLink, RouterLinkActive, CommonModule]
+  imports: [TranslateModule, RouterLink, RouterLinkActive, CommonModule, HeaderComponent, FooterComponent]
 })
-export class ErrorComponent {
+export class
+ErrorComponent {
 
 }

@@ -12,15 +12,8 @@
           <li class="lang__item" [ngClass]="{'selected': lang}" (click)="selectLang(false)" (keydown)="selectLang(false)" tabindex="13">Eng</li>
         </ul>
       </div>
-      <div class="main__title">
-        <h1>{{'header.pop-up-menu.title' | translate}}</h1>
-      </div>
       <div class="nav">
         <div class="nav__menu">
-          <div class="menu__span">
-            <span>{{'header.pop-up-menu.nav-menu-subtitle' | translate}}</span>
-          </div>
-          <hr>
           <div class="links">
             <ul class="links__list">
               <li *ngFor="let link of navLinks" class="list__item">
@@ -29,27 +22,24 @@
               </li>
             </ul>
           </div>
-        </div>
-        <div class="nav__social">
-          <div class="social__span">
-            <span>{{'header.pop-up-menu.call-to-action' | translate}}</span>
-          </div>
-          <hr>
-          <div class="sotial__network">
+          <div class="social__network">
             <ul class="networks">
               <li class="networks__item"><img src="./assets/img/header/social-facebook.png" alt="facebook"></li>
               <li class="networks__item"><img src="./assets/img/header/social-youtube.png" alt="youtube"></li>
             </ul>
           </div>
         </div>
+        <div class="nav__social social">
+          <div class="social__span">
+            <span>{{'header.pop-up-menu.title' | translate}}</span>
+          </div>
+          <ul class="social__list">
+            <li class="social__item"><a class="social__fb" href="#">Facebook</a></li>
+            <li class="social__item"><a class="social__inst" href="#">Instagram</a></li>
+            <li class="social__item"><a class="social__tg" href="#">Telegram</a></li>
+            <li class="social__item"><a class="social__copy" href="#">{{'header.pop-up-menu.copy' | translate}}</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="footer">
-      <ul class="footer__list">
-        <li class="footer__item"><a href="#">{{'header.pop-up-menu.ruls' | translate}}</a></li>
-        <li class="footer__item"><a href="#">{{'header.pop-up-menu.privacy-policy' | translate}}</a></li>
-        <li class="footer__item"><a href="#">{{'header.pop-up-menu.reporting' | translate}}</a></li>
-      </ul>
-      <span class="footer__item--copiright">{{'header.pop-up-menu.copyrigh' | translate}}</span>
     </div>
  </div>
