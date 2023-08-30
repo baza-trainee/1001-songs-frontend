@@ -57,8 +57,10 @@
     width: px-to-rem(628);
     height: px-to-rem(320);
     border-radius: px-to-rem(12);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
   }
 
   &__title {
@@ -139,12 +141,19 @@
 @media (width <= 768px) {
   .news {
     &__container {
-      width: 704px;
+      width: px-to-rem(704);
+      padding-left: 32px;
+      padding-right: 32px;
     }
   }
 
   .card {
     height: 179px;
+    width: 703px;
+
+    &__body {
+      gap: 26px;
+    }
 
     &__image-item {
       width: 339px;

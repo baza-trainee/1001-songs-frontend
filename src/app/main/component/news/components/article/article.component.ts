@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Params, Router, UrlSegment,  } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
 import { LatestNewsComponent } from '../latest-news/latest-news.component';
-
 
 @Component({
   selector: 'app-article',
@@ -15,23 +14,25 @@ import { LatestNewsComponent } from '../latest-news/latest-news.component';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit{
+export class ArticleComponent implements OnInit {
   public article$!: Observable<Article>;
   public isId!: UrlSegment;
 
-
-  constructor(private articlesService: ArticlesService, private router: Router, private route: ActivatedRoute){}
+  constructor(
+    private articlesService: ArticlesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.isId = this.route.snapshot.url[1];
 
     if (this.isId) {
-
       this.article$ = this.route.params.pipe(
         switchMap((params: Params) => {
-          return this.articlesService.getArticle(params['id'])
+          return this.articlesService.getArticle(params['id']);
         })
-      )
+      );
     }
   }
 

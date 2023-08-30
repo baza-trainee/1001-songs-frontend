@@ -25,3 +25,16 @@
     font-weight: typography.$font-weight-semibolt;
   }
 }
+
+@media (width <= 1440px) {
+}
+@media (width <= 1024px) {
+}
+@media (width <= 768px) {
+  .news__filter-item {
+    white-space: nowrap;
+    contain: style;
+  }
+}
+@media (width <= 390px) {
+}
