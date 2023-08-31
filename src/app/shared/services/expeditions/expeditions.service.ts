@@ -18,7 +18,7 @@ export class ExpeditionsService {
     'expeditions.categories.video-of-ritual',
     'expeditions.categories.digital-rcord'
   ];
-  $expeditions: Observable<any> = new BehaviorSubject([
+  $expeditions: Observable<unknown> = new BehaviorSubject([
     {
       id: '1',
       name: 'Благовіщеня',
