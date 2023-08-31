@@ -1,13 +1,10 @@
-<div class="news__filter">
+<div class="news__filter" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
   <div
     class="news__filter-item"
     *ngFor="let category of categories"
     (click)="filterArticles(category)"
     [class.news__filter-selected]="category === selectedFilter"
     [style.transform]="'translateX(' + translateX + 'px)'"
-    (touchstart)="onTouchStart($event)"
-    (touchmove)="onTouchMove($event)"
-    (touchend)="onTouchEnd()"
   >
     {{ category }}
   </div>

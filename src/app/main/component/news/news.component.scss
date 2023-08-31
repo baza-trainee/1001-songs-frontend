@@ -1,7 +1,3 @@
-@function px-to-rem($px) {
-  @return calc($px * 0.063rem);
-}
-
 .news {
   display: flex;
   flex-direction: column;

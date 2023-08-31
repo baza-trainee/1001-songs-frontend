@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
@@ -48,20 +48,20 @@ export class FilterComponent implements OnInit, OnDestroy {
   onTouchStart(event: TouchEvent): void {
     this.startX = event.touches[0].clientX;
     this.currentX = this.startX;
-    console.log(window.innerWidth);
   }
 
   onTouchMove(event: TouchEvent): void {
-    console.log(event.target);
     const touch = event.touches[0];
     const diffX = touch.clientX - this.currentX;
     this.translateX += diffX;
     this.currentX = touch.clientX;
+    const target = event.target;
+    console.log(target);
   }
 
   onTouchEnd(): void {
-    this.startX = 0;
-    this.currentX = 0;
+    this.startX = 370;
+    this.currentX = 370;
   }
 
   ngOnDestroy(): void {

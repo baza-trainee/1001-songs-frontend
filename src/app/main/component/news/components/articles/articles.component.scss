@@ -87,6 +87,10 @@
   height: 24px;
 }
 
+.filter__wrap {
+  width: 100%;
+}
+
 @media (width > 390px) {
   .news {
     &_container {
