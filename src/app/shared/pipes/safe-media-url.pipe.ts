@@ -14,6 +14,7 @@ export class SafeMediaUrlPipe implements PipeTransform {
     if (url) {
       const mediaSrcId = url.split(delimeter)[3];
       const newUrlSrc = `${service}${mediaSrcId}?rel=0&autohide=I`;
+      console.log(newUrlSrc)
       return this.sanitizer.bypassSecurityTrustResourceUrl(newUrlSrc);
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(service);

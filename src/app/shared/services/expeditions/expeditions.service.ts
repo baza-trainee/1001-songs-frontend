@@ -18,7 +18,7 @@ export class ExpeditionsService {
     'expeditions.categories.video-of-ritual',
     'expeditions.categories.digital-rcord'
   ];
-  $expeditions: Observable<Iexpediton[] | object> = new BehaviorSubject([
+  $expeditions: Observable<any> = new BehaviorSubject([
     {
       id: '1',
       name: 'Благовіщеня',
@@ -46,7 +46,7 @@ export class ExpeditionsService {
     this.$expeditions = this.http.get(URL).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return of([]);
+        return of([{} as Iexpediton]);
       })
     );
   }

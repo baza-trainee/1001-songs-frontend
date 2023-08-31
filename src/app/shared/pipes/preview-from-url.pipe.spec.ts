@@ -3,8 +3,6 @@ import { PreviewFromUrlPipe } from './preview-from-url.pipe';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 
 describe('PreviewFromUrlPipe', () => {
-  // let sanitizer: DomSanitizer;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule]
