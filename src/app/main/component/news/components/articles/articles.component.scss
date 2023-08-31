@@ -1,199 +1,97 @@
-@use '/src/typography/typography';
-
-@function px-to-rem($px) {
-  @return calc($px * 0.063rem);
-}
-
-.gap-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
+@use '/src/typography/typography' as *;
 
 .news {
   &__container {
-    width: px-to-rem(1282);
-  }
-
-  &__card-articles {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    width: 358px;
+    gap: 16px;
+    padding-top: 128px;
+    padding-bottom: 48px;
   }
 
   &__title {
-    @include typography.h2-desktop;
-
-    padding-bottom: px-to-rem(16);
+    @include h2-mobile;
   }
+}
+
+.cards__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .card {
-  border-top: 1px solid typography.$color-primary;
-  max-width: px-to-rem(1282);
-  height: px-to-rem(320);
-  contain: strict;
-  cursor: pointer;
-  &:nth-child(odd) {
-    margin-top: px-to-rem(16);
-  }
+  display: flex;
+  height: 384px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid $color-primary;
+  gap: 16px;
 
   &__header {
-    @include typography.link-desktop;
-
     display: flex;
     justify-content: space-between;
-    font-family: 'Open Sans';
-    padding: px-to-rem(16) 0;
+    align-items: flex-start;
+    width: 358px;
+    padding-top: 16px;
   }
 
-  &__body {
-    display: flex;
-    align-items: flex-start;
-    gap: px-to-rem(24);
+  &__header-event {
+    flex: 1 0 0;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular;
+    line-height: 24px;
+    color: $color-primary;
   }
 
   &__image-item {
-    width: px-to-rem(628);
-    height: px-to-rem(320);
-    border-radius: px-to-rem(12);
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
+    width: 358px;
+    height: 181px;
+    border-radius: 12px;
   }
 
   &__title {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: px-to-rem(16);
+    gap: 16px;
   }
 
   &__title-name {
-    width: px-to-rem(629);
-    font-family: typography.$secondary-fonts;
-    font-size: px-to-rem(28);
+    font-family: 'Open Sans';
+    font-size: 18px;
     font-style: normal;
-    font-weight: typography.$font-weight-regular;
-    line-height: px-to-rem(36);
-    color: typography.$color-primary;
+    font-weight: $font-weight-semibolt;
+    line-height: 24px;
+    color: $color-primary;
   }
 
   &__title-place {
-    margin: 0;
-    /* Desktop/Yeseva One/Overline */
-    font-family: typography.$secondary-fonts;
-    font-size: px-to-rem(20);
+    font-family: 'Open Sans';
+    font-size: 16px;
     font-style: normal;
-    font-weight: typography.$font-weight-regular;
-    line-height: px-to-rem(28);
-    color: #666666;
+    font-weight: $font-weight-regular;
+    line-height: 24px;
+    color: var(--text-color-popup-menu);
   }
-}
-
-.text-bold {
-  font-weight: typography.$font-weight-bolt;
 }
 
 .arrow__icon {
-  cursor: pointer;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
 }
 
-@media (width < 1920px) {
-  .news__container {
-    width: 1280px;
-  }
-
-  .card {
-    &__image-item {
-      width: 629px;
-      height: 320px;
-    }
-  }
-}
-
-@media (width < 1440px) {
+@media (width > 390px) {
   .news {
-    &__container {
-      width: 928px;
-    }
-    &__title {
-      font-size: 40px;
-    }
-  }
-
-  .card {
-    &__image-item {
-      width: 452px;
-      height: 236px;
-    }
-
-    &__title-name {
-      width: 452px;
-      font-size: 20px;
-      line-height: 24px;
-      font-weight: typography.$font-weight-regular;
-    }
-  }
-}
-
-@media (width <= 768px) {
-  .news {
-    &__container {
-      width: px-to-rem(704);
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-  }
-
-  .card {
-    height: 179px;
-    width: 703px;
-
-    &__body {
-      gap: 26px;
-    }
-
-    &__image-item {
-      width: 339px;
-      height: 179px;
-    }
-
-    &__title-name {
-      width: 338px;
-      font-size: 18px;
-    }
-
-    &__title-place {
-      font-size: 16px;
-    }
-  }
-}
-
-@media (width <= 390px) {
-  .news {
-    &__container {
-      width: 358px;
-      padding-top: 48px;
-    }
-  }
-
-  .card {
-    height: 179px;
-
-    &__image-item {
-      width: 358px;
-      height: 181px;
-    }
-
-    &__title-name {
-      width: 338px;
-      font-size: 18px;
-    }
-
-    &__title-place {
-      font-size: 16px;
+    &_container {
+      width: 703px;
+      padding-top: 156px;
     }
   }
 }

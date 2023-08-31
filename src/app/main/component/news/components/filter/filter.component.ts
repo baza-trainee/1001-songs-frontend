@@ -19,6 +19,9 @@ export class FilterComponent implements OnInit, OnDestroy {
   private filteredArticle!: Article[];
   private articles!: Article[];
   private unSub!: Subscription;
+  public startX: number = 0;
+  public currentX: number = 0;
+  public translateX: number = 0;
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
 
@@ -40,6 +43,25 @@ export class FilterComponent implements OnInit, OnDestroy {
         this.filteredArticles.emit(this.filteredArticle);
       }
     }
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.startX = event.touches[0].clientX;
+    this.currentX = this.startX;
+    console.log(window.innerWidth);
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    console.log(event.target);
+    const touch = event.touches[0];
+    const diffX = touch.clientX - this.currentX;
+    this.translateX += diffX;
+    this.currentX = touch.clientX;
+  }
+
+  onTouchEnd(): void {
+    this.startX = 0;
+    this.currentX = 0;
   }
 
   ngOnDestroy(): void {

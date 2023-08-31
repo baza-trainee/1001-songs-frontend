@@ -2,8 +2,10 @@
   <div class="news__title">
     {{ 'Новини' | translate }}
   </div>
-  <app-filter (filteredArticles)="filteredArticles($event)"></app-filter>
-  <div class="gap-wrap">
+  <div class="filter__wrap">
+    <app-filter (filteredArticles)="filteredArticles($event)"></app-filter>
+  </div>
+  <div class="cards__wrap">
     <ng-container *ngFor="let article of articles">
       <div class="card" (click)="redirectToArticle(article.id)">
         <div class="card__header">
@@ -17,9 +19,9 @@
           </div>
         </div>
         <div class="card__body">
-          <div class="card__image">
-            <div class="card__image-item" [style.background-image]="'url(' + article.images[0] + ')'" alt=""></div>
-          </div>
+          <!-- <div class="card__image"> -->
+          <div class="card__image-item" [style.background-image]="'url(' + article.images[0] + ')'" alt=""></div>
+          <!-- </div> -->
           <div class="card__title">
             <div class="card__title-name">{{ article.title }}</div>
             <div class="card__title-place">({{ article.location }})</div>

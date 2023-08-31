@@ -1,40 +1,37 @@
-@use '../../../../../../typography/typography';
-
-@function px-to-rem($px) {
-  @return calc($px * 0.063rem);
-}
+@use '../../../../../../typography/typography' as *;
 
 .news {
   &__filter {
     display: flex;
     align-items: flex-start;
-    gap: px-to-rem(48);
+    gap: 28px;
+    contain: size;
   }
 
   &__filter-item {
+    display: inline-block;
+    white-space: nowrap;
     font-family: 'Open Sans';
     font-size: px-to-rem(16);
     font-style: normal;
-    font-weight: typography.$font-weight-regular;
-    line-height: px-to-rem(24);
-    color: typography.$color-primary;
+    font-weight: $font-weight-regular;
+    line-height: 24px;
+    transition: transform 0.3s ease-in-out;
+    touch-action: pan-y;
+    color: $color-primary;
     cursor: pointer;
+    max-width: 358px;
   }
 
   &__filter-selected {
-    font-weight: typography.$font-weight-semibolt;
+    font-weight: $font-weight-semibolt;
   }
 }
 
-@media (width <= 1440px) {
-}
-@media (width <= 1024px) {
-}
-@media (width <= 768px) {
-  .news__filter-item {
-    white-space: nowrap;
-    contain: style;
+@media (width > 390px) {
+  .news {
+    &__filter {
+      gap: 48px;
+    }
   }
-}
-@media (width <= 390px) {
 }
