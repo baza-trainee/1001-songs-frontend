@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import Iexpediton from '../../interfaces/expedition.interface';
 import { environment } from 'src/environments/environment';
 import { StatEndpoints } from '../../config/endpoints/stat-endpoints';
@@ -18,7 +18,7 @@ export class ExpeditionsService {
     'expeditions.categories.video-of-ritual',
     'expeditions.categories.digital-rcord'
   ];
-  $expeditions: Observable<unknown> = new BehaviorSubject([
+  $expeditions: BehaviorSubject<Iexpediton[]> = new BehaviorSubject([
     {
       id: '1',
       name: 'Благовіщеня',
@@ -26,7 +26,7 @@ export class ExpeditionsService {
       mediaSrc: 'https://youtu.be/EDU2xd_bRvM',
       eventDate: '7 квітня 2006 року',
       location: 'Село Осівка, Житомирщина'
-    }
+    } as Iexpediton
   ]);
 
   constructor(private http: HttpClient) {
@@ -43,11 +43,12 @@ export class ExpeditionsService {
 
   private uploadExpeditions() {
     const URL = `${environment.baseUrl}${StatEndpoints.expeditions}`;
-    this.$expeditions = this.http.get(URL).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error(error);
-        return of([{} as Iexpediton]);
-      })
+    this.http.get(URL).subscribe(
+      (data) => this.$expeditions.next(data as Iexpediton[]),
+      (error) => {
+        this.$expeditions.next([{} as Iexpediton]);
+        console.error(error.message);
+      }
     );
   }
 }
