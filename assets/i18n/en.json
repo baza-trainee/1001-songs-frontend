@@ -17,11 +17,16 @@
    },
    "footer": {
       "button": "Support the project",
+      "partners": "Our partners",
+     "contacts" : {
+       "title" : "Contacts",
+       "email" : "clientsupport@gmail.com"
+     },
       "rules": {
          "reporting":"Reporting",
          "policy": "Privacy policy",
          "terms": "Terms and conditions of use",
-         "copyright": "Copyright © 2023. All rights reserved"
+         "copyright": "Developed by BazaTraineeUkraine 2023. All rights reserved"
       }
    },
   "home": {
