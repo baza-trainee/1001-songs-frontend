@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Subscription, tap } from 'rxjs';
+import { NgFor } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
+import { SlideStringDirective } from '../../services/slide-string.directive';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor, SlideStringDirective],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
@@ -19,9 +20,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   private filteredArticle!: Article[];
   private articles!: Article[];
   private unSub!: Subscription;
-  public startX: number = 0;
-  public currentX: number = 0;
-  public translateX: number = 0;
+
+  slide = 1000;
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
 
@@ -43,25 +43,6 @@ export class FilterComponent implements OnInit, OnDestroy {
         this.filteredArticles.emit(this.filteredArticle);
       }
     }
-  }
-
-  onTouchStart(event: TouchEvent): void {
-    this.startX = event.touches[0].clientX;
-    this.currentX = this.startX;
-  }
-
-  onTouchMove(event: TouchEvent): void {
-    const touch = event.touches[0];
-    const diffX = touch.clientX - this.currentX;
-    this.translateX += diffX;
-    this.currentX = touch.clientX;
-    const target = event.target;
-    console.log(target);
-  }
-
-  onTouchEnd(): void {
-    this.startX = 370;
-    this.currentX = 370;
   }
 
   ngOnDestroy(): void {

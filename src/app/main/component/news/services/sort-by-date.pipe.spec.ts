@@ -1,8 +1,8 @@
-import { SortByDatePipe } from './sort-by-date.pipe';
+import { CutText } from './cut-text.pipe';
 
 describe('SortByDatePipe', () => {
   it('create an instance', () => {
-    const pipe = new SortByDatePipe();
+    const pipe = new CutText();
     expect(pipe).toBeTruthy();
   });
 });

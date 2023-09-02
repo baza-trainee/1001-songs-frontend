@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ArticlesService } from '../../services/articles.service';
 import { Article } from '../../article.interface';
-import { CutText } from '../../services/sort-by-date.pipe';
+import { CutText } from '../../services/cut-text.pipe';
 import { Router } from '@angular/router';
 
 @Component({
