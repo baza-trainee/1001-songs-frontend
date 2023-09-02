@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000/'
+  baseUrl: 'https://bt-1001.vercel.app/'
 };
