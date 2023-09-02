@@ -39,6 +39,22 @@
     "actions": {
       "button-donate": "Donate",
       "button-share": "Share"
+    },
+    "home-map": {
+      "popup-btn": "Listen to the recordings",
+      "popup-count": "Number of records"
+    },
+    "home-actual": {
+      "title": "Current projects"
+    },
+    "home-expeditions": {
+      "title": "Expeditions",
+      "button": "Watch the video",
+      "router-link": "Watch all videos"
+    },
+    "home-news": {
+      "title": "News",
+      "router-link": "View all"
     }
   },
   "tapes": {

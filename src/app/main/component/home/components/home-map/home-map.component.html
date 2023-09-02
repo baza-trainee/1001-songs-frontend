@@ -1,0 +1,29 @@
+<section class="map">
+  <google-map
+    class="map"
+    width="100%"
+    height="694px"
+    [center]="{ lat: 48.379433, lng: 31.165579 }"
+    [zoom]="6"
+    [options]="{ mapId: 'bcf460a73f14398b', disableDefaultUI: true}"
+  >
+    <map-marker *ngFor="let marker of cordsMarkers"
+                [position]="marker.position"
+                [options]="{ icon: getCustomMarkerIcon(marker.key) }"
+                (mapClick)="onMarkerClick(marker.key)">
+      <div class="container">
+        <div class="popup-map" [ngClass]="{'active': selectedMarkerKey === marker.key}">
+          <button class="popup-map__close" (click)="onCloseInfoWindow()">+</button>
+          <div class="popup-map__container">
+            <img class="popup-map__img" [src]="marker.popup.photoUrl" alt="Фото">
+            <div class="popup-map__content">
+              <h2 class="popup-map__title">{{ marker.popup.title }}</h2>
+              <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }}: {{marker.popup.countRecords}}</p>
+            </div>
+          </div>
+          <a class="popup-map__btn" [href]="marker.popup.link">{{ 'home.home-map.popup-btn' | translate }}</a>
+        </div>
+      </div>
+    </map-marker>
+  </google-map>
+</section>

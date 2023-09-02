@@ -1,0 +1,270 @@
+@import '../../../../../../typography/typography';
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.expeditions {
+  background-color: var(--bg-color-screen);
+
+  &__container {
+    padding: 80px 0;
+  }
+
+  &__title {
+    @include h2-desktop;
+
+    margin-bottom: 48px;
+  }
+
+  &__videos {
+    margin-bottom: 42px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &__main {
+    width: 50%;
+
+    &-img {
+      margin-bottom: 19px;
+      border-radius: 16px;
+    }
+
+    &-date,
+    &-location,
+    &-btn {
+      @include link-desktop;
+
+      font-family: "Open Sans", sans-serif;
+    }
+
+    &-date,
+    &-btn {
+      font-weight: 600;
+    }
+
+    &-location {
+      margin-bottom: 21px;
+    }
+
+    &-title {
+      @include h4-desktop($line-height: 36px);
+
+      margin: 6px 0 11px;
+    }
+
+    &-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 100px;
+      background-color: var(--bg-color-accent);
+      border: 2px solid var(--bg-color-accent);
+      transition: all .3s ease;
+
+      &:hover {
+        background-color: transparent;
+        color: var(--bg-color-accent);;
+      }
+    }
+  }
+
+  &__all {
+    width: 50%;
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+
+    &-video {
+      display: flex;
+      gap: 24px;
+
+    }
+
+    &-img {
+      width: 48%;
+      border-radius: 16px;
+      vertical-align: bottom;
+    }
+
+    &-date,
+    &-location {
+      @include link-desktop($font_size: 14px, $color: var(--text-color-extra-1), $line-height: 20px);
+
+      font-family: "Open Sans", sans-serif;
+    }
+
+    &-description {
+      @include link-desktop($font_size: 16px, $line-height: 24px);
+
+      font-family: "Open Sans", sans-serif;
+      margin-bottom: 7px;
+    }
+
+    &-title {
+      @include h4-desktop($font_size: 24px, $line-height: 32px, $font-weight: $font-weight-semibolt);
+
+      font-family: "Open Sans", sans-serif;
+      margin: 6px 0 9px;
+    }
+  }
+
+  &__router {
+    text-align: right;
+
+    &-link {
+      @include link-desktop($font_size: 16px, $line-height: 24px, $font-weight: $font-weight-semibolt);
+
+      font-family: "Open Sans", sans-serif;
+      padding-right: 31px;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: 24px;
+        height: 24px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url('../../../../../../assets/img/home/icons/arrow_forward.svg');
+      }
+    }
+  }
+}
+
+@media (width <=1376px) {
+  .container {
+    margin: 0 48px;
+  }
+}
+
+@media (width <=1166px) {
+  .expeditions {
+    &__videos {
+      flex-wrap: wrap;
+      margin-bottom: 73px;
+    }
+
+    &__main {
+      width: 100%;
+    }
+
+    &__all {
+      width: 100%;
+      flex-direction: row;
+
+      &-img {
+        width: 100%;
+        height: 180px;
+      }
+
+      &-video {
+        width: 33%;
+        flex-direction: column
+      }
+    }
+  }
+}
+
+@media (width <= 790px) {
+  .expeditions {
+    &__videos {
+      gap: 48px;
+      margin-bottom: 30px;
+    }
+
+    &__container {
+      padding: 60px 0;
+      margin: 0 29px;
+    }
+
+    &__title {
+      margin-bottom: 32px;
+    }
+
+    &__main {
+      &-img {
+        height: 386px;
+      }
+    }
+
+    &__all {
+      flex-direction: column;
+
+      &-video {
+        width: 100%;
+        flex-direction: row
+      }
+
+      &-content,
+      &-img {
+        width: 50%;
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .expeditions {
+    &__container {
+      padding: 48px 0;
+      margin: 0 16px;
+    }
+
+    &__videos {
+      gap: 30px;
+      margin-bottom: 43px;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 28px;
+    }
+
+    &__main {
+      &-img {
+        height: 200px;
+        margin-bottom: 11px;
+      }
+
+      &-title {
+        font-size: 24px;
+        line-height: 32px;
+        margin: 4px 0;
+      }
+    }
+
+    &__all {
+      gap: 30px;
+
+      &-video {
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      &-img {
+        width: 100%;
+      }
+
+      &-content {
+        width: 100%;
+        height: auto;
+      }
+
+      &-title {
+        font-size: 18px;
+        line-height: 24px;
+        margin: 5px 0 3px
+      }
+
+      &-description {
+        margin-bottom: 4px;
+      }
+    }
+  }
+}
