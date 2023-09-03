@@ -4,7 +4,10 @@
     class="news__filter-item"
     (click)="filterArticles(category)"
     [class.news__filter-selected]="category === selectedFilter"
-    appSlideString
+    [style.transform]="'translateX(' + translateX + 'px)'"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
   >
     {{ category }}
   </div>

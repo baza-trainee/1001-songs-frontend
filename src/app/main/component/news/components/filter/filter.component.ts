@@ -1,15 +1,14 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
-import { SlideStringDirective } from '../../services/slide-string.directive';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [NgFor, SlideStringDirective],
+  imports: [NgFor],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
@@ -20,8 +19,13 @@ export class FilterComponent implements OnInit, OnDestroy {
   private filteredArticle!: Article[];
   private articles!: Article[];
   private unSub!: Subscription;
+  public startX: number = 0;
+  public currentX: number = 0;
+  public translateX: number = 0;
+  private maxSlide = 0;
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
+  @ViewChild('slide', { read: ElementRef }) slide!: ElementRef;
 
   constructor(private articleService: ArticlesService) {}
 
@@ -41,6 +45,32 @@ export class FilterComponent implements OnInit, OnDestroy {
         this.filteredArticles.emit(this.filteredArticle);
       }
     }
+  }
+  onTouchStart(event: TouchEvent): void {
+    this.startX = event.touches[0].clientX;
+    this.currentX = this.startX;
+    this.maxSlide = this.slide.nativeElement.lastElementChild.offsetLeft - this.slide.nativeElement.offsetWidth + 100;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    const touch = event.touches[0];
+    const diffX = touch.clientX - this.currentX;
+    if (this.translateX > 0) {
+      this.translateX = 0;
+    }
+    if (this.maxSlide - Math.abs(this.translateX) < 0) {
+      this.translateX = -320;
+    } else {
+      this.translateX += diffX;
+      this.currentX = touch.clientX;
+    }
+    console.log(this.translateX);
+    console.log(this.maxSlide);
+  }
+
+  onTouchEnd(): void {
+    this.startX = 0;
+    this.currentX = 0;
   }
 
   ngOnDestroy(): void {
