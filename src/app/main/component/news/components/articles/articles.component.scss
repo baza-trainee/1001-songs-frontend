@@ -21,11 +21,12 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  width: 358px;
 }
 
 .card {
+  width: 358px;
   display: flex;
-  height: 384px;
   flex-direction: column;
   align-items: flex-start;
   border-top: 1px solid $color-primary;
@@ -53,6 +54,8 @@
     width: 358px;
     height: 181px;
     border-radius: 12px;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   &__title {
@@ -91,11 +94,99 @@
   width: 100%;
 }
 
-@media (width > 390px) {
+@media (width > 768px) {
   .news {
-    &_container {
+    &__container {
       width: 703px;
       padding-top: 156px;
+      padding-bottom: 71px;
     }
   }
+
+  .cards__wrap {
+    gap: 48px;
+  }
+
+  .card {
+    &__header {
+      display: flex;
+      width: 703px;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &__body {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    &__image-item {
+      width: 339px;
+      height: 179px;
+    }
+
+    &__title {
+      width: 338px;
+    }
+
+    &__title-name,
+    &__title-place {
+      font-family: $secondary-fonts;
+      color: $color-primary;
+    }
+  }
+}
+
+@media (width > 1024px) {
+  .news {
+    &__container {
+      width: 928px;
+      padding-top: 176px;
+      padding-bottom: 91px;
+    }
+
+    &__title-name {
+      font-size: 40px;
+      font-weight: $font-weight-regular;
+      line-height: 48px;
+    }
+  }
+  .cards__wrap {
+    width: 928px;
+  }
+
+  .card {
+    width: 928px;
+
+    &__header {
+      width: 928px;
+    }
+
+    &__image-item {
+      width: 452px;
+      height: 236px;
+    }
+
+    &__title {
+      width: 452px;
+      flex-shrink: 0;
+    }
+
+    &__title-name {
+      font-family: 'Open Sans';
+      font-size: 20px;
+      line-height: 28px;
+      width: 452px;
+    }
+
+    &__title-place {
+      font-family: 'Work Sans';
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media (width > 1440px) {
 }

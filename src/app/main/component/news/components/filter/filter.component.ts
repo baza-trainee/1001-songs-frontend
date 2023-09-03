@@ -22,7 +22,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   public startX: number = 0;
   public currentX: number = 0;
   public translateX: number = 0;
-  private maxSlide = 0;
+  private maxSlide: number = 0;
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
   @ViewChild('slide', { read: ElementRef }) slide!: ElementRef;
@@ -64,8 +64,6 @@ export class FilterComponent implements OnInit, OnDestroy {
       this.translateX += diffX;
       this.currentX = touch.clientX;
     }
-    console.log(this.translateX);
-    console.log(this.maxSlide);
   }
 
   onTouchEnd(): void {
