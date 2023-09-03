@@ -1,58 +1,30 @@
-import { Directive, ElementRef, HostBinding, HostListener, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { FilterComponent } from '../components/filter/filter.component';
+import { Directive, ElementRef, HostBinding, HostListener, inject, Input, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appSlideString]',
   standalone: true
 })
-export class SlideStringDirective implements AfterViewInit {
-  private startX: number = 0;
-  private currentX: number = 0;
+export class SlideStringDirective {
+  private renderer = inject(Renderer2);
+  private elRef = inject(ElementRef);
   private translateX = 0;
-
-  @ViewChild('slide', { read: FilterComponent })
-  slide!: FilterComponent;
-
-  ngAfterViewInit(): void {
-    console.log(this.slide);
-  }
-
-  @HostBinding('style.transform') get translate() {
-    return `translateX(${this.translateX})`;
-  }
+  private move = 0;
 
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent): void {
-    const maxScroll = 205;
-    // const maxScroll = this.el.nativeElement.scrollWidth - this.el.nativeElement.offsetWidth + 70;
-    const touch = event.touches[0];
-    let diffX = touch.clientX - this.currentX;
-    if (this.translateX > 0) {
-      this.translateX = 0;
-      console.log('more than zero');
-    }
-    this.translate;
+    const touchX = event.touches[0].clientX;
+    this.move = this.translateX + touchX;
 
-    this.translateX += diffX;
-    this.currentX = touch.clientX;
-    if (maxScroll - Math.abs(this.translateX) <= 0) {
-      console.log('less than zero');
-    }
+    console.log(this.move);
   }
 
-  @HostListener('touchstart', ['$event']) onTouchStart(event: TouchEvent) {
-    this.startX = event.touches[0].clientX;
-    this.currentX = this.startX;
-    console.log(event);
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {}
+
+  @HostBinding('style.transform')
+  get translate() {
+    return `translateX(${this.move}px)`;
   }
 
-  @HostListener('touchend') onTouchEnd() {
-    console.log(this.translateX);
-    this.startX = 0;
-    this.currentX = 0;
-  }
-
-  run() {
-    return this.translateX;
-  }
+  @HostListener('touchend') onTouchEnd() {}
 }

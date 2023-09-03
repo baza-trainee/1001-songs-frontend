@@ -1,6 +1,6 @@
 import { CutText } from './cut-text.pipe';
 
-describe('SortByDatePipe', () => {
+describe('CutTextPipe', () => {
   it('create an instance', () => {
     const pipe = new CutText();
     expect(pipe).toBeTruthy();

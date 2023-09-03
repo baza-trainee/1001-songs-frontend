@@ -21,8 +21,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   private articles!: Article[];
   private unSub!: Subscription;
 
-  slide = 1000;
-
   @Output() filteredArticles = new EventEmitter<Article[]>();
 
   constructor(private articleService: ArticlesService) {}
