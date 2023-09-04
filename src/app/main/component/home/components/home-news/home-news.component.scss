@@ -123,8 +123,12 @@ img {
 }
 
 @media (width <=1440px) {
-  .news__all-item {
-    padding: 16px 0 32px;
+  .news {
+    &__all {
+      &-item {
+        padding: 16px 0 32px;
+      }
+    }
   }
 }
 
@@ -204,8 +208,12 @@ img {
 }
 
 @media (width <= 672px) {
-  .news__all-item {
-    width: 47%;
+  .news {
+    &__all {
+      &-item {
+        width: 47%;
+      }
+    }
   }
 }
 

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TranslateModule} from "@ngx-translate/core";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-home-news',
   standalone: true,
-    imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RouterLink],
   templateUrl: './home-news.component.html',
   styleUrls: ['./home-news.component.scss']
 })
