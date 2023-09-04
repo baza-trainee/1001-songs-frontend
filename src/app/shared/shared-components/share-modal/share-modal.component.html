@@ -1,0 +1,39 @@
+<mat-dialog-content class="dialog">
+  <img class="dialog__image" src="./assets/img/home/Donation/dialog-image.png" alt="dialog share image">
+  <p class="dialog__text"> {{ 'share.dialog.text' | translate }} </p>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog__action">
+  <div class="dialog__action-block">
+    <a href="#">
+      <img src="./assets/img/home/Donation/facebook.svg" alt="facebook share icon">
+    </a>
+    <a class="dialog__action-block--text" href="#">Facebook</a>
+  </div>
+  <div class="dialog__action-block">
+    <a href="#">
+      <img src="./assets/img/home/Donation/instagram.svg" alt="instagram share icon">
+    </a>
+    <a class="dialog__action-block--text" href="#">Instagram</a>
+  </div>
+  <div class="dialog__action-block">
+    <a href="#">
+      <img src="./assets/img/home/Donation/telegram.svg" alt="telegram share icon">
+    </a>
+    <a class="dialog__action-block--text" href="#">Telegram</a>
+  </div>
+  <div class="dialog__action-block">
+    <button
+      type="button"
+      class="dialog__action-block--btn"
+      (click)="copyCurrentUrl()"
+    >
+      <img src="./assets/img/home/Donation/share-copy.svg" alt="copy share icon">
+    </button>
+    <p
+      (click)="copyCurrentUrl()"
+      (keypress)="copyCurrentUrl()"
+      tabindex="0"
+      class="dialog__action-block--text"> {{ 'share.dialog.copy' | translate }}</p>
+  </div>
+</mat-dialog-actions>
+

@@ -42,6 +42,12 @@
       "places": "record spaces"
     }
   },
+  "share": {
+    "dialog": {
+      "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
+      "copy": "Copy"
+    }
+  },
    "about": {
       "stub": "The 'About the project' page is under development"
    },
@@ -63,7 +69,7 @@
       "text": "Oops! It looks like the page you are looking for is currently unavailable"
     },
     "actions": {
-      "block-btn": "To the main page"
+      "block-btn": "Main page"
     }
   }
 }
