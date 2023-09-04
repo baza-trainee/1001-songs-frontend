@@ -47,21 +47,32 @@
       "places": "record spaces"
     }
   },
-   "about": {
-      "stub": "The 'About the project' page is under development"
-   },
-   "map":{
-      "stub": "Page 'Map' under development"
-   },
-   "news":{
-      "stub": "Page 'News' under development"
-   },
-   "expeditions":{
-      "stub": "Page 'Expeditions' under development"
-   },
-   "science":{
-      "stub": "Page 'Educational Section' under development"
-   },
+  "about": {
+    "stub": "The 'About the project' page is under development"
+  },
+  "map": {
+    "stub": "Page 'Map' under development"
+  },
+  "news": {
+    "stub": "Page 'News' under development"
+  },
+  "expeditions": {
+    "stub": "Page 'Expeditions' under development",
+    "title": "Expeditions",
+    "intro": "The priorities of modern times are the filling of «white spots» on the folkloristic map of Ukraine (eastern Volhynia, Dnieper region, southern Chernihiv region, Sumy region, Berezhany region, and other territories), as well as specialized regional programs for publishing song collections based on materials from specific ethnographic locales.",
+    "categories": {
+      "all": "All",
+      "exploring": "Exploring",
+      "static": "Static",
+      "interdisciplinary": "Interdisciplinary",
+      "thematic": "Thematic",
+      "video-of-ritual": "Video of ritual",
+      "digital-rcord": "Digital rcord"
+    }
+  },
+  "science": {
+    "stub": "Page 'Educational Section' under development"
+  },
   "error": {
     "error-inner": {
       "title": "404",
@@ -72,9 +83,3 @@
     }
   }
 }
-
-
-
-
-
-
