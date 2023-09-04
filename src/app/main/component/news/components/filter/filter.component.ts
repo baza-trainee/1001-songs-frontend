@@ -46,23 +46,30 @@ export class FilterComponent implements OnInit, OnDestroy {
       }
     }
   }
+  // slider for string
   onTouchStart(event: TouchEvent): void {
     this.startX = event.touches[0].clientX;
     this.currentX = this.startX;
-    this.maxSlide = this.slide.nativeElement.lastElementChild.offsetLeft - this.slide.nativeElement.offsetWidth + 50;
+    this.maxSlide = this.slide.nativeElement.offsetWidth;
   }
 
   onTouchMove(event: TouchEvent): void {
-    const touch = event.touches[0];
-    const diffX = touch.clientX - this.currentX;
-    if (this.translateX > 0) {
-      this.translateX = 0;
-    }
-    if (this.maxSlide - Math.abs(this.translateX) < 0) {
-      this.translateX = -320;
-    } else {
-      this.translateX += diffX;
-      this.currentX = touch.clientX;
+    if (window.outerWidth <= 768) {
+      const touch = event.touches[0];
+      const diffX = touch.clientX - this.currentX;
+      if (this.translateX > 0) {
+        this.translateX = 0;
+      }
+
+      if (this.maxSlide - Math.abs(this.translateX) < 0) {
+        console.log('UPSS');
+        console.log(this.translateX);
+        this.translateX = -this.maxSlide;
+        console.log('UPSS');
+      } else {
+        this.translateX += diffX;
+        this.currentX = touch.clientX;
+      }
     }
   }
 
