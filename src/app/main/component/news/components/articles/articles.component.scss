@@ -71,7 +71,11 @@
     font-style: normal;
     font-weight: $font-weight-semibolt;
     line-height: 24px;
-    color: $color-primary;
+    color: #666;
+
+    &:hover {
+      color: $color-primary;
+    }
   }
 
   &__title-place {
@@ -104,10 +108,13 @@
   }
 
   .cards__wrap {
+    width: 703px;
     gap: 48px;
   }
 
   .card {
+    width: 703px;
+
     &__header {
       display: flex;
       width: 703px;
@@ -133,7 +140,6 @@
     &__title-name,
     &__title-place {
       font-family: $secondary-fonts;
-      color: $color-primary;
     }
   }
 }
@@ -146,7 +152,7 @@
       padding-bottom: 91px;
     }
 
-    &__title-name {
+    &__title {
       font-size: 40px;
       font-weight: $font-weight-regular;
       line-height: 48px;
@@ -189,4 +195,57 @@
 }
 
 @media (width > 1440px) {
+  .news {
+    &__container {
+      padding-top: 156px;
+      padding-bottom: 91px;
+      width: 1280px;
+    }
+  }
+  .cards__wrap {
+    width: 1282px;
+  }
+
+  .card {
+    width: 1282px;
+
+    &__image-item {
+      width: 629px;
+      height: 320px;
+    }
+
+    &__header {
+      width: 1282px;
+    }
+
+    &__title {
+      width: 629px;
+    }
+
+    &__title-name {
+      width: 629px;
+      font-family: $secondary-fonts;
+      line-height: 36px;
+    }
+
+    &__title-place {
+      font-family: $secondary-fonts;
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media (width > 1920px) {
+  .news {
+    &__container {
+      width: 1282px;
+      padding-top: 156px;
+      padding-bottom: 80px;
+    }
+  }
+
+  .cards__wrap {
+    width: 1282px;
+  }
 }

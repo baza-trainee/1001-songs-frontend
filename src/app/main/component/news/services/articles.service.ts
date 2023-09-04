@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import { Article } from '../article.interface';
 import { articles } from '../utils/mock-data';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ArticlesService {
-  private readonly articlesPathUrl = null;
+  private readonly articlesPathUrl = 'https://bt-1001.vercel.app/news ';
+
+  constructor(private http: HttpClient) {}
 
   getArticles(): Observable<Article[]> {
-    return of(articles);
+    return this.http.get<Article[]>(this.articlesPathUrl);
   }
 
   getArticle(id: number): Observable<Article> {
-    return of(...articles.filter((article: Article) => article.id === id));
+    // should be added filter by id for getting an article from articles
+    return this.http.get<Article>(this.articlesPathUrl);
   }
 }

@@ -14,7 +14,8 @@ import { FilterComponent } from '../filter/filter.component';
   standalone: true,
   imports: [TranslateModule, NgFor, ArticleComponent, RouterLink, FilterComponent],
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss']
+  styleUrls: ['./articles.component.scss'],
+  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   public articles!: Article[];
