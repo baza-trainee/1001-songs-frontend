@@ -62,20 +62,12 @@ export class FilterComponent implements OnInit, OnDestroy {
       }
 
       if (this.maxSlide - Math.abs(this.translateX) < 0) {
-        console.log('UPSS');
-        console.log(this.translateX);
         this.translateX = -this.maxSlide;
-        console.log('UPSS');
       } else {
         this.translateX += diffX;
         this.currentX = touch.clientX;
       }
     }
-  }
-
-  onTouchEnd(): void {
-    this.startX = 0;
-    this.currentX = 0;
   }
 
   ngOnDestroy(): void {

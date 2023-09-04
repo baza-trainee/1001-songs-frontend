@@ -12,11 +12,12 @@ import { LatestNewsComponent } from '../latest-news/latest-news.component';
   standalone: true,
   imports: [CommonModule, LatestNewsComponent],
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.scss']
+  styleUrls: ['./article.component.scss'],
+  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
 export class ArticleComponent implements OnInit {
-  public article$!: Observable<Article>;
-  public isId!: UrlSegment;
+  public article$!: Observable<Article[]>;
+  public isId!: number;
 
   constructor(
     private articlesService: ArticlesService,
@@ -25,14 +26,10 @@ export class ArticleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isId = this.route.snapshot.url[1];
+    this.isId = +this.route.snapshot.url[1].path;
 
     if (this.isId) {
-      this.article$ = this.route.params.pipe(
-        switchMap((params: Params) => {
-          return this.articlesService.getArticle(params['id']);
-        })
-      );
+      this.article$ = this.articlesService.getArticle(this.isId);
     }
   }
 

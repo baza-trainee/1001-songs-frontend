@@ -1,11 +1,16 @@
 @use '/src/typography/typography' as *;
 
+@mixin width($pad) {
+  width: calc(100vw - ($pad * 2px));
+}
+
 .news {
   &__container {
+    @include width(16);
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 358px;
     gap: 16px;
     padding-top: 128px;
     padding-bottom: 48px;
@@ -17,26 +22,31 @@
 }
 
 .cards__wrap {
+  @include width(16);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  width: 358px;
 }
 
 .card {
-  width: 358px;
+  @include width(16);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border-top: 1px solid $color-primary;
   gap: 16px;
+  cursor: pointer;
 
   &__header {
+    @include width(16);
+
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 358px;
+
     padding-top: 16px;
   }
 
@@ -101,23 +111,24 @@
 @media (width > 768px) {
   .news {
     &__container {
-      width: 703px;
+      @include width(32);
+
       padding-top: 156px;
       padding-bottom: 71px;
     }
   }
 
   .cards__wrap {
-    width: 703px;
+    @include width(32);
     gap: 48px;
   }
 
   .card {
-    width: 703px;
+    @include width(32);
 
     &__header {
       display: flex;
-      width: 703px;
+      @include width(32);
       justify-content: space-between;
       align-items: flex-start;
     }
@@ -147,7 +158,7 @@
 @media (width > 1024px) {
   .news {
     &__container {
-      width: 928px;
+      @include width(48);
       padding-top: 176px;
       padding-bottom: 91px;
     }
@@ -159,14 +170,14 @@
     }
   }
   .cards__wrap {
-    width: 928px;
+    @include width(48);
   }
 
   .card {
-    width: 928px;
+    @include width(48);
 
     &__header {
-      width: 928px;
+      @include width(48);
     }
 
     &__image-item {
@@ -197,25 +208,28 @@
 @media (width > 1440px) {
   .news {
     &__container {
+      @include width(80);
+      max-width: 1280px;
       padding-top: 156px;
       padding-bottom: 91px;
-      width: 1280px;
     }
   }
   .cards__wrap {
-    width: 1282px;
+    @include width(80);
+    max-width: 1280px;
   }
 
   .card {
-    width: 1282px;
-
+    @include width(80);
+    max-width: 1280px;
     &__image-item {
       width: 629px;
       height: 320px;
     }
 
     &__header {
-      width: 1282px;
+      @include width(80);
+      max-width: 1280px;
     }
 
     &__title {
@@ -239,13 +253,22 @@
 @media (width > 1920px) {
   .news {
     &__container {
-      width: 1282px;
+      @include width(320);
+
       padding-top: 156px;
       padding-bottom: 80px;
     }
   }
 
   .cards__wrap {
-    width: 1282px;
+    @include width(320);
+  }
+
+  .card {
+    @include width(320);
+
+    &__header {
+      @include width(320);
+    }
   }
 }
