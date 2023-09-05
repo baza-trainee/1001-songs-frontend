@@ -42,12 +42,6 @@
       "places": "record spaces"
     }
   },
-  "share": {
-    "dialog": {
-      "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
-      "copy": "Copy"
-    }
-  },
    "about": {
       "stub": "The 'About the project' page is under development"
    },
@@ -70,6 +64,12 @@
     },
     "actions": {
       "block-btn": "Main page"
+    }
+  },
+  "share": {
+    "dialog": {
+      "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
+      "copy": "Copy"
     }
   }
 }

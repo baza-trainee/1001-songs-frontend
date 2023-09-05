@@ -7,6 +7,8 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
+
+
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 export function createTranslateLoader(http: HttpClient) {
