@@ -1,4 +1,6 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArticlesService } from '../../services/articles.service';
 
 import { LatestNewsComponent } from './latest-news.component';
 
@@ -8,7 +10,8 @@ describe('LatestNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LatestNewsComponent]
+      imports: [LatestNewsComponent],
+      providers: [ArticlesService, HttpClient, HttpHandler]
     });
     fixture = TestBed.createComponent(LatestNewsComponent);
     component = fixture.componentInstance;
