@@ -54,14 +54,14 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   onTouchMove(event: TouchEvent): void {
-    console.dir(this.slide.nativeElement.lastElementChild.offsetLeft);
+
     if (window.outerWidth <= 768) {
       const touch = event.touches[0];
       const diffX = touch.clientX - this.currentX;
       if (this.translateX > 0) {
         this.translateX = 0;
       }
-      console.log(this.maxSlide - Math.abs(this.translateX));
+
 
       if (this.maxSlide - Math.abs(this.translateX) < 0) {
         this.translateX = -this.maxSlide;

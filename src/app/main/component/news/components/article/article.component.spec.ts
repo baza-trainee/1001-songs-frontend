@@ -17,9 +17,20 @@ describe('ArticleComponent', () => {
         ArticlesService,
         HttpClient,
         HttpHandler,
-        { provide: ActivatedRoute, useValue: { snapshot: { params: { id: '1', name: 'TestParam' } } } }
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              params: {
+                id: '2',
+                name: 'testParam'
+              }
+            }
+          }
+        }
       ]
     });
+
     fixture = TestBed.createComponent(ArticleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

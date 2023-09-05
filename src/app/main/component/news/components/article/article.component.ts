@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { Article } from '../../article.interface';
 import { ArticlesService } from '../../services/articles.service';
@@ -26,7 +26,7 @@ export class ArticleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isId = +this.route.snapshot.url[1].path;
+    this.isId = +this.route.snapshot.params['id'];
 
     if (this.isId) {
       this.article$ = this.articlesService.getArticle(this.isId);
