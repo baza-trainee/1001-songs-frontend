@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Iexpediton from '../../interfaces/expedition.interface';
-import { environment } from 'src/environments/environment';
-import { StatEndpoints } from '../../config/endpoints/stat-endpoints';
+import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +41,7 @@ export class ExpeditionsService {
   }
 
   private uploadExpeditions() {
-    const URL = `${environment.baseUrl}${StatEndpoints.expeditions}`;
+    const URL = `${API_URL}${StatEndpoints.expeditions}`;
     this.http.get(URL).subscribe(
       (data) => this.$expeditions.next(data as Iexpediton[]),
       (error) => {

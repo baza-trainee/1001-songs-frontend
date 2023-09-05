@@ -4,7 +4,7 @@ import { ExpeditionsService } from './expeditions.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BehaviorSubject } from 'rxjs';
 import { testCategories, testExpeditionsData } from 'src/mock-data/tests';
-import { environment } from 'src/environments/environment';
+import { API_URL } from '../../config/endpoints/stat-endpoints';
 
 describe('ExpeditionsService', () => {
   let service: ExpeditionsService;
@@ -22,7 +22,7 @@ describe('ExpeditionsService', () => {
     service.getExpeditions().subscribe((data) => {
       expect(data).toEqual(testExpeditionsData);
     });
-    const req = httpTestingController.expectOne(environment.baseUrl+'expeditions');
+    const req = httpTestingController.expectOne(API_URL+'expeditions');
     req.flush(testExpeditionsData);
     httpTestingController.verify();
   });
