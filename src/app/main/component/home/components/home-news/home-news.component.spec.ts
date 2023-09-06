@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeNewsComponent } from './home-news.component';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterModule} from "@angular/router";
 
 describe('HomeNewsComponent', () => {
   let component: HomeNewsComponent;
@@ -11,7 +11,7 @@ describe('HomeNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HomeNewsComponent],
+      imports: [TranslateModule.forRoot(), RouterModule.forRoot([]), HomeNewsComponent],
       providers: [TranslateService,
         {
           provide: ActivatedRoute,
@@ -32,5 +32,20 @@ describe('HomeNewsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a router link', () => {
+    fixture.detectChanges();
+    const routerLinkElement = fixture.nativeElement.querySelector('.news__router-link');
+
+    expect(routerLinkElement).toBeTruthy();
+    expect(routerLinkElement.getAttribute('routerLink')).toBeDefined();
+  });
+
+  it('should display the title correctly', () => {
+    fixture.detectChanges();
+    const titleElement = fixture.nativeElement.querySelector('.news__title');
+    const translatedTitle = translateService.instant('home.home-news.title');
+    expect(titleElement.textContent).toContain(translatedTitle);
   });
 });

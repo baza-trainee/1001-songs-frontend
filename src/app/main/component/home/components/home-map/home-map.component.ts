@@ -77,9 +77,10 @@ export class HomeMapComponent {
 
   selectedMarkerKey: string | null = null;
   showInfoWindow: boolean = false;
+
   constructor(
     private _translate: TranslateService
-  ){}
+  ) { }
 
   onMarkerClick(key: string) {
     this.selectedMarkerKey = key;
@@ -94,7 +95,6 @@ export class HomeMapComponent {
   getCustomMarkerIcon(key: string): google.maps.Icon {
     return {
       url: this.selectedMarkerKey === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg',
-      scaledSize: new google.maps.Size(56, 56),
     }
   }
 }

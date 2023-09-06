@@ -31,4 +31,12 @@ describe('HomeActualComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display the title correctly', () => {
+    fixture.detectChanges();
+    const titleElement = fixture.nativeElement.querySelector('.actual__title');
+    const translatedTitle = translateService.instant('home.home-actual.title');
+    expect(titleElement.textContent).toContain(translatedTitle);
+  });
+
 });
