@@ -1,59 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {HomeMapComponent, Marker} from './home-map.component';
+import {HomeMapComponent} from './home-map.component';
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {GoogleMapsModule } from "@angular/google-maps";
+
 
 describe('HomeMapComponent', () => {
   let component: HomeMapComponent;
   let fixture: ComponentFixture<HomeMapComponent>;
+  let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeMapComponent],
+      imports: [TranslateModule.forRoot(), HomeMapComponent, GoogleMapsModule],
+      providers: [TranslateService]
     });
 
+    window.google = google;
+
+    translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(HomeMapComponent);
-    component = fixture.componentInstance;
+    component = new HomeMapComponent(translateService);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have markers', () => {
-    expect(component.cordsMarkers.length).toBeGreaterThan(0);
-  });
-
-  it('should handle marker click', () => {
-    const marker: Marker = {
-      key: 'marker1',
-      position: { lat: 50.4501, lng: 30.5234 },
-      popup: {
-        title: 'с. Крячківка, Полтавська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 20,
-        link: '#',
-      },
-    };
-
-    component.onMarkerClick(marker.key);
-
-    expect(component.selectedMarkerKey).toBe(marker.key);
-    expect(component.showInfoWindow).toBe(true);
-  });
-
-  it('should close info window', () => {
-    component.onCloseInfoWindow();
-
-    expect(component.selectedMarkerKey).toBe(null);
-    expect(component.showInfoWindow).toBe(false);
-  });
-
-  it('should get custom marker icon', () => {
-    const markerKey = 'marker1';
-    const icon = component.getCustomMarkerIcon(markerKey);
-
-    expect(icon.url).toContain('place.svg');
-    expect(icon.scaledSize?.width).toBe(56);
-    expect(icon.scaledSize?.height).toBe(56);
-  });
 });

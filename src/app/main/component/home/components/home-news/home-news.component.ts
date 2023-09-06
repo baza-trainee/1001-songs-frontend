@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -11,6 +11,11 @@ import {RouterLink} from "@angular/router";
   styleUrls: ['./home-news.component.scss']
 })
 export class HomeNewsComponent {
+
+  constructor(
+    private _translate: TranslateService
+  ){}
+
   newsItems = [
     {
       img: "./assets/img/home/news.jpg",

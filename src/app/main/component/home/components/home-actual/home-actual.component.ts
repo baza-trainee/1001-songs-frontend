@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 export interface CarouselItem {
   imgSrc: string,
@@ -17,6 +17,10 @@ export interface CarouselItem {
   styleUrls: ['./home-actual.component.scss']
 })
 export class HomeActualComponent {
+
+  constructor(private _translate: TranslateService) {
+  }
+
   carouselItems: CarouselItem[] = [
     {
       imgSrc: './assets/img/home/carousel1.jpg',

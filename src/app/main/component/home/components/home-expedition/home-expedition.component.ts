@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -11,6 +11,9 @@ import {RouterLink} from "@angular/router";
   styleUrls: ['./home-expedition.component.scss']
 })
 export class HomeExpeditionComponent {
+
+  constructor(private _translate: TranslateService) {}
+
   expeditionItems = [
     {
       img: "./assets/img/home/expedition1.jpg",

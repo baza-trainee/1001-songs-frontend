@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {GoogleMapsModule} from "@angular/google-maps";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 export interface Marker {
   key: string,
@@ -12,7 +12,6 @@ export interface Marker {
     countRecords: number,
     link: string
   }
-
 }
 @Component({
   selector: 'app-home-map',
@@ -22,6 +21,7 @@ export interface Marker {
   styleUrls: ['./home-map.component.scss']
 })
 export class HomeMapComponent {
+
   cordsMarkers: Marker[] = [
     {
       key: 'marker1',
@@ -76,7 +76,10 @@ export class HomeMapComponent {
   ];
 
   selectedMarkerKey: string | null = null;
-  showInfoWindow = false;
+  showInfoWindow: boolean = false;
+  constructor(
+    private _translate: TranslateService
+  ){}
 
   onMarkerClick(key: string) {
     this.selectedMarkerKey = key;
