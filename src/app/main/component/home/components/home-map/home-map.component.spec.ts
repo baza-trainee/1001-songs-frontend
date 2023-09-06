@@ -20,6 +20,8 @@ export const google = {
     },
   },
 };
+class googleMock {}
+
 describe('HomeMapComponent', () => {
   let component: HomeMapComponent;
   let fixture: ComponentFixture<HomeMapComponent>;
@@ -31,7 +33,7 @@ describe('HomeMapComponent', () => {
       providers: [TranslateService]
     });
 
-    (window as any).google = google;
+    (window as unknown as { google: googleMock }).google = google;
 
     translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(HomeMapComponent);
