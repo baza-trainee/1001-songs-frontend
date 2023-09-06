@@ -1,0 +1,87 @@
+@import '../../../../typography/typography';
+
+.dialog{
+  &__text {
+    max-width: 375px;
+    text-align: center;
+    margin: 5px auto 0;
+    font-size: 20px;
+    line-height: 28px;
+    color: rgba(40, 40, 40, 100%);
+    font-weight: 600;
+  }
+
+  &__action{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 24px 0 16px;
+    padding: 0;
+
+    &-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s linear;
+
+      &:hover {
+        transform: scale(1.1);
+        font-weight: 600;
+      }
+
+      &--text {
+        font-size: 14px;
+        line-height: 16.8px;
+        color: rgba(69, 69, 69, 100%);
+        margin-top: 8px;
+        cursor: pointer;
+      }
+
+      &--btn {
+        border: none;
+        background: transparent;
+      }
+    }
+  }
+}
+
+/* stylelint-disable */
+
+::ng-deep {
+  .mdc-dialog__surface {
+    border-radius: 12px !important;
+  }
+
+  .cdk-overlay-dark-backdrop {
+    background: rgba(0,0,0,.45) !important;
+  }
+
+  .mat-mdc-snack-bar-container .mdc-snackbar__label {
+    font-size: 18px !important;
+    border-radius: 20px;
+    padding: 10px 0;
+    color: var(--bg-color-accent)!important;
+  }
+
+  .mat-mdc-snack-bar-container {
+    transform: translateY(110px) !important;
+    flex: inherit !important;
+  }
+
+  .mat-mdc-simple-snack-bar{
+    width: 170px;
+    text-align: center;
+    justify-content: center !important;
+  }
+
+  .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background: var(--text-color-primary) !important;
+    min-width: 150px !important;
+  }
+}
+
+.mdc-dialog__content {
+  padding: 0;
+}
+
+/* stylelint-enable */

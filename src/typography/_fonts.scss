@@ -1,7 +1,3 @@
-@font-face {
-   font-family: 'Work Sans';
-   src: url('../assets/fonts/WorkSans/WorkSans-VariableFont_wght.ttf') format('truetype');
-}
 
 @font-face {
    font-family: 'Yeseva One';
@@ -21,8 +17,8 @@
 }
 
 :root {
-   --primary-font: 'Work Sans';
+   --primary-font: 'Open Sans';
    --secondary-font: 'Yeseva One';
-   --tertiary-font: 'Work Sans';
+   --tertiary-font: 'Open Sans';
    --quaternary-font: 'Yeseva One', sans-serif;
 }
