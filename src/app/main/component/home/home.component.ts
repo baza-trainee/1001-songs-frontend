@@ -8,6 +8,10 @@ import {ErrorComponent} from "../../../shared/shared-components/error/error.comp
 import {HomeTapeComponent} from "../../../shared/shared-components/home-tape/home-tape.component";
 import {MatDialog, MatDialogConfig, MatDialogModule} from "@angular/material/dialog";
 import {ShareModalComponent} from "../../../shared/shared-components/share-modal/share-modal.component";
+import {HomeMapComponent} from "./components/home-map/home-map.component";
+import {HomeActualComponent} from "./components/home-actual/home-actual.component";
+import {HomeExpeditionComponent} from "./components/home-expedition/home-expedition.component";
+import {HomeNewsComponent} from "./components/home-news/home-news.component";
 
 
 
@@ -16,7 +20,7 @@ import {ShareModalComponent} from "../../../shared/shared-components/share-modal
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     standalone: true,
-  imports: [RouterLink, TranslateModule, CommonModule, ErrorComponent, HomeTapeComponent, MatDialogModule]
+  imports: [RouterLink, TranslateModule, CommonModule, ErrorComponent, HomeTapeComponent, MatDialogModule, HomeMapComponent, HomeActualComponent, HomeExpeditionComponent, HomeNewsComponent]
 })
 export class HomeComponent {
   protected readonly homePageAssets = Homepage;
