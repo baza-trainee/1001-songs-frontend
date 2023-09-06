@@ -7,7 +7,10 @@ import {GoogleMapsModule } from "@angular/google-maps";
 export const google = {
   maps: {
     Marker: class FakeMarker {
-      setMap(map: any) {}
+      private map: unknown;
+      setMap(map: unknown) {
+        this.map = map;
+      }
     },
     Size: class {},
     LatLng: class {},
