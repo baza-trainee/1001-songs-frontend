@@ -74,27 +74,31 @@ export class HomeMapComponent {
       }
     }
   ];
-
-  selectedMarkerKey: string | null = null;
+  selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
 
+  mapOptions = {
+    center: { lat: 48.379433, lng: 31.165579 },
+    zoom: 6,
+    options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true}
+  }
   constructor(
     private _translate: TranslateService
   ) { }
 
-  onMarkerClick(key: string) {
-    this.selectedMarkerKey = key;
+  onMarkerClick(marker: Marker) {
+    this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
 
   onCloseInfoWindow(): void {
     this.showInfoWindow = false;
-    this.selectedMarkerKey = null;
+    this.selectedMarker = null;
   }
 
   getCustomMarkerIcon(key: string): google.maps.Icon {
     return {
-      url: this.selectedMarkerKey === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg',
+      url: this.selectedMarker?.key === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg',
     }
   }
 }
