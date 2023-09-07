@@ -51,7 +51,28 @@
     "stub": "The 'About the project' page is under development"
   },
   "map": {
-    "stub": "Page 'Map' under development"
+    "player": {
+      "counter-title" : "Number of results found",
+      "player-title" : "Play all found songs",
+      "songs-list" : {
+        "titles" : {
+          "photo" : "Photo",
+          "name" : "Name",
+          "genre" : "Genre",
+          "recording-location" : "Recording location",
+          "listen" : "Listen"
+        },
+        "song-card" : {
+          "detail-button" : "Details"
+        },
+        "song-card-detail" : {
+          "date" : "Date of recording",
+          "collectors" : "Collectors",
+          "ethnographic-region" : "Ethnographic region",
+          "more-detail-button" : "Additional details"
+        }
+      }
+    }
   },
   "news": {
     "stub": "Page 'News' under development"
