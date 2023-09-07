@@ -24,12 +24,8 @@ export const google = {
 export const fakeSelectedMarker = {
   key: 'marker1',
   position: { lat: 0, lng: 0 },
-  popup: {
-    title: '',
-    photoUrl: '',
-    countRecords: 0,
-    link: ''
-  }}
+  popup: {title: '', photoUrl: '', countRecords: 0, link: ''}
+}
 class googleMock {}
 
 describe('HomeMapComponent', () => {
