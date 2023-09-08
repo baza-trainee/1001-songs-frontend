@@ -14,15 +14,6 @@ export class ArticlesService {
     return this.http.get<Article[]>(this.articlesPathUrl).pipe(catchError(this.handleError<Article[]>('error from getArticles')));
   }
 
-  getArticle(id: number): Observable<Article[]> {
-    // should be added filter by id for getting an article from articles
-    return this.http.get<Article[]>(this.articlesPathUrl).pipe(
-      map((article: Article[]) => {
-        return article.filter((item: Article) => item.id === id);
-      }),
-      catchError(this.handleError<Article[]>('error from getArticle'))
-    );
-  }
 
   private handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {

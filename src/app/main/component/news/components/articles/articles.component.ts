@@ -4,7 +4,6 @@ import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-import { ArticleComponent } from '../article/article.component';
 import { ArticlesService } from '../../services/articles.service';
 import { Article } from '../../article.interface';
 import { FilterComponent } from '../filter/filter.component';
@@ -12,7 +11,7 @@ import { FilterComponent } from '../filter/filter.component';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [TranslateModule, NgFor, ArticleComponent, RouterLink, FilterComponent],
+  imports: [TranslateModule, NgFor, RouterLink, FilterComponent],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
   providers: [{ provide: ArticlesService, useClass: ArticlesService }]
