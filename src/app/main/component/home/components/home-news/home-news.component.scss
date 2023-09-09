@@ -1,0 +1,268 @@
+@import '../../../../../../typography/typography';
+
+img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.news {
+  &__container {
+    padding: 80px 0;
+  }
+
+  &__title {
+    @include h2-desktop;
+
+    margin-bottom: 48px;
+  }
+
+  &__items {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  &__all {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 24px;
+
+    &-item {
+      position: relative;
+      border-top: 1px solid var(--text-color-primary);
+      padding: 16px 0;
+      width: 47.7%;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--text-color-primary);
+    }
+
+    &-link {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      right: 0;
+      top: 16px;
+      background-image: url('../../../../../../assets/img/home/icons/arrow_outward.svg');
+    }
+
+    &-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 28px;
+      margin: 16px 0;
+    }
+
+  }
+
+  &__main {
+    width: 50%;
+
+    &-img {
+      width: 100%;
+      vertical-align: bottom;
+      margin-bottom: 24px;
+    }
+
+    &-date {
+      font-family: "Open Sans", sans-serif;
+
+    }
+
+    &-title {
+      @include h4-desktop($line-height: 36px);
+
+      margin: 17px 0
+    }
+
+    &-location {
+      @include link-desktop($font-family: $tertiary-fonts, $font_size: 18.1px);
+
+      position: relative;
+      display: inline-block;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        left: 0;
+        bottom: 2.9px;
+        background-color: var(--text-color-primary);
+      }
+    }
+  }
+
+  &__router {
+    text-align: right;
+
+    &-link {
+      @include link-desktop($font_size: 16px, $line-height: 24px, $font-weight: $font-weight-semibolt);
+
+      padding-right: 31px;
+      font-family: "Open Sans", sans-serif;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: 24px;
+        height: 24px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url('../../../../../../assets/img/home/icons/arrow_forward.svg');
+      }
+    }
+  }
+}
+
+@media (width <=1440px) {
+  .news {
+    &__all {
+      &-item {
+        padding: 16px 0 32px;
+      }
+    }
+  }
+}
+
+@media (width <=1376px) {
+  .container {
+    margin: 0 48px;
+  }
+}
+
+@media (width <=1166px) {
+  .news {
+    &__items {
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    &__main {
+      width: 100%;
+
+      &-item {
+        display: flex;
+        gap: 24px;
+      }
+
+      &-img {
+        width: 48.7%;
+        height: 320px;
+        object-fit: cover;
+      }
+    }
+
+    &__all {
+      width: 100%;
+
+      &-item {
+        width: 48%;
+        padding: 16px 0;
+      }
+    }
+  }
+
+}
+
+@media (width <= 790px) {
+  .container {
+    padding: 60px 0;
+    margin: 0 32px;
+  }
+}
+
+@media (width <= 790px) {
+  .news {
+    &__container {
+      padding: 60px 0;
+      margin: 0 29px;
+    }
+
+    &__items {
+      margin-bottom: 32px;
+    }
+
+    &__title {
+      margin-bottom: 32px;
+    }
+
+    &__main {
+      &-item {
+        flex-direction: column
+      }
+
+      &-img {
+        width: 100%;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (width <= 672px) {
+  .news {
+    &__all {
+      &-item {
+        width: 47%;
+      }
+    }
+  }
+}
+
+@media (width <= 500px) {
+  .news {
+    &__container {
+      padding: 48px 0;
+      margin: 0 16px;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 28px;
+    }
+
+    &__items {
+      margin-bottom: 30px;
+    }
+
+    &__all {
+      &-item {
+        width: 100%;
+      }
+
+      &-title {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      &-location {
+        padding-bottom: 7px;
+      }
+    }
+
+    &__main {
+      &-item {
+        gap: 19px;
+      }
+
+      &-img {
+        height: 200px;
+      }
+
+      &-title {
+        font-size: 24px;
+        line-height: 32px;
+        margin: 17px 0 14px;
+      }
+    }
+  }
+}

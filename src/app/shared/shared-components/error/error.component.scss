@@ -59,6 +59,13 @@
   }
 }
 
+@media (width <= 2200px) {
+  .error{
+    height: 100%;
+    background-position-y: 2%;
+  }
+}
+
 @media (width <= 1140px) {
   .error{
     height: 644px;
@@ -70,13 +77,6 @@
         margin-bottom: 72px;
       }
     }
-  }
-}
-
-@media (width <= 2200px) {
-  .error{
-    height: 100%;
-    background-position-y: 2%;
   }
 }
 

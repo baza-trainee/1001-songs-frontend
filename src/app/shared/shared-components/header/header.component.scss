@@ -21,7 +21,7 @@ a {
    position: fixed;
    top: 0;
    left: 0;
-   z-index: 1;
+   z-index: 10;
    background-color: var(--bg-color-header);
    border-bottom: 1px solid var(--neutrals-400, #B7B7B7);
    backdrop-filter: blur(10px);

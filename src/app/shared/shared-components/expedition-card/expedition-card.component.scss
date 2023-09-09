@@ -1,0 +1,115 @@
+@import '../../../../typography/typography';
+
+.event {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  width: 302px;
+
+  &__media {
+    height: 180px;
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+
+    &__control {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      position: absolute;
+      border-style: none;
+      top: calc(50% - 24px);
+      left: calc(50% - 24px);
+      padding-left: 2px;
+      font-size: 0.8rem;
+    }
+
+    img {
+      position: absolute;
+      width: 302px;
+      height: 180px;
+      border-radius: 8px;
+      object-fit: cover;
+      filter: sepia(70%);
+    }
+
+    &__iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__date {
+    @include caption-desktop;
+
+    margin-top: 24px;
+  }
+
+  &__name {
+    @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $primary-fonts);
+  }
+
+  &__description {
+    @include body-desktop;
+
+    overflow: hidden;
+  }
+
+  &__location {
+    @include caption-desktop;
+
+    margin-top: 8px;
+  }
+}
+
+@media (width < 1025px) {
+  .event {
+    width: 293px;
+
+    &__media {
+      img {
+        width: 293px;
+      }
+    }
+  }
+}
+
+@media (width < 769px) {
+  .event {
+    width: 340px;
+
+    &__media {
+      height: 200px;
+
+      img {
+        width: 340px;
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media (width < 391px) {
+  .event {
+    height: 338px;
+    width: 358px;
+
+    &__media {
+      img {
+        width: 358px;
+      }
+    }
+    
+    &__date {
+      margin-top: 18px;
+    }
+
+    &__name {
+      @include h6-mobile($line-height: 30px, $font-family: $primary-fonts);
+    }
+
+    &__location {
+      margin-top: 6px;
+    }
+  }
+}
