@@ -1,16 +1,24 @@
-@font-face {
-   font-family: 'Work Sans';
-   src: url('../assets/fonts/WorkSans/WorkSans-VariableFont_wght.ttf') format('truetype');
-}
 
 @font-face {
    font-family: 'Yeseva One';
    src: url('../assets/fonts/YesevaOne/YesevaOne-Regular.ttf') format('truetype');
 }
 
+@font-face {
+   font-family: 'Open Sans';
+   src: url('../assets/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+   font-weight: 400;
+}
+
+@font-face {
+   font-family: 'Open Sans';
+   src: url('../assets/fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+   font-weight: 600;
+}
+
 :root {
-   --primary-font: 'Work Sans';
+   --primary-font: 'Open Sans';
    --secondary-font: 'Yeseva One';
-   --tertiary-font: 'Work Sans';
+   --tertiary-font: 'Open Sans';
    --quaternary-font: 'Yeseva One', sans-serif;
 }

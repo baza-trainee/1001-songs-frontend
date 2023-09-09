@@ -1,0 +1,19 @@
+<section class="actual">
+  <div class="container actual__container">
+    <h2 class="actual__title">{{'home.home-actual.title' | translate}}</h2>
+    <div class="actual__carousel">
+      <div class="actual__carousel-container">
+        <div class="actual__carousel-item" *ngFor="let item of carouselItems">
+          <img class="actual__carousel-img" [src]="item.imgSrc" [alt]="item.imgAlt">
+          <h3 class="actual__carousel-title">{{item.title}}</h3>
+          <p class="actual__carousel-description">{{item.description}}</p>
+        </div>
+      </div>
+      <div class="actual__nav">
+        <span class="actual__nav-item active"></span>
+        <span class="actual__nav-item"></span>
+        <span class="actual__nav-item"></span>
+      </div>
+    </div>
+  </div>
+</section>
