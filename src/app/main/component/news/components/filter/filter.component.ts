@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -23,6 +23,7 @@ export class FilterComponent implements OnInit {
   private maxSlide: number = 0;
 
   private readonly articleService = inject(ArticlesService);
+  private readonly destroyRef = inject(DestroyRef);
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
   @ViewChild('slide', { read: ElementRef }) slide!: ElementRef;
@@ -30,7 +31,7 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
     this.articleService
       .getArticles()
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((articles) => (this.articles = articles));
   }
 
