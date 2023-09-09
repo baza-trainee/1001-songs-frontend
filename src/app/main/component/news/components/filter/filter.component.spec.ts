@@ -1,8 +1,9 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { ArticlesService } from '../../services/articles.service';
+import { first } from 'rxjs';
 
+import { ArticlesService } from '../../services/articles.service';
 import { FilterComponent } from './filter.component';
 
 describe('FilterComponent', () => {
@@ -23,5 +24,12 @@ describe('FilterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should react on event', () => {
+    component.filteredArticles.pipe(first()).subscribe((articles: any) => {
+      expect(articles.length).toEqual(6);
+      component.filterArticles('Усі');
+    });
   });
 });

@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ArticlesService } from '../../services/articles.service';
 import { Article } from '../../article.interface';
@@ -16,17 +16,16 @@ import { FilterComponent } from '../filter/filter.component';
   styleUrls: ['./articles.component.scss'],
   providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
-export class ArticlesComponent implements OnInit, OnDestroy {
+export class ArticlesComponent implements OnInit {
   public articles!: Article[];
-  private unSub!: Subscription;
-
-  constructor(
-    private articlesService: ArticlesService,
-    private router: Router
-  ) {}
+  private readonly articlesService = inject(ArticlesService);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
-    this.unSub = this.articlesService.getArticles().subscribe((articles) => (this.articles = articles));
+    this.articlesService
+      .getArticles()
+      .pipe(takeUntilDestroyed())
+      .subscribe((articles) => (this.articles = articles));
   }
 
   filteredArticles(articles: Article[]): void {
@@ -35,9 +34,5 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   redirectToArticle(id: number) {
     this.router.navigate(['/article', id]);
-  }
-
-  ngOnDestroy(): void {
-    if (this.unSub) this.unSub.unsubscribe();
   }
 }
