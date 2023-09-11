@@ -1,0 +1,19 @@
+<div class="event">
+  <div class="event__media">
+    <img *ngIf="isPreviewDisplayed" [src]="event.mediaSrc | previewFromUrl" alt="Expedition image" />
+    <button class="event__media__control" *ngIf="isPreviewDisplayed" (click)="playVideo()">&#9658;</button>
+    <iframe
+      #player
+      class="event__media__iframe"
+      [src]="event.mediaSrc | safeMediaUrl"
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <span class="event__date">{{ event.eventDate }}</span>
+  <span class="event__name">{{ event.name | slice: 0 : 22 }}</span>
+  <span class="event__description">{{ event.shortDescription | slice: 0 : 30 }} </span>
+  <span class="event__location">{{ event.location | slice: 0 : 30 }}</span>
+</div>

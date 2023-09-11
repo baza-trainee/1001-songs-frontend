@@ -41,11 +41,8 @@ a {
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+@media (width <=1376px) {
+  .container {
+    max-width: 100%;
+  }
 }

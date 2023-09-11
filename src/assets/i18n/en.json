@@ -17,11 +17,16 @@
    },
    "footer": {
       "button": "Support the project",
+      "partners": "Our partners",
+     "contacts" : {
+       "title" : "Contacts",
+       "email" : "clientsupport@gmail.com"
+     },
       "rules": {
          "reporting":"Reporting",
          "policy": "Privacy policy",
          "terms": "Terms and conditions of use",
-         "copyright": "Copyright © 2023. All rights reserved"
+         "copyright": "Developed by BazaTraineeUkraine 2023. All rights reserved"
       }
    },
   "home": {
@@ -34,6 +39,22 @@
     "actions": {
       "button-donate": "Donate",
       "button-share": "Share"
+    },
+    "home-map": {
+      "popup-btn": "Listen to the recordings",
+      "popup-count": "Number of records"
+    },
+    "home-actual": {
+      "title": "Current projects"
+    },
+    "home-expeditions": {
+      "title": "Expeditions",
+      "button": "Watch the video",
+      "router-link": "Watch all videos"
+    },
+    "home-news": {
+      "title": "News",
+      "router-link": "View all"
     }
   },
   "tapes": {
@@ -42,34 +63,45 @@
       "places": "record spaces"
     }
   },
-   "about": {
-      "stub": "The 'About the project' page is under development"
-   },
-   "map":{
-      "stub": "Page 'Map' under development"
-   },
-   "news":{
-      "stub": "Page 'News' under development"
-   },
-   "expeditions":{
-      "stub": "Page 'Expeditions' under development"
-   },
-   "science":{
-      "stub": "Page 'Educational Section' under development"
-   },
+  "about": {
+    "stub": "The 'About the project' page is under development"
+  },
+  "map": {
+    "stub": "Page 'Map' under development"
+  },
+  "news": {
+    "stub": "Page 'News' under development"
+  },
+  "expeditions": {
+    "stub": "Page 'Expeditions' under development",
+    "title": "Expeditions",
+    "intro": "The priorities of modern times are the filling of «white spots» on the folkloristic map of Ukraine (eastern Volhynia, Dnieper region, southern Chernihiv region, Sumy region, Berezhany region, and other territories), as well as specialized regional programs for publishing song collections based on materials from specific ethnographic locales.",
+    "categories": {
+      "all": "All",
+      "exploring": "Exploring",
+      "static": "Static",
+      "interdisciplinary": "Interdisciplinary",
+      "thematic": "Thematic",
+      "video-of-ritual": "Video of ritual",
+      "digital-rcord": "Digital rcord"
+    }
+  },
+  "science": {
+    "stub": "Page 'Educational Section' under development"
+  },
   "error": {
     "error-inner": {
       "title": "404",
       "text": "Oops! It looks like the page you are looking for is currently unavailable"
     },
     "actions": {
-      "block-btn": "To the main page"
+      "block-btn": "Main page"
+    }
+  },
+  "share": {
+    "dialog": {
+      "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
+      "copy": "Copy"
     }
   }
 }
-
-
-
-
-
-
