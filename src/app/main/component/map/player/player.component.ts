@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -15,25 +15,29 @@ import {CloudService} from "../../../../shared/services/audio/cloud.service";
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit{
+
+  @ViewChild('slider', { static: true }) slider!: ElementRef;
+
   files: AudioDataInterface[] = [];
   state!: StreamStateInterface;
+  backgroundSize: string = '0% 100%'
   // currentFile!: AudioDataInterface;
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
-              private cloudService: CloudService) {
-
+              private cloudService: CloudService,
+              ) {
 
   }
 
 
   ngOnInit() {
     // get media files
-    // this.cloudService.getFiles().subscribe(files => {
-    //   this.files = files;
-    //
-    //   this.openFile(this.files[1]);
-    //
-    // });
+    this.cloudService.getFiles().subscribe(files => {
+      this.files = files;
+
+      this.openFile(this.files[1]);
+
+    });
 
     // listen to stream state
     this.audioService.getState()
@@ -90,9 +94,7 @@ export class PlayerComponent implements OnInit{
 
   onSliderChangeEnd(change: Event) {
     console.log(change);
-    this.audioService.seekTo(change.timeStamp / 1000);
+    // this.audioService.seekTo(change.timeStamp / 1000);
   }
-
-
 
 }
