@@ -20,8 +20,8 @@ export class PlayerComponent implements OnInit{
 
   files: AudioDataInterface[] = [];
   state!: StreamStateInterface;
-  backgroundSize: string = '0% 100%'
-  // currentFile!: AudioDataInterface;
+  secondsToRewindTrack: number = 5;
+  currentFile!: AudioDataInterface;
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
               private cloudService: CloudService,
@@ -34,8 +34,11 @@ export class PlayerComponent implements OnInit{
     // get media files
     this.cloudService.getFiles().subscribe(files => {
       this.files = files;
+      this.files.forEach((item: AudioDataInterface, index: number) => item.index = index);
 
-      this.openFile(this.files[1]);
+      console.log(this.files);
+
+      this.openFile(this.files[0]);
 
     });
 
@@ -50,12 +53,12 @@ export class PlayerComponent implements OnInit{
   playStream(url: string) {
     this.audioService.playStream(url)
       .subscribe(events => {
-        console.log(events);
+        // console.log(events);
       });
   }
 
   openFile(file: AudioDataInterface) {
-    // this.currentFile = file;
+    this.currentFile = file;
     this.audioService.stop();
     this.playStream(file.url);
   }
@@ -73,28 +76,38 @@ export class PlayerComponent implements OnInit{
   }
 
   next() {
-    // const index = this.currentFile.index + 1;
-    const file = this.files[2];
-    this.openFile(file);
+      const index = this.currentFile.index + 1;
+      const file = this.files[index];
+      this.openFile(file);
+
   }
 
   previous() {
-    // const index = this.currentFile.index - 1;
-    const file = this.files[1];
+    const index = this.currentFile.index - 1;
+    const file = this.files[index];
     this.openFile(file);
   }
 
-  // isFirstPlaying() {
-  //   return this.currentFile.index === 0;
-  // }
+  backward(value: string) {
+    this.audioService.seekTo(Number(value) - this.secondsToRewindTrack);
+  }
 
-  // isLastPlaying() {
-  //   return this.currentFile.index === this.files.length - 1;
-  // }
+  forward(value: string) {
+    this.audioService.seekTo(Number(value) + this.secondsToRewindTrack);
+  }
 
-  onSliderChangeEnd(change: Event) {
-    console.log(change);
-    // this.audioService.seekTo(change.timeStamp / 1000);
+  isFirstPlaying() {
+    return this.currentFile.index === 0;
+  }
+
+  isLastPlaying() {
+    return this.currentFile.index === this.files.length - 1;
+  }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSliderChangeEnd(event: any) {
+    const sliderValue = event.target.value;
+    this.audioService.seekTo(sliderValue);
   }
 
 }
