@@ -1,0 +1,34 @@
+<section class="expeditions">
+  <div class="container expeditions__container">
+    <h2 class="expeditions__title">{{'home.home-expeditions.title' | translate}}</h2>
+    <div class="expeditions__videos">
+      <div class="expeditions__main">
+        <div class="expeditions__main-video">
+          <img class="expeditions__main-img" [src]="expeditionItems[0].img" alt="{{ expeditionItems[0].title }}">
+          <p class="expeditions__main-date">{{ expeditionItems[0].date }}</p>
+          <h4 class="expeditions__main-title">{{ expeditionItems[0].title }}</h4>
+          <p class="expeditions__main-location">{{ expeditionItems[0].location }}</p>
+          <a class="expeditions__main-btn" href="#">{{'home.home-expeditions.button' | translate}}</a>
+        </div>
+      </div>
+      <div class="expeditions__all">
+        <div class="expeditions__all-video" *ngFor="let item of expeditionItems.slice(1)">
+          <img class="expeditions__all-img" [src]="item.img" alt="{{ item.title }}">
+          <div class="expeditions__all-content">
+            <p class="expeditions__all-date">{{ item.date }}</p>
+            <h4 class="expeditions__all-title">{{ item.title }}</h4>
+            <p class="expeditions__all-description">{{ item.shortDescription }}</p>
+            <p class="expeditions__all-location">{{ item.location }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expeditions__router">
+      <a
+        class="expeditions__router-link"
+        [routerLink]="'/expeditions'"
+      >{{'home.home-expeditions.router-link' | translate}}
+      </a>
+    </div>
+  </div>
+</section>

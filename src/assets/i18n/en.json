@@ -39,6 +39,22 @@
     "actions": {
       "button-donate": "Donate",
       "button-share": "Share"
+    },
+    "home-map": {
+      "popup-btn": "Listen to the recordings",
+      "popup-count": "Number of records"
+    },
+    "home-actual": {
+      "title": "Current projects"
+    },
+    "home-expeditions": {
+      "title": "Expeditions",
+      "button": "Watch the video",
+      "router-link": "Watch all videos"
+    },
+    "home-news": {
+      "title": "News",
+      "router-link": "View all"
     }
   },
   "tapes": {
@@ -100,7 +116,13 @@
       "text": "Oops! It looks like the page you are looking for is currently unavailable"
     },
     "actions": {
-      "block-btn": "To the main page"
+      "block-btn": "Main page"
+    }
+  },
+  "share": {
+    "dialog": {
+      "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
+      "copy": "Copy"
     }
   }
 }
