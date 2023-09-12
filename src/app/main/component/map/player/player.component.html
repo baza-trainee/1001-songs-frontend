@@ -68,8 +68,14 @@
 
       </div>
 
-      <div class="playlist__song-card">
-
+      <div class="playlist__song-card" *ngFor="let file of spotifyFiles">
+        <div class="name"> {{ file.name }}</div>
+        <div class="artist"> {{ file.artist }}</div>
+        <button class="btn__player" (click)="playStream(file.preview_url)" [style.background-color]="currentFile.index === file.index ? 'red' : ''">
+          <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 0C6.944 0 0 6.7456 0 15.0571C0 23.3687 6.944 30.1143 15.5 30.1143C24.056 30.1143 31 23.3687 31 15.0571C31 6.7456 24.056 0 15.5 0ZM12.4 21.8329V8.28143L21.7 15.0571L12.4 21.8329Z" fill="#131313"/>
+          </svg>
+        </button>
       </div>
 
     </div>

@@ -19,9 +19,15 @@ export class PlayerComponent implements OnInit{
   @ViewChild('slider', { static: true }) slider!: ElementRef;
 
   files: AudioDataInterface[] = [];
+  spotifyFiles: any = [];
   state!: StreamStateInterface;
   secondsToRewindTrack: number = 5;
-  currentFile!: AudioDataInterface;
+  currentFile: AudioDataInterface = {
+    url: '',
+    name: '',
+    artist: '',
+    index: 0
+  };
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
               private cloudService: CloudService,
@@ -32,13 +38,20 @@ export class PlayerComponent implements OnInit{
 
   ngOnInit() {
     // get media files
-    this.cloudService.getFiles().subscribe(files => {
-      this.files = files;
-      this.files.forEach((item: AudioDataInterface, index: number) => item.index = index);
+    this.cloudService.getSpotify().subscribe(data => {
+      this.spotifyFiles = data.tracks;
 
-      console.log(this.files);
 
-      this.openFile(this.files[0]);
+      console.log(this.spotifyFiles);
+
+
+      // this.files.forEach((item: AudioDataInterface, index: number) => item.index = index);
+
+      // console.log(this.files);
+
+      // this.openFile(this.files[0]);
+
+      this.playStream(this.spotifyFiles[0].preview_url);
 
     });
 
