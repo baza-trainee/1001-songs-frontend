@@ -85,6 +85,7 @@
               -webkit-appearance: caret;
               accent-color: #282828;
               border-radius: 5px;
+
             }
 
             .timeline__time {
@@ -106,6 +107,105 @@
 
         }
       }
+    }
+
+    .songs__playlist {
+      padding: 80px 0;
+
+      .playlist-titles {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 0 12px;
+
+        .titles {
+          @include caption-desktop;
+
+          &.title__photo {
+            min-width: 72px;
+          }
+
+          &.title__name {
+            min-width: 180px;
+          }
+
+          &.title__record-info {
+            display: flex;
+            align-items: center;
+            min-width: 466px;
+
+            .record-info__genre {
+              min-width: 123px;
+            }
+
+            .record-info__recording-location {
+              min-width: 229px;
+            }
+          }
+
+          .title__listen {
+            min-width: 72px;
+          }
+
+        }
+      }
+
+      .playlist__song-card {
+        padding: 12px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 1px 4px 16px 8px rgba(15, 15, 15, 0.15);
+        border-radius: 12px;
+
+        @include body-desktop;
+
+        .song-card__img {
+          width: 72px;
+          height: 72px;
+          background-size: cover;
+          background-position: center;
+          border-radius: 12px;
+        }
+
+        .song-card__name-info {
+          min-width: 180px;
+
+          .name-info__name {
+            font-weight: 600;
+          }
+
+          .name-info__album {
+            font-size: 14px;
+          }
+
+        }
+
+        .song-card__song-info {
+          display: flex;
+          min-width: 466px;
+
+          .song-info__genre {
+            min-width: 123px;
+          }
+
+          .song-info__location {
+            min-width: 229px;
+          }
+
+        }
+
+        .song-card__btn {
+
+        }
+
+        .song-card__listen {
+          cursor: pointer;
+        }
+
+      }
+
     }
   }
 }

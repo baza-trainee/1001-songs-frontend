@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -16,8 +16,7 @@ import {CloudService} from "../../../../shared/services/audio/cloud.service";
 })
 export class PlayerComponent implements OnInit{
 
-  @ViewChild('slider', { static: true }) slider!: ElementRef;
-
+  serverStaticImgPath: string = './assets/img/player/';
   files: AudioDataInterface[] = [];
   spotifyFiles: any = [];
   state!: StreamStateInterface;
@@ -42,7 +41,7 @@ export class PlayerComponent implements OnInit{
       this.spotifyFiles = data.tracks;
 
 
-      console.log(this.spotifyFiles);
+      // console.log(this.spotifyFiles);
 
 
       // this.files.forEach((item: AudioDataInterface, index: number) => item.index = index);
@@ -51,7 +50,7 @@ export class PlayerComponent implements OnInit{
 
       // this.openFile(this.files[0]);
 
-      this.playStream(this.spotifyFiles[0].preview_url);
+      // this.playStream(this.spotifyFiles[0].preview_url);
 
     });
 
@@ -81,6 +80,7 @@ export class PlayerComponent implements OnInit{
   }
 
   play() {
+    // this.slider.
     this.audioService.play();
   }
 
