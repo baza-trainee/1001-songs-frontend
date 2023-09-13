@@ -9,37 +9,42 @@ import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
 import { environment } from './environments/environment';
 
-
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
+import { ExpeditionsState } from './app/store/expeditions.state';
 
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  }
-
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 bootstrapApplication(AppComponent, {
-    providers: [
-    importProvidersFrom(BrowserModule, TranslateModule.forRoot({
+  providers: [
+    importProvidersFrom(
+      NgxsModule.forRoot([ExpeditionsState]),
+      BrowserModule,
+      TranslateModule.forRoot({
         defaultLanguage: 'ua',
         loader: {
-            provide: TranslateLoader,
-            useFactory: (createTranslateLoader),
-            deps: [HttpClient]
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient]
         }
-    })),
+      })
+    ),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter([
-        {
-            path: '', component: MainComponent, loadChildren: () => import('./app/main/main.routes').then(rm => rm.MAIN_ROUTES)
-        },
-        { path: '404', component: ErrorComponent },
-        { path: '**', redirectTo: '404' }
+      {
+        path: '',
+        component: MainComponent,
+        loadChildren: () => import('./app/main/main.routes').then((rm) => rm.MAIN_ROUTES)
+      },
+      { path: '404', component: ErrorComponent },
+      { path: '**', redirectTo: '404' }
     ]),
     provideAnimations()
-]
-})
-  .catch(err => console.error(err));
+  ]
+}).catch((err) => console.error(err));
 
-  if (environment.production) {
-    enableProdMode();
-  }
+if (environment.production) {
+  enableProdMode();
+}
