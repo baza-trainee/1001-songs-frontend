@@ -32,7 +32,7 @@ export class HomeComponent {
 
   openDialog(): void {
     const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
 
     this.dialog.open(ShareModalComponent, dialogConfig);
   }

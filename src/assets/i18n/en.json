@@ -101,7 +101,10 @@
   "share": {
     "dialog": {
       "text": "Support the preservation of ethnomusical heritage of Ukraine and tell the world about it",
-      "copy": "Copy"
+      "copy": "Copy",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "telegram": "Telegram"
     }
   }
 }
