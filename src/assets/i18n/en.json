@@ -68,7 +68,7 @@
   },
   "map": {
     "player": {
-      "counter-title" : "Number of results found",
+      "counter-title" : "Number found",
       "player-title" : "Play all found songs",
       "songs-list" : {
         "titles" : {

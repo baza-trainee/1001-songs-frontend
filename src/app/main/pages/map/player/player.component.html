@@ -77,6 +77,7 @@
       <div class="playlist__song-card" *ngFor="let file of spotifyFiles">
 
         <div class="song-card__img" style="background-image: url({{serverStaticImgPath + 'play.png'}})"></div>
+
         <div class="song-card__name-info">
           <div class="name-info__name">Степом, степом</div>
           <div class="name-info__album">Українська народна пісня</div>
@@ -87,9 +88,9 @@
           <div class="song-info__location">с. Крячківка, Полтавська обл.</div>
         </div>
 
-        <div class="song-card__btn btn-detail">Деталі</div>
+        <div class="song-card__btn btn-detail">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
 
-        <div class="song-card__listen" (click)="playStream(file.preview_url)">
+        <div class="song-card__listen">
           <div class="btn__listen">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>

@@ -11,10 +11,10 @@
 
     .songs__info {
       display: flex;
-      justify-content: space-between;
 
       .songs__counter {
         min-width: 161px;
+        margin-right: 132px;
 
         .counter__title {
           @include body-desktop();
@@ -123,10 +123,12 @@
 
           &.title__photo {
             min-width: 72px;
+            margin-right: 24px;
           }
 
           &.title__name {
             min-width: 180px;
+            margin-right: 114px;
           }
 
           &.title__record-info {
@@ -136,6 +138,8 @@
 
             .record-info__genre {
               min-width: 123px;
+              margin-right: 114px;
+
             }
 
             .record-info__recording-location {
@@ -143,27 +147,30 @@
             }
           }
 
-          .title__listen {
+          &.title__listen {
             min-width: 72px;
+            margin-left: 26.2%;
           }
 
         }
       }
 
       .playlist__song-card {
+        width: 100%;
+        height: 96px;
         padding: 12px;
         margin-bottom: 12px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         box-shadow: 1px 4px 16px 8px rgba(15, 15, 15, 0.15);
         border-radius: 12px;
 
         @include body-desktop;
 
         .song-card__img {
-          width: 72px;
+          min-width: 72px;
           height: 72px;
+          margin-right: 24px;
           background-size: cover;
           background-position: center;
           border-radius: 12px;
@@ -171,6 +178,7 @@
 
         .song-card__name-info {
           min-width: 180px;
+          margin-right: 114px;
 
           .name-info__name {
             font-weight: 600;
@@ -185,9 +193,13 @@
         .song-card__song-info {
           display: flex;
           min-width: 466px;
+          margin-right: 114px;
+
 
           .song-info__genre {
             min-width: 123px;
+            margin-right: 114px;
+
           }
 
           .song-info__location {
@@ -197,10 +209,20 @@
         }
 
         .song-card__btn {
+          @include button-desktop;
 
+          min-width: 101px;
+          height: 48px;
+          padding: 10px;
+          text-align: center;
+          margin-right: 114px;
+          border-radius: 100px;
+          border: 2px solid var(--text-color-accent);
+          cursor: pointer;
         }
 
         .song-card__listen {
+          min-width: 72px;
           cursor: pointer;
         }
 
@@ -210,3 +232,7 @@
   }
 }
 
+@media (width <= 1439px) {
+
+
+}
