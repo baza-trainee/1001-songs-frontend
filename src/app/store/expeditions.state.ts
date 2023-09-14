@@ -3,9 +3,7 @@ import { FetchExpeditions } from './expedition.actions';
 import Iexpediton from '../shared/interfaces/expedition.interface';
 import { Injectable } from '@angular/core';
 import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
-import { catchError, tap } from 'rxjs';
-import { error } from 'selenium-webdriver';
-//import {AddTodo, EmptyTodo} from './todo.actions';
+import { map, tap } from 'rxjs';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];
@@ -14,16 +12,7 @@ export interface ExpeditionsStateModel {
 @State<ExpeditionsStateModel>({
   name: 'expeditions',
   defaults: {
-    expeditionsList: [
-      {
-        id: '1',
-        name: 'Благовіщеня',
-        shortDescription: 'Зустріч Весни на Благовіщеня на Поліссі',
-        mediaSrc: 'https://youtu.be/EDU2xd_bRvM',
-        eventDate: '7 квітня 2006 року',
-        location: 'Село Осівка, Житомирщина'
-      }
-    ]
+    expeditionsList: [{} as Iexpediton]
   }
 })
 @Injectable()
@@ -35,15 +24,11 @@ export class ExpeditionsState {
     return state.expeditionsList;
   }
 
-  //   @Action(FetchExpeditions)
-  //   setExpeditions({patchState, getState}: StateContext<ExpeditionsStateModel>, {expeditions}: FetchExpeditions): void {
-  //     patchState({expeditionsList: [... expeditions]});
-  //   }
-
   @Action(FetchExpeditions)
-  fetchExpeditions(ctx: StateContext<ExpeditionsStateModel>, action: FetchExpeditions) {
+  fetchExpeditions(ctx: StateContext<ExpeditionsStateModel>) {
     return this.expeditionsService.fetchExpeditions().pipe(
-      tap((expeditions: any) => {
+      map((expeditionData) => expeditionData as Iexpediton[]),
+      tap((expeditions: Iexpediton[]) => {
         const state = ctx.getState();
         ctx.setState({
           ...state,
@@ -52,9 +37,4 @@ export class ExpeditionsState {
       })
     );
   }
-
-  //   @Action(EmptyTodo)
-  //   emptyTodo({patchState}: StateContext<TodoStateModel>): void {
-  //     patchState({todoList: []});
-  //   }
 }
