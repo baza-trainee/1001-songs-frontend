@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Select, Store } from '@ngxs/store';
 import { ExpeditionsState } from 'src/app/store/expeditions.state';
 import { FetchExpeditions } from 'src/app/store/expedition.actions';
+import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
 
 @Component({
   selector: 'app-expeditions',
@@ -20,14 +21,14 @@ import { FetchExpeditions } from 'src/app/store/expedition.actions';
 })
 export class ExpeditionsComponent {
   @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
-  categories: string[];
+  categories =expeditionCategories;
   selectedCategory: number = 0;
 
   constructor(
-    private expeditionsService: ExpeditionsService,
+   // private expeditionsService: ExpeditionsService,
     private store: Store
   ) {
-    this.categories = this.expeditionsService.getCategories();
+    //this.categories = this.expeditionsService.getCategories();
     this.store.dispatch(new FetchExpeditions())
   }
 

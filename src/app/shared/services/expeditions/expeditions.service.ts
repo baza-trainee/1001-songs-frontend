@@ -9,15 +9,15 @@ import { StatEndpoints } from '../../config/endpoints/stat-endpoints';
   providedIn: 'root'
 })
 export class ExpeditionsService {
-  categories: string[] = [
-    'expeditions.categories.all',
-    'expeditions.categories.exploring',
-    'expeditions.categories.static',
-    'expeditions.categories.interdisciplinary',
-    'expeditions.categories.thematic',
-    'expeditions.categories.video-of-ritual',
-    'expeditions.categories.digital-rcord'
-  ];
+  // categories: string[] = [
+  //   'expeditions.categories.all',
+  //   'expeditions.categories.exploring',
+  //   'expeditions.categories.static',
+  //   'expeditions.categories.interdisciplinary',
+  //   'expeditions.categories.thematic',
+  //   'expeditions.categories.video-of-ritual',
+  //   'expeditions.categories.digital-rcord'
+  // ];
 
 //  URL = `${environment.baseUrl}`;
 
@@ -29,9 +29,9 @@ export class ExpeditionsService {
   //   //return this.$expeditions;
   // }
 
-  getCategories() {
-    return this.categories;
-  }
+  // getCategories() {
+  //   return this.categories;
+  // }
 
   fetchExpeditions() {
     return this.http
