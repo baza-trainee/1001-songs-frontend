@@ -2,15 +2,12 @@
 
 .error {
   position: relative;
-  background-image: url("../../../../assets/img/home/Header-min.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient (13deg, rgba (176, 176, 176, 40%), rgba(176, 176, 176, 40%)), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
   background-position-x: 30%;
   background-position-y: -63%;
-  opacity: 0.6;
   height: 100%;
 
-  .container{
+  .container {
     padding: 0 10px;
   }
 
@@ -20,8 +17,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: calc(108px + 91px);
+    padding-top: calc (108px + 91px);
     padding-bottom: 191px;
+
   }
 
   &__block-title {
@@ -59,10 +57,24 @@
   }
 }
 
+@media (width <= 2400px) {
+  .error{
+    height: 100%;
+    background-position-y: 5%;
+  }
+}
+
 @media (width <= 2200px) {
   .error{
     height: 100%;
-    background-position-y: 2%;
+    background-position-y: 10%;
+  }
+}
+
+@media (width <= 1440px) {
+  .error{
+    height: 100%;
+    background-position-y: -1100%;
   }
 }
 
