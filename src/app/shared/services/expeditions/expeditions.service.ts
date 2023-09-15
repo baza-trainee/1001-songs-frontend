@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { catchError } from 'rxjs';
 import Iexpediton from '../../interfaces/expedition.interface';
 import { environment } from 'src/environments/environment';
 import { StatEndpoints } from '../../config/endpoints/stat-endpoints';

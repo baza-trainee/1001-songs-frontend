@@ -4,7 +4,6 @@ import Iexpediton from '../shared/interfaces/expedition.interface';
 import { Injectable } from '@angular/core';
 import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
 import { map, tap } from 'rxjs';
-import { testExpeditionsData } from 'src/mock-data/tests';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];

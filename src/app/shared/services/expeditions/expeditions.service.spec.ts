@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ExpeditionsService } from './expeditions.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { testExpeditionsData } from 'src/mock-data/tests';
+import { testExpeditionsData } from 'src/app/mock-data/tests';
 import { environment } from 'src/environments/environment';
 
 describe('ExpeditionsService', () => {
