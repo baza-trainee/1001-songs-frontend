@@ -50,11 +50,11 @@
             </button>
           </div>
           <div class="player__timeline">
-            <input #slider class="" type="range" min="0" step="0.1"
+            <input #slider class="" type="range" min="0" step="1"
                    [max]="state.duration"
                    [value]="state.currentTime || 0"
                    (input)="onSliderChangeEnd($event)"
-                   [disabled]="state.error || currentFile.index === undefined">
+                   [disabled]="state.error && state.currentTime === undefined">
             <span class="timeline__time current-time">{{ state.readableCurrentTime }}</span>
             <span class="timeline__time duration">{{ state.readableDuration }}</span>
           </div>
@@ -91,7 +91,7 @@
         <div class="song-card__btn btn-detail">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
 
         <div class="song-card__listen">
-          <div class="btn__listen">
+          <div class="btn__listen" (click)="playStream(file.preview_url)">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>
               <path d="M48.4 33.9215C50 34.8453 50 37.1547 48.4 38.0785L31.6 47.7779C30 48.7017 28 47.547 28 45.6995L28 26.3005C28 24.453 30 23.2983 31.6 24.2221L48.4 33.9215Z" fill="#282828"/>

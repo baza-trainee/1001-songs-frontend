@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AudioDataInterface} from "../../interfaces/audio-data.interface";
+import {IAudioData} from "../../interfaces/audio-data.interface";
 import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +12,32 @@ export class CloudService {
   constructor(private http: HttpClient) {
   }
 
-  files: AudioDataInterface[] = [
-    // tslint:disable-next-line: max-line-length
-    {
-      index: 0,
-      url: "./assets/music/alan_walker.mp3",
-      name: "Perfect",
-      artist: " Ed Sheeran"
-    },
-    {
-      // tslint:disable-next-line: max-line-length
-      index: 1,
-      url: "./assets/music/tiesto1.mp3",
-      name: "Man Atkeya Beparwah",
-      artist: "Nusrat Fateh Ali Khan"
-    },
-    {
-      index: 2,
-      url: "./assets/music/tiesto2.mp3",
-      name: "Penny Lane",
-      artist: "The Beatles"
-    }
-  ];
-
-  getFiles() {
-    return of(this.files);
-  }
+  // files: IAudioData[] = [
+  //   // tslint:disable-next-line: max-line-length
+  //   {
+  //     index: 0,
+  //     url: "./assets/music/alan_walker.mp3",
+  //     name: "Perfect",
+  //     artist: " Ed Sheeran"
+  //   },
+  //   {
+  //     // tslint:disable-next-line: max-line-length
+  //     index: 1,
+  //     url: "./assets/music/tiesto1.mp3",
+  //     name: "Man Atkeya Beparwah",
+  //     artist: "Nusrat Fateh Ali Khan"
+  //   },
+  //   {
+  //     index: 2,
+  //     url: "./assets/music/tiesto2.mp3",
+  //     name: "Penny Lane",
+  //     artist: "The Beatles"
+  //   }
+  // ];
+  //
+  // getFiles() {
+  //   return of(this.files);
+  // }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getSpotify(): Observable<any>{
     const apiUrl = 'https://spotify23.p.rapidapi.com/recommendations/';
@@ -53,6 +54,9 @@ export class CloudService {
       .set('seed_genres', 'classical,country');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.http.get<any>(apiUrl, { headers, params });
+  }
+  getAudioData(): Observable<IAudioData[]>{
+    return this.http.get<IAudioData[]>(environment.api + 'songs');
   }
 
 }
