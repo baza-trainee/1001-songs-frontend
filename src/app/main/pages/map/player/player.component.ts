@@ -76,7 +76,6 @@ export class PlayerComponent implements OnInit{
   }
 
   play() {
-    // this.slider.
     this.audioService.play();
   }
 

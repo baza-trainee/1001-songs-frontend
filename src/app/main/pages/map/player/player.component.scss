@@ -85,7 +85,6 @@
               -webkit-appearance: caret;
               accent-color: #282828;
               border-radius: 5px;
-
             }
 
             .timeline__time {
@@ -233,6 +232,195 @@
 }
 
 @media (width <= 1439px) {
+  .songs {
+    padding: 80px 0;
+
+    .container{
+      max-width: 1024px;
+      padding: 0 48px;
+
+      .songs__info {
+        .songs__counter {
+          margin-right: 24px;
+        }
+
+        .songs__player {
+          min-width: 743px;
+
+          .player__container {
+            justify-content: flex-start;
+
+            .player__actions {
+              width: 198px;
+              margin-right: 18px;
+            }
+          }
+        }
+      }
+
+      .songs__playlist {
+        .playlist-titles {
+          .titles {
+            &.title__name {
+              margin-right: 101px;
+            }
+
+            &.title__record-info {
+              display: block;
+              min-width: 229px;
+
+              .record-info__genre {
+                min-width: 100%;
+                margin-right: 0;
+              }
+
+              .record-info__recording-location {
+                min-width: 100%;
+              }
+            }
+
+            &.title__listen {
+              min-width: 72px;
+              margin-left: 25%;
+            }
+
+          }
+        }
+
+        .playlist__song-card {
+          .song-card__name-info {
+            margin-right: 101px;
+          }
+
+          .song-card__song-info {
+            display: block;
+            min-width: 229px;
+            margin-right: 101px;
+
+            .song-info__genre {
+              min-width: 100%;
+              margin-right: 0;
+              margin-bottom: 12px;
+            }
+
+            .song-info__location {
+              min-width: 100%;
+            }
+          }
+
+          .song-card__btn {
+            margin-right: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 1023px) {
+  .songs {
+    padding: 60px 0;
+
+    .container{
+      max-width: 768px;
+      padding: 0 32px;
+
+      .songs__info {
+        .songs__counter {
+          min-width: 105px;
+
+          .counter__title {
+            text-align: center;
+          }
+
+          .counter__result {
+            height: 102px;
+          }
+        }
 
 
+        .songs__player {
+          min-width: 575px;
+
+
+          .player__title  {
+            width: 110px;
+            margin: 0 auto 12px;
+            text-align: center;
+          }
+
+          .player__container {
+            display: block;
+
+            .player__actions {
+              width: 198px;
+              margin: 0 auto 16px;
+            }
+
+            .player__timeline {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .songs__playlist {
+        padding: 80px 0;
+
+        .playlist-titles {
+          .titles {
+            &.title__name {
+              margin-right: 101px;
+            }
+
+            &.title__record-info {
+              display: block;
+              min-width: 229px;
+
+              .record-info__genre {
+                min-width: 100%;
+                margin-right: 0;
+              }
+
+              .record-info__recording-location {
+                min-width: 100%;
+              }
+            }
+
+            &.title__listen {
+              min-width: 72px;
+              margin-left: 25%;
+            }
+
+          }
+        }
+
+        .playlist__song-card {
+          .song-card__name-info {
+            margin-right: 101px;
+          }
+
+          .song-card__song-info {
+            display: block;
+            min-width: 229px;
+            margin-right: 101px;
+
+            .song-info__genre {
+              min-width: 100%;
+              margin-right: 0;
+              margin-bottom: 12px;
+            }
+
+            .song-info__location {
+              min-width: 100%;
+            }
+          }
+
+          .song-card__btn {
+            margin-right: 24px;
+          }
+        }
+      }
+    }
+  }
 }
