@@ -1,6 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
-//import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
 import { NgxsModule, Store } from '@ngxs/store';
 import { FetchExpeditions } from './expedition.actions';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,14 +6,12 @@ import { ExpeditionsState } from './expeditions.state';
 import { testExpeditionsData } from '../mock-data/tests';
 
 describe('ExpeditionsState', () => {
-  // let service: ExpeditionsService;
   let store: Store;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([ExpeditionsState]), HttpClientModule]
     });
-   // service = TestBed.inject(ExpeditionsService);
     store = TestBed.inject(Store);
   });
 
