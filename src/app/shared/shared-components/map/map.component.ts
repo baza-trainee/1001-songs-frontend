@@ -6,7 +6,7 @@ import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/shared/markers';
 
 @Component({
-  selector: 'app-home-map',
+  selector: 'app-map',
   standalone: true,
   imports: [CommonModule, GoogleMapsModule, TranslateModule],
   templateUrl: './map.component.html',
