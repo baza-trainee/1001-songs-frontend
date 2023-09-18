@@ -6,13 +6,13 @@ import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/shared/markers';
 
 @Component({
-  selector: 'app-map',
+  selector: 'app-interacive-map',
   standalone: true,
   imports: [CommonModule, GoogleMapsModule, TranslateModule],
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  templateUrl: './interacive-map.component.html',
+  styleUrls: ['./interacive-map.component.scss']
 })
-export class MapComponent {
+export class InteraciveMapComponent {
   @Input() markers: Marker[] = cordsMarkers;
 
   selectedMarker: Marker | null = null;

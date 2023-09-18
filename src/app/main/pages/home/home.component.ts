@@ -8,10 +8,10 @@ import { ErrorComponent } from '../../../shared/shared-components/error/error.co
 import { HomeTapeComponent } from '../../../shared/shared-components/home-tape/home-tape.component';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { ShareModalComponent } from '../../../shared/shared-components/share-modal/share-modal.component';
-import { MapComponent } from '../../../shared/shared-components/map/map.component';
 import { HomeActualComponent } from './components/home-actual/home-actual.component';
 import { HomeExpeditionComponent } from './components/home-expedition/home-expedition.component';
 import { HomeNewsComponent } from './components/home-news/home-news.component';
+import { InteraciveMapComponent } from 'src/app/shared/shared-components/interacive-map/interacive-map.component';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ import { HomeNewsComponent } from './components/home-news/home-news.component';
     ErrorComponent,
     HomeTapeComponent,
     MatDialogModule,
-    MapComponent,
+    InteraciveMapComponent,
     HomeActualComponent,
     HomeExpeditionComponent,
     HomeNewsComponent
