@@ -1,18 +1,10 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GoogleMapsModule} from "@angular/google-maps";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import { GoogleMapsModule } from '@angular/google-maps';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Marker } from 'src/app/shared/interfaces/map-marker';
+import { cordsMarkers } from 'src/app/shared/markers';
 
-export interface Marker {
-  key: string,
-  position: {lat: number, lng: number},
-  popup: {
-    title: string,
-    photoUrl: string,
-    countRecords: number,
-    link: string
-  }
-}
 @Component({
   selector: 'app-home-map',
   standalone: true,
@@ -21,70 +13,18 @@ export interface Marker {
   styleUrls: ['./home-map.component.scss']
 })
 export class HomeMapComponent {
+  @Input() markers: Marker[] = cordsMarkers;
 
-  cordsMarkers: Marker[] = [
-    {
-      key: 'marker1',
-      position: {lat: 50.4501, lng: 30.5234},
-      popup: {
-        title: 'с. Крячківка, Полтавська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 20,
-        link: '#'
-      }
-    },
-    {
-      key: 'marker2',
-      position: {lat: 49.8397, lng: 24.0297},
-      popup: {
-        title: 'м. Львів, Львівська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 16,
-        link: '#'
-      }
-    },
-    {
-      key: 'marker3',
-      position: {lat: 48.5132, lng: 32.2597},
-      popup: {
-        title: 'м. Кропівницький, Черкаська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 7,
-        link: '#'
-      }
-    },
-    {
-      key: 'marker4',
-      position: {lat: 46.4833, lng: 30.7326},
-      popup: {
-        title: 'м. Одеса, Одеська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 30,
-        link: '#'
-      }
-    },
-    {
-      key: 'marker5',
-      position: {lat: 48.6198, lng: 22.301},
-      popup: {
-        title: 'м. Ужгород, Закарпатська обл.',
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 15,
-        link: '#'
-      }
-    }
-  ];
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
+ // cords: Marker[] = cordsMarkers;
 
   mapOptions = {
     center: { lat: 48.379433, lng: 31.165579 },
     zoom: 6,
-    options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true}
-  }
-  constructor(
-    private _translate: TranslateService
-  ) { }
+    options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
+  };
+  constructor(private _translate: TranslateService) {}
 
   onMarkerClick(marker: Marker) {
     this.selectedMarker = marker;
@@ -98,7 +38,7 @@ export class HomeMapComponent {
 
   getCustomMarkerIcon(key: string): google.maps.Icon {
     return {
-      url: this.selectedMarker?.key === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg',
-    }
+      url: this.selectedMarker?.key === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
+    };
   }
 }
