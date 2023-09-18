@@ -9,10 +9,10 @@ import { cordsMarkers } from 'src/app/shared/markers';
   selector: 'app-home-map',
   standalone: true,
   imports: [CommonModule, GoogleMapsModule, TranslateModule],
-  templateUrl: './home-map.component.html',
-  styleUrls: ['./home-map.component.scss']
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
-export class HomeMapComponent {
+export class MapComponent {
   @Input() markers: Marker[] = cordsMarkers;
 
   selectedMarker: Marker | null = null;

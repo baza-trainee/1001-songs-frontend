@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {HomeMapComponent, Marker} from './home-map.component';
+import {MapComponent} from './map.component';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {GoogleMapsModule } from "@angular/google-maps";
+import { Marker } from '../../interfaces/map-marker';
 
 export const google = {
   maps: {
@@ -29,21 +30,21 @@ export const fakeSelectedMarker = {
 class googleMock {}
 
 describe('HomeMapComponent', () => {
-  let component: HomeMapComponent;
-  let fixture: ComponentFixture<HomeMapComponent>;
+  let component: MapComponent;
+  let fixture: ComponentFixture<MapComponent>;
   let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HomeMapComponent, GoogleMapsModule],
+      imports: [TranslateModule.forRoot(), MapComponent, GoogleMapsModule],
       providers: [TranslateService]
     });
 
     (window as unknown as { google: googleMock }).google = google;
 
     translateService = TestBed.inject(TranslateService);
-    fixture = TestBed.createComponent(HomeMapComponent);
-    component = new HomeMapComponent(translateService);
+    fixture = TestBed.createComponent(MapComponent);
+    component = new MapComponent(translateService);
     fixture.detectChanges();
   });
 
