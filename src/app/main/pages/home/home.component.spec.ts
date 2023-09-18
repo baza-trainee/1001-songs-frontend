@@ -3,7 +3,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {HomeComponent} from './home.component';
 import {ActivatedRoute} from '@angular/router';
 import {GoogleMapsModule} from "@angular/google-maps";
-import {google} from "./components/home-map/home-map.component.spec";
+import {google} from "../../../shared/shared-components/home-map/home-map.component.spec";
 class googleMock {}
 
 describe('HomeComponent', () => {

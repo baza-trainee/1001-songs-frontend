@@ -17,8 +17,6 @@ export class HomeMapComponent {
 
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
- // cords: Marker[] = cordsMarkers;
-
   mapOptions = {
     center: { lat: 48.379433, lng: 31.165579 },
     zoom: 6,
