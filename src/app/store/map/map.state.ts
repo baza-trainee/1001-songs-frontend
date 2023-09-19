@@ -16,7 +16,18 @@ export interface MapStateModel {
 @State<MapStateModel>({
   name: 'map',
   defaults: {
-    markersList: []
+    markersList: [
+      {
+        key: 'marker1',
+        position: { lat: 50.4501, lng: 30.5234 },
+        popup: {
+          title: 'с. Крячківка, Полтавська обл.',
+          photoUrl: './assets/img/home/kiivImg.jpg',
+          countRecords: 20,
+          link: '#'
+        }
+      }
+    ]
   }
 })
 @Injectable()
@@ -24,7 +35,7 @@ export class MapState {
   constructor(private mapService: MapService) {}
 
   @Selector()
-  static getExpeditionsList(state: MapStateModel): any[] {
+  static getMarkersList(state: MapStateModel): any[] {
     return state.markersList;
   }
 
