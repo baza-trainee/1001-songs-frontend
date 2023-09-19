@@ -120,6 +120,9 @@ SEE LICENSE IN LICENSE
 @ngx-translate/http-loader
 SEE LICENSE IN LICENSE
 
+@ngxs/store
+MIT
+
 ngx-clipboard
 MIT
 
