@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { SafeMediaUrlPipe } from '../../../shared/pipes/safe-media-url.pipe';
 import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedition-card/expedition-card.component';
 import Iexpediton from 'src/app/shared/interfaces/expedition.interface';
-import {  HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { Select, Store } from '@ngxs/store';
+import { ExpeditionsState } from 'src/app/store/expeditions.state';
+import { FetchExpeditions } from 'src/app/store/expedition.actions';
+import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
 
 @Component({
   selector: 'app-expeditions',
@@ -16,13 +19,12 @@ import {  HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, TranslateModule, SafeMediaUrlPipe, ExpeditionCardComponent, HttpClientModule]
 })
 export class ExpeditionsComponent {
-  $expeditions: Observable<Iexpediton[]>;
-  categories: string[];
+  @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
+  categories = expeditionCategories;
   selectedCategory: number = 0;
 
-  constructor(private expeditionsService: ExpeditionsService) {
-    this.categories = this.expeditionsService.getCategories();
-    this.$expeditions = this.expeditionsService.getExpeditions();
+  constructor(private store: Store) {
+    this.store.dispatch(new FetchExpeditions());
   }
 
   selectCategory(id: number) {
