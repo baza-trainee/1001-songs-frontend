@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { InteraciveMapComponent } from 'src/app/shared/shared-components/interacive-map/interacive-map.component';
+import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 
 @Component({
@@ -14,12 +14,16 @@ import { MapState } from 'src/app/store/map/map.state';
   standalone: true,
   imports: [CommonModule, TranslateModule, InteraciveMapComponent]
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
   @Select(MapState.getMarkersList) markers$?: Observable<any>;
-  constructor(private _translate: TranslateService) {
-    console.log(this.markers$);
-    this.markers$?.subscribe((d) => {
-      console.log(d);
-    });
+
+  constructor(
+    private _translate: TranslateService,
+    private store: Store
+  ) {
+    
+  }
+  ngOnInit(): void {
+    this.store.dispatch(new FetchMarkers());
   }
 }

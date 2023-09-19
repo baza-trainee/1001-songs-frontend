@@ -3,11 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { FetchMarkers } from './map.actions';
 import { tap } from 'rxjs';
-// import { FetchExpeditions } from './expedition.actions';
-// import Iexpediton from '../shared/interfaces/expedition.interface';
-// import { Injectable } from '@angular/core';
-// import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
-// import { map, tap } from 'rxjs';
+import { Song } from 'src/app/shared/interfaces/song';
 
 export interface MapStateModel {
   markersList: any[];
@@ -40,14 +36,17 @@ export class MapState {
   }
 
   @Action(FetchMarkers)
-  fetchExpeditions(ctx: StateContext<MapStateModel>) {
+  fetchMarkers(ctx: StateContext<MapStateModel>) {
     return this.mapService.fetchMarkers().pipe(
       // map((markersData) => expeditionData ), //the expression need to avoid any type
-      tap((expeditions: any) => {
+      tap((songs: any) => {
+        const filteredSongs = songs.filter((song: Song) => song.location != null);
+        console.log(songs);
         const state = ctx.getState();
+        const markers = filteredSongs.map((song: Song, i: number) => this.mapService.markerFromSong(song, i));
         ctx.setState({
           ...state,
-          markersList: [...expeditions]
+          markersList: [...markers]
         });
       })
     );
