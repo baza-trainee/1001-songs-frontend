@@ -14,7 +14,7 @@ import { cordsMarkers } from 'src/app/shared/markers';
 })
 export class InteraciveMapComponent {
   @Input() markers: Marker[] | null = cordsMarkers;
-  @Output() onMarkerClicked = new EventEmitter<Marker>();
+  @Output() markerClicked = new EventEmitter<Marker>();
 
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
@@ -27,7 +27,7 @@ export class InteraciveMapComponent {
 
   listenToRecords() {
     if (this.selectedMarker != null) {
-      this.onMarkerClicked.emit(this.selectedMarker);
+      this.markerClicked.emit(this.selectedMarker);
     }
     this.onCloseInfoWindow();
   }

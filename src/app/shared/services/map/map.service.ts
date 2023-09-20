@@ -4,9 +4,6 @@ import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
 import { Marker } from '../../interfaces/map-marker';
 import { Song } from '../../interfaces/song';
-import { NgxsModule } from '@ngxs/store';
-import { HttpClientModule } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })

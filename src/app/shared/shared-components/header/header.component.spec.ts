@@ -10,7 +10,6 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let translateService: TranslateService;
-  let state: NgxsModule;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,10 +27,16 @@ describe('HeaderComponent', () => {
       ]
     });
     translateService = TestBed.inject(TranslateService);
-    state = TestBed.inject(NgxsModule);
     fixture = TestBed.createComponent(HeaderComponent);
     component = new HeaderComponent(translateService);
     fixture.detectChanges();
+  });
+
+  it('should be false', (done) => {
+    component.isLoading$?.subscribe((isLoading) => {
+      expect(isLoading).toBe(false);
+      done();
+    });
   });
 
   it('should create', () => {

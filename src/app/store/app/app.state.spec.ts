@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
-import { testExpeditionsData } from 'src/app/mock-data/tests';
 import { AppState } from './app.state';
 import { SetIsLoading } from './app.actions';
 
