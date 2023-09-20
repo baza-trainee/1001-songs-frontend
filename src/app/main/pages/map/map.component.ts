@@ -4,6 +4,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { InteraciveMapComponent } from 'src/app/shared/shared-components/interacive-map/interacive-map.component';
+import { SetIsLoading } from 'src/app/store/app/app.actions';
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 
@@ -20,10 +21,9 @@ export class MapComponent implements OnInit {
   constructor(
     private _translate: TranslateService,
     private store: Store
-  ) {
-    
-  }
+  ) {}
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
+    this.store.dispatch(new SetIsLoading(true));
   }
 }

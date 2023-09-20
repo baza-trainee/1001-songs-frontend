@@ -41,7 +41,6 @@ export class MapState {
       // map((markersData) => expeditionData ), //the expression need to avoid any type
       tap((songs: any) => {
         const filteredSongs = songs.filter((song: Song) => song.location != null);
-        console.log(songs);
         const state = ctx.getState();
         const markers = filteredSongs.map((song: Song, i: number) => this.mapService.markerFromSong(song, i));
         ctx.setState({
