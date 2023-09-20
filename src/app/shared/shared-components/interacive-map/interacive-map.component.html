@@ -20,7 +20,7 @@
             <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : {{ selectedMarker.popup.countRecords }}</p>
           </div>
         </div>
-        <a class="popup-map__btn" [href]="selectedMarker.popup.link">{{ 'home.home-map.popup-btn' | translate }}</a>
+        <a class="popup-map__btn" (click)="listenToRecords()">{{ 'home.home-map.popup-btn' | translate }}</a>
       </div>
     </div>
   </ng-container>

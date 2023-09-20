@@ -21,4 +21,8 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
   }
+
+  handleMapEmit(ev: Marker) {
+    console.log('event value : ', ev);
+  }
 }

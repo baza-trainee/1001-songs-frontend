@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -14,6 +14,7 @@ import { cordsMarkers } from 'src/app/shared/markers';
 })
 export class InteraciveMapComponent {
   @Input() markers: Marker[] | null = cordsMarkers;
+  @Output() onMarkerClicked = new EventEmitter<Marker>();
 
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
@@ -23,6 +24,13 @@ export class InteraciveMapComponent {
     options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
   };
   constructor(private _translate: TranslateService) {}
+
+  listenToRecords() {
+    if (this.selectedMarker != null) {
+      this.onMarkerClicked.emit(this.selectedMarker);
+    }
+    this.onCloseInfoWindow();
+  }
 
   onMarkerClick(marker: Marker) {
     this.selectedMarker = marker;
