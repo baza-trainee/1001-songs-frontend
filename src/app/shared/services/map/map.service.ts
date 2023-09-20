@@ -11,7 +11,7 @@ import { Song } from '../../interfaces/song';
 export class MapService {
   constructor(private http: HttpClient) {}
 
-  markerFromSong(song: Song, i: number): Marker {
+  markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
     const marker: Marker = {
       key: song.id.toString(),

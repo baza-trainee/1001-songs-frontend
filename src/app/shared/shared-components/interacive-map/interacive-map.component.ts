@@ -13,7 +13,7 @@ import { cordsMarkers } from 'src/app/shared/markers';
   styleUrls: ['./interacive-map.component.scss']
 })
 export class InteraciveMapComponent {
-  @Input() markers: Marker[] = cordsMarkers;
+  @Input() markers: Marker[] | null = cordsMarkers;
 
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
