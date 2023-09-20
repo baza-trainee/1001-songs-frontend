@@ -1,4 +1,4 @@
-.spinner-box {
+.spinner {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -7,5 +7,5 @@
   height: 100vh;
   top: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 40%);
 }
