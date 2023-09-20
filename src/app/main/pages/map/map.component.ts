@@ -24,6 +24,5 @@ export class MapComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
-    this.store.dispatch(new SetIsLoading(true));
   }
 }
