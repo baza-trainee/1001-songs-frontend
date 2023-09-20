@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { MapService } from 'src/app/shared/services/map/map.service';
-import { tap } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song';
 import { SetIsLoading } from './app.actions';
 
 export interface AppStateModel {

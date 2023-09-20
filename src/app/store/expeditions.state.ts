@@ -1,9 +1,10 @@
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { FetchExpeditions } from './expedition.actions';
 import Iexpediton from '../shared/interfaces/expedition.interface';
 import { Injectable } from '@angular/core';
 import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
 import { map, tap } from 'rxjs';
+import { SetIsLoading } from './app/app.actions';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];
@@ -26,7 +27,10 @@ export interface ExpeditionsStateModel {
 })
 @Injectable()
 export class ExpeditionsState {
-  constructor(private expeditionsService: ExpeditionsService) {}
+  constructor(
+    private expeditionsService: ExpeditionsService,
+    private store: Store
+  ) {}
 
   @Selector()
   static getExpeditionsList(state: ExpeditionsStateModel): Iexpediton[] {
@@ -35,6 +39,7 @@ export class ExpeditionsState {
 
   @Action(FetchExpeditions)
   fetchExpeditions(ctx: StateContext<ExpeditionsStateModel>) {
+    this.store.dispatch(new SetIsLoading(true));
     return this.expeditionsService.fetchExpeditions().pipe(
       map((expeditionData) => expeditionData as Iexpediton[]), //the expression need to avoid any type
       tap((expeditions: Iexpediton[]) => {
@@ -43,6 +48,7 @@ export class ExpeditionsState {
           ...state,
           expeditionsList: [...expeditions]
         });
+        this.store.dispatch(new SetIsLoading(false));
       })
     );
   }

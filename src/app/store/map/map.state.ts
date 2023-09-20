@@ -31,7 +31,7 @@ export interface MapStateModel {
 export class MapState {
   constructor(
     private mapService: MapService,
-    private strore: Store
+    private store: Store
   ) {}
 
   @Selector()
@@ -41,7 +41,7 @@ export class MapState {
 
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
-    this.strore.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(true));
     return this.mapService.fetchMarkers().pipe(
       tap((songs: any) => {
         const filteredSongs = songs.filter((song: Song) => song.location != null);
@@ -51,7 +51,7 @@ export class MapState {
           ...state,
           markersList: [...markers]
         });
-        this.strore.dispatch(new SetIsLoading(false));
+        this.store.dispatch(new SetIsLoading(false));
       })
     );
   }
