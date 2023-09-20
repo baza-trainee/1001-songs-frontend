@@ -41,11 +41,15 @@ export class MapState {
 
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
+    const state = ctx.getState();
+    if (state.markersList.length > 1) {
+      return;
+    }
     this.store.dispatch(new SetIsLoading(true));
     return this.mapService.fetchMarkers().pipe(
       tap((songs: any) => {
         const filteredSongs = songs.filter((song: Song) => song.location != null);
-        const state = ctx.getState();
+
         const markers = filteredSongs.map((song: Song, i: number) => this.mapService.markerFromSong(song, i));
         ctx.setState({
           ...state,
