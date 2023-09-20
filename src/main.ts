@@ -11,7 +11,7 @@ import { environment } from './environments/environment';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
-import { ExpeditionsState } from './app/store/expeditions.state';
+import { ExpeditionsState } from './app/store/expeditions/expeditions.state';
 import { MapState } from './app/store/map/map.state';
 import { AppState } from './app/store/app/app.state';
 

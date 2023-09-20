@@ -7,9 +7,9 @@ import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedi
 import Iexpediton from 'src/app/shared/interfaces/expedition.interface';
 import { HttpClientModule } from '@angular/common/http';
 import { Select, Store } from '@ngxs/store';
-import { ExpeditionsState } from 'src/app/store/expeditions.state';
-import { FetchExpeditions } from 'src/app/store/expedition.actions';
+import { ExpeditionsState } from 'src/app/store/expeditions/expeditions.state';
 import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
+import { FetchExpeditions } from 'src/app/store/expeditions/expedition.actions';
 
 @Component({
   selector: 'app-expeditions',

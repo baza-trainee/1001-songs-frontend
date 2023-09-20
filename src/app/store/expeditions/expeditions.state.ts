@@ -1,10 +1,10 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { FetchExpeditions } from './expedition.actions';
-import Iexpediton from '../shared/interfaces/expedition.interface';
+import Iexpediton from '../../shared/interfaces/expedition.interface';
 import { Injectable } from '@angular/core';
-import { ExpeditionsService } from '../shared/services/expeditions/expeditions.service';
+import { ExpeditionsService } from '../../shared/services/expeditions/expeditions.service';
 import { map, tap } from 'rxjs';
-import { SetIsLoading } from './app/app.actions';
+import { SetIsLoading } from '../app/app.actions';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];
