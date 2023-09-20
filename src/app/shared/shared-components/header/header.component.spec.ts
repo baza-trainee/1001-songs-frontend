@@ -3,29 +3,32 @@ import { HeaderComponent } from './header.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PopUpMenuComponent } from './pop-up-menu/pop-up-menu.component';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from 'src/app/store/app/app.state';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let translateService: TranslateService;
+  let state: NgxsModule;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [TranslateModule.forRoot(), HeaderComponent, PopUpMenuComponent],
-    providers: [TranslateService,
-      {
-        provide: ActivatedRoute,
-        useValue: {
-          snapshot: {
-            data: {
+      imports: [TranslateModule.forRoot(), HeaderComponent, PopUpMenuComponent, NgxsModule.forRoot([AppState])],
+      providers: [
+        TranslateService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              data: {}
             }
           }
         }
-      }
-    ]
-});
+      ]
+    });
     translateService = TestBed.inject(TranslateService);
+    state = TestBed.inject(NgxsModule);
     fixture = TestBed.createComponent(HeaderComponent);
     component = new HeaderComponent(translateService);
     fixture.detectChanges();
@@ -35,7 +38,6 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
   it('should toggle language and change translation', () => {
     const initialLang = 'Eng';
     expect(component.changeLang).toBeTrue();
@@ -52,10 +54,10 @@ describe('HeaderComponent', () => {
     component.selectLang();
     fixture.detectChanges();
     expect(component.changeLang).toEqual(false);
- 
+
     component.selectLang();
     fixture.detectChanges();
-    expect(component.changeLang).toEqual(true); 
+    expect(component.changeLang).toEqual(true);
   });
 
   it('should switch language between "Укр" and "Eng" on each click', () => {
@@ -65,7 +67,7 @@ describe('HeaderComponent', () => {
     expect(component.lang).toEqual('Укр');
     component.selectLang();
     fixture.detectChanges();
-    expect(component.lang).toEqual('Eng'); 
+    expect(component.lang).toEqual('Eng');
   });
 
   it('should set changeLang to true if currentLang is not "en"', () => {
@@ -75,9 +77,9 @@ describe('HeaderComponent', () => {
   });
 
   it('should isPopupOpen = true', () => {
-    expect(component.isPopupOpen ).toEqual(false);
+    expect(component.isPopupOpen).toEqual(false);
     component.togglePopUp();
-    expect(component.isPopupOpen ).toEqual(true);
+    expect(component.isPopupOpen).toEqual(true);
   });
 
   it('should change language to "Eng" when value is "true"', () => {
@@ -103,5 +105,4 @@ describe('HeaderComponent', () => {
     component.togglePopUp();
     expect(component.isPopupOpen).toBeTrue();
   });
-
 });

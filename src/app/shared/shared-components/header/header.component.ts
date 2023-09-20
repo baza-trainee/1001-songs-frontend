@@ -5,18 +5,18 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { navLinksHeader } from '../../enums/navLinks.enum';
 import { PreloaderComponent } from '../preloader/preloader.component';
-import { Select } from '@ngxs/store';
+import { NgxsModule, Select } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    standalone: true,
-    imports: [RouterLink, RouterLinkActive, CommonModule, PopUpMenuComponent, TranslateModule,PreloaderComponent]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, CommonModule, PopUpMenuComponent, TranslateModule, PreloaderComponent, NgxsModule]
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   @Select(AppState.getIsLoading) isLoading$?: Observable<boolean>;
   public isPopupOpen = false;
   public changeLang: boolean = true;
@@ -25,15 +25,13 @@ export class HeaderComponent implements OnInit{
 
   public lang = 'Eng';
 
-  constructor(
-    private _translate: TranslateService
-  ){}
+  constructor(private _translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.checkLang()
+    this.checkLang();
   }
 
-  selectLang(){
+  selectLang() {
     this.changeLang = !this.changeLang;
     this.lang = this.changeLang ? 'Eng' : 'Укр';
     this._translate.use(this.changeLang ? 'ua' : 'en');
@@ -43,14 +41,13 @@ export class HeaderComponent implements OnInit{
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  checkLang(){
+  checkLang() {
     this.changeLang = this._translate.currentLang === 'en' ? false : true;
   }
 
-  receivedData(value:boolean){
+  receivedData(value: boolean) {
     this.changeLang = value ? false : true;
     this.lang = this.changeLang ? 'Eng' : 'Укр';
     this._translate.use(this.changeLang ? 'ua' : 'en');
   }
-
 }

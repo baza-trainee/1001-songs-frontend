@@ -3,7 +3,7 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { FetchExpeditions } from './expedition.actions';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpeditionsState } from './expeditions.state';
-import { testExpeditionsData } from '../mock-data/tests';
+import { testExpeditionsData } from 'src/app/mock-data/tests';
 
 describe('ExpeditionsState', () => {
   let store: Store;
