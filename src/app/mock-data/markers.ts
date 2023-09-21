@@ -1,4 +1,4 @@
-import { Marker } from './interfaces/map-marker';
+import { Marker } from '../shared/interfaces/map-marker';
 
 export const cordsMarkers: Marker[] = [
   {

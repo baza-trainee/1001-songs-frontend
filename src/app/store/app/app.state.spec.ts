@@ -20,7 +20,7 @@ describe('ExpeditionsState', () => {
     expect(flagIsLoading).toBe(true);
   });
 
-  it('it should select expeditions', () => {
+  it('it should select isLoading', () => {
     const flagIsLoading = store.selectSnapshot(AppState.getIsLoading);
     expect(flagIsLoading).toEqual(false);
   });

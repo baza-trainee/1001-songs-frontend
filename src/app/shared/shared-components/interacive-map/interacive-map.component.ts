@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Marker } from 'src/app/shared/interfaces/map-marker';
-import { cordsMarkers } from 'src/app/shared/markers';
+import { cordsMarkers } from 'src/app/mock-data/markers';
 
 @Component({
   selector: 'app-interacive-map',
