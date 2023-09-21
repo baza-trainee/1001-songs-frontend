@@ -17,9 +17,7 @@ import {CloudService} from "../../../../shared/services/audio/cloud.service";
 export class PlayerComponent implements OnInit{
 
   serverStaticImgPath: string = './assets/img/player/';
-  staticVideoImgUrl: string = 'http://img.youtube.com/vi/';
-  staticVideoUrl: string = 'https://www.youtube.com/embed/';
-  isVideoPlaying: boolean = false;
+  staticVideoImgUrl: string = './assets/img/player/video_mock.png';
 
   files: IAudioData[] = [];
   spotifyFiles!: any;
@@ -137,10 +135,6 @@ export class PlayerComponent implements OnInit{
 
   toggleDetailBtn() {
     this.isDetailOpen = !this.isDetailOpen;
-  }
-
-  playVideo() {
-    this.isVideoPlaying = true;
   }
 
 }

@@ -133,48 +133,67 @@
         </div>
         <div class="song-card__detail" *ngIf="isDetailOpen">
 
-          <div class="detail__video" #videoContainer>
-            <img src="{{staticVideoImgUrl + 'T_vrh-QXLik' + '/0.jpg'}}" alt="Preview image" [hidden]="isVideoPlaying">
-            <button class="event__media__control"
-                    [hidden]="isVideoPlaying"
-                    (click)="playVideo()">
-              &#9658;</button>
-            <iframe
-              *ngIf="isVideoPlaying"
-              width="560"
-              height="315"
-              [src]="staticVideoUrl + 'T_vrh-QXLik' + '&autoplay=1'"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </div>
+          <div class="detail__video" style="background-image: url({{staticVideoImgUrl}});"></div>
 
           <div class="detail__info">
 
             <div class="info__date-record">
               <div class="date-record__title">{{ 'map.player.songs-list.song-card.song-card-detail.record-date' | translate  }}</div>
-              <div class="date-record__date"></div>
+              <div class="date-record__date">01.06.2020</div>
             </div>
 
             <div class="info__collectors">
               <div class="collectors__title">{{ 'map.player.songs-list.song-card.song-card-detail.collectors' | translate  }}</div>
               <div class="collectors__names">
                 <ul class="names__names-list">
-                  <li class="names-list__item"></li>
+                  <li class="names-list__item">Петро Поліщук</li>
                 </ul>
               </div>
             </div>
 
             <div class="info__ethnographic-region">
               <div class="ethnographic-region__title">{{ 'map.player.songs-list.song-card.song-card-detail.ethnographic-region' | translate  }}</div>
-              <div class="ethnographic-region__region"></div>
+              <div class="ethnographic-region__region">с. Крячківка, Полтавська обл.</div>
             </div>
 
             <div class="info__btn-more-detail">{{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate  }}</div>
 
           </div>
 
-          <div class="detail__song-text"></div>
+          <div class="detail__song-text">
+            <div class="song-text__content">
+              <p>
+                Степом, степом йшли у бій солдати <br>
+                Степом, степом - обрій затягло. <br>
+                Мати, мати стала коло хати, <br>
+                А навкруг в диму село
+              </p>
+              <p>
+                Степом, степом йшли у бій солдати <br>
+                Степом, степом - обрій затягло. <br>
+                Мати, мати стала коло хати, <br>
+                А навкруг в диму село
+              </p>
+              <p>
+                Степом, степом йшли у бій солдати <br>
+                Степом, степом - обрій затягло. <br>
+                Мати, мати стала коло хати, <br>
+                А навкруг в диму село
+              </p>
+              <p>
+                Степом, степом йшли у бій солдати <br>
+                Степом, степом - обрій затягло. <br>
+                Мати, мати стала коло хати, <br>
+                А навкруг в диму село
+              </p>
+              <p>
+                Степом, степом йшли у бій солдати <br>
+                Степом, степом - обрій затягло. <br>
+                Мати, мати стала коло хати, <br>
+                А навкруг в диму село
+              </p>
+            </div>
+          </div>
 
         </div>
 
