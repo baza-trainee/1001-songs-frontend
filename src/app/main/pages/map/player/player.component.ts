@@ -17,11 +17,17 @@ import {CloudService} from "../../../../shared/services/audio/cloud.service";
 export class PlayerComponent implements OnInit{
 
   serverStaticImgPath: string = './assets/img/player/';
+  staticVideoImgUrl: string = 'http://img.youtube.com/vi/';
+  staticVideoUrl: string = 'https://www.youtube.com/embed/';
+  isVideoPlaying: boolean = false;
+
   files: IAudioData[] = [];
   spotifyFiles!: any;
   state!: StreamStateInterface;
   secondsToRewindTrack: number = 5;
   currentFile: IAudioData | null = null;
+  isDetailOpen: boolean = true;
+
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
               private cloudService: CloudService,
@@ -89,7 +95,6 @@ export class PlayerComponent implements OnInit{
       const file = this.files[index];
       this.openFile(file);
     }
-
   }
 
   previous() {
@@ -125,9 +130,17 @@ export class PlayerComponent implements OnInit{
   }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSliderChangeEnd(event: any) {
+  onSliderChangeEnd(event:  any) {
     const sliderValue = event.target.value;
     this.audioService.seekTo(sliderValue);
+  }
+
+  toggleDetailBtn() {
+    this.isDetailOpen = !this.isDetailOpen;
+  }
+
+  playVideo() {
+    this.isVideoPlaying = true;
   }
 
 }

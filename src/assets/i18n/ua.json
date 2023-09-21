@@ -79,13 +79,13 @@
           "listen" : "Слухати"
         },
         "song-card" : {
-          "detail-button" : "Деталі"
-        },
-        "song-card-detail" : {
-          "date" : "Дата запису",
-          "collectors" : "Збирачі",
-          "ethnographic-region" : "Етнографічний регіон",
-          "more-detail-button" : "Більше деталей"
+          "detail-button" : "Деталі",
+          "song-card-detail" : {
+            "record-date" : "Дата запису",
+            "collectors" : "Збирачі",
+            "ethnographic-region" : "Етнографічний регіон",
+            "more-detail-button" : "Більше деталей"
+          }
         }
       }
     }

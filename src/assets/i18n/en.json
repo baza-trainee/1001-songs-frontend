@@ -79,13 +79,13 @@
           "listen" : "Listen"
         },
         "song-card" : {
-          "detail-button" : "Details"
-        },
-        "song-card-detail" : {
-          "date" : "Date of recording",
-          "collectors" : "Collectors",
-          "ethnographic-region" : "Ethnographic region",
-          "more-detail-button" : "Additional details"
+          "detail-button" : "Details",
+          "song-card-detail" : {
+            "record-date" : "Date of recording",
+            "collectors" : "Collectors",
+            "ethnographic-region" : "Ethnographic region",
+            "more-detail-button" : "More details"
+          }
         }
       }
     }

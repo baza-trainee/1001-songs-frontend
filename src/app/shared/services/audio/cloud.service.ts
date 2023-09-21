@@ -48,7 +48,7 @@ export class CloudService {
     });
 
     const params = new HttpParams()
-      .set('limit', '10')
+      .set('limit', '2')
       .set('seed_tracks', '0c6xIDDpzE81m2q797ordA')
       .set('seed_artists', '4NHQUGzhtTLFvgF5SZesLK')
       .set('seed_genres', 'classical,country');

@@ -101,44 +101,84 @@
       </div>
 
       <div class="playlist__song-card" *ngFor="let file of spotifyFiles">
+        <div class="song-card__header" [class.active]="isDetailOpen">
+          <div class="song-card__img" style="background-image: url({{serverStaticImgPath + 'play.png'}})"></div>
 
-        <div class="song-card__img" style="background-image: url({{serverStaticImgPath + 'play.png'}})"></div>
+          <div class="song-card__name-info">
+            <div class="name-info__name">Степом, степом</div>
+            <div class="name-info__album">Українська народна пісня</div>
+          </div>
 
-        <div class="song-card__name-info">
-          <div class="name-info__name">Степом, степом</div>
-          <div class="name-info__album">Українська народна пісня</div>
-        </div>
+          <div class="song-card__song-info">
+            <div class="song-info__genre">Історична пісня</div>
+            <div class="song-info__location">с. Крячківка, Полтавська обл.</div>
+          </div>
 
-        <div class="song-card__song-info">
-          <div class="song-info__genre">Історична пісня</div>
-          <div class="song-info__location">с. Крячківка, Полтавська обл.</div>
-        </div>
+          <div class="song-card__btn btn-detail" (click)="toggleDetailBtn()">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
 
-        <div class="song-card__btn btn-detail">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
-
-        <div class="song-card__listen">
-          <div class="btn__listen" (click)="playStream(file.preview_url)">
-            <svg class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>
-              <path d="M48.4 33.9215C50 34.8453 50 37.1547 48.4 38.0785L31.6 47.7779C30 48.7017 28 47.547 28 45.6995L28 26.3005C28 24.453 30 23.2983 31.6 24.2221L48.4 33.9215Z" fill="#282828"/>
-              <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" stroke="#DDDDDD"/>
-            </svg>
-            <svg class="listen__mobile" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444" fill="#FEFEFE"/>
-              <path d="M37.6453 26.3833C38.8898 27.1018 38.8898 28.898 37.6453 29.6164L24.5786 37.1605C23.3342 37.879 21.7786 36.9809 21.7786 35.5439L21.7786 20.4558C21.7786 19.0189 23.3342 18.1208 24.5786 18.8392L37.6453 26.3833Z" fill="#282828"/>
-              <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444" stroke="#DDDDDD" stroke-width="0.777778"/>
-            </svg>
-
+          <div class="song-card__listen">
+            <div class="btn__listen" (click)="playStream(file.preview_url)">
+              <svg class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>
+                <path d="M48.4 33.9215C50 34.8453 50 37.1547 48.4 38.0785L31.6 47.7779C30 48.7017 28 47.547 28 45.6995L28 26.3005C28 24.453 30 23.2983 31.6 24.2221L48.4 33.9215Z" fill="#282828"/>
+                <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" stroke="#DDDDDD"/>
+              </svg>
+              <svg class="listen__mobile" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444" fill="#FEFEFE"/>
+                <path d="M37.6453 26.3833C38.8898 27.1018 38.8898 28.898 37.6453 29.6164L24.5786 37.1605C23.3342 37.879 21.7786 36.9809 21.7786 35.5439L21.7786 20.4558C21.7786 19.0189 23.3342 18.1208 24.5786 18.8392L37.6453 26.3833Z" fill="#282828"/>
+                <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444" stroke="#DDDDDD" stroke-width="0.777778"/>
+              </svg>
+            </div>
           </div>
         </div>
+        <div class="song-card__detail" *ngIf="isDetailOpen">
 
-<!--        <div class="name"> {{ file.name }}</div>-->
-<!--        <div class="artist"> {{ file.artist }}</div>-->
-<!--        <button class="btn__player" (click)="playStream(file.preview_url)">-->
-<!--          <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--            <path d="M15.5 0C6.944 0 0 6.7456 0 15.0571C0 23.3687 6.944 30.1143 15.5 30.1143C24.056 30.1143 31 23.3687 31 15.0571C31 6.7456 24.056 0 15.5 0ZM12.4 21.8329V8.28143L21.7 15.0571L12.4 21.8329Z" fill="#131313"/>-->
-<!--          </svg>-->
-<!--        </button>-->
+          <div class="detail__video" #videoContainer>
+            <img src="{{staticVideoImgUrl + 'T_vrh-QXLik' + '/0.jpg'}}" alt="Preview image" [hidden]="isVideoPlaying">
+            <button class="event__media__control"
+                    [hidden]="isVideoPlaying"
+                    (click)="playVideo()">
+              &#9658;</button>
+            <iframe
+              *ngIf="isVideoPlaying"
+              width="560"
+              height="315"
+              [src]="staticVideoUrl + 'T_vrh-QXLik' + '&autoplay=1'"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="detail__info">
+
+            <div class="info__date-record">
+              <div class="date-record__title">{{ 'map.player.songs-list.song-card.song-card-detail.record-date' | translate  }}</div>
+              <div class="date-record__date"></div>
+            </div>
+
+            <div class="info__collectors">
+              <div class="collectors__title">{{ 'map.player.songs-list.song-card.song-card-detail.collectors' | translate  }}</div>
+              <div class="collectors__names">
+                <ul class="names__names-list">
+                  <li class="names-list__item"></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="info__ethnographic-region">
+              <div class="ethnographic-region__title">{{ 'map.player.songs-list.song-card.song-card-detail.ethnographic-region' | translate  }}</div>
+              <div class="ethnographic-region__region"></div>
+            </div>
+
+            <div class="info__btn-more-detail">{{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate  }}</div>
+
+          </div>
+
+          <div class="detail__song-text"></div>
+
+        </div>
+
+
       </div>
 
     </div>
