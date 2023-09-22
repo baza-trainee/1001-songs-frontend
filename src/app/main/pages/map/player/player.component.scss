@@ -340,6 +340,7 @@
             background-color: #FEFEFE;
             border-radius: 12px;
             padding: 24px 12px 0 24px;
+            box-shadow: 0 2px 10px 0 rgba(15, 15, 15, 0.07);
 
             .song-text__content{
               width: 291px;
@@ -365,13 +366,11 @@
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 400;
-                width: 236px;
+                //width: 236px;
                 margin-bottom: 16px;
               }
             }
-
           }
-
         }
       }
     }
@@ -460,6 +459,20 @@
               margin-right: 24px;
             }
           }
+
+          .song-card__detail {
+            display: flex;
+            flex-wrap: wrap;
+
+            .detail__info{
+              margin-right: 0;
+            }
+
+            .detail__song-text {
+              margin-top: 24px;
+              margin-right: 24px;
+            }
+          }
         }
       }
     }
@@ -535,6 +548,26 @@
               .song-info__location {
                 display: none;
               }
+            }
+          }
+
+          .song-card__detail {
+            padding: 60px 16px 24px;
+
+            .detail__video{
+              width: 100%;
+              margin-right: 0;
+              margin-bottom: 24px;
+              order: 1;
+            }
+
+            .detail__info{
+              order: 3;
+            }
+
+            .detail__song-text {
+              order: 2;
+              margin-top: 0;
             }
           }
         }
@@ -651,6 +684,35 @@
                 .listen__mobile{
                   display: flex;
                 }
+              }
+            }
+          }
+
+          .song-card__detail {
+            padding: 18px 8px;
+            display: block;
+
+            .detail__video{
+              width: 342px;
+              height: 230px;
+              margin-bottom: 18px
+            }
+
+            .detail__info{
+              margin-bottom: 18px;
+
+              .info__btn-more-detail {
+                width: 100%;
+              }
+            }
+
+            .detail__song-text {
+              width: 100%;
+              margin-right: 0;
+              padding-left: 12px;
+
+              .song-text__content{
+                width: 318px;
               }
             }
           }

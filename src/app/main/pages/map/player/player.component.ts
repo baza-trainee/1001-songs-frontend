@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -15,12 +15,12 @@ import {CloudService} from "../../../../shared/services/audio/cloud.service";
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit{
-
+  screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
 
   files: IAudioData[] = [];
-  spotifyFiles!: any;
+  // spotifyFiles!: any;
   state!: StreamStateInterface;
   secondsToRewindTrack: number = 5;
   currentFile: IAudioData | null = null;
@@ -33,26 +33,11 @@ export class PlayerComponent implements OnInit{
 
   }
 
-
   ngOnInit() {
-    // get media files
 
-    this.cloudService.getSpotify().subscribe(data => {
-      // console.log(data);
-      this.spotifyFiles = data.tracks;
-    })
-
-
-    // this.cloudService.getAudioData().subscribe(data => {
-    //
-    //   console.log(data);
-    //
-    //   this.files = data;
-    //
-    //   this.files.forEach((item: IAudioData, index: number) => item.index = index);
-    //
-    //
-    // });
+    this.cloudService.getFiles().subscribe(data => {
+      this.files = data;
+    });
 
     // listen to stream state
     this.audioService.getState()
@@ -61,6 +46,8 @@ export class PlayerComponent implements OnInit{
       });
 
   }
+
+
 
   playStream(url: string) {
     this.audioService.playStream(url)
@@ -135,6 +122,18 @@ export class PlayerComponent implements OnInit{
 
   toggleDetailBtn() {
     this.isDetailOpen = !this.isDetailOpen;
+  }
+
+  getScreenWidth(): void {
+    this.screenWidth = window.innerWidth;
+  }
+
+  mobileToggleDetailBtn() {
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth < 768){
+      this.isDetailOpen = !this.isDetailOpen;
+    }
+    return
   }
 
 }

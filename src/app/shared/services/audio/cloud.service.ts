@@ -12,32 +12,87 @@ export class CloudService {
   constructor(private http: HttpClient) {
   }
 
-  // files: IAudioData[] = [
-  //   // tslint:disable-next-line: max-line-length
-  //   {
-  //     index: 0,
-  //     url: "./assets/music/alan_walker.mp3",
-  //     name: "Perfect",
-  //     artist: " Ed Sheeran"
-  //   },
-  //   {
-  //     // tslint:disable-next-line: max-line-length
-  //     index: 1,
-  //     url: "./assets/music/tiesto1.mp3",
-  //     name: "Man Atkeya Beparwah",
-  //     artist: "Nusrat Fateh Ali Khan"
-  //   },
-  //   {
-  //     index: 2,
-  //     url: "./assets/music/tiesto2.mp3",
-  //     name: "Penny Lane",
-  //     artist: "The Beatles"
-  //   }
-  // ];
-  //
-  // getFiles() {
-  //   return of(this.files);
-  // }
+  files: IAudioData[] = [
+    // tslint:disable-next-line: max-line-length
+    {
+      index: 0,
+      id: 0,
+      title: "",
+      recording_date: "",
+      performers: "",
+      collectors: "",
+      source: "",
+      location: {
+        id: 0,
+        country: "",
+        region: "",
+        district_center: "",
+        administrative_center: "",
+        ethnicity: "",
+        ethnographic_district: "",
+        official_name: "",
+        unofficial_name: "",
+        recording_location: ""
+      },
+      details: {
+        id: 0,
+        incipit: "",
+        genre_cycle: "",
+        poetic_text_genre: "",
+        texture: ""
+      },
+      media: {
+        id: 0,
+        stereo_audio: "./assets/music/alan_walker.mp3",
+        multichannel_audio: "",
+        video_file: "",
+        text: "",
+        image: ""
+      }
+    },
+    {
+      // tslint:disable-next-line: max-line-length
+      index: 1,
+      id: 0,
+      title: "",
+      recording_date: "",
+      performers: "",
+      collectors: "",
+      source: "",
+      location: {
+        id: 0,
+        country: "",
+        region: "",
+        district_center: "",
+        administrative_center: "",
+        ethnicity: "",
+        ethnographic_district: "",
+        official_name: "",
+        unofficial_name: "",
+        recording_location: ""
+      },
+      details: {
+        id: 0,
+        incipit: "",
+        genre_cycle: "",
+        poetic_text_genre: "",
+        texture: ""
+      },
+      media: {
+        id: 0,
+        stereo_audio: "./assets/music/tiesto1.mp3",
+        multichannel_audio: "",
+        video_file: "",
+        text: "",
+        image: ""
+      }
+    },
+  ];
+
+  getFiles() {
+    return of(this.files);
+  }
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getSpotify(): Observable<any>{
     const apiUrl = 'https://spotify23.p.rapidapi.com/recommendations/';
