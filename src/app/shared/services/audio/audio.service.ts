@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject, takeUntil} from "rxjs";
 import {StreamStateInterface} from "../../interfaces/stream-state.interface";
 import * as moment from "moment";
+import {MultichannelStreamStateInterface} from "../../interfaces/multichannel-stream-state.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,38 @@ import * as moment from "moment";
 export class AudioService {
   private stop$: Subject<void>  = new Subject<void>();
   private audioObj: HTMLAudioElement = new Audio();
+  private audioObjs: HTMLAudioElement[] = [];
   audioEvents: string[] = [
     'ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'
   ];
+
+  private trackStates: MultichannelStreamStateInterface[] = []; // Массив объектов состояния для каждой аудиодорожки
+
+
+
+
+  playMultichannelAudio(urls: string[]) {
+    const audioObjects: HTMLAudioElement[] = [];
+
+    // Создайте отдельный объект Audio для каждой аудиодорожки
+    urls.forEach(url => {
+      const audioObj = new Audio();
+      audioObj.src = url;
+      audioObj.load();
+      audioObjects.push(audioObj);
+    });
+
+    // Воспроизводите все аудиодорожки одновременно
+    audioObjects.forEach(audioObj => {
+      audioObj.play();
+    });
+
+    // Верните объекты Audio, чтобы пользователь мог управлять ими отдельно
+    return audioObjects;
+  }
+
+
+
   private state: StreamStateInterface = {
     playing: false,
     readableCurrentTime: '',

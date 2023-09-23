@@ -6,6 +6,7 @@ import {IAudioData} from "../../../../shared/interfaces/audio-data.interface";
 import {StreamStateInterface} from "../../../../shared/interfaces/stream-state.interface";
 import {AudioService} from "../../../../shared/services/audio/audio.service";
 import {CloudService} from "../../../../shared/services/audio/cloud.service";
+import {MultichannelStreamStateInterface} from "../../../../shared/interfaces/multichannel-stream-state.interface";
 
 @Component({
   selector: 'app-player',
@@ -20,11 +21,13 @@ export class PlayerComponent implements OnInit{
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
 
   files: IAudioData[] = [];
-  // spotifyFiles!: any;
   state!: StreamStateInterface;
   secondsToRewindTrack: number = 5;
   currentFile: IAudioData | null = null;
-  isDetailOpen: boolean = true;
+
+  multiChanelStates!: MultichannelStreamStateInterface[];
+
+  private audioObjects: HTMLAudioElement[] = [];
 
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
@@ -37,17 +40,25 @@ export class PlayerComponent implements OnInit{
 
     this.cloudService.getFiles().subscribe(data => {
       this.files = data;
+
+      this.files.forEach((item: IAudioData, index: number) => {
+        item.index = index;
+        item.isDetailOpen = false;
+      })
     });
 
     // listen to stream state
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
+        console.log(this.state);
       });
 
   }
 
-
+  playMultichannelAudio(multichannelAudioUrls: string[]) {
+    this.audioObjects = this.audioService.playMultichannelAudio(multichannelAudioUrls);
+  }
 
   playStream(url: string) {
     this.audioService.playStream(url)
@@ -59,7 +70,11 @@ export class PlayerComponent implements OnInit{
   openFile(file: IAudioData) {
     this.currentFile = file;
     this.audioService.stop();
-    this.playStream(file.media.stereo_audio);
+    if(this.currentFile.media.multichannel_audio && (this.currentFile.media.multichannel_audio.length - 1) > 0){
+      this.playMultichannelAudio(this.currentFile.media.multichannel_audio);
+    }else{
+      this.playStream(file.media.stereo_audio);
+    }
   }
 
   pause() {
@@ -75,7 +90,7 @@ export class PlayerComponent implements OnInit{
   }
 
   next() {
-    if(this.currentFile){
+    if(this.currentFile && this.currentFile.index){
       const index = this.currentFile.index + 1;
       const file = this.files[index];
       this.openFile(file);
@@ -83,7 +98,7 @@ export class PlayerComponent implements OnInit{
   }
 
   previous() {
-    if(this.currentFile){
+    if(this.currentFile && this.currentFile.index){
       const index = this.currentFile.index - 1;
       const file = this.files[index];
       this.openFile(file);
@@ -120,18 +135,14 @@ export class PlayerComponent implements OnInit{
     this.audioService.seekTo(sliderValue);
   }
 
-  toggleDetailBtn() {
-    this.isDetailOpen = !this.isDetailOpen;
+  toggleDetailBtn(file: IAudioData) {
+    file.isDetailOpen = !file.isDetailOpen;
   }
 
-  getScreenWidth(): void {
-    this.screenWidth = window.innerWidth;
-  }
-
-  mobileToggleDetailBtn() {
+  mobileToggleDetailBtn(file: IAudioData) {
     this.screenWidth = window.innerWidth;
     if(this.screenWidth < 768){
-      this.isDetailOpen = !this.isDetailOpen;
+      file.isDetailOpen = !file.isDetailOpen;
     }
     return
   }

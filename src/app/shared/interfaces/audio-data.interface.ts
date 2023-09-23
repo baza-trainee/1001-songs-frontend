@@ -1,5 +1,6 @@
 export interface IAudioData {
-  index: number,
+  index?: number,
+  isDetailOpen?: boolean,
   id: number,
   title: string,
   recording_date: string,
@@ -19,16 +20,16 @@ export interface IAudioData {
     recording_location: string
   },
   details: {
-    id: 0,
+    id: number,
     incipit: string,
     genre_cycle: string,
     poetic_text_genre: string,
     texture: string
   },
   media: {
-    id: 0,
+    id: number,
     stereo_audio: string,
-    multichannel_audio: string,
+    multichannel_audio: string[],
     video_file: string,
     text: string,
     image: string

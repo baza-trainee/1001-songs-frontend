@@ -108,6 +108,72 @@
           }
 
         }
+
+        .player__multichanel_items {
+
+          .multichanel__item {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            top: -7px;
+            z-index: 1;
+            padding: 17px 16px;
+            background-color: var(--bg-color-screen);
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+            box-shadow: 1px 0 18px 0 rgba(0, 0, 0, 0.10) inset;
+            margin-bottom: 12px;
+
+            .item__aside {
+              display: flex;
+              align-items: center;
+              .item__name{
+                margin-right: 20px;
+              }
+
+              .item__actions{
+
+              }
+            }
+
+
+
+            .item__timeline{
+              position: relative;
+              width: 71.32%;
+
+
+              input[type=range] {
+                height: 5px;
+                width: 100%;
+                position: relative;
+                top: -4px;
+                -webkit-appearance: caret;
+                accent-color: #282828;
+                border-radius: 5px;
+              }
+
+              .timeline__time {
+                position: absolute;
+                top: 16px;
+                font-size: 10px;
+                letter-spacing: 0.2px;
+                text-transform: capitalize;
+
+                &.current-time{
+                  left: 0;
+                }
+
+                &.duration {
+                  right: 0;
+                }
+              }
+            }
+
+          }
+        }
+
+
       }
     }
 

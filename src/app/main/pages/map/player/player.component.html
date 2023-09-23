@@ -86,6 +86,26 @@
           </div>
         </div>
 
+        <div class="player__multichanel_items">
+          <div class="multichanel__item">
+            <div class="item__aside">
+              <div class="item__name">Chanel 1</div>
+              <div class="item__actions">
+                <button>Mute</button>
+              </div>
+            </div>
+
+            <div class="item__timeline">
+              <input #slider class="" type="range" min="0" step="0.1"
+                     [max]="state.duration"
+                     [value]="state.currentTime || 0"
+                     [disabled]="state.error && state.currentTime === undefined">
+              <span class="timeline__time current-time">{{ state.readableCurrentTime }}</span>
+              <span class="timeline__time duration">{{ state.readableDuration }}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -101,7 +121,7 @@
       </div>
 
       <div class="playlist__song-card" *ngFor="let file of files">
-        <div class="song-card__header" (click)="mobileToggleDetailBtn()"  [class.active]="isDetailOpen">
+        <div class="song-card__header" (click)="mobileToggleDetailBtn(file)"  [class.active]="file.isDetailOpen">
           <div class="song-card__img" style="background-image: url({{serverStaticImgPath + 'play.png'}})"></div>
 
           <div class="song-card__name-info">
@@ -114,7 +134,7 @@
             <div class="song-info__location">с. Крячківка, Полтавська обл.</div>
           </div>
 
-          <div class="song-card__btn btn-detail" (click)="toggleDetailBtn()">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
+          <div class="song-card__btn btn-detail" (click)="toggleDetailBtn(file)">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
 
           <div class="song-card__listen">
             <div class="btn__listen" (click)="openFile(file)">
@@ -131,7 +151,7 @@
             </div>
           </div>
         </div>
-        <div class="song-card__detail" *ngIf="isDetailOpen">
+        <div class="song-card__detail" *ngIf="file.isDetailOpen">
 
           <div class="detail__video" style="background-image: url({{staticVideoImgUrl}});"></div>
 
