@@ -5,7 +5,7 @@
     <iframe
       #player
       class="event__media__iframe"
-      [src]="event.mediaSrc | safeMediaUrl"
+      [src]="event.mediaSrc | safeMediaUrl | sanitize"
       frameborder="0"
       allow="autoplay"
       allowfullscreen

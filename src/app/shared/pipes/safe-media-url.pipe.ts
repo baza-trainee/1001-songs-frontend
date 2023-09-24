@@ -6,16 +6,16 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   standalone: true
 })
 export class SafeMediaUrlPipe implements PipeTransform {
-  constructor(protected sanitizer: DomSanitizer) {}
+  constructor() {}
 
-  transform(url: string): SafeResourceUrl  {
+  transform(url: string): string {
     const service = 'https://www.youtube.com/embed/';
     const delimeter = /[/?]/;
     if (url) {
       const mediaSrcId = url.split(delimeter)[3];
       const newUrlSrc = `${service}${mediaSrcId}?rel=0&autohide=I`;
-      return this.sanitizer.bypassSecurityTrustResourceUrl(newUrlSrc);
+      return newUrlSrc;
     }
-    return this.sanitizer.bypassSecurityTrustResourceUrl(service);
+    return service;
   }
 }
