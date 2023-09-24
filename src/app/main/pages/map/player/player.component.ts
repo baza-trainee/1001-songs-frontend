@@ -7,11 +7,13 @@ import {StreamStateInterface} from "../../../../shared/interfaces/stream-state.i
 import {AudioService} from "../../../../shared/services/audio/audio.service";
 import {CloudService} from "../../../../shared/services/audio/cloud.service";
 import {MultichannelStreamStateInterface} from "../../../../shared/interfaces/multichannel-stream-state.interface";
+import {StereoPlayerComponent} from "./stereo-player/stereo-player.component";
+import {MultichanelPlayerComponent} from "./multichanel-player/multichanel-player.component";
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule, StereoPlayerComponent, MultichanelPlayerComponent],
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
@@ -22,12 +24,10 @@ export class PlayerComponent implements OnInit{
 
   files: IAudioData[] = [];
   state!: StreamStateInterface;
-  secondsToRewindTrack: number = 5;
   currentFile: IAudioData | null = null;
 
   multiChanelStates!: MultichannelStreamStateInterface[];
 
-  private audioObjects: HTMLAudioElement[] = [];
 
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
@@ -46,94 +46,20 @@ export class PlayerComponent implements OnInit{
         item.isDetailOpen = false;
       })
     });
+    //
+    // this.audioService.getMultichannelState()
+    //   .subscribe(states => {
+    //     this.multiChanelStates = states;
+    //     this.multiChanelStates.forEach((chanel, index) => console.log('chanel' + index + ' ' + chanel ));
+    //   })
 
-    // listen to stream state
-    this.audioService.getState()
-      .subscribe(state => {
-        this.state = state;
-        console.log(this.state);
-      });
 
   }
+  //
+  // playMultichannelAudio(multichannelAudioUrls: string[]) {
+  //   this.audioService.playMultichannelAudio(multichannelAudioUrls);
+  // }
 
-  playMultichannelAudio(multichannelAudioUrls: string[]) {
-    this.audioObjects = this.audioService.playMultichannelAudio(multichannelAudioUrls);
-  }
-
-  playStream(url: string) {
-    this.audioService.playStream(url)
-      .subscribe(events => {
-        // console.log(events);
-      });
-  }
-
-  openFile(file: IAudioData) {
-    this.currentFile = file;
-    this.audioService.stop();
-    if(this.currentFile.media.multichannel_audio && (this.currentFile.media.multichannel_audio.length - 1) > 0){
-      this.playMultichannelAudio(this.currentFile.media.multichannel_audio);
-    }else{
-      this.playStream(file.media.stereo_audio);
-    }
-  }
-
-  pause() {
-    this.audioService.pause();
-  }
-
-  play() {
-    this.audioService.play();
-  }
-
-  stop() {
-    this.audioService.stop();
-  }
-
-  next() {
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index + 1;
-      const file = this.files[index];
-      this.openFile(file);
-    }
-  }
-
-  previous() {
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index - 1;
-      const file = this.files[index];
-      this.openFile(file);
-    }
-  }
-
-  backward(value: string) {
-    this.audioService.seekTo(Number(value) - this.secondsToRewindTrack);
-  }
-
-  forward(value: string) {
-    this.audioService.seekTo(Number(value) + this.secondsToRewindTrack);
-  }
-
-  isFirstPlaying() {
-    if(this.currentFile) {
-      return this.currentFile.index === 0;
-    } else {
-      return
-    }
-  }
-
-  isLastPlaying() {
-    if(this.currentFile) {
-      return this.currentFile.index === this.files.length - 1;
-    } else {
-      return
-    }
-  }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSliderChangeEnd(event:  any) {
-    const sliderValue = event.target.value;
-    this.audioService.seekTo(sliderValue);
-  }
 
   toggleDetailBtn(file: IAudioData) {
     file.isDetailOpen = !file.isDetailOpen;

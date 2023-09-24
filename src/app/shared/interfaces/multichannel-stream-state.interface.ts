@@ -6,4 +6,5 @@ export interface MultichannelStreamStateInterface {
   currentTime: number | undefined;
   canplay: boolean;
   error: boolean;
+  muted: boolean;
 }
