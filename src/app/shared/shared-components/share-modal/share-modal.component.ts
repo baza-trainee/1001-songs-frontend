@@ -5,6 +5,8 @@ import {TranslateModule} from "@ngx-translate/core";
 import {ClipboardModule, ClipboardService} from "ngx-clipboard";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {DialogRef} from "@angular/cdk/dialog";
+import {ShareModal} from "../../enums/icons.enum";
+import {ShareModalLink} from "../../enums/navLinks.enum";
 
 @Component({
   selector: 'app-share-modal',
@@ -14,6 +16,9 @@ import {DialogRef} from "@angular/cdk/dialog";
   styleUrls: ['./share-modal.component.scss']
 })
 export class ShareModalComponent {
+
+  protected readonly ShareModal = ShareModal;
+  protected readonly ShareModalLink = ShareModalLink;
 
   constructor(
     private clipboardService: ClipboardService,
@@ -38,7 +43,7 @@ export class ShareModalComponent {
   }
 
   // close dialog window after coping;
-  private closeDialog(): void {
+  public closeDialog(): void {
     this.dialogRef.close()
   }
 }

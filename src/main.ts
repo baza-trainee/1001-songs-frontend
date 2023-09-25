@@ -10,42 +10,19 @@ import { ErrorComponent } from './app/shared/shared-components/error/error.compo
 import { environment } from './environments/environment';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
+import { ExpeditionsState } from './app/store/expeditions/expeditions.state';
+import { MapState } from './app/store/map/map.state';
+import { AppState } from './app/store/app/app.state';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 bootstrapApplication(AppComponent, {
-  //   providers: [
-  //     importProvidersFrom(
-  //       BrowserModule,
-  //       TranslateModule.forRoot({
-  //         defaultLanguage: 'ua',
-  //         loader: {
-  //           provide: TranslateLoader,
-  //           useFactory: createTranslateLoader,
-  //           deps: [HttpClient]
-  //         }
-  //       })
-  //     ),
-  //     provideHttpClient(withInterceptorsFromDi()),
-  //     provideRouter(
-  //       [
-  //         {
-  //           path: '',
-  //           component: MainComponent,
-  //           loadChildren: () => import('./app/main/main.routes').then((rm) => rm.MAIN_ROUTES)
-  //         },
-  //         { path: '404', component: ErrorComponent },
-  //         { path: '**', redirectTo: '404' }
-  //       ],
-  //       // for scroll to top when go to another page
-  //       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
-  //     )
-  //   ]
-  // }).catch((err) => console.error(err));
   providers: [
     importProvidersFrom(
+      NgxsModule.forRoot([AppState, ExpeditionsState, MapState]),
       BrowserModule,
       TranslateModule.forRoot({
         defaultLanguage: 'ua',
@@ -57,6 +34,15 @@ bootstrapApplication(AppComponent, {
       })
     ),
     provideHttpClient(withInterceptorsFromDi()),
+    provideRouter([
+      {
+        path: '',
+        component: MainComponent,
+        loadChildren: () => import('./app/main/main.routes').then((rm) => rm.MAIN_ROUTES)
+      },
+      { path: '404', component: ErrorComponent },
+      { path: '**', redirectTo: '404' }
+    ]),
     provideRouter(
       [
         {

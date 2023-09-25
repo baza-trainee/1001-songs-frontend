@@ -14,5 +14,5 @@
 docs/
 .prettierignore
 *.md
-
+..*
 !src/

@@ -1,14 +1,28 @@
 @import '../../../../typography/typography';
 
 .dialog{
+  position: relative;
+
+  &__close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border: none;
+    background-color: transparent;
+  }
+
   &__text {
     max-width: 375px;
     text-align: center;
     margin: 5px auto 0;
-    font-size: 20px;
-    line-height: 28px;
     color: rgba(40, 40, 40, 100%);
-    font-weight: 600;
+
+    @include subtitle-desktop;
+  }
+
+  &__image {
+    width: 410px;
+    height: 224px;
   }
 
   &__action{
@@ -24,15 +38,14 @@
       align-items: center;
       transition: all 0.2s linear;
 
+      @include caption-desktop;
+
       &:hover {
         transform: scale(1.1);
         font-weight: 600;
       }
 
       &--text {
-        font-size: 14px;
-        line-height: 16.8px;
-        color: rgba(69, 69, 69, 100%);
         margin-top: 8px;
         cursor: pointer;
       }
@@ -82,6 +95,28 @@
 
 .mdc-dialog__content {
   padding: 0;
+}
+
+
+@media (width < 525px) {
+  .dialog__image {
+    max-width: 100%;
+  }
+}
+
+
+@media (width < 418px) {
+  ::ng-deep {
+    #cdk-overlay-0,
+    .cdk-overlay-pane{
+      min-width: 100vw;
+      height: 100vh;
+    }
+
+    .mdc-dialog__surface{
+      border-radius: 0 !important;
+    }
+  }
 }
 
 /* stylelint-enable */
