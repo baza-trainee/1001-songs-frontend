@@ -302,6 +302,9 @@
             cursor: pointer;
 
             .btn__listen {
+              border: 0;
+              background: transparent;
+
               .listen__mobile{
                 display: none;
               }

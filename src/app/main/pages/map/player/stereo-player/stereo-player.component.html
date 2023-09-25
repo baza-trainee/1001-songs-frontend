@@ -1,4 +1,4 @@
-<div class="player__container">
+<div class="player__container" *ngIf="showStereoPlayer">
   <div class="player__actions">
     <button class="btn__player back" (click)="backward(slider.value)">
       <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">

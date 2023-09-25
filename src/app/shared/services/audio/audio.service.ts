@@ -23,6 +23,11 @@ export class AudioService {
     error: false,
   };
 
+
+
+  showStereoPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+
   private streamObservable(url: string) {
     return new Observable(observer => {
       // Play audio

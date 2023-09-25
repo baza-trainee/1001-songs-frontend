@@ -1,4 +1,4 @@
-<div class="player__container" *ngIf="multiChanelStates && multiChanelStates.length > 0">
+<div class="player__container" *ngIf="showMultichanelPlayer && multiChanelStates.length > 0">
   <div class="player__actions">
     <button class="btn__player back" (click)="backward(slider.value)">
       <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-<div class="player__multichanel_items">
+<div class="player__multichanel_items" *ngIf="showMultichanelPlayer">
   <div class="multichanel__item" *ngFor="let multiState of multiChanelStates; let i = index;">
     <div class="item__aside">
       <div class="item__name">Chanel {{ i + 1 }}</div>

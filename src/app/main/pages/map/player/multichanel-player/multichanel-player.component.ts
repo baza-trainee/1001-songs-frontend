@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
 import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
 import {MultichannelStreamStateInterface} from "../../../../../shared/interfaces/multichannel-stream-state.interface";
+import {AudioService} from "../../../../../shared/services/audio/audio.service";
 
 @Component({
   selector: 'app-multichanel-player',
@@ -17,7 +18,14 @@ export class MultichanelPlayerComponent implements OnInit{
   secondsToRewindTrack: number = 5;
   multiChanelStates!: MultichannelStreamStateInterface[];
 
-  constructor(private multiChanelAudioService: MultichanelAudioService) {
+  showMultichanelPlayer: boolean = false;
+
+  constructor(private multiChanelAudioService: MultichanelAudioService,
+              private audioService: AudioService,) {
+
+    this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe(showMultichanelPlayer => {
+      this.showMultichanelPlayer = showMultichanelPlayer;
+    });
   }
 
   ngOnInit() {
@@ -33,7 +41,10 @@ export class MultichanelPlayerComponent implements OnInit{
 
   openFile(file: IAudioData) {
     this.currentFile = file;
+    this.audioService.stop();
     this.multiChanelAudioService.stopAll();
+    this.audioService.showStereoPlayerSubject.next(false);
+    this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
     this.playStream(file.media.multichannel_audio);
   }
 

@@ -43,8 +43,10 @@
 
           <div class="song-card__btn btn-detail" (click)="toggleDetailBtn(file)">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
 
-          <div class="song-card__listen">
-            <div class="btn__listen" (click)="multiChanelPlayer.openFile(file)">
+          <div class="song-card__listen" >
+            <button class="btn__listen"
+                 [disabled]="!file.isStereo && !file.isMultiChanel"
+                 (click)="file.isStereo ? stereoPlayer.openFile(file) : multiChanelPlayer.openFile(file)">
               <svg class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>
                 <path d="M48.4 33.9215C50 34.8453 50 37.1547 48.4 38.0785L31.6 47.7779C30 48.7017 28 47.547 28 45.6995L28 26.3005C28 24.453 30 23.2983 31.6 24.2221L48.4 33.9215Z" fill="#282828"/>
@@ -55,7 +57,7 @@
                 <path d="M37.6453 26.3833C38.8898 27.1018 38.8898 28.898 37.6453 29.6164L24.5786 37.1605C23.3342 37.879 21.7786 36.9809 21.7786 35.5439L21.7786 20.4558C21.7786 19.0189 23.3342 18.1208 24.5786 18.8392L37.6453 26.3833Z" fill="#282828"/>
                 <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444" stroke="#DDDDDD" stroke-width="0.777778"/>
               </svg>
-            </div>
+            </button>
           </div>
         </div>
         <div class="song-card__detail" *ngIf="file.isDetailOpen">

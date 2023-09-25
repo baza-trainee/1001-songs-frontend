@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
 import {StreamStateInterface} from "../../../../../shared/interfaces/stream-state.interface";
 import {AudioService} from "../../../../../shared/services/audio/audio.service";
+import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
 
 @Component({
   selector: 'app-stereo-player',
@@ -17,8 +18,16 @@ export class StereoPlayerComponent implements OnInit{
   secondsToRewindTrack: number = 5;
   state!: StreamStateInterface;
 
+  showStereoPlayer: boolean = false;
+
+
   constructor(private audioService: AudioService,
+              private multiChanelAudioService: MultichanelAudioService,
               ) {
+
+    this.audioService.showStereoPlayerSubject.subscribe(showStereoPlayer => {
+      this.showStereoPlayer = showStereoPlayer;
+    });
   }
 
   ngOnInit() {
@@ -37,9 +46,13 @@ export class StereoPlayerComponent implements OnInit{
 
   openFile(file: IAudioData) {
     this.currentFile = file;
+    this.multiChanelAudioService.stopAll();
     this.audioService.stop();
+    this.audioService.showStereoPlayerSubject.next(true);
+    this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
     this.playStream(file.media.stereo_audio);
   }
+
 
   pause() {
     this.audioService.pause();

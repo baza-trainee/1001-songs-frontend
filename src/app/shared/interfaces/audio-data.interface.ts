@@ -1,6 +1,8 @@
 export interface IAudioData {
   index?: number,
   isDetailOpen?: boolean,
+  isStereo?: boolean,
+  isMultiChanel?: boolean,
   id: number,
   title: string,
   recording_date: string,

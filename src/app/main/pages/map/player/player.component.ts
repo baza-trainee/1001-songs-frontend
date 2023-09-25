@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {IAudioData} from "../../../../shared/interfaces/audio-data.interface";
-import {StreamStateInterface} from "../../../../shared/interfaces/stream-state.interface";
 import {AudioService} from "../../../../shared/services/audio/audio.service";
 import {CloudService} from "../../../../shared/services/audio/cloud.service";
-import {MultichannelStreamStateInterface} from "../../../../shared/interfaces/multichannel-stream-state.interface";
 import {StereoPlayerComponent} from "./stereo-player/stereo-player.component";
 import {MultichanelPlayerComponent} from "./multichanel-player/multichanel-player.component";
 
@@ -23,17 +21,14 @@ export class PlayerComponent implements OnInit{
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
 
   files: IAudioData[] = [];
-  state!: StreamStateInterface;
   currentFile: IAudioData | null = null;
-
-  multiChanelStates!: MultichannelStreamStateInterface[];
 
 
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
               private cloudService: CloudService,
               ) {
-
+    this.audioService.showStereoPlayerSubject.next(true);
   }
 
   ngOnInit() {
@@ -44,22 +39,13 @@ export class PlayerComponent implements OnInit{
       this.files.forEach((item: IAudioData, index: number) => {
         item.index = index;
         item.isDetailOpen = false;
-      })
-    });
-    //
-    // this.audioService.getMultichannelState()
-    //   .subscribe(states => {
-    //     this.multiChanelStates = states;
-    //     this.multiChanelStates.forEach((chanel, index) => console.log('chanel' + index + ' ' + chanel ));
-    //   })
+        item.isStereo = item.media.stereo_audio !== '';
+        item.isMultiChanel = item.media.multichannel_audio.length > 0;
+      });
 
+    });
 
   }
-  //
-  // playMultichannelAudio(multichannelAudioUrls: string[]) {
-  //   this.audioService.playMultichannelAudio(multichannelAudioUrls);
-  // }
-
 
   toggleDetailBtn(file: IAudioData) {
     file.isDetailOpen = !file.isDetailOpen;

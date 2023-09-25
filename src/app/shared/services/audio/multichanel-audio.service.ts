@@ -34,6 +34,11 @@ export class MultichanelAudioService {
     };
   }
 
+
+  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+
+
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
     this.audioObjects.push(audioObj);
@@ -79,21 +84,12 @@ export class MultichanelAudioService {
   }
 
   playStreamAll(urls: string[]) {
-    this.stopAll(); // Останавливаем все текущие аудио и очищаем состояния
-
-    // Удаляем все предыдущие аудио-объекты и состояния
-    this.audioObjects.forEach(audioObj => {
-      audioObj.pause();
-    });
-    this.audioObjects = [];
-    this.audioStates = [];
-
-    // Теперь запускаем новый плейстрим
+    this.stopAll();
     return this.playStream(urls).pipe(takeUntil(this.stop$));
   }
 
   playStream(urls: string[]): Observable<MultichannelStreamStateInterface[]> {
-    this.stopAll(); // Stop any currently playing audio
+    this.stopAll();
 
     const observables: Observable<MultichannelStreamStateInterface>[] = [];
 
@@ -122,7 +118,6 @@ export class MultichanelAudioService {
       observables.push(streamObservable);
     }
 
-    // Combine all observables and wait for their completion
     return forkJoin(observables).pipe(
       map(() => this.audioStates),
     );
@@ -141,6 +136,12 @@ export class MultichanelAudioService {
   }
 
   stopAll(): void {
+    // Удаляем все предыдущие аудио-объекты и состояния
+    this.audioObjects.forEach(audioObj => {
+      audioObj.pause();
+    });
+    this.audioObjects = [];
+    this.audioStates = [];
     this.stop$.next();
   }
 
