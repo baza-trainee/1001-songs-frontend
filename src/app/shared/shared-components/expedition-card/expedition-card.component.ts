@@ -15,12 +15,4 @@ import { VideoPlayerComponent } from '../video-player/video-player.component';
 })
 export class ExpeditionCardComponent {
   @Input() event: Iexpediton = {} as Iexpediton;
-  @ViewChild('player') player!: ElementRef;
-  isPreviewDisplayed = true;
-
-  playVideo() {
-    this.isPreviewDisplayed = false;
-    const url = this.player.nativeElement.src;
-    this.player.nativeElement.src = url + '&autoplay=1';
-  }
 }
