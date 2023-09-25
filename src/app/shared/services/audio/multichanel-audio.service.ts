@@ -79,6 +79,16 @@ export class MultichanelAudioService {
   }
 
   playStreamAll(urls: string[]) {
+    this.stopAll(); // Останавливаем все текущие аудио и очищаем состояния
+
+    // Удаляем все предыдущие аудио-объекты и состояния
+    this.audioObjects.forEach(audioObj => {
+      audioObj.pause();
+    });
+    this.audioObjects = [];
+    this.audioStates = [];
+
+    // Теперь запускаем новый плейстрим
     return this.playStream(urls).pipe(takeUntil(this.stop$));
   }
 

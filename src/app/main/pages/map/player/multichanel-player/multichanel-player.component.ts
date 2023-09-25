@@ -62,8 +62,6 @@ export class MultichanelPlayerComponent implements OnInit{
   }
 
   previous() {
-    this.stop();
-
     if(this.currentFile && this.currentFile.index){
       const index = this.currentFile.index - 1;
       const file = this.files[index];
