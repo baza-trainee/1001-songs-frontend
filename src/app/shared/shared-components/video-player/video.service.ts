@@ -8,7 +8,6 @@ export class VideoService {
   constructor() {}
 
   getEmbeddedUrl(url: string): string {
-    console.log(url)
     const service = 'https://www.youtube.com/embed/';
     const delimeter = /[/?]/;
     if (url) {

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { SafeMediaUrlPipe } from '../../../shared/pipes/safe-media-url.pipe';
 import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedition-card/expedition-card.component';
 import Iexpediton from 'src/app/shared/interfaces/expedition.interface';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +15,7 @@ import { FetchExpeditions } from 'src/app/store/expeditions/expedition.actions';
   templateUrl: './expeditions.component.html',
   styleUrls: ['./expeditions.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, SafeMediaUrlPipe, ExpeditionCardComponent, HttpClientModule]
+  imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule]
 })
 export class ExpeditionsComponent {
   @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
