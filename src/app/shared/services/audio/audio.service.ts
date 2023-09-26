@@ -24,7 +24,6 @@ export class AudioService {
   };
 
 
-
   showStereoPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 

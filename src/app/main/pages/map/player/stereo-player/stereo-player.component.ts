@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
 import {StreamStateInterface} from "../../../../../shared/interfaces/stream-state.interface";
 import {AudioService} from "../../../../../shared/services/audio/audio.service";
 import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-stereo-player',
@@ -12,36 +13,40 @@ import {MultichanelAudioService} from "../../../../../shared/services/audio/mult
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
-export class StereoPlayerComponent implements OnInit{
+export class StereoPlayerComponent implements OnInit, OnDestroy{
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
   secondsToRewindTrack: number = 5;
   state!: StreamStateInterface;
-
   showStereoPlayer: boolean = false;
-
+  private playStreamSubscription: Subscription | undefined;
+  private getStateSubscription: Subscription | undefined;
 
   constructor(private audioService: AudioService,
               private multiChanelAudioService: MultichanelAudioService,
               ) {
-
     this.audioService.showStereoPlayerSubject.subscribe(showStereoPlayer => {
       this.showStereoPlayer = showStereoPlayer;
     });
   }
 
   ngOnInit() {
-
-    // listen to stream state
-    this.audioService.getState()
+    this.getStateSubscription = this.audioService.getState()
       .subscribe(state => {
         this.state = state;
       });
   }
 
+  ngOnDestroy() {
+    this.stop();
+    this.resetStereoPlayerState();
+    this.playStreamSubscription?.unsubscribe();
+    this.audioService.showStereoPlayerSubject.next(false);
+    this.getStateSubscription?.unsubscribe();
+  }
 
   playStream(url: string) {
-    this.audioService.playStream(url).subscribe();
+    this.playStreamSubscription = this.audioService.playStream(url).subscribe();
   }
 
   openFile(file: IAudioData) {
@@ -52,7 +57,6 @@ export class StereoPlayerComponent implements OnInit{
     this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
     this.playStream(file.media.stereo_audio);
   }
-
 
   pause() {
     this.audioService.pause();
@@ -112,5 +116,11 @@ export class StereoPlayerComponent implements OnInit{
     this.audioService.seekTo(sliderValue);
   }
 
-
+  resetStereoPlayerState() {
+    this.state.playing = false;
+    this.state.currentTime = 0;
+    this.state.readableCurrentTime = this.audioService.formatTime(0);
+    this.state.duration = 0;
+    this.state.readableDuration = this.audioService.formatTime(0);
+  }
 }

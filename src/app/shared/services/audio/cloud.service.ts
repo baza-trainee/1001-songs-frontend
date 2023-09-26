@@ -126,6 +126,83 @@ export class CloudService {
         image: ""
       }
     },
+    {
+      id: 4,
+      title: "",
+      recording_date: "",
+      performers: "",
+      collectors: "",
+      source: "",
+      location: {
+        id: 4,
+        country: "",
+        region: "",
+        district_center: "",
+        administrative_center: "",
+        ethnicity: "",
+        ethnographic_district: "",
+        official_name: "",
+        unofficial_name: "",
+        recording_location: ""
+      },
+      details: {
+        id: 4,
+        incipit: "",
+        genre_cycle: "",
+        poetic_text_genre: "",
+        texture: ""
+      },
+      media: {
+        id: 4,
+        stereo_audio: "",
+        multichannel_audio: [],
+        video_file: "",
+        text: "",
+        image: ""
+      }
+    },
+    {
+      id: 5,
+      title: "",
+      recording_date: "",
+      performers: "",
+      collectors: "",
+      source: "",
+      location: {
+        id: 5,
+        country: "",
+        region: "",
+        district_center: "",
+        administrative_center: "",
+        ethnicity: "",
+        ethnographic_district: "",
+        official_name: "",
+        unofficial_name: "",
+        recording_location: ""
+      },
+      details: {
+        id: 5,
+        incipit: "",
+        genre_cycle: "",
+        poetic_text_genre: "",
+        texture: ""
+      },
+      media: {
+        id: 5,
+        stereo_audio: "",
+        multichannel_audio: [
+          "./assets/music/mc_song_2/01.mp3",
+          "./assets/music/mc_song_2/02.mp3",
+          "./assets/music/mc_song_2/03.mp3",
+          "./assets/music/mc_song_2/04.mp3",
+          "./assets/music/mc_song_2/05.mp3",
+          "./assets/music/mc_song_2/06.mp3",
+        ],
+        video_file: "",
+        text: "",
+        image: ""
+      }
+    },
   ];
 
   getFiles() {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -7,6 +7,7 @@ import {AudioService} from "../../../../shared/services/audio/audio.service";
 import {CloudService} from "../../../../shared/services/audio/cloud.service";
 import {StereoPlayerComponent} from "./stereo-player/stereo-player.component";
 import {MultichanelPlayerComponent} from "./multichanel-player/multichanel-player.component";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-player',
@@ -15,14 +16,13 @@ import {MultichanelPlayerComponent} from "./multichanel-player/multichanel-playe
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit{
+export class PlayerComponent implements OnInit, OnDestroy{
   screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
-
   files: IAudioData[] = [];
   currentFile: IAudioData | null = null;
-
+  cloudServiceSubscribe: Subscription | undefined;
 
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
@@ -32,8 +32,7 @@ export class PlayerComponent implements OnInit{
   }
 
   ngOnInit() {
-
-    this.cloudService.getFiles().subscribe(data => {
+    this.cloudServiceSubscribe = this.cloudService.getFiles().subscribe(data => {
       this.files = data;
 
       this.files.forEach((item: IAudioData, index: number) => {
@@ -42,9 +41,11 @@ export class PlayerComponent implements OnInit{
         item.isStereo = item.media.stereo_audio !== '';
         item.isMultiChanel = item.media.multichannel_audio.length > 0;
       });
-
     });
+  }
 
+  ngOnDestroy() {
+    this.cloudServiceSubscribe?.unsubscribe();
   }
 
   toggleDetailBtn(file: IAudioData) {

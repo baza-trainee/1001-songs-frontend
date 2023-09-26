@@ -79,7 +79,7 @@
     <div class="item__aside">
       <div class="item__name">Chanel {{ i + 1 }}</div>
       <div class="item__actions">
-        <button (click)="muteToggle(i)">Mute</button>
+        <button [class.active]="multiState.muted" (click)="muteToggle(i)">Mute</button>
       </div>
     </div>
 

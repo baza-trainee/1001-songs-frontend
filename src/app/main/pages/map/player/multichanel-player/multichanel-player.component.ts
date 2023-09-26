@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
 import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
@@ -12,7 +12,7 @@ import {AudioService} from "../../../../../shared/services/audio/audio.service";
   templateUrl: './multichanel-player.component.html',
   styleUrls: ['./multichanel-player.component.scss']
 })
-export class MultichanelPlayerComponent implements OnInit{
+export class MultichanelPlayerComponent implements OnInit, OnDestroy{
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
   secondsToRewindTrack: number = 5;
@@ -33,6 +33,11 @@ export class MultichanelPlayerComponent implements OnInit{
       .subscribe(states => {
         this.multiChanelStates = states;
       });
+  }
+
+  ngOnDestroy() {
+    this.stop();
+    this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
   }
 
   playStream(urls: string[]){

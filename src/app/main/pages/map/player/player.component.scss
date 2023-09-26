@@ -172,8 +172,6 @@
 
           }
         }
-
-
       }
     }
 
@@ -304,6 +302,14 @@
             .btn__listen {
               border: 0;
               background: transparent;
+
+              &:disabled {
+                cursor: not-allowed;
+
+                svg {
+                  opacity: 0.4;
+                }
+              }
 
               .listen__mobile{
                 display: none;
