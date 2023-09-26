@@ -14,7 +14,7 @@ export class ArticlesService {
   }
 
   private handleError<T>(operation: string, result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: string): Observable<T> => {
       console.error(`An error occurs in ${operation}: `, error);
       return of(result as T);
     };
