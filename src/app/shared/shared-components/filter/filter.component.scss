@@ -1,0 +1,56 @@
+@use '../../../../typography/typography' as *;
+
+.news {
+  &__filter {
+    overflow: hidden;
+    width: 94vw;
+  }
+
+  &__filter-container {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__filter-item {
+    display: inline-block;
+    white-space: nowrap;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular;
+    line-height: 24px;
+    touch-action: pan-y;
+    color: $color-primary;
+    cursor: pointer;
+    margin-right: 28px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__filter-selected {
+    font-weight: $font-weight-semibolt;
+  }
+}
+
+@media (width >= 768px) {
+  .news {
+    &__filter-item {
+      margin-right: 49px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media (width >= 880px) {
+  .news {
+    &__filter {
+      width: auto;
+    }
+  }
+}
+

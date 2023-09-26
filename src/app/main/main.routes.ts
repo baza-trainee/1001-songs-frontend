@@ -1,22 +1,22 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './component/home/home.component';
-import { AboutComponent } from './component/about/about.component';
-import { MapComponent } from './component/map/map.component';
-import { NewsComponent } from './component/news/news.component';
-import { ExpeditionsComponent } from './component/expeditions/expeditions.component';
-import { ScienceComponent } from './component/science/science.component';
+import {Routes} from '@angular/router';
 
-import { ArticlesComponent } from './component/news/components/articles/articles.component';
+import {AboutComponent} from "./pages/about/about.component";
+import {MapComponent} from "./pages/map/map.component";
+import {NewsComponent} from "./pages/news/news.component";
+import {ArticlesComponent} from "./pages/news/components/articles/articles.component";
+import {ExpeditionsComponent} from "./pages/expeditions/expeditions.component";
+import {ScienceComponent} from "./pages/science/science.component";
+import {HomeComponent} from "./pages/home/home.component";
 
 export const MAIN_ROUTES: Routes = [
-  { path: 'about', component: AboutComponent },
-  { path: 'map', component: MapComponent },
+  {path: 'about', component: AboutComponent},
+  {path: 'map', component: MapComponent},
   {
     path: '',
     component: NewsComponent,
-    children: [{ path: 'news', component: ArticlesComponent }]
+    children: [{path: 'news', component: ArticlesComponent}]
   },
-  { path: 'expeditions', component: ExpeditionsComponent },
-  { path: 'science', component: ScienceComponent },
-  { path: '', component: HomeComponent }
+  {path: 'expeditions', component: ExpeditionsComponent},
+  {path: 'science', component: ScienceComponent},
+  {path: '', component: HomeComponent}
 ];

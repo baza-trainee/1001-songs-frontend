@@ -1,9 +1,10 @@
-import { Component, DestroyRef, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {Component, DestroyRef, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {NgFor} from '@angular/common';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-import { Article } from '../../article.interface';
-import { ArticlesService } from '../../services/articles.service';
+import {Article} from "../../../main/pages/news/article.interface";
+import {ArticlesService} from "../../../main/pages/news/services/articles.service";
+
 
 @Component({
   selector: 'app-filter',
@@ -13,7 +14,7 @@ import { ArticlesService } from '../../services/articles.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  public readonly categories: string[] = ['Усі', 'Зустрічі', 'Лекції', 'Публікації', 'Майстер-класи', 'Концерти', 'Коференції'];
+  @Input() categories: string[] = [];
   public selectedFilter: string = 'Усі';
   private filteredArticle!: Article[];
   private articles!: Article[];
@@ -21,12 +22,13 @@ export class FilterComponent implements OnInit {
   public currentX: number = 0;
   public translateX: number = 0;
   private maxSlide: number = 0;
+  private isDragging!: boolean;
 
   private readonly articleService = inject(ArticlesService);
   private readonly destroyRef = inject(DestroyRef);
 
   @Output() filteredArticles = new EventEmitter<Article[]>();
-  @ViewChild('slide', { read: ElementRef }) slide!: ElementRef;
+  @ViewChild('slide', {read: ElementRef}) slide!: ElementRef;
 
   ngOnInit(): void {
     this.articleService
@@ -48,27 +50,34 @@ export class FilterComponent implements OnInit {
       }
     }
   }
+
   // slider for string
   onTouchStart(event: TouchEvent): void {
     this.startX = event.touches[0].clientX;
     this.currentX = this.startX;
-    this.maxSlide = this.slide.nativeElement.lastElementChild.offsetLeft - this.slide.nativeElement.offsetWidth + 150;
+    this.maxSlide = this.slide.nativeElement.offsetWidth - window.innerWidth + (this.slide.nativeElement.offsetLeft * 2);
+    this.isDragging = true;
   }
 
   onTouchMove(event: TouchEvent): void {
-    if (window.outerWidth <= 768) {
+    if (this.isDragging && window.outerWidth <= 880) {
       const touch = event.touches[0];
       const diffX = touch.clientX - this.currentX;
+      this.translateX += diffX;
+
       if (this.translateX > 0) {
         this.translateX = 0;
       }
 
       if (this.maxSlide - Math.abs(this.translateX) < 0) {
         this.translateX = -this.maxSlide;
-      } else {
-        this.translateX += diffX;
-        this.currentX = touch.clientX;
       }
+
+      this.currentX = touch.clientX;
     }
+  }
+
+  onTouchEnd(): void {
+    this.isDragging = false;
   }
 }
