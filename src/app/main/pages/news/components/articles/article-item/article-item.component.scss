@@ -52,6 +52,7 @@
 
   &__title-name {
     @include h3-mobile($color: var(--text-color-popup-menu), $text-transform: none);
+
     transition: color .5s ease-in-out;
   }
 
@@ -59,8 +60,12 @@
     @include h3-mobile($font-size: 20px, $line-height: 28px, $color: var(--text-color-popup-menu), $text-transform: none);
   }
 
-  &:hover .card__title-name {
-    color: $color-primary;
+  &:hover {
+    .card {
+      &__title-name {
+        color: $color-primary;
+      }
+    }
   }
 }
 

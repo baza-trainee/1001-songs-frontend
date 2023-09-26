@@ -10,7 +10,6 @@ import { MapState } from 'src/app/store/map/map.state';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
   standalone: true,
   imports: [CommonModule, InteraciveMapComponent]
 })
