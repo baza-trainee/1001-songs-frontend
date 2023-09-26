@@ -1,0 +1,141 @@
+@use '/src/typography/typography' as *;
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid $color-primary;
+  gap: 16px;
+  cursor: pointer;
+  margin-bottom: 47px;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 16px;
+  }
+
+  &__header-event {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular;
+    line-height: 24px;
+    color: $color-primary;
+  }
+
+  &__body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+  }
+
+  &__image-item {
+    width: 75%;
+    height: 322px;
+    border-radius: 12px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 75%;
+  }
+
+  &__title-name {
+    @include h3-mobile($color: var(--text-color-popup-menu), $text-transform: none);
+    transition: color .5s ease-in-out;
+  }
+
+  &__title-place {
+    @include h3-mobile($font-size: 20px, $line-height: 28px, $color: var(--text-color-popup-menu), $text-transform: none);
+  }
+
+  &:hover .card__title-name {
+    color: $color-primary;
+  }
+}
+
+.arrow__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.filter__wrap {
+  width: 100%;
+}
+
+@media (width <=1024px) {
+  .card {
+    &__image-item {
+      height: 236px;
+    }
+
+    &__title-name {
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    &__title-place {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media (width <=889px) {
+  .card {
+    &__image-item {
+      width: 50%;
+      height: 180px;
+    }
+
+    &__title {
+      width: 50%;
+
+      &-name {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      &-place {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+}
+
+@media (width <=465px) {
+  .card {
+    margin-bottom: 33px;
+
+    &__image-item {
+      width: 100%;
+    }
+
+    &__body {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    &__title {
+      width: 100%;
+
+      &-place {
+        font-weight: 400;
+      }
+    }
+  }
+}
+

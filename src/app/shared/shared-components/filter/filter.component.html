@@ -1,0 +1,18 @@
+<div class="news__filter">
+  <div class="news__filter-container" #slide>
+    <div
+      class="news__filter-item"
+      tabindex="0"
+      *ngFor="let category of categories"
+      (click)="filterArticles(category)"
+      (keydown.enter)="filterArticles(category)"
+      [class.news__filter-selected]="category === selectedFilter"
+      [style.transform]="'translateX(' + translateX + 'px)'"
+      (touchend)="onTouchEnd()"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
+    >
+      {{ category }}
+    </div>
+  </div>
+</div>
