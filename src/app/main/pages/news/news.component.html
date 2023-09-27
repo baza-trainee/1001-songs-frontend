@@ -1,3 +1,16 @@
 <section class="news wrapper">
-  <router-outlet></router-outlet>
+  <div class="news__container">
+    <div class="news__title">
+      {{ 'Новини' | translate }}
+    </div>
+    <div class="filter__wrap">
+      <app-filter [categories]="categories" (filteredArticles)="filteredArticles($event)" />
+    </div>
+    <div class="cards__wrap">
+      <app-article-item
+        *ngFor="let item of articles"
+        [article]="item"
+      />
+    </div>
+  </div>
 </section>
