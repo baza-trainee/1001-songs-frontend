@@ -15,4 +15,12 @@ import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.componen
 })
 export class ScienceComponent {
   categories$: Observable<string[]> = of(['Пісні зимового циклу', 'Масляна, Колодій', 'Пісні весняного циклу', 'Звичайні пісні']);
+  classDirection = 'bottom';
+  changeDirection() {
+    if (this.classDirection === 'bottom') {
+      this.classDirection = 'top';
+    } else {
+      this.classDirection = 'bottom';
+    }
+  }
 }

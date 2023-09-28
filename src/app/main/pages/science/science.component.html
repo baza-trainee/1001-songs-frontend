@@ -10,10 +10,10 @@
       </div>
     </div>
 
-    <mat-expansion-panel hideToggle="true">
+    <mat-expansion-panel hideToggle="true" (opened)="changeDirection()" (closed)="changeDirection()">
       <mat-expansion-panel-header>
         <mat-panel-title> Рекомендації </mat-panel-title>
-        <mat-panel-description> <app-arrow-down></app-arrow-down> </mat-panel-description>
+        <mat-panel-description> <app-arrow-down [direction]="classDirection"></app-arrow-down> </mat-panel-description>
       </mat-expansion-panel-header>
       <p>I'm visible because I am open</p>
     </mat-expansion-panel>
