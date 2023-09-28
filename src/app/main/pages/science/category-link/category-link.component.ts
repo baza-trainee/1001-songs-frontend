@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryLinkComponent {
   @Input() category: string = 'Hello world';
-  @Input() imgUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqBRMobAtsKBspRCxYZLTBpoe70VVmmgP8YA&usqp=CAU';
+  @Input() imgUrl: string = 'https://baza-trainee.github.io/1001-songs-frontend/assets/img/home/expedition3.jpg';
 }

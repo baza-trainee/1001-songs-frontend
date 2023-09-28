@@ -26,7 +26,11 @@
   }
   &__gallery {
     &__item {
-      border: 1px solid violet;
+      border: 1px solid rgb(0, 0, 0);
+      display: inline-block;
+      width: 411px;
+      height: 281px;
+     
     }
   }
 }
