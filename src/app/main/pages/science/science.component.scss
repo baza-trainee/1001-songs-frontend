@@ -1,5 +1,10 @@
 @import '../../../../typography/typography';
 
+.mat-expansion-panel-header-title {
+  @include h5-desktop($font-size: 24px);
+  border: 1px solid red;
+}
+
 .container {
   display: flex;
   min-height: 90vh;
