@@ -25,12 +25,16 @@
     padding-top: 5px;
   }
   &__gallery {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    flex-wrap: wrap;
     &__item {
-      border: 1px solid rgb(0, 0, 0);
+      // border: 1px solid rgb(0, 0, 0);
       display: inline-block;
-      width: 411px;
+      width: 410px;
       height: 281px;
-     
+      // border: 1px solid red;
     }
   }
 }
@@ -41,7 +45,7 @@
     margin-bottom: 80px;
   }
 
-  .expeditions {
+  .science {
     margin-right: 48px;
     margin-left: 48px;
   }

@@ -12,5 +12,5 @@ import { CategoryLinkComponent } from './category-link/category-link.component';
   imports: [CommonModule, TranslateModule, CategoryLinkComponent]
 })
 export class ScienceComponent {
-  categories$: Observable<string[]> = of(['Пісні зимового циклу', 'Масляна, Колодій']);
+  categories$: Observable<string[]> = of(['Пісні зимового циклу', 'Масляна, Колодій', 'Пісні весняного циклу', 'Звичайні пісні']);
 }

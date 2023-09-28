@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ArrowOutwardComponent } from 'src/app/icons/arrow-outward/arrow-outward.component';
 
 @Component({
   selector: 'app-category-link',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ArrowOutwardComponent],
   templateUrl: './category-link.component.html',
   styleUrls: ['./category-link.component.scss']
 })
