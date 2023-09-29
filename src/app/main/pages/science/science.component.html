@@ -4,9 +4,9 @@
     <p class="science__introduction">
       {{ 'expeditions.intro' | translate }}
     </p>
-    <div class="science__gallery" *ngIf="categories$ | async as categories">
+    <div class="science__gallery">
       <div class="science__gallery__item" *ngFor="let category of categories">
-        <app-category-link [category]="category"></app-category-link>
+        <app-category-link [category]="category | translate"></app-category-link>
       </div>
     </div>
 

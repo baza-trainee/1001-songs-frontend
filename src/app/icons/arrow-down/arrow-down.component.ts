@@ -15,8 +15,6 @@ import { CommonModule } from '@angular/common';
   `,
   styles: [
     `
-      .init {
-      }
       .top {
         transform: rotate(180deg);
         transition: 0.3s;

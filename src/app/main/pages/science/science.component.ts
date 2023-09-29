@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { CategoryLinkComponent } from './category-link/category-link.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.component';
+import { scienceCategories } from 'src/app/shared/enums/scienceCategories';
 
 @Component({
   selector: 'app-science',
@@ -14,8 +15,9 @@ import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.componen
   imports: [CommonModule, TranslateModule, CategoryLinkComponent, MatExpansionModule, ArrowDownComponent]
 })
 export class ScienceComponent {
-  categories$: Observable<string[]> = of(['Пісні зимового циклу', 'Масляна, Колодій', 'Пісні весняного циклу', 'Звичайні пісні']);
+  categories: string[] = Object.values(scienceCategories);
   classDirection = 'bottom';
+
   changeDirection() {
     if (this.classDirection === 'bottom') {
       this.classDirection = 'top';

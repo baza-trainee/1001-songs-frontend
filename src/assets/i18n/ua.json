@@ -1,34 +1,34 @@
 {
-   "header": {
-      "nav-menu": {
-         "about": "Про проект",
-         "map": "Мапа",
-         "educational-section": "Освітній розділ",
-         "news": "Новини",
-         "expedition": "Експедиції"
-      },
-      "actions": {
-         "button-donate":"Підтримати"
-      },
-     "pop-up-menu":{
-         "title": "Поділіться проєктом культурного надбання українців зі світом.",
-         "copy": "Копіювати"
-     }
-   },
-   "footer": {
-      "button": "Підтримати проєкт",
-      "partners": "Наші партнери",
-      "contacts" : {
-        "title" : "Контакти",
-        "email" : "clientsupport@gmail.com"
-      },
-      "rules": {
-         "reporting":"Звітність",
-         "policy": "Політика приватності",
-         "terms": "Правила та умови використання",
-         "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
-      }
-   },
+  "header": {
+    "nav-menu": {
+      "about": "Про проект",
+      "map": "Мапа",
+      "educational-section": "Освітній розділ",
+      "news": "Новини",
+      "expedition": "Експедиції"
+    },
+    "actions": {
+      "button-donate": "Підтримати"
+    },
+    "pop-up-menu": {
+      "title": "Поділіться проєктом культурного надбання українців зі світом.",
+      "copy": "Копіювати"
+    }
+  },
+  "footer": {
+    "button": "Підтримати проєкт",
+    "partners": "Наші партнери",
+    "contacts": {
+      "title": "Контакти",
+      "email": "clientsupport@gmail.com"
+    },
+    "rules": {
+      "reporting": "Звітність",
+      "policy": "Політика приватності",
+      "terms": "Правила та умови використання",
+      "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
+    }
+  },
   "home": {
     "home-info": {
       "songs-link": "1000+ пісень",
@@ -87,7 +87,18 @@
     }
   },
   "science": {
-    "stub": "Сторінка 'Освітній розділ' у розробці"
+    "stub": "Сторінка 'Освітній розділ' у розробці",
+    "categories": {
+      "winters": "Пісні зимового циклу",
+      "shrove": "Масляна, колодій",
+      "spring": "Пісні весняного циклу",
+      "common": "Звичайні пісні",
+      "summer": "Пісні літнього циклу",
+      "children": "Дитячій фольклор",
+      "wedding": "Весільні пісні",
+      "epos": "Музичний епос",
+      "instrumental": "Інструментальна музика"
+    }
   },
   "error": {
     "error-inner": {

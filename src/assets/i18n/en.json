@@ -1,34 +1,34 @@
 {
-   "header": {
-      "nav-menu": {
-         "about": "About",
-         "map": "Map",
-         "educational-section": "Educational Section",
-         "news": "News",
-         "expedition": "Expeditions"
-      },
-      "actions": {
-         "button-donate": "Donate"
-      },
-     "pop-up-menu": {
-       "title": "Share the project of Ukrainian cultural heritage with the world.",
-       "copy": "Copy"
-     }
-   },
-   "footer": {
-      "button": "Support the project",
-      "partners": "Our partners",
-     "contacts" : {
-       "title" : "Contacts",
-       "email" : "clientsupport@gmail.com"
-     },
-      "rules": {
-         "reporting":"Reporting",
-         "policy": "Privacy policy",
-         "terms": "Terms and conditions of use",
-         "copyright": "Developed by BazaTraineeUkraine 2023. All rights reserved"
-      }
-   },
+  "header": {
+    "nav-menu": {
+      "about": "About",
+      "map": "Map",
+      "educational-section": "Educational Section",
+      "news": "News",
+      "expedition": "Expeditions"
+    },
+    "actions": {
+      "button-donate": "Donate"
+    },
+    "pop-up-menu": {
+      "title": "Share the project of Ukrainian cultural heritage with the world.",
+      "copy": "Copy"
+    }
+  },
+  "footer": {
+    "button": "Support the project",
+    "partners": "Our partners",
+    "contacts": {
+      "title": "Contacts",
+      "email": "clientsupport@gmail.com"
+    },
+    "rules": {
+      "reporting": "Reporting",
+      "policy": "Privacy policy",
+      "terms": "Terms and conditions of use",
+      "copyright": "Developed by BazaTraineeUkraine 2023. All rights reserved"
+    }
+  },
   "home": {
     "home-info": {
       "songs-link": "1000+ songs",
@@ -87,7 +87,18 @@
     }
   },
   "science": {
-    "stub": "Page 'Educational Section' under development"
+    "stub": "Page 'Educational Section' under development",
+    "categories": {
+      "winters": "Songs of the winter cycle",
+      "shrove": "Shrovetide, Kolodiy",
+      "spring": "Songs of the spring cycle",
+      "common": "Common songs",
+      "summer": "Songs of the summer cycle",
+      "children": "Children's folklore",
+      "wedding": "Wedding songs",
+      "epos": "Musical epic",
+      "instrumental": "Instrumental music"
+    }
   },
   "error": {
     "error-inner": {
