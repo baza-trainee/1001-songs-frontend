@@ -5,7 +5,8 @@ import { Observable, of } from 'rxjs';
 import { CategoryLinkComponent } from './category-link/category-link.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.component';
-import { scienceCategories } from 'src/app/shared/enums/scienceCategories';
+import { scienceCategories } from './category-link/categoriesList';
+//import { scienceCategories } from 'src/app/shared/enums/scienceCategories';
 
 @Component({
   selector: 'app-science',
@@ -15,7 +16,7 @@ import { scienceCategories } from 'src/app/shared/enums/scienceCategories';
   imports: [CommonModule, TranslateModule, CategoryLinkComponent, MatExpansionModule, ArrowDownComponent]
 })
 export class ScienceComponent {
-  categories: string[] = Object.values(scienceCategories);
+  categories: { translateKey: string; url: string }[] = scienceCategories;
   classDirection = 'bottom';
 
   changeDirection() {
