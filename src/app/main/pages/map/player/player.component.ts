@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -23,7 +23,8 @@ export class PlayerComponent implements OnInit, OnDestroy{
   files: IAudioData[] = [];
   currentFile: IAudioData | null = null;
   cloudServiceSubscribe: Subscription | undefined;
-
+  @ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
+  @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
   constructor(private _translate: TranslateService,
               private audioService: AudioService,
               private cloudService: CloudService,
@@ -50,6 +51,15 @@ export class PlayerComponent implements OnInit, OnDestroy{
 
   toggleDetailBtn(file: IAudioData) {
     file.isDetailOpen = !file.isDetailOpen;
+  }
+
+  openCurrentFile(file: IAudioData) {
+    if(file.isStereo && this.stereoPlayer) {
+      this.stereoPlayer.openFile(file);
+    }
+    if(file.isMultiChanel && this.multiChanelPlayer){
+      this.multiChanelPlayer.openFile(file)
+    }
   }
 
   mobileToggleDetailBtn(file: IAudioData) {

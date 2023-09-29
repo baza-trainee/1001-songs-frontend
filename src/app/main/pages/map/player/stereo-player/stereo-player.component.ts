@@ -16,6 +16,7 @@ import {Subscription} from "rxjs";
 export class StereoPlayerComponent implements OnInit, OnDestroy{
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
+  @Input() openCurrentFile!: (file: IAudioData) => void;
   secondsToRewindTrack: number = 5;
   state!: StreamStateInterface;
   showStereoPlayer: boolean = false;
@@ -71,18 +72,20 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   next() {
-    if(this.currentFile && this.currentFile.index){
+    debugger
+    if(this.currentFile && this.currentFile.index  && this.openCurrentFile){
       const index = this.currentFile.index + 1;
       const file = this.files[index];
-      this.openFile(file);
+      this.openCurrentFile(file);
     }
   }
 
   previous() {
-    if(this.currentFile && this.currentFile.index){
+    debugger
+    if(this.currentFile && this.currentFile.index && this.openCurrentFile){
       const index = this.currentFile.index - 1;
       const file = this.files[index];
-      this.openFile(file);
+      this.openCurrentFile(file);
     }
   }
 

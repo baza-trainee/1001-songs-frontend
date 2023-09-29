@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
 import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
@@ -15,6 +15,8 @@ import {AudioService} from "../../../../../shared/services/audio/audio.service";
 export class MultichanelPlayerComponent implements OnInit, OnDestroy{
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
+  @Input() openCurrentFile!: (file: IAudioData) => void;
+  @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
   secondsToRewindTrack: number = 5;
   multiChanelStates!: MultichannelStreamStateInterface[];
 
@@ -78,10 +80,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy{
   }
 
   previous() {
+    debugger
     if(this.currentFile && this.currentFile.index){
       const index = this.currentFile.index - 1;
       const file = this.files[index];
-      this.openFile(file);
+      this.openCurrentFile(file);
     }
   }
 
