@@ -17,13 +17,13 @@ import { scienceCategories } from './category-link/categoriesList';
 })
 export class ScienceComponent {
   categories: { translateKey: string; url: string }[] = scienceCategories;
-  classDirection = 'bottom';
+  expansionRecomendationArrow = 'bottom';
+  expansionSourcesArrow = 'bottom';
 
-  changeDirection() {
-    if (this.classDirection === 'bottom') {
-      this.classDirection = 'top';
-    } else {
-      this.classDirection = 'bottom';
-    }
+  rotateRecomendationArrow() {
+    this.expansionRecomendationArrow = this.expansionRecomendationArrow === 'bottom' ? 'top' : 'bottom';
+  }
+  rotateSourcesArrow() {
+    this.expansionSourcesArrow = this.expansionSourcesArrow === 'bottom' ? 'top' : 'bottom';
   }
 }

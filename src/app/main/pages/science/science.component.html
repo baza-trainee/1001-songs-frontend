@@ -1,6 +1,6 @@
 <div class="container">
   <div class="science">
-    <h2 class="science__title">Hello world</h2>
+    <h2 class="science__title">{{ 'science.title' | translate }}</h2>
     <p class="science__introduction">
       {{ 'expeditions.intro' | translate }}
     </p>
@@ -10,11 +10,26 @@
       </div>
     </div>
 
-    <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="changeDirection()" (closed)="changeDirection()">
+    <mat-expansion-panel
+      hideToggle="true"
+      class="mat-elevation-z0"
+      (opened)="rotateRecomendationArrow()"
+      (closed)="rotateRecomendationArrow()"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Рекомендації </mat-panel-title>
         <mat-panel-description>
-          <app-arrow-down [direction]="classDirection"></app-arrow-down>
+          <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="rotateSourcesArrow()" (closed)="rotateSourcesArrow()">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Рекомендовані джерела </mat-panel-title>
+        <mat-panel-description>
+          <app-arrow-down [direction]="expansionSourcesArrow"></app-arrow-down>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>I'm visible because I am open</p>
