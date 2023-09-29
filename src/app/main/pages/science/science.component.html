@@ -6,14 +6,16 @@
     </p>
     <div class="science__gallery">
       <div class="science__gallery__item" *ngFor="let category of categories">
-        <app-category-link [category]="category.translateKey | translate"></app-category-link>
+        <app-category-link [category]="category.translateKey | translate" [imgUrl]="category.url"></app-category-link>
       </div>
     </div>
 
-    <mat-expansion-panel hideToggle="true" (opened)="changeDirection()" (closed)="changeDirection()">
+    <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="changeDirection()" (closed)="changeDirection()">
       <mat-expansion-panel-header>
         <mat-panel-title> Рекомендації </mat-panel-title>
-        <mat-panel-description> <app-arrow-down [direction]="classDirection"></app-arrow-down> </mat-panel-description>
+        <mat-panel-description>
+          <app-arrow-down [direction]="classDirection"></app-arrow-down>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <p>I'm visible because I am open</p>
     </mat-expansion-panel>
