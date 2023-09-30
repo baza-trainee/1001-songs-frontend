@@ -1,9 +1,10 @@
 @import '/src/typography/typography';
+
 $radius: 15px;
 $link-x-padding: 24px;
+
 .card {
   position: relative;
-  //   border: 3px dotted red;
   border-radius: $radius;
   overflow: hidden;
   height: 100%;
