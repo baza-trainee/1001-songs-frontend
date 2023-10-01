@@ -41,7 +41,11 @@
       </div>
 
       <div class="playlist__song__card" *ngFor="let file of files">
-        <div class="song__card__header" (click)="mobileToggleDetailBtn(file)"  [class.active]="file.isDetailOpen">
+        <div class="song__card__header"
+             (click)="mobileToggleDetailBtn(file)"
+             [class.active]="file.isDetailOpen"
+             (keyup)="handleKeyUpEvent($event, file)"
+              tabindex="0">
           <div class="song__card__img" style="background-image: url({{serverStaticImgPath + 'play.png'}})"></div>
 
           <div class="song__card__name__info">
@@ -54,7 +58,12 @@
             <div class="song__info__location">с. Крячківка, Полтавська обл.</div>
           </div>
 
-          <div class="song__card__btn btn-detail" (click)="toggleDetailBtn(file)">{{ 'map.player.songs-list.song-card.detail-button' | translate  }}</div>
+          <div class="song__card__btn btn-detail"
+               (click)="toggleDetailBtn(file)"
+               (keyup)="handleKeyUpEvent($event, file)"
+               tabindex="0">
+            {{ 'map.player.songs-list.song-card.detail-button' | translate  }}
+          </div>
 
           <div class="song__card__listen" >
             <button class="btn__listen"

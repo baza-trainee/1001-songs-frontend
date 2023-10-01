@@ -86,4 +86,10 @@ export class PlayerComponent implements OnInit, OnDestroy{
     return
   }
 
+  handleKeyUpEvent(event: Event, file: IAudioData){
+    if(event && event.isTrusted){
+      this.mobileToggleDetailBtn(file);
+    }
+  }
+
 }
