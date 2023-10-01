@@ -133,7 +133,6 @@ export class MultichanelAudioService {
   }
 
   stopAll(): void {
-    // Удаляем все предыдущие аудио-объекты и состояния
     this.audioObjects.forEach(audioObj => {
       audioObj.pause();
     });

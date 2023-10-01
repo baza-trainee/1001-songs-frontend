@@ -72,7 +72,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   next() {
-    debugger
     if(this.currentFile && this.currentFile.index  && this.openCurrentFile){
       const index = this.currentFile.index + 1;
       const file = this.files[index];
@@ -81,7 +80,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   previous() {
-    debugger
     if(this.currentFile && this.currentFile.index && this.openCurrentFile){
       const index = this.currentFile.index - 1;
       const file = this.files[index];
