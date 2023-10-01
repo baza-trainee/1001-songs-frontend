@@ -34,10 +34,7 @@ export class MultichanelAudioService {
     };
   }
 
-
   showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);

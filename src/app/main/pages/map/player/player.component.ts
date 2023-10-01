@@ -21,7 +21,7 @@ export class PlayerComponent implements OnInit, OnDestroy{
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   files: IAudioData[] = [];
-  currentFile: IAudioData | null = null;
+  currentFile!: IAudioData;
   cloudServiceSubscribe: Subscription | undefined;
   @ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
   @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
@@ -59,6 +59,22 @@ export class PlayerComponent implements OnInit, OnDestroy{
     }
     if(file.isMultiChanel && this.multiChanelPlayer){
       this.multiChanelPlayer.openFile(file)
+    }
+  }
+
+  nextSong() {
+    if(this.currentFile && this.currentFile.index){
+      const index = this.currentFile.index + 1;
+      const file = this.files[index];
+      this.openCurrentFile(file);
+    }
+  }
+
+  previousSong() {
+    if(this.currentFile && this.currentFile.index){
+      const index = this.currentFile.index - 1;
+      const file = this.files[index];
+      this.openCurrentFile(file);
     }
   }
 

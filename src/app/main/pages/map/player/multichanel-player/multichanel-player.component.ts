@@ -16,6 +16,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy{
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
   @Input() openCurrentFile!: (file: IAudioData) => void;
+  @Input() nextSong!: () => void;
+  @Input() previousSong!: () => void;
   @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
   secondsToRewindTrack: number = 5;
   multiChanelStates!: MultichannelStreamStateInterface[];
@@ -72,20 +74,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy{
   }
 
   next() {
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index + 1;
-      const file = this.files[index];
-      this.openFile(file);
-    }
+    this.nextSong();
   }
 
   previous() {
-    debugger
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index - 1;
-      const file = this.files[index];
-      this.openCurrentFile(file);
-    }
+    this.previousSong();
   }
 
   backward(value: string) {

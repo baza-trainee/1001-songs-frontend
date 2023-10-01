@@ -41,12 +41,8 @@ export class CloudService {
       },
       media: {
         id: 1,
-        stereo_audio: "",
-        multichannel_audio: [
-          "./assets/music/mc_song/chanel01.mp3",
-          "./assets/music/mc_song/chanel02.mp3",
-          "./assets/music/mc_song/chanel03.mp3"
-        ],
+        stereo_audio: "./assets/music/tiesto1.mp3",
+        multichannel_audio: [],
         video_file: "",
         text: "",
         image: ""
@@ -80,8 +76,12 @@ export class CloudService {
       },
       media: {
         id: 2,
-        stereo_audio: "./assets/music/tiesto1.mp3",
-        multichannel_audio: [],
+        stereo_audio: "",
+        multichannel_audio: [
+          "./assets/music/mc_song/chanel01.mp3",
+          "./assets/music/mc_song/chanel02.mp3",
+          "./assets/music/mc_song/chanel03.mp3"
+        ],
         video_file: "",
         text: "",
         image: ""
