@@ -28,6 +28,7 @@
     "@angular/router": "^16.1.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@ngxs/store": "^3.8.1",
     "angular-cli-ghpages": "^1.0.6",
     "e2e": "0.0.8",
     "lint-staged": "^13.2.2",

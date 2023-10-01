@@ -1,39 +1,52 @@
 <mat-dialog-content class="dialog">
-  <img class="dialog__image" src="./assets/img/home/Donation/dialog-image.png" alt="dialog share image">
-  <p class="dialog__text"> {{ 'share.dialog.text' | translate }} </p>
+  <img class="dialog__image" [src]="ShareModal.dialogImage" alt="dialog share image">
+  <p class="dialog__text">{{ ShareModalLink.text | translate }}</p>
+  <button
+    tabindex="0"
+    (keyup)="closeDialog()"
+    (click)="closeDialog()"
+    class="dialog__close">
+    <img [src]="ShareModal.close" alt="close" class="dialog__close-img">
+  </button>
 </mat-dialog-content>
 <mat-dialog-actions class="dialog__action">
   <div class="dialog__action-block">
-    <a href="#">
-      <img src="./assets/img/home/Donation/facebook.svg" alt="facebook share icon">
+    <a
+      tabindex="0"
+      href="#">
+      <img [src]="ShareModal.facebook" alt="facebook share icon">
     </a>
-    <a class="dialog__action-block--text" href="#">Facebook</a>
+    <a class="dialog__action-block--text" href="#">{{ ShareModalLink.facebook | translate }}</a>
   </div>
   <div class="dialog__action-block">
-    <a href="#">
-      <img src="./assets/img/home/Donation/instagram.svg" alt="instagram share icon">
+    <a
+      tabindex="0"
+      href="#">
+      <img [src]="ShareModal.instagram" alt="instagram share icon">
     </a>
-    <a class="dialog__action-block--text" href="#">Instagram</a>
+    <a class="dialog__action-block--text" href="#">{{ ShareModalLink.instagram | translate }}</a>
   </div>
   <div class="dialog__action-block">
-    <a href="#">
-      <img src="./assets/img/home/Donation/telegram.svg" alt="telegram share icon">
+    <a
+      tabindex="0"
+      href="#">
+      <img [src]="ShareModal.telegram" alt="telegram share icon">
     </a>
-    <a class="dialog__action-block--text" href="#">Telegram</a>
+    <a class="dialog__action-block--text" href="#">{{ ShareModalLink.telegram | translate }}</a>
   </div>
   <div class="dialog__action-block">
     <button
       type="button"
       class="dialog__action-block--btn"
       (click)="copyCurrentUrl()"
+      tabindex="0"
     >
-      <img src="./assets/img/home/Donation/share-copy.svg" alt="copy share icon">
+      <img [src]="ShareModal.copy" alt="copy share icon">
     </button>
     <p
       (click)="copyCurrentUrl()"
       (keypress)="copyCurrentUrl()"
       tabindex="0"
-      class="dialog__action-block--text"> {{ 'share.dialog.copy' | translate }}</p>
+      class="dialog__action-block--text"> {{ ShareModalLink.copy | translate }}</p>
   </div>
 </mat-dialog-actions>
-

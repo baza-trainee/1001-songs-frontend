@@ -1,4 +1,5 @@
 <header class="header">
+   <app-preloader *ngIf="isLoading$ | async"></app-preloader>
    <nav class="nav">
       <div class="logo">
          <a class="logo__link" routerLink = "" routerLinkActive="active"><img class="logo__link-img" src="./assets/img/header/logo.png" alt="logo"></a>

@@ -1,4 +1,4 @@
-<section class="map">
-  <div class="map-container"></div>
+<div class="map">
+  <app-interacive-map [markers]="markers$ | async" (markerClicked)="handleMapEmit($event)"></app-interacive-map>
   <app-player></app-player>
-</section>
+</div>

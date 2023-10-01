@@ -2,8 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ExpeditionsService } from './expeditions.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { BehaviorSubject } from 'rxjs';
-import { testCategories, testExpeditionsData } from 'src/mock-data/tests';
+import { testExpeditionsData } from 'src/app/mock-data/tests';
 import { environment } from 'src/environments/environment';
 
 describe('ExpeditionsService', () => {
@@ -19,25 +18,12 @@ describe('ExpeditionsService', () => {
   });
 
   it('can test HttpClient.get', () => {
-    service.getExpeditions().subscribe((data) => {
+    service.fetchExpeditions().subscribe((data) => {
       expect(data).toEqual(testExpeditionsData);
     });
-    const req = httpTestingController.expectOne(environment.baseUrl+'expeditions');
+    const req = httpTestingController.expectOne(environment.baseUrl + 'expeditions');
     req.flush(testExpeditionsData);
     httpTestingController.verify();
-  });
-
-  it('should return array of categories', () => {
-    const categories = service.getCategories();
-    expect(categories).toEqual(testCategories);
-  });
-
-  it('should return subscribtion for array of Iexpeditions', () => {
-    spyOn(service, 'getExpeditions').and.returnValue(new BehaviorSubject(testExpeditionsData));
-    const exps = service.getExpeditions();
-    exps.subscribe((data) => {
-      expect(data).toEqual(testExpeditionsData);
-    });
   });
 
   it('should be created', () => {

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {HomeMapComponent, Marker} from './home-map.component';
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {GoogleMapsModule } from "@angular/google-maps";
+import { InteraciveMapComponent } from './interacive-map.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { Marker } from '../../interfaces/map-marker';
 
 export const google = {
   maps: {
@@ -17,33 +18,33 @@ export const google = {
     Map: class {
       setOptions() {}
       fitBounds() {}
-    },
-  },
+    }
+  }
 };
 
 export const fakeSelectedMarker = {
   key: 'marker1',
   position: { lat: 0, lng: 0 },
-  popup: {title: '', photoUrl: '', countRecords: 0, link: ''}
-}
+  popup: { title: '', photoUrl: '', countRecords: 0, link: '' }
+};
 class googleMock {}
 
 describe('HomeMapComponent', () => {
-  let component: HomeMapComponent;
-  let fixture: ComponentFixture<HomeMapComponent>;
+  let component: InteraciveMapComponent;
+  let fixture: ComponentFixture<InteraciveMapComponent>;
   let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HomeMapComponent, GoogleMapsModule],
+      imports: [TranslateModule.forRoot(), InteraciveMapComponent, GoogleMapsModule],
       providers: [TranslateService]
     });
 
     (window as unknown as { google: googleMock }).google = google;
 
     translateService = TestBed.inject(TranslateService);
-    fixture = TestBed.createComponent(HomeMapComponent);
-    component = new HomeMapComponent(translateService);
+    fixture = TestBed.createComponent(InteraciveMapComponent);
+    component = new InteraciveMapComponent(translateService);
     fixture.detectChanges();
   });
 

@@ -7,17 +7,17 @@
     <div>
       <ul class="expeditions__categories">
         <li
-          *ngFor="let category of categories; let i = index"
+          *ngFor="let category of categories | keyvalue; let i = index"
           tabindex="0"
           role="button"
           (click)="selectCategory(i)"
           (keypress)="selectCategory(i)"
         >
-          <a [class.expeditions__selected-category]="i === selectedCategory"> {{ category | translate }}</a>
+          <a [class.expeditions__selected-category]="i === selectedCategory"> {{ category.value | translate }}</a>
         </li>
       </ul>
     </div>
-    <div class="expeditions__gallery" *ngIf="$expeditions | async as expeditions">
+    <div class="expeditions__gallery" *ngIf="expeditions$ | async as expeditions">
       <div *ngFor="let event of expeditions" class="expeditions__gallery__item">
         <app-expedition-card [event]="event"></app-expedition-card>
       </div>
