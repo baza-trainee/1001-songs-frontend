@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayerComponent } from './player.component';
-import {ActivatedRoute} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, } from "@ngx-translate/core";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('PlayerComponent', () => {
   let component: PlayerComponent;
@@ -10,18 +10,7 @@ describe('PlayerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PlayerComponent],
-      providers: [TranslateService,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              data: {
-              }
-            }
-          }
-        }
-      ]
+      imports: [TranslateModule.forRoot(), HttpClientModule, PlayerComponent],
     });
     fixture = TestBed.createComponent(PlayerComponent);
     component = fixture.componentInstance;
