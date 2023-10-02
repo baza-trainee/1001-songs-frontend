@@ -10,7 +10,9 @@
       </div>
     </div>
 
-    <div class="pagination">
+    <app-recomendation></app-recomendation>
+
+    <!-- <div class="pagination">
       <button class="pagination__navigation"><app-navigation-next></app-navigation-next></button>
       <button class="pagination__navigation pagination__number" *ngFor="let page of recomendationPages">{{ page }}</button>
       <button class="pagination__navigation"><app-navigation-next pointTo="right"></app-navigation-next></button>
@@ -28,18 +30,18 @@
           <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <!-- <div class="science__recomendations__content"> -->
+      <div class="science__recomendations__content">
       <ng-container *ngFor="let recomendation of recomendations">
         <p>
           {{ recomendation }}
         </p>
         <br />
       </ng-container>
-      <!-- <div class="pagination">
+      <div class="pagination">
         <button class="btn mat-elevation-z0" ><</button>
-      </div> -->
-      <!-- </div> -->
-    </mat-expansion-panel>
+      </div> 
+      </div>
+    </mat-expansion-panel> -->
 
     <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="rotateSourcesArrow()" (closed)="rotateSourcesArrow()">
       <mat-expansion-panel-header>

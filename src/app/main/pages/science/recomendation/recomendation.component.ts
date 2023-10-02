@@ -15,8 +15,11 @@ import { recomendations } from '../category-link/recomendations';
 export class RecomendationComponent implements OnInit {
   expansionRecomendationArrow = 'bottom';
   recomendations? = recomendations;
+  recomendationPages: number[] = [1];
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.recomendationPages = Array.from(Array(Math.floor(recomendations!.length / 5) + (recomendations.length % 5)).keys()).map(
+      (el) => el + 1
+    );
   }
   rotateRecomendationArrow() {
     this.expansionRecomendationArrow = this.expansionRecomendationArrow === 'bottom' ? 'top' : 'bottom';

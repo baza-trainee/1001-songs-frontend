@@ -7,13 +7,22 @@ import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.componen
 import { scienceCategories } from './category-link/categoriesList';
 import { recomendations } from './category-link/recomendations';
 import { NavigationNextComponent } from 'src/app/icons/navigation-next/navigation-next.component';
+import { RecomendationComponent } from './recomendation/recomendation.component';
 
 @Component({
   selector: 'app-science',
   templateUrl: './science.component.html',
   styleUrls: ['./science.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, CategoryLinkComponent, MatExpansionModule, ArrowDownComponent, NavigationNextComponent]
+  imports: [
+    CommonModule,
+    TranslateModule,
+    CategoryLinkComponent,
+    MatExpansionModule,
+    ArrowDownComponent,
+    NavigationNextComponent,
+    RecomendationComponent
+  ]
 })
 export class ScienceComponent implements OnInit {
   categories: { translateKey: string; url: string }[] = scienceCategories;
