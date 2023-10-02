@@ -1,0 +1,20 @@
+<mat-expansion-panel
+  hideToggle="true"
+  class="mat-elevation-z0 science__recomendations"
+  (opened)="rotateRecomendationArrow()"
+  (closed)="rotateRecomendationArrow()"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Рекомендації </mat-panel-title>
+    <mat-panel-description>
+      <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <!-- <div class="science__recomendations__content"> -->
+  <ng-container *ngFor="let recomendation of recomendations">
+    <p>
+      {{ recomendation }}
+    </p>
+    <br />
+  </ng-container>
+</mat-expansion-panel>
