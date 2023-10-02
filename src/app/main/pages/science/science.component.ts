@@ -17,12 +17,16 @@ import { NavigationNextComponent } from 'src/app/icons/navigation-next/navigatio
 })
 export class ScienceComponent implements OnInit {
   categories: { translateKey: string; url: string }[] = scienceCategories;
-  recomendations = recomendations;
+  recomendations? = recomendations;
+  recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
 
   ngOnInit(): void {
     console.log(recomendations.length);
+    this.recomendationPages = Array.from(Array(Math.floor(recomendations!.length / 5) + (recomendations.length % 5)).keys()).map(
+      (el) => el + 1
+    );
   }
 
   rotateRecomendationArrow() {
