@@ -11,9 +11,18 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class="pagination">
-    <button class="pagination__navigation"><app-navigation-next></app-navigation-next></button>
-    <button class="pagination__navigation pagination__number" *ngFor="let page of recomendationPages">{{ page }}</button>
-    <button class="pagination__navigation"><app-navigation-next pointTo="right"></app-navigation-next></button>
+    <button class="pagination__navigation" (click)="navigateToNextPage(-1)"><app-navigation-next></app-navigation-next></button>
+    <button
+      class="pagination__navigation pagination__number"
+      *ngFor="let page of recomendationPages"
+      [ngClass]="{ 'current-page': page === currentPage }"
+      (click)="navigateToPage(page)"
+    >
+      {{ page }}
+    </button>
+    <button class="pagination__navigation" (click)="navigateToNextPage(1)">
+      <app-navigation-next pointTo="right"></app-navigation-next>
+    </button>
   </div>
   <ng-container *ngFor="let recomendation of recomendations">
     <p>
