@@ -13,3 +13,27 @@
   border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 7px;
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  &__navigation {
+    border: 1px solid rgba(0, 0, 0, 20%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: inherit;
+    line-height: 3px;
+    // padding-top: 3px;
+    // padding-right: 3px;
+  }
+  &__number {
+    background-color: yellow;
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 0px;
+    // padding-bottom: 3px;
+    .selected {
+    }
+  }
+}
