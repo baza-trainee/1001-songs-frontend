@@ -1,4 +1,5 @@
 export interface Song {
+  isDetailOpen?: boolean;
   id: string;
   title: string;
   recording_date: string;
