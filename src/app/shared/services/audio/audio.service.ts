@@ -26,7 +26,6 @@ export class AudioService {
   private streamObservable(url: string) {
     return new Observable((observer) => {
       // Play audio
-      console.log('work');
       this.audioObj.src = url;
       this.audioObj.load();
       this.audioObj.play();
@@ -49,6 +48,10 @@ export class AudioService {
     });
   }
 
+  playStream(url: string) {
+    return this.streamObservable(url).pipe(takeUntil(this.stop$));
+  }
+
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
     events.forEach((event) => {
       obj.addEventListener(event, handler);
@@ -59,10 +62,6 @@ export class AudioService {
     events.forEach((event) => {
       obj.removeEventListener(event, handler);
     });
-  }
-
-  playStream(url: string) {
-    return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }
 
   play() {

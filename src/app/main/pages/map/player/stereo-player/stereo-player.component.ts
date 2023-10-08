@@ -4,7 +4,7 @@ import { IAudioData } from '../../../../../shared/interfaces/audio-data.interfac
 import { StreamStateInterface } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Song } from 'src/app/shared/interfaces/song';
 import { Select } from '@ngxs/store';
@@ -18,17 +18,19 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
   styleUrls: ['./stereo-player.component.scss']
 })
 export class StereoPlayerComponent implements OnInit, OnDestroy {
+  private REWIND_STEP: number = 5;
   @Input() files: IAudioData[] = [];
   @Input() currentFile: Song | null = null;
   @Input() openCurrentFile!: (file: IAudioData) => void;
   secondsToRewindTrack: number = 5;
   state!: StreamStateInterface;
   showStereoPlayer: boolean = false;
-  private playStreamSubscription: Subscription | undefined;
-  private getStateSubscription: Subscription | undefined;
+  //  private playStreamSubscription: Subscription | undefined;
+ // private getStateSubscription: Subscription | undefined;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
-  // state$!: Observable<StreamStateInterface>;
-  sliderv: BehaviorSubject<number> = new BehaviorSubject(0);
+  state$!: Observable<StreamStateInterface>;
+  subState!: Subscription;
+  isPreloader = false;
 
   constructor(
     private audioService: AudioService,
@@ -47,28 +49,34 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
         this.openFile(s);
       }
     });
-    // this.state$ = this.audioService.getState();
-    this.getStateSubscription = this.audioService.getState().subscribe((state) => {
-      console.log(state);
-      this.state = state;
-      if (state.currentTime) this.sliderv.next(state.currentTime);
+    this.state$ = this.audioService.getState();
+    // this.getStateSubscription = this.audioService.getState().subscribe((state) => {
+    //   console.log(state);
+    //   this.state = state;
+    //   //if (state.currentTime) this.sliderv.next(state.currentTime);
+    // });
+    this.subState = this.state$.subscribe((ev) => {
+      if (ev.canplay && this.isPreloader) {
+        this.isPreloader = false;
+      }
     });
   }
 
   ngOnDestroy() {
     this.stop();
     //  this.resetStereoPlayerState();
-    this.playStreamSubscription?.unsubscribe();
+    //  this.playStreamSubscription?.unsubscribe();
     this.audioService.showStereoPlayer$.next(false);
-    this.getStateSubscription?.unsubscribe();
+   // this.getStateSubscription?.unsubscribe();
   }
 
   playStream(url: string) {
-    this.playStreamSubscription = this.audioService.playStream(url).subscribe();
+    this.audioService.playStream(url).subscribe();
   }
 
   openFile(file: Song) {
     //console.log(this.state);
+    this.isPreloader = true;
     this.currentFile = file;
     this.multiChanelAudioService.stopAll();
     this.audioService.stop();
@@ -105,12 +113,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  backward(value: string) {
-    this.audioService.seekTo(Number(value) - this.secondsToRewindTrack);
+  backward(currentTime: number | undefined) {
+    this.audioService.seekTo(Number(currentTime) - this.REWIND_STEP);
   }
 
-  forward(value: string) {
-    this.audioService.seekTo(Number(value) + this.secondsToRewindTrack);
+  forward(currentTime: number | undefined) {
+    this.audioService.seekTo(Number(currentTime) + this.REWIND_STEP);
   }
 
   isFirstPlaying() {
