@@ -4,7 +4,7 @@ import { IAudioData } from '../../../../../shared/interfaces/audio-data.interfac
 import { StreamStateInterface } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Song } from 'src/app/shared/interfaces/song';
 import { Select } from '@ngxs/store';
@@ -19,7 +19,7 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 })
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   @Input() files: IAudioData[] = [];
-  @Input() currentFile: IAudioData | null = null;
+  @Input() currentFile: Song | null = null;
   @Input() openCurrentFile!: (file: IAudioData) => void;
   secondsToRewindTrack: number = 5;
   state!: StreamStateInterface;
@@ -27,36 +27,39 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   private playStreamSubscription: Subscription | undefined;
   private getStateSubscription: Subscription | undefined;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
+  // state$!: Observable<StreamStateInterface>;
+  sliderv: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(
     private audioService: AudioService,
     private multiChanelAudioService: MultichanelAudioService,
     private cloudService: CloudService
   ) {
-    this.audioService.showStereoPlayerSubject.subscribe((showStereoPlayer) => {
+    this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {
       this.showStereoPlayer = showStereoPlayer;
     });
   }
 
   ngOnInit() {
     this.selectedSong$?.subscribe((s) => {
-      console.log(s);
+      // console.log('state', this.state);
       if (s.media) {
-        this.playStream(this.cloudService.preparateGoogleDriveFileUrl(s.media.stereo_audio));
-        //this.openFile(s)
+        this.openFile(s);
       }
     });
-
+    // this.state$ = this.audioService.getState();
     this.getStateSubscription = this.audioService.getState().subscribe((state) => {
+      console.log(state);
       this.state = state;
+      if (state.currentTime) this.sliderv.next(state.currentTime);
     });
   }
 
   ngOnDestroy() {
     this.stop();
-    this.resetStereoPlayerState();
+    //  this.resetStereoPlayerState();
     this.playStreamSubscription?.unsubscribe();
-    this.audioService.showStereoPlayerSubject.next(false);
+    this.audioService.showStereoPlayer$.next(false);
     this.getStateSubscription?.unsubscribe();
   }
 
@@ -64,13 +67,14 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.playStreamSubscription = this.audioService.playStream(url).subscribe();
   }
 
-  openFile(file: IAudioData) {
+  openFile(file: Song) {
+    //console.log(this.state);
     this.currentFile = file;
     this.multiChanelAudioService.stopAll();
     this.audioService.stop();
-    this.audioService.showStereoPlayerSubject.next(true);
+    this.audioService.showStereoPlayer$.next(true);
     this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
-    this.playStream(file.media.stereo_audio);
+    this.playStream(this.cloudService.preparateGoogleDriveFileUrl(file.media.stereo_audio));
   }
 
   pause() {
@@ -131,11 +135,11 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.audioService.seekTo(sliderValue);
   }
 
-  resetStereoPlayerState() {
-    this.state.playing = false;
-    this.state.currentTime = 0;
-    this.state.readableCurrentTime = this.audioService.formatTime(0);
-    this.state.duration = 0;
-    this.state.readableDuration = this.audioService.formatTime(0);
-  }
+  // resetStereoPlayerState() {
+  //   this.state.playing = false;
+  //   this.state.currentTime = 0;
+  //   this.state.readableCurrentTime = this.audioService.formatTime(0);
+  //   this.state.duration = 0;
+  //   this.state.readableDuration = this.audioService.formatTime(0);
+  // }
 }

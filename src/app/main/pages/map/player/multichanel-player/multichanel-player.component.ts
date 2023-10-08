@@ -52,7 +52,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy{
     this.currentFile = file;
     this.audioService.stop();
     this.multiChanelAudioService.stopAll();
-    this.audioService.showStereoPlayerSubject.next(false);
+    this.audioService.showStereoPlayer$.next(false);
     this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
     this.playStream(file.media.multichannel_audio);
   }

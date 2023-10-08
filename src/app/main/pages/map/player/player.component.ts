@@ -53,13 +53,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // private playerService: PlayerService,
     private store: Store
   ) {
-    this.audioService.showStereoPlayerSubject.next(true);
+    this.audioService.showStereoPlayer$.next(true);
     //this.selectedSong = songs[0]
   }
 
   ngOnInit() {
     this.store.dispatch(new FetchSongsByLocation(this.location));
-    this.songs$?.subscribe((s) => console.log(s));
+    //this.songs$?.subscribe((s) => console.log(s));
     // this.selectedSong$?.subscribe((song) => {
     //   if (song.title) {
     //     console.log(song);
