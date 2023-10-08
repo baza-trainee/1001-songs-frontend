@@ -3,6 +3,7 @@ import {IAudioData} from "../../interfaces/audio-data.interface";
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import { Song } from '../../interfaces/song';
 
 @Injectable({
   providedIn: 'root'
@@ -208,6 +209,11 @@ export class CloudService {
   getFiles() {
     return of(this.files);
   }
+
+  getSongsByLocation(locationName: string): Observable<Song[]> {
+    return this.http.get<Song[]>(`https://song-0gm4.onrender.com/api/v1/songs_location/?location=${locationName}`);
+  }
+
 
   getAudioData(): Observable<IAudioData[]>{
     return this.http.get<IAudioData[]>(environment.api + 'songs');
