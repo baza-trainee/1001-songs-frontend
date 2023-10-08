@@ -44,7 +44,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   //@ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
   @Select(PlaylistState.getSongs) songs$?: Observable<Song[]>;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
-  selectedSong = '';
+  //selectedSong = '';
   location = 'Ромейки';
   constructor(
     private _translate: TranslateService,

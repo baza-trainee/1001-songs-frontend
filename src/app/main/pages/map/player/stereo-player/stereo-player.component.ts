@@ -4,11 +4,12 @@ import { IAudioData } from '../../../../../shared/interfaces/audio-data.interfac
 import { StreamStateInterface } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
-import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, take, tap } from 'rxjs';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Song } from 'src/app/shared/interfaces/song';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
+import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
 
 @Component({
   selector: 'app-stereo-player',
@@ -26,16 +27,20 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   state!: StreamStateInterface;
   showStereoPlayer: boolean = false;
   //  private playStreamSubscription: Subscription | undefined;
- // private getStateSubscription: Subscription | undefined;
+  // private getStateSubscription: Subscription | undefined;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
+ // @Select(PlaylistState.getSongs) songs$?: Observable<Song[]>;
   state$!: Observable<StreamStateInterface>;
   subState!: Subscription;
   isPreloader = false;
+  // isFirstPlaying = false;
+  // isLastPlaying = false;
 
   constructor(
     private audioService: AudioService,
     private multiChanelAudioService: MultichanelAudioService,
-    private cloudService: CloudService
+    private cloudService: CloudService,
+    private store: Store
   ) {
     this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {
       this.showStereoPlayer = showStereoPlayer;
@@ -43,13 +48,14 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedSong$?.subscribe((s) => {
+    this.selectedSong$?.subscribe((song) => {
       // console.log('state', this.state);
-      if (s.media) {
-        this.openFile(s);
+      if (song.media) {
+        this.openFile(song);
       }
     });
     this.state$ = this.audioService.getState();
+
     // this.getStateSubscription = this.audioService.getState().subscribe((state) => {
     //   console.log(state);
     //   this.state = state;
@@ -67,7 +73,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     //  this.resetStereoPlayerState();
     //  this.playStreamSubscription?.unsubscribe();
     this.audioService.showStereoPlayer$.next(false);
-   // this.getStateSubscription?.unsubscribe();
+    // this.getStateSubscription?.unsubscribe();
   }
 
   playStream(url: string) {
@@ -98,19 +104,21 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
-      const index = this.currentFile.index + 1;
-      const file = this.files[index];
-      this.openCurrentFile(file);
-    }
+    this.store.dispatch(new SelectNext());
+    // if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
+    //   const index = this.currentFile.index + 1;
+    //   const file = this.files[index];
+    //   this.openCurrentFile(file);
+    // }
   }
 
   previous() {
-    if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
-      const index = this.currentFile.index - 1;
-      const file = this.files[index];
-      this.openCurrentFile(file);
-    }
+    this.store.dispatch(new SelectPrev());
+    // if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
+    //   const index = this.currentFile.index - 1;
+    //   const file = this.files[index];
+    //   this.openCurrentFile(file);
+    // }
   }
 
   backward(currentTime: number | undefined) {
@@ -121,21 +129,21 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.audioService.seekTo(Number(currentTime) + this.REWIND_STEP);
   }
 
-  isFirstPlaying() {
-    if (this.currentFile) {
-      return this.currentFile.index === 0;
-    } else {
-      return;
-    }
-  }
+  // isFirstPlaying() {
+  //   if (this.currentFile) {
+  //     return this.currentFile.index === 0;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
-  isLastPlaying() {
-    if (this.currentFile) {
-      return this.currentFile.index === this.files.length - 1;
-    } else {
-      return;
-    }
-  }
+  // isLastPlaying() {
+  //   if (this.currentFile) {
+  //     return this.currentFile.index === this.files.length - 1;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSliderChangeEnd(event: any) {

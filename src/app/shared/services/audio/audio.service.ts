@@ -2,6 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { StreamStateInterface } from '../../interfaces/stream-state.interface';
 import * as moment from 'moment';
+enum events {
+  ended = 'ended',
+  error = 'error',
+  play = 'play',
+  playing = 'playing',
+  pause = 'pause',
+  timeupdate = 'timeupdate',
+  canplay = 'canplay',
+  loadedmetadata = 'loadedmetadata',
+  loadstart = 'loadstart'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +46,7 @@ export class AudioService {
         observer.next(event);
       };
 
-      this.addEvents(this.audioObj, this.audioEvents, handler);
+      this.addEvents(this.audioObj, Object.values(events), handler);
       return () => {
         // Stop Playing
         this.audioObj.pause();
