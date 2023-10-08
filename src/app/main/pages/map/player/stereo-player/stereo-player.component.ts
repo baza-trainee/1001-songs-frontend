@@ -1,10 +1,14 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
-import {StreamStateInterface} from "../../../../../shared/interfaces/stream-state.interface";
-import {AudioService} from "../../../../../shared/services/audio/audio.service";
-import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
-import {Subscription} from "rxjs";
+import { IAudioData } from '../../../../../shared/interfaces/audio-data.interface';
+import { StreamStateInterface } from '../../../../../shared/interfaces/stream-state.interface';
+import { AudioService } from '../../../../../shared/services/audio/audio.service';
+import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
+import { Observable, Subscription } from 'rxjs';
+import { PlaylistState } from 'src/app/store/playlist/playlist.state';
+import { Song } from 'src/app/shared/interfaces/song';
+import { Select } from '@ngxs/store';
+import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 
 @Component({
   selector: 'app-stereo-player',
@@ -13,7 +17,7 @@ import {Subscription} from "rxjs";
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
-export class StereoPlayerComponent implements OnInit, OnDestroy{
+export class StereoPlayerComponent implements OnInit, OnDestroy {
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
   @Input() openCurrentFile!: (file: IAudioData) => void;
@@ -22,20 +26,30 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   showStereoPlayer: boolean = false;
   private playStreamSubscription: Subscription | undefined;
   private getStateSubscription: Subscription | undefined;
+  @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
 
-  constructor(private audioService: AudioService,
-              private multiChanelAudioService: MultichanelAudioService,
-              ) {
-    this.audioService.showStereoPlayerSubject.subscribe(showStereoPlayer => {
+  constructor(
+    private audioService: AudioService,
+    private multiChanelAudioService: MultichanelAudioService,
+    private cloudService: CloudService
+  ) {
+    this.audioService.showStereoPlayerSubject.subscribe((showStereoPlayer) => {
       this.showStereoPlayer = showStereoPlayer;
     });
   }
 
   ngOnInit() {
-    this.getStateSubscription = this.audioService.getState()
-      .subscribe(state => {
-        this.state = state;
-      });
+    this.selectedSong$?.subscribe((s) => {
+      console.log(s);
+      if (s.media) {
+        this.playStream(this.cloudService.preparateGoogleDriveFileUrl(s.media.stereo_audio));
+        //this.openFile(s)
+      }
+    });
+
+    this.getStateSubscription = this.audioService.getState().subscribe((state) => {
+      this.state = state;
+    });
   }
 
   ngOnDestroy() {
@@ -72,7 +86,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   next() {
-    if(this.currentFile && this.currentFile.index  && this.openCurrentFile){
+    if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
       const index = this.currentFile.index + 1;
       const file = this.files[index];
       this.openCurrentFile(file);
@@ -80,7 +94,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   previous() {
-    if(this.currentFile && this.currentFile.index && this.openCurrentFile){
+    if (this.currentFile && this.currentFile.index && this.openCurrentFile) {
       const index = this.currentFile.index - 1;
       const file = this.files[index];
       this.openCurrentFile(file);
@@ -96,23 +110,23 @@ export class StereoPlayerComponent implements OnInit, OnDestroy{
   }
 
   isFirstPlaying() {
-    if(this.currentFile) {
+    if (this.currentFile) {
       return this.currentFile.index === 0;
     } else {
-      return
+      return;
     }
   }
 
   isLastPlaying() {
-    if(this.currentFile) {
+    if (this.currentFile) {
       return this.currentFile.index === this.files.length - 1;
     } else {
-      return
+      return;
     }
   }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSliderChangeEnd(event:  any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSliderChangeEnd(event: any) {
     const sliderValue = event.target.value;
     this.audioService.seekTo(sliderValue);
   }

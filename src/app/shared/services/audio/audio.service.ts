@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject, takeUntil} from "rxjs";
-import {StreamStateInterface} from "../../interfaces/stream-state.interface";
-import * as moment from "moment";
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { StreamStateInterface } from '../../interfaces/stream-state.interface';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioService {
-  private stop$: Subject<void>  = new Subject<void>();
+  private stop$: Subject<void> = new Subject<void>();
   private audioObj: HTMLAudioElement = new Audio();
-  audioEvents: string[] = [
-    'ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'
-  ];
+  audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
 
   private state: StreamStateInterface = {
     playing: false,
@@ -20,14 +18,15 @@ export class AudioService {
     duration: undefined,
     currentTime: undefined,
     canplay: false,
-    error: false,
+    error: false
   };
 
   showStereoPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private streamObservable(url: string) {
-    return new Observable(observer => {
+    return new Observable((observer) => {
       // Play audio
+      console.log('work');
       this.audioObj.src = url;
       this.audioObj.load();
       this.audioObj.play();
@@ -51,13 +50,13 @@ export class AudioService {
   }
 
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
-    events.forEach(event => {
+    events.forEach((event) => {
       obj.addEventListener(event, handler);
     });
   }
 
   private removeEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
-    events.forEach(event => {
+    events.forEach((event) => {
       obj.removeEventListener(event, handler);
     });
   }
