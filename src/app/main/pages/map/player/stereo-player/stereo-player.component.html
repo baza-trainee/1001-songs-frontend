@@ -1,5 +1,11 @@
 <div *ngIf="state$ | async as state">
-  <div class="player__container" *ngIf="showStereoPlayer" [class.empty]="!state.canplay" [class.loading]="isPreloader">
+  <div
+    class="player__container"
+    *ngIf="showStereoPlayer"
+    [class.empty]="!state.canplay"
+    [class.loading]="isPreloader"
+    style="border: 2px solid blue"
+  >
     <div class="player__actions">
       <button class="btn__player back" (click)="backward(state.currentTime)">
         <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
