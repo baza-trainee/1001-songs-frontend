@@ -3,13 +3,8 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { SetIsLoading } from '../app/app.actions';
-//import { FetchSongs } from './player.actions';
-import { IAudioData } from 'src/app/shared/interfaces/audio-data.interface';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { FetchSongsByLocation, SelectNext, SelectPrev, SelectSong } from './playlist.actions';
-import { songs } from 'src/app/mock-data/songs';
-// import { PlayerService } from 'src/app/shared/services/audio/player.service';
-// import { songs } from 'src/app/mock-data/songs';
 
 export interface PlaylistStateModel {
   songsList: Song[];
@@ -27,7 +22,6 @@ export interface PlaylistStateModel {
 export class PlaylistState {
   constructor(
     private cloudService: CloudService,
-    //private Service: PlayerService,
     private store: Store
   ) {}
 
@@ -44,7 +38,6 @@ export class PlaylistState {
   @Action(SelectNext)
   selectNext(ctx: StateContext<PlaylistStateModel>) {
     const state = ctx.getState();
-    const currentSong = state.playingSong;
     const nextSongIndex = state.songsList.indexOf(state.playingSong) + 1;
     const songsListLength = state.songsList.length;
     if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
@@ -59,9 +52,7 @@ export class PlaylistState {
   @Action(SelectPrev)
   selectPrev(ctx: StateContext<PlaylistStateModel>) {
     const state = ctx.getState();
-    const currentSong = state.playingSong;
     const nextSongIndex = state.songsList.indexOf(state.playingSong) - 1;
-    const songsListLength = state.songsList.length;
     if (nextSongIndex < 0) {
       return;
     }
@@ -73,7 +64,6 @@ export class PlaylistState {
 
   @Action(SelectSong)
   selectSong(ctx: StateContext<PlaylistStateModel>, action: SelectSong) {
-    console.log('step 2', action);
     const state = ctx.getState();
     const selectedSong = state.songsList.find((song: Song) => song.id === action.selectedSongId);
     if (!selectedSong) {
@@ -87,7 +77,6 @@ export class PlaylistState {
 
   @Action(FetchSongsByLocation)
   fetchSongsByLocation(ctx: StateContext<PlaylistStateModel>, action: FetchSongsByLocation) {
-    console.log(action);
     const state = ctx.getState();
     this.store.dispatch(new SetIsLoading(true));
     return this.cloudService.getSongsByLocation(action.locationName).pipe(
