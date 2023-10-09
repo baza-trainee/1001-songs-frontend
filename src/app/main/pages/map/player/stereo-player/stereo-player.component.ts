@@ -19,7 +19,8 @@ import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions'
 })
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
-  showStereoPlayer: boolean = false;
+
+  showStereoPlayer: boolean = true;
 
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$!: Observable<StreamStateInterface>;
@@ -33,15 +34,17 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     private store: Store
   ) {
     this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {
-      this.showStereoPlayer = showStereoPlayer;
+      // this.showStereoPlayer = showStereoPlayer;
     });
   }
 
   ngOnInit() {
     this.selectedSong$?.subscribe((song) => {
-      if (song.media && song.media.multichannel_audio.length) {
+      if (song.media && song.media.multichannel_audio.length > 1) {
         // this.audioService.showStereoPlayer$.next(false);
         this.showStereoPlayer = false;
+      } else {
+        this.showStereoPlayer = true;
       }
       if (song.media) {
         this.openFile(song);
