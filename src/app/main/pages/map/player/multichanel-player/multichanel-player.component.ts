@@ -8,6 +8,7 @@ import { Select } from '@ngxs/store';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
+import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 
 @Component({
   selector: 'app-multichanel-player',
@@ -24,29 +25,48 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   @Input() previousSong!: () => void;
   @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
   secondsToRewindTrack: number = 5;
-  multiChanelStates!: MultichannelStreamStateInterface[];
+  multiChanelStates: MultichannelStreamStateInterface[] = [
+    {
+      playing: false,
+      muted: false,
+      readableCurrentTime: '',
+      readableDuration: '',
+      duration: undefined,
+      currentTime: undefined,
+      canplay: false,
+      error: false
+    }
+  ];
 
-  showMultichanelPlayer: boolean = false;
+  showMultichanelPlayer: boolean = true;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
+  state$!: Observable<MultichannelStreamStateInterface[]>;
 
   constructor(
     private multiChanelAudioService: MultichanelAudioService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private cloudService: CloudService
   ) {
+    console.log('constructor');
     this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
-      this.showMultichanelPlayer = showMultichanelPlayer;
+      //this.showMultichanelPlayer = showMultichanelPlayer;
     });
   }
 
   ngOnInit() {
     this.selectedSong$?.subscribe((song) => {
-      if (song.media && song.media.multichannel_audio.length) {
+      //console.log(song);
+      if (song.media && song.media.multichannel_audio.length > 1) {
+        this.showMultichanelPlayer = true;
         console.log(song);
+        this.openFile(song)
       }
     });
+    this.state$ = this.multiChanelAudioService.getMultichannelState();
 
     this.multiChanelAudioService.getMultichannelState().subscribe((states) => {
       this.multiChanelStates = states;
+      console.log('states', states);
     });
   }
 
@@ -59,8 +79,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.multiChanelAudioService.playStreamAll(urls).subscribe();
   }
 
-  openFile(file: IAudioData) {
-    this.currentFile = file;
+  openFile(file: Song) {
+  //  this.currentFile = file;
     this.audioService.stop();
     this.multiChanelAudioService.stopAll();
     this.audioService.showStereoPlayer$.next(false);
