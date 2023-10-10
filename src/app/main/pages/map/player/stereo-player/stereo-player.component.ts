@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
-import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
 import { Observable, Subscription } from 'rxjs';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Song } from 'src/app/shared/interfaces/song';
 import { Select, Store } from '@ngxs/store';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
+import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 
 @Component({
   selector: 'app-stereo-player',
@@ -29,7 +29,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private audioService: AudioService,
-    private multiChanelAudioService: MultichanelAudioService,
+    private multiAudioService: MultiAudioService,
     private cloudService: CloudService,
     private store: Store
   ) {
@@ -70,7 +70,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   openFile(file: Song) {
     this.isPreloader = true;
-    this.multiChanelAudioService.stopAll();
+    this.multiAudioService.stopAll();
     this.audioService.stop();
   //  this.audioService.showStereoPlayer$.next(true);
    // this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);

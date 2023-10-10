@@ -9,7 +9,7 @@ import { events } from '../../enums/audio.enum';
 @Injectable({
   providedIn: 'root'
 })
-export class MultichanelAudioService {
+export class MultiAudioService {
   constructor() {}
   private tracks: HTMLAudioElement[] = [];
   private audioStates: StreamState[] = [];
