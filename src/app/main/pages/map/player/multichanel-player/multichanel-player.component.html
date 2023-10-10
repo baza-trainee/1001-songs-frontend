@@ -1,7 +1,7 @@
 <div *ngIf="state$ | async as multiState">
   <div
     class="player__container"
-    *ngIf="showMultichanelPlayer && multiState.length > 0"
+    *ngIf="multiState[0]"
     style="border: 2px solid red"
     [class.loading]="isPreloader"
   >

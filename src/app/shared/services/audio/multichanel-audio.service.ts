@@ -8,7 +8,7 @@ import { CloudService } from './cloud.service';
   providedIn: 'root'
 })
 export class MultichanelAudioService {
-  constructor(private cloudService: CloudService) {}
+  constructor() {}
   private audioObjects: HTMLAudioElement[] = [];
   private audioStates: MultichannelStreamStateInterface[] = [];
   private stop$: Subject<void> = new Subject<void>();
@@ -16,7 +16,7 @@ export class MultichanelAudioService {
 
   private createAudioObject(url: string): HTMLAudioElement {
     const audioObj = new Audio();
-    audioObj.src = this.cloudService.preparateGoogleDriveFileUrl(url);
+    audioObj.src = (url);
     audioObj.load();
     return audioObj;
   }
@@ -34,7 +34,7 @@ export class MultichanelAudioService {
     };
   }
 
-  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+//  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);

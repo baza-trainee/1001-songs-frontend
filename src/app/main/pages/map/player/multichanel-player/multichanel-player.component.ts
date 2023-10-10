@@ -44,7 +44,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   showMultichanelPlayer: boolean = false;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
-  state$!: Observable<MultichannelStreamStateInterface[]>;
+  state$: Observable<MultichannelStreamStateInterface[]>;
 
   constructor(
     private multiChanelAudioService: MultichanelAudioService,
@@ -52,6 +52,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     private cloudService: CloudService,
     private store: Store
   ) {
+    this.state$ = this.multiChanelAudioService.getMultichannelState();
     // console.log('constructor');
     // this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
     //   //this.showMultichanelPlayer = showMultichanelPlayer;
@@ -70,23 +71,19 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         this.showMultichanelPlayer = false;
       }
     });
-    this.state$ = this.multiChanelAudioService.getMultichannelState();
 
-    this.multiChanelAudioService
-      .getMultichannelState()
-      .pipe(skip(1))
-      .subscribe((states) => {
-        if (states[0].playing && this.isPreloader) {
-          this.isPreloader = false;
-        }
+    this.state$.pipe(skip(1)).subscribe((states) => {
+      if (states[0].playing && this.isPreloader) {
+        this.isPreloader = false;
+      }
 
-       // console.log('states-> ', states);
-      });
+      // console.log('states-> ', states);
+    });
   }
 
   ngOnDestroy() {
     this.stop();
-    this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
+    // this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
   }
 
   playStream(urls: string[]) {
@@ -97,9 +94,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     //  this.currentFile = file;
     this.audioService.stop();
     this.multiChanelAudioService.stopAll();
-   // this.audioService.showStereoPlayer$.next(false);
-  //  this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
-    this.playStream(file.media.multichannel_audio);
+    // this.audioService.showStereoPlayer$.next(false);
+    //  this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
+    const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
+    this.playStream(urls);
   }
 
   muteToggle(index: number) {
