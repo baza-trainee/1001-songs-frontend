@@ -6,7 +6,7 @@ import { MultichannelStreamStateInterface } from '../../../../../shared/interfac
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select } from '@ngxs/store';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
-import { Observable } from 'rxjs';
+import { Observable, skip } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 
@@ -18,27 +18,30 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
   styleUrls: ['./multichanel-player.component.scss']
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
+  private REWIND_STEP: number = 5;
+  
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
-  @Input() openCurrentFile!: (file: IAudioData) => void;
+ // @Input() openCurrentFile!: (file: IAudioData) => void;
   @Input() nextSong!: () => void;
   @Input() previousSong!: () => void;
   @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
   secondsToRewindTrack: number = 5;
-  multiChanelStates: MultichannelStreamStateInterface[] = [
-    {
-      playing: false,
-      muted: false,
-      readableCurrentTime: '',
-      readableDuration: '',
-      duration: undefined,
-      currentTime: undefined,
-      canplay: false,
-      error: false
-    }
-  ];
+  isPreloader = false;
+  // multiChanelStates: MultichannelStreamStateInterface[] = [
+  //   {
+  //     playing: false,
+  //     muted: false,
+  //     readableCurrentTime: '',
+  //     readableDuration: '',
+  //     duration: undefined,
+  //     currentTime: undefined,
+  //     canplay: false,
+  //     error: false
+  //   }
+  // ];
 
-  showMultichanelPlayer: boolean = true;
+  showMultichanelPlayer: boolean = false;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$!: Observable<MultichannelStreamStateInterface[]>;
 
@@ -47,26 +50,29 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     private audioService: AudioService,
     private cloudService: CloudService
   ) {
-    console.log('constructor');
-    this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
-      //this.showMultichanelPlayer = showMultichanelPlayer;
-    });
+    // console.log('constructor');
+    // this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
+    //   //this.showMultichanelPlayer = showMultichanelPlayer;
+    // });
   }
 
   ngOnInit() {
+    
     this.selectedSong$?.subscribe((song) => {
       //console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
-        this.showMultichanelPlayer = true;
-        console.log(song);
+       
+      //  console.log(song);
         this.openFile(song)
+        this.showMultichanelPlayer = true;
       }
     });
     this.state$ = this.multiChanelAudioService.getMultichannelState();
 
-    this.multiChanelAudioService.getMultichannelState().subscribe((states) => {
-      this.multiChanelStates = states;
-      console.log('states', states);
+    this.multiChanelAudioService.getMultichannelState().pipe(skip(1)).subscribe((states) => {
+     // this.multiChanelStates = states;
+      
+      console.log('states-> ', states);
     });
   }
 

@@ -2,7 +2,7 @@
   <div
     class="player__container"
     *ngIf="showStereoPlayer"
-    [class.empty]="!state.canplay"
+    [class.inactive]="!state.canplay"
     [class.loading]="isPreloader"
     style="border: 2px solid blue"
   >
