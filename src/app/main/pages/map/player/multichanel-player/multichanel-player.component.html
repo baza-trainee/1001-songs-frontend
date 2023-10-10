@@ -174,11 +174,11 @@
   </div>
 
   <div class="player__multichanel__items" *ngIf="showMultichanelPlayer">
-    <div class="multichanel__item" *ngFor="let multiState of multiState; let i = index">
+    <div class="multichanel__item" *ngFor="let state of multiState; let i = index">
       <div class="item__aside">
         <div class="item__name">Chanel {{ i + 1 }}</div>
         <div class="item__actions">
-          <button [class.active]="multiState.muted" (click)="muteToggle(i)">Mute</button>
+          <button [class.active]="state.muted" (click)="muteToggle(i)">Mute</button>
         </div>
       </div>
 
@@ -188,12 +188,12 @@
           type="range"
           min="0"
           step="0.1"
-          [max]="multiState.duration"
-          [value]="multiState.currentTime || 0"
-          [disabled]="multiState.error && multiState.currentTime === undefined"
+          [max]="state.duration"
+          [value]="state.currentTime || 0"
+          [disabled]="state.error && state.currentTime === undefined"
         />
-        <span class="timeline__time current__time">{{ multiState.readableCurrentTime }}</span>
-        <span class="timeline__time duration">{{ multiState.readableDuration }}</span>
+        <span class="timeline__time current__time">{{ state.readableCurrentTime }}</span>
+        <span class="timeline__time duration">{{ state.readableDuration }}</span>
       </div>
     </div>
   </div>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment/moment';
-import { MultichannelStreamStateInterface } from '../../interfaces/multichannel-stream-state.interface';
+//import { MultichannelStreamStateInterface } from '../../interfaces/multichannel-stream-state.interface';
 import { CloudService } from './cloud.service';
+import { StreamState } from '../../interfaces/stream-state.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,18 @@ import { CloudService } from './cloud.service';
 export class MultichanelAudioService {
   constructor() {}
   private audioObjects: HTMLAudioElement[] = [];
-  private audioStates: MultichannelStreamStateInterface[] = [];
+  private audioStates: StreamState[] = [];
   private stop$: Subject<void> = new Subject<void>();
   private audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
 
   private createAudioObject(url: string): HTMLAudioElement {
     const audioObj = new Audio();
-    audioObj.src = (url);
+    audioObj.src = url;
     audioObj.load();
     return audioObj;
   }
 
-  private createAudioState(): MultichannelStreamStateInterface {
+  private createAudioState(): StreamState {
     return {
       playing: false,
       muted: false,
@@ -34,7 +35,7 @@ export class MultichanelAudioService {
     };
   }
 
-//  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  //  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
@@ -85,16 +86,16 @@ export class MultichanelAudioService {
     return this.playStream(urls).pipe(takeUntil(this.stop$));
   }
 
-  playStream(urls: string[]): Observable<MultichannelStreamStateInterface[]> {
+  playStream(urls: string[]): Observable<StreamState[]> {
     this.stopAll();
 
-    const observables: Observable<MultichannelStreamStateInterface>[] = [];
+    const observables: Observable<StreamState>[] = [];
 
     for (const url of urls) {
       const audioObj = this.addAudio(url);
       const index = this.audioObjects.indexOf(audioObj);
 
-      const streamObservable = new Observable<MultichannelStreamStateInterface>((observer) => {
+      const streamObservable = new Observable<StreamState>((observer) => {
         const handler = (event: Event) => {
           this.updateAudioState(index, event);
           observer.next(this.audioStates[index]);
@@ -103,6 +104,7 @@ export class MultichanelAudioService {
         this.addEvents(audioObj, this.audioEvents, handler);
 
         audioObj.play().catch((error) => {
+         // console.log('Multichannel error');
           observer.error(error);
         });
 
@@ -174,7 +176,7 @@ export class MultichanelAudioService {
     return moment.utc(momentTime).format(format);
   }
 
-  getState(index: number): Observable<MultichannelStreamStateInterface> {
+  getState(index: number): Observable<StreamState> {
     if (index >= 0 && index < this.audioStates.length) {
       return new BehaviorSubject(this.audioStates[index]).asObservable();
     }
@@ -193,11 +195,9 @@ export class MultichanelAudioService {
     });
   }
 
-  private multichannelStateSubject: BehaviorSubject<MultichannelStreamStateInterface[]> = new BehaviorSubject<
-    MultichannelStreamStateInterface[]
-  >([]);
+  private multichannelStateSubject: BehaviorSubject<StreamState[]> = new BehaviorSubject<StreamState[]>([]);
 
-  getMultichannelState(): Observable<MultichannelStreamStateInterface[]> {
+  getMultichannelState(): Observable<StreamState[]> {
     return this.multichannelStateSubject.asObservable();
   }
 }

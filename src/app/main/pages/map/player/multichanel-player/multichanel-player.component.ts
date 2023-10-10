@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@ang
 import { CommonModule } from '@angular/common';
 import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
 import { IAudioData } from '../../../../../shared/interfaces/audio-data.interface';
-import { MultichannelStreamStateInterface } from '../../../../../shared/interfaces/multichannel-stream-state.interface';
+//import { MultichannelStreamStateInterface } from '../../../../../shared/interfaces/multichannel-stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
@@ -10,6 +10,7 @@ import { Observable, skip } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
+import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 
 @Component({
   selector: 'app-multichanel-player',
@@ -44,7 +45,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   showMultichanelPlayer: boolean = false;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
-  state$: Observable<MultichannelStreamStateInterface[]>;
+  state$: Observable<StreamState[]>;
 
   constructor(
     private multiChanelAudioService: MultichanelAudioService,
