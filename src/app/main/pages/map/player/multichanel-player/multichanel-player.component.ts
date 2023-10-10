@@ -4,11 +4,12 @@ import { MultichanelAudioService } from '../../../../../shared/services/audio/mu
 import { IAudioData } from '../../../../../shared/interfaces/audio-data.interface';
 import { MultichannelStreamStateInterface } from '../../../../../shared/interfaces/multichannel-stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
 import { Observable, skip } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
+import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
 
 @Component({
   selector: 'app-multichanel-player',
@@ -48,7 +49,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   constructor(
     private multiChanelAudioService: MultichanelAudioService,
     private audioService: AudioService,
-    private cloudService: CloudService
+    private cloudService: CloudService,
+    private store: Store
   ) {
     // console.log('constructor');
     // this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
@@ -58,12 +60,14 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedSong$?.subscribe((song) => {
-      //console.log(song);
+      console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
         //  console.log(song);
         this.openFile(song);
         this.isPreloader = true;
         this.showMultichanelPlayer = true;
+      } else {
+        this.showMultichanelPlayer = false;
       }
     });
     this.state$ = this.multiChanelAudioService.getMultichannelState();
@@ -76,7 +80,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
           this.isPreloader = false;
         }
 
-        console.log('states-> ', states);
+       // console.log('states-> ', states);
       });
   }
 
@@ -115,11 +119,13 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    this.nextSong();
+    this.store.dispatch(new SelectNext());
+    // this.nextSong();
   }
 
   previous() {
-    this.previousSong();
+    this.store.dispatch(new SelectPrev());
+    //this.previousSong();
   }
 
   backward(value: string) {

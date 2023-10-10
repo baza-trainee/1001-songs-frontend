@@ -36,8 +36,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   @Select(PlaylistState.getSongs) songs$?: Observable<Song[]>;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
 
-  location = 'Блажове';
-  //location = 'Ромейки';
+  //location = 'Блажове';
+  location = 'Ромейки';
 
   constructor(
     private _translate: TranslateService,
