@@ -22,26 +22,7 @@ import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
- // @Input() files: IAudioData[] = [];
- // @Input() currentFile: IAudioData | null = null;
-  // @Input() openCurrentFile!: (file: IAudioData) => void;
- // @Input() nextSong!: () => void;
-  //@Input() previousSong!: () => void;
- // @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
- // secondsToRewindTrack: number = 5;
   isPreloader = false;
-  // multiChanelStates: MultichannelStreamStateInterface[] = [
-  //   {
-  //     playing: false,
-  //     muted: false,
-  //     readableCurrentTime: '',
-  //     readableDuration: '',
-  //     duration: undefined,
-  //     currentTime: undefined,
-  //     canplay: false,
-  //     error: false
-  //   }
-  // ];
 
   showMultichanelPlayer: boolean = false;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
@@ -54,15 +35,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     private store: Store
   ) {
     this.state$ = this.multiChanelAudioService.getMultichannelState();
-    // console.log('constructor');
-    // this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe((showMultichanelPlayer) => {
-    //   //this.showMultichanelPlayer = showMultichanelPlayer;
-    // });
   }
 
   ngOnInit() {
     this.selectedSong$?.subscribe((song) => {
-      console.log(song);
+      //console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
         //  console.log(song);
         this.openFile(song);
@@ -77,14 +54,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       if (states[0].playing && this.isPreloader) {
         this.isPreloader = false;
       }
-
-      // console.log('states-> ', states);
     });
   }
 
   ngOnDestroy() {
     this.stop();
-    // this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
   }
 
   playStream(urls: string[]) {
@@ -95,8 +69,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     //  this.currentFile = file;
     this.audioService.stop();
     this.multiChanelAudioService.stopAll();
-    // this.audioService.showStereoPlayer$.next(false);
-    //  this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
     const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
     this.playStream(urls);
   }
@@ -119,12 +91,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   next() {
     this.store.dispatch(new SelectNext());
-    // this.nextSong();
   }
 
   previous() {
     this.store.dispatch(new SelectPrev());
-    //this.previousSong();
   }
 
   backward(value: string) {
@@ -134,22 +104,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   forward(value: string) {
     this.multiChanelAudioService.seekTo(Number(value) + this.REWIND_STEP);
   }
-
-  // isFirstPlaying() {
-  //   if (this.currentFile) {
-  //     return this.currentFile.index === 0;
-  //   } else {
-  //     return;
-  //   }
-  // }
-
-  // isLastPlaying() {
-  //   if (this.currentFile) {
-  //     return this.currentFile.index === this.files.length - 1;
-  //   } else {
-  //     return;
-  //   }
-  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSliderChangeEnd(event: any) {

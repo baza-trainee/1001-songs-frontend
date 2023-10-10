@@ -4,6 +4,7 @@ import * as moment from 'moment/moment';
 //import { MultichannelStreamStateInterface } from '../../interfaces/multichannel-stream-state.interface';
 import { CloudService } from './cloud.service';
 import { StreamState } from '../../interfaces/stream-state.interface';
+import { events } from '../../enums/audio.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,6 @@ export class MultichanelAudioService {
   private tracks: HTMLAudioElement[] = [];
   private audioStates: StreamState[] = [];
   private stop$: Subject<void> = new Subject<void>();
-  private audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
 
   private createAudioObject(url: string): HTMLAudioElement {
     const audioObj = new Audio();
@@ -101,7 +101,7 @@ export class MultichanelAudioService {
           observer.next(this.audioStates[index]);
         };
 
-        this.addEvents(audioObj, this.audioEvents, handler);
+        this.addEvents(audioObj, Object.values(events), handler);
 
         audioObj.play().catch((error) => {
          // console.log('Multichannel error');
@@ -110,7 +110,7 @@ export class MultichanelAudioService {
 
         return () => {
           this.removeAudio(index);
-          this.removeEvents(audioObj, this.audioEvents, handler);
+          this.removeEvents(audioObj, Object.values(events), handler);
         };
       });
 
@@ -176,12 +176,12 @@ export class MultichanelAudioService {
     return moment.utc(momentTime).format(format);
   }
 
-  getState(index: number): Observable<StreamState> {
-    if (index >= 0 && index < this.audioStates.length) {
-      return new BehaviorSubject(this.audioStates[index]).asObservable();
-    }
-    return new BehaviorSubject(this.createAudioState()).asObservable();
-  }
+  // getState(index: number): Observable<StreamState> {
+  //   if (index >= 0 && index < this.audioStates.length) {
+  //     return new BehaviorSubject(this.audioStates[index]).asObservable();
+  //   }
+  //   return new BehaviorSubject(this.createAudioState()).asObservable();
+  // }
 
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
     events.forEach((event) => {

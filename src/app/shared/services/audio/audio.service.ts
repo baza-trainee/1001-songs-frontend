@@ -2,17 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { StreamState } from '../../interfaces/stream-state.interface';
 import * as moment from 'moment';
-enum events {
-  ended = 'ended',
-  error = 'error',
-  play = 'play',
-  playing = 'playing',
-  pause = 'pause',
-  timeupdate = 'timeupdate',
-  canplay = 'canplay',
-  loadedmetadata = 'loadedmetadata',
-  loadstart = 'loadstart'
-}
+import { events } from '../../enums/audio.enum';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +11,6 @@ enum events {
 export class AudioService {
   private stop$: Subject<void> = new Subject<void>();
   private audioObj: HTMLAudioElement = new Audio();
-  audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
 
   private state: StreamState = {
     playing: false,
@@ -52,7 +42,7 @@ export class AudioService {
         this.audioObj.pause();
         this.audioObj.currentTime = 0;
         // remove event listeners
-        this.removeEvents(this.audioObj, this.audioEvents, handler);
+        this.removeEvents(this.audioObj,  Object.values(events), handler);
         // reset state
         this.resetState();
       };
