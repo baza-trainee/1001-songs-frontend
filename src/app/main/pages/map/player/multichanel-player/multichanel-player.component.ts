@@ -19,10 +19,10 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
-  
+
   @Input() files: IAudioData[] = [];
   @Input() currentFile: IAudioData | null = null;
- // @Input() openCurrentFile!: (file: IAudioData) => void;
+  // @Input() openCurrentFile!: (file: IAudioData) => void;
   @Input() nextSong!: () => void;
   @Input() previousSong!: () => void;
   @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
@@ -57,23 +57,27 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
     this.selectedSong$?.subscribe((song) => {
       //console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
-       
-      //  console.log(song);
-        this.openFile(song)
+        //  console.log(song);
+        this.openFile(song);
+        this.isPreloader = true;
         this.showMultichanelPlayer = true;
       }
     });
     this.state$ = this.multiChanelAudioService.getMultichannelState();
 
-    this.multiChanelAudioService.getMultichannelState().pipe(skip(1)).subscribe((states) => {
-     // this.multiChanelStates = states;
-      
-      console.log('states-> ', states);
-    });
+    this.multiChanelAudioService
+      .getMultichannelState()
+      .pipe(skip(1))
+      .subscribe((states) => {
+        if (states[0].playing && this.isPreloader) {
+          this.isPreloader = false;
+        }
+
+        console.log('states-> ', states);
+      });
   }
 
   ngOnDestroy() {
@@ -86,7 +90,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   openFile(file: Song) {
-  //  this.currentFile = file;
+    //  this.currentFile = file;
     this.audioService.stop();
     this.multiChanelAudioService.stopAll();
     this.audioService.showStereoPlayer$.next(false);
