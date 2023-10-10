@@ -10,7 +10,7 @@ import { StreamState } from '../../interfaces/stream-state.interface';
 })
 export class MultichanelAudioService {
   constructor() {}
-  private audioObjects: HTMLAudioElement[] = [];
+  private tracks: HTMLAudioElement[] = [];
   private audioStates: StreamState[] = [];
   private stop$: Subject<void> = new Subject<void>();
   private audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
@@ -39,23 +39,23 @@ export class MultichanelAudioService {
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
-    this.audioObjects.push(audioObj);
+    this.tracks.push(audioObj);
     this.audioStates.push(this.createAudioState());
     return audioObj;
   }
 
   private removeAudio(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      const audioObj = this.audioObjects[index];
+    if (index >= 0 && index < this.tracks.length) {
+      const audioObj = this.tracks[index];
       audioObj.pause();
-      this.audioObjects.splice(index, 1);
+      this.tracks.splice(index, 1);
       this.audioStates.splice(index, 1);
     }
   }
 
   private updateAudioState(index: number, event: Event): void {
     const state = this.audioStates[index];
-    const audioObj = this.audioObjects[index];
+    const audioObj = this.tracks[index];
 
     switch (event.type) {
       case 'canplay':
@@ -93,7 +93,7 @@ export class MultichanelAudioService {
 
     for (const url of urls) {
       const audioObj = this.addAudio(url);
-      const index = this.audioObjects.indexOf(audioObj);
+      const index = this.tracks.indexOf(audioObj);
 
       const streamObservable = new Observable<StreamState>((observer) => {
         const handler = (event: Event) => {
@@ -121,43 +121,43 @@ export class MultichanelAudioService {
   }
 
   play(): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.play();
     }
   }
 
   pause(): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.pause();
     }
   }
 
   stopAll(): void {
-    this.audioObjects.forEach((audioObj) => {
+    this.tracks.forEach((audioObj) => {
       audioObj.pause();
     });
-    this.audioObjects = [];
+    this.tracks = [];
     this.audioStates = [];
     this.stop$.next();
   }
 
   mute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      this.audioObjects[index].muted = true;
+    if (index >= 0 && index < this.tracks.length) {
+      this.tracks[index].muted = true;
       this.audioStates[index].muted = true;
     }
   }
 
   unmute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      this.audioObjects[index].muted = false;
+    if (index >= 0 && index < this.tracks.length) {
+      this.tracks[index].muted = false;
       this.audioStates[index].muted = false;
     }
   }
 
   toggleMute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      const audioObj = this.audioObjects[index];
+    if (index >= 0 && index < this.tracks.length) {
+      const audioObj = this.tracks[index];
       const state = this.audioStates[index];
 
       audioObj.muted = !audioObj.muted;
@@ -166,7 +166,7 @@ export class MultichanelAudioService {
   }
 
   seekTo(seconds: number): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.currentTime = seconds;
     }
   }

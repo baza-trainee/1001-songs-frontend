@@ -28,7 +28,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   @Input() nextSong!: () => void;
   @Input() previousSong!: () => void;
   @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
-  secondsToRewindTrack: number = 5;
+ // secondsToRewindTrack: number = 5;
   isPreloader = false;
   // multiChanelStates: MultichannelStreamStateInterface[] = [
   //   {
@@ -128,11 +128,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   backward(value: string) {
-    this.multiChanelAudioService.seekTo(Number(value) - this.secondsToRewindTrack);
+    this.multiChanelAudioService.seekTo(Number(value) - this.REWIND_STEP);
   }
 
   forward(value: string) {
-    this.multiChanelAudioService.seekTo(Number(value) + this.secondsToRewindTrack);
+    this.multiChanelAudioService.seekTo(Number(value) + this.REWIND_STEP);
   }
 
   isFirstPlaying() {
