@@ -1,8 +1,5 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { MultiAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
-import { IAudioData } from '../../../../../shared/interfaces/audio-data.interface';
-//import { MultichannelStreamStateInterface } from '../../../../../shared/interfaces/multichannel-stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlaylistState } from 'src/app/store/playlist/playlist.state';
@@ -54,8 +51,15 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(skip(1)).subscribe((states) => {
       if (states[0].playing && this.isPreloader) {
         this.isPreloader = false;
+        this.synchronizeTracs();
       }
     });
+  }
+
+  synchronizeTracs() {
+    setTimeout(() => {
+      this.multiAudioService.seekTo(Number(0));
+    }, 0);
   }
 
   ngOnDestroy() {
