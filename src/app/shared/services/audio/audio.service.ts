@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { StreamStateInterface } from '../../interfaces/stream-state.interface';
+import { StreamState } from '../../interfaces/stream-state.interface';
 import * as moment from 'moment';
 enum events {
   ended = 'ended',
@@ -22,7 +22,7 @@ export class AudioService {
   private audioObj: HTMLAudioElement = new Audio();
   audioEvents: string[] = ['ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'];
 
-  private state: StreamStateInterface = {
+  private state: StreamState = {
     playing: false,
     readableCurrentTime: '',
     readableDuration: '',
@@ -96,7 +96,7 @@ export class AudioService {
     return moment.utc(momentTime).format(format);
   }
 
-  private stateChange: BehaviorSubject<StreamStateInterface> = new BehaviorSubject(this.state);
+  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
   private updateStateEvents(event: Event): void {
     switch (event.type) {
@@ -135,7 +135,7 @@ export class AudioService {
     };
   }
 
-  getState(): Observable<StreamStateInterface> {
+  getState(): Observable<StreamState> {
     return this.stateChange.asObservable();
   }
 }

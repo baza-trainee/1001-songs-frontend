@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StreamStateInterface } from '../../../../../shared/interfaces/stream-state.interface';
+import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { MultichanelAudioService } from '../../../../../shared/services/audio/multichanel-audio.service';
 import { Observable, Subscription } from 'rxjs';
@@ -23,7 +23,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   showStereoPlayer: boolean = true;
 
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
-  state$!: Observable<StreamStateInterface>;
+  state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;
 
