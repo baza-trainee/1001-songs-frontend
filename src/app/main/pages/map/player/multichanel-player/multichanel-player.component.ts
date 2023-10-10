@@ -22,12 +22,12 @@ import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
-  @Input() files: IAudioData[] = [];
-  @Input() currentFile: IAudioData | null = null;
+ // @Input() files: IAudioData[] = [];
+ // @Input() currentFile: IAudioData | null = null;
   // @Input() openCurrentFile!: (file: IAudioData) => void;
-  @Input() nextSong!: () => void;
-  @Input() previousSong!: () => void;
-  @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
+ // @Input() nextSong!: () => void;
+  //@Input() previousSong!: () => void;
+ // @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
  // secondsToRewindTrack: number = 5;
   isPreloader = false;
   // multiChanelStates: MultichannelStreamStateInterface[] = [
@@ -135,21 +135,21 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.multiChanelAudioService.seekTo(Number(value) + this.REWIND_STEP);
   }
 
-  isFirstPlaying() {
-    if (this.currentFile) {
-      return this.currentFile.index === 0;
-    } else {
-      return;
-    }
-  }
+  // isFirstPlaying() {
+  //   if (this.currentFile) {
+  //     return this.currentFile.index === 0;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
-  isLastPlaying() {
-    if (this.currentFile) {
-      return this.currentFile.index === this.files.length - 1;
-    } else {
-      return;
-    }
-  }
+  // isLastPlaying() {
+  //   if (this.currentFile) {
+  //     return this.currentFile.index === this.files.length - 1;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSliderChangeEnd(event: any) {
