@@ -9,11 +9,13 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-multichanel-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './multichanel-player.component.html',
   styleUrls: ['./multichanel-player.component.scss']
 })
@@ -59,7 +61,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   synchronizeTracs() {
     setTimeout(() => {
       this.multiAudioService.seekTo(Number(0));
-    }, 0);
+    }, 500);
   }
 
   ngOnDestroy() {

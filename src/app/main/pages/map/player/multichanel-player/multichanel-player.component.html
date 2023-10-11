@@ -1,10 +1,5 @@
 <div *ngIf="state$ | async as multiState">
-  <div
-    class="player__container"
-    *ngIf="multiState[0]"
-    style="border: 2px solid red"
-    [class.loading]="isPreloader"
-  >
+  <div class="player__container" *ngIf="multiState[0]" style="border: 2px solid red" [class.loading]="isPreloader">
     <div class="player__actions">
       <button class="btn__player back" (click)="backward(slider.value)">
         <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +19,7 @@
           />
         </svg>
       </button>
-      <button class="btn__player prev" (click)="previous()" >
+      <button class="btn__player prev" (click)="previous()">
         <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.01465 1.38086V17.9621" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           <path
@@ -57,7 +52,7 @@
           />
         </svg>
       </button>
-      <button class="btn__player next" (click)="next()" >
+      <button class="btn__player next" (click)="next()">
         <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14.0146 1.38086V17.9621" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           <path
@@ -109,12 +104,7 @@
           />
         </svg>
       </button>
-      <button
-        class="btn__player__mobile play"
-        (click)="play()"
-        [disabled]="multiState[0].error"
-        *ngIf="!multiState[0].playing"
-      >
+      <button class="btn__player__mobile play" (click)="play()" [disabled]="multiState[0].error" *ngIf="!multiState[0].playing">
         <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M37 0C16.576 0 0 16.576 0 37C0 57.424 16.576 74 37 74C57.424 74 74 57.424 74 37C74 16.576 57.424 0 37 0ZM29.6 53.65V20.35L51.8 37L29.6 53.65Z"
@@ -178,7 +168,14 @@
       <div class="item__aside">
         <div class="item__name">Chanel {{ i + 1 }}</div>
         <div class="item__actions">
-          <button [class.active]="state.muted" (click)="muteToggle(i)">Mute</button>
+          <!-- <button [class.active]="state.muted" (click)="muteToggle(i)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_up"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_off"></mat-icon>
+          </button> -->
+          <button mat-icon-button (click)="muteToggle(i)" color="black" aria-label="Example icon button with a home icon">
+            <mat-icon *ngIf="!state.muted">volume_up</mat-icon>
+            <mat-icon *ngIf="state.muted" >volume_off</mat-icon>
+          </button>
         </div>
       </div>
 
