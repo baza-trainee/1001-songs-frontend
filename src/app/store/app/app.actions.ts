@@ -1,5 +1,5 @@
 export class SetIsLoading {
   static readonly type = '[App] Set';
 
-  constructor(public loadingStatus: boolean) {}
+  constructor(public loadingStatus: number) {}
 }

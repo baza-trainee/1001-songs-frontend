@@ -46,7 +46,7 @@ export class MapState {
     if (state.markersList.length > 1) {
       return;
     }
-    this.store.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(1));
     return this.mapService.fetchMarkers().pipe(
       map((songs) => songs as Song[]), //the expression need to avoid any type
       tap((songs: Song[]) => {
@@ -56,7 +56,7 @@ export class MapState {
           ...state,
           markersList: [...markers]
         });
-        this.store.dispatch(new SetIsLoading(false));
+        this.store.dispatch(new SetIsLoading(-1));
       })
     );
   }

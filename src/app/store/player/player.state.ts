@@ -78,14 +78,15 @@ export class PlayerState {
   @Action(FetchSongsByLocation)
   fetchSongsByLocation(ctx: StateContext<PlayerStateModel>, action: FetchSongsByLocation) {
     const state = ctx.getState();
-    this.store.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(1));
     return this.cloudService.getSongsByLocation(action.locationName).pipe(
       tap((songs: Song[]) => {
         ctx.setState({
           ...state,
           songsList: [...songs]
         });
-        this.store.dispatch(new SetIsLoading(false));
+        console.log('Player: loaded songs of the location ...')
+        this.store.dispatch(new SetIsLoading(-1));
       })
     );
   }

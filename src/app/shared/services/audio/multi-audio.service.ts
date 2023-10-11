@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment/moment';
-//import { MultichannelStreamStateInterface } from '../../interfaces/multichannel-stream-state.interface';
-import { CloudService } from './cloud.service';
 import { StreamState } from '../../interfaces/stream-state.interface';
 import { events } from '../../enums/audio.enum';
 
@@ -104,7 +102,6 @@ export class MultiAudioService {
         this.addEvents(audioObj, Object.values(events), handler);
 
         audioObj.play().catch((error) => {
-         // console.log('Multichannel error');
           observer.error(error);
         });
 
