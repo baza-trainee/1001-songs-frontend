@@ -219,6 +219,6 @@ export class CloudService {
   preparateGoogleDriveFileUrl(url: string) {
     const fileId = url.split('/').reverse()[1];
     // console.log(fileId)
-    return `https://docs.google.com/uc?export=open&id=${fileId}`;
+    return `https://docs.google.com/uc?export=load&id=${fileId}`;
   }
 }

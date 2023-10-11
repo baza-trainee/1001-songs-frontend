@@ -24,7 +24,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   isPreloader = false;
 
-  showMultichanelPlayer: boolean = false;
+  isVisible: boolean = false;
   @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
@@ -44,9 +44,9 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         //  console.log(song);
         this.openFile(song);
         this.isPreloader = true;
-        this.showMultichanelPlayer = true;
+        this.isVisible = true;
       } else {
-        this.showMultichanelPlayer = false;
+        this.isVisible = false;
       }
     });
 
