@@ -1,0 +1,117 @@
+.filter {
+  &__box {
+    width: 315px;
+    position: relative;
+  }
+
+  &__header {
+    padding: 12px 48px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    display: inline-block;
+    border-radius: 0 0 12px 12px;
+    background: #FEFEFE;
+    box-shadow: 0 4px 19px 0 rgba(0, 0, 0, 0.12);
+    z-index: 2;
+  }
+  &__header,
+  &__header-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 28px;
+    padding-left: 8px;
+  }
+
+  &__body {
+    width: 100%;
+    height: 694px;
+    position: absolute;
+    top: 0;
+    background: #FEFEFE;
+    box-shadow: 0 4px 19px 0 rgba(0, 0, 0, 0.12);
+
+  }
+  &__body {
+    padding: 73px 48px 5px;
+    overflow-y: auto;
+    &-title {
+      font-family: "Yeseva One", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      margin: 0 0 4px;
+    }
+  }
+  &__location {
+    margin-bottom: 16px;
+  }
+  &__location,
+  &__song {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Вместо .field_multiselect */
+.mat-select-panel {
+  border-radius: 12px;
+  border: 1px solid #989898;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Вместо .btn_multiselect */
+.mat-select-value {
+  padding: 2px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 12px;
+  background: var(--Yellow-bg-cl, #FFF068);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  z-index: 2;
+}
+/* Вместо .dropdown__box */
+.mat-option {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Вместо .custom-checkbox input[type="checkbox"] */
+.mat-pseudo-checkbox {
+  display: none;
+}
+
+/* Вместо .custom-checkbox .checkmark */
+.mat-pseudo-checkbox {
+  margin-right: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--neutrals-500, #989898);
+  display: inline-block;
+}
+
+/* Вместо .custom-checkbox input[type="checkbox"]:checked + .checkmark */
+.mat-pseudo-checkbox-checked {
+  background: var(--Yellow-bg-cl, #FFF068);
+  border: 1px solid #989898;
+}

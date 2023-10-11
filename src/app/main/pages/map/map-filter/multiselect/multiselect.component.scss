@@ -1,0 +1,59 @@
+
+nz-select {
+  width: 100%;
+
+  ::ng-deep {
+    .ant-select-selection-search {
+      margin-left: 0;
+    }
+    .ant-select-selection-item-remove {
+      height: 16px;
+      svg {
+        background-color: #fff;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        padding: 4px;
+      }
+    }
+    nz-option {
+      background-color: #FFF068 !important;
+    }
+    .ant-select-selection-item {
+      flex-direction: row-reverse;
+      gap: 4px;
+      border: none;
+      margin: 0;
+      padding: 2px 4px;
+      align-items: center;
+      border-radius: 12px;
+      background: #FFF068;
+      color: #131313;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+    }
+    .ant-select-selector {
+      position: relative;
+      width: 100%;
+      display: flex;
+      box-sizing: border-box;
+      align-items: start;
+      gap: 4px;
+      border-radius: 12px !important;
+      border: 1px solid #989898 !important;
+      box-shadow: none !important;
+      font-family: 'Open Sans', sans-serif;
+      padding: 12px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+  svg {
+    cursor: pointer;
+  }
+}

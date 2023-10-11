@@ -1,0 +1,19 @@
+<nz-select
+  class="select"
+  [nzMaxTagCount]="10"
+  [nzMaxTagPlaceholder]="tagPlaceHolder"
+  [nzMode]="'multiple'"
+  [nzPlaceHolder]="name"
+  [nzDropdownClassName]="'drop-list'"
+  [nzAllowClear]="true"
+  [nzShowArrow]="true"
+  [(ngModel)]="listOfSelectedValue"
+  (ngModelChange)="notifyParent()"
+>
+  <nz-option *ngFor="let item of listOfOption" nzCustomContent [nzLabel]="item + ' (100)'" [nzValue]="item">
+    <span class="custom-checkbox" nz-icon nzType="chekbox"></span>
+    {{ item }} (100)
+  </nz-option>
+</nz-select>
+<ng-template #tagPlaceHolder let-selectedList>i {{ selectedList.length }} більше</ng-template>
+

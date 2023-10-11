@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol class="icon-filter">
+    <symbol id="filterIcon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M26.6783 6H5L13.6713 16.2538V23.3426L18.007 25.5105V16.2538L26.6783 6Z" stroke="#131313"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </symbol>
+    <symbol id="arrowFilterShow">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 14.5L17 9.5H7L12 14.5Z" fill="#484848"/>
+      </svg>
+    </symbol>
+  </symbol>
+</svg>

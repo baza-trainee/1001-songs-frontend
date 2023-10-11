@@ -1,50 +1,67 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InteraciveMapComponent } from './interacive-map.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { GoogleMapsModule } from '@angular/google-maps';
-import { Marker } from '../../interfaces/map-marker';
+import {InteractiveMapComponent} from './interactive-map.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {GoogleMapsModule} from '@angular/google-maps';
+import {FilterSong} from "../../interfaces/map-marker";
+// import { Marker } from '../../interfaces/map-marker';
 
 export const google = {
   maps: {
     Marker: class FakeMarker {
       private map: unknown;
+
       setMap(map: unknown) {
         this.map = map;
       }
     },
-    Size: class {},
-    LatLng: class {},
+    Size: class {
+    },
+    LatLng: class {
+    },
     Map: class {
-      setOptions() {}
-      fitBounds() {}
+      setOptions() {
+      }
+
+      fitBounds() {
+      }
     }
   }
 };
 
 export const fakeSelectedMarker = {
-  key: 'marker1',
-  position: { lat: 0, lng: 0 },
-  popup: { title: '', photoUrl: '', countRecords: 0, link: '' }
+  id: 'marker1',
+  title: 'Лєтєла соя',
+  genre_cycle: 'Осінь',
+  found: 'no-name',
+  image: './assets/img/home/kiivImg.jpg',
+  location: {
+    country: 'Ukraine',
+    region: 'Рівне',
+    district_center: 'с. Рокитне',
+    recording_location: {lat: 50.4501, lng: 30.5234}
+  }
 };
-class googleMock {}
+
+class googleMock {
+}
 
 describe('HomeMapComponent', () => {
-  let component: InteraciveMapComponent;
-  let fixture: ComponentFixture<InteraciveMapComponent>;
+  let component: InteractiveMapComponent;
+  let fixture: ComponentFixture<InteractiveMapComponent>;
   let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), InteraciveMapComponent, GoogleMapsModule],
+      imports: [TranslateModule.forRoot(), InteractiveMapComponent, GoogleMapsModule],
       providers: [TranslateService]
     });
 
     (window as unknown as { google: googleMock }).google = google;
 
     translateService = TestBed.inject(TranslateService);
-    fixture = TestBed.createComponent(InteraciveMapComponent);
-    component = new InteraciveMapComponent(translateService);
+    fixture = TestBed.createComponent(InteractiveMapComponent);
+    component = new InteractiveMapComponent(translateService);
     fixture.detectChanges();
   });
 
@@ -75,7 +92,7 @@ describe('HomeMapComponent', () => {
   });
 
   it('should set selectedMarker and showInfoWindow to true on marker click', () => {
-    const marker: Marker = fakeSelectedMarker;
+    const marker: FilterSong = fakeSelectedMarker;
 
     component.onMarkerClick(marker);
 

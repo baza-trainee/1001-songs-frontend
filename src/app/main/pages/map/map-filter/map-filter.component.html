@@ -1,0 +1,65 @@
+<div class="filter container">
+  <div class="filter__box">
+    <div (click)="showFilter = !showFilter" class="filter__header">
+      <div class="filter__header-box">
+        <svg viewBox="0 0 32 32" width="32" height="32">
+          <use xlink:href="./assets/sprites.svg#filterIcon"></use>
+        </svg>
+        <span class="filter__title">Фільтр</span>
+      </div>
+      <svg
+           [style.transform]="!showFilter ? ' rotate(0deg)' : 'rotate(180deg)'"
+           width="24" height="24" viewBox="0 0 24 24"
+      ><use xlink:href="./assets/sprites.svg#arrowFilterShow"></use>
+      </svg>
+    </div>
+    <ng-container *ngIf="showFilter">
+      <div class="filter__body">
+        <div class="filter__location">
+          <h3 class="filter__body-title">Місцевість</h3>
+          <app-multiselect
+            [name]="'Країна'"
+            [listOfOption]="options.country"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+
+          <app-multiselect
+            [name]="'Область'"
+            [listOfOption]="options.region"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+
+          <app-multiselect
+            [name]="'Населений пункт'"
+            [listOfOption]="options.district_center"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+        </div>
+        <div class="filter__song">
+          <h3 class="filter__body-title">Пісня</h3>
+          <app-multiselect
+            [name]="'Жанр'"
+            [listOfOption]="options.genre_cycle"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+          <app-multiselect
+            [name]="'Назва'"
+            [listOfOption]="options.title"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+          <app-multiselect
+            [name]="'Фонд'"
+            [listOfOption]="options.found"
+            [listOfSelectedValue]="['']"
+            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+          ></app-multiselect>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

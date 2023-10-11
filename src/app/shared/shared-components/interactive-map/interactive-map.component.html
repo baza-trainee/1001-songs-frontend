@@ -1,0 +1,42 @@
+<section class="map">
+  <google-map class="map" width="100%" height="694px" [center]="mapOptions.center" [zoom]="mapOptions.zoom" [options]="mapOptions.options">
+    <map-marker
+      *ngFor="let marker of markers"
+      [position]="marker.location.recording_location"
+      [options]="{ icon: getCustomMarkerIcon(marker.id) }"
+      (mapClick)="onMarkerClick(marker)"
+    >
+    </map-marker>
+    <ng-container *ngIf="popupType === 'default'">
+      <ng-container *ngFor="let elem of markers">
+        <map-marker
+          #marker="mapMarker"
+          [position]="elem.location.recording_location"
+          [options]="{ icon: getCustomMarkerIcon(elem.id) }"
+          (mapClick)="openInfoWindow(marker, infoWindow, elem)"
+        ></map-marker>
+        <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window">
+          <h2 class="popup-map__title">{{ elem.location.district_center }}</h2>
+          <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : 20</p>
+        </map-info-window>
+    </ng-container>
+    </ng-container>
+  </google-map>
+  <ng-container *ngIf="selectedMarker && popupType === 'homeType'">
+    <div class="container">
+      <div class="popup-map" [ngClass]="{ active: selectedMarker }">
+        <button class="popup-map__close" (click)="onCloseInfoWindow()">+</button>
+        <div class="popup-map__container">
+          <img class="popup-map__img" [src]="selectedMarker.image" alt="Фото" />
+          <div class="popup-map__content">
+            <h2 class="popup-map__title">{{ selectedMarker.location.district_center }}</h2>
+            <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : 20</p>
+          </div>
+        </div>
+        <a class="popup-map__btn" role="button" tabindex="0" (keypress)="listenToRecords()" (click)="listenToRecords()">{{
+          'home.home-map.popup-btn' | translate
+        }}</a>
+      </div>
+    </div>
+  </ng-container>
+</section>
