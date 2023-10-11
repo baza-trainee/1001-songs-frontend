@@ -4,12 +4,13 @@ import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
-import {FilteredOptions, FilterSong} from 'src/app/shared/interfaces/map-marker';
+import {FilteredOptions, FilterSong, SelectedOptions} from 'src/app/shared/interfaces/map-marker';
 import {InteractiveMapComponent} from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
 import {FetchMarkers} from 'src/app/store/map/map.actions';
 import {MapState} from 'src/app/store/map/map.state';
 import {MapFilterComponent} from "./map-filter/map-filter.component";
 import {PlayerComponent} from "./player/player.component";
+import {MapService} from "../../../shared/services/map/map.service";
 
 @Component({
   selector: 'app-map',
@@ -24,7 +25,8 @@ export class MapComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   allMarkers: FilterSong[] = [];
   filteredMarkers: FilterSong[] = [];
-  constructor(private store: Store) {}
+
+  constructor(private store: Store, private mapService: MapService) {}
 
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
@@ -36,8 +38,8 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSelectedOptionsChange(options: FilteredOptions) {
-    console.log(options + 'main-component')
+  onSelectedOptionsChange(options: SelectedOptions) {
+    this.filteredMarkers = this.mapService.filteredMarkers(options, this.allMarkers);
   }
 
   ngOnDestroy(): void {

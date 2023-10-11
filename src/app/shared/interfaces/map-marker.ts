@@ -10,6 +10,7 @@ export interface SelectedOptions {
   genre_cycle: string[];
   found: string[];
 }
+
 export interface FilterSong {
   id: string;
   title: string;

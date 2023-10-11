@@ -10,7 +10,7 @@ import { Song } from '../../interfaces/song';
 export class MapService {
   constructor(private http: HttpClient) {}
 
-  getAllProperty(songs: FilterSong[]): SelectedOptions {
+  createFilterBySongs(songs: FilterSong[]): SelectedOptions {
     const selectedOptions: SelectedOptions = {
       country: [],
       region: [],
@@ -37,6 +37,19 @@ export class MapService {
     selectedOptions.found = [...new Set(selectedOptions.found)];
 
     return selectedOptions;
+  }
+
+  filteredMarkers(options: SelectedOptions, allSongs: FilterSong[] ): FilterSong[] {
+    return allSongs.filter((marker) => {
+      return (
+        (options.country.length === 0 || options.country.includes(marker.location.country)) &&
+        (options.region.length === 0 || options.region.includes(marker.location.region)) &&
+        (options.district_center.length === 0 || options.district_center.includes(marker.location.district_center)) &&
+        (options.title.length === 0 || options.title.includes(marker.title)) &&
+        (options.genre_cycle.length === 0 || options.genre_cycle.includes(marker.genre_cycle)) &&
+        (options.found.length === 0 || options.found.includes(marker.found))
+      );
+    });
   }
 
   getAllSongsFromFilter(song: Song): FilterSong {

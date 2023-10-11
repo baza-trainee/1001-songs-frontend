@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {MultiselectComponent} from "./multiselect/multiselect.component";
-import {FilteredOptions, FilterSong, SelectedOptions} from "../../../../shared/interfaces/map-marker";
+import {FilterSong, SelectedOptions} from "../../../../shared/interfaces/map-marker";
 import {MapService} from "../../../../shared/services/map/map.service";
 
 
@@ -14,28 +14,44 @@ import {MapService} from "../../../../shared/services/map/map.service";
   styleUrls: ['./map-filter.component.scss']
 })
 
-export class MapFilterComponent implements OnInit, OnChanges {
+export class MapFilterComponent implements OnChanges {
   @Input() markers!: FilterSong[];
-  @Output() selectedOptionsChange = new EventEmitter<FilteredOptions>();
+  @Output() selectedOptionsChange = new EventEmitter<SelectedOptions>();
   showFilter = false;
   options!: SelectedOptions;
-
+  selectedOptions: SelectedOptions = {
+    country: [],
+    region: [],
+    district_center: [],
+    title: [],
+    genre_cycle: [],
+    found: []
+  };
   constructor(private mapService: MapService) {}
-
-  ngOnInit(): void {
-    this.options = this.mapService.getAllProperty(this.markers);
-  }
   ngOnChanges(changes: SimpleChanges) {
-    if ('markers' in changes) {
-      this.options = this.mapService.getAllProperty(this.markers);
+    if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
+      this.options = this.mapService.createFilterBySongs(this.markers);
     }
   }
 
-  onSelectedOptionsChange(options: FilteredOptions) {
-    console.log(options)
+  sendSelectedOptions() {
+    this.selectedOptionsChange.emit(this.selectedOptions);
+  }
+
+  onSelectedOptionsChange(filterType: keyof SelectedOptions, selectedOptions: string[]) {
+    this.selectedOptions[filterType] = selectedOptions;
+    this.sendSelectedOptions();
   }
 
   filerClear() {
-    this.options = this.mapService.getAllProperty(this.markers);
+    this.selectedOptions = {
+      country: [],
+      region: [],
+      district_center: [],
+      title: [],
+      genre_cycle: [],
+      found: []
+    };
+    this.sendSelectedOptions();
   }
 }

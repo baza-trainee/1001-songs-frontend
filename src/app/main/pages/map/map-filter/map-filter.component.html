@@ -29,22 +29,22 @@
           <app-multiselect
             [name]="'Країна'"
             [listOfOption]="options.country"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.country"
+            (selectedOptionsChange)="onSelectedOptionsChange('country', $event)"
           ></app-multiselect>
 
           <app-multiselect
             [name]="'Область'"
             [listOfOption]="options.region"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.region"
+            (selectedOptionsChange)="onSelectedOptionsChange('region', $event)"
           ></app-multiselect>
 
           <app-multiselect
             [name]="'Населений пункт'"
             [listOfOption]="options.district_center"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.district_center"
+            (selectedOptionsChange)="onSelectedOptionsChange('district_center', $event)"
           ></app-multiselect>
         </div>
         <div class="filter__song">
@@ -52,20 +52,20 @@
           <app-multiselect
             [name]="'Жанр'"
             [listOfOption]="options.genre_cycle"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.genre_cycle"
+            (selectedOptionsChange)="onSelectedOptionsChange('genre_cycle', $event)"
           ></app-multiselect>
           <app-multiselect
             [name]="'Назва'"
             [listOfOption]="options.title"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.title"
+            (selectedOptionsChange)="onSelectedOptionsChange('title', $event)"
           ></app-multiselect>
           <app-multiselect
             [name]="'Фонд'"
             [listOfOption]="options.found"
-            [listOfSelectedValue]="['']"
-            (selectedOptionsChange)="onSelectedOptionsChange($event)"
+            [listOfSelectedValue]="selectedOptions.found"
+            (selectedOptionsChange)="onSelectedOptionsChange('found', $event)"
           ></app-multiselect>
         </div>
       </div>
