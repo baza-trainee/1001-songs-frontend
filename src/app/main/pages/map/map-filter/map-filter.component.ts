@@ -40,6 +40,8 @@ export class MapFilterComponent implements OnChanges {
 
   onSelectedOptionsChange(filterType: keyof SelectedOptions, selectedOptions: string[]) {
     this.selectedOptions[filterType] = selectedOptions;
+    const cords = this.mapService.filteredMarkers(this.selectedOptions ,this.markers);
+    this.options = this.mapService.createFilterBySongs(cords);
     this.sendSelectedOptions();
   }
 
