@@ -4,7 +4,6 @@
     *ngIf="showStereoPlayer"
     [class.inactive]="!state.canplay"
     [class.loading]="isPreloader"
-    style="border: 2px solid blue"
   >
     <div class="player__actions">
       <button class="btn__player back" (click)="backward(state.currentTime)">

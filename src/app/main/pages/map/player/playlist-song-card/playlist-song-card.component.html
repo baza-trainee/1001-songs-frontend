@@ -1,5 +1,5 @@
-<div class="playlist__song__card" >
-    <div class="song__card__header"
+<div class="playlist__song__card"  >
+    <div class="song__card__header"  [class.inactive]="!hasMedia"
          (click)="mobileToggleDetailBtn()"
          [class.active]="song.isDetailOpen"
          (keyup)="handleKeyUpEvent($event, song)"
@@ -25,7 +25,7 @@
 
       <div class="song__card__listen" >
         <button class="btn__listen"
-             [disabled]=""
+             [disabled]="!hasMedia"
              (click)="openCurrentFile()">
           <svg class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>

@@ -2,6 +2,11 @@
 @import '../../../../../../typography/fonts';
 @import '../../../../../../typography/colors';
 
+.inactive {
+  opacity: 0.5;
+}
+
+
 .playlist__song__card {
   .song__card__header {
     position: relative;

@@ -18,18 +18,22 @@ import { Song } from 'src/app/shared/interfaces/song';
 export class PlaylistSongCardComponent implements OnInit {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
-  @ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
-  @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
+  //@ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
+  // @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
+  hasMedia: boolean = true;
   // currentFile!: IAudioData;
   //@Output() selectFromList = new even
 
   constructor(
     private _translate: TranslateService,
     private store: Store
-  ) {}
+  ) {
+   // this.hasMedia = this.song.media ? true : false;
+  }
   ngOnInit(): void {
-    // console.log(this.file);
+    console.log(this.song);
+    this.hasMedia = this.song.media ? true : false;
   }
 
   openCurrentFile() {
