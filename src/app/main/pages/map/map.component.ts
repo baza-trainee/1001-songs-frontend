@@ -2,19 +2,21 @@ import {CommonModule} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 import {FilteredOptions, FilterSong} from 'src/app/shared/interfaces/map-marker';
 import {InteractiveMapComponent} from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
 import {FetchMarkers} from 'src/app/store/map/map.actions';
 import {MapState} from 'src/app/store/map/map.state';
 import {MapFilterComponent} from "./map-filter/map-filter.component";
+import {PlayerComponent} from "./player/player.component";
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   standalone: true,
-  imports: [CommonModule, InteractiveMapComponent, MapFilterComponent]
+  imports: [CommonModule, InteractiveMapComponent, MapFilterComponent, RouterLink, RouterLinkActive, PlayerComponent]
 })
 
 export class MapComponent implements OnInit, OnDestroy {
@@ -41,6 +43,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
   handleMapEmit(ev: FilterSong) {
     console.log('event value : ', ev);
   }

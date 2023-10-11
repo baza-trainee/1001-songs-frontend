@@ -67,7 +67,29 @@
     "stub": "Сторінка 'Про проект' у розробці"
   },
   "map": {
-    "stub": "Сторінка 'Мапа' у розробці"
+    "player": {
+      "counter-title" : "Кількість знайдених",
+      "player-title" : "Слухати всі знайдені пісні",
+      "songs-list" : {
+        "titles" : {
+          "photo" : "Фото",
+          "name" : "Назва",
+          "genre" : "Жанр",
+          "recording-location" : "Місце запису",
+          "listen" : "Слухати"
+        },
+        "song-card" : {
+          "detail-button" : "Деталі",
+          "song-card-detail" : {
+            "record-date" : "Дата запису",
+            "collectors" : "Збирачі",
+            "ethnographic-region" : "Етнографічний регіон",
+            "more-detail-button" : "Більше деталей"
+          }
+        }
+      }
+    }
+
   },
   "news": {
     "stub": "Сторінка 'Новини' у розробці"
