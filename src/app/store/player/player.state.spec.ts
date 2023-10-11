@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
 import { cordsMarkers } from 'src/app/mock-data/markers';
-import { PlaylistState } from './playlist.state';
+import { PlaylistState } from './player.state';
 
 describe('ExpeditionsState', () => {
   let store: Store;

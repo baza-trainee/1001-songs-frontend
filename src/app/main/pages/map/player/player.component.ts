@@ -8,9 +8,9 @@ import { MultichanelPlayerComponent } from './multichanel-player/multichanel-pla
 import { Observable } from 'rxjs';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
 import { Select, Store } from '@ngxs/store';
-import { PlaylistState } from 'src/app/store/playlist/playlist.state';
-import { FetchSongsByLocation } from 'src/app/store/playlist/playlist.actions';
+import { FetchSongsByLocation } from 'src/app/store/player/player.actions';
 import { Song } from 'src/app/shared/interfaces/song';
+import { PlayerState } from 'src/app/store/player/player.state';
 
 @Component({
   selector: 'app-player',
@@ -33,8 +33,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
 
-  @Select(PlaylistState.getSongs) songs$?: Observable<Song[]>;
-  @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(PlayerState.getSongs) songs$?: Observable<Song[]>;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
 
   //location = 'Блажове';
   location = 'Ромейки';

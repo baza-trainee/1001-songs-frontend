@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
-import { PlaylistState } from 'src/app/store/playlist/playlist.state';
+import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable, skip } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { SelectNext, SelectPrev } from 'src/app/store/playlist/playlist.actions';
+import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +25,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   isPreloader = false;
 
   isVisible: boolean = false;
-  @Select(PlaylistState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
   constructor(

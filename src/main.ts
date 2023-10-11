@@ -14,7 +14,7 @@ import { NgxsModule } from '@ngxs/store';
 import { ExpeditionsState } from './app/store/expeditions/expeditions.state';
 import { MapState } from './app/store/map/map.state';
 import { AppState } from './app/store/app/app.state';
-import { PlaylistState } from './app/store/playlist/playlist.state';
+import { PlayerState } from './app/store/player/player.state';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
-      NgxsModule.forRoot([AppState, ExpeditionsState, MapState, PlaylistState]),
+      NgxsModule.forRoot([AppState, ExpeditionsState, MapState, PlayerState]),
       BrowserModule,
       TranslateModule.forRoot({
         defaultLanguage: 'ua',

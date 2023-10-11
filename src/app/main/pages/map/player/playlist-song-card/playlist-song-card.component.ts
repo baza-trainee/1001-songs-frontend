@@ -5,7 +5,7 @@ import { StereoPlayerComponent } from '../stereo-player/stereo-player.component'
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { SelectSong } from 'src/app/store/playlist/playlist.actions';
+import { SelectSong } from 'src/app/store/player/player.actions';
 import { Song } from 'src/app/shared/interfaces/song';
 
 @Component({
