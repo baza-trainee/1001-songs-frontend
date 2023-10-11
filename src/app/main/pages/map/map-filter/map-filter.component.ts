@@ -34,4 +34,8 @@ export class MapFilterComponent implements OnInit, OnChanges {
   onSelectedOptionsChange(options: FilteredOptions) {
     console.log(options)
   }
+
+  filerClear() {
+    this.options = this.mapService.getAllProperty(this.markers);
+  }
 }

@@ -9,7 +9,6 @@ import { SetIsLoading } from '../app/app.actions';
 import {FilterSong} from 'src/app/shared/interfaces/map-marker';
 
 export interface MapStateModel {
-  // markersList: Marker[];
   filterSongs: FilterSong[];
 }
 

@@ -16,8 +16,9 @@
     box-shadow: 0 4px 19px 0 rgba(0, 0, 0, 0.12);
     z-index: 2;
   }
+
   &__header,
-  &__header-box{
+  &__header-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,17 +31,17 @@
   }
 
   &__body {
+    padding: 73px 48px 5px;
     width: 100%;
     height: 694px;
     position: absolute;
     top: 0;
     background: #FEFEFE;
     box-shadow: 0 4px 19px 0 rgba(0, 0, 0, 0.12);
-
-  }
-  &__body {
-    padding: 73px 48px 5px;
+    transition: transform .3s ease-in-out;
     overflow-y: auto;
+    transform: translateY(-100%);
+
     &-title {
       font-family: "Yeseva One", sans-serif;
       font-size: 16px;
@@ -50,9 +51,34 @@
       margin: 0 0 4px;
     }
   }
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__clear {
+    display: flex;
+    border-radius: 12px;
+    background: #FFF068;
+    padding: 2px 4px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    gap: 4px;
+
+  }
+
   &__location {
     margin-bottom: 16px;
   }
+
   &__location,
   &__song {
     display: flex;
@@ -61,57 +87,41 @@
   }
 }
 
-/* Вместо .field_multiselect */
-.mat-select-panel {
-  border-radius: 12px;
-  border: 1px solid #989898;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
+  }
 }
 
-/* Вместо .btn_multiselect */
-.mat-select-value {
-  padding: 2px 4px;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  border-radius: 12px;
-  background: var(--Yellow-bg-cl, #FFF068);
-  font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  z-index: 2;
-}
-/* Вместо .dropdown__box */
-.mat-option {
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+@media (width <=1024px) {
+  .container {
+    margin: 0 48px;
+  }
 }
 
-/* Вместо .custom-checkbox input[type="checkbox"] */
-.mat-pseudo-checkbox {
-  display: none;
+@media (width <=768px) {
+  .container {
+    margin: 0 32px;
+  }
 }
 
-/* Вместо .custom-checkbox .checkmark */
-.mat-pseudo-checkbox {
-  margin-right: 4px;
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  border: 1px solid var(--neutrals-500, #989898);
-  display: inline-block;
-}
+@media (width <=465px) {
+  .container {
+  }
+  .filter {
+    margin: 0;
 
-/* Вместо .custom-checkbox input[type="checkbox"]:checked + .checkmark */
-.mat-pseudo-checkbox-checked {
-  background: var(--Yellow-bg-cl, #FFF068);
-  border: 1px solid #989898;
+    &__body {
+      padding: 73px 16px 5px;
+    }
+
+    &__box {
+      width: 100%;
+    }
+
+    &__header {
+      padding: 16px 12px;
+    }
+  }
 }
