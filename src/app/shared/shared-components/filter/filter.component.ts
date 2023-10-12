@@ -1,54 +1,32 @@
-import {Component, DestroyRef, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {NgFor} from '@angular/common';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {KeyValuePipe, NgFor} from '@angular/common';
 
-import {Article} from "../../interfaces/article.interface";
-import {ArticlesService} from "../../services/news/articles.service";
-
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, TranslateModule, KeyValuePipe],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent {
   @Input() categories: string[] = [];
-  public selectedFilter: string = 'Усі';
-  private filteredArticle!: Article[];
-  private articles!: Article[];
+  public selectedFilterIndex: number = 0;
   public startX: number = 0;
   public currentX: number = 0;
   public translateX: number = 0;
   private maxSlide: number = 0;
   private isDragging!: boolean;
 
-  private readonly articleService = inject(ArticlesService);
-  private readonly destroyRef = inject(DestroyRef);
-
-  @Output() filteredArticles = new EventEmitter<Article[]>();
+  @Output() filteredArticles = new EventEmitter<string>();
   @ViewChild('slide', {read: ElementRef}) slide!: ElementRef;
 
-  ngOnInit(): void {
-    this.articleService
-      .getArticles()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((articles) => (this.articles = articles));
-  }
 
-  filterArticles(category: string) {
-    if (category) {
-      this.selectedFilter = category;
-
-      if (category === 'Усі') {
-        this.filteredArticle = this.articles;
-        this.filteredArticles.emit(this.filteredArticle);
-      } else {
-        this.filteredArticle = this.articles.filter((article) => article.category === category);
-        this.filteredArticles.emit(this.filteredArticle);
-      }
-    }
+  filterArticles(index: number, category: string) {
+    if (index >= 0) this.selectedFilterIndex = index;
+    const nameCategory = category.split('.');
+    this.filteredArticles.emit(nameCategory.pop()!);
   }
 
   // slider for string

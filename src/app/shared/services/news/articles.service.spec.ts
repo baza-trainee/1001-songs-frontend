@@ -13,9 +13,6 @@ describe('ArticlesService', () => {
     service = TestBed.inject(ArticlesService);
   });
 
-  it('should return values', () => {
-    expect(service.getArticles()).toBeTruthy();
-  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
