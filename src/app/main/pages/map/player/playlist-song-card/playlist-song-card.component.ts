@@ -32,7 +32,7 @@ export class PlaylistSongCardComponent implements OnInit {
    // this.hasMedia = this.song.media ? true : false;
   }
   ngOnInit(): void {
-    console.log(this.song);
+   // console.log(this.song);
     this.hasMedia = this.song.media ? true : false;
   }
 

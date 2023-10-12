@@ -41,7 +41,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selectedSong$?.subscribe((song) => {
       if (song.media && song.media.multichannel_audio.length > 1) {
-        // this.audioService.showStereoPlayer$.next(false);
         this.showStereoPlayer = false;
       } else {
         this.showStereoPlayer = true;
@@ -72,8 +71,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.multiAudioService.stopAll();
     this.audioService.stop();
-  //  this.audioService.showStereoPlayer$.next(true);
-   // this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
     this.playStream(this.cloudService.preparateGoogleDriveFileUrl(file.media.stereo_audio));
   }
 
