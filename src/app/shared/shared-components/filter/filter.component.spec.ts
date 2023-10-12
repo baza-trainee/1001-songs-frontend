@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
 
 import {FilterComponent} from './filter.component';
-import {ArticlesService} from "../../../main/pages/news/services/articles.service";
+import {ArticlesService} from "../../services/news/articles.service";
 
 describe('FilterComponent', () => {
   let component: FilterComponent;

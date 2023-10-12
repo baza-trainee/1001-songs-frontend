@@ -2,8 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewsComponent} from './news.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpHandler} from "@angular/common/http";
-import {ArticlesService} from "../../../shared/services/news/articles.service";
+import {NgxsModule} from "@ngxs/store";
+import {NewsState} from "../../../store/news/news.state";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -11,10 +12,8 @@ describe('NewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NewsComponent, TranslateModule.forRoot()],
-      providers: [{provide: ArticlesService}, HttpClient, HttpHandler]
+      imports: [TranslateModule.forRoot(), HttpClientModule, NewsComponent, NgxsModule.forRoot([NewsState])]
     });
-
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
