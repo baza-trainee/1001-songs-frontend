@@ -4,9 +4,7 @@
       {{ article.eventDate }}
     </div>
     <div class="arrow__icon" (click)="redirectToArticle(article.id)" tabindex="0"  (keydown.enter)="redirectToArticle(article.id)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#131313">
-        <path d="M6.5 5.5V7.5H15.09L5.5 17.09L6.91 18.5L16.5 8.91V17.5H18.5V5.5H6.5Z" fill="#131313"/>
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="./assets/sprites.svg#arrowArticleItem"></use></svg>
     </div>
   </div>
   <div class="card__body">

@@ -1,13 +1,13 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import {Component, DestroyRef, OnInit} from '@angular/core';
+import {RouterLink, RouterOutlet} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
 import {NgForOf} from "@angular/common";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 import {Article} from "./article.interface";
-import {ArticlesService} from "./services/articles.service";
 import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
+import {ArticlesService} from "../../../shared/services/news/articles.service";
 
 
 @Component({
@@ -23,14 +23,17 @@ import {ArticleItemComponent} from "./components/article-item/article-item.compo
     FilterComponent,
     NgForOf,
   ],
-  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
+  providers: [{provide: ArticlesService, useClass: ArticlesService}]
 })
 
 export class NewsComponent implements OnInit {
-public readonly categories: string[] = ['Усі', 'Зустрічі', 'Лекції', 'Публікації', 'Майстер-класи', 'Концерти', 'Конференції'];
-public articles!: Article[];
-private readonly articlesService = inject(ArticlesService);
-private readonly destroyRef = inject(DestroyRef);
+  public readonly categories: string[] = ['Усі', 'Зустрічі', 'Лекції', 'Публікації', 'Майстер-класи', 'Концерти', 'Конференції'];
+  public articles!: Article[];
+
+  constructor(
+    private articlesService: ArticlesService,
+    private destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
     this.articlesService

@@ -2,8 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewsComponent} from './news.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {ArticlesService} from './services/articles.service';
 import {HttpClient, HttpHandler} from "@angular/common/http";
+import {ArticlesService} from "../../../shared/services/news/articles.service";
 
 describe('NewsComponent', () => {
   let component: NewsComponent;

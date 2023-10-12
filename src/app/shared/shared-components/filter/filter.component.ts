@@ -3,7 +3,7 @@ import {NgFor} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 import {Article} from "../../../main/pages/news/article.interface";
-import {ArticlesService} from "../../../main/pages/news/services/articles.service";
+import {ArticlesService} from "../../services/news/articles.service";
 
 
 @Component({
