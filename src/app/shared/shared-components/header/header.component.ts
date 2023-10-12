@@ -42,10 +42,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkLang();
-    setTimeout(() => {
-      this.openD();
-    }, 3000);
+    // this.checkLang();
+    // setTimeout(() => {
+    //   this.openD();
+    // }, 3000);
   }
 
   openD() {
