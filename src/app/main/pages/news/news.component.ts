@@ -1,7 +1,7 @@
 import {Component, DestroyRef, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
-import {NgForOf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 import {Article} from "./article.interface";
@@ -21,7 +21,7 @@ import {ArticlesService} from "../../../shared/services/news/articles.service";
     RouterLink,
     ArticleItemComponent,
     FilterComponent,
-    NgForOf,
+    CommonModule,
   ],
   providers: [{provide: ArticlesService, useClass: ArticlesService}]
 })
