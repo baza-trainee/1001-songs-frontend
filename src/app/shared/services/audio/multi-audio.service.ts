@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from 'rxjs';
-import * as moment from 'moment/moment';
+//import * as moment from 'moment/moment';
 import { StreamState } from '../../interfaces/stream-state.interface';
 import { events } from '../../enums/audio.enum';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -168,9 +169,9 @@ export class MultiAudioService {
     }
   }
 
-  formatTime(time: number, format: string = 'mm:ss'): string {
+  formatTime(time: number, pattern: string = 'mm:ss'): string {
     const momentTime = time * 1000;
-    return moment.utc(momentTime).format(format);
+    return format(momentTime, pattern);
   }
 
   // getState(index: number): Observable<StreamState> {

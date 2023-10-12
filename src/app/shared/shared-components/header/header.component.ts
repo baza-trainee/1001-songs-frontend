@@ -42,13 +42,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.checkLang();
-    // setTimeout(() => {
-    //   this.openD();
-    // }, 3000);
+   
   }
 
-  openD() {
+  openDialog() {
     this.dialog.open(DialogComponent, { data: { text: 'Error. Try again later' } });
   }
 

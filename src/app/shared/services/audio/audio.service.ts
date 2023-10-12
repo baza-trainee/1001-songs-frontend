@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { StreamState } from '../../interfaces/stream-state.interface';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { events } from '../../enums/audio.enum';
-
+import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class AudioService {
         this.audioObj.pause();
         this.audioObj.currentTime = 0;
         // remove event listeners
-        this.removeEvents(this.audioObj,  Object.values(events), handler);
+        this.removeEvents(this.audioObj, Object.values(events), handler);
         // reset state
         this.resetState();
       };
@@ -81,9 +81,9 @@ export class AudioService {
     this.audioObj.currentTime = seconds;
   }
 
-  formatTime(time: number, format: string = 'mm.ss') {
+  formatTime(time: number, pattern: string = 'mm:ss') {
     const momentTime = time * 1000;
-    return moment.utc(momentTime).format(format);
+    return format(momentTime, pattern);
   }
 
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
