@@ -2,7 +2,7 @@ import {Component, DestroyRef, ElementRef, EventEmitter, inject, Input, OnInit, 
 import {NgFor} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-import {Article} from "../../../main/pages/news/article.interface";
+import {Article} from "../../interfaces/article.interface";
 import {ArticlesService} from "../../services/news/articles.service";
 
 

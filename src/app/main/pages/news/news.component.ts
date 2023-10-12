@@ -4,7 +4,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from "@angular/common";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
-import {Article} from "./article.interface";
+import {Article} from "../../../shared/interfaces/article.interface";
 import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";

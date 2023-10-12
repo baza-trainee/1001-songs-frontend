@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Article} from "../../../main/pages/news/article.interface";
+import {Article} from "../../interfaces/article.interface";
 
 
 @Injectable()
