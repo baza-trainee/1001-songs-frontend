@@ -85,7 +85,6 @@ export class PlayerState {
           ...state,
           songsList: [...songs]
         });
-        console.log('Player: loaded songs of the location ...')
         this.store.dispatch(new SetIsLoading(-1));
       })
     );

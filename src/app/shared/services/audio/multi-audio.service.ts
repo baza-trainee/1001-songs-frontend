@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from 'rxjs';
-//import * as moment from 'moment/moment';
 import { StreamState } from '../../interfaces/stream-state.interface';
 import { events } from '../../enums/audio.enum';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +32,6 @@ export class MultiAudioService {
       error: false
     };
   }
-
-  //  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
@@ -173,13 +170,6 @@ export class MultiAudioService {
     const momentTime = time * 1000;
     return format(momentTime, pattern);
   }
-
-  // getState(index: number): Observable<StreamState> {
-  //   if (index >= 0 && index < this.audioStates.length) {
-  //     return new BehaviorSubject(this.audioStates[index]).asObservable();
-  //   }
-  //   return new BehaviorSubject(this.createAudioState()).asObservable();
-  // }
 
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
     events.forEach((event) => {

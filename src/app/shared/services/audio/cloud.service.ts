@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Song } from '../../interfaces/song';
@@ -10,7 +10,6 @@ import { Song } from '../../interfaces/song';
 export class CloudService {
   constructor(private http: HttpClient) {}
 
-  
   getSongsByLocation(locationName: string): Observable<Song[]> {
     return this.http.get<Song[]>(`https://song-0gm4.onrender.com/api/v1/songs_location/?location=${locationName}`);
   }
@@ -21,7 +20,6 @@ export class CloudService {
 
   preparateGoogleDriveFileUrl(url: string) {
     const fileId = url.split('/').reverse()[1];
-    console.log(fileId, ' --- ',url)
     return `https://docs.google.com/uc?export=load&id=${fileId}`;
   }
 }

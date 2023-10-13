@@ -34,7 +34,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     private store: Store
   ) {
     this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {
-      // this.showStereoPlayer = showStereoPlayer;
     });
   }
 
