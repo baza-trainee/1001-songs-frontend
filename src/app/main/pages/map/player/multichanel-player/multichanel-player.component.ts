@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Observable, filter, skip } from 'rxjs';
+import { Observable, filter, skip, take } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
@@ -53,10 +53,12 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(skip(1)).subscribe((states) => {
       if (states[0].playing && this.isPreloader) {
         this.isPreloader = false;
-       
-        if(!(states[0].canplay && states[1].canplay && states[2].canplay) ){
-          this.synchronizeTracs();
-        }
+        // this.synchronizeTracs();
+        // this.synchronizeTracs();
+      }
+      if (!states[0].canplay || !states[1].canplay || !states[2].canplay) {
+        console.log(states[0].canplay, '->', !states[1].canplay, '->', !states[2].canplay);
+        this.synchronizeTracs();
       }
     });
   }

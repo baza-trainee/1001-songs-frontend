@@ -25,7 +25,6 @@ export class PlaylistSongCardComponent implements OnInit {
     private store: Store
   ) {}
   ngOnInit(): void {
-    console.log(this.song);
     this.hasMedia = this.song.media ? true : false;
   }
 
