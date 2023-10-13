@@ -4,7 +4,7 @@
       {{ 'news.title' | translate }}
     </div>
     <div class="filter__wrap">
-      <app-filter [categories]="categories" (filteredArticles)="filteredArticles($event)" />
+      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
     </div>
     <div class="cards__wrap">
       <app-article-item

@@ -31,16 +31,17 @@ import {NewsState} from "../../../store/news/news.state";
 })
 
 export class NewsComponent implements OnDestroy {
-  @Select(NewsState.getArticlesList) setArticles$?: Observable<Article[]>;
+  @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
   categories: newsCategories[] = Object.values(newsCategories);
   public articles!: Article[];
   public filteredArticle!: Article[];
-  private articlesSubscription?: Subscription;
+  private readonly articlesSubscription?: Subscription;
 
   constructor(private store: Store) {
-    this.store.dispatch(new FetchArticles()).subscribe((data) => {
-      this.articles = data.news.articlesList;
-      this.filteredArticle = data.news.articlesList;
+    this.store.dispatch(new FetchArticles());
+    this.articlesSubscription = this.setArticles$.subscribe((data) => {
+      this.articles = data;
+      this.filteredArticle = data;
     });
   }
 
@@ -49,7 +50,7 @@ export class NewsComponent implements OnDestroy {
       this.articlesSubscription.unsubscribe();
     }
   }
-  filteredArticles(category: string): void {
+  filteredCategory(category: string): void {
     let label: string = 'Усі';
     switch (category) {
       case 'meetings':

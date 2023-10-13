@@ -19,14 +19,14 @@ export class FilterComponent {
   private maxSlide: number = 0;
   private isDragging!: boolean;
 
-  @Output() filteredArticles = new EventEmitter<string>();
+  @Output() filteredCategories = new EventEmitter<string>();
   @ViewChild('slide', {read: ElementRef}) slide!: ElementRef;
 
 
   filterArticles(index: number, category: string) {
     if (index >= 0) this.selectedFilterIndex = index;
     const nameCategory = category.split('.');
-    this.filteredArticles.emit(nameCategory.pop()!);
+    this.filteredCategories.emit(nameCategory.pop()!);
   }
 
   // slider for string
