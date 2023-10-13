@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IAudioData } from 'src/app/shared/interfaces/audio-data.interface';
 import { StereoPlayerComponent } from '../stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
@@ -18,33 +17,20 @@ import { Song } from 'src/app/shared/interfaces/song';
 export class PlaylistSongCardComponent implements OnInit {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
-  //@ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
-  // @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
-  // currentFile!: IAudioData;
-  //@Output() selectFromList = new even
 
   constructor(
     private _translate: TranslateService,
     private store: Store
-  ) {
-   // this.hasMedia = this.song.media ? true : false;
-  }
+  ) {}
   ngOnInit(): void {
-   // console.log(this.song);
+    console.log(this.song);
     this.hasMedia = this.song.media ? true : false;
   }
 
   openCurrentFile() {
-    //  console.log('initete', this.file);
     this.store.dispatch(new SelectSong(this.song.id));
-    // if (this.stereoPlayer) {
-    //   this.stereoPlayer.openFile(this.file);
-    // }
-    // if (this.file.media.multichannel_audio.length > 1 && this.multiChanelPlayer) {
-    //   this.multiChanelPlayer.openFile(this.file);
-    // }
   }
 
   toggleDetailBtn() {
