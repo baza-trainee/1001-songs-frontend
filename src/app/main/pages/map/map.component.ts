@@ -12,6 +12,7 @@ import {PlayerComponent} from "./player/player.component";
 
 @Component({
   selector: 'app-map',
+  styleUrls: ['./map.component.scss'],
   templateUrl: './map.component.html',
   standalone: true,
   imports: [CommonModule, InteraciveMapComponent, RouterLink, RouterLinkActive, PlayerComponent]
