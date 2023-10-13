@@ -1,3 +1,16 @@
-<div style="display: flex; justify-content: center; align-items: center;"> 
-   <p style="padding: 10px; color: azure; font-size: larger; background-color: #1a1a1a;">{{ 'news.stub' | translate }}</p>
-</div>
+<section class="news wrapper">
+  <div class="news__container">
+    <div class="news__title">
+      {{ 'news.title' | translate }}
+    </div>
+    <div class="filter__wrap">
+      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+    </div>
+    <div class="cards__wrap">
+      <app-article-item
+        *ngFor="let item of filteredArticle"
+        [article]="item"
+      />
+    </div>
+  </div>
+</section>

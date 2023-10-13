@@ -1,0 +1,19 @@
+<div class="card" (click)="redirectToArticle(article.id)" tabindex="0"  (keydown.enter)="redirectToArticle(article.id)">
+  <div class="card__header">
+    <div class="card__header-event">
+      {{ article.eventDate }}
+    </div>
+    <div class="arrow__icon" (click)="redirectToArticle(article.id)" tabindex="0"  (keydown.enter)="redirectToArticle(article.id)">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+      </svg>
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__image-item" [style.background-image]="'url(' + article.images[0] + ')'"></div>
+    <div class="card__title">
+      <div class="card__title-name">{{ article.title }}</div>
+      <div class="card__title-place">({{ article.location }})</div>
+    </div>
+  </div>
+</div>
