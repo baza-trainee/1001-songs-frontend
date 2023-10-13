@@ -2,10 +2,16 @@
 @import '../../../../../../typography/fonts';
 @import '../../../../../../typography/colors';
 
-.inactive {
-  opacity: 0.5;
+.no-media {
+  font-size: 2em;
+  width: 70px;
+  height: 70px;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: not-allowed;
 }
-
 
 .playlist__song__card {
   .song__card__header {

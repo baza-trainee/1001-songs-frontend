@@ -6,11 +6,12 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { SelectSong } from 'src/app/store/player/player.actions';
 import { Song } from 'src/app/shared/interfaces/song';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-playlist-song-card',
   standalone: true,
-  imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule],
+  imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule, MatIconModule],
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })

@@ -1,7 +1,7 @@
 <div class="playlist__song__card">
   <div
     class="song__card__header"
-    [class.inactive]="!hasMedia"
+  
     (click)="mobileToggleDetailBtn()"
     [class.active]="song.isDetailOpen"
     (keyup)="handleKeyUpEvent($event, song)"
@@ -24,8 +24,18 @@
     </div>
 
     <div class="song__card__listen">
-      <button class="btn__listen" [disabled]="!hasMedia" (click)="openCurrentFile()">
-        <svg class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mat-icon *ngIf="!hasMedia" class="no-media" aria-hidden="false" aria-label="Example home icon" fontIcon="music_off"></mat-icon>
+      <button  *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="openCurrentFile()">
+     
+        <svg
+         
+          class="listen__desktop"
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE" />
           <path
             d="M48.4 33.9215C50 34.8453 50 37.1547 48.4 38.0785L31.6 47.7779C30 48.7017 28 47.547 28 45.6995L28 26.3005C28 24.453 30 23.2983 31.6 24.2221L48.4 33.9215Z"
@@ -73,9 +83,7 @@
     </div>
 
     <div class="detail__song__text">
-      <div class="song__text__content" [innerHTML]=" song.media.text">
-        
-      </div>
+      <div class="song__text__content" [innerHTML]="song.media.text"></div>
     </div>
   </div>
 </div>
