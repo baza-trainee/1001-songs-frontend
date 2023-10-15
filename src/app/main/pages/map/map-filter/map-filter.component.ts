@@ -5,6 +5,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {MultiselectComponent} from "./multiselect/multiselect.component";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {mapFilter} from "../../../../shared/enums/mapFilter";
+import {MapService} from "../../../../shared/services/map/map.service";
 
 @Component({
   selector: 'app-map-filter',
@@ -18,6 +19,8 @@ export class MapFilterComponent implements OnInit{
   @Input() markers!: Marker[];
   @Output() selectedOptionsChange = new EventEmitter<SelectedSongFilter>();
   filterCategory = mapFilter;
+  selectedOptions: SelectedSongFilter = new SelectedSongFilter();
+  isShowFilter = false;
   form = new FormGroup({
     country: new FormControl([]),
     region: new FormControl([]),
@@ -27,15 +30,8 @@ export class MapFilterComponent implements OnInit{
     found: new FormControl([])
   });
 
-  country: string[] = ['Всі', 'Україна', 'Білорусь', 'Польша'];
-  isShowFilter = false;
-  selectedOptions: SelectedSongFilter = new SelectedSongFilter();
+  constructor(private _translate: TranslateService, private _mapService: MapService) {}
 
-  constructor(private _translate: TranslateService) {}
-
-  showFilter(): void {
-    this.isShowFilter = !this.isShowFilter;
-  }
   initHandlers (): void {
     this.form.controls.country.valueChanges.subscribe(()=> {
 
@@ -52,6 +48,8 @@ export class MapFilterComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.initHandlers()
+    this.initHandlers();
+    this.selectedOptions = this._mapService.createFilterBySongs(this.markers);
+    console.log(this.selectedOptions)
   }
 }

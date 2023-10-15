@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { MapService } from 'src/app/shared/services/map/map.service';
-import { FetchMarkers } from './map.actions';
-import { map, tap } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song';
-import { SetIsLoading } from '../app/app.actions';
-import { Marker } from 'src/app/shared/interfaces/map-marker';
+import {Injectable} from '@angular/core';
+import {map, tap} from 'rxjs';
+import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
+
+import {MapService} from 'src/app/shared/services/map/map.service';
+import {FetchMarkers} from './map.actions';
+import {Song} from 'src/app/shared/interfaces/song';
+import {SetIsLoading} from '../app/app.actions';
+import {Marker} from 'src/app/shared/interfaces/map-marker';
 
 export interface MapStateModel {
   markersList: Marker[];
@@ -25,7 +26,7 @@ export interface MapStateModel {
           country: 'Ukraine',
           region: 'Рівне',
           district_center: 'с. Рокитне',
-          recording_location: { lat: 50.4501, lng: 30.5234  }
+          recording_location: {lat: 50.4501, lng: 30.5234}
         }
       }
     ]
@@ -36,12 +37,14 @@ export class MapState {
   constructor(
     private mapService: MapService,
     private store: Store
-  ) {}
+  ) {
+  }
 
   @Selector()
   static getMarkersList(state: MapStateModel): Marker[] {
     return state.markersList;
   }
+
 
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
