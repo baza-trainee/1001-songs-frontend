@@ -11,7 +11,7 @@ import { ShareModalComponent } from '../../../shared/shared-components/share-mod
 import { HomeActualComponent } from './components/home-actual/home-actual.component';
 import { HomeExpeditionComponent } from './components/home-expedition/home-expedition.component';
 import { HomeNewsComponent } from './components/home-news/home-news.component';
-import { InteraciveMapComponent } from 'src/app/shared/shared-components/interacive-map/interacive-map.component';
+import { InteractiveMapComponent } from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ import { InteraciveMapComponent } from 'src/app/shared/shared-components/interac
     ErrorComponent,
     HomeTapeComponent,
     MatDialogModule,
-    InteraciveMapComponent,
+    InteractiveMapComponent,
     HomeActualComponent,
     HomeExpeditionComponent,
     HomeNewsComponent

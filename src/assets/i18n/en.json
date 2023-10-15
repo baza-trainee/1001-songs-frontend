@@ -67,6 +67,20 @@
     "stub": "The 'About the project' page is under development"
   },
   "map": {
+    "filter": {
+      "title": "Filter",
+      "button-clear": "Clear",
+      "locations": "Locations",
+      "song": "Song",
+      "categories": {
+        "country": "Country",
+        "region": "Region",
+        "settlement": "Settlement",
+        "genre": "Genre",
+        "title": "Title",
+        "found": "Fund"
+      }
+    },
     "player": {
       "counter-title" : "Number found",
       "player-title" : "Play all found songs",

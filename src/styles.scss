@@ -2,6 +2,7 @@
 @import '/src/typography/colors';
 @import '/src/typography/fonts';
 @import '/src/typography/typography';
+@import '/src/styles/multiselect';
 
 /* ----------GENERAL------------ */
 html {
@@ -46,3 +47,4 @@ a {
     max-width: 100%;
   }
 }
+

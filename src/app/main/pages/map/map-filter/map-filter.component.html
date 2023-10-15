@@ -1,0 +1,51 @@
+<div class="filter container">
+  <div class="filter__box">
+    <div
+      class="filter__header"
+      tabindex="0"
+      (click)="isShowFilter = !isShowFilter"
+      (keypress)="isShowFilter = !isShowFilter"
+    >
+      <div class="filter__header-box">
+        <svg viewBox="0 0 32 32" width="32" height="32">
+          <use xlink:href="./assets/sprites.svg#filterIcon"></use>
+        </svg>
+        <span class="filter__title">{{ 'map.filter.title' | translate }}</span>
+      </div>
+      <svg
+        [style.transform]="!isShowFilter ? ' rotate(0deg)' : 'rotate(180deg)'"
+        width="24" height="24" viewBox="0 0 24 24"
+      >
+        <use xlink:href="./assets/sprites.svg#arrowFilterShow"></use>
+      </svg>
+    </div>
+    <ng-container>
+      <form [formGroup]="form">
+        <div class="filter__body"
+             [ngStyle]="!isShowFilter ? {'transform': 'translateY(-100%)'} : {'transform': 'translateY(0)'}">
+
+          <div class="filter__location">
+            <div class="filter__title-container">
+              <h3 class="filter__body-title">{{ 'map.filter.locations' | translate }}</h3>
+              <button class="filter__clear" (click)="filerClear()">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <use xlink:href="./assets/sprites.svg#filterClear"></use>
+                </svg>
+                <span>{{ 'map.filter.button-clear' | translate }}</span>
+              </button>
+            </div>
+            <app-multiselect controlName="country" [options]="country" [name]="filterCategory.country"></app-multiselect>
+            <app-multiselect controlName="region" [options]="country" [name]="filterCategory.region"></app-multiselect>
+            <app-multiselect controlName="settlement" [options]="country" [name]="filterCategory.settlement"></app-multiselect>
+          </div>
+          <div class="filter__song">
+            <h3 class="filter__body-title">{{ 'map.filter.song' | translate }}</h3>
+            <app-multiselect controlName="genre" [options]="country" [name]="filterCategory.genre"></app-multiselect>
+            <app-multiselect controlName="title" [options]="country" [name]="filterCategory.title"></app-multiselect>
+            <app-multiselect controlName="found" [options]="country" [name]="filterCategory.found"></app-multiselect>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</div>

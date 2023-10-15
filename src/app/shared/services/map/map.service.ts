@@ -12,17 +12,19 @@ export class MapService {
 
   markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
-    const marker: Marker = {
-      key: song.id.toString(),
-      position: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) },
-      popup: {
-        title: song.location['official_name_city'],
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 1,
-        link: ''
+    return {
+      id: song.id.toString(),
+      title: song.title,
+      genre_cycle: song.details['genre_cycle'],
+      found: 'no-name',
+      image: song.media?.['image'] ? song.media['image'] : './assets/img/home/kiivImg.jpg',
+      location: {
+        country: song.location['country'],
+        region: song.location['region'],
+        district_center: song.location['official_name_city'],
+        recording_location: {lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1])}
       }
     };
-    return marker;
   }
 
   fetchMarkers() {

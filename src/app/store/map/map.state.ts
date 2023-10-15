@@ -16,13 +16,16 @@ export interface MapStateModel {
   defaults: {
     markersList: [
       {
-        key: 'marker1',
-        position: { lat: 50.4501, lng: 30.5234 },
-        popup: {
-          title: 'с. Крячківка, Полтавська обл.',
-          photoUrl: './assets/img/home/kiivImg.jpg',
-          countRecords: 20,
-          link: '#'
+        id: 'marker1',
+        title: 'Лєтєла соя',
+        genre_cycle: 'Осінь',
+        found: 'no-name',
+        image: './assets/img/home/kiivImg.jpg',
+        location: {
+          country: 'Ukraine',
+          region: 'Рівне',
+          district_center: 'с. Рокитне',
+          recording_location: { lat: 50.4501, lng: 30.5234  }
         }
       }
     ]

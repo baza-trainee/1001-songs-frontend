@@ -1,0 +1,127 @@
+.filter {
+  &__box {
+    width: 315px;
+    position: relative;
+  }
+
+  &__header {
+    padding: 12px 48px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    display: inline-block;
+    border-radius: 0 0 12px 12px;
+    background: #FEFEFE;
+    box-shadow: 0 4px 19px 0 rgba(0, 0, 0, 0.12);
+    z-index: 2;
+  }
+
+  &__header,
+  &__header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 28px;
+    padding-left: 8px;
+  }
+
+  &__body {
+    padding: 73px 48px 5px;
+    width: 100%;
+    height: 694px;
+    position: absolute;
+    top: 0;
+    background: #FEFEFE;
+    box-shadow: 1px 0 18px 0 rgba(0, 0, 0, 0.10) inset;
+    transition: transform .3s ease-in-out;
+    overflow-y: auto;
+    transform: translateY(-100%);
+
+    &-title {
+      font-family: "Yeseva One", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      margin: 0 0 4px;
+    }
+  }
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__clear {
+    display: flex;
+    border-radius: 12px;
+    background: #FFF068;
+    padding: 2px 4px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    gap: 4px;
+
+  }
+
+  &__location {
+    margin-bottom: 16px;
+  }
+
+  &__location,
+  &__song {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
+  }
+}
+
+@media (width <=1024px) {
+  .container {
+    margin: 0 48px;
+  }
+}
+
+@media (width <=768px) {
+  .container {
+    margin: 0 32px;
+  }
+}
+
+@media (width <=465px) {
+  .container {
+  }
+  .filter {
+    margin: 0;
+
+    &__body {
+      padding: 73px 16px 5px;
+    }
+
+    &__box {
+      width: 100%;
+    }
+
+    &__header {
+      padding: 16px 12px;
+    }
+  }
+}
