@@ -5,8 +5,8 @@
   gap: 8px;
 }
 
-.nav__btn-left,
-.nav__btn-right {
+.nav__btn__left,
+.nav__btn__right {
   background-color: transparent;
   border: none;
 }
@@ -59,7 +59,7 @@
   }
 }
 
-.our-projects {
+.projects {
   margin: 0 auto 80px;
   width: 1280px;
 
@@ -101,7 +101,7 @@
   }
 }
 
-.bounding-box {
+.limiter {
   margin-left: 110px;
 }
 
@@ -129,7 +129,7 @@
     }
   }
 
-  .our-projects {
+  .projects {
     width: 100%;
     padding: 0 48px;
 
@@ -147,7 +147,7 @@
     }
   }
 
-  .bounding-box {
+  .limiter {
     margin-left: 0;
   }
 }
@@ -171,7 +171,7 @@
     }
   }
 
-  .our-projects {
+  .projects {
     &__items {
       overflow: hidden;
       display: flex;
@@ -194,7 +194,7 @@
     }
   }
 
-  .bounding-box {
+  .limiter {
     margin-left: 0;
   }
 }
@@ -232,7 +232,7 @@
     }
   }
 
-  .our-projects {
+  .projects {
     margin: 0;
     padding: 0 16px 28px;
 
@@ -265,7 +265,7 @@
     }
   }
 
-  .bounding-box {
+  .limiter {
     margin-left: 0;
   }
 }

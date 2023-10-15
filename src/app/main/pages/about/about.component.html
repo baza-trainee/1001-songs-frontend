@@ -1,5 +1,5 @@
 <section class="about">
-  <div class="bounding-box">
+  <div class="limiter">
     <h2 class="about__title">{{ 'about.title' | translate }}</h2>
     <p class="about__description">
       Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam
@@ -11,25 +11,25 @@
 
   <img class="about__main-img" src=".\assets\img\about\about-us-photo.jpg" alt="about us photo" />
 
-  <p class="about__description bounding-box">
+  <p class="about__description limiter">
     Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
     ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
     Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
     ac. Adipiscing pellentesque non molestie sapien sit hac.
   </p>
 
-  <div class="about__carousel bounding-box">
+  <div class="about__carousel limiter">
     <img class="about__carousel-item" src=".\assets\img\about\about-us-photo.jpg" alt="" />
     <div class="about__carousel-nav">
       <p class="about__carousel-nav__desrc"><span class="about__carousel-nav__count">1/2</span> Lorem ipsum</p>
       <div class="nav__btns">
-        <button class="nav__btn-left"><img src=".\assets\img\about\icons\Left-arrow.svg" alt=""/></button>
-        <button class="nav__btn-right"><img src=".\assets\img\about\icons\Right-arrow.svg" alt=""/></button>
+        <button class="nav__btn__left"><img src=".\assets\img\about\icons\Left-arrow.svg" alt=""/></button>
+        <button class="nav__btn__right"><img src=".\assets\img\about\icons\Right-arrow.svg" alt=""/></button>
       </div>
     </div>
   </div>
 
-  <p class="about__description bounding-box">
+  <p class="about__description limiter">
     Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
     ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
     Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
@@ -39,17 +39,17 @@
 
 <app-about-team></app-about-team>
 
-<section class="our-projects">
-  <h2 class="our-projects__title">{{ 'about.projects.title' | translate }}</h2>
-  <div class="our-projects__items">
-    <div class="our-projects__item" *ngFor="let item of projectsItems">
-      <img class="our-projects__item-img" src="{{ item.img }}" alt="Project photo" />
-      <h4 class="our-projects__item-title">{{ item.title }}</h4>
-      <p class="our-projects__item-descr">{{ item.description }}</p>
+<section class="projects">
+  <h2 class="projects__title">{{ 'about.projects.title' | translate }}</h2>
+  <div class="projects__items">
+    <div class="projects__item" *ngFor="let item of projectsItems">
+      <img class="projects__item-img" src="{{ item.img }}" alt="Project photo" />
+      <h4 class="projects__item-title">{{ item.title }}</h4>
+      <p class="projects__item-descr">{{ item.description }}</p>
     </div>
   </div>
   <div class="nav__btns">
-    <button class="nav__btn-left"><img src=".\assets\img\about\icons\arrow_back.svg" alt=""/></button>
-    <button class="nav__btn-right"><img src=".\assets\img\about\icons\arrow_forward.svg" alt=""/></button>
+    <button class="nav__btn__left"><img src=".\assets\img\about\icons\arrow_back.svg" alt=""/></button>
+    <button class="nav__btn__right"><img src=".\assets\img\about\icons\arrow_forward.svg" alt=""/></button>
   </div>
 </section>

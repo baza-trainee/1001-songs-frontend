@@ -16,7 +16,7 @@
     @include h2-desktop;
   }
 
-  .team-members__container {
+  &__container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -64,7 +64,7 @@
         @include h4-mobile;
       }
 
-      .team-members__container {
+      &__container {
         flex-direction: column;
         margin-top: 24px;
       }
