@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="team">
+    <h2 class="team__title">{{ 'about.team.title' | translate }}</h2>
+    <div class="team-members__container">
+      <app-team-member-card *ngFor="let member of members" [member]="member"></app-team-member-card>
+    </div>
+  </div>
+</div>

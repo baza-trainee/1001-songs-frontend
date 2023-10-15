@@ -1,3 +1,55 @@
-<div style="display: flex; justify-content: center; align-items: center;">
-   <p style="padding: 10px; color: azure; font-size: larger; background-color: #1a1a1a;">{{ 'about.stub' | translate }}</p>
-</div>
+<section class="about">
+  <div class="bounding-box">
+    <h2 class="about__title">{{ 'about.title' | translate }}</h2>
+    <p class="about__description">
+      Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam
+      et ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet
+      consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor
+      massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.
+    </p>
+  </div>
+
+  <img class="about__main-img" src=".\assets\img\about\about-us-photo.jpg" alt="about us photo" />
+
+  <p class="about__description bounding-box">
+    Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
+    ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
+    Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
+    ac. Adipiscing pellentesque non molestie sapien sit hac.
+  </p>
+
+  <div class="about__carousel bounding-box">
+    <img class="about__carousel-item" src=".\assets\img\about\about-us-photo.jpg" alt="" />
+    <div class="about__carousel-nav">
+      <p class="about__carousel-nav__desrc"><span class="about__carousel-nav__count">1/2</span> Lorem ipsum</p>
+      <div class="nav__btns">
+        <button class="nav__btn-left"><img src=".\assets\img\about\icons\Left-arrow.svg" /></button>
+        <button class="nav__btn-right"><img src=".\assets\img\about\icons\Right-arrow.svg" /></button>
+      </div>
+    </div>
+  </div>
+
+  <p class="about__description bounding-box">
+    Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
+    ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
+    Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
+    ac. Adipiscing pellentesque non molestie sapien sit hac.
+  </p>
+</section>
+
+<app-about-team></app-about-team>
+
+<section class="our-projects">
+  <h2 class="our-projects__title">{{ 'about.projects.title' | translate }}</h2>
+  <div class="our-projects__items">
+    <div class="our-projects__item" *ngFor="let item of projectsItems">
+      <img class="our-projects__item-img" src="{{ item.img }}" alt="Project photo" />
+      <h4 class="our-projects__item-title">{{ item.title }}</h4>
+      <p class="our-projects__item-descr">{{ item.description }}</p>
+    </div>
+  </div>
+  <div class="nav__btns">
+    <button class="nav__btn-left"><img src=".\assets\img\about\icons\arrow_back.svg" /></button>
+    <button class="nav__btn-right"><img src=".\assets\img\about\icons\arrow_forward.svg" /></button>
+  </div>
+</section>

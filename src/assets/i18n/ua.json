@@ -1,34 +1,34 @@
 {
-   "header": {
-      "nav-menu": {
-         "about": "Про проект",
-         "map": "Мапа",
-         "educational-section": "Освітній розділ",
-         "news": "Новини",
-         "expedition": "Експедиції"
-      },
-      "actions": {
-         "button-donate":"Підтримати"
-      },
-     "pop-up-menu":{
-         "title": "Поділіться проєктом культурного надбання українців зі світом.",
-         "copy": "Копіювати"
-     }
-   },
-   "footer": {
-      "button": "Підтримати проєкт",
-      "partners": "Наші партнери",
-      "contacts" : {
-        "title" : "Контакти",
-        "email" : "clientsupport@gmail.com"
-      },
-      "rules": {
-         "reporting":"Звітність",
-         "policy": "Політика приватності",
-         "terms": "Правила та умови використання",
-         "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
-      }
-   },
+  "header": {
+    "nav-menu": {
+      "about": "Про проект",
+      "map": "Мапа",
+      "educational-section": "Освітній розділ",
+      "news": "Новини",
+      "expedition": "Експедиції"
+    },
+    "actions": {
+      "button-donate": "Підтримати"
+    },
+    "pop-up-menu": {
+      "title": "Поділіться проєктом культурного надбання українців зі світом.",
+      "copy": "Копіювати"
+    }
+  },
+  "footer": {
+    "button": "Підтримати проєкт",
+    "partners": "Наші партнери",
+    "contacts": {
+      "title": "Контакти",
+      "email": "clientsupport@gmail.com"
+    },
+    "rules": {
+      "reporting": "Звітність",
+      "policy": "Політика приватності",
+      "terms": "Правила та умови використання",
+      "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
+    }
+  },
   "home": {
     "home-info": {
       "songs-link": "1000+ пісень",
@@ -64,32 +64,38 @@
     }
   },
   "about": {
-    "stub": "Сторінка 'Про проект' у розробці"
+    "stub": "Сторінка 'Про проект' у розробці",
+    "title": "Про нас",
+    "team": {
+      "title": "Команда"
+    },
+    "projects": {
+      "title": "Наші проєкти"
+    }
   },
   "map": {
     "player": {
-      "counter-title" : "Кількість знайдених",
-      "player-title" : "Слухати всі знайдені пісні",
-      "songs-list" : {
-        "titles" : {
-          "photo" : "Фото",
-          "name" : "Назва",
-          "genre" : "Жанр",
-          "recording-location" : "Місце запису",
-          "listen" : "Слухати"
+      "counter-title": "Кількість знайдених",
+      "player-title": "Слухати всі знайдені пісні",
+      "songs-list": {
+        "titles": {
+          "photo": "Фото",
+          "name": "Назва",
+          "genre": "Жанр",
+          "recording-location": "Місце запису",
+          "listen": "Слухати"
         },
-        "song-card" : {
-          "detail-button" : "Деталі",
-          "song-card-detail" : {
-            "record-date" : "Дата запису",
-            "collectors" : "Збирачі",
-            "ethnographic-region" : "Етнографічний регіон",
-            "more-detail-button" : "Більше деталей"
+        "song-card": {
+          "detail-button": "Деталі",
+          "song-card-detail": {
+            "record-date": "Дата запису",
+            "collectors": "Збирачі",
+            "ethnographic-region": "Етнографічний регіон",
+            "more-detail-button": "Більше деталей"
           }
         }
       }
     }
-
   },
   "news": {
     "stub": "Сторінка 'Новини' у розробці"
