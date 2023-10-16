@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { PopUpMenuComponent } from './pop-up-menu/pop-up-menu.component';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatDialogModule
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Select(AppState.getIsLoading) isLoading$?: Observable<boolean>;
   public isPopupOpen = false;
   public changeLang: boolean = true;
@@ -40,10 +40,6 @@ export class HeaderComponent implements OnInit {
     private _translate: TranslateService,
     public dialog: MatDialog
   ) {}
-
-  ngOnInit(): void {
-   
-  }
 
   openDialog() {
     this.dialog.open(DialogComponent, { data: { text: 'Error. Try again later' } });

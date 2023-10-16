@@ -3,7 +3,7 @@
     class="song__card__header"
     (click)="mobileToggleDetailBtn()"
     [class.active]="song.isDetailOpen"
-    (keyup)="handleKeyUpEvent($event, song)"
+    (keyup)="handleKeyUpEvent($event)"
     tabindex="0"
   >
     <div class="song__card__img"></div>
@@ -18,7 +18,7 @@
       <div class="song__info__location">{{ song.location.official_name_city }}, {{ song.location.region }}</div>
     </div>
 
-    <div class="song__card__btn btn-detail" (click)="toggleDetailBtn()" (keyup)="handleKeyUpEvent($event, song)" tabindex="0">
+    <div class="song__card__btn btn-detail" (click)="toggleDetailBtn()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
       {{ 'map.player.songs-list.song-card.detail-button' | translate }}
     </div>
 

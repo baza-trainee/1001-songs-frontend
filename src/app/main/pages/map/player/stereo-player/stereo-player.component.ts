@@ -27,7 +27,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   subState!: Subscription;
   isPreloader = false;
 
-  destroy$: Subject<void> = new Subject<any>();
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private audioService: AudioService,
@@ -103,7 +103,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.audioService.seekTo(Number(currentTime) + this.REWIND_STEP);
   }
 
-  onSliderChangeEnd(event: any) {
+  onSliderChangeEnd(event: { target: { value: number } }) {
     const sliderValue = event.target.value;
     this.audioService.seekTo(sliderValue);
   }

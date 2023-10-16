@@ -37,7 +37,7 @@ export class PlaylistSongCardComponent implements OnInit {
     this.song.isDetailOpen = !this.song.isDetailOpen;
   }
 
-  handleKeyUpEvent(event: Event, file: Song) {
+  handleKeyUpEvent(event: Event) {
     if (event && event.isTrusted) {
       this.mobileToggleDetailBtn();
     }

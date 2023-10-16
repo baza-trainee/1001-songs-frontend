@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,5 +17,5 @@ import { MatButtonModule } from '@angular/material/button';
   styles: []
 })
 export class DialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { text: string }) {}
 }

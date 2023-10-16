@@ -28,7 +28,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
-  destroy$: Subject<void> = new Subject<any>();
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private multiAudioService: MultiAudioService,
