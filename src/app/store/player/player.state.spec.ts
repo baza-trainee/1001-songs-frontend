@@ -1,25 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import { NgxsModule } from '@ngxs/store';
-import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule, Store } from '@ngxs/store';
 import { PlayerState } from './player.state';
 
-describe('ExpeditionsState', () => {
-  // let store: Store;
-
+describe('PlayerState', () => {
+  let store: Store;
+  let state: PlayerState;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([PlayerState]), HttpClientModule]
+      imports: [NgxsModule.forRoot([PlayerState])]
     });
-    //  store = TestBed.inject(Store);
+    store = TestBed.inject(Store);
+    state = TestBed.inject(PlayerState);
   });
 
-  //   it('it should fetch markers', async () => {
-  //     await store.dispatch(new FetchMarkers()).toPromise();
-  //     const markers = store.selectSnapshot(MapState.getMarkersList);
-  //   });
-
-  // it('it should select markers', () => {
-  //   const markers = store.selectSnapshot(MapState.getMarkersList);
-  //   expect(markers[0]).toEqual(cordsMarkers[0]);
-  // });
+  it('should create', () => {
+    expect(state).toBeTruthy();
+  });
 });

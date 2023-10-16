@@ -103,8 +103,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.audioService.seekTo(Number(currentTime) + this.REWIND_STEP);
   }
 
-  onSliderChangeEnd(event: { target: { value: number } }) {
-    const sliderValue = event.target.value;
-    this.audioService.seekTo(sliderValue);
+  onSliderChangeEnd(event: Event) {
+    if(event && event.target && event.target){
+      const target = event.target as HTMLInputElement;
+      const sliderValue: number = target.value as unknown as number;
+      this.audioService.seekTo(sliderValue);
+    }
+   
   }
 }
