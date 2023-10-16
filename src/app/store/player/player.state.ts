@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongsByLocation, ResettSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -75,7 +75,7 @@ export class PlayerState {
     });
   }
 
-  @Action(SelectSong)
+  @Action(ResetSong)
   resetSong(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
 

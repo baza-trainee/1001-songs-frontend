@@ -3,12 +3,14 @@ import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from '
 import { StreamState } from '../../interfaces/stream-state.interface';
 import { events } from '../../enums/audio.enum';
 import { format } from 'date-fns';
+import { Store } from '@ngxs/store';
+import { ResetSong } from 'src/app/store/player/player.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MultiAudioService {
-  constructor() {}
+  constructor(private store: Store) {}
   private tracks: HTMLAudioElement[] = [];
   private audioStates: StreamState[] = [];
   private stop$: Subject<void> = new Subject<void>();
@@ -74,6 +76,9 @@ export class MultiAudioService {
         state.readableCurrentTime = this.formatTime(state.currentTime);
         break;
       case 'error':
+        console.log('ERROR ERROR');
+        this.store.dispatch(new ResetSong());
+        this.resetState();
         state.error = true;
         break;
     }

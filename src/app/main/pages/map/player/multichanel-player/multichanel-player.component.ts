@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Observable, filter, skip, take } from 'rxjs';
+import { Observable, Subject, filter, skip, take, takeUntil } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
@@ -28,6 +28,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
+  destroy$: Subject<void> = new Subject<any>();
+
   constructor(
     private multiAudioService: MultiAudioService,
     private audioService: AudioService,
@@ -38,7 +40,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedSong$?.subscribe((song) => {
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       //console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
         //  console.log(song);
@@ -50,18 +52,21 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.state$.pipe(skip(1)).subscribe((states) => {
-      console.log(states);
-      if (states[0].playing && this.isPreloader) {
-        this.isPreloader = false;
-        // this.synchronizeTracs();
-        // this.synchronizeTracs();
-      }
-      if (!states[0].canplay || !states[1].canplay || !states[2].canplay) {
-        console.log(states[0].canplay, '->', !states[1].canplay, '->', !states[2].canplay);
-        this.synchronizeTracs();
-      }
-    });
+    this.state$
+      .pipe(takeUntil(this.destroy$))
+      .pipe(skip(1))
+      .subscribe((states) => {
+        console.log(states);
+        if (states[0].playing && this.isPreloader) {
+          this.isPreloader = false;
+          // this.synchronizeTracs();
+          // this.synchronizeTracs();
+        }
+        if (!states[0].canplay || !states[1].canplay || !states[2].canplay) {
+          console.log(states[0].canplay, '->', !states[1].canplay, '->', !states[2].canplay);
+          this.synchronizeTracs();
+        }
+      });
   }
 
   synchronizeTracs() {
@@ -72,6 +77,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stop();
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 
   playStream(urls: string[]) {

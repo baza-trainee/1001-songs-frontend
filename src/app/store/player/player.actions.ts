@@ -8,7 +8,7 @@ export class SelectSong {
 
   constructor(public selectedSongId: string) {}
 }
-export class ResettSong {
+export class ResetSong {
   static readonly type = '[Player] Reset';
 
   constructor() {}

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song';
 import { Select, Store } from '@ngxs/store';
@@ -27,18 +27,19 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   subState!: Subscription;
   isPreloader = false;
 
+  destroy$: Subject<void> = new Subject<any>();
+
   constructor(
     private audioService: AudioService,
     private multiAudioService: MultiAudioService,
     private cloudService: CloudService,
     private store: Store
   ) {
-    this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {
-    });
+   // this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {});
   }
 
   ngOnInit() {
-    this.selectedSong$?.subscribe((song) => {
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       if (song.media && song.media.multichannel_audio.length > 1) {
         this.showStereoPlayer = false;
       } else {
@@ -50,7 +51,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     });
     this.state$ = this.audioService.getState();
 
-    this.subState = this.state$.subscribe((ev) => {
+    this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
       }
@@ -59,7 +60,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stop();
-    this.audioService.showStereoPlayer$.next(false);
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 
   playStream(url: string) {
