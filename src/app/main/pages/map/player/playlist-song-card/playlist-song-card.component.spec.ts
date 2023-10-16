@@ -4,6 +4,7 @@ import { PlaylistSongCardComponent } from './playlist-song-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { NgxsModule } from '@ngxs/store';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('PlaylistSongCardComponent', () => {
   let component: PlaylistSongCardComponent;
@@ -11,7 +12,7 @@ describe('PlaylistSongCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PlaylistSongCardComponent, TranslateModule.forRoot(),  NgxsModule.forRoot([PlayerState])]
+      imports: [PlaylistSongCardComponent, TranslateModule.forRoot(), NgxsModule.forRoot([PlayerState]), HttpClientModule]
     });
     fixture = TestBed.createComponent(PlaylistSongCardComponent);
     component = fixture.componentInstance;

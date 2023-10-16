@@ -28,7 +28,7 @@ import { DialogComponent } from './dialog/dialog.component';
   ]
 })
 export class HeaderComponent {
-  @Select(AppState.getIsLoading) isLoading$?: Observable<boolean>;
+  @Select(AppState.getIsLoading) isLoading$?: Observable<number>;
   public isPopupOpen = false;
   public changeLang: boolean = true;
   public menuSwitcherOff: boolean = true;

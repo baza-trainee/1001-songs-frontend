@@ -14,8 +14,11 @@
     </div>
 
     <div class="song__card__song__info">
-      <div class="song__info__genre">{{ song.details.genre_cycle }}</div>
-      <div class="song__info__location">{{ song.location.official_name_city }}, {{ song.location.region }}</div>
+      <div class="song__info__genre">{{ song.details && song.details.genre_cycle ? song.details.genre_cycle : 'Unknown' }}</div>
+      <div class="song__info__location">
+        {{ song.location && song.location.official_name_city ? song.location.official_name_city : 'Unknown' }},
+        {{ song.location && song.location.region ? song.location.region : 'Unknown' }}
+      </div>
     </div>
 
     <div class="song__card__btn btn-detail" (click)="toggleDetailBtn()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
