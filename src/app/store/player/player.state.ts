@@ -4,18 +4,18 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongsByLocation, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongsByLocation, ResettSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 
 export interface PlayerStateModel {
   songsList: Song[];
-  playingSong: Song;
+  selecteSong: Song;
 }
 
 @State<PlayerStateModel>({
   name: 'playlist',
   defaults: {
     songsList: [],
-    playingSong: {} as Song
+    selecteSong: {} as Song
   }
 })
 @Injectable()
@@ -32,33 +32,33 @@ export class PlayerState {
 
   @Selector()
   static getSelectedSong(state: PlayerStateModel): Song {
-    return state.playingSong as Song;
+    return state.selecteSong as Song;
   }
 
   @Action(SelectNext)
   selectNext(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
-    const nextSongIndex = state.songsList.indexOf(state.playingSong) + 1;
+    const nextSongIndex = state.songsList.indexOf(state.selecteSong) + 1;
     const songsListLength = state.songsList.length;
     if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
       return;
     }
     return ctx.setState({
       ...state,
-      playingSong: state.songsList[nextSongIndex]
+      selecteSong: state.songsList[nextSongIndex]
     });
   }
 
   @Action(SelectPrev)
   selectPrev(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
-    const nextSongIndex = state.songsList.indexOf(state.playingSong) - 1;
+    const nextSongIndex = state.songsList.indexOf(state.selecteSong) - 1;
     if (nextSongIndex < 0) {
       return;
     }
     return ctx.setState({
       ...state,
-      playingSong: state.songsList[nextSongIndex]
+      selecteSong: state.songsList[nextSongIndex]
     });
   }
 
@@ -71,7 +71,17 @@ export class PlayerState {
     }
     return ctx.setState({
       ...state,
-      playingSong: selectedSong
+      selecteSong: selectedSong
+    });
+  }
+
+  @Action(SelectSong)
+  resetSong(ctx: StateContext<PlayerStateModel>) {
+    const state = ctx.getState();
+
+    return ctx.setState({
+      ...state,
+      selecteSong: {} as Song
     });
   }
 

@@ -8,6 +8,11 @@ export class SelectSong {
 
   constructor(public selectedSongId: string) {}
 }
+export class ResettSong {
+  static readonly type = '[Player] Reset';
+
+  constructor() {}
+}
 export class SelectNext {
   static readonly type = '[Player] SelectNext';
 
