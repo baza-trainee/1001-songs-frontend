@@ -35,7 +35,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     private cloudService: CloudService,
     private store: Store
   ) {
-   // this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {});
+    // this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {});
   }
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
       } else {
         this.showStereoPlayer = true;
       }
-      if (song.media) {
+      if (song.media && song.media.stereo_audio) {
         this.openFile(song);
       }
     });

@@ -41,11 +41,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
-      //console.log(song);
       if (song.media && song.media.multichannel_audio.length > 1) {
-        //  console.log(song);
         this.openFile(song);
-        this.isPreloader = true;
         this.isVisible = true;
       } else {
         this.isVisible = false;
@@ -56,14 +53,12 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .pipe(skip(1))
       .subscribe((states) => {
-        console.log(states);
-        if (states[0].playing && this.isPreloader) {
+        const loading = states.filter((state) => !state.playing);
+        if (!loading.length) {
           this.isPreloader = false;
-          // this.synchronizeTracs();
-          // this.synchronizeTracs();
         }
-        if (!states[0].canplay || !states[1].canplay || !states[2].canplay) {
-          console.log(states[0].canplay, '->', !states[1].canplay, '->', !states[2].canplay);
+        const canPlay = states.filter((state) => !state.canplay);
+        if (canPlay.length) {
           this.synchronizeTracs();
         }
       });
@@ -87,6 +82,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   openFile(file: Song) {
     //  this.currentFile = file;
+    this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
     const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
