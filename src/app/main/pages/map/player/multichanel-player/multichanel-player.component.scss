@@ -17,7 +17,6 @@
     animation-timing-function: linear;
     border: 5px solid black;
     border-radius: 45%;
-    // border-top: 5px solid rgba(255, 255, 255, 1);
     position: absolute;
     left: calc(50% - 20px);
     z-index: 999;
@@ -97,6 +96,7 @@
   .multichanel__item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     top: -7px;
     z-index: 1;
@@ -120,8 +120,8 @@
 
       .item__actions {
         button {
-          &.active {
-            background-color: yellow;
+          .mat-icon {
+            transform: scale(1.5);
           }
         }
       }

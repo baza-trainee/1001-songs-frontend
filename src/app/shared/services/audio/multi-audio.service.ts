@@ -33,6 +33,10 @@ export class MultiAudioService {
     };
   }
 
+  private resetState() {
+    this.audioStates = [...this.audioStates.map((state) => this.createAudioState())];
+  }
+
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
     this.tracks.push(audioObj);

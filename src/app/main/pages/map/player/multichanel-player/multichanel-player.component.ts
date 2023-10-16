@@ -51,6 +51,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     });
 
     this.state$.pipe(skip(1)).subscribe((states) => {
+      console.log(states);
       if (states[0].playing && this.isPreloader) {
         this.isPreloader = false;
         // this.synchronizeTracs();
