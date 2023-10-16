@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Observable, Subject, filter, skip, take, takeUntil } from 'rxjs';
+import { Observable, Subject, skip, takeUntil } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';

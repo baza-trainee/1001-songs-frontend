@@ -41,18 +41,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private _translate: TranslateService,
-    private audioService: AudioService,
 
     private store: Store
-  ) {
-    this.audioService.showStereoPlayer$.next(true);
-  }
+  ) {}
 
-  ngOnInit() {
-    this.store.dispatch(new FetchSongsByLocation(this.location));
-  }
+  ngOnInit() {}
 
-  ngOnDestroy() {
-    // this.cloudServiceSubscribe?.unsubscribe();
-  }
+  ngOnDestroy() {}
 }
