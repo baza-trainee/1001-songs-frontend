@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Marker, SelectedSongFilter} from "../../../../shared/interfaces/map-marker";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -15,14 +15,15 @@ import {MapService} from "../../../../shared/services/map/map.service";
   styleUrls: ['./map-filter.component.scss']
 })
 
-export class MapFilterComponent implements OnInit{
+export class MapFilterComponent implements OnChanges {
   @Input() markers!: Marker[];
   @Output() selectedOptionsChange = new EventEmitter<SelectedSongFilter>();
   filterCategory = mapFilter;
-  selectedOptions: SelectedSongFilter = new SelectedSongFilter();
+  options: SelectedSongFilter = new SelectedSongFilter();
   isShowFilter = false;
+
   form = new FormGroup({
-    country: new FormControl([]),
+    country: new FormControl(['']),
     region: new FormControl([]),
     settlement: new FormControl([]),
     genre: new FormControl([]),
@@ -30,26 +31,25 @@ export class MapFilterComponent implements OnInit{
     found: new FormControl([])
   });
 
-  constructor(private _translate: TranslateService, private _mapService: MapService) {}
+  constructor(
+    private _translate: TranslateService,
+    private _mapService: MapService
+  ) {}
 
-  initHandlers (): void {
-    this.form.controls.country.valueChanges.subscribe(()=> {
-
-    })
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
+      this.options = this._mapService.createFilterBySongs(this.markers);
+    }
   }
 
   sendSelectedOptions() {
-    this.selectedOptionsChange.emit(this.selectedOptions);
+    this.selectedOptionsChange.emit(this.options);
   }
 
   filerClear() {
-    this.selectedOptions = new SelectedSongFilter();
+    console.log(this.form.get('country')?.value)
+    this.form.reset();
+    this.options = this._mapService.createFilterBySongs(this.markers);
     this.sendSelectedOptions();
-  }
-
-  ngOnInit(): void {
-    this.initHandlers();
-    this.selectedOptions = this._mapService.createFilterBySongs(this.markers);
-    console.log(this.selectedOptions)
   }
 }

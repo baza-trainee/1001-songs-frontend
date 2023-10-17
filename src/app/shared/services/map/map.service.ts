@@ -39,8 +39,8 @@ export class MapService {
       id: song.id.toString(),
       title: song.title,
       genre_cycle: song.details['genre_cycle'],
-      found: 'no-name',
-      image: song.media?.['image'] ? song.media['image'] : './assets/img/home/kiivImg.jpg',
+      found: song.archive,
+      image: song.media?.['photo_of_performers'] ? song.media['photo_of_performers'] : './assets/img/home/kiivImg.jpg',
       location: {
         country: song.location['country'],
         region: song.location['region'],
