@@ -9,7 +9,7 @@ import { InteraciveMapComponent } from 'src/app/shared/shared-components/interac
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './player/player.component';
-import { FetchSongsByLocation } from 'src/app/store/player/player.actions';
+import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
 
 @Component({
   selector: 'app-map',
@@ -28,6 +28,7 @@ export class MapComponent implements OnInit {
   }
 
   handleMapEmit(ev: Marker) {
+    this.store.dispatch(new ResetSong());
     this.store.dispatch(new FetchSongsByLocation(ev.popup.title));
   }
 }
