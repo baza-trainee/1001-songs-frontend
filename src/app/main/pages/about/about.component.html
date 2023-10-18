@@ -1,35 +1,41 @@
 <section class="about">
-  <div class="limiter">
-    <h2 class="about__title">{{ 'about.title' | translate }}</h2>
-    <p class="about__description">
-      Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam
-      et ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet
-      consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor
-      massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.
-    </p>
-  </div>
-
-  <img class="about__main-img" src=".\assets\img\about\about-us-photo.jpg" alt="about us photo" />
-
-  <p class="about__description limiter">
+  <h2 class="about__title">{{ 'about.title' | translate }}</h2>
+  <p class="about__description">
     Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
     ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
     Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
     ac. Adipiscing pellentesque non molestie sapien sit hac.
   </p>
 
-  <div class="about__carousel limiter">
+  <img class="about__main-img" src=".\assets\img\about\about-us-photo.jpg" alt="about us photo" />
+
+  <p class="about__description">
+    Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
+    ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
+    Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
+    ac. Adipiscing pellentesque non molestie sapien sit hac.
+  </p>
+
+  <div class="about__carousel">
     <img class="about__carousel-item" src=".\assets\img\about\about-us-photo.jpg" alt="" />
     <div class="about__carousel-nav">
       <p class="about__carousel-nav__desrc"><span class="about__carousel-nav__count">1/2</span> Lorem ipsum</p>
       <div class="nav__btns">
-        <button class="nav__btn__left"><img src=".\assets\img\about\icons\Left-arrow.svg" alt=""/></button>
-        <button class="nav__btn__right"><img src=".\assets\img\about\icons\Right-arrow.svg" alt=""/></button>
+        <button class="nav__btn__left">
+          <svg width="82" height="82" viewBox="0 0 100 100">
+            <use xlink:href="./assets/sprites.svg#arrowBack"></use>
+          </svg>
+        </button>
+        <button class="nav__btn__right">
+          <svg width="82" height="82" viewBox="0 0 100 100">
+            <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
-  <p class="about__description limiter">
+  <p class="about__description">
     Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et
     ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet consectetur.
     Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor massa dictumst
@@ -49,7 +55,15 @@
     </div>
   </div>
   <div class="nav__btns">
-    <button class="nav__btn__left"><img src=".\assets\img\about\icons\arrow_back.svg" alt=""/></button>
-    <button class="nav__btn__right"><img src=".\assets\img\about\icons\arrow_forward.svg" alt=""/></button>
+    <button class="nav__btn__left">
+      <svg width="100" height="100">
+        <use xlink:href="./assets/sprites.svg#arrowBack"></use>
+      </svg>
+    </button>
+    <button class="nav__btn__right">
+      <svg width="100" height="100">
+        <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+      </svg>
+    </button>
   </div>
 </section>
