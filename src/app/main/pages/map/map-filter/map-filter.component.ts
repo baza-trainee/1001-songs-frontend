@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Marker, SelectedSongFilter} from "../../../../shared/interfaces/map-marker";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {MultiselectComponent} from "./multiselect/multiselect.component";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+
+import {Marker, SelectedSongFilter} from "../../../../shared/interfaces/map-marker";
+import {MultiselectComponent} from "./multiselect/multiselect.component";
 import {mapFilter} from "../../../../shared/enums/mapFilter";
 import {MapService} from "../../../../shared/services/map/map.service";
 
@@ -43,11 +44,6 @@ export class MapFilterComponent implements OnChanges {
       this.options = this._mapService.createFilterBySongs(this.markers);
     }
   }
-
-  // handleChipRemoved(option: string): void {
-  //   this.sendSelectedOptions();
-  // }
-
 
   sendSelectedOptions() {
     this.selectedOptionsChange.emit(this.options);

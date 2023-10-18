@@ -1,5 +1,6 @@
-<mat-form-field>
+<mat-form-field class="multiselect__box">
   <mat-select
+    class="multiselect"
     placeholder="{{ name | translate }}"
     multiple
     [(value)]="selectedValues"
@@ -9,6 +10,7 @@
       <mat-chip-listbox>
         <mat-chip
           *ngFor="let option of selectedValues"
+          class="multiselect__chip"
           [removable]="true"
           (removed)="removeOption(option)">
           <mat-icon matChipRemove>
@@ -19,7 +21,7 @@
           {{ option }}
         </mat-chip>
       </mat-chip-listbox>
-      <button class="clear-button" (click)="clearSelections()">
+      <button class="multiselect__clear" (click)="clearSelections()">
         <mat-icon>
           <svg width="12" height="12" viewBox="0 0 12 12">
             <use xlink:href="./assets/sprites.svg#selectClear"></use>
@@ -27,7 +29,7 @@
         </mat-icon>
       </button>
     </mat-select-trigger>
-    <mat-option *ngFor="let option of options" [value]="option">
+    <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option">
       {{ option }}
     </mat-option>
   </mat-select>
