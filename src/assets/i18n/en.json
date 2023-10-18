@@ -98,7 +98,16 @@
     }
   },
   "news": {
-    "stub": "Page 'News' under development"
+    "title": "News",
+    "categories": {
+      "all": "All",
+      "meetings": "Meetings",
+      "lectures": "Lectures",
+      "publications": "Publications",
+      "workshops": "Workshops",
+      "concerts": "Concerts",
+      "conferences": "Conferences"
+    }
   },
   "expeditions": {
     "stub": "Page 'Expeditions' under development",

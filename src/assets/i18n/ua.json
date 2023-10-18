@@ -98,7 +98,16 @@
     }
   },
   "news": {
-    "stub": "Сторінка 'Новини' у розробці"
+    "title": "Новини",
+    "categories": {
+      "all": "Усі",
+      "meetings": "Зустрічі",
+      "lectures": "Лекції",
+      "publications": "Публікації",
+      "workshops": "Майстер-класи",
+      "concerts": "Концерти",
+      "conferences": "Конференції"
+    }
   },
   "expeditions": {
     "stub": "Сторінка 'Експедиції' у розробці",
