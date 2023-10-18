@@ -32,16 +32,39 @@
                 <span>{{ 'map.filter.button-clear' | translate }}</span>
               </button>
             </div>
-<!--            <pre>{{ form.value | json }}</pre>-->
-            <app-multiselect controlName="country" [options]="options.country" [name]="filterCategory.country"></app-multiselect>
-            <app-multiselect controlName="region" [options]="options.region" [name]="filterCategory.region"></app-multiselect>
-            <app-multiselect controlName="settlement" [options]="options.settlement" [name]="filterCategory.settlement"></app-multiselect>
+            <app-multiselect
+              [control]="form.controls.country"
+              [options]="options.country"
+              [name]="filterCategory.country">
+            </app-multiselect>
+            <app-multiselect
+              [control]="form.controls.region"
+              [options]="options.region"
+              [name]="filterCategory.region">
+            </app-multiselect>
+            <app-multiselect
+              [control]="form.controls.settlement"
+              [options]="options.settlement"
+              [name]="filterCategory.settlement">
+            </app-multiselect>
           </div>
           <div class="filter__song">
             <h3 class="filter__body-title">{{ 'map.filter.song' | translate }}</h3>
-            <app-multiselect controlName="genre" [options]="options.genre" [name]="filterCategory.genre"></app-multiselect>
-            <app-multiselect controlName="title" [options]="options.title" [name]="filterCategory.title"></app-multiselect>
-            <app-multiselect controlName="found" [options]="options.found" [name]="filterCategory.found"></app-multiselect>
+            <app-multiselect
+              [control]="form.controls.genre"
+              [options]="options.genre"
+              [name]="filterCategory.genre">
+            </app-multiselect>
+            <app-multiselect
+              [control]="form.controls.title"
+              [options]="options.title"
+              [name]="filterCategory.title">
+            </app-multiselect>
+            <app-multiselect
+              [control]="form.controls.found"
+              [options]="options.found"
+              [name]="filterCategory.found">
+            </app-multiselect>
           </div>
         </div>
       </form>

@@ -1,11 +1,13 @@
 import {Component, Input} from '@angular/core';
-import {ControlContainer, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ControlContainer, FormControl, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-multiselect',
@@ -21,6 +23,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     MatSelectModule,
     TranslateModule,
     MatAutocompleteModule,
+    MatChipsModule,
+    MatCheckboxModule,
   ],
   viewProviders: [
     {
@@ -30,14 +34,29 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
   ],
 })
 export class MultiselectComponent {
-  @Input({required: true}) controlName!: string;
+  @Input({required: true}) control!: FormControl;
   @Input({required: true}) options!: string[];
   @Input({required: true}) name!: string;
-  selectedOptions: string[] = [];
+  selectedValues: string[] = [];
 
   constructor(private _translate: TranslateService) {}
 
   onSelectionChange(event: MatSelectChange) {
-    this.selectedOptions = event.value;
+    this.control.setValue(event.value);
+  }
+
+  removeOption(option: string): void {
+    const value = this.control.value as string[];
+    this.removeFirst(value, option);
+    this.control.setValue(value);
+  }
+  clearSelections(): void {
+    this.control.setValue([]);
+  }
+  private removeFirst<T>(array: T[], toRemove: T): void {
+    const index = array.indexOf(toRemove);
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
   }
 }

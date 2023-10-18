@@ -18,18 +18,20 @@ import {MapService} from "../../../../shared/services/map/map.service";
 export class MapFilterComponent implements OnChanges {
   @Input() markers!: Marker[];
   @Output() selectedOptionsChange = new EventEmitter<SelectedSongFilter>();
+
   filterCategory = mapFilter;
   options: SelectedSongFilter = new SelectedSongFilter();
   isShowFilter = false;
 
   form = new FormGroup({
-    country: new FormControl(['']),
-    region: new FormControl([]),
-    settlement: new FormControl([]),
-    genre: new FormControl([]),
-    title: new FormControl([]),
-    found: new FormControl([])
+    country: new FormControl<string[]>([]),
+    region: new FormControl<string[]>([]),
+    settlement: new FormControl<string[]>([]),
+    genre: new FormControl<string[]>([]),
+    title: new FormControl<string[]>([]),
+    found: new FormControl<string[]>([])
   });
+
 
   constructor(
     private _translate: TranslateService,
@@ -42,12 +44,16 @@ export class MapFilterComponent implements OnChanges {
     }
   }
 
+  // handleChipRemoved(option: string): void {
+  //   this.sendSelectedOptions();
+  // }
+
+
   sendSelectedOptions() {
     this.selectedOptionsChange.emit(this.options);
   }
 
   filerClear() {
-    console.log(this.form.get('country')?.value)
     this.form.reset();
     this.options = this._mapService.createFilterBySongs(this.markers);
     this.sendSelectedOptions();
