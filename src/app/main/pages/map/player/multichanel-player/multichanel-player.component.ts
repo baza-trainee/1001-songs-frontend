@@ -121,9 +121,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.multiAudioService.seekTo(Number(value) + this.REWIND_STEP);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSliderChangeEnd(event: any) {
-    const sliderValue = event.target.value;
-    this.multiAudioService.seekTo(sliderValue);
+  onSliderChangeEnd(event: Event) {
+    if (event && event.target && event.target) {
+      const target = event.target as HTMLInputElement;
+      const sliderValue: number = target.value as unknown as number;
+      this.audioService.seekTo(sliderValue);
+    }
   }
 }
