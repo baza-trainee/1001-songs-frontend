@@ -40,6 +40,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
+      this.stop();
       if (song.media && song.media.multichannel_audio.length > 1) {
         this.showStereoPlayer = false;
       } else {
@@ -104,11 +105,10 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   }
 
   onSliderChangeEnd(event: Event) {
-    if(event && event.target && event.target){
+    if (event && event.target && event.target) {
       const target = event.target as HTMLInputElement;
       const sliderValue: number = target.value as unknown as number;
       this.audioService.seekTo(sliderValue);
     }
-   
   }
 }

@@ -73,6 +73,8 @@ export class AudioService {
   }
 
   stop() {
+    this.resetState();
+    this.stateChange.next(this.state);
     this.stop$.next();
   }
 
@@ -88,6 +90,7 @@ export class AudioService {
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
   private updateStateEvents(event: Event): void {
+    console.log(event);
     switch (event.type) {
       case 'canplay':
         this.state.duration = this.audioObj.duration;
