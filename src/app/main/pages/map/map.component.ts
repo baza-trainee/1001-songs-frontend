@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -20,6 +20,7 @@ import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.act
 })
 export class MapComponent implements OnInit {
   @Select(MapState.getMarkersList) markers$?: Observable<Marker[]>;
+  // @ViewChild('player') player!: ElementRef<HTMLElement>;
 
   constructor(private store: Store) {}
 
@@ -27,8 +28,14 @@ export class MapComponent implements OnInit {
     this.store.dispatch(new FetchMarkers());
   }
 
-  handleMapEmit(ev: Marker) {
+  handleMapEmit(ev: Marker, target: HTMLElement) {
+    this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
     this.store.dispatch(new FetchSongsByLocation(ev.popup.title));
+  }
+
+  scrollToElement(element: HTMLElement): void {
+    // con
+    element.scrollIntoView({ behavior: 'smooth' });
   }
 }

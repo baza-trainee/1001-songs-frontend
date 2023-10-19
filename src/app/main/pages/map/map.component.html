@@ -1,4 +1,4 @@
 <div class="map">
-  <app-interacive-map [markers]="markers$ | async" (markerClicked)="handleMapEmit($event)"></app-interacive-map>
-  <app-player></app-player>
+  <app-interacive-map [markers]="markers$ | async" (markerClicked)="handleMapEmit($event, player)"></app-interacive-map>
+  <div #player><app-player></app-player></div>
 </div>
