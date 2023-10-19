@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
 
-import {Marker, SelectedSongFilter} from '../../interfaces/map-marker';
+import {Marker, SelectedMarkerFilter} from '../../interfaces/map-marker';
 import { Song } from '../../interfaces/song';
 
 @Injectable({
@@ -12,10 +12,10 @@ import { Song } from '../../interfaces/song';
 export class MapService {
   constructor(private http: HttpClient) {}
 
-  createFilterBySongs(songs: Marker[]): SelectedSongFilter {
-    const selectedOptions = new SelectedSongFilter();
+  createFilterByMarker(markers: Marker[]): SelectedMarkerFilter {
+    const selectedOptions = new SelectedMarkerFilter();
 
-    songs.forEach(item => {
+    markers.forEach(item => {
       selectedOptions.country.push(item.location.country);
       selectedOptions.region.push(item.location.region);
       selectedOptions.settlement.push(item.location.district_center);
@@ -33,6 +33,7 @@ export class MapService {
 
     return selectedOptions;
   }
+
   markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
     return {

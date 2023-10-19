@@ -1,8 +1,4 @@
-export interface FilteredOptionsMap {
-  name: string,
-  selectedOptions: string[]
-}
-export class SelectedSongFilter {
+export class SelectedMarkerFilter {
   country: string[] = [];
   region: string[] = [];
   settlement: string[] = [];

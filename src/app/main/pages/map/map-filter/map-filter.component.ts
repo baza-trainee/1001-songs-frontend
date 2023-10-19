@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
-import {Marker, SelectedSongFilter} from "../../../../shared/interfaces/map-marker";
+import {Marker, SelectedMarkerFilter} from "../../../../shared/interfaces/map-marker";
 import {MultiselectComponent} from "./multiselect/multiselect.component";
 import {mapFilter} from "../../../../shared/enums/mapFilter";
 import {MapService} from "../../../../shared/services/map/map.service";
@@ -18,10 +18,10 @@ import {MapService} from "../../../../shared/services/map/map.service";
 
 export class MapFilterComponent implements OnChanges {
   @Input() markers!: Marker[];
-  @Output() selectedOptionsChange = new EventEmitter<SelectedSongFilter>();
+  @Output() selectedOptionsChange = new EventEmitter<SelectedMarkerFilter>();
 
   filterCategory = mapFilter;
-  options: SelectedSongFilter = new SelectedSongFilter();
+  options: SelectedMarkerFilter = new SelectedMarkerFilter();
   isShowFilter = false;
 
   form = new FormGroup({
@@ -35,13 +35,13 @@ export class MapFilterComponent implements OnChanges {
 
 
   constructor(
-    private _translate: TranslateService,
-    private _mapService: MapService
+    private translate: TranslateService,
+    private mapService: MapService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
-      this.options = this._mapService.createFilterBySongs(this.markers);
+      this.options = this.mapService.createFilterByMarker(this.markers);
     }
   }
 
@@ -51,7 +51,7 @@ export class MapFilterComponent implements OnChanges {
 
   filerClear() {
     this.form.reset();
-    this.options = this._mapService.createFilterBySongs(this.markers);
+    this.options = this.mapService.createFilterByMarker(this.markers);
     this.sendSelectedOptions();
   }
 }

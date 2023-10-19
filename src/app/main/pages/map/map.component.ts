@@ -4,7 +4,7 @@ import {Select, Store} from '@ngxs/store';
 import {Observable, Subscription} from 'rxjs';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
-import {Marker, SelectedSongFilter} from 'src/app/shared/interfaces/map-marker';
+import {Marker, SelectedMarkerFilter} from 'src/app/shared/interfaces/map-marker';
 import {FetchMarkers} from 'src/app/store/map/map.actions';
 import {MapState} from 'src/app/store/map/map.state';
 import {PlayerComponent} from "./player/player.component";
@@ -38,7 +38,7 @@ export class MapComponent implements OnInit, OnDestroy {
     console.log('event value : ', ev);
   }
 
-  onSelectedOptionsChange(options: SelectedSongFilter) {
+  onSelectedOptionsChange(options: SelectedMarkerFilter) {
     console.log(options)
   }
 }
