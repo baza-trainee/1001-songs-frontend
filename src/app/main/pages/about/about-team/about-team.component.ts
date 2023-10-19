@@ -15,33 +15,18 @@ import { Member } from 'src/app/shared/interfaces/member.interface';
 export class AboutTeamComponent {
   members: Member[] = [
     {
-      photo: './assets/img/about/members-photo/member-photo-1.jpg',
+      photo: 'https://drive.google.com/uc?export=view&id=1rErEFcUN__armqupV-KbSUY_MJpFrCH6',
       name: 'Елеонора Хачатрян',
       description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
     },
     {
-      photo: './assets/img/about/members-photo/member-photo-2.jpg',
+      photo: 'https://drive.google.com/uc?export=view&id=1A73TAgBfq68HY_xl2tTt2BFKb5NB4KsS',
       name: 'Олег Коробов',
       description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
     },
     {
-      photo: './assets/img/about/members-photo/member-photo-3.jpg',
+      photo: 'https://drive.google.com/uc?export=view&id=1SAqT0DF9tmVY7rHNsjlXjCPrvsD0X0D2',
       name: 'Маргарита Скаженик',
-      description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
-    },
-    {
-      photo: './assets/img/about/members-photo/member-photo-2.jpg',
-      name: 'Олег Коробов',
-      description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
-    },
-    {
-      photo: './assets/img/about/members-photo/member-photo-3.jpg',
-      name: 'Маргарита Скаженик',
-      description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
-    },
-    {
-      photo: './assets/img/about/members-photo/member-photo-1.jpg',
-      name: 'Елеонора Хачатрян',
       description: 'Lorem ipsum dolor sit amet consectetur. Tempus quis augue pretium sed morbi sit pulvinar est.'
     }
   ];

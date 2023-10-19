@@ -12,24 +12,26 @@ import { AboutTeamComponent } from './about-team/about-team.component';
   imports: [TranslateModule, CommonModule, AboutTeamComponent]
 })
 export class AboutComponent {
+  imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
+
   projectsItems = [
     {
-      img: './assets/img/about/our-projects/project-photo-1.jpg',
+      img: this.imgSrc,
       title: '1000 і 1 пісня',
       description: 'Проєкт спрямований для підтримки фонду записів старовинних автентичних пісень українців.'
     },
     {
-      img: './assets/img/about/our-projects/project-photo-2.jpg',
+      img: this.imgSrc,
       title: 'Назва проєкту',
       description: 'Текст опис проєкту'
     },
     {
-      img: './assets/img/about/our-projects/project-photo-3.jpg',
+      img: this.imgSrc,
       title: 'Назва проєкту',
       description: 'Текст опис проєкту'
     },
     {
-      img: './assets/img/about/our-projects/project-photo-4.jpg',
+      img: this.imgSrc,
       title: 'Назва проєкту',
       description: 'Текст опис проєкту'
     }
