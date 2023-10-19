@@ -24,16 +24,17 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     TranslateModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatCheckboxModule,
+    MatCheckboxModule
   ]
 })
+
 export class MultiselectComponent {
   @Input({required: true}) control!: FormControl;
   @Input({required: true}) options!: string[];
   @Input({required: true}) name!: string;
   selectedValues: string[] = [];
 
-  constructor(private _translate: TranslateService) {}
+  constructor(private translate: TranslateService) {}
 
   onSelectionChange(event: MatSelectChange) {
     this.control.setValue(event.value);
@@ -44,9 +45,11 @@ export class MultiselectComponent {
     this.removeFirst(value, option);
     this.control.setValue(value);
   }
+
   clearSelections(): void {
     this.control.setValue([]);
   }
+
   private removeFirst<T>(array: T[], toRemove: T): void {
     const index = array.indexOf(toRemove);
     if (index !== -1) {
