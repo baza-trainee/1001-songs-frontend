@@ -19,14 +19,14 @@ export interface MapStateModel {
       {
         id: 'marker1',
         title: 'Лєтєла соя',
-        genre_cycle: 'Осінь',
-        found: 'no-name',
+        genre_cycle: 'Весна',
+        found: '',
         image: './assets/img/home/kiivImg.jpg',
         location: {
-          country: 'Ukraine',
-          region: 'Рівне',
-          district_center: 'с. Рокитне',
-          recording_location: {lat: 50.4501, lng: 30.5234}
+          country: 'Україна',
+          region: 'Полтавська обл.',
+          district_center: 'с. Крячківка',
+          recording_location: { lat: 50.4501, lng: 30.5234 }
         }
       }
     ]
@@ -37,14 +37,12 @@ export class MapState {
   constructor(
     private mapService: MapService,
     private store: Store
-  ) {
-  }
+  ) {}
 
   @Selector()
   static getMarkersList(state: MapStateModel): Marker[] {
     return state.markersList;
   }
-
 
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
