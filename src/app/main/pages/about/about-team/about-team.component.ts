@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TeamMemberCardComponent } from 'src/app/shared/shared-components/team-member-card/team-member-card.component';
+import { TeamMemberCardComponent } from './team-member-card/team-member-card.component';
 import { Member } from 'src/app/shared/interfaces/member.interface';
 
 @Component({
