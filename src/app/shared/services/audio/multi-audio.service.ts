@@ -76,7 +76,6 @@ export class MultiAudioService {
         state.readableCurrentTime = this.formatTime(state.currentTime);
         break;
       case 'error':
-       // console.log('ERROR ERROR');
         this.store.dispatch(new ResetSong());
         this.resetState();
         state.error = true;
