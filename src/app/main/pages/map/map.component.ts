@@ -35,7 +35,6 @@ export class MapComponent implements OnInit {
   }
 
   scrollToElement(element: HTMLElement): void {
-    // con
     element.scrollIntoView({ behavior: 'smooth' });
   }
 }
