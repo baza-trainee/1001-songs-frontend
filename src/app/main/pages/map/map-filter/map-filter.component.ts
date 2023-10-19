@@ -33,8 +33,7 @@ export class MapFilterComponent implements OnChanges {
     found: new FormControl<string[]>([])
   });
 
-
-  constructor(
+  constructor (
     private translate: TranslateService,
     private mapService: MapService
   ) {}

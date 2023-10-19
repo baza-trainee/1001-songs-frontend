@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ControlContainer, FormControl, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -25,13 +25,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatAutocompleteModule,
     MatChipsModule,
     MatCheckboxModule,
-  ],
-  viewProviders: [
-    {
-      provide: ControlContainer,
-      useExisting: FormGroupDirective,
-    },
-  ],
+  ]
 })
 export class MultiselectComponent {
   @Input({required: true}) control!: FormControl;
