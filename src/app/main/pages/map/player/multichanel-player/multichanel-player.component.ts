@@ -41,6 +41,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
+      this.multiAudioService.stopAll();
       if (song.media && song.media.multichannel_audio.length > 1) {
         this.openFile(song);
         this.isVisible = true;
