@@ -3,13 +3,12 @@
     class="multiselect"
     placeholder="{{ name | translate }}"
     multiple
-    [(value)]="selectedValues"
     [formControl]="control"
     (selectionChange)="onSelectionChange($event)">
     <mat-select-trigger>
       <mat-chip-listbox>
         <mat-chip
-          *ngFor="let option of selectedValues"
+          *ngFor="let option of control.value"
           class="multiselect__chip"
           [removable]="true"
           (removed)="removeOption(option)">

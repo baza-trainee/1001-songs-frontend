@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -15,16 +15,15 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
   styleUrls: ['./multiselect.component.scss'],
   standalone: true,
   imports: [
-    FormsModule,
     MatFormFieldModule,
     CommonModule,
     MatIconModule,
-    ReactiveFormsModule,
     MatSelectModule,
     TranslateModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveFormsModule
   ]
 })
 
@@ -32,7 +31,6 @@ export class MultiselectComponent {
   @Input({required: true}) control!: FormControl;
   @Input({required: true}) options!: string[];
   @Input({required: true}) name!: string;
-  selectedValues: string[] = [];
 
   constructor(private translate: TranslateService) {}
 
