@@ -4,7 +4,7 @@ import { AudioService } from '../../../../../shared/services/audio/audio.service
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable, Subject, skip, takeUntil } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song';
+import { Song } from 'src/app/shared/interfaces/song.interface';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song';
+import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';

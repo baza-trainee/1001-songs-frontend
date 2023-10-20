@@ -4,7 +4,7 @@ import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
 
 import {Marker, SelectedMarkerFilter} from '../../interfaces/map-marker';
-import { Song } from '../../interfaces/song';
+import { Song } from '../../interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root'

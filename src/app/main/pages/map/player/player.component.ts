@@ -7,7 +7,7 @@ import { MultichanelPlayerComponent } from './multichanel-player/multichanel-pla
 import { Observable } from 'rxjs';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
 import { Select, Store } from '@ngxs/store';
-import { Song } from 'src/app/shared/interfaces/song';
+import { Song } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 
 @Component({

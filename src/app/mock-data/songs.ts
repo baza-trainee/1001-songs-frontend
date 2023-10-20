@@ -1,4 +1,6 @@
-export const songs = [
+import { Song } from '../shared/interfaces/song.interface';
+
+export const songs: Song[] = [
   {
     id: '4391ddd6-2ffc-4434-a02e-e1b1bd9e8010',
     title: 'Ой рябая курка (веснянка)',
@@ -17,8 +19,10 @@ export const songs = [
       ethnographic_district: "Прип'ятське Полісся Західне: Волинське, Стир",
       official_name_city: 'Ромейки',
       unofficial_name_city: '-',
-      recording_location: '51.259, 26.219'
+      recording_location: '51.259, 26.219',
+      coordinates: ''
     },
+    archive: '',
     details: {
       id: 'ac54acd2-bf13-4517-bd51-5b8719ba1bc0',
       incipit: 'Ой рябая курка (веснянка)',
@@ -27,12 +31,14 @@ export const songs = [
       texture: 'спів'
     },
     media: {
-      id: '00a45780-6cde-4b28-bf0d-dcc000d6eb80',
-      stereo_audio: 'https://drive.google.com/file/d/1g50cjJQuo1zSRPCEJX0Qtng0b9kVAIxG/view?usp=drive_link',
-      multichannel_audio: ['https://drive.google.com/file/d/1g50cjJQuo1zSRPCEJX0Qtng0b9kVAIxG/view?usp=drive_link'],
+      id: '',
+      stereo_audio: '',
+      multichannel_audio: [],
       video_file: '',
       text: '',
-      image: ''
+      photo_of_performers: '',
+      notes: '',
+      melogeographical_data: ''
     }
   },
   {
@@ -53,8 +59,10 @@ export const songs = [
       ethnographic_district: "Прип'ятське Полісся Західне: Волинське, Стир",
       official_name_city: 'Ромейки',
       unofficial_name_city: '-',
-      recording_location: '51.259, 26.219'
+      recording_location: '51.259, 26.219',
+      coordinates: ''
     },
+    archive: '',
     details: {
       id: '3e2565f2-4e1e-4874-9c85-f64fe966cbb2',
       incipit: 'Там у світі над землею (колядка)',
@@ -68,7 +76,9 @@ export const songs = [
       multichannel_audio: ['https://drive.google.com/file/d/1CQPtY_9eGXpNAeLTQSC74n0gcKUhsrP1/view?usp=drive_link'],
       video_file: '',
       text: '',
-      image: ''
+      photo_of_performers: '',
+      notes: '',
+      melogeographical_data: ''
     }
   }
 ];

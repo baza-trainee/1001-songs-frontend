@@ -4,7 +4,7 @@ import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 
 import {MapService} from 'src/app/shared/services/map/map.service';
 import {FetchMarkers} from './map.actions';
-import {Song} from 'src/app/shared/interfaces/song';
+import {Song} from 'src/app/shared/interfaces/song.interface';
 import {SetIsLoading} from '../app/app.actions';
 import {Marker} from 'src/app/shared/interfaces/map-marker';
 
