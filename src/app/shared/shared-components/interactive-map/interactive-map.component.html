@@ -15,7 +15,7 @@
           [options]="{ icon: getCustomMarkerIcon(elem.id) }"
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
-        <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window">
+        <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
           <h2 class="popup-map__title">{{ elem.location.district_center }}</h2>
           <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : 20</p>
         </map-info-window>

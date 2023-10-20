@@ -1,3 +1,11 @@
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+   
+  </mat-expansion-panel-header>
+  <p>This is the primary content of the panel.</p>
+</mat-expansion-panel>
+
+
 <div class="playlist__song__card">
   <div
     class="song__card__header"
@@ -47,7 +55,7 @@
       </button>
     </div>
   </div>
-  
+  <div class="song__card__detail" >
     <div class="detail__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
 
     <div class="detail__info">
@@ -79,4 +87,4 @@
       <div class="song__text__content" [innerHTML]="song.media && song.media.text ? song.media.text : 'No text available'"></div>
     </div>
   </div>
-
+</div>
