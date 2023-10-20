@@ -67,6 +67,20 @@
     "stub": "Сторінка 'Про проект' у розробці"
   },
   "map": {
+    "filter": {
+      "title": "Фільтр",
+      "button-clear": "Очистити",
+      "locations": "Місцевість",
+      "song": "Пісня",
+      "categories": {
+        "country": "Країна",
+        "region": "Область",
+        "settlement": "Населений пункт",
+        "genre": "Жанр",
+        "title": "Назва",
+        "found": "Фонд"
+      }
+    },
     "player": {
       "counter-title" : "Кількість знайдених",
       "player-title" : "Слухати всі знайдені пісні",
