@@ -1,21 +1,23 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GoogleMapsModule } from '@angular/google-maps';
+import {GoogleMapsModule, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/mock-data/markers';
 
 @Component({
-  selector: 'app-interacive-map',
+  selector: 'app-interactive-map',
   standalone: true,
   imports: [CommonModule, GoogleMapsModule, TranslateModule],
-  templateUrl: './interacive-map.component.html',
-  styleUrls: ['./interacive-map.component.scss']
+  templateUrl: './interactive-map.component.html',
+  styleUrls: ['./interactive-map.component.scss']
 })
-export class InteraciveMapComponent {
+export class InteractiveMapComponent {
+  @Input() popupType: string = 'default';
   @Input() markers: Marker[] | null = cordsMarkers;
   @Output() markerClicked = new EventEmitter<Marker>();
 
+  private currentInfoWindow: MapInfoWindow | null = null;
   selectedMarker: Marker | null = null;
   showInfoWindow: boolean = false;
   mapOptions = {
@@ -24,6 +26,16 @@ export class InteraciveMapComponent {
     options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
   };
   constructor(private _translate: TranslateService) {}
+
+  public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: Marker) {
+    if (this.currentInfoWindow) {
+      this.currentInfoWindow.close();
+    }
+    infoWindow.open(marker);
+    this.currentInfoWindow = infoWindow;
+
+    this.onMarkerClick(elem);
+  }
 
   listenToRecords() {
     if (this.selectedMarker != null) {
@@ -42,9 +54,9 @@ export class InteraciveMapComponent {
     this.selectedMarker = null;
   }
 
-  getCustomMarkerIcon(key: string): google.maps.Icon {
+  getCustomMarkerIcon(id: string): google.maps.Icon {
     return {
-      url: this.selectedMarker?.key === key ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
+      url: this.selectedMarker?.id === id ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
     };
   }
 }

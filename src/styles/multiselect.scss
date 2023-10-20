@@ -1,0 +1,121 @@
+.mdc {
+  &-line{
+    &-ripple {
+      &::before,
+      &::after {
+        border: none !important;
+      }
+    }
+  }
+
+  &-text-field {
+    padding: 0 !important;
+    min-height: auto;
+    border-radius: 12px !important;
+  }
+
+  &-list-item__primary-text {
+    color: var(--text-color-primary) !important;
+  }
+
+  &-evolution {
+    &-chip {
+      &__action {
+        padding: 0 !important;
+      }
+
+      &-set__chips {
+        flex-direction: column !important;
+        align-items: flex-start;
+      }
+    }
+  }
+}
+
+
+.mat {
+  &-mdc {
+    &-form {
+      &-field {
+        &-subscript-wrapper {
+          height: 0 !important;
+        }
+
+        &-infix {
+          padding: 0 !important;
+          min-height: auto;
+          border-radius: 12px !important;
+        }
+      }
+    }
+
+    &-select-arrow,
+    &-select-placeholder {
+      color: var(--color-input) !important;
+    }
+
+    &-select-panel {
+      margin-top: 4px;
+      max-height: 150px !important;
+      border-radius: 12px !important;
+      background: #FEFEFE;
+      box-shadow: 0 2px 10px 0 rgba(15, 15, 15, 7%) !important;
+
+      &::-webkit-scrollbar {
+        position: relative;
+        width: 20px;
+        border: 8px solid transparent;
+        box-shadow: white;
+        left: -100px;
+        background-color: transparent;
+        border-radius: 12px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 12px;
+        background: var(--color-input);
+        background-clip: content-box;
+        border: 8px solid transparent;
+      }
+    }
+
+    &-chip-remove {
+      opacity: 1 !important;
+    }
+  }
+
+  &-pseudo-checkbox {
+    border-radius: 2px !important;
+    border: 1px solid var(--color-input) !important;
+    width: 12px !important;
+    height: 12px !important;
+    margin-right: 8px !important;
+
+    &-checked {
+      background: #FFF068 !important;
+
+      &::after {
+        width: 0 !important;
+        height: 0 !important;
+        color: var(--bg-color-yellow) !important;
+      }
+    }
+  }
+}
+
+.multiselect {
+  &__clear {
+    .mat {
+      &-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+

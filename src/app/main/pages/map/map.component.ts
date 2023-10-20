@@ -1,14 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Select, Store} from '@ngxs/store';
+import {Observable, Subscription} from 'rxjs';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
-import { Marker } from 'src/app/shared/interfaces/map-marker';
-import { InteraciveMapComponent } from 'src/app/shared/shared-components/interacive-map/interacive-map.component';
-import { FetchMarkers } from 'src/app/store/map/map.actions';
-import { MapState } from 'src/app/store/map/map.state';
-import { PlayerComponent } from './player/player.component';
+import {Marker, SelectedMarkerFilter} from 'src/app/shared/interfaces/map-marker';
+import {FetchMarkers} from 'src/app/store/map/map.actions';
+import {MapState} from 'src/app/store/map/map.state';
+import {PlayerComponent} from "./player/player.component";
+import {InteractiveMapComponent} from "../../../shared/shared-components/interactive-map/interactive-map.component";
+import {MapFilterComponent} from "./map-filter/map-filter.component";
 import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
 
 @Component({
@@ -16,25 +17,36 @@ import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.act
   styleUrls: ['./map.component.scss'],
   templateUrl: './map.component.html',
   standalone: true,
-  imports: [CommonModule, InteraciveMapComponent, RouterLink, RouterLinkActive, PlayerComponent]
+  imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
-export class MapComponent implements OnInit {
-  @Select(MapState.getMarkersList) markers$?: Observable<Marker[]>;
-  // @ViewChild('player') player!: ElementRef<HTMLElement>;
+export class MapComponent implements OnInit, OnDestroy {
+  @Select(MapState.getMarkersList) markers$!: Observable<Marker[]>;
+  filteredMarkers!: Marker[];
+  private subscription: Subscription = new Subscription();
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
+    this.subscription = this.markers$.subscribe((marker)=>{
+      this.filteredMarkers = marker;
+    })
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  handleMapEmit(ev: Marker, target: HTMLElement) {
+  handleMapEmit(marker: Marker, target: HTMLElement) {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
-    this.store.dispatch(new FetchSongsByLocation(ev.popup.title));
+    this.store.dispatch(new FetchSongsByLocation( marker.title));
   }
 
   scrollToElement(element: HTMLElement): void {
     element.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  onSelectedOptionsChange(options: SelectedMarkerFilter) {
+    console.log(options)
   }
 }

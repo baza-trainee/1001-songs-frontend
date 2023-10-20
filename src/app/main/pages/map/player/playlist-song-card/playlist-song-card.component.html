@@ -2,7 +2,7 @@
   <div
     class="song__card__header"
     (click)="mobileToggleDetailBtn()"
-    [class.active]="song.isDetailOpen"
+   
     (keyup)="handleKeyUpEvent($event)"
     tabindex="0"
   >
@@ -47,7 +47,7 @@
       </button>
     </div>
   </div>
-  <div class="song__card__detail" *ngIf="song.isDetailOpen">
+  
     <div class="detail__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
 
     <div class="detail__info">
@@ -79,4 +79,4 @@
       <div class="song__text__content" [innerHTML]="song.media && song.media.text ? song.media.text : 'No text available'"></div>
     </div>
   </div>
-</div>
+

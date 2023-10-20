@@ -34,7 +34,7 @@ export class PlaylistSongCardComponent implements OnInit {
   }
 
   toggleDetailBtn() {
-    this.song.isDetailOpen = !this.song.isDetailOpen;
+    // this.song.isDetailOpen = !this.song.isDetailOpen;
   }
 
   handleKeyUpEvent(event: Event) {
@@ -46,7 +46,7 @@ export class PlaylistSongCardComponent implements OnInit {
   mobileToggleDetailBtn() {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 768) {
-      this.song.isDetailOpen = !this.song.isDetailOpen;
+      // this.song.isDetailOpen = !this.song.isDetailOpen;
     }
     return;
   }

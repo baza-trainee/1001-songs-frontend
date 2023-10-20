@@ -1,54 +1,70 @@
-import { Marker } from '../shared/interfaces/map-marker';
+import {Marker} from "../shared/interfaces/map-marker";
 
 export const cordsMarkers: Marker[] = [
   {
-    key: 'marker1',
-    position: { lat: 50.4501, lng: 30.5234 },
-    popup: {
-      title: 'с. Крячківка, Полтавська обл.',
-      photoUrl: './assets/img/home/kiivImg.jpg',
-      countRecords: 20,
-      link: '#'
+    id: 'marker1',
+    title: 'Лєтєла соя',
+    genre_cycle: 'Весна',
+    found: '',
+    image: './assets/img/home/kiivImg.jpg',
+    location: {
+      country: 'Україна',
+      region: 'Полтавська обл.',
+      district_center: 'с. Крячківка',
+      recording_location: { lat: 50.4501, lng: 30.5234 }
     }
   },
   {
-    key: 'marker2',
-    position: { lat: 49.8397, lng: 24.0297 },
-    popup: {
-      title: 'м. Львів, Львівська обл.',
-      photoUrl: './assets/img/home/kiivImg.jpg',
-      countRecords: 16,
-      link: '#'
+    id: 'marker2',
+    title: 'Лєтєла соя',
+    genre_cycle: 'Осінь',
+    found: 'no-found',
+    image: './assets/img/home/kiivImg.jpg',
+    location: {
+      country: 'Україна',
+      region: 'Львівська обл.',
+      district_center: 'м. Львів',
+      recording_location: { lat: 49.8397, lng: 24.0297 }
     }
   },
   {
-    key: 'marker3',
-    position: { lat: 48.5132, lng: 32.2597 },
-    popup: {
-      title: 'м. Кропівницький, Черкаська обл.',
-      photoUrl: './assets/img/home/kiivImg.jpg',
-      countRecords: 7,
-      link: '#'
+    id: 'marker3',
+    title: 'Лєтєла соя',
+    genre_cycle: 'Осінь',
+    found: 'no-found',
+    image: './assets/img/home/kiivImg.jpg',
+    location: {
+      country: 'Україна',
+      region: 'Кіровоградська обл.',
+      district_center: 'м. Кропівницький',
+      recording_location: { lat: 48.5132, lng: 32.2597 }
     }
   },
   {
-    key: 'marker4',
-    position: { lat: 46.4833, lng: 30.7326 },
-    popup: {
-      title: 'м. Одеса, Одеська обл.',
-      photoUrl: './assets/img/home/kiivImg.jpg',
-      countRecords: 30,
-      link: '#'
+    id: 'marker4',
+    title: ', Лєтєла соя',
+    genre_cycle: 'Зима',
+    found: 'no-found',
+    image: './assets/img/home/kiivImg.jpg',
+    location: {
+      country: 'Україна',
+      region: 'Одеська обл.',
+      district_center: 'м. Одеса',
+      recording_location: { lat: 46.4833, lng: 30.7326 }
     }
   },
   {
-    key: 'marker5',
-    position: { lat: 48.6198, lng: 22.301 },
-    popup: {
-      title: 'м. Ужгород, Закарпатська обл.',
-      photoUrl: './assets/img/home/kiivImg.jpg',
-      countRecords: 15,
-      link: '#'
+    id: 'marker5',
+    title: 'Лєтєла соя',
+    genre_cycle: 'Весна',
+    found: '',
+    image: './assets/img/home/kiivImg.jpg',
+    location: {
+      country: 'Україна',
+      region: 'Закарпатська обл.',
+      district_center: 'м. Ужгород',
+      recording_location: { lat: 48.6198, lng: 22.301 }
     }
   }
 ];
+

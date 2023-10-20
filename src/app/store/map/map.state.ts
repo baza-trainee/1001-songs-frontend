@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { MapService } from 'src/app/shared/services/map/map.service';
-import { FetchMarkers } from './map.actions';
-import { map, tap } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song';
-import { SetIsLoading } from '../app/app.actions';
-import { Marker } from 'src/app/shared/interfaces/map-marker';
+import {Injectable} from '@angular/core';
+import {map, tap} from 'rxjs';
+import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
+
+import {MapService} from 'src/app/shared/services/map/map.service';
+import {FetchMarkers} from './map.actions';
+import {Song} from 'src/app/shared/interfaces/song';
+import {SetIsLoading} from '../app/app.actions';
+import {Marker} from 'src/app/shared/interfaces/map-marker';
 
 export interface MapStateModel {
   markersList: Marker[];
@@ -16,13 +17,16 @@ export interface MapStateModel {
   defaults: {
     markersList: [
       {
-        key: 'marker1',
-        position: { lat: 50.4501, lng: 30.5234 },
-        popup: {
-          title: 'с. Крячківка, Полтавська обл.',
-          photoUrl: './assets/img/home/kiivImg.jpg',
-          countRecords: 20,
-          link: '#'
+        id: 'marker1',
+        title: 'Лєтєла соя',
+        genre_cycle: 'Весна',
+        found: '',
+        image: './assets/img/home/kiivImg.jpg',
+        location: {
+          country: 'Україна',
+          region: 'Полтавська обл.',
+          district_center: 'с. Крячківка',
+          recording_location: { lat: 50.4501, lng: 30.5234 }
         }
       }
     ]

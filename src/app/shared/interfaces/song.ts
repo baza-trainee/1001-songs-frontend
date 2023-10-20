@@ -1,6 +1,4 @@
 export interface Song {
-  isDetailOpen?: boolean;
-  index?:number;
   id: string;
   title: string;
   recording_date: string;
@@ -18,7 +16,9 @@ export interface Song {
     official_name_city: string;
     unofficial_name_city: string;
     recording_location: string;
+    coordinates: string;
   };
+  archive: string;
   details: {
     id: string;
     incipit: string;
@@ -32,6 +32,8 @@ export interface Song {
     multichannel_audio: string[];
     video_file: string;
     text: string;
-    image: string;
+    photo_of_performers: string;
+    notes: string;
+    melogeographical_data: string;
   };
 }
