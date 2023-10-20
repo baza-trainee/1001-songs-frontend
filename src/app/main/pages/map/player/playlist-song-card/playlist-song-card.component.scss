@@ -2,7 +2,7 @@
 @import '../../../../../../typography/fonts';
 @import '../../../../../../typography/colors';
 
-.no-media {
+.nomedia {
   font-size: 2em;
   width: 70px;
   height: 70px;
@@ -39,7 +39,7 @@
       background-size: cover;
       background-position: center;
       border-radius: 12px;
-      background-image: url(~src/assets/img/player/play.png);
+      background-image: url("~src/assets/img/player/play.png");
     }
 
     .song__card__name__info {
