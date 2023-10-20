@@ -21,6 +21,7 @@ export class PlaylistSongCardComponent implements OnInit {
   @Input() song: Song = {} as Song;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
+  isOpened: boolean = false;
 
   constructor(
     private _translate: TranslateService,
@@ -34,17 +35,18 @@ export class PlaylistSongCardComponent implements OnInit {
     this.store.dispatch(new SelectSong(this.song.id));
   }
 
-  toggleDetailBtn() {
+  toggleVisibility() {
+    this.isOpened = !this.isOpened;
     // this.song.isDetailOpen = !this.song.isDetailOpen;
   }
 
   handleKeyUpEvent(event: Event) {
     if (event && event.isTrusted) {
-      this.mobileToggleDetailBtn();
+      this.toggleMobileVisibility();
     }
   }
 
-  mobileToggleDetailBtn() {
+  toggleMobileVisibility() {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 768) {
       // this.song.isDetailOpen = !this.song.isDetailOpen;
