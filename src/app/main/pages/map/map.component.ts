@@ -37,7 +37,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   handleMapEmit(marker: Marker, target: HTMLElement) {
-    console.log(marker);
+    console.log(target);
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
     this.store.dispatch(new FetchSongsByLocation(marker.location.district_center));
