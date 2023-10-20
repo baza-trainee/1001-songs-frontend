@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AboutComponent } from './about.component';
-describe('AboutComponent', () => {
-  let component: AboutComponent;
-  let fixture: ComponentFixture<AboutComponent>;
+import { AboutTeamComponent } from './about-team.component';
+
+describe('AboutTeamComponent', () => {
+  let component: AboutTeamComponent;
+  let fixture: ComponentFixture<AboutTeamComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), AboutComponent]
+      imports: [TranslateModule.forRoot(), AboutTeamComponent]
     });
-    fixture = TestBed.createComponent(AboutComponent);
+    fixture = TestBed.createComponent(AboutTeamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
