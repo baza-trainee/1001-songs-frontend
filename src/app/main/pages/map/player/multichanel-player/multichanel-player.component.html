@@ -169,8 +169,8 @@
         <div class="item__name">Chanel {{ i + 1 }}</div>
         <div class="item__actions">
           <button mat-icon-button (click)="muteToggle(i)" [color]="state.muted ? 'warn' : ''" aria-label="mute unmute button">
-            <mat-icon *ngIf="!state.muted">volume_up</mat-icon>
-            <mat-icon *ngIf="state.muted">volume_off</mat-icon>
+            <mat-icon class="mat__icon" *ngIf="!state.muted">volume_up</mat-icon>
+            <mat-icon class="mat__icon" *ngIf="state.muted">volume_off</mat-icon>
           </button>
         </div>
       </div>
