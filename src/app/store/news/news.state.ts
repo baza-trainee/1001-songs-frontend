@@ -58,7 +58,7 @@ export class NewsState {
 
   @Action(FetchArticles)
   fetchArticles(ctx: StateContext<NewsStateModel>) {
-    this.store.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(1));
     return this.articlesService.fetchArticles().pipe(
       map((newsData) => newsData as Article[]),
       tap((articles: Article[]) => {
@@ -67,7 +67,7 @@ export class NewsState {
           ...state,
           articlesList: [...articles]
         });
-        this.store.dispatch(new SetIsLoading(false));
+        this.store.dispatch(new SetIsLoading(-1));
       })
     );
   }

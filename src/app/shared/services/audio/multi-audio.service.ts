@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from "rxjs";
-import * as moment from "moment/moment";
-import {MultichannelStreamStateInterface} from "../../interfaces/multichannel-stream-state.interface";
+import { BehaviorSubject, forkJoin, map, Observable, Subject, takeUntil } from 'rxjs';
+import { StreamState } from '../../interfaces/stream-state.interface';
+import { events } from '../../enums/audio.enum';
+import { format } from 'date-fns';
+import { Store } from '@ngxs/store';
+import { ResetSong } from 'src/app/store/player/player.actions';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MultichanelAudioService {
-  private audioObjects: HTMLAudioElement[] = [];
-  private audioStates: MultichannelStreamStateInterface[] = [];
+export class MultiAudioService {
+  constructor(private store: Store) {}
+  private tracks: HTMLAudioElement[] = [];
+  private audioStates: StreamState[] = [];
   private stop$: Subject<void> = new Subject<void>();
-  private audioEvents: string[] = [
-    'ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'
-  ];
 
   private createAudioObject(url: string): HTMLAudioElement {
     const audioObj = new Audio();
@@ -21,7 +22,7 @@ export class MultichanelAudioService {
     return audioObj;
   }
 
-  private createAudioState(): MultichannelStreamStateInterface {
+  private createAudioState(): StreamState {
     return {
       playing: false,
       muted: false,
@@ -30,31 +31,33 @@ export class MultichanelAudioService {
       duration: undefined,
       currentTime: undefined,
       canplay: false,
-      error: false,
+      error: false
     };
   }
 
-  showMultichanelPlayerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private resetState() {
+    this.audioStates = [...this.audioStates.map(() => this.createAudioState())];
+  }
 
   private addAudio(url: string): HTMLAudioElement {
     const audioObj = this.createAudioObject(url);
-    this.audioObjects.push(audioObj);
+    this.tracks.push(audioObj);
     this.audioStates.push(this.createAudioState());
     return audioObj;
   }
 
   private removeAudio(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      const audioObj = this.audioObjects[index];
+    if (index >= 0 && index < this.tracks.length) {
+      const audioObj = this.tracks[index];
       audioObj.pause();
-      this.audioObjects.splice(index, 1);
+      this.tracks.splice(index, 1);
       this.audioStates.splice(index, 1);
     }
   }
 
   private updateAudioState(index: number, event: Event): void {
     const state = this.audioStates[index];
-    const audioObj = this.audioObjects[index];
+    const audioObj = this.tracks[index];
 
     switch (event.type) {
       case 'canplay':
@@ -73,6 +76,8 @@ export class MultichanelAudioService {
         state.readableCurrentTime = this.formatTime(state.currentTime);
         break;
       case 'error':
+        this.store.dispatch(new ResetSong());
+        this.resetState();
         state.error = true;
         break;
     }
@@ -85,79 +90,77 @@ export class MultichanelAudioService {
     return this.playStream(urls).pipe(takeUntil(this.stop$));
   }
 
-  playStream(urls: string[]): Observable<MultichannelStreamStateInterface[]> {
+  playStream(urls: string[]): Observable<StreamState[]> {
     this.stopAll();
 
-    const observables: Observable<MultichannelStreamStateInterface>[] = [];
+    const observables: Observable<StreamState>[] = [];
 
     for (const url of urls) {
       const audioObj = this.addAudio(url);
-      const index = this.audioObjects.indexOf(audioObj);
+      const index = this.tracks.indexOf(audioObj);
 
-      const streamObservable = new Observable<MultichannelStreamStateInterface>(observer => {
+      const streamObservable = new Observable<StreamState>((observer) => {
         const handler = (event: Event) => {
           this.updateAudioState(index, event);
           observer.next(this.audioStates[index]);
         };
 
-        this.addEvents(audioObj, this.audioEvents, handler);
+        this.addEvents(audioObj, Object.values(events), handler);
 
-        audioObj.play().catch(error => {
+        audioObj.play().catch((error) => {
           observer.error(error);
         });
 
         return () => {
           this.removeAudio(index);
-          this.removeEvents(audioObj, this.audioEvents, handler);
+          this.removeEvents(audioObj, Object.values(events), handler);
         };
       });
 
       observables.push(streamObservable);
     }
 
-    return forkJoin(observables).pipe(
-      map(() => this.audioStates),
-    );
+    return forkJoin(observables).pipe(map(() => this.audioStates));
   }
 
   play(): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.play();
     }
   }
 
   pause(): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.pause();
     }
   }
 
   stopAll(): void {
-    this.audioObjects.forEach(audioObj => {
+    this.tracks.forEach((audioObj) => {
       audioObj.pause();
     });
-    this.audioObjects = [];
+    this.tracks = [];
     this.audioStates = [];
     this.stop$.next();
   }
 
   mute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      this.audioObjects[index].muted = true;
+    if (index >= 0 && index < this.tracks.length) {
+      this.tracks[index].muted = true;
       this.audioStates[index].muted = true;
     }
   }
 
   unmute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      this.audioObjects[index].muted = false;
+    if (index >= 0 && index < this.tracks.length) {
+      this.tracks[index].muted = false;
       this.audioStates[index].muted = false;
     }
   }
 
   toggleMute(index: number): void {
-    if (index >= 0 && index < this.audioObjects.length) {
-      const audioObj = this.audioObjects[index];
+    if (index >= 0 && index < this.tracks.length) {
+      const audioObj = this.tracks[index];
       const state = this.audioStates[index];
 
       audioObj.muted = !audioObj.muted;
@@ -166,38 +169,31 @@ export class MultichanelAudioService {
   }
 
   seekTo(seconds: number): void {
-    for (const audioObj of this.audioObjects) {
+    for (const audioObj of this.tracks) {
       audioObj.currentTime = seconds;
     }
   }
 
-  formatTime(time: number, format: string = 'mm:ss'): string {
+  formatTime(time: number, pattern: string = 'mm:ss'): string {
     const momentTime = time * 1000;
-    return moment.utc(momentTime).format(format);
-  }
-
-  getState(index: number): Observable<MultichannelStreamStateInterface> {
-    if (index >= 0 && index < this.audioStates.length) {
-      return new BehaviorSubject(this.audioStates[index]).asObservable();
-    }
-    return new BehaviorSubject(this.createAudioState()).asObservable();
+    return format(momentTime, pattern);
   }
 
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
-    events.forEach(event => {
+    events.forEach((event) => {
       obj.addEventListener(event, handler);
     });
   }
 
   private removeEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
-    events.forEach(event => {
+    events.forEach((event) => {
       obj.removeEventListener(event, handler);
     });
   }
 
-  private multichannelStateSubject: BehaviorSubject<MultichannelStreamStateInterface[]> = new BehaviorSubject<MultichannelStreamStateInterface[]>([]);
+  private multichannelStateSubject: BehaviorSubject<StreamState[]> = new BehaviorSubject<StreamState[]>([]);
 
-  getMultichannelState(): Observable<MultichannelStreamStateInterface[]> {
+  getMultichannelState(): Observable<StreamState[]> {
     return this.multichannelStateSubject.asObservable();
   }
 }

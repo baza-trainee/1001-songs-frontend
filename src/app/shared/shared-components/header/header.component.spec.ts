@@ -5,15 +5,17 @@ import { PopUpMenuComponent } from './pop-up-menu/pop-up-menu.component';
 import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let translateService: TranslateService;
+  let dialogComponent: MatDialog;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HeaderComponent, PopUpMenuComponent, NgxsModule.forRoot([AppState])],
+      imports: [TranslateModule.forRoot(), HeaderComponent, PopUpMenuComponent, NgxsModule.forRoot([AppState]), MatDialogModule],
       providers: [
         TranslateService,
         {
@@ -27,14 +29,15 @@ describe('HeaderComponent', () => {
       ]
     });
     translateService = TestBed.inject(TranslateService);
+    dialogComponent = TestBed.inject(MatDialog);
     fixture = TestBed.createComponent(HeaderComponent);
-    component = new HeaderComponent(translateService);
+    component = new HeaderComponent(translateService, dialogComponent);
     fixture.detectChanges();
   });
 
   it('should be false', (done) => {
     component.isLoading$?.subscribe((isLoading) => {
-      expect(isLoading).toBe(false);
+      expect(isLoading).toBe(0);
       done();
     });
   });

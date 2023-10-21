@@ -15,13 +15,13 @@ describe('ExpeditionsState', () => {
   });
 
   it('it should set isLoading', async () => {
-    await store.dispatch(new SetIsLoading(true));
+    await store.dispatch(new SetIsLoading(1));
     const flagIsLoading = store.selectSnapshot(AppState.getIsLoading);
-    expect(flagIsLoading).toBe(true);
+    expect(flagIsLoading).toBe(1);
   });
 
   it('it should select isLoading', () => {
     const flagIsLoading = store.selectSnapshot(AppState.getIsLoading);
-    expect(flagIsLoading).toEqual(false);
+    expect(flagIsLoading).toEqual(0);
   });
 });

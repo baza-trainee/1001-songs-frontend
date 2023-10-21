@@ -4,7 +4,7 @@ import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 
 import {MapService} from 'src/app/shared/services/map/map.service';
 import {FetchMarkers} from './map.actions';
-import {Song} from 'src/app/shared/interfaces/song';
+import {Song} from 'src/app/shared/interfaces/song.interface';
 import {SetIsLoading} from '../app/app.actions';
 import {Marker} from 'src/app/shared/interfaces/map-marker';
 
@@ -50,7 +50,7 @@ export class MapState {
     if (state.markersList.length > 1) {
       return;
     }
-    this.store.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(1));
     return this.mapService.fetchMarkers().pipe(
       map((songs) => songs as Song[]), //the expression need to avoid any type
       tap((songs: Song[]) => {
@@ -60,7 +60,7 @@ export class MapState {
           ...state,
           markersList: [...markers]
         });
-        this.store.dispatch(new SetIsLoading(false));
+        this.store.dispatch(new SetIsLoading(-1));
       })
     );
   }

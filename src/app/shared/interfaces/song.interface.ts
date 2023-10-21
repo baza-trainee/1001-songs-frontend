@@ -22,7 +22,7 @@ export interface Song {
   details: {
     id: string;
     incipit: string;
-    genre_cycle: 'Зима';
+    genre_cycle: string;
     poetic_text_genre: string;
     texture: string;
   };

@@ -1,15 +1,16 @@
-import {CommonModule} from '@angular/common';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
-import {Observable, Subscription} from 'rxjs';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import {Marker, SelectedMarkerFilter} from 'src/app/shared/interfaces/map-marker';
-import {FetchMarkers} from 'src/app/store/map/map.actions';
-import {MapState} from 'src/app/store/map/map.state';
-import {PlayerComponent} from "./player/player.component";
-import {InteractiveMapComponent} from "../../../shared/shared-components/interactive-map/interactive-map.component";
-import {MapFilterComponent} from "./map-filter/map-filter.component";
+import { Marker, SelectedMarkerFilter } from 'src/app/shared/interfaces/map-marker';
+import { FetchMarkers } from 'src/app/store/map/map.actions';
+import { MapState } from 'src/app/store/map/map.state';
+import { PlayerComponent } from './player/player.component';
+import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
+import { MapFilterComponent } from './map-filter/map-filter.component';
+import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
 
 @Component({
   selector: 'app-map',
@@ -27,18 +28,25 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
-    this.subscription = this.markers$.subscribe((marker)=>{
+    this.subscription = this.markers$.subscribe((marker) => {
       this.filteredMarkers = marker;
-    })
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  handleMapEmit(ev: Marker) {
-    console.log('event value : ', ev);
+
+  handleMapEmit(marker: Marker, target: HTMLElement) {
+    this.scrollToElement(target);
+    this.store.dispatch(new ResetSong());
+    this.store.dispatch(new FetchSongsByLocation(marker.location.district_center));
+  }
+
+  scrollToElement(element: HTMLElement): void {
+    element.scrollIntoView({ behavior: 'smooth' });
   }
 
   onSelectedOptionsChange(options: SelectedMarkerFilter) {
-    console.log(options)
+    console.log(options);
   }
 }

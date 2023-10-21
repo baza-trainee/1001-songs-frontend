@@ -1,114 +1,132 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MultichanelAudioService} from "../../../../../shared/services/audio/multichanel-audio.service";
-import {IAudioData} from "../../../../../shared/interfaces/audio-data.interface";
-import {MultichannelStreamStateInterface} from "../../../../../shared/interfaces/multichannel-stream-state.interface";
-import {AudioService} from "../../../../../shared/services/audio/audio.service";
+import { AudioService } from '../../../../../shared/services/audio/audio.service';
+import { Select, Store } from '@ngxs/store';
+import { PlayerState } from 'src/app/store/player/player.state';
+import { Observable, Subject, skip, takeUntil } from 'rxjs';
+import { Song } from 'src/app/shared/interfaces/song.interface';
+import { CloudService } from 'src/app/shared/services/audio/cloud.service';
+import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
+import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
+import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-multichanel-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './multichanel-player.component.html',
   styleUrls: ['./multichanel-player.component.scss']
 })
-export class MultichanelPlayerComponent implements OnInit, OnDestroy{
-  @Input() files: IAudioData[] = [];
-  @Input() currentFile: IAudioData | null = null;
-  @Input() openCurrentFile!: (file: IAudioData) => void;
-  @Input() nextSong!: () => void;
-  @Input() previousSong!: () => void;
-  @ViewChild('stereoPlayer') stereoPlayer!: ElementRef;
-  secondsToRewindTrack: number = 5;
-  multiChanelStates!: MultichannelStreamStateInterface[];
+export class MultichanelPlayerComponent implements OnInit, OnDestroy {
+  private REWIND_STEP: number = 5;
 
-  showMultichanelPlayer: boolean = false;
+  isPreloader = false;
 
-  constructor(private multiChanelAudioService: MultichanelAudioService,
-              private audioService: AudioService,) {
+  isVisible: boolean = false;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  state$: Observable<StreamState[]>;
 
-    this.multiChanelAudioService.showMultichanelPlayerSubject.subscribe(showMultichanelPlayer => {
-      this.showMultichanelPlayer = showMultichanelPlayer;
-    });
+  destroy$: Subject<void> = new Subject<void>();
+
+  constructor(
+    private multiAudioService: MultiAudioService,
+    private audioService: AudioService,
+    private cloudService: CloudService,
+    private store: Store
+  ) {
+    this.state$ = this.multiAudioService.getMultichannelState();
   }
 
   ngOnInit() {
-    this.multiChanelAudioService.getMultichannelState()
-      .subscribe(states => {
-        this.multiChanelStates = states;
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
+      this.multiAudioService.stopAll();
+      if (song.media && song.media.multichannel_audio.length > 1) {
+        this.openFile(song);
+        this.isVisible = true;
+      } else {
+        this.isVisible = false;
+      }
+    });
+
+    this.state$
+      .pipe(takeUntil(this.destroy$))
+      .pipe(skip(1))
+      .subscribe((states) => {
+        const loading = states.filter((state) => !state.playing);
+        if (!loading.length) {
+          this.isPreloader = false;
+        }
+        const canPlay = states.filter((state) => !state.canplay);
+        if (canPlay.length) {
+          this.synchronizeTracs();
+        }
       });
+  }
+
+  synchronizeTracs() {
+    setTimeout(() => {
+      this.multiAudioService.seekTo(Number(0));
+    }, 500);
   }
 
   ngOnDestroy() {
     this.stop();
-    this.multiChanelAudioService.showMultichanelPlayerSubject.next(false);
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 
-  playStream(urls: string[]){
-    this.multiChanelAudioService.playStreamAll(urls).subscribe();
+  playStream(urls: string[]) {
+    this.multiAudioService.playStreamAll(urls).subscribe();
   }
 
-  openFile(file: IAudioData) {
-    this.currentFile = file;
+  openFile(file: Song) {
+    //  this.currentFile = file;
+    this.isPreloader = true;
     this.audioService.stop();
-    this.multiChanelAudioService.stopAll();
-    this.audioService.showStereoPlayerSubject.next(false);
-    this.multiChanelAudioService.showMultichanelPlayerSubject.next(true);
-    this.playStream(file.media.multichannel_audio);
+    this.multiAudioService.stopAll();
+    const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
+    this.playStream(urls);
   }
 
-  muteToggle(index: number){
-    this.multiChanelAudioService.toggleMute(index);
+  muteToggle(index: number) {
+    this.multiAudioService.toggleMute(index);
   }
 
   pause() {
-    this.multiChanelAudioService.pause();
+    this.multiAudioService.pause();
   }
 
   play() {
-    this.multiChanelAudioService.play();
+    this.multiAudioService.play();
   }
 
   stop() {
-    this.multiChanelAudioService.stopAll();
+    this.multiAudioService.stopAll();
   }
 
   next() {
-    this.nextSong();
+    this.store.dispatch(new SelectNext());
   }
 
   previous() {
-    this.previousSong();
+    this.store.dispatch(new SelectPrev());
   }
 
   backward(value: string) {
-    this.multiChanelAudioService.seekTo(Number(value) - this.secondsToRewindTrack);
+    this.multiAudioService.seekTo(Number(value) - this.REWIND_STEP);
   }
 
   forward(value: string) {
-    this.multiChanelAudioService.seekTo(Number(value) + this.secondsToRewindTrack);
+    this.multiAudioService.seekTo(Number(value) + this.REWIND_STEP);
   }
 
-  isFirstPlaying() {
-    if(this.currentFile) {
-      return this.currentFile.index === 0;
-    } else {
-      return
+  onSliderChangeEnd(event: Event) {
+    if (event && event.target && event.target) {
+      const target = event.target as HTMLInputElement;
+      const sliderValue: number = target.value as unknown as number;
+      this.audioService.seekTo(sliderValue);
     }
   }
-
-  isLastPlaying() {
-    if(this.currentFile) {
-      return this.currentFile.index === this.files.length - 1;
-    } else {
-      return
-    }
-  }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSliderChangeEnd(event:  any) {
-    const sliderValue = event.target.value;
-    this.multiChanelAudioService.seekTo(sliderValue);
-  }
-
 }

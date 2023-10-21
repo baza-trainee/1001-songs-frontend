@@ -1,50 +1,44 @@
 <header class="header">
-   <app-preloader *ngIf="isLoading$ | async"></app-preloader>
-   <nav class="nav">
-      <div class="logo">
-         <a class="logo__link" routerLink = "" routerLinkActive="active"><img class="logo__link-img" src="./assets/img/header/logo.png" alt="logo"></a>
+  <app-preloader *ngIf="isLoading$ | async"></app-preloader>
+  <nav class="nav">
+    <div class="logo">
+      <a class="logo__link" routerLink="" routerLinkActive="active"
+        ><img class="logo__link-img" src="./assets/img/header/logo.png" alt="logo"
+      /></a>
+    </div>
+    <div class="menu">
+      <div class="burger" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="2">
+        <img src="./assets/img/header/burger-icon.svg" alt="Burger menu icon" class="burger__icon" />
       </div>
-      <div class="menu">
-         <div 
-            class="burger"  
-            (click)="togglePopUp()"
-            (keypress)="togglePopUp()"
-            tabindex="2"
-         >
-            <img src="./assets/img/header/burger-icon.svg" alt="Burger menu icon" class="burger__icon">
-         </div>
-         <ul [ngClass]="menuSwitcherOff ? 'menu-list switcher' : 'menu-list'" tabindex="0" >
-            
-            <li class="menu-list__item" *ngFor="let link of navLinks">
-               <a class="menu-list__item-link" 
-                  [routerLink] = "link.route" routerLinkActive="active"
-                  >
-                  {{ link.name | translate }}
-               </a>
-            </li>
-         </ul>
+      <ul [ngClass]="menuSwitcherOff ? 'menu-list switcher' : 'menu-list'" tabindex="0">
+        <li class="menu-list__item" *ngFor="let link of navLinks">
+          <a class="menu-list__item-link" [routerLink]="link.route" routerLinkActive="active">
+            {{ link.name | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="actions" tabindex="3">
+      <div class="actions__search">
+        <img src="./assets/img/header/search.svg" class="actions__search-img" alt="search icons" />
       </div>
-      <div class="actions" tabindex="3">
-         <div class="actions__search">
-            <img src="./assets/img/header/search.svg" class="actions__search-img" alt="search icons">
-         </div>
-         <div class="actions__lang">
-            <ul class="actions__lang-list">
-               <li class="actions__lang-item" (click)="selectLang()" (keyup.space)="selectLang()" tabindex="4">
-                  <span>
-                     {{lang}}
-                  </span>
-               </li>
-            </ul>
-         </div>
-         <div class="actions__donate">
-            <button class="actions__donate-button">{{ 'header.actions.button-donate' | translate }}</button>
-         </div>
+      <div class="actions__lang">
+        <ul class="actions__lang-list">
+          <li class="actions__lang-item" (click)="selectLang()" (keyup.space)="selectLang()" tabindex="4">
+            <span>
+              {{ lang }}
+            </span>
+          </li>
+        </ul>
       </div>
-   </nav>
-   <app-pop-up-menu *ngIf="isPopupOpen" (changeLangDetection)="receivedData($event)">
-      <div class="icon" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="6">
-         <img class="icon__close" alt="close icon" src="./assets/img/header/close-icon.svg">
+      <div class="actions__donate">
+        <button class="actions__donate-button">{{ 'header.actions.button-donate' | translate }}</button>
       </div>
-   </app-pop-up-menu>
+    </div>
+  </nav>
+  <app-pop-up-menu *ngIf="isPopupOpen" (changeLangDetection)="receivedData($event)">
+    <div class="icon" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="6">
+      <img class="icon__close" alt="close icon" src="./assets/img/header/close-icon.svg" />
+    </div>
+  </app-pop-up-menu>
 </header>

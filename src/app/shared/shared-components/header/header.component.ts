@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { PopUpMenuComponent } from './pop-up-menu/pop-up-menu.component';
 import { CommonModule } from '@angular/common';
@@ -8,16 +8,27 @@ import { PreloaderComponent } from '../preloader/preloader.component';
 import { NgxsModule, Select } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { Observable } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, PopUpMenuComponent, TranslateModule, PreloaderComponent, NgxsModule]
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+    PopUpMenuComponent,
+    TranslateModule,
+    PreloaderComponent,
+    NgxsModule,
+    MatDialogModule
+  ]
 })
-export class HeaderComponent implements OnInit {
-  @Select(AppState.getIsLoading) isLoading$?: Observable<boolean>;
+export class HeaderComponent {
+  @Select(AppState.getIsLoading) isLoading$?: Observable<number>;
   public isPopupOpen = false;
   public changeLang: boolean = true;
   public menuSwitcherOff: boolean = true;
@@ -25,10 +36,13 @@ export class HeaderComponent implements OnInit {
 
   public lang = 'Eng';
 
-  constructor(private _translate: TranslateService) {}
+  constructor(
+    private _translate: TranslateService,
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {
-    this.checkLang();
+  openDialog() {
+    this.dialog.open(DialogComponent, { data: { text: 'Error. Try again later' } });
   }
 
   selectLang() {

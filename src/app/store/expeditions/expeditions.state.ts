@@ -39,7 +39,7 @@ export class ExpeditionsState {
 
   @Action(FetchExpeditions)
   fetchExpeditions(ctx: StateContext<ExpeditionsStateModel>) {
-    this.store.dispatch(new SetIsLoading(true));
+    this.store.dispatch(new SetIsLoading(1));
     return this.expeditionsService.fetchExpeditions().pipe(
       map((expeditionData) => expeditionData as Iexpediton[]), //the expression need to avoid any type
       tap((expeditions: Iexpediton[]) => {
@@ -48,7 +48,7 @@ export class ExpeditionsState {
           ...state,
           expeditionsList: [...expeditions]
         });
-        this.store.dispatch(new SetIsLoading(false));
+        this.store.dispatch(new SetIsLoading(-1));
       })
     );
   }

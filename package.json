@@ -30,6 +30,7 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@ngxs/store": "^3.8.1",
     "angular-cli-ghpages": "^1.0.6",
+    "date-fns": "^2.30.0",
     "e2e": "0.0.8",
     "lint-staged": "^13.2.2",
     "moment": "^2.29.4",

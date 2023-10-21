@@ -1,95 +1,44 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {IAudioData} from "../../../../shared/interfaces/audio-data.interface";
-import {AudioService} from "../../../../shared/services/audio/audio.service";
-import {CloudService} from "../../../../shared/services/audio/cloud.service";
-import {StereoPlayerComponent} from "./stereo-player/stereo-player.component";
-import {MultichanelPlayerComponent} from "./multichanel-player/multichanel-player.component";
-import {Subscription} from "rxjs";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
+import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
+import { Observable } from 'rxjs';
+import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
+import { Select, Store } from '@ngxs/store';
+import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlayerState } from 'src/app/store/player/player.state';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule, StereoPlayerComponent, MultichanelPlayerComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    TranslateModule,
+    StereoPlayerComponent,
+    MultichanelPlayerComponent,
+    PlaylistSongCardComponent
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit, OnDestroy{
+export class PlayerComponent {
   screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
-  files: IAudioData[] = [];
-  currentFile!: IAudioData;
-  cloudServiceSubscribe: Subscription | undefined;
-  @ViewChild('stereoPlayer') stereoPlayer: StereoPlayerComponent | undefined;
-  @ViewChild('multiChanelPlayer') multiChanelPlayer: MultichanelPlayerComponent | undefined;
-  constructor(private _translate: TranslateService,
-              private audioService: AudioService,
-              private cloudService: CloudService,
-              ) {
-    this.audioService.showStereoPlayerSubject.next(true);
-  }
 
-  ngOnInit() {
-    this.cloudServiceSubscribe = this.cloudService.getFiles().subscribe(data => {
-      this.files = data;
+  @Select(PlayerState.getSongs) songs$?: Observable<Song[]>;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
 
-      this.files.forEach((item: IAudioData, index: number) => {
-        item.index = index;
-        item.isDetailOpen = false;
-        item.isStereo = item.media.stereo_audio !== '';
-        item.isMultiChanel = item.media.multichannel_audio.length > 0;
-      });
-    });
-  }
+  location = 'Ромейки';
 
-  ngOnDestroy() {
-    this.cloudServiceSubscribe?.unsubscribe();
-  }
+  constructor(
+    private _translate: TranslateService,
 
-  toggleDetailBtn(file: IAudioData) {
-    file.isDetailOpen = !file.isDetailOpen;
-  }
-
-  openCurrentFile(file: IAudioData) {
-    if(file.isStereo && this.stereoPlayer) {
-      this.stereoPlayer.openFile(file);
-    }
-    if(file.isMultiChanel && this.multiChanelPlayer){
-      this.multiChanelPlayer.openFile(file)
-    }
-  }
-
-  nextSong() {
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index + 1;
-      const file = this.files[index];
-      this.openCurrentFile(file);
-    }
-  }
-
-  previousSong() {
-    if(this.currentFile && this.currentFile.index){
-      const index = this.currentFile.index - 1;
-      const file = this.files[index];
-      this.openCurrentFile(file);
-    }
-  }
-
-  mobileToggleDetailBtn(file: IAudioData) {
-    this.screenWidth = window.innerWidth;
-    if(this.screenWidth < 768){
-      file.isDetailOpen = !file.isDetailOpen;
-    }
-    return
-  }
-
-  handleKeyUpEvent(event: Event, file: IAudioData){
-    if(event && event.isTrusted){
-      this.mobileToggleDetailBtn(file);
-    }
-  }
-
+    private store: Store
+  ) {}
 }

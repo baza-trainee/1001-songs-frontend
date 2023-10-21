@@ -3,13 +3,13 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { SetIsLoading } from './app.actions';
 
 export interface AppStateModel {
-  isLoading: boolean;
+  isLoading: number;
 }
 
 @State<AppStateModel>({
   name: 'app',
   defaults: {
-    isLoading: false
+    isLoading: 0
   }
 })
 @Injectable()
@@ -17,7 +17,7 @@ export class AppState {
   constructor() {}
 
   @Selector()
-  static getIsLoading(state: AppStateModel): boolean {
+  static getIsLoading(state: AppStateModel): number {
     return state.isLoading;
   }
 
@@ -26,7 +26,7 @@ export class AppState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      isLoading: action.loadingStatus
+      isLoading: state.isLoading + action.loadingStatus
     });
   }
 }

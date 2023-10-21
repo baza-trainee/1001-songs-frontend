@@ -6,10 +6,8 @@ import { NgxsModule } from '@ngxs/store';
 import { MapState } from 'src/app/store/map/map.state';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
-import {RouterTestingModule} from "@angular/router/testing";
-import {Marker} from "../../../shared/interfaces/map-marker";
-import {cordsMarkers} from "../../../mock-data/markers";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const google = {
   maps: {
@@ -44,7 +42,7 @@ describe('MapComponent', () => {
         HttpClientModule,
         GoogleMapsModule,
         MapComponent
-      ],
+      ]
     });
 
     (window as unknown as { google: googleMock }).google = google;
@@ -57,11 +55,4 @@ describe('MapComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should handle map emit', () => {
-    const mockMarker: Marker = cordsMarkers[0];
-    spyOn(console, 'log');
-
-    component.handleMapEmit(mockMarker);
-    expect(console.log).toHaveBeenCalledWith('event value : ', mockMarker);
-  });
 });
