@@ -1,3 +1,5 @@
 <div class="map">
-  <app-interacive-map [markers]="markers$ | async" (markerClicked)="handleMapEmit($event)"></app-interacive-map>
+  <app-interactive-map [markers]="filteredMarkers" (markerClicked)="handleMapEmit($event)"></app-interactive-map>
+  <app-map-filter [markers]="filteredMarkers" (selectedOptionsChange)="onSelectedOptionsChange($event)" class="map__filter container"></app-map-filter>
+  <app-player></app-player>
 </div>

@@ -6,7 +6,10 @@ import { NgxsModule } from '@ngxs/store';
 import { MapState } from 'src/app/store/map/map.state';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { cordsMarkers } from 'src/app/mock-data/markers';
+import {RouterTestingModule} from "@angular/router/testing";
+import {Marker} from "../../../shared/interfaces/map-marker";
+import {cordsMarkers} from "../../../mock-data/markers";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 export const google = {
   maps: {
@@ -25,11 +28,6 @@ export const google = {
   }
 };
 
-export const fakeSelectedMarker = {
-  key: 'marker1',
-  position: { lat: 0, lng: 0 },
-  popup: { title: '', photoUrl: '', countRecords: 0, link: '' }
-};
 class googleMock {}
 
 describe('MapComponent', () => {
@@ -38,7 +36,15 @@ describe('MapComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), MapComponent, NgxsModule.forRoot([MapState]), HttpClientModule, GoogleMapsModule]
+      imports: [
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        NgxsModule.forRoot([MapState]),
+        HttpClientModule,
+        GoogleMapsModule,
+        MapComponent
+      ],
     });
 
     (window as unknown as { google: googleMock }).google = google;
@@ -47,14 +53,15 @@ describe('MapComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should select markers ', () => {
-    const markers = component.markers$;
-    markers?.subscribe((markers) => {
-      expect(markers[0]).toEqual(cordsMarkers[0]);
-    });
-  });
-
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should handle map emit', () => {
+    const mockMarker: Marker = cordsMarkers[0];
+    spyOn(console, 'log');
+
+    component.handleMapEmit(mockMarker);
+    expect(console.log).toHaveBeenCalledWith('event value : ', mockMarker);
   });
 });

@@ -13,5 +13,4 @@ import {TranslateModule} from "@ngx-translate/core";
 export class HomeTapeComponent {
   protected readonly homeTape = Homepage;
 
-
 }

@@ -22,238 +22,414 @@ $color-extra-2: var(--text-color-extra-2);
 
 // for desktop
 
-@mixin h1-desktop($font-family: $secondary-fonts, $font-size: 92px, $font-weight: $font-weight-regular, $line-height: 92px, $color: $color-secondary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h1-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 92px,
+  $font-weight: $font-weight-regular,
+  $line-height: 92px,
+  $color: $color-secondary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h1-tablet($font-family: $secondary-fonts, $font-size: 68px, $font-weight: $font-weight-regular, $line-height: 68px, $color: $color-secondary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h1-tablet(
+  $font-family: $secondary-fonts,
+  $font-size: 68px,
+  $font-weight: $font-weight-regular,
+  $line-height: 68px,
+  $color: $color-secondary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h2-desktop($font-family: $secondary-fonts, $font-size: 40px, $font-weight: $font-weight-regular, $line-height: 48px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h2-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 40px,
+  $font-weight: $font-weight-regular,
+  $line-height: 48px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h3-desktop($font-family: $secondary-fonts, $font-size: 32px, $font-weight: $font-weight-regular, $line-height: 40px, $text-transform: uppercase, $color: $color-accent) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   text-transform: $text-transform;
-   color: $color;
+@mixin h3-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 32px,
+  $font-weight: $font-weight-regular,
+  $line-height: 40px,
+  $text-transform: uppercase,
+  $color: $color-accent
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  text-transform: $text-transform;
+  color: $color;
 }
 
-@mixin h4-desktop($font-family: $secondary-fonts, $font-size: 28px, $font-weight: $font-weight-regular, $line-height: 92px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h4-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 28px,
+  $font-weight: $font-weight-regular,
+  $line-height: 92px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h5-desktop($font-family: $secondary-fonts, $font-size: 21px, $font-weight: $font-weight-regular, $line-height: 92px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h5-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 21px,
+  $font-weight: $font-weight-regular,
+  $line-height: 92px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h6-desktop($font-family: $secondary-fonts, $font-size: 21px, $font-weight: $font-weight-semibolt, $line-height: 92px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h6-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 21px,
+  $font-weight: $font-weight-semibolt,
+  $line-height: 92px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin subtitle-desktop($font-family: $primary-fonts, $font-size: 20px, $font-weight: $font-weight-semibolt, $line-height: 28px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin subtitle-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 20px,
+  $font-weight: $font-weight-semibolt,
+  $line-height: 28px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin overline-desktop($font-family: $secondary-fonts, $font-size: 20px, $font-weight: $font-weight-regular, $line-height: 28px, $color: $color-accent) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin overline-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 20px,
+  $font-weight: $font-weight-regular,
+  $line-height: 28px,
+  $color: $color-accent
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin paragraph-desktop($font-family: $primary-fonts, $font-size: 20px, $font-weight: $font-weight-regular, $line-height: 28px, $color: $color-secondary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin paragraph-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 20px,
+  $font-weight: $font-weight-regular,
+  $line-height: 28px,
+  $color: $color-secondary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin button-desktop($font-family: $primary-fonts, $font-size: 16px, $font-weight: $font-weight-semibolt, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin button-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-semibolt,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin link-desktop($font-family: $secondary-fonts, $font-size: 16px, $font-weight: $font-weight-regular, $line-height: 24px, $color: $primary-fonts) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin link-desktop(
+  $font-family: $secondary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-regular,
+  $line-height: 24px,
+  $color: $primary-fonts
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin body-desktop($font-family: $primary-fonts, $font-size: 16px, $font-weight: $font-weight-regular, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin body-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-regular,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin caption-desktop($font-family: $primary-fonts, $font-size: 14px, $font-weight: $font-weight-regular, $line-height: 20px, $color: $color-extra-1) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin caption-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 14px,
+  $font-weight: $font-weight-regular,
+  $line-height: 20px,
+  $color: $color-extra-1
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin caption-small-desktop($font-family: $primary-fonts, $font-size: 12px, $font-weight: $font-weight-bolt, $line-height: 16px, $color: $color-extra-1) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin caption-small-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 12px,
+  $font-weight: $font-weight-bolt,
+  $line-height: 16px,
+  $color: $color-extra-1
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin copyright-desktop($font-family: $primary-fonts, $font-size: 12px, $font-weight: $font-weight-regular, $line-height: 16px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin copyright-desktop(
+  $font-family: $primary-fonts,
+  $font-size: 12px,
+  $font-weight: $font-weight-regular,
+  $line-height: 16px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
 // for mobile
 
-@mixin h1-mobile($font-family: $secondary-fonts, $font-size: 52px, $font-weight: $font-weight-regular, $line-height: 52px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h1-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 52px,
+  $font-weight: $font-weight-regular,
+  $line-height: 52px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h2-mobile($font-family: $secondary-fonts, $font-size: 32px, $font-weight: $font-weight-regular, $line-height: 40px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h2-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 32px,
+  $font-weight: $font-weight-regular,
+  $line-height: 40px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h3-mobile($font-family: $secondary-fonts, $font-size: 28px, $font-weight: $font-weight-regular, $line-height: 36px, $text-transform: uppercase, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   text-transform: $text-transform;
-   color: $color;
+@mixin h3-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 28px,
+  $font-weight: $font-weight-regular,
+  $line-height: 36px,
+  $text-transform: uppercase,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  text-transform: $text-transform;
+  color: $color;
 }
 
-@mixin h4-mobile($font-family: $secondary-fonts, $font-size: 24px, $font-weight: $font-weight-regular, $line-height: 32px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h4-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 24px,
+  $font-weight: $font-weight-regular,
+  $line-height: 32px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h5-mobile($font-family: $secondary-fonts, $font-size: 22px, $font-weight: $font-weight-regular, $line-height: 28px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h5-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 22px,
+  $font-weight: $font-weight-regular,
+  $line-height: 28px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin h6-mobile($font-family: $secondary-fonts, $font-size: 18px, $font-weight: $font-weight-semibolt, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin h6-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 18px,
+  $font-weight: $font-weight-semibolt,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin overline-mobile($font-family: $secondary-fonts, $font-size: 18px, $font-weight: $font-weight-regular, $line-height: 24px, $color: $color-accent) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin overline-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 18px,
+  $font-weight: $font-weight-regular,
+  $line-height: 24px,
+  $color: $color-accent
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin button-mobile($font-family: $primary-fonts, $font-size: 16px, $font-weight: $font-weight-semibolt, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin button-mobile(
+  $font-family: $primary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-semibolt,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin link-mobile($font-family: $secondary-fonts, $font-size: 16px, $font-weight: $font-weight-regular, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin link-mobile(
+  $font-family: $secondary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-regular,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin body-mobile($font-family: $primary-fonts, $font-size: 16px, $font-weight: $font-weight-regular, $line-height: 24px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin body-mobile(
+  $font-family: $primary-fonts,
+  $font-size: 16px,
+  $font-weight: $font-weight-regular,
+  $line-height: 24px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin caption-mobile($font-family: $primary-fonts, $font-size: 14px, $font-weight: $font-weight-regular, $line-height: 20px, $color: $color-extra-1) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin caption-mobile(
+  $font-family: $primary-fonts,
+  $font-size: 14px,
+  $font-weight: $font-weight-regular,
+  $line-height: 20px,
+  $color: $color-extra-1
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin caption-small-mobile($font-family: $primary-fonts, $font-size: 12px, $font-weight: $font-weight-bolt, $line-height: 16px, $color: $color-extra-1) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin caption-small-mobile(
+  $font-family: $primary-fonts,
+  $font-size: 12px,
+  $font-weight: $font-weight-bolt,
+  $line-height: 16px,
+  $color: $color-extra-1
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }
 
-@mixin copyright-mobile($font-family: $primary-fonts, $font-size: 12px, $font-weight: $font-weight-regular, $line-height: 16px, $color: $color-primary) {
-   font-family: $font-family;
-   font-size: $font-size;
-   font-weight: $font-weight;
-   line-height: $line-height;
-   color: $color;
+@mixin copyright-mobile(
+  $font-family: $primary-fonts,
+  $font-size: 12px,
+  $font-weight: $font-weight-regular,
+  $line-height: 16px,
+  $color: $color-primary
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
 }

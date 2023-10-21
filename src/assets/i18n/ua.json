@@ -64,13 +64,64 @@
     }
   },
   "about": {
-    "stub": "Сторінка 'Про проект' у розробці"
+    "stub": "Сторінка 'Про проект' у розробці",
+    "title": "Про нас",
+    "team": {
+      "title": "Команда"
+    },
+    "projects": {
+      "title": "Наші проєкти"
+    }
   },
   "map": {
-    "stub": "Сторінка 'Мапа' у розробці"
+    "filter": {
+      "title": "Фільтр",
+      "button-clear": "Очистити",
+      "locations": "Місцевість",
+      "song": "Пісня",
+      "categories": {
+        "country": "Країна",
+        "region": "Область",
+        "settlement": "Населений пункт",
+        "genre": "Жанр",
+        "title": "Назва",
+        "found": "Фонд"
+      }
+    },
+    "player": {
+      "counter-title": "Кількість знайдених",
+      "player-title": "Слухати всі знайдені пісні",
+      "songs-list": {
+        "titles": {
+          "photo": "Фото",
+          "name": "Назва",
+          "genre": "Жанр",
+          "recording-location": "Місце запису",
+          "listen": "Слухати"
+        },
+        "song-card": {
+          "detail-button": "Деталі",
+          "song-card-detail": {
+            "record-date": "Дата запису",
+            "collectors": "Збирачі",
+            "ethnographic-region": "Етнографічний регіон",
+            "more-detail-button": "Більше деталей"
+          }
+        }
+      }
+    }
   },
   "news": {
-    "stub": "Сторінка 'Новини' у розробці"
+    "title": "Новини",
+    "categories": {
+      "all": "Усі",
+      "meetings": "Зустрічі",
+      "lectures": "Лекції",
+      "publications": "Публікації",
+      "workshops": "Майстер-класи",
+      "concerts": "Концерти",
+      "conferences": "Конференції"
+    }
   },
   "expeditions": {
     "stub": "Сторінка 'Експедиції' у розробці",

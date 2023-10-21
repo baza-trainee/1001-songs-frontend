@@ -2,27 +2,53 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
-import { Marker } from '../../interfaces/map-marker';
+
+import {Marker, SelectedMarkerFilter} from '../../interfaces/map-marker';
 import { Song } from '../../interfaces/song';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
   constructor(private http: HttpClient) {}
 
+  createFilterByMarker(markers: Marker[]): SelectedMarkerFilter {
+    const selectedOptions = new SelectedMarkerFilter();
+
+    markers.forEach(item => {
+      selectedOptions.country.push(item.location.country);
+      selectedOptions.region.push(item.location.region);
+      selectedOptions.settlement.push(item.location.district_center);
+      selectedOptions.title.push(item.title);
+      selectedOptions.genre.push(item.genre_cycle);
+      selectedOptions.found.push(item.found);
+    });
+
+    selectedOptions.country = [...new Set(selectedOptions.country)];
+    selectedOptions.region = [...new Set(selectedOptions.region)];
+    selectedOptions.settlement = [...new Set(selectedOptions.settlement)];
+    selectedOptions.title = [...new Set(selectedOptions.title)];
+    selectedOptions.genre = [...new Set(selectedOptions.genre)];
+    selectedOptions.found = [...new Set(selectedOptions.found)];
+
+    return selectedOptions;
+  }
+
   markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
-    const marker: Marker = {
-      key: song.id.toString(),
-      position: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) },
-      popup: {
-        title: song.location['official_name_city'],
-        photoUrl: './assets/img/home/kiivImg.jpg',
-        countRecords: 1,
-        link: ''
+    return {
+      id: song.id.toString(),
+      title: song.title,
+      genre_cycle: song.details['genre_cycle'],
+      found: song.archive,
+      image: song.media?.['photo_of_performers'] ? song.media['photo_of_performers'] : './assets/img/home/kiivImg.jpg',
+      location: {
+        country: song.location['country'],
+        region: song.location['region'],
+        district_center: song.location['official_name_city'],
+        recording_location: {lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1])}
       }
     };
-    return marker;
   }
 
   fetchMarkers() {

@@ -1,35 +1,39 @@
 export interface Song {
-  id: 0;
-  title: 'string';
-  recording_date: '2023-09-19';
-  performers: 'string';
-  collectors: 'string';
-  source: 'string';
+  id: string;
+  title: string;
+  recording_date: string;
+  performers: string;
+  collectors: string;
+  source: string;
   location: {
-    id: 0;
-    country: 'string';
-    region: 'string';
-    district_center: 'string';
-    administrative_code: 'string';
-    ethnos: 'string';
-    ethnographic_district: 'string';
-    official_name_city: 'string';
-    unofficial_name_city: 'string';
-    recording_location: 'string';
+    id: string;
+    country: string;
+    region: string;
+    district_center: string;
+    administrative_code: string;
+    ethnos: string;
+    ethnographic_district: string;
+    official_name_city: string;
+    unofficial_name_city: string;
+    recording_location: string;
+    coordinates: string;
   };
+  archive: string;
   details: {
-    id: 0;
-    incipit: 'string';
+    id: string;
+    incipit: string;
     genre_cycle: 'Зима';
-    poetic_text_genre: 'string';
-    texture: 'string';
+    poetic_text_genre: string;
+    texture: string;
   };
   media: {
-    id: 0;
-    stereo_audio: 'string';
-    multichannel_audio: 'string';
-    video_file: 'string';
-    text: 'string';
-    image: 'string';
+    id: string;
+    stereo_audio: string;
+    multichannel_audio: string[];
+    video_file: string;
+    text: string;
+    photo_of_performers: string;
+    notes: string;
+    melogeographical_data: string;
   };
 }
