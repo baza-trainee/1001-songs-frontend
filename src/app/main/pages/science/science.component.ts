@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CategoryLinkComponent } from './category-link/category-link.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ArrowDownComponent } from 'src/app/icons/arrow-down/arrow-down.component';
+import { ArrowDownComponent } from 'src/app/main/pages/science/arrow-down/arrow-down.component';
 import { scienceCategories } from './category-link/categoriesList';
 import { recomendations } from './category-link/recomendations';
-import { NavigationNextComponent } from 'src/app/icons/navigation-next/navigation-next.component';
 import { RecomendationComponent } from './recomendation/recomendation.component';
 
 @Component({
@@ -20,7 +19,6 @@ import { RecomendationComponent } from './recomendation/recomendation.component'
     CategoryLinkComponent,
     MatExpansionModule,
     ArrowDownComponent,
-    NavigationNextComponent,
     RecomendationComponent
   ]
 })
