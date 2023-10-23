@@ -20,7 +20,7 @@
       <div class="nav__menu">
         <div class="links">
           <ul class="links__list">
-            <li *ngFor="let link of navLinks" class="list__item" (click)="togglePopUp()" (keypress)="togglePopUp()">
+            <li *ngFor="let link of navLinks" class="list__item" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="5">
               <a [routerLink]="link.route" routerLinkActive="active">{{ link.name | translate }} </a>
             </li>
           </ul>
