@@ -1,45 +1,50 @@
 <div class="wrapper">
-    <div class="wrapper__header">
-      <a class="header__link" routerLink = "" routerLinkActive="active">
-        <img src="./assets/img/header/logo.png" alt="logo" class="header__logo">
-      </a>
-      <ng-content></ng-content>
+  <div class="wrapper__header">
+    <a class="header__link" routerLink="" routerLinkActive="active" (click)="togglePopUp()" (keypress)="togglePopUp()">
+      <img src="./assets/img/header/logo.png" alt="logo" class="header__logo" />
+    </a>
+    <ng-content></ng-content>
+  </div>
+  <div class="main">
+    <div class="action">
+      <ul class="lang">
+        <li class="lang__item" [ngClass]="{ selected: !lang }" (click)="selectLang(true)" (keypress)="selectLang(true)" tabindex="12">
+          Укр
+        </li>
+        <li class="lang__item" [ngClass]="{ selected: lang }" (click)="selectLang(false)" (keydown)="selectLang(false)" tabindex="13">
+          Eng
+        </li>
+      </ul>
     </div>
-    <div class="main">
-      <div class="action">
-        <ul class="lang">
-          <li class="lang__item" [ngClass]="{'selected': !lang}" (click)="selectLang(true)" (keypress)="selectLang(true)" tabindex="12">Укр</li>
-          <li class="lang__item" [ngClass]="{'selected': lang}" (click)="selectLang(false)" (keydown)="selectLang(false)" tabindex="13">Eng</li>
-        </ul>
-      </div>
-      <div class="nav">
-        <div class="nav__menu">
-          <div class="links">
-            <ul class="links__list">
-              <li *ngFor="let link of navLinks" class="list__item">
-                <a [routerLink] = "link.route" routerLinkActive="active">{{link.name | translate}}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="social__network">
-            <ul class="networks">
-              <li class="networks__item"><img src="./assets/img/header/social-facebook.png" alt="facebook"></li>
-              <li class="networks__item"><img src="./assets/img/header/social-youtube.png" alt="youtube"></li>
-            </ul>
-          </div>
+    <div class="nav">
+      <div class="nav__menu">
+        <div class="links">
+          <ul class="links__list">
+            <li *ngFor="let link of navLinks" class="list__item" (click)="togglePopUp()" (keypress)="togglePopUp()">
+              <a [routerLink]="link.route" routerLinkActive="active">{{ link.name | translate }} </a>
+            </li>
+          </ul>
         </div>
-        <div class="nav__social social">
-          <div class="social__span">
-            <span>{{'header.pop-up-menu.title' | translate}}</span>
-          </div>
-          <ul class="social__list">
-            <li class="social__item"><a class="social__fb" href="#">Facebook</a></li>
-            <li class="social__item"><a class="social__inst" href="#">Instagram</a></li>
-            <li class="social__item"><a class="social__tg" href="#">Telegram</a></li>
-            <li class="social__item"><a class="social__copy" href="#">{{'header.pop-up-menu.copy' | translate}}</a></li>
+        <div class="social__network">
+          <ul class="networks">
+            <li class="networks__item"><img src="./assets/img/header/social-facebook.png" alt="facebook" /></li>
+            <li class="networks__item"><img src="./assets/img/header/social-youtube.png" alt="youtube" /></li>
           </ul>
         </div>
       </div>
+      <div class="nav__social social">
+        <div class="social__span">
+          <span>{{ 'header.pop-up-menu.title' | translate }}</span>
+        </div>
+        <ul class="social__list">
+          <li class="social__item"><a class="social__fb" href="#">Facebook</a></li>
+          <li class="social__item"><a class="social__inst" href="#">Instagram</a></li>
+          <li class="social__item"><a class="social__tg" href="#">Telegram</a></li>
+          <li class="social__item">
+            <a class="social__copy" href="#">{{ 'header.pop-up-menu.copy' | translate }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
- </div>
+  </div>
+</div>
