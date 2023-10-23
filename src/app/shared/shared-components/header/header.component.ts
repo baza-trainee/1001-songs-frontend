@@ -55,7 +55,7 @@ export class HeaderComponent {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  onPopupChange(newStatus: any) {
+  onPopupChange(newStatus: boolean) {
     this.isPopupOpen = newStatus;
   }
 
