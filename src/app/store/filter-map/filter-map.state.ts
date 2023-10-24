@@ -1,6 +1,6 @@
 import {Marker} from "../../shared/interfaces/map-marker";
 import {Injectable} from "@angular/core";
-import {Selector, State, Store} from "@ngxs/store";
+import {Selector, State} from "@ngxs/store";
 
 export interface FilterMapStateModel {
   markersList: Marker[];
@@ -28,7 +28,6 @@ export interface FilterMapStateModel {
 @Injectable()
 export class FilterMapState {
   constructor(
-    private store: Store
   ) {}
 
   @Selector()
