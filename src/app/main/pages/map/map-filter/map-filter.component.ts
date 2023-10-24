@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
@@ -6,7 +6,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Marker, SelectedMarkerFilter} from "../../../../shared/interfaces/map-marker";
 import {MultiselectComponent} from "./multiselect/multiselect.component";
 import {mapFilter} from "../../../../shared/enums/mapFilter";
-import {MapService} from "../../../../shared/services/map/map.service";
+import {Subscription} from "rxjs";
+import {FilterMapService} from "../../../../shared/services/filter-map/filter-map.service";
 
 @Component({
   selector: 'app-map-filter',
@@ -16,13 +17,14 @@ import {MapService} from "../../../../shared/services/map/map.service";
   styleUrls: ['./map-filter.component.scss']
 })
 
-export class MapFilterComponent implements OnChanges {
+export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   @Input() markers!: Marker[];
   @Output() selectedOptionsChange = new EventEmitter<SelectedMarkerFilter>();
 
   filterCategory = mapFilter;
   options: SelectedMarkerFilter = new SelectedMarkerFilter();
   isShowFilter = false;
+  private formSubscription!: Subscription[];
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -35,12 +37,12 @@ export class MapFilterComponent implements OnChanges {
 
   constructor (
     private translate: TranslateService,
-    private mapService: MapService
+    private filterMapService: FilterMapService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
-      this.options = this.mapService.createFilterByMarker(this.markers);
+      this.options = this.filterMapService.createFilterByMarker(this.markers);
     }
   }
 
@@ -50,7 +52,25 @@ export class MapFilterComponent implements OnChanges {
 
   filerClear() {
     this.form.reset();
-    this.options = this.mapService.createFilterByMarker(this.markers);
+    this.options = this.filterMapService.createFilterByMarker(this.markers);
     this.sendSelectedOptions();
+  }
+
+  onSubmit() {
+  }
+
+
+  ngOnInit() {
+    this.formSubscription.push(this.form.controls.country.valueChanges.subscribe((value) => {
+      console.log(value);
+    }));
+  }
+
+  ngOnDestroy() {
+    if (this.formSubscription) {
+      this.formSubscription.forEach(subs => {
+        subs.unsubscribe()
+      })
+    }
   }
 }

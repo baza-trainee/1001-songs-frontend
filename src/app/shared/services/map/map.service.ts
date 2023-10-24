@@ -12,28 +12,6 @@ import { Song } from '../../interfaces/song.interface';
 export class MapService {
   constructor(private http: HttpClient) {}
 
-  createFilterByMarker(markers: Marker[]): SelectedMarkerFilter {
-    const selectedOptions = new SelectedMarkerFilter();
-
-    markers.forEach(item => {
-      selectedOptions.country.push(item.location.country);
-      selectedOptions.region.push(item.location.region);
-      selectedOptions.settlement.push(item.location.district_center);
-      selectedOptions.title.push(item.title);
-      selectedOptions.genre.push(item.genre_cycle);
-      selectedOptions.found.push(item.found);
-    });
-
-    selectedOptions.country = [...new Set(selectedOptions.country)];
-    selectedOptions.region = [...new Set(selectedOptions.region)];
-    selectedOptions.settlement = [...new Set(selectedOptions.settlement)];
-    selectedOptions.title = [...new Set(selectedOptions.title)];
-    selectedOptions.genre = [...new Set(selectedOptions.genre)];
-    selectedOptions.found = [...new Set(selectedOptions.found)];
-
-    return selectedOptions;
-  }
-
   markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
     return {
@@ -45,7 +23,7 @@ export class MapService {
       location: {
         country: song.location['country'],
         region: song.location['region'],
-        district_center: song.location['official_name_city'],
+        district_center: song.location['district_center'],
         recording_location: {lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1])}
       }
     };

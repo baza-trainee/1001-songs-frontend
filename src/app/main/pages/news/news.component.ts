@@ -50,6 +50,7 @@ export class NewsComponent implements OnDestroy {
       this.articlesSubscription.unsubscribe();
     }
   }
+
   filteredCategory(category: string): void {
     let label: string = 'Усі';
     switch (category) {

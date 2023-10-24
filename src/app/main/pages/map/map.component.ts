@@ -21,8 +21,8 @@ import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.act
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Select(MapState.getMarkersList) markers$!: Observable<Marker[]>;
-  filteredMarkers!: Marker[];
   private subscription: Subscription = new Subscription();
+  filteredMarkers!: Marker[];
 
   constructor(private store: Store) {}
 
