@@ -35,17 +35,21 @@ export class FilterMapService {
 
   filterByProperty(
       markers: Marker[],
-      value: string[] | null,
-      property: string[],
-      key: keyof SelectedMarkerFilter,
-      matcher: (marker: Marker) => boolean
+      options: SelectedMarkerFilter,
+      nameOption: keyof SelectedMarkerFilter,
+      filters: SelectedMarkerFilter
   ): SelectedMarkerFilter {
-    let filterMarkers = markers;
-    if (value && value.length) {
-      filterMarkers = markers.filter(matcher);
-    }
-
-    return { ...this.createFilterByMarker(filterMarkers), [key]: property};
+    let filterMarkers = markers.filter(marker => {
+      return (
+          (filters.country.length === 0 || filters.country.includes(marker.location.country)) &&
+          (filters.region.length === 0 || filters.region.includes(marker.location.region)) &&
+          (filters.settlement.length === 0 || filters.settlement.includes(marker.location.district_center)) &&
+          (filters.genre.length === 0 || filters.genre.includes(marker.genre_cycle)) &&
+          (filters.title.length === 0 || filters.title.includes(marker.title)) &&
+          (filters.found.length === 0 || filters.found.includes(marker.found))
+      );
+    });
+    return { ...this.createFilterByMarker(filterMarkers), [nameOption]: options[nameOption]};
   }
 
   fetchFilteredMarkers() {
