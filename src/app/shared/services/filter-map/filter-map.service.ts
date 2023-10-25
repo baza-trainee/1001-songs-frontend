@@ -33,6 +33,21 @@ export class FilterMapService {
     return selectedOptions;
   }
 
+  filterByProperty(
+      markers: Marker[],
+      value: string[] | null,
+      property: string[],
+      key: keyof SelectedMarkerFilter,
+      matcher: (marker: Marker) => boolean
+  ): SelectedMarkerFilter {
+    let filterMarkers = markers;
+    if (value && value.length) {
+      filterMarkers = markers.filter(matcher);
+    }
+
+    return { ...this.createFilterByMarker(filterMarkers), [key]: property};
+  }
+
   fetchFilteredMarkers() {
     return this.http.get(API_URL + StatEndpoints.songs).pipe(
       catchError(async (error) => {

@@ -1,37 +1,47 @@
-import {Marker} from "../../shared/interfaces/map-marker";
 import {Injectable} from "@angular/core";
-import {Selector, State} from "@ngxs/store";
+import {Action, Selector, State, StateContext} from "@ngxs/store";
+
+// import {FilterMapService} from "../../shared/services/filter-map/filter-map.service";
+import {Marker} from "../../shared/interfaces/map-marker";
+import {SelectCountry} from "./filter-map.actions";
 
 export interface FilterMapStateModel {
   markersList: Marker[];
+  selectedOptions: Marker[];
 }
+
 @State<FilterMapStateModel>({
   name: 'filterMap',
   defaults: {
-    markersList: [
-      {
-        id: 'marker1',
-        title: 'Лєтєла соя',
-        genre_cycle: 'Весна',
-        found: '',
-        image: './assets/img/home/kiivImg.jpg',
-        location: {
-          country: 'Україна',
-          region: 'Полтавська обл.',
-          district_center: 'с. Крячківка',
-          recording_location: { lat: 50.4501, lng: 30.5234 }
-        }
-      }
-    ]
+    markersList: [],
+    selectedOptions: []
   }
 })
+
 @Injectable()
 export class FilterMapState {
   constructor(
+    // private filterService: FilterMapService,
+    // private store: Store
   ) {}
 
   @Selector()
-  static getFilterMarkersList(state: FilterMapStateModel): Marker[] {
+  static getMarkersList(state: FilterMapStateModel): Marker[] {
     return state.markersList;
   }
+
+  @Selector()
+  static getSelectedOptions(state: FilterMapStateModel): Marker[] {
+    return state.selectedOptions;
+  }
+
+  @Action(SelectCountry)
+  selectCountry(ctx: StateContext<FilterMapStateModel>) {
+    const state = ctx.getState();
+    return ctx.setState({
+      ...state,
+      selectedOptions: []
+    })
+  }
+
 }
