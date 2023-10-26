@@ -12,9 +12,12 @@ import { navLinksHeader } from 'src/app/shared/enums/navLinks.enum';
   imports: [RouterLink, RouterLinkActive, TranslateModule, CommonModule]
 })
 export class PopUpMenuComponent implements OnInit {
+  @Output() isPopupOpenChange = new EventEmitter<boolean>();
   @Output() changeLangDetection = new EventEmitter<boolean>();
+
   public lang!: boolean;
   public navLinks = navLinksHeader;
+  public isPopupOpen: boolean = true;
   constructor(private _translate: TranslateService) {}
 
   ngOnInit(): void {
@@ -31,9 +34,6 @@ export class PopUpMenuComponent implements OnInit {
     this.checkLang();
     this.changeLangDetection.emit(this.lang);
   }
-
-  @Input() isPopupOpen!: boolean;
-  @Output() isPopupOpenChange = new EventEmitter<boolean>();
 
   togglePopUp() {
     this.isPopupOpen = !this.isPopupOpen;
