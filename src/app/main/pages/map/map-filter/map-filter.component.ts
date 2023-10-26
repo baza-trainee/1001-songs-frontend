@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map, merge, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, map, merge, Observable, of, pairwise, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { Marker, SelectedMarkerFilter } from '../../../../shared/interfaces/map-marker';
+import { Marker, SongFilter } from '../../../../shared/interfaces/map-marker';
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { mapFilter } from '../../../../shared/enums/mapFilter';
 import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from '../../../../store/filter-map/filter-map.actions';
@@ -21,8 +21,8 @@ import { FilteredMarkers } from '../../../../store/map/map.actions';
 })
 export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   @Input() markers!: Marker[];
-  @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SelectedMarkerFilter>;
-  @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SelectedMarkerFilter>;
+  @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
+  @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SongFilter>;
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
@@ -48,22 +48,20 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    merge(
-      this.form.controls.country.valueChanges.pipe(map(() => 'country')),
-      this.form.controls.region.valueChanges.pipe(map(() => 'region')),
-      this.form.controls.settlement.valueChanges.pipe(map(() => 'settlement')),
-      this.form.controls.genre.valueChanges.pipe(map(() => 'genre')),
-      this.form.controls.title.valueChanges.pipe(map(() => 'title')),
-      this.form.controls.found.valueChanges.pipe(map(() => 'found'))
-    )
+    this.form.valueChanges
       .pipe(
-        takeUntil(this.destroy$),
-        map((key) => key as keyof SelectedMarkerFilter)
+        startWith(this.form.getRawValue()),
+        pairwise(),
+        map(([previous, current]) => {
+          const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
+          return changedControl as keyof SongFilter;
+        }),
+        filter((key) => key !== null && key !== undefined)
       )
-      .subscribe((value: keyof SelectedMarkerFilter) => {
-        this.store.dispatch(new UpdateSelectOptions(this.form.value as SelectedMarkerFilter));
+      .subscribe((value: keyof SongFilter) => {
+        this.store.dispatch(new UpdateSelectOptions(this.form.value as SongFilter));
         this.store.dispatch(new UpdateShowOptions(value, this.markers));
-        this.store.dispatch(new FilteredMarkers(this.form.value as SelectedMarkerFilter));
+        this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
       });
   }
 
@@ -73,8 +71,8 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   filerClear() {
-    this.form.setValue(new SelectedMarkerFilter());
-    this.store.dispatch(new UpdateSelectOptions(this.form.value as SelectedMarkerFilter));
+    this.form.setValue(new SongFilter());
+    this.store.dispatch(new UpdateSelectOptions(this.form.value as SongFilter));
     this.store.dispatch(new LoadFilteredMarkers(this.markers));
   }
 

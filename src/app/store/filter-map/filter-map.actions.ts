@@ -1,15 +1,15 @@
-import { Marker, SelectedMarkerFilter } from '../../shared/interfaces/map-marker';
+import { Marker, SongFilter } from '../../shared/interfaces/map-marker';
 
 export class UpdateSelectOptions {
   static readonly type = '[Filter Map] Update Select Options';
 
-  constructor(public selectedOptions: SelectedMarkerFilter) {}
+  constructor(public selectedOptions: SongFilter) {}
 }
 export class UpdateShowOptions {
   static readonly type = '[Filter Map] Update Show Options';
 
   constructor(
-    public nameOption: keyof SelectedMarkerFilter,
+    public nameOption: keyof SongFilter,
     public markers: Marker[]
   ) {}
 }

@@ -1,4 +1,4 @@
-import { SelectedMarkerFilter } from '../../shared/interfaces/map-marker';
+import { SongFilter } from '../../shared/interfaces/map-marker';
 
 export class FetchMarkers {
   static readonly type = '[Map] Set';
@@ -8,5 +8,5 @@ export class FetchMarkers {
 export class FilteredMarkers {
   static readonly type = '[Map] Filter Markers';
 
-  constructor(public options: SelectedMarkerFilter) {}
+  constructor(public options: SongFilter) {}
 }

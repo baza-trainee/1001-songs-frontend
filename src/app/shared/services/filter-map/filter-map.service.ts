@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Marker, SelectedMarkerFilter } from '../../interfaces/map-marker';
+import { Marker, SongFilter } from '../../interfaces/map-marker';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Marker, SelectedMarkerFilter } from '../../interfaces/map-marker';
 export class FilterMapService {
   constructor(private http: HttpClient) {}
 
-  filterMarker(selectOptions: SelectedMarkerFilter, markers: Marker[]): Marker[] {
+  filterMarker(selectOptions: SongFilter, markers: Marker[]): Marker[] {
     return markers.filter((marker) => {
       return (
         (selectOptions.country.length === 0 || selectOptions.country.includes(marker.location.country)) &&
@@ -21,8 +21,8 @@ export class FilterMapService {
     });
   }
 
-  createFilterByMarker(markers: Marker[]): SelectedMarkerFilter {
-    const selectedOptions = new SelectedMarkerFilter();
+  createFilterByMarker(markers: Marker[]): SongFilter {
+    const selectedOptions = new SongFilter();
 
     markers.forEach((item) => {
       selectedOptions.country.push(item.location.country);

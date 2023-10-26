@@ -74,6 +74,12 @@
     gap: 4px;
   }
 
+  &__search {
+    &__body__title {
+      margin-bottom: 9px;
+    }
+  }
+
   &__submit {
     margin-top: 18px;
     display: flex;
