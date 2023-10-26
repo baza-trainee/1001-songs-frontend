@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
 
-import {Marker} from '../../interfaces/map-marker';
+import { Marker } from '../../interfaces/map-marker';
 import { Song } from '../../interfaces/song.interface';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class MapService {
         country: song.location['country'],
         region: song.location['region'],
         district_center: song.location['district_center'],
-        recording_location: {lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1])}
+        recording_location: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) }
       }
     };
   }

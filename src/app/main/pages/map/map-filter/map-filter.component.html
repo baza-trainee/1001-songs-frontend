@@ -19,7 +19,7 @@
         <use xlink:href="./assets/sprites.svg#arrowFilterShow"></use>
       </svg>
     </div>
-    <ng-container>
+    <ng-container  *ngIf="showOptions$ | async as options">
       <form [formGroup]="form">
         <div class="filter__body" [ngStyle]="!isShowFilter ? {'transform': 'translateY(-100%)'} : {'transform': 'translateY(0)'}">
           <div class="filter__location">

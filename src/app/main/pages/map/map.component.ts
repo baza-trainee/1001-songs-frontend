@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Marker, SelectedMarkerFilter } from 'src/app/shared/interfaces/map-marker';
+import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './player/player.component';
@@ -21,16 +21,13 @@ import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.act
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Select(MapState.getMarkersList) markers$!: Observable<Marker[]>;
+  @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
   private subscription: Subscription = new Subscription();
-  filteredMarkers!: Marker[];
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
-    this.subscription = this.markers$.subscribe((marker) => {
-      this.filteredMarkers = marker;
-    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -44,9 +41,5 @@ export class MapComponent implements OnInit, OnDestroy {
 
   scrollToElement(element: HTMLElement): void {
     element.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  onSelectedOptionsChange(options: SelectedMarkerFilter) {
-    console.log(options);
   }
 }

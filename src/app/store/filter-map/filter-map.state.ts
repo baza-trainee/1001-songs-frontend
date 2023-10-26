@@ -1,47 +1,78 @@
-import {Injectable} from "@angular/core";
-import {Action, Selector, State, StateContext} from "@ngxs/store";
+import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
-// import {FilterMapService} from "../../shared/services/filter-map/filter-map.service";
-import {Marker} from "../../shared/interfaces/map-marker";
-import {SelectCountry} from "./filter-map.actions";
+import { SelectedMarkerFilter } from '../../shared/interfaces/map-marker';
+import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from './filter-map.actions';
+import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 
 export interface FilterMapStateModel {
-  markersList: Marker[];
-  selectedOptions: Marker[];
+  selectedOptions: SelectedMarkerFilter;
+  showOptions: SelectedMarkerFilter;
+  allOptions: SelectedMarkerFilter;
 }
 
 @State<FilterMapStateModel>({
   name: 'filterMap',
   defaults: {
-    markersList: [],
-    selectedOptions: []
+    selectedOptions: new SelectedMarkerFilter(),
+    showOptions: new SelectedMarkerFilter(),
+    allOptions: new SelectedMarkerFilter()
   }
 })
-
 @Injectable()
 export class FilterMapState {
   constructor(
-    // private filterService: FilterMapService,
-    // private store: Store
+    private filterMapService: FilterMapService,
+    private store: Store
   ) {}
 
   @Selector()
-  static getMarkersList(state: FilterMapStateModel): Marker[] {
-    return state.markersList;
-  }
-
-  @Selector()
-  static getSelectedOptions(state: FilterMapStateModel): Marker[] {
+  static getSelectedOptions(state: FilterMapStateModel): SelectedMarkerFilter {
     return state.selectedOptions;
   }
 
-  @Action(SelectCountry)
-  selectCountry(ctx: StateContext<FilterMapStateModel>) {
-    const state = ctx.getState();
-    return ctx.setState({
-      ...state,
-      selectedOptions: []
-    })
+  @Selector()
+  static getShowOptions(state: FilterMapStateModel): SelectedMarkerFilter {
+    return state.showOptions;
   }
 
+  @Action(UpdateSelectOptions)
+  updateSelectOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateSelectOptions) {
+    const state = ctx.getState();
+
+    ctx.setState({
+      ...state,
+      selectedOptions: action.selectedOptions
+    });
+  }
+
+  @Action(UpdateShowOptions)
+  updateShowOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateShowOptions) {
+    const state = ctx.getState();
+    const options = state.showOptions;
+    const nameOption = action.nameOption;
+    const markers = action.markers;
+    const selectOptions = state.selectedOptions;
+
+    let filterMarkers = this.filterMapService.filterMarker(selectOptions, markers);
+
+    const showOptions = { ...this.filterMapService.createFilterByMarker(filterMarkers), [nameOption]: options[nameOption] };
+
+    ctx.setState({
+      ...state,
+      showOptions
+    });
+  }
+
+  @Action(LoadFilteredMarkers)
+  loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: LoadFilteredMarkers) {
+    const state = ctx.getState();
+
+    const allOptions = this.filterMapService.createFilterByMarker(action.markers);
+    ctx.setState({
+      ...state,
+      allOptions,
+      showOptions: allOptions
+    });
+  }
 }

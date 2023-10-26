@@ -1,13 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { map, merge, Subject, takeUntil } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { map, merge, Observable, Subject, takeUntil } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { Marker, SelectedMarkerFilter } from '../../../../shared/interfaces/map-marker';
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { mapFilter } from '../../../../shared/enums/mapFilter';
-import { FilterMapService } from '../../../../shared/services/filter-map/filter-map.service';
+import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from '../../../../store/filter-map/filter-map.actions';
+import { FilterMapState } from '../../../../store/filter-map/filter-map.state';
+import { FilteredMarkers } from '../../../../store/map/map.actions';
 
 @Component({
   selector: 'app-map-filter',
@@ -18,11 +21,9 @@ import { FilterMapService } from '../../../../shared/services/filter-map/filter-
 })
 export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   @Input() markers!: Marker[];
-  @Output() selectedOptionsChange = new EventEmitter<SelectedMarkerFilter>();
-
+  @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SelectedMarkerFilter>;
+  @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SelectedMarkerFilter>;
   filterCategory = mapFilter;
-  options: SelectedMarkerFilter = new SelectedMarkerFilter();
-  allOptions: SelectedMarkerFilter = new SelectedMarkerFilter();
   isShowFilter = false;
   private destroy$ = new Subject<void>();
 
@@ -36,12 +37,17 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   });
 
   constructor(
-    // private translate: TranslateService,
-    // private store: Store,
-    private filterMapService: FilterMapService
+    private translate: TranslateService,
+    private store: Store
   ) {}
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
+      this.store.dispatch(new LoadFilteredMarkers(this.markers));
+    }
+  }
+
+  ngOnInit(): void {
     merge(
       this.form.controls.country.valueChanges.pipe(map(() => 'country')),
       this.form.controls.region.valueChanges.pipe(map(() => 'region')),
@@ -55,15 +61,10 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
         map((key) => key as keyof SelectedMarkerFilter)
       )
       .subscribe((value: keyof SelectedMarkerFilter) => {
-        this.options = this.filterMapService.filterByProperty(this.markers, this.options, value, this.form.value as SelectedMarkerFilter);
+        this.store.dispatch(new UpdateSelectOptions(this.form.value as SelectedMarkerFilter));
+        this.store.dispatch(new UpdateShowOptions(value, this.markers));
+        this.store.dispatch(new FilteredMarkers(this.form.value as SelectedMarkerFilter));
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
-      this.options = this.filterMapService.createFilterByMarker(this.markers);
-      this.allOptions = this.filterMapService.createFilterByMarker(this.markers);
-    }
   }
 
   ngOnDestroy() {
@@ -71,14 +72,10 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  sendSelectedOptions() {
-    this.selectedOptionsChange.emit(this.options);
-  }
-
   filerClear() {
-    this.form.reset();
-    this.options = this.filterMapService.createFilterByMarker(this.markers);
-    this.sendSelectedOptions();
+    this.form.setValue(new SelectedMarkerFilter());
+    this.store.dispatch(new UpdateSelectOptions(this.form.value as SelectedMarkerFilter));
+    this.store.dispatch(new LoadFilteredMarkers(this.markers));
   }
 
   onSubmit() {}

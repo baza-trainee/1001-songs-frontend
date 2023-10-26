@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
-import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
-import {catchError} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Marker, SelectedMarkerFilter} from "../../interfaces/map-marker";
+import { HttpClient } from '@angular/common/http';
+import { Marker, SelectedMarkerFilter } from '../../interfaces/map-marker';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterMapService {
-
   constructor(private http: HttpClient) {}
+
+  filterMarker(selectOptions: SelectedMarkerFilter, markers: Marker[]): Marker[] {
+    return markers.filter((marker) => {
+      return (
+        (selectOptions.country.length === 0 || selectOptions.country.includes(marker.location.country)) &&
+        (selectOptions.region.length === 0 || selectOptions.region.includes(marker.location.region)) &&
+        (selectOptions.settlement.length === 0 || selectOptions.settlement.includes(marker.location.district_center)) &&
+        (selectOptions.genre.length === 0 || selectOptions.genre.includes(marker.genre_cycle)) &&
+        (selectOptions.title.length === 0 || selectOptions.title.includes(marker.title)) &&
+        (selectOptions.found.length === 0 || selectOptions.found.includes(marker.found))
+      );
+    });
+  }
 
   createFilterByMarker(markers: Marker[]): SelectedMarkerFilter {
     const selectedOptions = new SelectedMarkerFilter();
 
-    markers.forEach(item => {
+    markers.forEach((item) => {
       selectedOptions.country.push(item.location.country);
       selectedOptions.region.push(item.location.region);
       selectedOptions.settlement.push(item.location.district_center);
@@ -31,32 +41,5 @@ export class FilterMapService {
     selectedOptions.found = [...new Set(selectedOptions.found)];
 
     return selectedOptions;
-  }
-
-  filterByProperty(
-      markers: Marker[],
-      options: SelectedMarkerFilter,
-      nameOption: keyof SelectedMarkerFilter,
-      filters: SelectedMarkerFilter
-  ): SelectedMarkerFilter {
-    let filterMarkers = markers.filter(marker => {
-      return (
-          (filters.country.length === 0 || filters.country.includes(marker.location.country)) &&
-          (filters.region.length === 0 || filters.region.includes(marker.location.region)) &&
-          (filters.settlement.length === 0 || filters.settlement.includes(marker.location.district_center)) &&
-          (filters.genre.length === 0 || filters.genre.includes(marker.genre_cycle)) &&
-          (filters.title.length === 0 || filters.title.includes(marker.title)) &&
-          (filters.found.length === 0 || filters.found.includes(marker.found))
-      );
-    });
-    return { ...this.createFilterByMarker(filterMarkers), [nameOption]: options[nameOption]};
-  }
-
-  fetchFilteredMarkers() {
-    return this.http.get(API_URL + StatEndpoints.songs).pipe(
-      catchError(async (error) => {
-        console.error(error);
-      })
-    );
   }
 }
