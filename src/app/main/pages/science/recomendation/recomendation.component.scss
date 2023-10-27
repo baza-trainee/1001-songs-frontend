@@ -4,16 +4,22 @@
   @include h5-desktop($font-size: 24px);
 }
 
-.mat-expansion-panel-header-description {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 0;
-}
+
 
 .mat-expansion-panel {
-  border: 1px solid rgba(0, 0, 0, 60%);
+  border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 7px;
+  min-height: 64px;
+  .mat-expansion-panel-header {
+    height: 64px;
+    .mat-expansion-panel-header-description {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 0;
+    }
+  }
 }
+
 .recomendations {
   &__pagination {
     display: flex;
