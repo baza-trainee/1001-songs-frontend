@@ -12,8 +12,38 @@
 
     <app-recomendation></app-recomendation>
 
+    <!-- <div class="pagination">
+      <button class="pagination__navigation"><app-navigation-next></app-navigation-next></button>
+      <button class="pagination__navigation pagination__number" *ngFor="let page of recomendationPages">{{ page }}</button>
+      <button class="pagination__navigation"><app-navigation-next pointTo="right"></app-navigation-next></button>
+    </div>
 
-    <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="rotateSourcesArrow()" (closed)="rotateSourcesArrow()">
+    <mat-expansion-panel
+      hideToggle="true"
+      class="mat-elevation-z0 science__recomendations"
+      (opened)="rotateRecomendationArrow()"
+      (closed)="rotateRecomendationArrow()"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Рекомендації </mat-panel-title>
+        <mat-panel-description>
+          <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="science__recomendations__content">
+      <ng-container *ngFor="let recomendation of recomendations">
+        <p>
+          {{ recomendation }}
+        </p>
+        <br />
+      </ng-container>
+      <div class="pagination">
+        <button class="btn mat-elevation-z0" ><</button>
+      </div> 
+      </div>
+    </mat-expansion-panel> -->
+
+    <!-- <mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="rotateSourcesArrow()" (closed)="rotateSourcesArrow()">
       <mat-expansion-panel-header>
         <mat-panel-title> Рекомендовані джерела </mat-panel-title>
         <mat-panel-description>
@@ -32,6 +62,8 @@
           >
         </li>
       </ul>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
+
+    <app-recommended-sources></app-recommended-sources>
   </div>
 </div>

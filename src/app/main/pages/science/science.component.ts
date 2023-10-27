@@ -7,6 +7,7 @@ import { ArrowDownComponent } from 'src/app/main/pages/science/arrow-down/arrow-
 import { scienceCategories } from './category-link/categoriesList';
 import { recomendations } from './category-link/recomendations';
 import { RecomendationComponent } from './recomendation/recomendation.component';
+import { RecommendedSourcesComponent } from './recommended-sources/recommended-sources.component';
 
 @Component({
   selector: 'app-science',
@@ -19,7 +20,8 @@ import { RecomendationComponent } from './recomendation/recomendation.component'
     CategoryLinkComponent,
     MatExpansionModule,
     ArrowDownComponent,
-    RecomendationComponent
+    RecomendationComponent,
+    RecommendedSourcesComponent
   ]
 })
 export class ScienceComponent implements OnInit {
