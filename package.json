@@ -33,7 +33,6 @@
     "date-fns": "^2.30.0",
     "e2e": "0.0.8",
     "lint-staged": "^13.2.2",
-    "moment": "^2.29.4",
     "ngx-clipboard": "^16.0.0",
     "ngx-window-token": "^7.0.0",
     "package": "^1.0.1",
