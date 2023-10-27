@@ -1,6 +1,5 @@
 @import '../../../../typography/typography';
 
-
 .container {
   display: flex;
   min-height: 90vh;
@@ -8,6 +7,7 @@
   max-width: 1440px;
   margin-top: 148px;
   margin-bottom: 80px;
+  padding-top: 30px;
 }
 
 .science {
@@ -17,6 +17,7 @@
 
   &__title {
     @include h2-desktop($line-height: 65px);
+    margin-bottom: 10px;
   }
 
   &__introduction {
@@ -53,6 +54,22 @@
   .science {
     margin-right: 48px;
     margin-left: 48px;
+
+    &__title {
+    }
+
+    &__introduction {
+    }
+    &__gallery {
+      &__item {
+        display: inline-block;
+        width: 293px;
+        height: 200px;
+      }
+    }
+    &__recomendations {
+      margin-bottom: 24px;
+    }
   }
 }
 
