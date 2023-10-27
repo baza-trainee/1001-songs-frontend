@@ -4,33 +4,35 @@
   @include h5-desktop($font-size: 24px);
 }
 
-
-
 .mat-expansion-panel {
   border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 7px;
   min-height: 64px;
   .mat-expansion-panel-header {
+    
     height: 64px;
     .mat-expansion-panel-header-description {
       display: flex;
       justify-content: flex-end;
       margin-right: 0;
+      flex-grow: initial;
+    }
+    .mat-expansion-panel-header-title {
     }
   }
 }
 
 ul {
-    list-style: initial;
-  }
-  
-  li {
-    margin-left: 40px;
-  }
-  .lit-link {
-    @include h6-desktop($font-family: 'Open sans');
-  }
-  .link {
-    margin-left: -40px;
-    // text-decoration: underline;
-  }
+  list-style: initial;
+}
+
+li {
+  margin-left: 40px;
+}
+.lit-link {
+  @include h6-desktop($font-family: 'Open sans');
+}
+.link {
+  margin-left: -40px;
+  // text-decoration: underline;
+}

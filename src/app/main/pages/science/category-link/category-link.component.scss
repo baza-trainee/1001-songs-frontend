@@ -14,8 +14,10 @@ $link-x-padding: 24px;
     position: absolute;
     display: inline-flex;
     justify-content: space-between;
+    text-align: left;
+    align-items: end;
     padding: 0 $link-x-padding 0 $link-x-padding;
-    top: 205px;
+    top: 207px;
     width: 100%;
     padding-top: 30px;
     color: rgb(255, 255, 255);
@@ -23,10 +25,27 @@ $link-x-padding: 24px;
     background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 80%));
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
-    text-align: center;
+    // text-align: center;
     cursor: pointer;
+    // border: 2px solid red;
+    // z-index: 999;
+    span {
+      //  border: 1px solid red;
+      width: 20px;
+      height: 24px;
+    }
   }
   img {
     height: 100%;
+  }
+}
+
+@media (width < 1025px) {
+  .card {
+    .link {
+      top: 105px;
+
+      height: 100px;
+    }
   }
 }
