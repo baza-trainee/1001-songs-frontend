@@ -55,6 +55,10 @@ export class HeaderComponent {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
+  onPopupChange(newStatus: boolean) {
+    this.isPopupOpen = newStatus;
+  }
+
   checkLang() {
     this.changeLang = this._translate.currentLang === 'en' ? false : true;
   }

@@ -36,7 +36,10 @@
       </div>
     </div>
   </nav>
-  <app-pop-up-menu *ngIf="isPopupOpen" (changeLangDetection)="receivedData($event)">
+  <app-pop-up-menu 
+      *ngIf="isPopupOpen" 
+      (changeLangDetection)="receivedData($event)" 
+      (isPopupOpenChange)="onPopupChange($event)">
     <div class="icon" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="6">
       <img class="icon__close" alt="close icon" src="./assets/img/header/close-icon.svg" />
     </div>
