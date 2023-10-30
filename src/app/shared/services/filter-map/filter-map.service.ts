@@ -1,15 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Marker, SongFilter } from '../../interfaces/map-marker';
+import { Store } from '@ngxs/store';
+import { MapState } from '../../../store/map/map.state';
+import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterMapService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
-  filterMarker(selectOptions: SongFilter, markers: Marker[]): Marker[] {
-    return markers.filter((marker) => {
+  countSongsByOption(option: string): number {
+    const filteredMarkers = this.store.selectSnapshot(MapState.getFilteredMarkerList);
+
+    const foundMarkers = filteredMarkers.filter((marker) => {
+      return (
+        marker.location.country.toLowerCase().includes(option.toLowerCase()) ||
+        marker.location.region.toLowerCase().includes(option.toLowerCase()) ||
+        marker.genre_cycle.toLowerCase().includes(option.toLowerCase()) ||
+        marker.found.toLowerCase().includes(option.toLowerCase()) ||
+        marker.location.district_center.toLowerCase().includes(option.toLowerCase())
+      );
+    });
+
+    return foundMarkers.length;
+  }
+
+  filterMarker(selectOptions: SongFilter): Marker[] {
+    const filteredMarkers = this.store.selectSnapshot(MapState.getMarkersList);
+
+    return filteredMarkers.filter((marker) => {
       return (
         (selectOptions.country.length === 0 || selectOptions.country.includes(marker.location.country)) &&
         (selectOptions.region.length === 0 || selectOptions.region.includes(marker.location.region)) &&
@@ -41,5 +66,13 @@ export class FilterMapService {
     selectedOptions.found = [...new Set(selectedOptions.found)];
 
     return selectedOptions;
+  }
+
+  searchSongsByTitle(title: string) {
+    return this.http.get(API_URL + StatEndpoints.songs + '?title=' + title).pipe(
+      catchError(async (error) => {
+        console.error(error);
+      })
+    );
   }
 }

@@ -80,6 +80,7 @@
       "button-submit": "Apply",
       "locations": "Locations",
       "song": "Song",
+      "search": "Search",
       "categories": {
         "country": "Country",
         "region": "Region",

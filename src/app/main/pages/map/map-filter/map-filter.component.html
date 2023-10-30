@@ -21,10 +21,11 @@
     </div>
     <ng-container  *ngIf="showOptions$ | async as options">
       <form [formGroup]="form">
-        <div class="filter__body" [ngStyle]="!isShowFilter ? {'transform': 'translateY(-100%)'} : {'transform': 'translateY(0)'}">
+<!--        <div class="filter__body" [ngStyle]="!isShowFilter ? {'transform': 'translateY(-100%)', 'opacity': '0'} : {'transform': 'translateY(0)', 'opacity': '1'}">-->
+        <div class="filter__body" [ngClass]="{'hidden': !isShowFilter}">
           <div class="filter__location">
             <div class="filter__search filter__title-container">
-              <h3 class="filter__body-title">Пошук</h3>
+              <h3 class="filter__body-title">{{ 'map.filter.search' | translate }}</h3>
               <button class="filter__clear" (click)="filerClear()">
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <use xlink:href="./assets/sprites.svg#filterClear"></use>
@@ -32,11 +33,11 @@
                 <span>{{ 'map.filter.button-clear' | translate }}</span>
               </button>
             </div>
-            <app-multiselect
-              [control]="form.controls.title"
-              [options]="options.title"
-              [name]="filterCategory.title"
-            ></app-multiselect>
+            <app-search-input
+                    [control]="form.controls.title"
+                    [options]="options.title"
+                    [name]="filterCategory.title"
+            ></app-search-input>
             <h3 class="filter__body-title">{{ 'map.filter.locations' | translate }}</h3>
             <app-multiselect
               [control]="form.controls.country"

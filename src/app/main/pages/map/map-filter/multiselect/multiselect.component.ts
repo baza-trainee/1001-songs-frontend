@@ -1,13 +1,14 @@
-import {Component, Input} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
-import {CommonModule} from '@angular/common';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectChange, MatSelectModule} from "@angular/material/select";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatChipsModule} from "@angular/material/chips";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { Component, Input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FilterMapService } from '../../../../../shared/services/filter-map/filter-map.service';
 
 @Component({
   selector: 'app-multiselect',
@@ -26,13 +27,15 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ReactiveFormsModule
   ]
 })
-
 export class MultiselectComponent {
-  @Input({required: true}) control!: FormControl;
-  @Input({required: true}) options!: string[];
-  @Input({required: true}) name!: string;
+  @Input({ required: true }) control!: FormControl;
+  @Input({ required: true }) options!: string[];
+  @Input({ required: true }) name!: string;
 
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService,
+    public filterMapService: FilterMapService
+  ) {}
 
   onSelectionChange(event: MatSelectChange) {
     this.control.setValue(event.value);

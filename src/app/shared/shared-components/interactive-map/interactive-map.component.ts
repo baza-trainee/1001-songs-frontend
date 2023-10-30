@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GoogleMapsModule, MapInfoWindow, MapMarker} from '@angular/google-maps';
+import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Marker } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/mock-data/markers';
+import { FilterMapService } from '../../services/filter-map/filter-map.service';
 
 @Component({
   selector: 'app-interactive-map',
@@ -25,7 +26,10 @@ export class InteractiveMapComponent {
     zoom: 6,
     options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
   };
-  constructor(private _translate: TranslateService) {}
+  constructor(
+    private _translate: TranslateService,
+    public filterMapServices: FilterMapService
+  ) {}
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: Marker) {
     if (this.currentInfoWindow) {

@@ -54,5 +54,4 @@ describe('MapComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

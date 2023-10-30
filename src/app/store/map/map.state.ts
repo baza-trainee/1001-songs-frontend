@@ -3,7 +3,7 @@ import { map, tap } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
 import { MapService } from 'src/app/shared/services/map/map.service';
-import { FetchMarkers, FilteredMarkers } from './map.actions';
+import { FetchMarkers, FilteredMarkers, ResetMarkers } from './map.actions';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { Marker } from 'src/app/shared/interfaces/map-marker';
@@ -42,11 +42,21 @@ export class MapState {
   filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
     const state = ctx.getState();
 
-    const markers = this.filterMapService.filterMarker(action.options, state.markersList);
+    const markers = this.filterMapService.filterMarker(action.options);
 
     ctx.setState({
       ...state,
       filteredMarkerList: markers
+    });
+  }
+
+  @Action(ResetMarkers)
+  resetMarkers(ctx: StateContext<MapStateModel>) {
+    const state = ctx.getState();
+
+    ctx.setState({
+      ...state,
+      filteredMarkerList: state.markersList
     });
   }
 

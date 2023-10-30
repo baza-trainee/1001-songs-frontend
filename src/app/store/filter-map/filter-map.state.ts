@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
 import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from './filter-map.actions';
@@ -21,10 +21,7 @@ export interface FilterMapStateModel {
 })
 @Injectable()
 export class FilterMapState {
-  constructor(
-    private filterMapService: FilterMapService,
-    private store: Store
-  ) {}
+  constructor(private filterMapService: FilterMapService) {}
 
   @Selector()
   static getSelectedOptions(state: FilterMapStateModel): SongFilter {
@@ -51,10 +48,9 @@ export class FilterMapState {
     const state = ctx.getState();
     const options = state.showOptions;
     const nameOption = action.nameOption;
-    const markers = action.markers;
     const selectOptions = state.selectedOptions;
 
-    let filterMarkers = this.filterMapService.filterMarker(selectOptions, markers);
+    let filterMarkers = this.filterMapService.filterMarker(selectOptions);
 
     const showOptions = { ...this.filterMapService.createFilterByMarker(filterMarkers), [nameOption]: options[nameOption] };
 

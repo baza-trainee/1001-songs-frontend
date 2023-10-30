@@ -10,3 +10,8 @@ export class FilteredMarkers {
 
   constructor(public options: SongFilter) {}
 }
+export class ResetMarkers {
+  static readonly type = '[Map] Reset Markers';
+
+  constructor() {}
+}
