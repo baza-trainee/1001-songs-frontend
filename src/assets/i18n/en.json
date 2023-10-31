@@ -109,6 +109,21 @@
           }
         }
       }
+    },
+    "song-page": {
+      "path": {
+        "home": "Main",
+        "map": "Map"
+      },
+      "photos": "Photos",
+      "listen-song": "Listen to song",
+      "song-info": {
+        "place": "Place of recording",
+        "region": "Ethnographic region",
+        "record": "Recording",
+        "performers": "Performers",
+        "data": "Date of recording"
+      }
     }
   },
   "news": {

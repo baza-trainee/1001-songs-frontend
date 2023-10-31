@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import {Marker, SelectedMarkerFilter} from "../../../../shared/interfaces/map-marker";
-import {MultiselectComponent} from "./multiselect/multiselect.component";
-import {mapFilter} from "../../../../shared/enums/mapFilter";
-import {MapService} from "../../../../shared/services/map/map.service";
+import { Marker, SelectedMarkerFilter } from '../../../../../shared/interfaces/map-marker';
+import { MultiselectComponent } from './multiselect/multiselect.component';
+import { mapFilter } from '../../../../../shared/enums/mapFilter';
+import { MapService } from '../../../../../shared/services/map/map.service';
 
 @Component({
   selector: 'app-map-filter',
@@ -15,7 +15,6 @@ import {MapService} from "../../../../shared/services/map/map.service";
   templateUrl: './map-filter.component.html',
   styleUrls: ['./map-filter.component.scss']
 })
-
 export class MapFilterComponent implements OnChanges {
   @Input() markers!: Marker[];
   @Output() selectedOptionsChange = new EventEmitter<SelectedMarkerFilter>();
@@ -33,7 +32,7 @@ export class MapFilterComponent implements OnChanges {
     found: new FormControl<string[]>([])
   });
 
-  constructor (
+  constructor(
     private translate: TranslateService,
     private mapService: MapService
   ) {}
