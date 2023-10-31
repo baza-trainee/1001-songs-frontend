@@ -31,19 +31,80 @@ export class FilterMapService {
     return foundMarkers.length;
   }
 
-  filterMarker(selectOptions: SongFilter): Marker[] {
-    const filteredMarkers = this.store.selectSnapshot(MapState.getMarkersList);
-
-    return filteredMarkers.filter((marker) => {
+  filteredMarker(selectOptions: SongFilter): Marker[] {
+    const markers = this.store.selectSnapshot(MapState.getMarkersList);
+    if (this.isFilteredEmpty(selectOptions)) {
+      return markers;
+    }
+    return markers.filter((marker) => {
       return (
-        (selectOptions.country.length === 0 || selectOptions.country.includes(marker.location.country)) &&
-        (selectOptions.region.length === 0 || selectOptions.region.includes(marker.location.region)) &&
-        (selectOptions.settlement.length === 0 || selectOptions.settlement.includes(marker.location.district_center)) &&
-        (selectOptions.genre.length === 0 || selectOptions.genre.includes(marker.genre_cycle)) &&
-        (selectOptions.title.length === 0 || selectOptions.title.includes(marker.title)) &&
-        (selectOptions.found.length === 0 || selectOptions.found.includes(marker.found))
+        (!selectOptions.country.length || selectOptions.country.includes(marker.location.country)) &&
+        (!selectOptions.region.length || selectOptions.region.includes(marker.location.region)) &&
+        (!selectOptions.settlement.length || selectOptions.settlement.includes(marker.location.district_center)) &&
+        (!selectOptions.genre.length || selectOptions.genre.includes(marker.genre_cycle)) &&
+        (!selectOptions.title.length || selectOptions.title.includes(marker.title)) &&
+        (!selectOptions.found.length || selectOptions.found.includes(marker.found))
       );
     });
+  }
+
+  isFilteredEmpty(selectOptions: SongFilter): boolean {
+    return (
+      !selectOptions.country.length &&
+      !selectOptions.region.length &&
+      !selectOptions.settlement.length &&
+      !selectOptions.genre.length &&
+      !selectOptions.title.length &&
+      !selectOptions.found.length
+    );
+  }
+
+  // generateShowOptions(
+  //   filterMarkers: Marker[],
+  //   selectedOptions: SongFilter,
+  //   optionName?: keyof SongFilter
+  // ): SongFilter {
+  //   if (this.isFilteredEmpty(selectedOptions)) {
+  //     return state.allOptions;
+  //   } else if (optionName && selectedOptions[optionName].length) {
+  //     return {
+  //       ...this.createFilterByMarker(filterMarkers),
+  //       [optionName]: state.showOptions[optionName]
+  //     };
+  //   } else if (optionsWithLength.length) {
+  //     const [optionName, optionValue] = optionsWithLength[0];
+  //     return {
+  //       ...this.createFilterByMarker(filterMarkers),
+  //       [optionName]: state.allOptions[optionName]
+  //     };
+  //   } else {
+  //     return { ...this.createFilterByMarker(filterMarkers) };
+  //   }
+  // }
+
+  generateShowOptions(
+    filterMarkers: Marker[],
+    selectedOptions: SongFilter,
+    allOptions: SongFilter,
+    showOptions: SongFilter,
+    optionName: keyof SongFilter,
+    onlySelectOptionName: keyof SongFilter | undefined
+  ): SongFilter {
+    if (this.isFilteredEmpty(selectedOptions)) {
+      return allOptions;
+    } else if (optionName && selectedOptions[optionName].length) {
+      return {
+        ...this.createFilterByMarker(filterMarkers),
+        [optionName]: showOptions[optionName]
+      };
+    } else if (onlySelectOptionName && selectedOptions[onlySelectOptionName].length) {
+      return {
+        ...this.createFilterByMarker(filterMarkers),
+        [onlySelectOptionName]: allOptions[onlySelectOptionName]
+      };
+    } else {
+      return { ...this.createFilterByMarker(filterMarkers) };
+    }
   }
 
   createFilterByMarker(markers: Marker[]): SongFilter {

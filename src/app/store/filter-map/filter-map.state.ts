@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from './filter-map.actions';
+import { LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 
 export interface FilterMapStateModel {
@@ -33,29 +33,36 @@ export class FilterMapState {
     return state.showOptions;
   }
 
-  @Action(UpdateSelectOptions)
-  updateSelectOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateSelectOptions) {
-    const state = ctx.getState();
-
-    ctx.setState({
-      ...state,
-      selectedOptions: action.selectedOptions
-    });
+  @Selector()
+  static getAllOptions(state: FilterMapStateModel): SongFilter {
+    return state.allOptions;
   }
 
-  @Action(UpdateShowOptions)
-  updateShowOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateShowOptions) {
+  @Action(UpdateOptions)
+  updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
     const state = ctx.getState();
-    const options = state.showOptions;
-    const nameOption = action.nameOption;
-    const selectOptions = state.selectedOptions;
+    const filterMarkers = this.filterMapService.filteredMarker(action.selectedOptions);
 
-    let filterMarkers = this.filterMapService.filterMarker(selectOptions);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);
+    let onSelect: keyof SongFilter | undefined;
 
-    const showOptions = { ...this.filterMapService.createFilterByMarker(filterMarkers), [nameOption]: options[nameOption] };
+    if (optionsWithLength.length === 1) {
+      onSelect = optionsWithLength[0][0] as keyof SongFilter;
+    }
+
+    const showOptions = this.filterMapService.generateShowOptions(
+      filterMarkers,
+      action.selectedOptions,
+      state.allOptions,
+      state.showOptions,
+      action.optionName,
+      onSelect
+    );
 
     ctx.setState({
       ...state,
+      selectedOptions: action.selectedOptions,
       showOptions
     });
   }

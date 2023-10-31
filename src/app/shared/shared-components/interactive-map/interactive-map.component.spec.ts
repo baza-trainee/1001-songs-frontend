@@ -44,7 +44,6 @@ class googleMock {}
 describe('InteractiveMapComponent', () => {
   let component: InteractiveMapComponent;
   let fixture: ComponentFixture<InteractiveMapComponent>;
-  let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -54,7 +53,6 @@ describe('InteractiveMapComponent', () => {
 
     (window as unknown as { google: googleMock }).google = google;
 
-    translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(InteractiveMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

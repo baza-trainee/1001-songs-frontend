@@ -17,7 +17,7 @@
               <use xlink:href="./assets/sprites.svg#chipClear"></use>
             </svg>
           </mat-icon>
-          {{ option }} ({{ filterMapService.countSongsByOption(option) }})
+          {{ option }}
         </mat-chip>
       </mat-chip-listbox>
       <button class="multiselect__clear" (click)="clearSelections()">
@@ -29,7 +29,7 @@
       </button>
     </mat-select-trigger>
     <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option">
-      {{ option }} ({{ filterMapService.countSongsByOption(option) }})
+      {{ option }}
     </mat-option>
   </mat-select>
 </mat-form-field>

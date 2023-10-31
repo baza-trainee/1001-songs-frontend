@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { filter, map, Observable, pairwise, startWith, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Marker, SongFilter } from '../../../../shared/interfaces/map-marker';
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { mapFilter } from '../../../../shared/enums/mapFilter';
-import { LoadFilteredMarkers, UpdateSelectOptions, UpdateShowOptions } from '../../../../store/filter-map/filter-map.actions';
+import { LoadFilteredMarkers, UpdateOptions } from '../../../../store/filter-map/filter-map.actions';
 import { FilterMapState } from '../../../../store/filter-map/filter-map.state';
 import { FilteredMarkers, ResetMarkers } from '../../../../store/map/map.actions';
 import { SearchInputComponent } from './search-input/search-input.component';
@@ -24,6 +24,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   @Input() markers!: Marker[];
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SongFilter>;
+  @Output() changeFilter = new EventEmitter<Marker[]>();
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
@@ -37,10 +38,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
     found: new FormControl<string[]>([])
   });
 
-  constructor(
-    private translate: TranslateService,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
@@ -61,9 +59,8 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
         filter((key) => key !== null && key !== undefined)
       )
       .subscribe((value: keyof SongFilter) => {
-        this.store.dispatch(new UpdateSelectOptions(this.form.value as SongFilter));
-        this.store.dispatch(new UpdateShowOptions(value, this.markers));
         this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
+        this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value, this.markers));
       });
   }
 
@@ -74,7 +71,6 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
 
   filerClear() {
     this.form.setValue(new SongFilter());
-    this.store.dispatch(new UpdateSelectOptions(this.form.value as SongFilter));
     this.store.dispatch(new LoadFilteredMarkers(this.markers));
     this.store.dispatch(new ResetMarkers());
   }

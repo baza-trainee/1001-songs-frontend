@@ -4,11 +4,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FilterMapService } from '../../../../../shared/services/filter-map/filter-map.service';
 
 @Component({
   selector: 'app-multiselect',
@@ -31,11 +30,7 @@ export class MultiselectComponent {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) options!: string[];
   @Input({ required: true }) name!: string;
-
-  constructor(
-    private translate: TranslateService,
-    public filterMapService: FilterMapService
-  ) {}
+  constructor() {}
 
   onSelectionChange(event: MatSelectChange) {
     this.control.setValue(event.value);
