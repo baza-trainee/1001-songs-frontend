@@ -1,47 +1,62 @@
-import {Injectable} from '@angular/core';
-import {map, tap} from 'rxjs';
-import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import { map, tap } from 'rxjs';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
-import {MapService} from 'src/app/shared/services/map/map.service';
-import {FetchMarkers} from './map.actions';
-import {Song} from 'src/app/shared/interfaces/song.interface';
-import {SetIsLoading} from '../app/app.actions';
-import {Marker} from 'src/app/shared/interfaces/map-marker';
+import { MapService } from 'src/app/shared/services/map/map.service';
+import { FetchMarkers, FilteredMarkers, ResetMarkers } from './map.actions';
+import { Song } from 'src/app/shared/interfaces/song.interface';
+import { SetIsLoading } from '../app/app.actions';
+import { Marker } from 'src/app/shared/interfaces/map-marker';
+import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 
 export interface MapStateModel {
   markersList: Marker[];
+  filteredMarkerList: Marker[];
 }
 
 @State<MapStateModel>({
   name: 'map',
   defaults: {
-    markersList: [
-      {
-        id: 'marker1',
-        title: 'Лєтєла соя',
-        genre_cycle: 'Весна',
-        found: '',
-        image: './assets/img/home/kiivImg.jpg',
-        location: {
-          country: 'Україна',
-          region: 'Полтавська обл.',
-          district_center: 'с. Крячківка',
-          recording_location: { lat: 50.4501, lng: 30.5234 }
-        }
-      }
-    ]
+    markersList: [],
+    filteredMarkerList: []
   }
 })
 @Injectable()
 export class MapState {
   constructor(
     private mapService: MapService,
+    private filterMapService: FilterMapService,
     private store: Store
   ) {}
 
   @Selector()
   static getMarkersList(state: MapStateModel): Marker[] {
     return state.markersList;
+  }
+  @Selector()
+  static getFilteredMarkerList(state: MapStateModel): Marker[] {
+    return state.filteredMarkerList;
+  }
+
+  @Action(FilteredMarkers)
+  filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
+    const state = ctx.getState();
+
+    const markers = this.filterMapService.filterMarkers(action.options);
+    ctx.setState({
+      ...state,
+      filteredMarkerList: markers
+    });
+  }
+
+  @Action(ResetMarkers)
+  resetMarkers(ctx: StateContext<MapStateModel>) {
+    const state = ctx.getState();
+
+    ctx.setState({
+      ...state,
+      filteredMarkerList: state.markersList
+    });
   }
 
   @Action(FetchMarkers)
@@ -58,7 +73,8 @@ export class MapState {
         const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
         ctx.setState({
           ...state,
-          markersList: [...markers]
+          markersList: [...markers],
+          filteredMarkerList: [...markers]
         });
         this.store.dispatch(new SetIsLoading(-1));
       })
