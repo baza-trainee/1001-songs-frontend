@@ -77,8 +77,10 @@
     "filter": {
       "title": "Filter",
       "button-clear": "Clear",
+      "button-submit": "Apply",
       "locations": "Locations",
       "song": "Song",
+      "search": "Search",
       "categories": {
         "country": "Country",
         "region": "Region",
