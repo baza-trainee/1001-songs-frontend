@@ -8,13 +8,16 @@
   border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 7px;
   min-height: 64px;
+  
   .mat-expansion-panel-header {
     height: 64px;
+
     .mat-expansion-panel-header-description {
       display: flex;
       justify-content: flex-end;
       margin-right: 0;
     }
+
     .mat-expansion-panel-header-title {
       height: 50px;
     }
@@ -43,6 +46,7 @@
     }
   }
 }
+
 .current-page {
   background-color: yellow;
   border: 1px solid yellow;

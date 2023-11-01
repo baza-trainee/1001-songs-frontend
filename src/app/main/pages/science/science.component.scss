@@ -18,6 +18,7 @@
 
   &__title {
     @include h2-desktop($line-height: 65px);
+
     margin-bottom: 10px;
   }
 
@@ -29,6 +30,7 @@
     padding-top: 5px;
     
   }
+
   &__gallery {
     display: flex;
     gap: 20px;
@@ -36,6 +38,7 @@
     flex-wrap: wrap;
     margin: 48px 0 48px 0;
   }
+
   &__recomendations {
     margin-bottom: 24px;
   }
@@ -62,6 +65,7 @@
     margin-top: 130px;
     margin-bottom: 80px;
   }
+
   .science {
     width: 100%;
     margin-right: 48px;
@@ -75,9 +79,10 @@
     margin-top: 105px;
     margin-bottom: 48px;
   }
+
   .science {
     width: 100%;
-    margin-right: 0px;
-    margin-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
   }
 }

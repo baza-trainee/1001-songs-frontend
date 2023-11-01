@@ -29,15 +29,17 @@ $width-mobile: 354px;
     padding-top: 30px;
     color: rgb(255, 255, 255);
     padding-bottom: 20px;
-    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 80%));
+    background: linear-gradient(rgba(255, 255, 255, 0%), rgba(0, 0, 0, 80%));
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
     cursor: pointer;
+
     span {
       width: 20px;
       height: 24px;
     }
   }
+
   img {
     height: 100%;
   }
@@ -47,11 +49,13 @@ $width-mobile: 354px;
   .card {
     width: $width-desktop-2;
     height: 200px;
+
     .link {
       top: 105px;
       width: $width-desktop-2;
       height: 100px;
     }
+
     img {
       width: $width-desktop-2;
     }
@@ -63,11 +67,13 @@ $width-mobile: 354px;
   .card {
     width: $width-tablet;
     height: 200px;
+
     .link {
       top: 105px;
       width: $width-tablet;
       height: 100px;
     }
+
     img {
       width: $width-tablet;
     }
@@ -78,11 +84,13 @@ $width-mobile: 354px;
   .card {
     width: $width-mobile;
     height: 200px;
+
     .link {
       top: 105px;
       width: $width-mobile;
       height: 100px;
     }
+
     img {
       width: $width-mobile;
     }
