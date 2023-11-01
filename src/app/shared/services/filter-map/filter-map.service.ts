@@ -59,29 +59,6 @@ export class FilterMapService {
     );
   }
 
-  // generateShowOptions(
-  //   filterMarkers: Marker[],
-  //   selectedOptions: SongFilter,
-  //   optionName?: keyof SongFilter
-  // ): SongFilter {
-  //   if (this.isFilteredEmpty(selectedOptions)) {
-  //     return state.allOptions;
-  //   } else if (optionName && selectedOptions[optionName].length) {
-  //     return {
-  //       ...this.createFilterByMarker(filterMarkers),
-  //       [optionName]: state.showOptions[optionName]
-  //     };
-  //   } else if (optionsWithLength.length) {
-  //     const [optionName, optionValue] = optionsWithLength[0];
-  //     return {
-  //       ...this.createFilterByMarker(filterMarkers),
-  //       [optionName]: state.allOptions[optionName]
-  //     };
-  //   } else {
-  //     return { ...this.createFilterByMarker(filterMarkers) };
-  //   }
-  // }
-
   generateShowOptions(
     filterMarkers: Marker[],
     selectedOptions: SongFilter,
