@@ -9,8 +9,8 @@ import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { MapFilterComponent } from './components/map-filter/map-filter.component';
 import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
+import { MapFilterComponent } from './components/map-filter/map-filter.component';
 
 @Component({
   selector: 'app-map',

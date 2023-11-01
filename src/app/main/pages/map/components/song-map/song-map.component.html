@@ -1,5 +1,5 @@
 <div class="container">
-  <section class="song-page">
+  <section class="song-page" *ngIf="selectedSong$ |async as song">
     <div class="song-page__path">
       <a href="#">{{"map.song-page.path.home" | translate }}</a>
       <span> / </span>
