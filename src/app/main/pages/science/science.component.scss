@@ -8,6 +8,7 @@
   margin-top: 148px;
   margin-bottom: 80px;
   padding-top: 30px;
+  overflow: hidden;
 }
 
 // p {
@@ -29,7 +30,6 @@
     @include body-desktop;
 
     text-wrap: wrap;
-    border: 1px solid red;
     max-width: 628px;
     padding-top: 5px;
   }
@@ -39,10 +39,6 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 48px 0 48px 0;
-    &__item {
-      // margin: 10px 10px 10px 10px;
-      // border: 1px solid red;
-    }
   }
   &__recomendations {
     margin-bottom: 24px;
@@ -59,18 +55,6 @@
     margin-right: 48px;
     margin-left: 48px;
 
-    // &__title {
-    // }
-
-    // &__introduction {
-    // }
-    // &__gallery {
-    //   &__item {
-    //     display: inline-block;
-    //     // width: 293px;
-    //     // height: 200px;
-    //   }
-    // }
     &__recomendations {
       margin-bottom: 24px;
     }
@@ -82,35 +66,11 @@
     margin-top: 130px;
     margin-bottom: 80px;
   }
-
-  // .expeditions {
-  //   margin-right: 32px;
-  //   margin-left: 32px;
-  //   width: 100%;
-  //   overflow: hidden;
-
-  //   &__title {
-  //     @include h2-desktop($line-height: 35px);
-  //   }
-
-  //   &__description {
-  //     width: 100%;
-  //   }
-
-  //   &__categories {
-  //     overflow: hidden;
-  //     height: 88px;
-  //   }
-
-    // &__gallery {
-    //   gap: 24px;
-    //   &__item {
-    //     display: inline-block;
-    //     width: 324px;
-    //     height: 200px;
-    //   }
-    // }
-  //}
+  .science {
+    width: 100%;
+    margin-right: 48px;
+    margin-left: 48px;
+  }
 }
 
 @media (width < 391px) {

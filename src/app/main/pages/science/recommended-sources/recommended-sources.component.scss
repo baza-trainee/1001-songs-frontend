@@ -18,6 +18,8 @@
     }
     .mat-expansion-panel-header-title {
       height: 50px;
+      overflow: hidden;
+      text-wrap: nowrap;
     }
   }
 }
