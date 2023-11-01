@@ -116,6 +116,13 @@
       }
     }
 
+    &__player {
+      &-title {
+        margin-bottom: 16px;
+        @include body-desktop;
+      }
+    }
+
     &__song {
       display: flex;
       gap: 24px;
@@ -213,7 +220,9 @@
       }
 
       &__carousel {
-
+        &-img {
+          height: 168px;
+        }
       }
     }
   }

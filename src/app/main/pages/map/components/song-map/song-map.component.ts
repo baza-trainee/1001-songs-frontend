@@ -2,15 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { CloudService } from '../../../../../shared/services/audio/cloud.service';
 import { Song } from '../../../../../shared/interfaces/song.interface';
 import { PlayerComponent } from '../player/player.component';
+import { StereoPlayerComponent } from '../player/stereo-player/stereo-player.component';
+import { MultichanelPlayerComponent } from '../player/multichanel-player/multichanel-player.component';
+import { Select } from '@ngxs/store';
+import { PlayerState } from '../../../../../store/player/player.state';
 
 @Component({
   selector: 'app-song-map',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, PlayerComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, PlayerComponent, StereoPlayerComponent, MultichanelPlayerComponent],
   templateUrl: './song-map.component.html',
   styleUrls: ['./song-map.component.scss']
 })
@@ -18,6 +22,8 @@ export class SongMapComponent implements OnInit, OnDestroy {
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   song!: Song;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+
   constructor(
     private route: ActivatedRoute,
     private cloudServices: CloudService

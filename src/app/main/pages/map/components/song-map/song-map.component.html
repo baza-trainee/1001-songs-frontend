@@ -36,11 +36,12 @@
           </div>
         </div>
       </div>
-      <div class="song-page__listen">
-        <p class="song-page__listen-title">{{"map.song-page.listen-song" | translate }}</p>
-      </div>
       <div class="song-page__player">
+        <p class="song-page__player-title">{{"map.song-page.listen-song" | translate }}</p>
 
+        <app-stereo-player #stereoPlayer></app-stereo-player>
+
+        <app-multichanel-player #multiChanelPlayer></app-multichanel-player>
       </div>
       <div class="song-page__song">
         <div class="song-page__song-box">

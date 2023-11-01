@@ -4,14 +4,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { Marker, SelectedMarkerFilter } from '../../../../../shared/interfaces/map-marker';
-import { MultiselectComponent } from './multiselect/multiselect.component';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { MapService } from '../../../../../shared/services/map/map.service';
+import { MultiselectComponent } from './multiselect/multiselect.component';
 
 @Component({
   selector: 'app-map-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, MultiselectComponent, ReactiveFormsModule],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, MultiselectComponent],
   templateUrl: './map-filter.component.html',
   styleUrls: ['./map-filter.component.scss']
 })
