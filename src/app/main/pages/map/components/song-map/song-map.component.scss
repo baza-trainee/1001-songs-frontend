@@ -153,6 +153,9 @@
 
   .song {
     &-page {
+      &__video {
+        height: 464px;
+      }
       &__info {
         flex-direction: column;
         gap: 80px;
@@ -181,9 +184,11 @@
   .song {
     &-page {
       padding: 60px 0;
-
       &__carousel {
         width: 100%;
+      }
+      &__video {
+        height: 352px;
       }
     }
   }
@@ -203,6 +208,13 @@
   .song {
     &-page {
       padding: 48px 0;
+      &__video {
+        height: 179px;
+      }
+
+      &__carousel {
+
+      }
     }
   }
 }
