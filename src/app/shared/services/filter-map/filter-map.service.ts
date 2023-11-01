@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Marker, SongFilter } from '../../interfaces/map-marker';
 import { Store } from '@ngxs/store';
-import { MapState } from '../../../store/map/map.state';
-import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { catchError } from 'rxjs';
+import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
+
+import { Marker, SongFilter } from '../../interfaces/map-marker';
+import { MapState } from '../../../store/map/map.state';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class FilterMapService {
     return foundMarkers.length;
   }
 
-  filteredMarker(selectOptions: SongFilter): Marker[] {
+  filterMarkers(selectOptions: SongFilter): Marker[] {
     const markers = this.store.selectSnapshot(MapState.getMarkersList);
     if (this.isFilteredEmpty(selectOptions)) {
       return markers;

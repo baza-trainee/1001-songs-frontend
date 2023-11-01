@@ -41,7 +41,7 @@ export class FilterMapState {
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
     const state = ctx.getState();
-    const filterMarkers = this.filterMapService.filteredMarker(action.selectedOptions);
+    const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);

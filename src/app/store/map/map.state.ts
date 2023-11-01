@@ -42,7 +42,7 @@ export class MapState {
   filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
     const state = ctx.getState();
 
-    const markers = this.filterMapService.filteredMarker(action.options);
+    const markers = this.filterMapService.filterMarkers(action.options);
     ctx.setState({
       ...state,
       filteredMarkerList: markers
