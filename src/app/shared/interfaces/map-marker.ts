@@ -1,9 +1,9 @@
-export class SelectedMarkerFilter {
+export class SongFilter {
   country: string[] = [];
   region: string[] = [];
   settlement: string[] = [];
   title: string[] = [];
-  genre: string[] =[];
+  genre: string[] = [];
   found: string[] = [];
 }
 

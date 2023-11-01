@@ -4,6 +4,10 @@ import { InteractiveMapComponent } from './interactive-map.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { Marker } from '../../interfaces/map-marker';
+import { FilterMapService } from '../../services/filter-map/filter-map.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
+import { MapState } from '../../../store/map/map.state';
 
 export const google = {
   maps: {
@@ -32,27 +36,25 @@ export const fakeSelectedMarker: Marker = {
     country: 'Ukraine',
     region: 'Рівне',
     district_center: 'с. Рокитне',
-    recording_location: { lat: 50.4501, lng: 30.5234  }
+    recording_location: { lat: 50.4501, lng: 30.5234 }
   }
 };
 class googleMock {}
 
-describe('HomeMapComponent', () => {
+describe('InteractiveMapComponent', () => {
   let component: InteractiveMapComponent;
   let fixture: ComponentFixture<InteractiveMapComponent>;
-  let translateService: TranslateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), InteractiveMapComponent, GoogleMapsModule],
-      providers: [TranslateService]
+      imports: [TranslateModule.forRoot(), InteractiveMapComponent, GoogleMapsModule, HttpClientModule, NgxsModule.forRoot([MapState])],
+      providers: [TranslateService, FilterMapService]
     });
 
     (window as unknown as { google: googleMock }).google = google;
 
-    translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(InteractiveMapComponent);
-    component = new InteractiveMapComponent(translateService);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

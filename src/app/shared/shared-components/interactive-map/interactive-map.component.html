@@ -17,7 +17,7 @@
         ></map-marker>
         <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
           <h2 class="popup-map__title">{{ elem.location.district_center }}</h2>
-          <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : 20</p>
+          <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : {{ filterMapServices.countSongsByOption(elem.location.district_center) }}</p>
         </map-info-window>
       </ng-container>
     </ng-container>
@@ -30,7 +30,7 @@
           <img class="popup-map__img" [src]="selectedMarker.image" alt="Фото" />
           <div class="popup-map__content">
             <h2 class="popup-map__title">{{ selectedMarker.location.district_center }}, {{ selectedMarker.location.region }}</h2>
-            <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : 20</p>
+            <p class="popup-map__count">{{ 'home.home-map.popup-count' | translate }} : {{ filterMapServices.countSongsByOption(selectedMarker.location.district_center) }}</p>
           </div>
         </div>
         <a class="popup-map__btn" role="button" tabindex="0" (keypress)="listenToRecords()" (click)="listenToRecords()">{{

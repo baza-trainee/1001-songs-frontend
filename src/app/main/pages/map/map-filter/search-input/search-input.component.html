@@ -1,0 +1,14 @@
+<mat-form-field class="search__box">
+    <input
+            class="search__input"
+            matInput
+            [formControl]="control"
+            [matAutocomplete]="auto"
+            placeholder="{{ name | translate }}"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
