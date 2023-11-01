@@ -10,6 +10,12 @@
       <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
     </mat-panel-description>
   </mat-expansion-panel-header>
+  <ng-container *ngFor="let recomendation of recomendations">
+    <p>
+      {{ recomendation }}
+    </p>
+    <br />
+  </ng-container>
   <div class="recomendations__pagination">
     <button class="recomendations__pagination__navigation" (click)="navigateToNextPage(-1)">
       <svg width="24" height="24" viewBox="-3 -4 24 24">
@@ -25,15 +31,9 @@
       {{ page }}
     </button>
     <button class="recomendations__pagination__navigation" (click)="navigateToNextPage(1)">
-      <svg width="24" height="24" viewBox="-2 -4 24 24"  style="transform: rotate(180deg);">
+      <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
         <use xlink:href="./assets/sprites.svg#paginationNext"></use>
       </svg>
     </button>
   </div>
-  <ng-container *ngFor="let recomendation of recomendations">
-    <p>
-      {{ recomendation }}
-    </p>
-    <br />
-  </ng-container>
 </mat-expansion-panel>

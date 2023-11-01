@@ -15,7 +15,6 @@ $width-mobile: 354px;
   border-radius: $radius;
   overflow: hidden;
 
-  // height: 100%;
   .link {
     @include link-desktop($font-size: 24px);
 
@@ -33,12 +32,8 @@ $width-mobile: 354px;
     background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 80%));
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
-    // text-align: center;
     cursor: pointer;
-    // border: 2px solid red;
-    // z-index: 999;
     span {
-      // border: 1px solid red;
       width: 20px;
       height: 24px;
     }
@@ -52,7 +47,6 @@ $width-mobile: 354px;
   .card {
     width: $width-desktop-2;
     height: 200px;
-    // border: 1px solid red;
     .link {
       top: 105px;
       width: $width-desktop-2;
@@ -69,7 +63,6 @@ $width-mobile: 354px;
   .card {
     width: $width-tablet;
     height: 200px;
-    // border: 1px solid red;
     .link {
       top: 105px;
       width: $width-tablet;
@@ -85,7 +78,6 @@ $width-mobile: 354px;
   .card {
     width: $width-mobile;
     height: 200px;
-    //  border: 2px solid red;
     .link {
       top: 105px;
       width: $width-mobile;
