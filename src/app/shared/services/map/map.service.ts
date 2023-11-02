@@ -14,7 +14,6 @@ export class MapService {
 
   markerFromSong(song: Song): Marker {
     const cords = song.location.recording_location.split(',');
-    console.log(song);
     return {
       id: song.id.toString(),
       title: song.title,
