@@ -123,6 +123,20 @@
       "workshops": "Майстер-класи",
       "concerts": "Концерти",
       "conferences": "Конференції"
+    },
+    "article": {
+      "path": {
+        "home": "Головна"
+      },
+      "about-article": {
+        "title": "Матеріал підготували",
+        "author": "Автор",
+        "editor": "Редактор",
+        "photos": "Світлини",
+        "share": "Поширити"
+
+      },
+      "latest-news": "Останні новини"
     }
   },
   "expeditions": {
