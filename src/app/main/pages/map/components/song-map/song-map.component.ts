@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { filter, first, Observable } from 'rxjs';
 
 import { PlayerComponent } from '../player/player.component';
 import { StereoPlayerComponent } from '../player/stereo-player/stereo-player.component';
@@ -12,6 +12,7 @@ import { Song } from '../../../../../shared/interfaces/song.interface';
 import { PlayerState } from '../../../../../store/player/player.state';
 import { FetchSongById, ResetSong } from '../../../../../store/player/player.actions';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
+import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 
 @Component({
   selector: 'app-song-map',
@@ -30,7 +31,7 @@ export class SongMapComponent implements OnInit, OnDestroy {
     { url: './assets/img/home/carousel3.jpg', alt: '' }
   ];
   slideIndex = 0;
-
+  state$!: Observable<StreamState>;
   constructor(
     private route: ActivatedRoute,
     private store: Store,
@@ -47,7 +48,13 @@ export class SongMapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new FetchSongById(this.route.snapshot.params['id']));
-    this.audioService.pause();
+    this.state$ = this.audioService.getState();
+    this.state$
+      .pipe(
+        filter((value) => value.canplay),
+        first()
+      )
+      .subscribe(() => this.audioService.pause());
   }
 
   ngOnDestroy(): void {
