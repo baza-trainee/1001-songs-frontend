@@ -36,11 +36,6 @@ export class ScienceComponent implements OnInit {
     this.recomendationPages = Array.from(
       Array(Math.floor(recomendations!.length / this.PAGE_SIZE) + (recomendations.length % this.PAGE_SIZE)).keys()
     ).map((el) => el + 1);
-
-    const pat = /^[a-z0-9]+((_{2}|-)[a-z0-9]+)*$/;
-    const target = 'mat-expansion-panel';
-    const res = target.match(pat);
-    console.log('Pattern result : ', res);
   }
 
   rotateRecomendationArrow() {

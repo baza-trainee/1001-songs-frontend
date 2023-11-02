@@ -5,7 +5,7 @@
    ],
    "rules":{
     "selector-class-pattern": [
-      "^[a-z0-9]+((_{2}|-)[a-z0-9]+)*$",
+      "^[a-z0-9]+(_{2}[a-z0-9]+)*$",
       {
         "message": "Class selectors should be written in kebab-case or BEM-style with double underscores."
       }
