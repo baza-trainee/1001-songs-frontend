@@ -25,6 +25,7 @@ import { RecommendedSourcesComponent } from './recommended-sources/recommended-s
   ]
 })
 export class ScienceComponent implements OnInit {
+  PAGE_SIZE = 5;
   categories: { translateKey: string; url: string }[] = scienceCategories;
   recomendations? = recomendations;
   recomendationPages: number[] = [1];
@@ -32,10 +33,14 @@ export class ScienceComponent implements OnInit {
   expansionSourcesArrow = 'bottom';
 
   ngOnInit(): void {
-    console.log(recomendations.length);
-    this.recomendationPages = Array.from(Array(Math.floor(recomendations!.length / 5) + (recomendations.length % 5)).keys()).map(
-      (el) => el + 1
-    );
+    this.recomendationPages = Array.from(
+      Array(Math.floor(recomendations!.length / this.PAGE_SIZE) + (recomendations.length % this.PAGE_SIZE)).keys()
+    ).map((el) => el + 1);
+
+    const pat = /^[a-z0-9]+(_{2}[a-z0-9]+)*$/;
+    const target = 'mat__expansion__panel';
+    const res = target.match(pat);
+    console.log('Pattern result : ', res);
   }
 
   rotateRecomendationArrow() {
