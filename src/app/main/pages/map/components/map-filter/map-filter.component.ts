@@ -5,13 +5,13 @@ import { filter, map, Observable, pairwise, startWith, Subject, takeUntil } from
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { Marker, SongFilter } from '../../../../shared/interfaces/map-marker';
 import { MultiselectComponent } from './multiselect/multiselect.component';
-import { mapFilter } from '../../../../shared/enums/mapFilter';
-import { LoadFilteredMarkers, UpdateOptions } from '../../../../store/filter-map/filter-map.actions';
-import { FilterMapState } from '../../../../store/filter-map/filter-map.state';
-import { FilteredMarkers, ResetMarkers } from '../../../../store/map/map.actions';
 import { SearchInputComponent } from './search-input/search-input.component';
+import { Marker, SongFilter } from '../../../../../shared/interfaces/map-marker';
+import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
+import { mapFilter } from '../../../../../shared/enums/mapFilter';
+import { LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
+import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
 
 @Component({
   selector: 'app-map-filter',

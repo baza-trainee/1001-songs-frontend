@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchInputComponent } from './search-input.component';
 import { NgxsModule } from '@ngxs/store';
-import { MapState } from '../../../../../store/map/map.state';
+import { MapState } from '../../../../../../store/map/map.state';
 import { FormControl, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AudioService } from '../../../../../shared/services/audio/audio.service';
+import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable, Subject, skip, takeUntil } from 'rxjs';

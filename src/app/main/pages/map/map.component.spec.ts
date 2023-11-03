@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MapComponent } from './map.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { NgxsModule } from '@ngxs/store';
-import { MapState } from 'src/app/store/map/map.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxsModule } from '@ngxs/store';
+
+import { MapComponent } from './map.component';
+import { MapState } from 'src/app/store/map/map.state';
 
 export const google = {
   maps: {

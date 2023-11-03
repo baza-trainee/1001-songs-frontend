@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Song } from '../../interfaces/song.interface';
+import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class CloudService {
 
   getSongsByLocation(locationName: string): Observable<Song[]> {
     return this.http.get<Song[]>(`https://song-0gm4.onrender.com/api/v1/songs_location/?location=${locationName}`);
+  }
+
+  getSongById(id: string): Observable<Song> {
+    return this.http.get<Song>(API_URL + StatEndpoints.songs + '/' + id);
   }
 
   getAudioData(): Observable<Song[]> {

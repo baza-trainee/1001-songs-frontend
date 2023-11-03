@@ -7,14 +7,23 @@ import { ExpeditionsComponent } from './pages/expeditions/expeditions.component'
 import { ScienceComponent } from './pages/science/science.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ArticleComponent } from './pages/news/components/article/article.component';
+import { SongMapComponent } from './pages/map/components/song-map/song-map.component';
 
 export const MAIN_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
-  { path: 'map', component: MapComponent },
+  {
+    path: 'map',
+    children: [
+      { path: '', component: MapComponent },
+      { path: ':id', component: SongMapComponent }
+    ]
+  },
   {
     path: 'news',
-    component: NewsComponent,
-    children: [{ path: 'news/:id', component: ArticleComponent }]
+    children: [
+      { path: '', component: NewsComponent },
+      { path: ':id', component: ArticleComponent }
+    ]
   },
   { path: 'expeditions', component: ExpeditionsComponent },
   { path: 'science', component: ScienceComponent },

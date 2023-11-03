@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
-import { AudioService } from '../../../../../shared/services/audio/audio.service';
+import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
+import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
@@ -47,7 +47,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
         this.showStereoPlayer = true;
       }
       if (song.media && song.media.stereo_audio) {
-       
         this.openFile(song);
       }
     });

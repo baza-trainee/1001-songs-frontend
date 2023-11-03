@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -83,6 +83,21 @@ export class PlayerState {
       ...state,
       selecteSong: {} as Song
     });
+  }
+
+  @Action(FetchSongById)
+  fetchSongById(ctx: StateContext<PlayerStateModel>, action: FetchSongById) {
+    const state = ctx.getState();
+    this.store.dispatch(new SetIsLoading(1));
+    return this.cloudService.getSongById(action.id).pipe(
+      tap((song: Song) => {
+        ctx.setState({
+          ...state,
+          selecteSong: song
+        });
+        this.store.dispatch(new SetIsLoading(-1));
+      })
+    );
   }
 
   @Action(FetchSongsByLocation)
