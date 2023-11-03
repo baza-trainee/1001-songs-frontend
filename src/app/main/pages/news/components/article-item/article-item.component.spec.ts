@@ -1,9 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ArticleItemComponent } from "./article-item.component";
-import { ActivatedRoute } from "@angular/router";
-import {Router} from "@angular/router";
-import {RouterTestingModule} from "@angular/router/testing";
+import { NgxsModule } from '@ngxs/store';
+
+import { ArticleItemComponent } from './article-item.component';
+import { NewsState } from '../../../../../store/news/news.state';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ArticleItemComponent', () => {
   let component: ArticleItemComponent;
@@ -11,7 +15,7 @@ describe('ArticleItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule, NgxsModule.forRoot([NewsState])],
       providers: [
         {
           provide: ActivatedRoute,
@@ -46,5 +50,4 @@ describe('ArticleItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

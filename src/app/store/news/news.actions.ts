@@ -3,3 +3,8 @@ export class FetchArticles {
 
   constructor() {}
 }
+export class SetSelectedArticle {
+  static readonly type = '[News] Set';
+
+  constructor(public id: number) {}
+}
