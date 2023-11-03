@@ -8,11 +8,20 @@ import { SelectSong } from 'src/app/store/player/player.actions';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-playlist-song-card',
   standalone: true,
-  imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule, MatIconModule, MatExpansionModule],
+  imports: [
+    CommonModule,
+    StereoPlayerComponent,
+    MultichanelPlayerComponent,
+    TranslateModule,
+    MatIconModule,
+    MatExpansionModule,
+    RouterLink
+  ],
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })

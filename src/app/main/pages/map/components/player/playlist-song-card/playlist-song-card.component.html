@@ -56,7 +56,7 @@
         <div class="ethnographic__region__region">{{ song.location.official_name_city }}, {{ song.location.region }}</div>
       </div>
 
-      <div class="info__btn__more__detail">{{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}</div>
+      <div class="info__btn__more__detail" [routerLink]="song.id">{{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}</div>
     </div>
 
     <div class="detail__song__text">

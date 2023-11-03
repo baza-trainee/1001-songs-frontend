@@ -2,13 +2,17 @@
   <app-preloader *ngIf="isLoading$ | async"></app-preloader>
   <nav class="nav">
     <div class="logo">
-      <a class="logo__link" routerLink="" routerLinkActive="active"
-        ><img class="logo__link-img" src="./assets/img/header/logo.png" alt="logo"
-      /></a>
+      <a class="logo__link" routerLink="" routerLinkActive="active">
+        <svg class="logo__link-img">
+          <use xlink:href="./assets/sprites.svg#logo"></use>
+        </svg>
+      </a>
     </div>
     <div class="menu">
       <div class="burger" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="2">
-        <img src="./assets/img/header/burger-icon.svg" alt="Burger menu icon" class="burger__icon" />
+        <svg class="burger__icon">
+          <use xlink:href="./assets/sprites.svg#headerBurger"></use>
+        </svg>
       </div>
       <ul [ngClass]="menuSwitcherOff ? 'menu-list switcher' : 'menu-list'" tabindex="0">
         <li class="menu-list__item" *ngFor="let link of navLinks">
@@ -20,7 +24,9 @@
     </div>
     <div class="actions" tabindex="3">
       <div class="actions__search">
-        <img src="./assets/img/header/search.svg" class="actions__search-img" alt="search icons" />
+        <svg class="actions__search-img">
+          <use xlink:href="./assets/sprites.svg#headerSearch"></use>
+        </svg>
       </div>
       <div class="actions__lang">
         <ul class="actions__lang-list">
@@ -36,12 +42,14 @@
       </div>
     </div>
   </nav>
-  <app-pop-up-menu 
-      *ngIf="isPopupOpen" 
-      (changeLangDetection)="receivedData($event)" 
+  <app-pop-up-menu
+      *ngIf="isPopupOpen"
+      (changeLangDetection)="receivedData($event)"
       (isPopupOpenChange)="onPopupChange($event)">
     <div class="icon" (click)="togglePopUp()" (keypress)="togglePopUp()" tabindex="6">
-      <img class="icon__close" alt="close icon" src="./assets/img/header/close-icon.svg" />
+      <svg class="icon__close" width="20" height="20" viewBox="0 0 20 20">
+        <use xlink:href="./assets/sprites.svg#headerClose"></use>
+      </svg>
     </div>
   </app-pop-up-menu>
 </header>
