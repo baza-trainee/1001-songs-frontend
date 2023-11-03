@@ -168,7 +168,19 @@
     }
   },
   "science": {
-    "stub": "Page 'Educational Section' under development"
+    "stub": "Page 'Educational Section' under development",
+    "title": "Education section",
+    "categories": {
+      "winters": "Songs of the winter cycle",
+      "shrove": "Shrovetide, Kolodiy",
+      "spring": "Songs of the spring cycle",
+      "common": "Common songs",
+      "summer": "Songs of the summer cycle",
+      "children": "Children's folklore",
+      "wedding": "Wedding songs",
+      "epos": "Musical epic",
+      "instrumental": "Instrumental music"
+    }
   },
   "error": {
     "error-inner": {
