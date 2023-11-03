@@ -29,7 +29,6 @@ export class RecomendationComponent implements OnInit {
 
   navigateToNextPage(pageNumber: number) {
     const nextPage = this.currentPage + pageNumber;
-    console.log(pageNumber);
     if (this.recomendationPages.length < nextPage || nextPage < 1) {
       return;
     }
