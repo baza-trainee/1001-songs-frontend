@@ -8,9 +8,12 @@
   gap: 48px;
 
   @include body-desktop;
-
   img {
     width: 100%;
+  }
+  &__img {
+    height: 720px;
+    object-fit: cover;
     vertical-align: bottom;
   }
 
@@ -40,6 +43,9 @@
   }
 
   &__sub {
+    &-img {
+      height: 476px;
+    }
     &-title {
       @include h4-mobile;
 
@@ -60,9 +66,39 @@
   }
 
   &__share {
+    display: flex;
+    align-items: center;
+
     &-title {
       color: var(--text-color-popup-menu);
       font-weight: 400;
+      margin-right: 24px;
+    }
+
+    &-link {
+      padding: 8px;
+      margin-right: 16px;
+      border: 1px solid var(--text-color-popup-menu);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__carousel {
+    padding: 80px 0;
+    background: var(--bg-color-screen);
+
+    &-title {
+      @include h2-desktop;
+
+      margin-bottom: 32px;
     }
   }
 }
@@ -80,8 +116,16 @@
   }
 
   .article {
+    &__img {
+      height: 524px;
+    }
     &__box {
       padding: 0;
+    }
+    &__sub {
+      &-img {
+        height: 524px;
+      }
     }
   }
 }
@@ -89,6 +133,16 @@
 @media (width <=768px) {
   .container {
     margin: 0 32px;
+  }
+  .article {
+    &__img {
+      height: 396px;
+    }
+    &__sub {
+      &-img {
+        height: 396px;
+      }
+    }
   }
 }
 
@@ -111,6 +165,10 @@
     padding: 32px 0;
     gap: 32px;
 
+    &__img  {
+      height: 200px;
+    }
+
     &__path {
       font-size: 14px;
     }
@@ -132,6 +190,18 @@
       &-title {
         font-size: 18px;
         line-height: 24px;
+      }
+    }
+    &__carousel {
+      &-title {
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 16px;
+      }
+    }
+    &__sub {
+      &-img {
+        height: 200px;
       }
     }
   }
