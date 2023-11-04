@@ -26,7 +26,7 @@ export class BreadcrumbsComponent implements OnInit {
       )
       .subscribe((route: any) => {
         const path = route.urlAfterRedirects;
-        const pathSegments = path.split('/').filter((el: string) => el !== '');     
+        const pathSegments = path.split('/').filter((el: string) => el !== '');
         this.crumbs = [...pathSegments.map((el: string) => this.getTranslateKey(el))];
       });
   }
@@ -38,9 +38,13 @@ export class BreadcrumbsComponent implements OnInit {
     const routeKey = links.navLinksHeader.find((link: any) => link.route === '/' + url);
     return routeKey ? routeKey.name : url;
   }
+  getPathFromKey(key: string) {
+    const path = links.navLinksHeader.find((link: any) => link.name === key);
+    return path ? path.name : key;
+  }
 
-  redirectToPath(event: any){
-    console.log(event)
+  redirectToPath(event: any) {
+    console.log(event);
   }
 }
 
