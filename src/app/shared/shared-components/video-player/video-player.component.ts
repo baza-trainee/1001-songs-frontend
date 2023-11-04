@@ -12,13 +12,14 @@ import { SanitizePipe } from '../../pipes/sanitizer.pipe';
 })
 export class VideoPlayerComponent implements OnInit {
   @Input() srcUrl: string = '';
+  @Input() widthIcon: number = 48;
   @ViewChild('player') player!: ElementRef;
   isPreviewDisplayed = true;
   previewUrl: string= '';
   embeddedUrl: string='';
 
   constructor(private videoService: VideoService) {
-    
+
   }
   ngOnInit(): void {
     this.previewUrl = this.videoService.previewFromUrl(this.srcUrl);

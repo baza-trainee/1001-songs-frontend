@@ -1,7 +1,6 @@
 .player {
-  height: 180px;
+  height: 100%;
   overflow: hidden;
-  border-radius: 8px;
   position: relative;
 
   &__control {
@@ -10,8 +9,9 @@
     border-radius: 50%;
     position: absolute;
     border-style: none;
-    top: calc(50% - 24px);
-    left: calc(50% - 24px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding-left: 2px;
     font-size: 0.8rem;
   }
@@ -19,8 +19,7 @@
   img {
     position: absolute;
     width: 100%;
-    height: 180px;
-    border-radius: 8px;
+    height: 100%;
     object-fit: cover;
     filter: sepia(70%);
   }

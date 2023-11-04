@@ -19,7 +19,12 @@
     </div>
     <div class="expeditions__gallery" *ngIf="expeditions$ | async as expeditions">
       <div *ngFor="let event of expeditions" class="expeditions__gallery__item">
-        <app-expedition-card [event]="event"></app-expedition-card>
+        <app-expedition-card
+          style="cursor: pointer"
+          (click)="setupSelectedExpedition(event.id)"
+          [routerLink]="event.id"
+          [event]="event"
+        ></app-expedition-card>
       </div>
     </div>
   </div>

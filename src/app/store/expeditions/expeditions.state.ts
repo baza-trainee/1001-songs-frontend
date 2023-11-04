@@ -1,13 +1,15 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { FetchExpeditions } from './expedition.actions';
-import Iexpediton from '../../shared/interfaces/expedition.interface';
 import { Injectable } from '@angular/core';
-import { ExpeditionsService } from '../../shared/services/expeditions/expeditions.service';
 import { map, tap } from 'rxjs';
+
 import { SetIsLoading } from '../app/app.actions';
+import { ExpeditionsService } from '../../shared/services/expeditions/expeditions.service';
+import {FetchExpeditions, SetSelectedExpedition} from './expedition.actions';
+import Iexpediton from '../../shared/interfaces/expedition.interface';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];
+  selectedExpedition: Iexpediton;
 }
 
 @State<ExpeditionsStateModel>({
@@ -22,7 +24,8 @@ export interface ExpeditionsStateModel {
         eventDate: '7 квітня 2006 року',
         location: 'Село Осівка, Житомирщина'
       }
-    ]
+    ],
+    selectedExpedition: {} as Iexpediton
   }
 })
 @Injectable()
@@ -35,6 +38,23 @@ export class ExpeditionsState {
   @Selector()
   static getExpeditionsList(state: ExpeditionsStateModel): Iexpediton[] {
     return state.expeditionsList;
+  }
+  @Selector()
+  static getSelectedExpedition(state: ExpeditionsStateModel): Iexpediton {
+    return state.selectedExpedition;
+  }
+
+  @Action(SetSelectedExpedition)
+  setSelectedExpedition(ctx: StateContext<ExpeditionsStateModel>, action: SetSelectedExpedition) {
+    const state = ctx.getState();
+    const selectedExpedition = state.expeditionsList.find((expedition: Iexpediton) => expedition.id === action.id);
+    if (!selectedExpedition) {
+      return;
+    }
+    return ctx.setState({
+      ...state,
+      selectedExpedition
+    });
   }
 
   @Action(FetchExpeditions)

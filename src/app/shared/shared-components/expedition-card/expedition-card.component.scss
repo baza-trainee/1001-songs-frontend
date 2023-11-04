@@ -6,6 +6,11 @@
   flex-direction: column;
   width: 302px;
 
+  &__player {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
   &__date {
     @include caption-desktop;
 
