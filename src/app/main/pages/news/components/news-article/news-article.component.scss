@@ -59,6 +59,7 @@
   &__about {
     display: flex;
     justify-content: space-between;
+    gap: 24px;
 
     &-title {
       color: var(--text-color-popup-menu);

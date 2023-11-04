@@ -29,7 +29,6 @@
   }
 
   &__player {
-
     &-main {
       height: 720px;
       border-radius: 0;
@@ -41,12 +40,16 @@
       height: 476px;
       border-radius: 0;
     }
-  }
 
-  &__img {
-    height: 720px;
-    object-fit: cover;
-    vertical-align: bottom;
+    &-descr {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: var(--text-color-popup-menu);
+      }
+    }
   }
 
   &__path {
@@ -67,6 +70,8 @@
   }
 
   &__date {
+    display: flex;
+    gap: 8px;
     margin-bottom: 32px;
   }
 
@@ -95,10 +100,6 @@
   }
 
   &__sub {
-    &-img {
-      height: 476px;
-    }
-
     &-title {
       @include h4-mobile($font-size: 28px);
     }
@@ -112,12 +113,33 @@
     display: flex;
     justify-content: space-between;
     font-size: 16px;
+    gap: 24px;
+    flex-wrap: wrap;
 
     &-title {
       color: var(--text-color-popup-menu);
       font-weight: 400;
       margin: 0;
       padding-bottom: 32px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 8px;
+
+    &-prev {
+      svg {
+        transform: rotate(180deg);
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &-prev,
+    &-next {
+      background-color: transparent;
+      border: none;
     }
   }
 
@@ -172,18 +194,26 @@
   }
 
   .article {
-    &__img {
-      height: 524px;
+    &__header {
+      flex-direction: column-reverse;
+
+      &-ua {
+        width: 50%;
+      }
+    }
+
+    &__player {
+      &-main {
+        height: 524px;
+      }
+
+      &-sub {
+        height: 524px;
+      }
     }
 
     &__box {
       margin-left: 0;
-    }
-
-    &__sub {
-      &-img {
-        height: 524px;
-      }
     }
   }
 }
@@ -194,12 +224,12 @@
   }
 
   .article {
-    &__img {
-      height: 396px;
-    }
+    &__player {
+      &-main {
+        height: 396px;
+      }
 
-    &__sub {
-      &-img {
+      &-sub {
         height: 396px;
       }
     }
@@ -213,6 +243,12 @@
 
   .article {
     margin-top: 96px;
+
+    &__about {
+      &-box {
+        width: 46%;
+      }
+    }
   }
 }
 
@@ -225,8 +261,18 @@
     padding: 32px 0;
     gap: 32px;
 
-    &__img  {
-      height: 200px;
+    &__header {
+      &-ua {
+        width: 100%;
+      }
+
+      &-text {
+        font-size: 16px;
+      }
+    }
+
+    &__date {
+      flex-direction: column;
     }
 
     &__path {
@@ -239,14 +285,22 @@
       margin-bottom: 16px;
     }
 
+    &__player {
+      &-main {
+        height: 200px;
+      }
+
+      &-sub {
+        height: 200px;
+      }
+    }
+
     &__text {
       font-size: 16px;
       gap: 16px;
     }
 
     &__about {
-      flex-wrap: wrap;
-
       &-title {
         font-size: 18px;
         line-height: 24px;
@@ -258,12 +312,6 @@
         font-size: 32px;
         line-height: 40px;
         margin-bottom: 16px;
-      }
-    }
-
-    &__sub {
-      &-img {
-        height: 200px;
       }
     }
   }
