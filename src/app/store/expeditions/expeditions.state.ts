@@ -5,11 +5,11 @@ import { map, tap } from 'rxjs';
 import { SetIsLoading } from '../app/app.actions';
 import { ExpeditionsService } from '../../shared/services/expeditions/expeditions.service';
 import {FetchExpeditions, SetSelectedExpedition} from './expedition.actions';
-import Iexpediton from '../../shared/interfaces/expedition.interface';
+import Iexpediton, {ArticleExpedition} from '../../shared/interfaces/expedition.interface';
 
 export interface ExpeditionsStateModel {
   expeditionsList: Iexpediton[];
-  selectedExpedition: Iexpediton;
+  selectedExpedition: ArticleExpedition;
 }
 
 @State<ExpeditionsStateModel>({
@@ -25,7 +25,7 @@ export interface ExpeditionsStateModel {
         location: 'Село Осівка, Житомирщина'
       }
     ],
-    selectedExpedition: {} as Iexpediton
+    selectedExpedition: {} as ArticleExpedition
   }
 })
 @Injectable()
@@ -40,7 +40,7 @@ export class ExpeditionsState {
     return state.expeditionsList;
   }
   @Selector()
-  static getSelectedExpedition(state: ExpeditionsStateModel): Iexpediton {
+  static getSelectedExpedition(state: ExpeditionsStateModel): ArticleExpedition {
     return state.selectedExpedition;
   }
 
@@ -53,7 +53,7 @@ export class ExpeditionsState {
     }
     return ctx.setState({
       ...state,
-      selectedExpedition
+      selectedExpedition: this.expeditionsService.createArticle(selectedExpedition)
     });
   }
 

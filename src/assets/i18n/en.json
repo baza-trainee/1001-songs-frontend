@@ -172,9 +172,10 @@
       },
       "about-article": {
         "title": "The material was prepared by",
-        "author": "Author",
+        "collectors": "Collectors",
         "editor": "Editor",
-        "photos": "Photos",
+        "video-editing": "Video editing",
+        "record": "Record",
         "share": "Share"
       },
       "latest-news": "Related expeditions"

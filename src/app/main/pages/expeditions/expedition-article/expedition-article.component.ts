@@ -6,7 +6,7 @@ import {Select} from "@ngxs/store";
 import {Observable} from "rxjs";
 
 import {ExpeditionsState} from "../../../../store/expeditions/expeditions.state";
-import Iexpediton from "../../../../shared/interfaces/expedition.interface";
+import {ArticleExpedition} from "../../../../shared/interfaces/expedition.interface";
 import {VideoPlayerComponent} from "../../../../shared/shared-components/video-player/video-player.component";
 
 @Component({
@@ -17,6 +17,6 @@ import {VideoPlayerComponent} from "../../../../shared/shared-components/video-p
   styleUrls: ['./expedition-article.component.scss']
 })
 export class ExpeditionArticleComponent {
-  @Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<Iexpediton>;
+  @Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<ArticleExpedition>;
 
 }
