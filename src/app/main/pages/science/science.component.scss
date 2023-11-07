@@ -27,15 +27,10 @@
   }
 
   &__gallery {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     margin: 48px 0;
-
-    &-item {
-      width: 31%;
-    }
   }
 
   &__recomendations {
@@ -71,11 +66,8 @@
     width: 100%;
 
     &__gallery {
-      justify-content: flex-start;
+      grid-template-columns: repeat(2, 1fr);
 
-      &-item {
-        width: 47%;
-      }
     }
   }
 }
@@ -91,9 +83,7 @@
     margin-left: 0;
 
     &__gallery {
-      &-item {
-        width: 100%;
-      }
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }

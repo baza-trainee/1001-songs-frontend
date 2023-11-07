@@ -1,76 +1,70 @@
 @import '/src/typography/typography';
 
-.container {
-  width: 100%;
-  max-width: none;
-  margin: 0 auto;
-  background: var(--bg-color-screen);
-}
-
 .team {
-  width: 1280px;
-  margin: 0 auto;
+  background: var(--bg-color-screen);
   padding: 80px 0;
 
   &__title {
     @include h2-desktop;
+
+    margin-bottom: 48px;
   }
 
   &__container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    row-gap: 24px;
-    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
   }
 }
 
 @media (width <=1024px) {
   .container {
-    padding: 0 48px;
-
-    .team {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-
-     
-    }
+    margin: 0 48px;
   }
 }
 
 @media (width <=768px) {
   .container {
-    padding: 60px 32px;
+    margin: 0 32px;
+  }
 
-    .team {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+  .team {
+    padding: 60px 0;
+
+    &__container {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
 
-@media (width <=390px) {
+@media (width <=675px) {
   .container {
-    padding: 48px 16px;
+    margin: 0 32px;
+  }
+}
 
-    .team {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+@media (width <=465px) {
+  .container {
+    margin: 0 16px;
+  }
 
-      &__title {
-        @include h4-mobile;
-      }
+  .team {
+    padding: 48px 0;
 
-      &__container {
-        flex-direction: column;
-        margin-top: 24px;
-      }
+    &__title {
+      @include h4-mobile;
+    }
+
+    &__container {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }
+
