@@ -180,6 +180,11 @@
       "wedding": "Wedding songs",
       "epos": "Musical epic",
       "instrumental": "Instrumental music"
+    },
+    "cycle": {
+      "path": {
+        "home": "Home"
+      }
     }
   },
   "error": {

@@ -6,7 +6,11 @@
     </p>
     <div class="science__gallery">
       <div class="science__gallery__item" *ngFor="let category of categories">
-        <app-category-link [category]="category.translateKey | translate" [imgUrl]="category.url"></app-category-link>
+        <app-category-link
+          [routerLink]="category.routerLink"
+          [category]="category.translateKey | translate"
+          [imgUrl]="category.url"
+        ></app-category-link>
       </div>
     </div>
     <div class="science__recomendations">
