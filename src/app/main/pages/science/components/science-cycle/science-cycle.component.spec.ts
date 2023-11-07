@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScienceCycleComponent } from './science-cycle.component';
+import {ActivatedRoute} from "@angular/router";
+import {of} from "rxjs";
+import {TranslateModule} from "@ngx-translate/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ScienceCycleComponent', () => {
   let component: ScienceCycleComponent;
@@ -8,7 +12,15 @@ describe('ScienceCycleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ScienceCycleComponent]
+      imports: [ScienceCycleComponent, TranslateModule.forRoot(), BrowserAnimationsModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ category: 'someCategory' })
+          }
+        }
+      ]
     });
     fixture = TestBed.createComponent(ScienceCycleComponent);
     component = fixture.componentInstance;

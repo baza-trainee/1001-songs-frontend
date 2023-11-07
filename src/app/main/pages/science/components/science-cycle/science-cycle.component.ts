@@ -28,18 +28,20 @@ export class ScienceCycleComponent implements OnInit {
   }
 
   private checkAndSetSelectedCategory() {
-    this.route.params.pipe(take(1)).subscribe(params => {
-      const categories: { translateKey: string; url: string; routerLink: string }[] = scienceCategories;
-      const requestedRouterLink = params['category'];
-      const selectedCategory = categories.find(category => category.routerLink === requestedRouterLink);
+    if (this.route.params) {
+      this.route.params.pipe(take(1)).subscribe(params => {
+        const categories: { translateKey: string; url: string; routerLink: string }[] = scienceCategories;
+        const requestedRouterLink = params['category'];
+        const selectedCategory = categories.find(category => category.routerLink === requestedRouterLink);
 
-      if (selectedCategory) {
-        this.category.title = selectedCategory.translateKey;
-        this.category.subcategories[0].urlImg = selectedCategory.url;
-      } else {
-        this.router.navigate(['/404']);
-      }
-    });
+        if (selectedCategory) {
+          this.category.title = selectedCategory.translateKey;
+          this.category.subcategories[0].urlImg = selectedCategory.url;
+        } else {
+          this.router.navigate(['/404']);
+        }
+      });
+    }
   }
 
 

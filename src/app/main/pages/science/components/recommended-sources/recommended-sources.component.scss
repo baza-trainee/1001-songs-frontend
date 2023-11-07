@@ -6,7 +6,8 @@
   border-radius: 7px;
 
   &-header {
-    height: 64px;
+    padding: 16px;
+    height: auto;
 
     &-description {
       display: flex;
@@ -16,27 +17,46 @@
     }
 
     &-title {
-      @include h5-desktop($font-size: 24px);
+      @include h4-mobile;
 
-      height: 50px;
-      overflow: hidden;
-      text-wrap: nowrap;
+      margin: 0;
     }
   }
 }
 
 ul {
-  list-style: initial;
-}
-
-li {
-  margin-left: 40px;
+  list-style: none;
 }
 
 .lit-link {
-  @include h6-desktop($font-family: 'Open sans');
+  padding-left: 25px;
+  position: relative;
+  display: inline-block;
+
+  @include paragraph-desktop($color: $color-primary, $font-weight: $font-weight-semibolt);
+
+  margin-bottom: 8px;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 6px;
+    background-color: var(--text-color-primary);
+    border-radius: 50%;
+  }
+
 }
 
-.link {
-  margin-left: -40px;
+@media (width <=465px) {
+  // eslint-disable-next-line no-use-before-define
+  .mat-expansion-panel {
+    &-title {
+      font-size: 22px;
+      line-height: 28px;
+    }
+  }
 }
