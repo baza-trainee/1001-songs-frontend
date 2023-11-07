@@ -1,4 +1,4 @@
-<div class="breadcrumbs">
+<div *ngIf="isVisible" class="breadcrumbs">
   <ul class="breadcrumbs__list">
     <li (click)="redirectToPath(HOME)">
       <a>{{ HOME | translate }}</a>

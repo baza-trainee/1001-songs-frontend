@@ -6,11 +6,11 @@ import * as links from '../../enums/navLinks.enum';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 enum LinkKeys {
-  About = 'header.nav-menu.about',
-  Map = 'header.nav-menu.map',
-  Education = 'header.nav-menu.educational-section',
+  about = 'header.nav-menu.about',
+  map = 'header.nav-menu.map',
+  education = 'header.nav-menu.educational-section',
   news = 'header.nav-menu.news',
-  Expedition = 'header.nav-menu.expedition'
+  expedition = 'header.nav-menu.expedition'
 }
 
 @Component({
@@ -23,6 +23,8 @@ enum LinkKeys {
 export class BreadcrumbsComponent implements OnInit {
   HOME = 'header.nav-menu.home';
   crumbs: string[] = [];
+  isVisible: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -30,6 +32,10 @@ export class BreadcrumbsComponent implements OnInit {
   ) {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: any) => {
       const path = route.urlAfterRedirects;
+      console.log(route);
+      if (path === '/') {
+        this.isVisible = false;
+      } else {this.isVisible = true}
       const pathSegments = path
         .split('/')
         .filter((el: string) => el !== '')
