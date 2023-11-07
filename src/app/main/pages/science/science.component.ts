@@ -8,6 +8,7 @@ import { scienceCategories } from './category-link/categoriesList';
 import { recomendations } from './category-link/recomendations';
 import { RecomendationComponent } from './recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './recommended-sources/recommended-sources.component';
+import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-science',
@@ -21,7 +22,8 @@ import { RecommendedSourcesComponent } from './recommended-sources/recommended-s
     MatExpansionModule,
     ArrowDownComponent,
     RecomendationComponent,
-    RecommendedSourcesComponent
+    RecommendedSourcesComponent,
+    BreadcrumbsComponent
   ]
 })
 export class ScienceComponent implements OnInit {

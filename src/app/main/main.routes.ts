@@ -20,10 +20,9 @@ export const MAIN_ROUTES: Routes = [
   },
   {
     path: 'news',
-    data: { alias: 'news' },
     children: [
       { path: '', component: NewsComponent },
-      { path: ':id', component: NewsArticleComponent, data: { mydata: 'DATA DATA' } }
+      { path: ':id', component: NewsArticleComponent }
     ]
   },
   { path: 'expeditions', component: ExpeditionsComponent },

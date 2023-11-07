@@ -23,7 +23,7 @@ enum LinkKeys {
 export class BreadcrumbsComponent implements OnInit {
   HOME = 'header.nav-menu.home';
   crumbs: string[] = [];
-  isVisible: boolean = false;
+  isVisible: boolean = true;
 
   constructor(
     private router: Router,
