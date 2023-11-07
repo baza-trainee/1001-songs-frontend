@@ -1,12 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterLink} from "@angular/router";
-import {Store} from "@ngxs/store";
 
 import Iexpediton from '../../interfaces/expedition.interface';
-import { SanitizePipe } from '../../pipes/sanitizer.pipe';
-import { VideoPlayerComponent } from '../video-player/video-player.component';
-import {SetSelectedExpedition} from "../../../store/expeditions/expedition.actions";
+import {SanitizePipe} from '../../pipes/sanitizer.pipe';
+import {VideoPlayerComponent} from '../video-player/video-player.component';
 
 @Component({
   selector: 'app-expedition-card',
@@ -18,9 +16,4 @@ import {SetSelectedExpedition} from "../../../store/expeditions/expedition.actio
 export class ExpeditionCardComponent {
   @Input() event: Iexpediton = {} as Iexpediton;
 
-  constructor(private store: Store) {}
-
-  setupSelectedExpedition(id: string) {
-    this.store.dispatch(new SetSelectedExpedition(id));
-  }
 }

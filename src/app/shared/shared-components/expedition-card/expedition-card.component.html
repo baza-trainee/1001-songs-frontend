@@ -2,9 +2,6 @@
   <app-video-player class="event__player" [srcUrl]="event.mediaSrc"></app-video-player>
   <div
     [routerLink]="event.id"
-    (click)="setupSelectedExpedition(event.id)"
-    (keydown)="setupSelectedExpedition(event.id)"
-    tabindex="10"
     style="cursor: pointer"
   >
     <p class="event__date">{{ event.eventDate }}</p>
