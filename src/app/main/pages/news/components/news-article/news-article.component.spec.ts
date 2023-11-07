@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { NewsArticleComponent } from './news-article.component';
 import { NewsState } from '../../../../../store/news/news.state';
+import {ActivatedRoute} from "@angular/router";
 
 describe('NewsArticleComponent', () => {
   let component: NewsArticleComponent;
@@ -12,7 +13,10 @@ describe('NewsArticleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NewsArticleComponent, TranslateModule.forRoot(), NgxsModule.forRoot([NewsState]), HttpClientTestingModule]
+      imports: [NewsArticleComponent, TranslateModule.forRoot(), NgxsModule.forRoot([NewsState]), HttpClientTestingModule],
+      providers: [{
+        provide: ActivatedRoute, useValue: {}
+      }]
     });
     fixture = TestBed.createComponent(NewsArticleComponent);
     component = fixture.componentInstance;

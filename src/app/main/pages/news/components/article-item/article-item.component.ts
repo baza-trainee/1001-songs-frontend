@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Store } from '@ngxs/store';
-
-import { SetSelectedArticle } from '../../../../../store/news/news.actions';
 
 @Component({
   selector: 'app-article-item',
@@ -22,9 +19,5 @@ export class ArticleItemComponent {
     eventDate: string;
   };
 
-  constructor(private store: Store) {}
-
-  setSelectedArticle(id: number) {
-    this.store.dispatch(new SetSelectedArticle(id));
-  }
+  constructor() {}
 }

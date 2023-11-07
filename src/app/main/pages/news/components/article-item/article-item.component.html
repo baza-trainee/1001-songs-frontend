@@ -1,9 +1,4 @@
-<div class="card"
-     routerLink="{{article.id}}"
-     (click)="setSelectedArticle(article.id)"
-     tabindex="0"
-     (keydown.enter)="setSelectedArticle(article.id)"
->
+<div class="card" routerLink="{{article.id}}">
   <div class="card__header">
     <div class="card__header-event">
       {{ article.eventDate }}
