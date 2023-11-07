@@ -337,6 +337,18 @@
     </symbol>
   </defs>
 
+  <symbol id="arrowOutward">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.5 18.5V16.5H15.09L5.5 6.91L6.91 5.5L16.5 15.09V6.5H18.5V18.5H6.5Z" fill="#FEFEFE" />
+    </svg>
+  </symbol>
+
+  <symbol id="paginationNext">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10.56 12L11.5 11.06L8.44667 8L11.5 4.94L10.56 4L6.56 8L10.56 12Z" fill="#131313" />
+    </svg>
+  </symbol>
+  
   <defs class="footer">
     <symbol id="iconFb">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,3 +1,19 @@
-<div style="display: flex; justify-content: center; align-items: center;"> 
-   <p style="padding: 10px; color: azure; font-size: larger; background-color: #1a1a1a;">{{ 'science.stub' | translate }}</p>
+<div class="container">
+  <div class="science">
+    <h2 class="science__title">{{ 'science.title' | translate }}</h2>
+    <p class="science__introduction">
+      {{ 'expeditions.intro' | translate }}
+    </p>
+    <div class="science__gallery">
+      <div class="science__gallery__item" *ngFor="let category of categories">
+        <app-category-link [category]="category.translateKey | translate" [imgUrl]="category.url"></app-category-link>
+      </div>
+    </div>
+    <div class="science__recomendations">
+      <app-recomendation></app-recomendation>
+    </div>
+    <div class="sciecnce__sources">
+      <app-recommended-sources></app-recommended-sources>
+    </div>
+  </div>
 </div>

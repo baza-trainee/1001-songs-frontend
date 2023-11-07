@@ -1,0 +1,20 @@
+<mat-expansion-panel hideToggle="true" class="mat-elevation-z0" (opened)="rotateSourcesArrow()" (closed)="rotateSourcesArrow()">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Рекомендовані джерела </mat-panel-title>
+    <mat-panel-description>
+      <app-arrow-down [direction]="expansionSourcesArrow"></app-arrow-down>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ul>
+    <li>
+      <span class="lit-link">Список українських народних пісень</span>
+      <br />
+      <a
+        class="link"
+        target="_blank"
+        href="https://uk.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D1%85_%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%B8%D1%85_%D0%BF%D1%96%D1%81%D0%B5%D0%BD%D1%8C"
+        >Бібіліографічне посилання</a
+      >
+    </li>
+  </ul>
+</mat-expansion-panel>
