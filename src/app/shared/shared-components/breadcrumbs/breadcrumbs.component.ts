@@ -23,28 +23,32 @@ enum LinkKeys {
 export class BreadcrumbsComponent implements OnInit {
   HOME = 'header.nav-menu.home';
   crumbs: string[] = [];
-  isVisible: boolean = true;
+  // isVisible: boolean = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _translate: TranslateService
   ) {
+    const url = window.location.href;
+    const path = url.split('#')[1];
+    this.setCrumbs(path);
+  }
+  ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: any) => {
       const path = route.urlAfterRedirects;
-      console.log(route);
-      if (path === '/') {
-        this.isVisible = false;
-      } else {this.isVisible = true}
-      const pathSegments = path
-        .split('/')
-        .filter((el: string) => el !== '')
-        .map((el: string) => LinkKeys[el as keyof typeof LinkKeys]);
-      pathSegments.pop();
-      this.crumbs = [...pathSegments];
+      this.setCrumbs(path);
     });
   }
-  ngOnInit(): void {}
+
+  setCrumbs(url: string) {
+    const pathSegments = url
+      .split('/')
+      .filter((el: string) => el !== '')
+      .map((el: string) => LinkKeys[el as keyof typeof LinkKeys]);
+    pathSegments.pop();
+    this.crumbs = [...pathSegments];
+  }
 
   redirectToPath(segment: string) {
     if (segment === this.HOME) {

@@ -1,11 +1,11 @@
-<div *ngIf="isVisible" class="breadcrumbs">
+<div class="breadcrumbs">
   <ul class="breadcrumbs__list">
     <li (click)="redirectToPath(HOME)">
       <a>{{ HOME | translate }}</a>
     </li>
 
     <li *ngFor="let crumb of crumbs" (click)="redirectToPath(crumb)">
-      / <a>{{ crumb | translate }}</a>
+      &nbsp;&nbsp;/&nbsp;&nbsp; <a>{{ crumb | translate }}</a>
     </li>
   </ul>
 </div>
