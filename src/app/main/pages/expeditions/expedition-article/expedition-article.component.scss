@@ -52,12 +52,6 @@
     }
   }
 
-  &__path {
-    a, span {
-      @include body-desktop;
-    }
-  }
-
   &__box {
     max-width: 845px;
     margin-left: 109px;
@@ -273,10 +267,6 @@
 
     &__date {
       flex-direction: column;
-    }
-
-    &__path {
-      font-size: 14px;
     }
 
     &__title {

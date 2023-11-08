@@ -9,11 +9,12 @@ import {ExpeditionsState} from "../../../../store/expeditions/expeditions.state"
 import Iexpediton, {ArticleExpedition} from "../../../../shared/interfaces/expedition.interface";
 import {VideoPlayerComponent} from "../../../../shared/shared-components/video-player/video-player.component";
 import {FetchExpeditions, SetSelectedExpedition} from "../../../../store/expeditions/expedition.actions";
+import {BreadcrumbsComponent} from "../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: 'app-expedition-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, VideoPlayerComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, VideoPlayerComponent, BreadcrumbsComponent],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })

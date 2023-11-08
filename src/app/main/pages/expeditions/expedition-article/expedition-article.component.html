@@ -1,11 +1,9 @@
 <ng-container  *ngIf="selectedExpedition$ | async as article">
   <div class="container" >
     <section class="article" *ngIf="article.id">
-      <div class="article__path">
-        <a href="#">{{ "expeditions.article.path.home" | translate }}</a>
-        <span> / </span>
-        <a [routerLink]="'/news'">{{ "expeditions.title" | translate }}</a>
-      </div>
+
+      <app-breadcrumbs></app-breadcrumbs>
+
       <div class="article__header">
         <div class="article__header-box article__box">
           <h1 class="article__title">{{ article.title }}</h1>
