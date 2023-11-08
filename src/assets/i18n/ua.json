@@ -5,7 +5,8 @@
       "map": "Мапа",
       "educational-section": "Освітній розділ",
       "news": "Новини",
-      "expedition": "Експедиції"
+      "expedition": "Експедиції",
+      "home":"Головна"
     },
     "actions": {
       "button-donate": "Підтримати"
@@ -181,6 +182,11 @@
       "wedding": "Весільні пісні",
       "epos": "Музичний епос",
       "instrumental": "Інструментальна музика"
+    },
+    "cycle": {
+      "path": {
+        "home": "Головна"
+      }
     }
   },
   "error": {

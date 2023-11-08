@@ -3,18 +3,14 @@
 .container {
   display: flex;
   min-height: 90vh;
-  margin: 0 auto;
+  margin: 148px auto 80px;
   max-width: 1440px;
-  margin-top: 148px;
-  margin-bottom: 80px;
   padding-top: 30px;
   overflow: hidden;
 }
 
 .science {
   width: 100%;
-  margin-right: 80px;
-  margin-left: 80px;
 
   &__title {
     @include h2-desktop($line-height: 65px);
@@ -25,17 +21,14 @@
   &__introduction {
     @include body-desktop;
 
-    text-wrap: wrap;
     max-width: 628px;
     padding-top: 5px;
-    
   }
 
   &__gallery {
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     margin: 48px 0;
   }
 
@@ -44,16 +37,19 @@
   }
 }
 
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin:  148px 80px 80px;
+  }
+}
+
 @media (width < 1025px) {
   .container {
-    margin-top: 148px;
-    margin-bottom: 80px;
+    margin: 148px 48px 80px;
   }
 
   .science {
-    margin-right: 48px;
-    margin-left: 48px;
-
     &__recomendations {
       margin-bottom: 24px;
     }
@@ -62,27 +58,31 @@
 
 @media (width < 769px) {
   .container {
-    margin-top: 130px;
-    margin-bottom: 80px;
+    margin: 130px 48px 80px;
   }
 
   .science {
     width: 100%;
-    margin-right: 48px;
-    margin-left: 48px;
+
+    &__gallery {
+      grid-template-columns: repeat(2, 1fr);
+
+    }
   }
 }
 
-@media (width < 391px) {
+@media (width <=465px) {
   .container {
-    width: 358px;
-    margin-top: 105px;
-    margin-bottom: 48px;
+    margin: 105px 16px 48px;
   }
 
   .science {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
+
+    &__gallery {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }

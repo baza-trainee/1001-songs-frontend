@@ -1,0 +1,62 @@
+@import '../../../../../../typography/typography';
+
+// eslint-disable-next-line no-use-before-define
+.mat-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, 60%);
+  border-radius: 7px;
+
+  &-header {
+    padding: 16px;
+    height: auto;
+
+    &-description {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 0;
+      flex-grow: initial;
+    }
+
+    &-title {
+      @include h4-mobile;
+
+      margin: 0;
+    }
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.lit-link {
+  padding-left: 25px;
+  position: relative;
+  display: inline-block;
+
+  @include paragraph-desktop($color: $color-primary, $font-weight: $font-weight-semibolt);
+
+  margin-bottom: 8px;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 6px;
+    background-color: var(--text-color-primary);
+    border-radius: 50%;
+  }
+
+}
+
+@media (width <=465px) {
+  // eslint-disable-next-line no-use-before-define
+  .mat-expansion-panel {
+    &-title {
+      font-size: 22px;
+      line-height: 28px;
+    }
+  }
+}

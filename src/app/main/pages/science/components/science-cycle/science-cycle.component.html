@@ -1,0 +1,47 @@
+<div class="container">
+  <section class="cycle" *ngIf="category">
+
+    <app-breadcrumbs></app-breadcrumbs>
+
+    <h1 class="cycle__title">{{ category.title | translate }}</h1>
+    <div class="cycle__description">
+      <div
+        class="cycle__description-box"
+        *ngIf="category.aboutCycle1"
+        [innerHTML]="category.aboutCycle1"
+      ></div>
+      <div
+        class="cycle__description-box"
+        *ngIf="category.aboutCycle2"
+        [innerHTML]="category.aboutCycle2"
+      ></div>
+    </div>
+    <ng-container *ngFor="let sub of category.subcategories">
+      <h4 class="cycle__title-sub">{{ sub.title }}</h4>
+      <div class="cycle__subcategory">
+        <div class="cycle__subcategory-img">
+          <img *ngIf="sub.urlImg" [src]="sub.urlImg" alt="Фото категорії">
+        </div>
+        <div class="cycle__subcategory-box">
+          <a
+            href="#"
+            class="cycle__subcategory-link"
+            *ngFor="let link of sub.links"
+          >
+            {{ link }}
+          <span class="cycle__subcategory-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+           </svg>
+          </span>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+    <div class="cycle__sources">
+
+      <app-recommended-sources></app-recommended-sources>
+
+    </div>
+  </section>
+</div>

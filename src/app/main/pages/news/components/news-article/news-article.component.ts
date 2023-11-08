@@ -7,12 +7,13 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { NewsState } from '../../../../../store/news/news.state';
 import { Article } from '../../../../../shared/interfaces/article.interface';
+import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FetchArticles, SetSelectedArticle } from "../../../../../store/news/news.actions";
 
 @Component({
   selector: 'app-news-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink],
+  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent],
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
