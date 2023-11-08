@@ -13,12 +13,6 @@ img {
   flex-direction: column;
   gap: 48px;
 
-  &__path {
-    a, span {
-      @include body-desktop;
-    }
-  }
-
   &__title {
     @include h2-desktop;
 
@@ -167,10 +161,6 @@ img {
     margin-top: 80px;
     padding: 48px 0;
     gap: 28px;
-
-    &__path {
-      font-size: 14px;
-    }
 
     &__title {
       font-size: 32px;

@@ -38,6 +38,7 @@ export class BreadcrumbsComponent implements OnInit {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
       if (route instanceof NavigationEnd) {
         const path = route.urlAfterRedirects;
+        console.log(path)
         this.setCrumbs(path);
       }
     });
