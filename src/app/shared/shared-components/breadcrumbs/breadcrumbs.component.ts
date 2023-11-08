@@ -69,6 +69,7 @@ export class BreadcrumbsComponent implements OnInit {
     const routeKey = Object.entries(this.Links).find((link: string[]) => link[0] === '/' + url);
     return routeKey ? routeKey[1] : url;
   }
+
   getPathFromKey(key: string) {
     const path = Object.entries(this.Links).find((e) => e[1] === key);
     return path ? path[0] : key;

@@ -1,10 +1,11 @@
 <div class="container">
   <section class="cycle" *ngIf="category">
-    <div class="cycle__path">
-      <a href="#">{{ "science.cycle.path.home" | translate }}</a>
-      <span> / </span>
-      <a [routerLink]="'/science'">{{ "science.title" | translate }}</a>
-    </div>
+<!--    <div class="cycle__path">-->
+<!--      <a href="#">{{ "science.cycle.path.home" | translate }}</a>-->
+<!--      <span> / </span>-->
+<!--      <a [routerLink]="'/science'">{{ "science.title" | translate }}</a>-->
+<!--    </div>-->
+    <app-breadcrumbs></app-breadcrumbs>
     <h1 class="cycle__title">{{ category.title | translate }}</h1>
     <div class="cycle__description">
       <div

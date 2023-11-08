@@ -8,11 +8,12 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RecommendedSourcesComponent} from "../recommended-sources/recommended-sources.component";
 import {mockScienceCycle} from "../../../../../mock-data/science-cycle";
 import {ScienceCategory} from "../../../../../shared/interfaces/science.interface";
+import {BreadcrumbsComponent} from "../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: 'app-science-cycle',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, RecommendedSourcesComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, RecommendedSourcesComponent, BreadcrumbsComponent],
   templateUrl: './science-cycle.component.html',
   styleUrls: ['./science-cycle.component.scss']
 })
