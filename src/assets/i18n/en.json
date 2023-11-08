@@ -5,7 +5,8 @@
       "map": "Map",
       "educational-section": "Educational Section",
       "news": "News",
-      "expedition": "Expeditions"
+      "expedition": "Expeditions",
+      "home": "Main"
     },
     "actions": {
       "button-donate": "Donate"
@@ -195,6 +196,11 @@
       "wedding": "Wedding songs",
       "epos": "Musical epic",
       "instrumental": "Instrumental music"
+    },
+    "cycle": {
+      "path": {
+        "home": "Home"
+      }
     }
   },
   "error": {

@@ -1,50 +1,46 @@
-<ng-container  *ngIf="selectedArticle$ | async as article">
-  <div class="container" >
+<ng-container *ngIf="selectedArticle$ | async as article">
+  <div class="container">
     <section class="article" *ngIf="article.id">
-      <div class="article__path">
-        <a href="#">{{ "news.article.path.home" | translate }}</a>
-        <span> / </span>
-        <a [routerLink]="'/news'">{{ "news.title" | translate }}</a>
-      </div>
+      <app-breadcrumbs></app-breadcrumbs>
       <div class="article__box">
         <h1 class="article__title">{{ article.title }}</h1>
         <p class="article__date">{{ article.eventDate }} • {{ article.location }}</p>
       </div>
       <div class="article__text">
         <ng-container *ngIf="article.text[0].split('\\n')">
-          <p class="article__box">{{ article.text[0].split('\\n')[0]}}</p>
-          <img class="article__img" [src]="article.images[0]" [alt]="article.title">
-          <p class="article__box">{{ article.text[0].split('\\n')[1]}}</p>
+          <p class="article__box">{{ article.text[0].split('\\n')[0] }}</p>
+          <img class="article__img" [src]="article.images[0]" [alt]="article.title" />
+          <p class="article__box">{{ article.text[0].split('\\n')[1] }}</p>
         </ng-container>
       </div>
       <div class="article__box">
-        <img class="article__sub-img" [src]="article.images[0]" [alt]="article.title">
+        <img class="article__sub-img" [src]="article.images[0]" [alt]="article.title" />
       </div>
       <div class="article__text">
         <ng-container *ngIf="article.text[1].split('\\n')">
-          <p class="article__box">{{ article.text[0].split('\\n')[0]}}</p>
-          <p class="article__box">{{ article.text[0].split('\\n')[1]}}</p>
+          <p class="article__box">{{ article.text[0].split('\\n')[0] }}</p>
+          <p class="article__box">{{ article.text[0].split('\\n')[1] }}</p>
         </ng-container>
       </div>
       <div class="article__box">
-        <h2 class="article__sub-title">{{ "news.article.about-article.title" | translate }}</h2>
+        <h2 class="article__sub-title">{{ 'news.article.about-article.title' | translate }}</h2>
         <div class="article__about">
           <div class="article__about-box">
-            <h5 class="article__about-title">{{ "news.article.about-article.author" | translate  }}:</h5>
-            <p class="article__about-text">Поліщук Петро, <br>Поліщук Петро </p>
+            <h5 class="article__about-title">{{ 'news.article.about-article.author' | translate }}:</h5>
+            <p class="article__about-text">Поліщук Петро, <br />Поліщук Петро</p>
           </div>
           <div class="article__about-box">
-            <h5 class="article__about-title">{{ "news.article.about-article.editor" | translate  }}:</h5>
+            <h5 class="article__about-title">{{ 'news.article.about-article.editor' | translate }}:</h5>
             <p class="article__about-text">Поліщук Петро</p>
           </div>
           <div class="article__about-box">
-            <h5 class="article__about-title">{{ "news.article.about-article.photos" | translate  }}:</h5>
+            <h5 class="article__about-title">{{ 'news.article.about-article.photos' | translate }}:</h5>
             <p class="article__about-text">Поліщук Петро</p>
           </div>
         </div>
       </div>
       <div class="article__box article__share">
-        <span class="article__share-title">{{ "news.article.about-article.share" | translate  }}</span>
+        <span class="article__share-title">{{ 'news.article.about-article.share' | translate }}</span>
         <a href="#" class="article__share-link">
           <svg width="24" height="24">
             <use xlink:href="./assets/sprites.svg#fbNews"></use>
@@ -69,10 +65,9 @@
     </section>
   </div>
 
-  <div class="article__carousel"  *ngIf="article.id">
+  <div class="article__carousel" *ngIf="article.id">
     <div class="container">
-      <h2 class="article__carousel-title">{{ "news.article.latest-news" | translate  }}</h2>
-
+      <h2 class="article__carousel-title">{{ 'news.article.latest-news' | translate }}</h2>
     </div>
   </div>
 </ng-container>

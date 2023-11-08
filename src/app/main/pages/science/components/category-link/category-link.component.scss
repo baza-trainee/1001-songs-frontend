@@ -1,15 +1,10 @@
 @import '/src/typography/typography';
 
 $radius: 15px;
-$link-x-padding: 24px;
-$width-desktop-1: 410px;
-$width-desktop-2: 293px;
-$width-tablet: 323px;
-$width-mobile: 354px;
 
 .card {
   display: inline-block;
-  width: $width-desktop-1;
+  width: 100%;
   height: 281px;
   position: relative;
   border-radius: $radius;
@@ -23,12 +18,10 @@ $width-mobile: 354px;
     justify-content: space-between;
     text-align: left;
     align-items: flex-end;
-    padding: 0 $link-x-padding 0 $link-x-padding;
-    top: 207px;
+    bottom: 0;
     width: 100%;
-    padding-top: 30px;
+    padding: 16px 24px;
     color: rgb(255, 255, 255);
-    padding-bottom: 20px;
     background: linear-gradient(rgba(255, 255, 255, 0%), rgba(0, 0, 0, 80%));
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
@@ -41,23 +34,18 @@ $width-mobile: 354px;
   }
 
   img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 
 @media (width < 1025px) {
   .card {
-    width: $width-desktop-2;
     height: 200px;
 
     .link {
-      top: 105px;
-      width: $width-desktop-2;
       height: 100px;
-    }
-
-    img {
-      width: $width-desktop-2;
     }
   }
 }
@@ -65,34 +53,21 @@ $width-mobile: 354px;
 
 @media (width < 769px) {
   .card {
-    width: $width-tablet;
     height: 200px;
 
     .link {
-      top: 105px;
-      width: $width-tablet;
       height: 100px;
-    }
-
-    img {
-      width: $width-tablet;
     }
   }
 }
 
 @media (width < 391px) {
   .card {
-    width: $width-mobile;
     height: 200px;
 
     .link {
-      top: 105px;
-      width: $width-mobile;
+      padding: 16px;
       height: 100px;
-    }
-
-    img {
-      width: $width-mobile;
     }
   }
 }
