@@ -166,6 +166,21 @@
       "thematic": "Thematic",
       "video-of-ritual": "Video of ritual",
       "digital-record": "Digital record"
+    },
+    "article": {
+      "path": {
+        "home": "Home"
+      },
+      "about-article": {
+        "title": "The material was prepared by",
+        "collectors": "Collectors",
+        "editor": "Editor",
+        "video-editing": "Video editing",
+        "record": "Record",
+        "share": "Share"
+      },
+      "sources": "Sources",
+      "latest-news": "Related expeditions"
     }
   },
   "science": {

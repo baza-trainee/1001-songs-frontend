@@ -167,6 +167,21 @@
       "thematic": "Тематична",
       "video-of-ritual": "Відеозапис обряду",
       "digital-record": "Цифровий запис"
+    },
+    "article": {
+      "path": {
+        "home": "Головна"
+      },
+      "about-article": {
+        "title": "Матеріал підготували",
+        "collectors": "Збирачі",
+        "editor": "Редактор",
+        "video-editing": "Відео-монтаж",
+        "record": "Запис",
+        "share": "Поширити"
+      },
+      "sources": "Джерела",
+      "latest-news": "Пов’язані експедиції"
     }
   },
   "science": {
