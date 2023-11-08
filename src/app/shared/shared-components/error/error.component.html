@@ -1,13 +1,15 @@
-<app-header></app-header>
-<section class="error">
-  <div class="container">
-    <div class="error__inner">
-      <div class="error__block">
-        <h1 class="error__block-title">{{ errorPage.title | translate }}</h1>
-        <h2 class="error__block-text">{{ errorPage.text | translate }}</h2>
-        <button class="error__block-btn" routerLink=""> {{ errorPage.toHome | translate }} </button>
+<div class="wrapper">
+  <app-header></app-header>
+  <section class="error">
+    <div class="container">
+      <div class="error__inner">
+        <div class="error__block">
+          <h1 class="error__block-title">{{ errorPage.title | translate }}</h1>
+          <h2 class="error__block-text">{{ errorPage.text | translate }}</h2>
+          <button class="error__block-btn" routerLink=""> {{ errorPage.toHome | translate }} </button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<app-footer></app-footer>
+  </section>
+  <app-footer></app-footer>
+</div>

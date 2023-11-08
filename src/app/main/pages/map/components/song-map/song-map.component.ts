@@ -13,11 +13,12 @@ import { PlayerState } from '../../../../../store/player/player.state';
 import { FetchSongById, ResetSong } from '../../../../../store/player/player.actions';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
+import {BreadcrumbsComponent} from "../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: 'app-song-map',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, PlayerComponent, StereoPlayerComponent, MultichanelPlayerComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, PlayerComponent, StereoPlayerComponent, MultichanelPlayerComponent, BreadcrumbsComponent],
   templateUrl: './song-map.component.html',
   styleUrls: ['./song-map.component.scss']
 })

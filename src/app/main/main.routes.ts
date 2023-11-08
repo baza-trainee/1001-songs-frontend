@@ -11,6 +11,7 @@ import { NewsArticleComponent } from './pages/news/components/news-article/news-
 import {ExpeditionArticleComponent} from "./pages/expeditions/expedition-article/expedition-article.component";
 import {ScienceCycleComponent} from "./pages/science/components/pages/science-cycle/science-cycle.component";
 import {ScienceSongsComponent} from "./pages/science/components/pages/science-songs/science-songs.component";
+import {ScienceSongComponent} from "./pages/science/components/pages/science-song/science-song.component";
 
 export const MAIN_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
@@ -41,7 +42,8 @@ export const MAIN_ROUTES: Routes = [
     children: [
       { path: '', component: ScienceComponent },
       { path: ':category', component: ScienceCycleComponent },
-      { path: ':category/:id', component: ScienceSongsComponent }
+      { path: ':category/:id', component: ScienceSongsComponent },
+      { path: ':category/:id/:idSong', component: ScienceSongComponent }
     ]
   },
   { path: '', component: HomeComponent }

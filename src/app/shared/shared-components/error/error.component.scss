@@ -1,11 +1,15 @@
 @import '../../../../typography/typography';
 
 .error {
+  flex-grow: 1;
+  padding-top: 108px;
   position: relative;
-  background: linear-gradient (13deg, rgba (176, 176, 176, 40%), rgba(176, 176, 176, 40%)), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
+  background: linear-gradient(13deg, rgba(176, 176, 176, 40%), rgba(176, 176, 176, 40%)), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
   background-position-x: 30%;
   background-position-y: -63%;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .container {
     padding: 0 10px;
@@ -17,7 +21,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: calc (108px + 91px);
+    padding-top: calc(108px + 91px);
     padding-bottom: 191px;
 
   }
@@ -66,14 +70,12 @@
 
 @media (width <= 2200px) {
   .error{
-    height: 100%;
     background-position-y: 10%;
   }
 }
 
 @media (width <= 1440px) {
   .error{
-    height: 100%;
     background-position-y: -1100%;
   }
 }
@@ -128,6 +130,12 @@
         line-height: 36px;
       }
     }
+  }
+}
+
+@media (width <=675px) {
+  .error {
+    padding-top: 96px;
   }
 }
 
