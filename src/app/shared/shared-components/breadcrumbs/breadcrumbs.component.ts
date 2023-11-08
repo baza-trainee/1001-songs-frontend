@@ -30,7 +30,9 @@ export class BreadcrumbsComponent implements OnInit {
   ) {
     const url = window.location.href;
     const path = url.split('#')[1];
-    this.setCrumbs(path);
+    if (path) {
+      this.setCrumbs(path);
+    }
   }
   ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
