@@ -14,7 +14,7 @@ describe('ExpeditionsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(),HttpClientTestingModule, ExpeditionsComponent, NgxsModule.forRoot([ExpeditionsState])],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, ExpeditionsComponent, NgxsModule.forRoot([ExpeditionsState])],
       providers: [
         {
           provide: ActivatedRoute,

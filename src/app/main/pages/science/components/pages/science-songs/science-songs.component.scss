@@ -52,47 +52,23 @@
 
   &__playlist {
     &-titles {
-      display: flex;
+      display: grid;
+      grid-template-columns: 0.4fr 1.5fr 1.6fr 0.6fr 0.3fr;
       align-items: center;
+      justify-items: start;
+      grid-gap: 16px;
       margin-bottom: 12px;
       padding: 0 12px;
-    }
 
-    .titles {
       @include caption-desktop($color: var(--text-color-popup-menu));
-
-      &.title__photo {
-        min-width: 72px;
-        margin-right: 24px;
-      }
-
-      &.title__name {
-        min-width: 180px;
-        margin-right: 114px;
-      }
-
-      &.title__record__info {
-        display: flex;
-        align-items: center;
-        min-width: 466px;
-
-        .record__info__genre {
-          min-width: 123px;
-          margin-right: 114px;
-
-        }
-
-        .record__info__recording__location {
-          min-width: 229px;
-        }
-      }
-
-      &.title__listen {
-        min-width: 72px;
-        margin-left: 26.2%;
-      }
-
     }
+  }
+
+  .title__record__info {
+    min-width: 255px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 }
 
@@ -108,23 +84,8 @@
         margin-right: 101px;
       }
 
-      &.title__record__info {
-        display: block;
-        min-width: 229px;
-
-        .record__info__genre {
-          min-width: 100%;
-          margin-right: 0;
-        }
-
-        .record__info__recording__location {
-          min-width: 100%;
-        }
-      }
-
       &.title__listen {
         min-width: 72px;
-        margin-left: 25%;
       }
     }
   }
@@ -136,10 +97,16 @@
   }
 
   .songs {
-    &__playlist{
+    &__playlist {
       &-titles {
-        display: none;
+        grid-template-columns: 0.4fr 1.9fr 0.9fr 0.6fr 0.2fr;
       }
+    }
+
+    .title__record__info {
+      min-width: auto;
+      gap: 0;
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }
@@ -152,6 +119,12 @@
   .songs {
     &__description {
       flex-direction: column;
+    }
+
+    &__playlist{
+      &-titles {
+        display: none;
+      }
     }
   }
 }
