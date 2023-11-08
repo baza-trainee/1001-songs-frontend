@@ -1,0 +1,56 @@
+@import '../../../../typography/typography';
+
+.breadcrumbs {
+  &__list {
+    li {
+      display: inline;
+    }
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+@media (width < 1025px) {
+  .container {
+    margin-top: 148px;
+    margin-bottom: 80px;
+  }
+
+  .science {
+    margin-right: 48px;
+    margin-left: 48px;
+
+    &__recomendations {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@media (width < 769px) {
+  .container {
+    margin-top: 130px;
+    margin-bottom: 80px;
+  }
+
+  .science {
+    width: 100%;
+    margin-right: 48px;
+    margin-left: 48px;
+  }
+}
+
+@media (width < 391px) {
+  .container {
+    width: 358px;
+    margin-top: 105px;
+    margin-bottom: 48px;
+  }
+
+  .science {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
