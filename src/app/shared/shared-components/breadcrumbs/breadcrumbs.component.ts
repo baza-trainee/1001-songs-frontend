@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, skip, switchMap } from 'rxjs';
-import * as links from '../../enums/navLinks.enum';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
-enum LinkKeys {
+enum LinkTrasnslateKeys {
+  home = 'header.nav-menu.home',
   about = 'header.nav-menu.about',
   map = 'header.nav-menu.map',
   education = 'header.nav-menu.educational-section',
@@ -21,13 +21,11 @@ enum LinkKeys {
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
-  HOME = 'header.nav-menu.home';
   crumbs: string[] = [];
-  // isVisible: boolean = true;
+  readonly Links = LinkTrasnslateKeys;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private _translate: TranslateService
   ) {
     const url = window.location.href;
@@ -41,17 +39,17 @@ export class BreadcrumbsComponent implements OnInit {
     });
   }
 
-  setCrumbs(url: string) {
-    const pathSegments = url
+  setCrumbs(path: string) {
+    const pathSegments = path
       .split('/')
-      .filter((el: string) => el !== '')
-      .map((el: string) => LinkKeys[el as keyof typeof LinkKeys]);
+      .filter((segment: string) => segment !== '')
+      .map((segment: string) => this.Links[segment as keyof typeof this.Links]);
     pathSegments.pop();
     this.crumbs = [...pathSegments];
   }
 
   redirectToPath(segment: string) {
-    if (segment === this.HOME) {
+    if (segment === this.Links.home) {
       this.router.navigateByUrl('/');
       return;
     }
@@ -64,15 +62,11 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   getTranslateKey(url: string): string {
-    const routeKey = links.navLinksHeader.find((link: any) => link.route === '/' + url);
-    return routeKey ? routeKey.name : url;
+    const routeKey = Object.entries(this.Links).find((link: any) => link.route === '/' + url);
+    return routeKey ? routeKey[1] : url;
   }
   getPathFromKey(key: string) {
-    const path = Object.entries(LinkKeys).find((e) => e[1] === key);
+    const path = Object.entries(this.Links).find((e) => e[1] === key);
     return path ? path[0] : key;
   }
-}
-
-export interface crumb {
-  url: string;
 }

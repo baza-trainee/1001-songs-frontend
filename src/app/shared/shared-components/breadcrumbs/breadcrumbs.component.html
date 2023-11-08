@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
   <ul class="breadcrumbs__list">
-    <li (click)="redirectToPath(HOME)">
-      <a>{{ HOME | translate }}</a>
+    <li (click)="redirectToPath(Links.home)">
+      <a>{{ Links.home | translate }}</a>
     </li>
 
     <li *ngFor="let crumb of crumbs" (click)="redirectToPath(crumb)">
