@@ -33,9 +33,11 @@ export class BreadcrumbsComponent implements OnInit {
     this.setCrumbs(path);
   }
   ngOnInit(): void {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: any) => {
-      const path = route.urlAfterRedirects;
-      this.setCrumbs(path);
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
+      if (route instanceof NavigationEnd) {
+        const path = route.urlAfterRedirects;
+        this.setCrumbs(path);
+      }
     });
   }
 
@@ -62,7 +64,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   getTranslateKey(url: string): string {
-    const routeKey = Object.entries(this.Links).find((link: any) => link.route === '/' + url);
+    const routeKey = Object.entries(this.Links).find((link: string[]) => link[0] === '/' + url);
     return routeKey ? routeKey[1] : url;
   }
   getPathFromKey(key: string) {
