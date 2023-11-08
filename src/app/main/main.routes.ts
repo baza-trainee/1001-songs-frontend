@@ -9,7 +9,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { SongMapComponent } from './pages/map/components/song-map/song-map.component';
 import { NewsArticleComponent } from './pages/news/components/news-article/news-article.component';
 import {ExpeditionArticleComponent} from "./pages/expeditions/expedition-article/expedition-article.component";
-import {ScienceCycleComponent} from "./pages/science/components/science-cycle/science-cycle.component";
+import {ScienceCycleComponent} from "./pages/science/components/pages/science-cycle/science-cycle.component";
+import {ScienceSongsComponent} from "./pages/science/components/pages/science-songs/science-songs.component";
 
 export const MAIN_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
@@ -39,7 +40,8 @@ export const MAIN_ROUTES: Routes = [
     path: 'science',
     children: [
       { path: '', component: ScienceComponent },
-      { path: ':category', component: ScienceCycleComponent }
+      { path: ':category', component: ScienceCycleComponent },
+      { path: ':category/:id', component: ScienceSongsComponent }
     ]
   },
   { path: '', component: HomeComponent }

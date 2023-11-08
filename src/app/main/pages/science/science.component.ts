@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { CategoryLinkComponent } from './components/category-link/category-link.component';
+import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ArrowDownComponent } from 'src/app/main/pages/science/components/arrow-down/arrow-down.component';
-import { scienceCategories } from './components/category-link/categoriesList';
-import { recomendations } from './components/category-link/recomendations';
-import { RecomendationComponent } from './components/recomendation/recomendation.component';
-import { RecommendedSourcesComponent } from './components/recommended-sources/recommended-sources.component';
+import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
+import { scienceCategories } from './components/shared-components/category-link/categoriesList';
+import { recomendations } from './components/shared-components/category-link/recomendations';
+import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
+import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import {RouterLink} from "@angular/router";
 
 @Component({

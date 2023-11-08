@@ -1,0 +1,51 @@
+<div class="container" *ngIf="songs$ | async as songs">
+  <section class="songs">
+    <div class="songs__path">
+
+      <app-breadcrumbs></app-breadcrumbs>
+
+    </div>
+    <h1 class="songs__title">{{ title }}</h1>
+    <div class="songs__description">
+      <div
+        class="songs__description-box"
+        *ngIf="about1"
+        [innerHTML]="about1"
+      ></div>
+      <div
+        class="songs__description-box"
+        *ngIf="about2"
+        [innerHTML]="about2"
+      ></div>
+    </div>
+
+    <div class="songs__carousel">
+      <h2 class="songs__title-sub">Тут буде слайдер</h2>
+    </div>
+    <h4 class="songs__title-sub">Фольклорні записи</h4>
+    <div class="songs__player">
+      <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
+
+      <app-stereo-player></app-stereo-player>
+
+      <app-multichanel-player></app-multichanel-player>
+
+    </div>
+    <div class="songs__playlist">
+      <div class="songs__playlist-titles">
+        <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>
+        <div class="titles title__name">{{ 'map.player.songs-list.titles.name' | translate }}</div>
+        <div class="titles title__record__info">
+          <div class="record__info__genre">{{ 'map.player.songs-list.titles.genre' | translate }}</div>
+          <div class="record__info__recording__location">{{ 'map.player.songs-list.titles.recording-location' | translate }}</div>
+        </div>
+        <div class="titles title__listen">{{ 'map.player.songs-list.titles.listen' | translate }}</div>
+      </div>
+      <div>
+        <div class="" *ngFor="let song of songs">
+          <app-playlist-song-card [song]="song"></app-playlist-song-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

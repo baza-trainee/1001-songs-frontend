@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {scienceCategories} from "../category-link/categoriesList";
+import {scienceCategories} from "../../shared-components/category-link/categoriesList";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {take} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 
-import {RecommendedSourcesComponent} from "../recommended-sources/recommended-sources.component";
-import {mockScienceCycle} from "../../../../../mock-data/science-cycle";
-import {ScienceCategory} from "../../../../../shared/interfaces/science.interface";
-import {BreadcrumbsComponent} from "../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
+import {RecommendedSourcesComponent} from "../../shared-components/recommended-sources/recommended-sources.component";
+import {mockScienceCycle} from "../../../../../../mock-data/science-cycle";
+import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
+import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: 'app-science-cycle',
@@ -19,6 +19,7 @@ import {BreadcrumbsComponent} from "../../../../../shared/shared-components/brea
 })
 export class ScienceCycleComponent implements OnInit {
   category: ScienceCategory = mockScienceCycle;
+  categoryName!: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute
@@ -32,8 +33,8 @@ export class ScienceCycleComponent implements OnInit {
     if (this.route.params) {
       this.route.params.pipe(take(1)).subscribe(params => {
         const categories: { translateKey: string; url: string; routerLink: string }[] = scienceCategories;
-        const requestedRouterLink = params['category'];
-        const selectedCategory = categories.find(category => category.routerLink === requestedRouterLink);
+        this.categoryName = params['category'];
+        const selectedCategory = categories.find(category => category.routerLink === this.categoryName);
 
         if (selectedCategory) {
           this.category.title = selectedCategory.translateKey;

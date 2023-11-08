@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ArrowDownComponent } from 'src/app/main/pages/science/components/arrow-down/arrow-down.component';
+import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
 import { recomendations } from '../category-link/recomendations';
 
 @Component({
