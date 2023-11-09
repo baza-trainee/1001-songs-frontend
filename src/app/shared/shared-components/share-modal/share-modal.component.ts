@@ -38,7 +38,7 @@ export class ShareModalComponent {
   shareOnInstagram() {
     const searchParams = new URLSearchParams();
     searchParams.set('u', window.location.href);
-    const navUrl = 'https://www.instagram.com/sharer.php' + searchParams;
+    const navUrl = 'https://www.instagram.com/share?' + searchParams;
     window.open(navUrl, '_blank');
   }
 
