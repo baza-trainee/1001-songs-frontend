@@ -201,6 +201,9 @@
       "path": {
         "home": "Home"
       }
+    },
+    "songs": {
+      "player-title": "Listen to the song"
     }
   },
   "error": {
