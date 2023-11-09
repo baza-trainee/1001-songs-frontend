@@ -8,9 +8,9 @@ enum LinkTrasnslateKeys {
   home = 'header.nav-menu.home',
   about = 'header.nav-menu.about',
   map = 'header.nav-menu.map',
-  education = 'header.nav-menu.educational-section',
+  science = 'header.nav-menu.educational-section',
   news = 'header.nav-menu.news',
-  expedition = 'header.nav-menu.expedition'
+  expeditions = 'header.nav-menu.expedition'
 }
 
 @Component({
