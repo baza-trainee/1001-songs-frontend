@@ -1,10 +1,8 @@
 <div class="container"*ngIf="selectedSong$ | async as song">
   <section class="song-page">
-    <div class="song-page__path">
-      <a href="#">{{"map.song-page.path.home" | translate }}</a>
-      <span> / </span>
-      <a [routerLink]="'/map'">{{"map.song-page.path.map" | translate }}</a>
-    </div>
+
+    <app-breadcrumbs></app-breadcrumbs>
+
     <div class="song-page__detail" *ngIf="song.id">
       <div class="song-page__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
       <div class="song-page__info">

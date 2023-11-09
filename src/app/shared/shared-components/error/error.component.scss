@@ -1,11 +1,13 @@
 @import '../../../../typography/typography';
 
 .error {
+  flex-grow: 1;
+  padding-top: 108px;
   position: relative;
-  background: linear-gradient (13deg, rgba (176, 176, 176, 40%), rgba(176, 176, 176, 40%)), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
-  background-position-x: 30%;
-  background-position-y: -63%;
-  height: 100%;
+  background: linear-gradient(13deg, rgba(176, 176, 176, 40%), rgba(176, 176, 176, 40%)), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .container {
     padding: 0 10px;
@@ -17,7 +19,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: calc (108px + 91px);
+    padding-top: calc(108px + 91px);
     padding-bottom: 191px;
 
   }
@@ -60,23 +62,9 @@
 @media (width <= 2400px) {
   .error{
     height: 100%;
-    background-position-y: 5%;
   }
 }
 
-@media (width <= 2200px) {
-  .error{
-    height: 100%;
-    background-position-y: 10%;
-  }
-}
-
-@media (width <= 1440px) {
-  .error{
-    height: 100%;
-    background-position-y: -1100%;
-  }
-}
 
 @media (width <= 1140px) {
   .error{
@@ -95,7 +83,6 @@
 @media (width <= 1024px) {
   .error{
     height: 100%;
-    background-position-x: 0;
 
     &__block{
       padding-top: 202px;
@@ -107,7 +94,6 @@
 @media (width <= 768px) {
   .error{
     height: 100%;
-    background-position-x: 35%;
 
     &__block{
       padding-top: 276px;
@@ -131,10 +117,14 @@
   }
 }
 
+@media (width <=675px) {
+  .error {
+    padding-top: 96px;
+  }
+}
+
 @media (width <= 500px) {
   .error {
-    background-position: 50%;
-
     &__block{
       padding-top: 250px;
 
@@ -158,11 +148,5 @@
         width: 358px;
       }
     }
-  }
-}
-
-@media (width <= 390px) {
-  .error {
-    background-position-x: 47%;
   }
 }

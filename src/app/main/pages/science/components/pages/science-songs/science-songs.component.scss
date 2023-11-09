@@ -1,0 +1,163 @@
+@import '../../../../../../../typography/typography';
+
+.songs {
+  @include body-desktop;
+
+  margin-top: 108px;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  img {
+    width: 100%;
+  }
+
+  &__title {
+    @include h2-desktop;
+
+    &-sub {
+      @include h4-desktop($line-height: 36px);
+
+      margin: 0;
+    }
+  }
+
+  &__description {
+    display: flex;
+    gap: 24px;
+
+    @include body-desktop($font-size: 20px, $line-height: 28px);
+
+    &-box {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  &__carousel {
+    padding: 120px 0;
+
+    .songs__title-sub {
+      color: var(--color-input);
+    }
+  }
+
+  &__player {
+    &-title {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__playlist {
+    &-titles {
+      display: grid;
+      grid-template-columns: 0.4fr 1.5fr 1.6fr 0.6fr 0.3fr;
+      align-items: center;
+      justify-items: start;
+      grid-gap: 16px;
+      margin-bottom: 12px;
+      padding: 0 12px;
+
+      @include caption-desktop($color: var(--text-color-popup-menu));
+    }
+  }
+
+  .title__record__info {
+    min-width: 255px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (width <=1440px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 80px;
+  }
+
+  .songs {
+    .titles {
+      &.title__name {
+        margin-right: 101px;
+      }
+
+      &.title__listen {
+        min-width: 72px;
+      }
+    }
+  }
+}
+
+@media (width <=1024px) {
+  .container {
+    margin: 0 48px;
+  }
+
+  .songs {
+    &__playlist {
+      &-titles {
+        grid-template-columns: 0.4fr 1.9fr 0.9fr 0.6fr 0.2fr;
+      }
+    }
+
+    .title__record__info {
+      min-width: auto;
+      gap: 0;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+@media (width <=768px) {
+  .container {
+    margin: 0 32px;
+  }
+
+  .songs {
+    &__description {
+      flex-direction: column;
+    }
+
+    &__playlist{
+      &-titles {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (width <=675px) {
+  .container {
+    margin: 0 32px;
+  }
+
+  .songs {
+    margin-top: 96px;
+  }
+}
+
+@media (width <=465px) {
+  .container {
+    margin: 0 16px;
+  }
+
+  .songs {
+    padding: 32px 0;
+    gap: 32px;
+
+    &__title {
+      font-size: 32px;
+      line-height: 40px;
+
+      &-sub {
+        font-size: 24px;
+        line-height: 32px;
+      }
+    }
+  }
+}
+
+

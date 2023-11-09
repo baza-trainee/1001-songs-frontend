@@ -16,7 +16,7 @@
         [innerHTML]="category.aboutCycle2"
       ></div>
     </div>
-    <ng-container *ngFor="let sub of category.subcategories">
+    <ng-container *ngFor="let sub of category.subcategories; let i = index">
       <h4 class="cycle__title-sub">{{ sub.title }}</h4>
       <div class="cycle__subcategory">
         <div class="cycle__subcategory-img">
@@ -26,7 +26,8 @@
           <a
             href="#"
             class="cycle__subcategory-link"
-            *ngFor="let link of sub.links"
+            [routerLink]="'' + i + j"
+            *ngFor="let link of sub.links; let j = index"
           >
             {{ link }}
           <span class="cycle__subcategory-arrow">

@@ -201,6 +201,25 @@
       "path": {
         "home": "Home"
       }
+    },
+    "songs": {
+      "player-title": "Listen to the song"
+    },
+    "song-page": {
+      "video": "Video",
+      "map": "Map",
+      "header": {
+        "photos": "Ethnographic photo",
+        "share": "Share",
+        "download": "Download recording"
+      },
+      "info": {
+        "title": "Information",
+        "place": "Place of recording",
+        "region": "Ethnographic region",
+        "record": "Record",
+        "performers": "Performers"
+      }
     }
   },
   "error": {
