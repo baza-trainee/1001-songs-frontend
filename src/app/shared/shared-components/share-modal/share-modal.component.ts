@@ -33,46 +33,26 @@ export class ShareModalComponent implements OnInit {
   }
 
   shareOnFacebook() {
-    let searchParams = new URLSearchParams();
+    const searchParams = new URLSearchParams();
     searchParams.set('u', window.location.href);
     const navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
     window.open(navUrl, '_blank');
   }
 
   shareOnInstagram() {
-    let searchParams = new URLSearchParams();
+    const searchParams = new URLSearchParams();
     searchParams.set('u', window.location.href);
     const navUrl = 'https://www.instagram.com/sharer.php' + searchParams;
     window.open(navUrl, '_blank');
   }
 
   shareOnTelegram() {
-    let searchParams = new URLSearchParams();
+    const searchParams = new URLSearchParams();
     searchParams.set('url', window.location.href);
     const navUrl = 'https://t.me/share/url?' + searchParams;
     window.open(navUrl, '_blank');
   }
-  // private createNavigationUrl() {
-  //   let searchParams = new URLSearchParams();
-
-  //   // TODO: zrobić map z tego manualnego dziugania
-
-  //   switch(this.type) {
-  //     case 'facebook':
-  //       searchParams.set('u', this.shareUrl);
-  //       this.navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
-  //       break;
-  //     case 'twitter':
-  //       searchParams.set('url', this.shareUrl);
-  //       this.navUrl =  'https://twitter.com/share?' + searchParams;
-  //       break;
-  //   }
-  // }
-
-  // public share() {
-  //   return window.open(this.navUrl, "_blank");
-  // }
-
+ 
   copyCurrentUrl(): void {
     const currentURL: string = window.location.href;
 
