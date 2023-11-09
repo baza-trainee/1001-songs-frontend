@@ -87,11 +87,13 @@
   &__player {
     &-title {
       @include h2-desktop;
+
       margin-bottom: 24px;
     }
 
     &-genre {
       @include body-desktop;
+
       margin-bottom: 48px;
     }
   }
