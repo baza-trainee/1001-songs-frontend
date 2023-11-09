@@ -8,6 +8,7 @@
 
   &__player {
     border-radius: 8px;
+    height: 180px;
     overflow: hidden;
   }
 
@@ -49,6 +50,10 @@
 @media (width < 769px) {
   .event {
     width: 340px;
+
+    &__player {
+      height: 200px;
+    }
 
     &__media {
       height: 200px;

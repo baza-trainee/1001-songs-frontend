@@ -10,24 +10,24 @@ import { ExpeditionCardComponent } from 'src/app/shared/shared-components/expedi
 import { ExpeditionsState } from 'src/app/store/expeditions/expeditions.state';
 import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
 import {FetchExpeditions} from 'src/app/store/expeditions/expedition.actions';
+import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
 
 @Component({
   selector: 'app-expeditions',
   templateUrl: './expeditions.component.html',
   styleUrls: ['./expeditions.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule]
+    imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent]
 })
 export class ExpeditionsComponent {
   @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
-  categories = expeditionCategories;
-  selectedCategory: number = 0;
+  categories: expeditionCategories[] = Object.values(expeditionCategories);
 
   constructor(private store: Store) {
     this.store.dispatch(new FetchExpeditions());
   }
 
-  selectCategory(id: number) {
-    this.selectedCategory = id;
+  filteredCategory(category: string): void {
+    console.log(category)
   }
 }
