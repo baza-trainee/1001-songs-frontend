@@ -15,7 +15,7 @@ import { ShareModalLink } from '../../enums/navLinks.enum';
   templateUrl: './share-modal.component.html',
   styleUrls: ['./share-modal.component.scss']
 })
-export class ShareModalComponent implements OnInit {
+export class ShareModalComponent {
   protected readonly ShareModal = ShareModal;
   protected readonly ShareModalLink = ShareModalLink;
   fbLink = 'https://www.facebook.com/sharer/sharer.php?';
@@ -26,10 +26,6 @@ export class ShareModalComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialogRef: DialogRef
   ) {
-    //  this.createNavigationUrl();
-  }
-  ngOnInit(): void {
-    console.log(window.location);
   }
 
   shareOnFacebook() {
