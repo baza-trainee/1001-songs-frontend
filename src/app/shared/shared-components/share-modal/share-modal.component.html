@@ -13,7 +13,10 @@
   <div class="dialog__action-block">
     <a
       tabindex="0"
-      href="#">
+      href="#" 
+      (click)="shareOnFacebook()"
+      (keyup)="shareOnFacebook()"
+    >
       <img [src]="ShareModal.facebook" alt="facebook share icon">
     </a>
     <a class="dialog__action-block--text" href="#">{{ ShareModalLink.facebook | translate }}</a>
@@ -21,7 +24,10 @@
   <div class="dialog__action-block">
     <a
       tabindex="0"
-      href="#">
+      href="#"
+      (click)="shareOnInstagram()"
+      (keyup)="shareOnInstagram()"
+    >
       <img [src]="ShareModal.instagram" alt="instagram share icon">
     </a>
     <a class="dialog__action-block--text" href="#">{{ ShareModalLink.instagram | translate }}</a>
@@ -29,7 +35,10 @@
   <div class="dialog__action-block">
     <a
       tabindex="0"
-      href="#">
+      href="#"
+      (click)="shareOnTelegram()"
+      (keyup)="shareOnTelegram()"
+    >
       <img [src]="ShareModal.telegram" alt="telegram share icon">
     </a>
     <a class="dialog__action-block--text" href="#">{{ ShareModalLink.telegram | translate }}</a>
