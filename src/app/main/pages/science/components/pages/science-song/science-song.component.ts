@@ -29,7 +29,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
 
   song!: Song;
   photos = [
-    { url: './assets/img/home/carousel1.jpg', alt: '' },
+    { url: './assets/img/Img.png', alt: '' },
     { url: './assets/img/home/carousel2.jpg', alt: '' },
     { url: './assets/img/home/carousel3.jpg', alt: '' }
   ];

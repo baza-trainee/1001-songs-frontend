@@ -5,7 +5,7 @@
   padding: 80px 0;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 80px;
 
   @include body-desktop;
 
@@ -15,7 +15,21 @@
 
   &__box {
     display: grid;
+    gap: 48px;
     grid-template-columns: 1fr 2fr;
+  }
+
+  &__title {
+    @include h2-desktop;
+
+    margin-bottom: 24px;
+
+    &-sub {
+      @include h4-desktop($line-height: 36px);
+
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
   }
 
   &__carousel {
@@ -85,16 +99,121 @@
   }
 
   &__player {
-    &-title {
-      @include h2-desktop;
-
-      margin-bottom: 24px;
-    }
-
     &-genre {
       @include body-desktop;
 
       margin-bottom: 48px;
+    }
+
+    &-btns {
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &-download {
+      @include body-desktop($font-weight: $font-weight-semibolt);
+
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 2px solid var(--text-color-extra-2);
+      cursor: not-allowed;
+      background-color: transparent;
+    }
+
+    &-mobile {
+      display: none;
+    }
+  }
+
+  &__share {
+    display: flex;
+    align-items: center;
+
+    &-title {
+      color: var(--text-color-popup-menu);
+      font-weight: 400;
+      margin-right: 24px;
+    }
+
+    &-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    &-link {
+      padding: 8px;
+      border: 1px solid var(--text-color-popup-menu);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__text {
+    background-color: var(--bg-color-screen);
+    box-shadow: 0 2px 10px 0 rgba(15, 15, 15, 7%);
+    padding: 48px 0;
+
+    &-content {
+      max-width: 659px;
+    }
+  }
+
+  &__info {
+    &-descr {
+      @include subtitle-desktop($font-weight: $font-weight-regular);
+    }
+
+    &-title {
+      @include body-desktop($color: var(--text-color-popup-menu));
+
+      margin-bottom: 8px;
+    }
+
+    &-detail {
+      @include body-desktop($font-weight: $font-weight-semibolt);
+    }
+
+    &-box {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &__video {
+    &-box {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    &-container {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      height: 488px;
+    }
+  }
+
+  &__map{
+    &-container {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      height: 488px;
     }
   }
 }
@@ -106,9 +225,35 @@
   }
 }
 
+@media (width <=1094px) {
+  .song {
+    &__player {
+      &-desctop {
+        display: none;
+      }
+
+      &-mobile {
+        display: block;
+      }
+    }
+  }
+}
+
 @media (width <=1024px) {
   .container {
     margin: 0 48px;
+  }
+
+  .song {
+    &__info {
+      grid-template-columns: 1fr;
+    }
+
+    &__title {
+      &-sub {
+        margin: 0;
+      }
+    }
   }
 }
 
@@ -116,15 +261,60 @@
   .container {
     margin: 0 32px;
   }
+
+  .song {
+    gap: 60px;
+
+    &__carousel {
+      width: 100%;
+
+      &-box {
+        height: 738px;
+      }
+    }
+
+    &__player {
+      order: -1;
+
+      &-genre {
+        margin-bottom: 0;
+      }
+    }
+
+    &__text {
+      margin: 0 -32px;
+      padding: 48px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__box {
+      grid-template-columns: 1fr;
+    }
+  }
 }
 
 @media (width <=675px) {
-  .container {
-    margin: 0 32px;
-  }
-
   .song {
     margin-top: 96px;
+  }
+}
+
+@media (width <=667px) {
+  .song {
+    &__player {
+      &-btns {
+        flex-direction: column;
+        gap: 48px;
+        align-items: stretch;
+      }
+    }
+
+    &__share {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -136,6 +326,45 @@
   .song {
     padding: 32px 0;
     gap: 32px;
+
+    &__carousel {
+      &-box {
+        height: 376px;
+      }
+    }
+
+    &__map {
+      &-container {
+        height: 206px;
+      }
+    }
+
+    &__video {
+      &-container {
+        height: 206px;
+      }
+    }
+
+    &__share {
+      &-links {
+        gap: 7px;
+      }
+    }
+
+    &__text {
+      margin: 0 -16px;
+      padding: 48px 16px;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 40px;
+
+      &-sub {
+        font-size: 24px;
+        line-height: 32px;
+      }
+    }
   }
 }
 
