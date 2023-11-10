@@ -1,12 +1,23 @@
-export interface ScienceCategory {
+export interface GenreSubCategory {
   title: string;
-  aboutCycle1: string;
-  aboutCycle2: string;
-  subcategories: ScienceSubcategory[];
+  query: string;
 }
 
-export interface ScienceSubcategory {
+export interface GenreGroup {
   title: string;
-  urlImg?: string;
-  links: string[];
+  subCategories: GenreSubCategory[];
 }
+
+export interface ScienceCategory {
+  title: string;
+  url: string;
+  routerLink: string;
+  genreGroups: GenreGroup[];
+}
+
+
+// export interface ScienceSubcategory {
+//   title: string;
+//   urlImg?: string;
+//   links: string[];
+// }

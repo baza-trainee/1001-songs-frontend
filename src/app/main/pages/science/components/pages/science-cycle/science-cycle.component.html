@@ -5,31 +5,29 @@
 
     <h1 class="cycle__title">{{ category.title | translate }}</h1>
     <div class="cycle__description">
-      <div
-        class="cycle__description-box"
-        *ngIf="category.aboutCycle1"
-        [innerHTML]="category.aboutCycle1"
-      ></div>
-      <div
-        class="cycle__description-box"
-        *ngIf="category.aboutCycle2"
-        [innerHTML]="category.aboutCycle2"
-      ></div>
+      <div class="cycle__description-box">
+        <p>Ритуальні зимові обходи дворів зі спеціальними піснями тривають від Різдва до Водохреща. Мета обходів – побажати господарям добробуту і здоров’я на весь майбутній рік. За давніми (дохристиянськими) уявленнями учасники обходів виконують волю предків – опікунів роду.</p>
+        <p>У більшості традицій на Різдво колядують (колядування могло тривати до Водохреща), ставлять Вертеп; напередодні Нового Року – щедрують (в зоні Карпат, в Галичині щедрування відсутні), водять Козу, Меланку, Коня тощо. На Новий рік посівають.</p>
+      </div>
+      <div class="cycle__description-box">
+        <p>Діти і молодь (хлопці, дівчата) колядують/щедрують попід хатою (під вікном або під дверима), зрідка могли заходити в сіни. Дорослих (одружених чоловіків і жінок), співаків церковної півчої – які співали колядки переважно християнської тематики – запрошують до хати. Ряджену «Козу» заводять до хати.</p>
+        <p>Раніше господарі обдаровували колядників/щедрівників наїдками (ритуальне годування задобрення духів предків): пампушками, млинцями, коржиками, горіхами, насінням; пізніше – солодощами; у наш час – грошима.</p>
+      </div>
     </div>
-    <ng-container *ngFor="let sub of category.subcategories; let i = index">
-      <h4 class="cycle__title-sub">{{ sub.title }}</h4>
+    <ng-container *ngFor="let sub of category.genreGroups; let i = index">
+      <h4 class="cycle__title-sub">{{ sub.title | translate }}</h4>
       <div class="cycle__subcategory">
-        <div class="cycle__subcategory-img">
-          <img *ngIf="sub.urlImg" [src]="sub.urlImg" alt="Фото категорії">
+        <div class="cycle__img-box">
+          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="category.url" alt="Фото категорії">
         </div>
         <div class="cycle__subcategory-box">
           <a
             href="#"
             class="cycle__subcategory-link"
-            [routerLink]="'' + i + j"
-            *ngFor="let link of sub.links; let j = index"
+            *ngFor="let link of sub.subCategories;"
+            [routerLink]="link.query"
           >
-            {{ link }}
+            {{ link.title | translate}}
           <span class="cycle__subcategory-arrow">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>

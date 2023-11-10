@@ -8,7 +8,7 @@
       <div class="science__gallery-item" *ngFor="let category of categories">
         <app-category-link
           [routerLink]="category.routerLink"
-          [category]="category.translateKey | translate"
+          [category]="category.title | translate"
           [imgUrl]="category.url"
         ></app-category-link>
       </div>

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
-import {Observable, take} from "rxjs";
+import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {mockScienceCycle} from "../../../../../../mock-data/science-cycle";
 import {
   MultichanelPlayerComponent
 } from "../../../../map/components/player/multichanel-player/multichanel-player.component";
@@ -38,10 +37,10 @@ export class ScienceSongsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new FetchSongsByLocation("Ромейки"));
-    this.route.params.pipe(take(1)).subscribe(params => {
-      this.title = mockScienceCycle.subcategories[params['id'].split('')[0]].links[params['id'].split('')[1]];
-      if (!this.title) this.router.navigate(['/404']);
-    });
+    // this.route.params.pipe(take(1)).subscribe(params => {
+    //   this.title = scienceCategories.subcategories[params['id'].split('')[0]].links[params['id'].split('')[1]];
+    //   if (!this.title) this.router.navigate(['/404']);
+    // });
   }
 
 }

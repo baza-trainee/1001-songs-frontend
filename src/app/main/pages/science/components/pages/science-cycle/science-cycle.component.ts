@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {scienceCategories} from "../../shared-components/category-link/categoriesList";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {take} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 
 import {RecommendedSourcesComponent} from "../../shared-components/recommended-sources/recommended-sources.component";
-import {mockScienceCycle} from "../../../../../../mock-data/science-cycle";
-import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
 import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
+import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
+import {scienceCategories} from "../../shared-components/category-link/categoriesList";
 
 @Component({
   selector: 'app-science-cycle',
@@ -18,7 +17,7 @@ import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/b
   styleUrls: ['./science-cycle.component.scss']
 })
 export class ScienceCycleComponent implements OnInit {
-  category: ScienceCategory = mockScienceCycle;
+  category!: ScienceCategory;
   categoryName!: string;
   constructor(
     private router: Router,
@@ -32,13 +31,11 @@ export class ScienceCycleComponent implements OnInit {
   private checkAndSetSelectedCategory() {
     if (this.route.params) {
       this.route.params.pipe(take(1)).subscribe(params => {
-        const categories: { translateKey: string; url: string; routerLink: string }[] = scienceCategories;
+        const categories: ScienceCategory[] = scienceCategories;
         this.categoryName = params['category'];
         const selectedCategory = categories.find(category => category.routerLink === this.categoryName);
-
         if (selectedCategory) {
-          this.category.title = selectedCategory.translateKey;
-          this.category.subcategories[0].urlImg = selectedCategory.url;
+          this.category = selectedCategory;
         } else {
           this.router.navigate(['/404']);
         }
