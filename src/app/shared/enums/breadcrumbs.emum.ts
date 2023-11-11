@@ -5,13 +5,13 @@ export enum BreadcrumbsTrasnslateKeys {
   science = 'header.nav-menu.educational-section',
   news = 'header.nav-menu.news',
   expeditions = 'header.nav-menu.expedition',
-  winters = 'science.categories.winters',
-  shrove = 'science.categories.shrove',
-  spring = 'science.categories.spring',
-  common = 'science.categories.common',
-  summer = 'science.categories.summer',
-  children = 'science.categories.children',
-  wedding = 'science.categories.wedding',
-  epos = 'science.categories.epos',
-  instrumental = 'science.categories.instrumental'
+  winters = 'science.categories.winters.title',
+  spring = 'science.categories.spring.title',
+  summer = 'science.categories.summer.title',
+  wedding = 'science.categories.wedding.title',
+  family = 'science.categories.family.title',
+  shrove = 'science.categories.ordinary-songs.title',
+  epos = 'science.categories.musical-epos.title',
+  instrumental = 'science.categories.instrumental-music.title',
+  funeral = 'science.categories.funeral-music.title'
 }

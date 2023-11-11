@@ -146,7 +146,7 @@ export const scienceCategories: ScienceCategory[] = [
   {
     title: "science.categories.ordinary-songs.title",
     url: "https://drive.google.com/uc?export=download&id=1bgZpKDm_9hQQC0UZlmgxp4YQDYehwgee",
-    routerLink: "ordinary-songs",
+    routerLink: "shrove",
     genreGroups: [
       {
         title: "science.categories.ordinary-songs.lyrical.title",
@@ -196,7 +196,7 @@ export const scienceCategories: ScienceCategory[] = [
   {
     title: "science.categories.musical-epos.title",
     url: "https://drive.google.com/uc?export=download&id=1vW77qHA6dTv57Xr7Uq237G9snXt6_A9q",
-    routerLink: "musical-epos",
+    routerLink: "epos",
     genreGroups: [
       {
         title: "science.categories.musical-epos.byliny.title",
@@ -221,7 +221,7 @@ export const scienceCategories: ScienceCategory[] = [
   {
     title: "science.categories.instrumental-music.title",
     url: "https://drive.google.com/uc?export=download&id=1IQVLLGc0a_LsaBIESyQM1yGPooQUVolx",
-    routerLink: "instrumental-music",
+    routerLink: "instrumental",
     genreGroups: [
       {
         title: "science.categories.instrumental-music.ukrainian-traditional.title",
@@ -248,7 +248,7 @@ export const scienceCategories: ScienceCategory[] = [
   {
     title: "science.categories.funeral-music.title",
     url: "https://drive.google.com/uc?export=download&id=1rRLcjLb1YrGYWxktc8L1gn1cYKsEL0Do",
-    routerLink: "funeral-music",
+    routerLink: "funeral",
     genreGroups: [
       {
         title: "science.categories.funeral-music.lamentation.title",
