@@ -3,15 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-
-enum LinkTrasnslateKeys {
-  home = 'header.nav-menu.home',
-  about = 'header.nav-menu.about',
-  map = 'header.nav-menu.map',
-  science = 'header.nav-menu.educational-section',
-  news = 'header.nav-menu.news',
-  expeditions = 'header.nav-menu.expedition'
-}
+import { BreadcrumbsTrasnslateKeys } from '../../enums/breadcrumbs.emum';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -22,7 +14,7 @@ enum LinkTrasnslateKeys {
 })
 export class BreadcrumbsComponent implements OnInit {
   crumbs: string[] = [];
-  readonly Links = LinkTrasnslateKeys;
+  readonly Links = BreadcrumbsTrasnslateKeys;
 
   constructor(
     private router: Router,
