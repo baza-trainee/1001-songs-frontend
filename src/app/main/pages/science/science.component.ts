@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { RouterLink } from "@angular/router";
+
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
 import { recomendations } from './components/shared-components/category-link/recomendations';
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
-import {RouterLink} from "@angular/router";
-import {ScienceCategory} from "../../../shared/interfaces/science.interface";
-import {scienceCategories} from "./components/shared-components/category-link/categoriesList";
+import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
+import { ScienceCategory } from "../../../shared/interfaces/science.interface";
+import { scienceCategories } from "../../../static-data/categoriesList";
 
 @Component({
   selector: 'app-science',
@@ -30,7 +31,6 @@ import {scienceCategories} from "./components/shared-components/category-link/ca
 export class ScienceComponent implements OnInit {
   PAGE_SIZE = 5;
   categories: ScienceCategory[] = scienceCategories;
-  // categories: { translateKey: string; url: string; routerLink: string }[] = scienceCategories;
   recomendations? = recomendations;
   recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
