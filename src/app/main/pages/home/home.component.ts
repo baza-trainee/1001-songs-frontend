@@ -12,7 +12,7 @@ import { HomeActualComponent } from './components/home-actual/home-actual.compon
 import { HomeExpeditionComponent } from './components/home-expedition/home-expedition.component';
 import { HomeNewsComponent } from './components/home-news/home-news.component';
 import { InteractiveMapComponent } from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
-import { DonationDialogComponent } from 'src/app/main/pages/home/components/dialog/donation-dialog.component';
+import { DonationDialogComponent } from 'src/app/main/pages/home/components/donation-dialog/donation-dialog.component';
 
 @Component({
   selector: 'app-home',
