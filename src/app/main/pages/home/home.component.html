@@ -8,7 +8,7 @@
             <img class="home__info-img" [src]="homePageAssets.flagIcon" alt="flag of Ukraine"></p>
         </div>
         <div class="home__info-actions">
-          <a class="home__info-button">
+          <a class="home__info-button" (click)="openDonationDialog()">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#infoButton"></use>
             </svg>

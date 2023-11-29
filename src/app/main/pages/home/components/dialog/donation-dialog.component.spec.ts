@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogComponent } from './dialog.component';
+import { DonationDialogComponent } from './donation-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 describe('DialogComponent', () => {
-  let component: DialogComponent;
-  let fixture: ComponentFixture<DialogComponent>;
+  let component: DonationDialogComponent;
+  let fixture: ComponentFixture<DonationDialogComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DialogComponent, MatDialogModule],
+      imports: [DonationDialogComponent, MatDialogModule],
       providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
     });
-    fixture = TestBed.createComponent(DialogComponent);
+    fixture = TestBed.createComponent(DonationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

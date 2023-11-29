@@ -9,7 +9,6 @@ import { NgxsModule, Select } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -40,10 +39,6 @@ export class HeaderComponent {
     private _translate: TranslateService,
     public dialog: MatDialog
   ) {}
-
-  openDialog() {
-    this.dialog.open(DialogComponent, { data: { text: 'Error. Try again later' } });
-  }
 
   selectLang() {
     this.changeLang = !this.changeLang;

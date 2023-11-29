@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-donation-dialog',
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatButtonModule],
   template: `
@@ -16,6 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
   `,
   styles: []
 })
-export class DialogComponent {
+export class DonationDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { text: string }) {}
 }

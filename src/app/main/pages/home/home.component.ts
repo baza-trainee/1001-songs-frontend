@@ -12,6 +12,7 @@ import { HomeActualComponent } from './components/home-actual/home-actual.compon
 import { HomeExpeditionComponent } from './components/home-expedition/home-expedition.component';
 import { HomeNewsComponent } from './components/home-news/home-news.component';
 import { InteractiveMapComponent } from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
+import { DonationDialogComponent } from 'src/app/main/pages/home/components/dialog/donation-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ import { InteractiveMapComponent } from 'src/app/shared/shared-components/intera
     InteractiveMapComponent,
     HomeActualComponent,
     HomeExpeditionComponent,
-    HomeNewsComponent
+    HomeNewsComponent,
+    DonationDialogComponent
   ]
 })
 export class HomeComponent {
@@ -44,5 +46,9 @@ export class HomeComponent {
     dialogConfig.disableClose = true;
 
     this.dialog.open(ShareModalComponent, dialogConfig);
+  }
+
+  openDonationDialog() {
+    this.dialog.open(DonationDialogComponent, { data: { text: 'Error. Try again later' } });
   }
 }
