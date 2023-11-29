@@ -66,8 +66,6 @@
   </div>
 
   <div class="article__carousel" *ngIf="article.id">
-    <div class="container">
-      <h2 class="article__carousel-title">{{ 'news.article.latest-news' | translate }}</h2>
-    </div>
+    <app-slider></app-slider>
   </div>
 </ng-container>

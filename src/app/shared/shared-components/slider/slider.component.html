@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="wrapper">
+    <h3 class="slider__title">{{ 'news.article.latest-news' | translate }}</h3>
+
+    <div class="slideshow-container">
+      <owl-carousel-o [options]="customOptions" class="swiper-container">
+        <ng-template carouselSlide *ngFor="let item of projectsItems" class="swiper-slide">
+          <div class="slide__item">
+            <img class="slide__item-img" src="{{ item.img }}" alt="Project photo" />
+            <p class="slide__item-date">{{ item.date }}</p>
+            <h4 class="slide__item-title">{{ item.title }}</h4>
+            <p class="slide__item-descr">{{ item.description }}</p>
+            <p class="slide__item-location">{{ item.location }}</p>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</div>

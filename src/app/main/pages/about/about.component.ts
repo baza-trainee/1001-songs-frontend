@@ -3,14 +3,13 @@ import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AboutTeamComponent } from './about-team/about-team.component';
-import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent]
+  imports: [TranslateModule, CommonModule, AboutTeamComponent]
 })
 export class AboutComponent {
   imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
