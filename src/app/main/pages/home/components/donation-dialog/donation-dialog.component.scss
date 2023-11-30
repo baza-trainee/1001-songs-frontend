@@ -1,5 +1,39 @@
 @import '../../../../../../typography/typography';
 
-h1 {
-  @include h4-desktop;
+.donation {
+  background: #fff9ef;
+  text-align: center;
+
+  &__title {
+
+    @include h4-desktop;
+  }
+
+  &__purpose {
+
+    &-title {
+      @include subtitle-desktop;
+
+      text-align: center;
+      display: block;
+    }
+  }
+
+  &__actions {
+
+    &-button {
+      @include button-desktop;
+
+      width: 150px;
+      height: 48px;
+      background: var(--text-color-accent);
+      border-radius: 100px;
+      border: 1px solid transparent;
+      outline: none;
+
+      &:hover {
+        background: var(--bg-color-accent);
+      }
+    }
+  }
 }

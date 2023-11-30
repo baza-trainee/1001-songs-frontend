@@ -1,14 +1,21 @@
 <div class="donation">
-  <h1 mat-dialog-title>"МУЗЕЙ КОЛИСКОВОЇ"</h1>
+  <h1 mat-dialog-title class="donation__title">ГО "МУЗЕЙ КОЛИСКОВОЇ"</h1>
   <div class="donation__credentials">
     <div mat-dialog-content>ЕДРПОУ:{{ data.register }}.</div>
     <div mat-dialog-content>IBAN:{{ data.iban }}.</div>
     <div mat-dialog-content>АТ КБ "ПРИВАТБАНК"</div>
   </div>
 
+  <div class="donation__purpose">
+    <span class="donation__purpose-title"> Призначення платежу</span>
+    <span class="donation__purpose-message">{{ purposeMessage }}</span>
+  </div>
+
   <div mat-dialog-actions class="donation__actions">
-    <div mat-dialog-actions class="donation__actions__key"></div>
-    <div mat-dialog-actions class="donation__actions__controls"></div>
+    <div mat-dialog-actions class="donation__actions-qr"></div>
+    <div mat-dialog-actions class="donation__actions-options">
+      <button class="donation__actions-button">{{ actions.bmc }}</button>
+    </div>
 
     <button mat-button mat-dialog-close>Close</button>
   </div>
