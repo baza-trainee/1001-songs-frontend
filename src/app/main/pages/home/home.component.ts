@@ -35,6 +35,9 @@ import { DonationDialogComponent } from 'src/app/main/pages/home/components/dona
 })
 export class HomeComponent {
   protected readonly homePageAssets = Homepage;
+  register = '45284215';
+  iban = 'UA353052990000026006035028980';
+  credentials = { iban: 'UA353052990000026006035028980', register: '45284215' };
 
   constructor(
     private _translate: TranslateService,
@@ -49,6 +52,6 @@ export class HomeComponent {
   }
 
   openDonationDialog() {
-    this.dialog.open(DonationDialogComponent, { data: { text: 'Error. Try again later' } });
+    this.dialog.open(DonationDialogComponent, { data: this.credentials });
   }
 }

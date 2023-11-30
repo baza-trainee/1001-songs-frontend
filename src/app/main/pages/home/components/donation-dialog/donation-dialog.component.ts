@@ -11,5 +11,5 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./donation-dialog.component.scss']
 })
 export class DonationDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { text: string }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { iban: string; register: string }) {}
 }

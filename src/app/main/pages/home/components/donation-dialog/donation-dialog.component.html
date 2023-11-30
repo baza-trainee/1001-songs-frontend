@@ -1,6 +1,15 @@
+<div class="donation">
+  <h1 mat-dialog-title>"МУЗЕЙ КОЛИСКОВОЇ"</h1>
+  <div class="donation__credentials">
+    <div mat-dialog-content>ЕДРПОУ:{{ data.register }}.</div>
+    <div mat-dialog-content>IBAN:{{ data.iban }}.</div>
+    <div mat-dialog-content>АТ КБ "ПРИВАТБАНК"</div>
+  </div>
 
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>{{ data.text }}.</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <div mat-dialog-actions class="donation__actions">
+    <div mat-dialog-actions class="donation__actions__key"></div>
+    <div mat-dialog-actions class="donation__actions__controls"></div>
+
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
 </div>
