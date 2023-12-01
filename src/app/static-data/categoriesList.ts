@@ -1,4 +1,4 @@
-import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
+import {ScienceCategory} from "../shared/interfaces/science.interface";
 
 export const scienceCategories: ScienceCategory[] = [
   {

@@ -15,7 +15,7 @@ import {PlayerState} from "../../../../../../store/player/player.state";
 import {Song} from "../../../../../../shared/interfaces/song.interface";
 import {FetchSongsByLocation} from "../../../../../../store/player/player.actions";
 import {TranslateModule} from "@ngx-translate/core";
-import {scienceCategories} from "../../shared-components/category-link/categoriesList";
+import {scienceCategories} from "../../../../../../static-data/categoriesList";
 
 @Component({
   selector: 'app-science-songs',

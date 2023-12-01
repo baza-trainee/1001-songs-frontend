@@ -7,7 +7,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RecommendedSourcesComponent} from "../../shared-components/recommended-sources/recommended-sources.component";
 import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
-import {scienceCategories} from "../../shared-components/category-link/categoriesList";
+import {scienceCategories} from "../../../../../../static-data/categoriesList";
 
 @Component({
   selector: 'app-science-cycle',
