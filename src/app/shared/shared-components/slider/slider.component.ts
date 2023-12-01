@@ -93,14 +93,15 @@ export class SliderComponent {
       },
       390: {
         items: 2,
-        margin: -60,
-        stagePadding: 10
+        margin: -80,
+        stagePadding: 5,
+        autoWidth: true
       },
 
       768: {
         items: 3,
         margin: -10,
-        stagePadding: 5
+        stagePadding: 20
       },
       1024: {
         items: 4
