@@ -4,7 +4,7 @@ $close-btn-size: 20px;
 
 ::ng-deep .custom-modalbox {
   border-radius: 16px;
-  overflow: hidden;
+  //overflow: hidden;
   overflow-y: auto;
 }
 
@@ -13,6 +13,7 @@ $close-btn-size: 20px;
   text-align: center;
   width: 627px;
   padding-bottom: 35px;
+  border: 1px solid red;
 
   &__close {
     text-align: end;
@@ -27,7 +28,9 @@ $close-btn-size: 20px;
   }
 
   &__title {
-    @include h5-desktop($font-size: 24px, $line-height: 0px);
+    @include h5-desktop($font-size: 24px, $line-height: 30px);
+
+    padding-top: 8px;
 
   }
 
@@ -43,11 +46,15 @@ $close-btn-size: 20px;
 
       text-align: center;
       display: block;
+      padding-top: 8px;
+      padding-bottom: 3px;
     }
 
     &-message {
+      @include paragraph-desktop($color: $color-primary);
+
       display: inline-block;
-      width: 400px;
+      max-width: 400px;
     }
   }
 
@@ -93,8 +100,107 @@ $close-btn-size: 20px;
   }
 }
 
-@media (width <= 790px) {
+@media (width <= 768px) {
   .donation {
-    width: auto;
+    max-width: 515px;
+    // width: auto;
+    &__close {
+      // width: ;
+      border: 1px solid red;
+      width: 100%;
+    }
+  }
+}
+
+@media (width <= 390px) {
+  .donation {
+    background: #fff9ef;
+    text-align: center;
+    // width: 627px;
+    padding-bottom: 35px;
+  
+    &__close {
+      text-align: end;
+      padding: 20px 20px 0 0;
+      &-btn {
+        display: inline-block;
+        align-self: flex-end;
+        height: $close-btn-size;
+        width: $close-btn-size;
+        cursor: pointer;
+      }
+    }
+  
+    &__title {
+      @include h5-desktop($font-size: 24px, $line-height: 30px);
+  
+      padding-top: 8px;
+  
+    }
+  
+    &__credentials {
+      div {
+        @include paragraph-desktop($color: $color-primary);
+      }
+    }
+  
+    &__purpose {
+      &-title {
+        @include subtitle-desktop;
+  
+        text-align: center;
+        display: block;
+        padding-top: 8px;
+        padding-bottom: 3px;
+      }
+  
+      &-message {
+        @include paragraph-desktop($color: $color-primary);
+  
+        display: inline-block;
+        width: 400px;
+      }
+    }
+  
+    &__actions {
+      display: flex;
+      justify-content: center;
+      align-items: start;
+  
+      &-qr {
+        display: block;
+      }
+  
+      &-caption {
+        @include subtitle-desktop;
+  
+        display: block;
+      }
+  
+      &-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+  
+      &-button {
+        @include button-desktop;
+  
+        width: 207px;
+        height: 48px;
+        background: var(--text-color-accent);
+        border-radius: 100px;
+        border: 1px solid transparent;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+  
+        &:hover {
+          background: var(--bg-color-accent);
+        }
+      }
+    }
   }
 }
