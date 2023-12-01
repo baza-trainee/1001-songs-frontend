@@ -52,6 +52,6 @@ export class HomeComponent {
   }
 
   openDonationDialog() {
-    this.dialog.open(DonationDialogComponent, { data: this.credentials });
+    this.dialog.open(DonationDialogComponent, { data: this.credentials, panelClass: 'custom-modalbox' });
   }
 }
