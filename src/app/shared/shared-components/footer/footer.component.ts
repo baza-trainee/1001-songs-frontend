@@ -3,6 +3,8 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { navLinksHeader } from '../../enums/navLinks.enum';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
 
 @Component({
     selector: 'app-footer',
@@ -15,6 +17,11 @@ export class FooterComponent {
   public navLinks = navLinksHeader;
 
   constructor(
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    public dialog: MatDialog
   ){}
+
+  openDonationDialog() {
+    this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
+  }
 }

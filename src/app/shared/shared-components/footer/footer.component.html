@@ -19,7 +19,9 @@
         </ul>
       </div>
       <div class="footer__donate">
-        <button> {{ 'footer.button' | translate }} </button>
+        <button 
+          (click)="openDonationDialog()"
+        > {{ 'footer.button' | translate }} </button>
       </div>
     </section>
 

@@ -9,6 +9,7 @@ import { NgxsModule, Select } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -63,4 +64,9 @@ export class HeaderComponent {
     this.lang = this.changeLang ? 'Eng' : 'Укр';
     this._translate.use(this.changeLang ? 'ua' : 'en');
   }
+
+  openDonationDialog() {
+    this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
+  }
+  
 }

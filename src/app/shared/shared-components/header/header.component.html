@@ -38,7 +38,10 @@
         </ul>
       </div>
       <div class="actions__donate">
-        <button class="actions__donate-button">{{ 'header.actions.button-donate' | translate }}</button>
+        <button class="actions__donate-button"
+          (click)="openDonationDialog()"
+        >{{ 'header.actions.button-donate' | translate }}
+        </button>
       </div>
     </div>
   </nav>
