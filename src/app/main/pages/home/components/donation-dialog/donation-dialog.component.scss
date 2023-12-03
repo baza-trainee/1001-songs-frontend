@@ -40,8 +40,8 @@ $close-btn-size: 20px;
       display: inline-block;
       word-break: break-word;
       // border: 1px solid red;
-       max-width: 400px;
-       min-width: 300px;
+      max-width: 400px;
+      min-width: 300px;
     }
   }
 
@@ -56,7 +56,6 @@ $close-btn-size: 20px;
       display: block;
       padding-top: 8px;
       padding-bottom: 3px;
-      
     }
 
     &-message {
@@ -105,6 +104,10 @@ $close-btn-size: 20px;
 
       &:hover {
         background: var(--bg-color-accent);
+      }
+
+      &:active {
+        filter: drop-shadow(6px 6px 10px rgba(0, 0, 0, 0.1)) ;
       }
     }
   }

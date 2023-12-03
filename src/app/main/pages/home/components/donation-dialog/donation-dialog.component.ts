@@ -13,5 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class DonationDialogComponent {
   actions = { copy: 'Copy IBAN', bmc: 'Buy Me A Coffe', patreon: 'Patreon' };
   purposeMessage = "Безповоротна фінансова допомога від прізвище, ім'я, по-батькові.";
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { iban: string; register: string }) {}
+  register = '45284215';
+  iban = 'UA353052990000026006035028980';
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {}) {}
 }
