@@ -24,7 +24,10 @@
       <span class="donation__actions-caption">QRкод (Приват24)</span>
     </div>
     <div mat-dialog-actions class="donation__actions-options">
-      <button class="donation__actions-button">
+      <button
+        class="donation__actions-button"
+        (click)="copyIBAN()"
+      >
         <svg width="24" height="24" viewBox="0 0 24 24">
           <use xlink:href="./assets/sprites.svg#copy"></use></svg
         >{{ actions.copy }}
