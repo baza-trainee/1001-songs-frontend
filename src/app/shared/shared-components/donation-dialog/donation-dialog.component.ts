@@ -17,7 +17,7 @@ export class DonationDialogComponent {
   register = '45284215';
   iban = 'UA353052990000026006035028980';
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {},
+    @Inject(MAT_DIALOG_DATA) public data: unknown,
     private clipboard: Clipboard
   ) {}
 

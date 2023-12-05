@@ -4,22 +4,20 @@
       <div class="home__info">
         <div class="home__info-desc">
           <h1 class="home__info-title">{{ 'home.home-info.title' | translate }}</h1>
-          <p class="home__info-subtitle">{{ 'home.home-info.subtitle' | translate }}
-            <img class="home__info-img" [src]="homePageAssets.flagIcon" alt="flag of Ukraine"></p>
+          <p class="home__info-subtitle">
+            {{ 'home.home-info.subtitle' | translate }} <img class="home__info-img" [src]="homePageAssets.flagIcon" alt="flag of Ukraine" />
+          </p>
         </div>
         <div class="home__info-actions">
-          <a class="home__info-button" (click)="openDonationDialog()">
+          <a class="home__info-button" (click)="openDonationDialog()" (keypress)="openDonationDialog()" tabindex="0">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#infoButton"></use>
             </svg>
-            {{ 'home.actions.button-donate' | translate }}</a>
-          <a
-            class="home__info-button"
-            (click)="openDialog()"
-            (keypress)="openDialog()"
-            tabindex="0"
+            {{ 'home.actions.button-donate' | translate }}</a
           >
-            <img [src]="homePageAssets.shareIcon" alt="img-share">{{ 'home.actions.button-share' | translate }}</a>
+          <a class="home__info-button" (click)="openDialog()" (keypress)="openDialog()" tabindex="0">
+            <img [src]="homePageAssets.shareIcon" alt="img-share" />{{ 'home.actions.button-share' | translate }}</a
+          >
         </div>
       </div>
     </div>
@@ -30,5 +28,3 @@
 <app-home-actual></app-home-actual>
 <app-home-expedition></app-home-expedition>
 <app-home-news></app-home-news>
-
-
