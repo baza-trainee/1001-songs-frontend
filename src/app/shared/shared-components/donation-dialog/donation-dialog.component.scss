@@ -17,7 +17,7 @@ $close-btn-size: 20px;
   &__close {
     text-align: end;
     padding: 20px 20px 0 0;
-    // border: 1px solid red;
+
     &-btn {
       display: inline-flex;
       align-self: flex-end;
@@ -39,7 +39,6 @@ $close-btn-size: 20px;
 
       display: inline-block;
       word-break: break-word;
-      // border: 1px solid red;
       max-width: 400px;
       min-width: 300px;
     }
@@ -49,6 +48,7 @@ $close-btn-size: 20px;
     margin: 0 auto;
     max-width: 400px;
     min-width: 300px;
+
     &-title {
       @include subtitle-desktop;
 
@@ -62,7 +62,6 @@ $close-btn-size: 20px;
       @include paragraph-desktop($color: $color-primary);
 
       display: inline-block;
-      // max-width: 400px;
     }
   }
 
@@ -130,8 +129,7 @@ $close-btn-size: 20px;
     padding-bottom: 35px;
 
     &__close {
-      // border: 1px solid red;
-      // width: 90%;
+
       &-btn {
         display: inline-block;
         align-self: flex-end;
@@ -166,8 +164,6 @@ $close-btn-size: 20px;
 
       &-message {
         @include body-mobile;
-
-        //  width: 368px;
       }
     }
 
@@ -181,18 +177,8 @@ $close-btn-size: 20px;
         @include h6-mobile($font-family: $primary-fonts);
       }
 
-      // &-caption {
-      //   @include subtitle-desktop;
-
-      //   display: block;
-      // }
-
       &-options {
-        // display: flex;
-        // flex-direction: column;
-        // gap: 12px;
         width: 100%;
-        // border: 1px solid red;
         padding: 0;
       }
 
