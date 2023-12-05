@@ -23,8 +23,5 @@ export class DonationDialogComponent {
 
   copyIBAN() {
     this.clipboard.copy(this.iban);
-    const pattern = new RegExp("^[a-z0-9]+((_{2}|-)[a-z0-9]+)*$");
-    const str = '::donation';
-    console.log(pattern.test(str));
   }
 }
