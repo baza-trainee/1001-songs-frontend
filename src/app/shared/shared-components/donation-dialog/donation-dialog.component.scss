@@ -106,7 +106,7 @@ $close-btn-size: 20px;
       }
 
       &:active {
-        filter: drop-shadow(6px 6px 10px rgba(0, 0, 0, 0.1)) ;
+        filter: drop-shadow(6px 6px 10px rgba(0, 0, 0, 10%));
       }
     }
   }
@@ -129,7 +129,7 @@ $close-btn-size: 20px;
     padding-bottom: 35px;
 
     &__close {
-
+      
       &-btn {
         display: inline-block;
         align-self: flex-end;
