@@ -69,11 +69,9 @@ footer.footer {
           font-weight: 600;
           line-height: 24px; /* 150% */
 
-
           &:hover {
             background: var(--bg-color-footer);
             color: var(--text-color-accent);
-            // border: 2px solid var(--text-color-accent);
             transition: all 0.2s linear;
           }
         }
