@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="slider">
+    <h3 class="slider__title">{{ 'news.article.latest-news' | translate }}</h3>
+
+    <div class="slider__container" #sliderContainer>
+      <div class="track" #track [ngStyle]="{ transform: trackTransform }">
+        <div *ngFor="let item of projectsItems" class="slide">
+          <div class="slide__item">
+            <img class="slide__item-img" src="{{ item.img }}" alt="Project photo" />
+            <p class="slide__item-date">{{ item.date }}</p>
+            <h4 class="slide__item-title">{{ item.title }}</h4>
+            <p class="slide__item-descr">{{ item.description }}</p>
+            <p class="slide__item-location">{{ item.location }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="prev" #prev (click)="index = index - 1" [disabled]="prevIsDisabled">
+          <svg width="40" height="40" viewBox="0 0 48 48">
+            <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+          </svg>
+        </button>
+        <button class="next" #next (click)="index = index + 1" [disabled]="nextIsDisabled">
+          <svg width="40" height="40" viewBox="0 0 48 48">
+            <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

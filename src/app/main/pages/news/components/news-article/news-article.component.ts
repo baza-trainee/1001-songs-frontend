@@ -9,11 +9,12 @@ import { NewsState } from '../../../../../store/news/news.state';
 import { Article } from '../../../../../shared/interfaces/article.interface';
 import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FetchArticles, SetSelectedArticle } from "../../../../../store/news/news.actions";
+import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 
 @Component({
   selector: 'app-news-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent],
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
