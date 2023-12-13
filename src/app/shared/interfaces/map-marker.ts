@@ -20,3 +20,9 @@ export interface Marker {
     recording_location: { lat: number; lng: number };
   };
 }
+
+export interface MarkerOfLocation {
+  count: string;
+  location__coordinates: string;
+  location__official_name_city: string;
+}

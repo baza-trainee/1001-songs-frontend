@@ -6,12 +6,12 @@ import { MapService } from 'src/app/shared/services/map/map.service';
 import { FetchMarkers, FilteredMarkers, ResetMarkers } from './map.actions';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
-import { Marker } from 'src/app/shared/interfaces/map-marker';
+import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 
 export interface MapStateModel {
-  markersList: Marker[];
-  filteredMarkerList: Marker[];
+  markersList: MarkerOfLocation[];
+  filteredMarkerList: MarkerOfLocation[];
 }
 
 @State<MapStateModel>({
@@ -30,23 +30,23 @@ export class MapState {
   ) {}
 
   @Selector()
-  static getMarkersList(state: MapStateModel): Marker[] {
+  static getMarkersList(state: MapStateModel): MarkerOfLocation[] {
     return state.markersList;
   }
   @Selector()
-  static getFilteredMarkerList(state: MapStateModel): Marker[] {
+  static getFilteredMarkerList(state: MapStateModel): MarkerOfLocation[] {
     return state.filteredMarkerList;
   }
 
   @Action(FilteredMarkers)
   filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
-    const state = ctx.getState();
+    // const state = ctx.getState();
 
-    const markers = this.filterMapService.filterMarkers(action.options);
-    ctx.setState({
-      ...state,
-      filteredMarkerList: markers
-    });
+    // const markers = this.filterMapService.filterMarkers(action.options);
+    // ctx.setState({
+    //   ...state,
+    //   filteredMarkerList: markers
+    // });
   }
 
   @Action(ResetMarkers)
@@ -67,14 +67,15 @@ export class MapState {
     }
     this.store.dispatch(new SetIsLoading(1));
     return this.mapService.fetchMarkers().pipe(
-      map((songs) => songs as Song[]), //the expression need to avoid any type
-      tap((songs: Song[]) => {
-        const filteredSongs = songs.filter((song: Song) => song.location != null);
-        const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
+      map((response: any) => response[0]), //the expression need to avoid any type
+      tap((markerList: MarkerOfLocation[]) => {
+      //  console.log(songs);
+       // const filteredSongs = songs.filter((song: Song) => song.location != null);
+      //  const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
         ctx.setState({
           ...state,
-          markersList: [...markers],
-          filteredMarkerList: [...markers]
+          markersList: [...markerList],
+          filteredMarkerList: [...markerList]
         });
         this.store.dispatch(new SetIsLoading(-1));
       })

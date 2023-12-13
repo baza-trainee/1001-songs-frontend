@@ -16,37 +16,37 @@ export class FilterMapService {
     private store: Store
   ) {}
 
-  countSongsByOption(option: string): number {
+  countSongsByOption(option: string): any {
     const filteredMarkers = this.store.selectSnapshot(MapState.getFilteredMarkerList);
 
-    const foundMarkers = filteredMarkers.filter((marker) => {
-      return (
-        marker.location.country.toLowerCase().includes(option.toLowerCase()) ||
-        marker.location.region.toLowerCase().includes(option.toLowerCase()) ||
-        marker.genre_cycle.toLowerCase().includes(option.toLowerCase()) ||
-        marker.found.toLowerCase().includes(option.toLowerCase()) ||
-        marker.location.district_center.toLowerCase().includes(option.toLowerCase())
-      );
-    });
+    // const foundMarkers = filteredMarkers.filter((marker) => {
+    //   return (
+    //     marker.location.country.toLowerCase().includes(option.toLowerCase()) ||
+    //     marker.location.region.toLowerCase().includes(option.toLowerCase()) ||
+    //     marker.genre_cycle.toLowerCase().includes(option.toLowerCase()) ||
+    //     marker.found.toLowerCase().includes(option.toLowerCase()) ||
+    //     marker.location.district_center.toLowerCase().includes(option.toLowerCase())
+    //   );
+    // });
 
-    return foundMarkers.length;
+    // return foundMarkers.length;
   }
 
-  filterMarkers(selectOptions: SongFilter): Marker[] {
-    const markers = this.store.selectSnapshot(MapState.getMarkersList);
-    if (this.isFilteredEmpty(selectOptions)) {
-      return markers;
-    }
-    return markers.filter((marker) => {
-      return (
-        (!selectOptions.country.length || selectOptions.country.includes(marker.location.country)) &&
-        (!selectOptions.region.length || selectOptions.region.includes(marker.location.region)) &&
-        (!selectOptions.settlement.length || selectOptions.settlement.includes(marker.location.district_center)) &&
-        (!selectOptions.genre.length || selectOptions.genre.includes(marker.genre_cycle)) &&
-        (!selectOptions.title.length || selectOptions.title.includes(marker.title)) &&
-        (!selectOptions.found.length || selectOptions.found.includes(marker.found))
-      );
-    });
+  filterMarkers(selectOptions: SongFilter) {
+    // const markers = this.store.selectSnapshot(MapState.getMarkersList);
+    // if (this.isFilteredEmpty(selectOptions)) {
+    //   return markers;
+    // }
+    // return markers.filter((marker) => {
+    //   return (
+    //     (!selectOptions.country.length || selectOptions.country.includes(marker.location.country)) &&
+    //     (!selectOptions.region.length || selectOptions.region.includes(marker.location.region)) &&
+    //     (!selectOptions.settlement.length || selectOptions.settlement.includes(marker.location.district_center)) &&
+    //     (!selectOptions.genre.length || selectOptions.genre.includes(marker.genre_cycle)) &&
+    //     (!selectOptions.title.length || selectOptions.title.includes(marker.title)) &&
+    //     (!selectOptions.found.length || selectOptions.found.includes(marker.found))
+    //   );
+    // });
   }
 
   isFilteredEmpty(selectOptions: SongFilter): boolean {

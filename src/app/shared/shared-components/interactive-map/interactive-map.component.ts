@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Marker } from 'src/app/shared/interfaces/map-marker';
+import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/mock-data/markers';
 import { FilterMapService } from '../../services/filter-map/filter-map.service';
 
@@ -15,11 +15,17 @@ import { FilterMapService } from '../../services/filter-map/filter-map.service';
 })
 export class InteractiveMapComponent {
   @Input() popupType: string = 'default';
-  @Input() markers: Marker[] | null = cordsMarkers;
+  @Input() markers: any = [
+    {
+      location__official_name_city: 'Полтава',
+      location__coordinates: '49.64704142664784, 34.42447708',
+      count: 1
+    }
+  ];
   @Output() markerClicked = new EventEmitter<Marker>();
 
   private currentInfoWindow: MapInfoWindow | null = null;
-  selectedMarker: Marker | null = null;
+  selectedMarker: MarkerOfLocation | null = null;
   showInfoWindow: boolean = false;
   mapOptions = {
     center: { lat: 48.379433, lng: 31.165579 },
@@ -29,9 +35,18 @@ export class InteractiveMapComponent {
   constructor(
     private _translate: TranslateService,
     public filterMapServices: FilterMapService
-  ) {}
+  ) {
+    // console.log(this.markers)
+  }
 
-  public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: Marker) {
+  formatCords(cords: string) {
+    const localcords = cords.split(',');
+    const lat = Number.parseFloat(localcords[0]);
+    const lng = Number.parseFloat(localcords[1]);
+    return { lat, lng };
+  }
+
+  public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: MarkerOfLocation) {
     if (this.currentInfoWindow) {
       this.currentInfoWindow.close();
     }
@@ -43,12 +58,12 @@ export class InteractiveMapComponent {
 
   listenToRecords() {
     if (this.selectedMarker != null) {
-      this.markerClicked.emit(this.selectedMarker);
+     // this.markerClicked.emit(this.selectedMarker);
     }
     this.onCloseInfoWindow();
   }
 
-  onMarkerClick(marker: Marker) {
+  onMarkerClick(marker: MarkerOfLocation) {
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
@@ -58,9 +73,9 @@ export class InteractiveMapComponent {
     this.selectedMarker = null;
   }
 
-  getCustomMarkerIcon(id: string): google.maps.Icon {
+  getCustomMarkerIcon(cordsAsId: string): google.maps.Icon {
     return {
-      url: this.selectedMarker?.id === id ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
+      url: this.selectedMarker?.location__coordinates === cordsAsId ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
     };
   }
 }

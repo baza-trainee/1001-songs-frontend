@@ -51,19 +51,19 @@ export class FilterMapState {
       onSelect = optionsWithLength[0][0] as keyof SongFilter;
     }
 
-    const showOptions = this.filterMapService.generateShowOptions(
-      filterMarkers,
-      action.selectedOptions,
-      state.allOptions,
-      state.showOptions,
-      action.optionName,
-      onSelect
-    );
+    // const showOptions = this.filterMapService.generateShowOptions(
+    //   filterMarkers,
+    //   action.selectedOptions,
+    //   state.allOptions,
+    //   state.showOptions,
+    //   action.optionName,
+    //   onSelect
+    // );
 
     ctx.setState({
       ...state,
       selectedOptions: action.selectedOptions,
-      showOptions
+    //  showOptions
     });
   }
 

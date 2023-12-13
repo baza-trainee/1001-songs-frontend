@@ -30,7 +30,7 @@ export class MapService {
   }
 
   fetchMarkers() {
-    return this.http.get(API_URL + StatEndpoints.songs).pipe(
+    return this.http.get(API_URL + StatEndpoints.markers).pipe(
       catchError(async (error) => {
         console.error(error);
       })
