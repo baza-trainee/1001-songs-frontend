@@ -86,8 +86,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
-    const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
-    this.playStream(urls);
+    //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
+    this.playStream(file.media.multichannel_audio);
   }
 
   muteToggle(index: number) {

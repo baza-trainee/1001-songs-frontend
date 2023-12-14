@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Marker } from 'src/app/shared/interfaces/map-marker';
+import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
@@ -34,10 +34,10 @@ export class MapComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  handleMapEmit(marker: Marker, target: HTMLElement) {
+  handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
-    this.store.dispatch(new FetchSongsByLocation(marker.location.district_center));
+    this.store.dispatch(new FetchSongsByLocation(marker.location__official_name_city));
   }
 
   scrollToElement(element: HTMLElement): void {

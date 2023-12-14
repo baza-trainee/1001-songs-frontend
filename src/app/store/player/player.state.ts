@@ -106,6 +106,7 @@ export class PlayerState {
     this.store.dispatch(new SetIsLoading(1));
     return this.cloudService.getSongsByLocation(action.locationName).pipe(
       tap((songs: Song[]) => {
+        console.log(songs)
         ctx.setState({
           ...state,
           songsList: [...songs]

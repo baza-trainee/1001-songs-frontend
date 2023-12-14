@@ -73,7 +73,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.multiAudioService.stopAll();
     this.audioService.stop();
-    this.playStream(this.cloudService.preparateGoogleDriveFileUrl(file.media.stereo_audio));
+    this.playStream((file.media.stereo_audio));
   }
 
   pause() {

@@ -22,7 +22,7 @@ export class InteractiveMapComponent {
       count: 1
     }
   ];
-  @Output() markerClicked = new EventEmitter<Marker>();
+  @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
 
   private currentInfoWindow: MapInfoWindow | null = null;
   selectedMarker: MarkerOfLocation | null = null;
@@ -58,7 +58,7 @@ export class InteractiveMapComponent {
 
   listenToRecords() {
     if (this.selectedMarker != null) {
-     // this.markerClicked.emit(this.selectedMarker);
+      this.markerClicked.emit(this.selectedMarker);
     }
     this.onCloseInfoWindow();
   }
@@ -75,7 +75,10 @@ export class InteractiveMapComponent {
 
   getCustomMarkerIcon(cordsAsId: string): google.maps.Icon {
     return {
-      url: this.selectedMarker?.location__coordinates === cordsAsId ? './assets/img/home/icons/place-hover.svg' : './assets/img/home/icons/place.svg'
+      url:
+        this.selectedMarker?.location__coordinates === cordsAsId
+          ? './assets/img/home/icons/place-hover.svg'
+          : './assets/img/home/icons/place.svg'
     };
   }
 }
