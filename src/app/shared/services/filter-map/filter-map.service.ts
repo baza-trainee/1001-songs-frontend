@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { catchError } from 'rxjs';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
-import { Marker, SongFilter } from '../../interfaces/map-marker';
+import { Marker, MarkerOfLocation, SongFilter } from '../../interfaces/map-marker';
 import { MapState } from '../../../store/map/map.state';
 
 @Injectable({
@@ -61,48 +61,49 @@ export class FilterMapService {
   }
 
   generateShowOptions(
-    filterMarkers: Marker[],
+   // filterMarkers: MarkerOfLocation[],
     selectedOptions: SongFilter,
     allOptions: SongFilter,
     showOptions: SongFilter,
     optionName: keyof SongFilter,
     onlySelectOptionName: keyof SongFilter | undefined
   ): SongFilter {
-    if (this.isFilteredEmpty(selectedOptions)) {
-      return allOptions;
-    } else if (optionName && selectedOptions[optionName].length) {
-      return {
-        ...this.createFilterByMarker(filterMarkers),
-        [optionName]: showOptions[optionName]
-      };
-    } else if (onlySelectOptionName && selectedOptions[onlySelectOptionName].length) {
-      return {
-        ...this.createFilterByMarker(filterMarkers),
-        [onlySelectOptionName]: allOptions[onlySelectOptionName]
-      };
-    } else {
-      return { ...this.createFilterByMarker(filterMarkers) };
-    }
+    // if (this.isFilteredEmpty(selectedOptions)) {
+    //   return allOptions;
+    // } else if (optionName && selectedOptions[optionName].length) {
+    //   return {
+    //     ...this.createFilterByMarker(filterMarkers),
+    //     [optionName]: showOptions[optionName]
+    //   };
+    // } else if (onlySelectOptionName && selectedOptions[onlySelectOptionName].length) {
+    //   return {
+    //     ...this.createFilterByMarker(filterMarkers),
+    //     [onlySelectOptionName]: allOptions[onlySelectOptionName]
+    //   };
+    // } else {
+    //   return { ...this.createFilterByMarker(filterMarkers) };
+    // }
+    return allOptions;
   }
 
-  createFilterByMarker(markers: Marker[]): SongFilter {
+  createFilterByMarker(markers: MarkerOfLocation[]): SongFilter {
     const selectedOptions = new SongFilter();
 
     markers.forEach((item) => {
-      selectedOptions.country.push(item.location.country);
-      selectedOptions.region.push(item.location.region);
-      selectedOptions.settlement.push(item.location.district_center);
-      selectedOptions.title.push(item.title);
-      selectedOptions.genre.push(item.genre_cycle);
-      selectedOptions.found.push(item.found);
+      // selectedOptions.country.push(item.location.country);
+      // selectedOptions.region.push(item.location.region);
+      // selectedOptions.settlement.push(item.location.district_center);
+      // selectedOptions.title.push(item.title);
+      // selectedOptions.genre.push(item.genre_cycle);
+      // selectedOptions.found.push(item.found);
     });
 
-    selectedOptions.country = [...new Set(selectedOptions.country)];
-    selectedOptions.region = [...new Set(selectedOptions.region)];
-    selectedOptions.settlement = [...new Set(selectedOptions.settlement)];
-    selectedOptions.title = [...new Set(selectedOptions.title)];
-    selectedOptions.genre = [...new Set(selectedOptions.genre)];
-    selectedOptions.found = [...new Set(selectedOptions.found)];
+    // selectedOptions.country = [...new Set(selectedOptions.country)];
+    // selectedOptions.region = [...new Set(selectedOptions.region)];
+    // selectedOptions.settlement = [...new Set(selectedOptions.settlement)];
+    // selectedOptions.title = [...new Set(selectedOptions.title)];
+    // selectedOptions.genre = [...new Set(selectedOptions.genre)];
+    // selectedOptions.found = [...new Set(selectedOptions.found)];
 
     return selectedOptions;
   }

@@ -2,7 +2,7 @@ export class SongFilter {
   country: string[] = [];
   region: string[] = [];
   settlement: string[] = [];
-  title: string[] = [];
+  title: string = '';
   genre: string[] = [];
   found: string[] = [];
 }
