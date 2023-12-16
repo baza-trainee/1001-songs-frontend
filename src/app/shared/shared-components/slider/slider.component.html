@@ -1,10 +1,9 @@
-<div class="container">
+<div class="container" [ngClass]="colorScheme">
   <div class="slider">
-    <h3 class="slider__title">{{ 'news.article.latest-news' | translate }}</h3>
-
+    <h3 class="slider__title">{{ title }}</h3>
     <div class="slider__container" #sliderContainer>
-      <div class="track" #track [ngStyle]="{ transform: trackTransform }">
-        <div *ngFor="let item of projectsItems" class="slide">
+      <div class="track" #track [ngStyle]="{ transform: 'translateX(-' + index * slideWidth + 'px)' }">
+        <div *ngFor="let item of sliderItems" class="slide" #slide>
           <div class="slide__item">
             <img class="slide__item-img" src="{{ item.img }}" alt="Project photo" />
             <p class="slide__item-date">{{ item.date }}</p>
@@ -16,12 +15,12 @@
       </div>
 
       <div class="nav">
-        <button class="prev" #prev (click)="index = index - 1" [disabled]="prevIsDisabled">
+        <button class="prev" (click)="changeIndex(index - 1)" [disabled]="prevIsDisabled">
           <svg width="40" height="40" viewBox="0 0 48 48">
             <use xlink:href="./assets/sprites.svg#arrowForward"></use>
           </svg>
         </button>
-        <button class="next" #next (click)="index = index + 1" [disabled]="nextIsDisabled">
+        <button class="next" (click)="changeIndex(index + 1)" [disabled]="nextIsDisabled">
           <svg width="40" height="40" viewBox="0 0 48 48">
             <use xlink:href="./assets/sprites.svg#arrowForward"></use>
           </svg>
