@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
+import { InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 import * as options from 'src/app/static-data/filter-options';
+import { MapService } from 'src/app/shared/services/map/map.service';
+import { map, tap } from 'rxjs';
 
 export interface FilterMapStateModel {
   selectedOptions: SongFilter;
@@ -17,19 +19,15 @@ export interface FilterMapStateModel {
   defaults: {
     selectedOptions: new SongFilter(),
     showOptions: new SongFilter(),
-    allOptions: {
-      country: options.coruntries,
-      region: options.regions,
-      settlement: ['Ромейки'],
-      title: 'Kalyna',
-      genre: options.genres,
-      found: ['fond of nina Matvienko']
-    }
+    allOptions: new SongFilter()
   }
 })
 @Injectable()
 export class FilterMapState {
-  constructor(private filterMapService: FilterMapService) {}
+  constructor(
+    private filterMapService: FilterMapService,
+    private mapService: MapService
+  ) {}
 
   @Selector()
   static getSelectedOptions(state: FilterMapStateModel): SongFilter {
@@ -48,7 +46,7 @@ export class FilterMapState {
 
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
-    console.log("action", action)
+    console.log('action', action);
     const state = ctx.getState();
     const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
 
@@ -86,5 +84,30 @@ export class FilterMapState {
       allOptions,
       showOptions: allOptions
     });
+  }
+
+  @Action(InitFilterOptions)
+  InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
+    const state = ctx.getState();
+
+    return this.mapService.fetchMarkers().pipe(
+      tap((response: any) => {
+        let allOptions = {
+          country: options.coruntries,
+          region: options.regions,
+          settlement: response[1],
+          title: 'Kalyna',
+          genre: options.genres,
+          found: response[2]
+        };
+        console.log(response);
+
+        ctx.setState({
+          ...state,
+          allOptions: allOptions,
+          showOptions: allOptions
+        });
+      })
+    );
   }
 }

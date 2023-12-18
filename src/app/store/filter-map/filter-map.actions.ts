@@ -5,11 +5,16 @@ export class UpdateOptions {
 
   constructor(
     public selectedOptions: SongFilter,
-    public optionName: keyof SongFilter,
+    public optionName: keyof SongFilter
   ) {}
 }
 export class LoadFilteredMarkers {
   static readonly type = '[Filter Map] Load Filtered Markers';
 
   constructor(public markers: MarkerOfLocation[]) {}
+}
+
+export class InitFilterOptions {
+  static readonly type = '[Filter Map] Init filter options';
+  constructor() {}
 }

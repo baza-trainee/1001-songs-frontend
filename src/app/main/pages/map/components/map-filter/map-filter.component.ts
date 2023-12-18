@@ -10,7 +10,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { Marker, MarkerOfLocation, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
-import { LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
+import { InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
 import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
 
 @Component({
@@ -47,6 +47,8 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new InitFilterOptions());
+
     this.form.valueChanges
       .pipe(
         takeUntil(this.destroy$),
@@ -60,7 +62,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
       )
       .subscribe((value: keyof SongFilter) => {
         //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
-        this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value ));
+        this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
       });
   }
 
@@ -71,7 +73,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
 
   filerClear() {
     this.form.setValue(new SongFilter());
-   // this.store.dispatch(new LoadFilteredMarkers(this.markers));
+    // this.store.dispatch(new LoadFilteredMarkers(this.markers));
     this.store.dispatch(new ResetMarkers());
   }
 
