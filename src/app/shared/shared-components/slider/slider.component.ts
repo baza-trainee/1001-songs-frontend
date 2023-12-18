@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { debounceTime, fromEvent, Observable, Subscription } from 'rxjs';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { Slide } from '../../interfaces/slide.interface';
 
 @Component({
   selector: 'app-slider',
@@ -11,37 +12,58 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('prev') prev!: ElementRef;
-  @ViewChild('next') next!: ElementRef;
-  @ViewChild('track') track!: ElementRef<HTMLDivElement>;
-  @ViewChild('sliderContainer') sliderContainer!: ElementRef;
+export class SliderComponent implements OnInit, OnDestroy {
+  @Input() sliderItems!: Slide[];
+  @Input() colorScheme: string = 'default';
+  @Input() title!: string;
+
+  @ViewChild('track') set track(el: ElementRef<HTMLDivElement>) {
+    this.trackRef = el.nativeElement;
+    this.trackWidth = el.nativeElement.offsetWidth;
+  }
+  @ViewChild('sliderContainer') set sliderContainer(el: ElementRef<HTMLDivElement>) {
+    this.sliderContainerRef = el.nativeElement;
+    this.sliderWidth = el.nativeElement.offsetWidth;
+  }
+  @ViewChild('slide') set slide(el: ElementRef<HTMLDivElement> | undefined) {
+    this.slideRef = el?.nativeElement || null;
+    this.slideWidth = (el?.nativeElement.offsetWidth || 0) + this.gap;
+  }
+
+  sliderContainerRef: HTMLDivElement | null = null;
+  trackRef: HTMLDivElement | null = null;
+  slideRef: HTMLDivElement | null = null;
+
+  sliderTitle!: string;
 
   index: number = 0;
   gap: number = 24;
   defaultSlideWidth: number = 302;
 
-  sliderWidth!: number;
-  slideWidth!: number;
+  trackWidth = 0;
+  sliderWidth = 0;
+  slideWidth = 0;
 
   resizeObservable$!: Observable<Event>;
   resizeSubscription$!: Subscription;
 
-  get prevIsDisabled() {
-    return this.index === 0;
-  }
-
-  get nextIsDisabled() {
-    return this.track?.nativeElement.offsetWidth - this.index * this.slideWidth <= this.sliderWidth;
-  }
-
-  get trackTransform() {
-    return `translateX(-${this.index * (this.slideWidth || 0)}px)`;
-  }
+  prevIsDisabled: boolean = true;
+  nextIsDisabled: boolean = false;
 
   setSliderWidths() {
-    this.sliderWidth = this.sliderContainer.nativeElement.offsetWidth;
-    this.slideWidth = (this.track.nativeElement.querySelector<HTMLDivElement>('.slide')?.offsetWidth || this.defaultSlideWidth) + this.gap;
+    this.sliderWidth = this.sliderContainerRef?.offsetWidth || 0;
+    this.slideWidth = (this.slideRef?.offsetWidth || this.defaultSlideWidth) + this.gap;
+    this.trackWidth = this.trackRef?.offsetWidth || 0;
+  }
+
+  changeIndex(value: number) {
+    this.index = value;
+    this.updateBtnsStatus();
+  }
+
+  updateBtnsStatus() {
+    this.prevIsDisabled = this.index === 0;
+    this.nextIsDisabled = this.trackWidth - this.index * this.slideWidth <= this.sliderWidth;
   }
 
   ngOnInit() {
@@ -49,84 +71,11 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
       this.setSliderWidths();
+      this.changeIndex(0);
     });
-  }
-
-  ngAfterViewInit() {
-    this.setSliderWidths();
   }
 
   ngOnDestroy() {
     this.resizeSubscription$.unsubscribe();
   }
-
-  imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
-
-  @Input() projectsItems = [
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина1',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина2',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина3',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина4',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина5',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина6',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина7',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина8',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина9',
-      description: 'Короткий опис',
-      location: 'Локація'
-    }
-  ];
-
-  constructor() {}
 }

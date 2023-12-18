@@ -95,16 +95,6 @@
       }
     }
   }
-
-  &__carousel {
-    background: var(--bg-color-screen);
-
-    &-title {
-      @include h2-desktop;
-
-      margin-bottom: 32px;
-    }
-  }
 }
 
 @media (width <=1440px) {
@@ -198,14 +188,6 @@
       &-title {
         font-size: 18px;
         line-height: 24px;
-      }
-    }
-
-    &__carousel {
-      &-title {
-        font-size: 32px;
-        line-height: 40px;
-        margin-bottom: 16px;
       }
     }
 

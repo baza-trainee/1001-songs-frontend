@@ -2,7 +2,7 @@
   <div class="container">
     <section class="article" *ngIf="article.id">
       <app-breadcrumbs></app-breadcrumbs>
-      
+
       <div class="article__box">
         <h1 class="article__title">{{ article.title }}</h1>
         <p class="article__date">{{ article.eventDate }} • {{ article.location }}</p>
@@ -66,7 +66,7 @@
     </section>
   </div>
 
-  <div class="article__carousel" *ngIf="article.id">
-    <app-slider></app-slider>
+  <div *ngIf="article.id">
+    <app-slider [sliderItems]="sliderItems" [title]="sliderTitle" colorScheme="default"></app-slider>
   </div>
 </ng-container>
