@@ -60,9 +60,9 @@
 
 
             <app-multiselect
-              [control]="form.controls.settlement"
-              [options]="options.settlement"
-              [name]="filterCategory.settlement"
+              [control]="form.controls.city"
+              [options]="options.city"
+              [name]="filterCategory.city"
             ></app-multiselect>
 
 
@@ -85,7 +85,7 @@
             ></app-multiselect>
 
 
-            <button class="filter__submit" type="submit" (click)="onSubmit()">{{ 'map.filter.button-submit' | translate }}</button>
+            <button class="filter__submit" type="submit" (click)="filterSongs()">{{ 'map.filter.button-submit' | translate }}</button>
           </div>
         </div>
       </form>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
+import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
@@ -46,12 +46,13 @@ export class FilterMapState {
 
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
-    console.log('action', action);
+    // console.log('action', action);
     const state = ctx.getState();
-    const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
+    // const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);
+    //console.log(optionsWithLength);
     let onSelect: keyof SongFilter | undefined;
 
     if (optionsWithLength.length === 1) {
@@ -86,6 +87,20 @@ export class FilterMapState {
     });
   }
 
+  @Action(FilterSongs)
+  filterSongs(ctx: StateContext<FilterMapStateModel>, action: FilterSongs) {
+    const state = ctx.getState();
+   console.log(action);
+   // const allOptions = this.filterMapService.createFilterByMarker(action.markers);
+   const x = action.filter;
+   this.filterMapService.fetchSongsByFilter(action.filter);
+    ctx.setState({
+      ...state,
+      // allOptions,
+      // showOptions: allOptions
+    });
+  }
+
   @Action(InitFilterOptions)
   InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
     const state = ctx.getState();
@@ -95,8 +110,8 @@ export class FilterMapState {
         let allOptions = {
           country: options.coruntries,
           region: options.regions,
-          settlement: response[1],
-          title: 'Kalyna',
+          city: response[1],
+          title: '',
           genre: options.genres,
           found: response[2]
         };

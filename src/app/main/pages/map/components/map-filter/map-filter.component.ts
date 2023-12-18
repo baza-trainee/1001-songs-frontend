@@ -10,7 +10,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { Marker, MarkerOfLocation, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
-import { InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
+import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
 import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
 
 @Component({
@@ -32,7 +32,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   form = new FormGroup({
     country: new FormControl<string[]>([]),
     region: new FormControl<string[]>([]),
-    settlement: new FormControl<string[]>([]),
+    city: new FormControl<string[]>([]),
     genre: new FormControl<string[]>([]),
     title: new FormControl<string>(''),
     found: new FormControl<string[]>([])
@@ -61,6 +61,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
         filter((key) => key !== null && key !== undefined)
       )
       .subscribe((value: keyof SongFilter) => {
+        //console.log(value);
         //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
         this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
       });
@@ -69,6 +70,11 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  filterSongs() {
+    console.log(this.form.value);
+    this.store.dispatch(new FilterSongs(this.form.value as SongFilter));
   }
 
   filerClear() {

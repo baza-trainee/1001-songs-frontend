@@ -13,8 +13,14 @@ export class LoadFilteredMarkers {
 
   constructor(public markers: MarkerOfLocation[]) {}
 }
+export class FilterSongs {
+  static readonly type = '[Filter Map] Filter songs';
+
+  constructor(public filter: SongFilter) {}
+}
 
 export class InitFilterOptions {
   static readonly type = '[Filter Map] Init filter options';
+
   constructor() {}
 }

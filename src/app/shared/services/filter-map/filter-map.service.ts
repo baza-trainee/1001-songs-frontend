@@ -53,7 +53,7 @@ export class FilterMapService {
     return (
       !selectOptions.country.length &&
       !selectOptions.region.length &&
-      !selectOptions.settlement.length &&
+      !selectOptions.city.length &&
       !selectOptions.genre.length &&
       !selectOptions.title.length &&
       !selectOptions.found.length
@@ -61,7 +61,7 @@ export class FilterMapService {
   }
 
   generateShowOptions(
-   // filterMarkers: MarkerOfLocation[],
+    // filterMarkers: MarkerOfLocation[],
     selectedOptions: SongFilter,
     allOptions: SongFilter,
     showOptions: SongFilter,
@@ -108,11 +108,33 @@ export class FilterMapService {
     return selectedOptions;
   }
 
+  fetchSongsByFilter(options: SongFilter) {
+    console.log('getFilteredSongs', options);
+    // const req = Object.entries(options);
+    // console.log(req);
+    const selectedFilterOptions = Object.entries(options).filter((el) => el[1].length > 0);
+    let fullRequest = API_URL + StatEndpoints.songs + '?';
+    selectedFilterOptions.forEach((option: [string, string[]]) => {
+      console.log(option);
+      //  if(option[])
+      let req = `${option[0]}=${option[1].map(el => this.replaceSpaces(el)).join(',')}&`;
+      fullRequest += req;
+    });
+    fullRequest = fullRequest.slice(0, fullRequest.length - 1);
+    this.http.get(fullRequest).subscribe(d => console.log(d))
+    console.log(fullRequest);
+  }
+
   searchSongsByTitle(title: string) {
     return this.http.get(API_URL + StatEndpoints.songs + '?title=' + title).pipe(
       catchError(async (error) => {
         console.error(error);
       })
     );
+  }
+
+  private replaceSpaces(strWithSpaces: string) {
+    const patch = '%20';
+    return strWithSpaces.trim().replaceAll(' ', patch);
   }
 }

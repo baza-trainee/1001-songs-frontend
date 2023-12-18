@@ -28,7 +28,7 @@
         </mat-icon>
       </button>
     </mat-select-trigger>
-    <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option">
+    <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option | translate">
       {{ option | translate }}
     </mat-option>
   </mat-select>
