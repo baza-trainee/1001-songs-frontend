@@ -1,15 +1,25 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog} from "@angular/material/dialog";
-import {ImagePopupComponent} from "../image-popup/image-popup.component";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslateModule} from "@ngx-translate/core";
 import {debounceTime, fromEvent, Observable, Subscription} from "rxjs";
+
+import {ImagePopupComponent} from "../image-popup/image-popup.component";
 
 @Component({
   selector: 'app-image-slider',
   standalone: true,
   imports: [CommonModule, MatIconModule, TranslateModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './image-slider.component.html',
   styleUrls: ['./image-slider.component.scss']
 })

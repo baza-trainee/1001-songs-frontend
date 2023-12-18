@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ImageSliderComponent } from './image-slider.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {MatDialogModule} from "@angular/material/dialog";
 import {TranslateModule} from "@ngx-translate/core";
+
+import { ImageSliderComponent } from './image-slider.component';
 
 describe('ImageSliderComponent', () => {
   let component: ImageSliderComponent;
