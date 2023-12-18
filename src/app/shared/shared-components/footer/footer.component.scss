@@ -69,9 +69,10 @@ footer.footer {
           font-weight: 600;
           line-height: 24px; /* 150% */
 
-
           &:hover {
-            background-color: rgba(255, 240, 104, 100%);
+            background: var(--bg-color-footer);
+            color: var(--text-color-accent);
+            transition: all 0.2s linear;
           }
         }
       }
