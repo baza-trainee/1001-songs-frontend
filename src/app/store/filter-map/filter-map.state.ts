@@ -48,6 +48,7 @@ export class FilterMapState {
 
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
+    console.log("action", action)
     const state = ctx.getState();
     const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
 
