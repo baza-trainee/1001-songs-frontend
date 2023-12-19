@@ -6,6 +6,9 @@ import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 import { Marker, MarkerOfLocation, SongFilter } from '../../interfaces/map-marker';
 import { MapState } from '../../../store/map/map.state';
+import { CountriesSelectOptions } from 'src/app/static-data/filter-options';
+import { RegionsSelectOptions } from 'src/app/static-data/filter-options';
+import { GenresSelectOptions } from 'src/app/static-data/filter-options';
 
 @Injectable({
   providedIn: 'root'
@@ -109,21 +112,36 @@ export class FilterMapService {
   }
 
   fetchSongsByFilter(options: SongFilter) {
-    //console.log('getFilteredSongs', options);
-    // const req = Object.entries(options);
-    // console.log(req);
     const selectedFilterOptions = Object.entries(options).filter((el) => el[1].length > 0);
     let fullRequest = API_URL + StatEndpoints.songs + '?';
     selectedFilterOptions.forEach((option: [string, string[]]) => {
-    //  console.log(option);
-      //  if(option[])
-      let req = `${option[0]}=${option[1].map((el) => this.replaceSpaces(el)).join(',')}&`;
+      const optionKey = option[0];
+      const optionValues = option[1].map((el) => this.retranslateOption(optionKey, el));
+      let req = `${optionKey}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
+      console.log(optionKey);
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
-    // this.http.get(fullRequest).subscribe(d => console.log(d))
+
     console.log(fullRequest);
+
     return this.http.get(fullRequest);
+  }
+
+  retranslateOption(optionName: string, optionValue: string) {
+    // let result : string = '';
+    if (optionName === 'city') {
+      const target = CountriesSelectOptions.find((city) => city.key === optionValue);
+      return target ? target.value : '';
+    } else if (optionName === 'regions') {
+      const target = RegionsSelectOptions.find((region) => region.key === optionValue);
+      return target ? target.value : '';
+    } else if (optionName === 'genre') {
+      const target = GenresSelectOptions.find((region) => region.key === optionValue);
+      return target ? target.value : '';
+    } else {
+      return optionValue;
+    }
   }
 
   searchSongsByTitle(title: string) {
