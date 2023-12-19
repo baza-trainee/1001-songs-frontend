@@ -424,7 +424,8 @@
       }
     },
     "songs": {
-      "player-title": "Слухати пісню"
+      "player-title": "Слухати пісню",
+      "illustrations": "Ілюстрації"
     },
     "song-page": {
       "video": "Відео",
