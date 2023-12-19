@@ -516,7 +516,8 @@
       }
     },
     "songs": {
-      "player-title": "Listen to the song"
+      "player-title": "Listen to the song",
+      "illustrations": "Illustrations"
     },
     "song-page": {
       "video": "Video",
