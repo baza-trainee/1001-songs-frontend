@@ -90,9 +90,6 @@ export class FilterMapState {
   @Action(FilterSongs)
   filterSongs(ctx: StateContext<FilterMapStateModel>, action: FilterSongs) {
     const state = ctx.getState();
-   console.log(action);
-   // const allOptions = this.filterMapService.createFilterByMarker(action.markers);
-   const x = action.filter;
    this.filterMapService.fetchSongsByFilter(action.filter);
     ctx.setState({
       ...state,

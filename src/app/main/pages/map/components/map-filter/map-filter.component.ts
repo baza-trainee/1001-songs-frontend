@@ -12,6 +12,7 @@ import { FilterMapState } from '../../../../../store/filter-map/filter-map.state
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
 import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
+import { FetchFilteredSongs } from 'src/app/store/player/player.actions';
 
 @Component({
   selector: 'app-map-filter',
@@ -74,7 +75,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
 
   filterSongs() {
     console.log(this.form.value);
-    this.store.dispatch(new FilterSongs(this.form.value as SongFilter));
+    this.store.dispatch(new FetchFilteredSongs(this.form.value as SongFilter));
   }
 
   filerClear() {

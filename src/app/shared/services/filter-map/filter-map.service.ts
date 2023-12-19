@@ -109,20 +109,21 @@ export class FilterMapService {
   }
 
   fetchSongsByFilter(options: SongFilter) {
-    console.log('getFilteredSongs', options);
+    //console.log('getFilteredSongs', options);
     // const req = Object.entries(options);
     // console.log(req);
     const selectedFilterOptions = Object.entries(options).filter((el) => el[1].length > 0);
     let fullRequest = API_URL + StatEndpoints.songs + '?';
     selectedFilterOptions.forEach((option: [string, string[]]) => {
-      console.log(option);
+    //  console.log(option);
       //  if(option[])
-      let req = `${option[0]}=${option[1].map(el => this.replaceSpaces(el)).join(',')}&`;
+      let req = `${option[0]}=${option[1].map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
-    this.http.get(fullRequest).subscribe(d => console.log(d))
+    // this.http.get(fullRequest).subscribe(d => console.log(d))
     console.log(fullRequest);
+    return this.http.get(fullRequest);
   }
 
   searchSongsByTitle(title: string) {

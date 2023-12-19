@@ -4,7 +4,9 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongById, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchFilteredSongs, FetchSongById, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
+import { songs } from 'src/app/mock-data/songs';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -22,6 +24,7 @@ export interface PlayerStateModel {
 export class PlayerState {
   constructor(
     private cloudService: CloudService,
+    private filterMapService: FilterMapService,
     private store: Store
   ) {}
 
@@ -33,6 +36,20 @@ export class PlayerState {
   @Selector()
   static getSelectedSong(state: PlayerStateModel): Song {
     return state.selecteSong as Song;
+  }
+
+  @Action(FetchFilteredSongs)
+  filterSongs(ctx: StateContext<PlayerStateModel>, action: FetchFilteredSongs) {
+    const state = ctx.getState();
+    
+    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
+      tap((songs) => {
+        ctx.setState({
+          ...state,
+          songsList: songs as Song[]
+        });
+      })
+    );
   }
 
   @Action(SelectNext)
@@ -106,7 +123,7 @@ export class PlayerState {
     this.store.dispatch(new SetIsLoading(1));
     return this.cloudService.getSongsByLocation(action.locationName).pipe(
       tap((songs: Song[]) => {
-        console.log(songs)
+        console.log(songs);
         ctx.setState({
           ...state,
           songsList: [...songs]
