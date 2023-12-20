@@ -18,7 +18,7 @@ import {
   UpdateOptions
 } from '../../../../../store/filter-map/filter-map.actions';
 import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
-import { FetchFilteredSongs } from 'src/app/store/player/player.actions';
+import { FetchSongs } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 
@@ -57,11 +57,10 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new InitFilterOptions());
-
-    this.songs.subscribe((songs) => {
-     // console.log(songs);
-      this.store.dispatch(new SetShownOptions(songs));
+    this.store.dispatch(new InitFilterOptions()).subscribe(()=>{
+      this.songs.subscribe((songs) => {
+        this.store.dispatch(new SetShownOptions(songs));
+      });
     });
 
     this.form.valueChanges
@@ -78,7 +77,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
       .subscribe((value: keyof SongFilter) => {
         console.log("filter is updated ");
         //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
-        this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
+       // this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
       });
   }
 
@@ -89,7 +88,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
 
   filterSongs() {
     console.log(this.form.value);
-    this.store.dispatch(new FetchFilteredSongs(this.form.value as SongFilter));
+    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
   filerClear() {

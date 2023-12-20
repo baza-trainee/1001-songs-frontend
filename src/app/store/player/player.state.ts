@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchFilteredSongs, FetchSongById, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongs, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { songs } from 'src/app/mock-data/songs';
 
@@ -38,10 +38,10 @@ export class PlayerState {
     return state.selecteSong as Song;
   }
 
-  @Action(FetchFilteredSongs)
-  filterSongs(ctx: StateContext<PlayerStateModel>, action: FetchFilteredSongs) {
+  @Action(FetchSongs)
+  fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
-    
+
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((songs) => {
         ctx.setState({

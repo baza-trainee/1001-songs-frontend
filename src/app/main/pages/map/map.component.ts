@@ -4,12 +4,12 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
+import { Marker, MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
+import { FetchSongs, FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 
 @Component({
@@ -28,8 +28,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
+    this.store.dispatch(new FetchSongs(new SongFilter()));
   }
-  
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -37,7 +38,9 @@ export class MapComponent implements OnInit, OnDestroy {
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
-    this.store.dispatch(new FetchSongsByLocation(marker.location__official_name_city));
+    let params: SongFilter = new SongFilter();
+    params.city = [marker.location__official_name_city];
+    this.store.dispatch(new FetchSongs(params));
   }
 
   scrollToElement(element: HTMLElement): void {

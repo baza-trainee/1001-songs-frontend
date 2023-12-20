@@ -36,6 +36,7 @@ export class FilterMapState {
 
   @Selector()
   static getShowOptions(state: FilterMapStateModel): SongFilter {
+    console.log(state)
     return state.showOptions;
   }
 
@@ -80,7 +81,7 @@ export class FilterMapState {
     const state = ctx.getState();
 
     const newOptions = this.filterMapService.generateShowOptions(state.allOptions, action.songs);
-
+   // console.log(newOptions);
     ctx.setState({
       ...state,
       showOptions: newOptions
@@ -124,11 +125,11 @@ export class FilterMapState {
           genre: options.genres,
           found: response[2]
         };
-        // console.log(response);
+         console.log(response);
 
         ctx.setState({
           ...state,
-          allOptions: allOptions,
+          allOptions: allOptions
           //showOptions: allOptions
         });
       })

@@ -31,7 +31,7 @@ export class SelectPrev {
   constructor() {}
 }
 
-export class FetchFilteredSongs {
+export class FetchSongs {
   static readonly type = '[Player] Fetch songs';
 
   constructor(public filter: SongFilter) {}

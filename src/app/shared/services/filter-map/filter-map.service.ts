@@ -96,7 +96,7 @@ export class FilterMapService {
     newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
     newOptions.found = [...new Set(songs.map((song) => song.archive))];
     //newOptions.country = counties
-    console.log('generateShowOptions > > > ', newOptions);
+   //console.log('generateShowOptions > > > ', newOptions);
     return newOptions;
   }
 
@@ -134,15 +134,15 @@ export class FilterMapService {
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
 
-    console.log(fullRequest);
+  //  console.log(fullRequest);
 
     return this.http.get(fullRequest);
   }
 
   retranslateOption(optionName: string, optionValue: string) {
     // let result : string = '';
-    if (optionName === 'city') {
-      const target = CountriesSelectOptions.find((city) => city.key === optionValue);
+    if (optionName === 'country') {
+      const target = CountriesSelectOptions.find((country) => country.key === optionValue);
       return target ? target.value : '';
     } else if (optionName === 'regions') {
       const target = RegionsSelectOptions.find((region) => region.key === optionValue);
