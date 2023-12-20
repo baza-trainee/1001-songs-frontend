@@ -9,6 +9,7 @@ import { MapState } from '../../../store/map/map.state';
 import { CountriesSelectOptions } from 'src/app/static-data/filter-options';
 import { RegionsSelectOptions } from 'src/app/static-data/filter-options';
 import { GenresSelectOptions } from 'src/app/static-data/filter-options';
+import { Song } from '../../interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -65,11 +66,12 @@ export class FilterMapService {
 
   generateShowOptions(
     // filterMarkers: MarkerOfLocation[],
-    selectedOptions: SongFilter,
+    // selectedOptions: SongFilter,
     allOptions: SongFilter,
-    showOptions: SongFilter,
-    optionName: keyof SongFilter,
-    onlySelectOptionName: keyof SongFilter | undefined
+    songs: Song[]
+    // showOptions: SongFilter,
+    //optionName: keyof SongFilter,
+    // onlySelectOptionName: keyof SongFilter | undefined
   ): SongFilter {
     // if (this.isFilteredEmpty(selectedOptions)) {
     //   return allOptions;
@@ -86,7 +88,16 @@ export class FilterMapService {
     // } else {
     //   return { ...this.createFilterByMarker(filterMarkers) };
     // }
-    return allOptions;
+    //console.log('generateShowOptions > > > ', songs);
+    let newOptions = new SongFilter();
+    newOptions.country = [...new Set(songs.map((song) => song.location.country))];
+    newOptions.region = [...new Set(songs.map((song) => song.location.region))];
+    newOptions.city = [...new Set(songs.map((song) => song.location.official_name_city))];
+    newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
+    newOptions.found = [...new Set(songs.map((song) => song.archive))];
+    //newOptions.country = counties
+    console.log('generateShowOptions > > > ', newOptions);
+    return newOptions;
   }
 
   createFilterByMarker(markers: MarkerOfLocation[]): SongFilter {

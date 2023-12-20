@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
+import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, SetShownOptions, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
@@ -59,44 +59,56 @@ export class FilterMapState {
       onSelect = optionsWithLength[0][0] as keyof SongFilter;
     }
 
-    const showOptions = this.filterMapService.generateShowOptions(
-      //filterMarkers,
-      action.selectedOptions,
-      state.allOptions,
-      state.showOptions,
-      action.optionName,
-      onSelect
-    );
+    //  const showOptions = this.filterMapService.generateShowOptions(
+    //filterMarkers,
+    // action.selectedOptions,
+    //   state.allOptions
+    //state.showOptions,
+    // action.optionName,
+    // onSelect
+    //  );
 
     ctx.setState({
       ...state,
-      selectedOptions: action.selectedOptions,
-      showOptions
+      selectedOptions: action.selectedOptions
+      //  showOptions
     });
   }
 
-  @Action(LoadFilteredMarkers)
-  loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: LoadFilteredMarkers) {
+  @Action(SetShownOptions)
+  setShownOptions(ctx: StateContext<FilterMapStateModel>, action: SetShownOptions) {
     const state = ctx.getState();
 
-    const allOptions = this.filterMapService.createFilterByMarker(action.markers);
+    const newOptions = this.filterMapService.generateShowOptions(state.allOptions, action.songs);
+
     ctx.setState({
       ...state,
-      allOptions,
-      showOptions: allOptions
+      showOptions: newOptions
     });
   }
 
-  @Action(FilterSongs)
-  filterSongs(ctx: StateContext<FilterMapStateModel>, action: FilterSongs) {
-    const state = ctx.getState();
-   this.filterMapService.fetchSongsByFilter(action.filter);
-    ctx.setState({
-      ...state,
-      // allOptions,
-      // showOptions: allOptions
-    });
-  }
+  // @Action(LoadFilteredMarkers)
+  // loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: LoadFilteredMarkers) {
+  //   const state = ctx.getState();
+
+  //   const allOptions = this.filterMapService.createFilterByMarker(action.markers);
+  //   ctx.setState({
+  //     ...state,
+  //     allOptions,
+  //     showOptions: allOptions
+  //   });
+  // }
+
+  // @Action(FilterSongs)
+  // filterSongs(ctx: StateContext<FilterMapStateModel>, action: FilterSongs) {
+  //   const state = ctx.getState();
+  //  this.filterMapService.fetchSongsByFilter(action.filter);
+  //   ctx.setState({
+  //     ...state,
+  //     // allOptions,
+  //     // showOptions: allOptions
+  //   });
+  // }
 
   @Action(InitFilterOptions)
   InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
@@ -112,12 +124,12 @@ export class FilterMapState {
           genre: options.genres,
           found: response[2]
         };
-        console.log(response);
+        // console.log(response);
 
         ctx.setState({
           ...state,
           allOptions: allOptions,
-          showOptions: allOptions
+          //showOptions: allOptions
         });
       })
     );

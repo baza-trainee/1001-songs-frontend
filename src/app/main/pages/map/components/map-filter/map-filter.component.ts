@@ -10,9 +10,17 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { Marker, MarkerOfLocation, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
-import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, UpdateOptions } from '../../../../../store/filter-map/filter-map.actions';
+import {
+  FilterSongs,
+  InitFilterOptions,
+  LoadFilteredMarkers,
+  SetShownOptions,
+  UpdateOptions
+} from '../../../../../store/filter-map/filter-map.actions';
 import { FilteredMarkers, ResetMarkers } from '../../../../../store/map/map.actions';
 import { FetchFilteredSongs } from 'src/app/store/player/player.actions';
+import { PlayerState } from 'src/app/store/player/player.state';
+import { Song } from 'src/app/shared/interfaces/song.interface';
 
 @Component({
   selector: 'app-map-filter',
@@ -25,6 +33,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   // @Input() markers!: MarkerOfLocation[];
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SongFilter>;
+  @Select(PlayerState.getSongs) songs!: Observable<Song[]>;
   @Output() changeFilter = new EventEmitter<MarkerOfLocation[]>();
   filterCategory = mapFilter;
   isShowFilter = false;
@@ -50,6 +59,11 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
 
+    this.songs.subscribe((songs) => {
+     // console.log(songs);
+      this.store.dispatch(new SetShownOptions(songs));
+    });
+
     this.form.valueChanges
       .pipe(
         takeUntil(this.destroy$),
@@ -62,7 +76,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
         filter((key) => key !== null && key !== undefined)
       )
       .subscribe((value: keyof SongFilter) => {
-        //console.log(value);
+        console.log("filter is updated ");
         //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
         this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
       });
