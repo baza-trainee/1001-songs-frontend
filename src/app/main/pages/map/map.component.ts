@@ -20,7 +20,7 @@ import { MapFilterComponent } from './components/map-filter/map-filter.component
   imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
 export class MapComponent implements OnInit, OnDestroy {
-  @Select(MapState.getMarkersList) markers$!: Observable<Marker[]>;
+  @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
   @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
   private subscription: Subscription = new Subscription();
 
@@ -29,6 +29,8 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
     this.store.dispatch(new FetchSongs(new SongFilter()));
+
+  //  this.markers$.subscribe(d => console.log(d))
   }
 
   ngOnDestroy(): void {

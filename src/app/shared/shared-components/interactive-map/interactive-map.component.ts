@@ -5,6 +5,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { cordsMarkers } from 'src/app/mock-data/markers';
 import { FilterMapService } from '../../services/filter-map/filter-map.service';
+import { MapState } from 'src/app/store/map/map.state';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-interactive-map',
@@ -24,6 +27,8 @@ export class InteractiveMapComponent {
   ];
   @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
 
+  @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
+
   private currentInfoWindow: MapInfoWindow | null = null;
   selectedMarker: MarkerOfLocation | null = null;
   showInfoWindow: boolean = false;
@@ -37,6 +42,9 @@ export class InteractiveMapComponent {
     public filterMapServices: FilterMapService
   ) {
     // console.log(this.markers)
+    this.markers$.subscribe((d) => {
+      this.markers = d;
+      console.log(d)});
   }
 
   formatCords(cords: string) {

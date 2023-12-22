@@ -9,11 +9,11 @@ export class UpdateOptions {
     public optionName: keyof SongFilter
   ) {}
 }
-export class LoadFilteredMarkers {
-  static readonly type = '[Filter Map] Load Filtered Markers';
+// export class SetFilteredMarkers {
+//   static readonly type = '[Filter Map] Set Filtered Markers';
 
-  constructor(public markers: MarkerOfLocation[]) {}
-}
+//   constructor(public songs: Song[]) {}
+// }
 export class FilterSongs {
   static readonly type = '[Filter Map] Filter songs';
 
@@ -29,5 +29,5 @@ export class InitFilterOptions {
 export class SetShownOptions {
   static readonly type = '[Filter Map] Set shown options';
 
-  constructor(public songs: Song []) {}
+  constructor(public songs: Song[]) {}
 }

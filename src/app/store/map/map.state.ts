@@ -3,7 +3,7 @@ import { map, tap } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
 import { MapService } from 'src/app/shared/services/map/map.service';
-import { FetchMarkers, FilteredMarkers, ResetMarkers } from './map.actions';
+import { FetchMarkers, FilteredMarkers, ResetMarkers, SetFilteredMarkers } from './map.actions';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
@@ -41,7 +41,6 @@ export class MapState {
   @Action(FilteredMarkers)
   filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
     // const state = ctx.getState();
-
     // const markers = this.filterMapService.filterMarkers(action.options);
     // ctx.setState({
     //   ...state,
@@ -59,6 +58,17 @@ export class MapState {
     });
   }
 
+  @Action(SetFilteredMarkers)
+  loadFilteredMarkers(ctx: StateContext<MapStateModel>, action: SetFilteredMarkers) {
+    const state = ctx.getState();
+    const newMarkers = this.filterMapService.filterMarkers(action.songs);
+   // console.log('loadFilteredMarkers', newMarkers);
+    ctx.setState({
+      ...state,
+      markersList: newMarkers
+    });
+  }
+
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
     const state = ctx.getState();
@@ -69,9 +79,9 @@ export class MapState {
     return this.mapService.fetchMarkers().pipe(
       map((response: any) => response[0]), //the expression need to avoid any type
       tap((markerList: MarkerOfLocation[]) => {
-      //  console.log(songs);
-       // const filteredSongs = songs.filter((song: Song) => song.location != null);
-      //  const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
+        //  console.log(songs);
+        // const filteredSongs = songs.filter((song: Song) => song.location != null);
+        //  const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
         ctx.setState({
           ...state,
           markersList: [...markerList],

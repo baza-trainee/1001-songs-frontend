@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { FilterSongs, InitFilterOptions, LoadFilteredMarkers, SetShownOptions, UpdateOptions } from './filter-map.actions';
+import { FilterSongs, InitFilterOptions, SetShownOptions, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
@@ -36,7 +36,6 @@ export class FilterMapState {
 
   @Selector()
   static getShowOptions(state: FilterMapStateModel): SongFilter {
-    console.log(state)
     return state.showOptions;
   }
 
@@ -88,11 +87,11 @@ export class FilterMapState {
     });
   }
 
-  // @Action(LoadFilteredMarkers)
-  // loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: LoadFilteredMarkers) {
+  // @Action(SetFilteredMarkers)
+  // loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: SetFilteredMarkers) {
   //   const state = ctx.getState();
 
-  //   const allOptions = this.filterMapService.createFilterByMarker(action.markers);
+  //   const allOptions = this.filterMapService.filterMarkers(action.songs);
   //   ctx.setState({
   //     ...state,
   //     allOptions,
@@ -125,7 +124,7 @@ export class FilterMapState {
           genre: options.genres,
           found: response[2]
         };
-         console.log(response);
+       //  console.log(response);
 
         ctx.setState({
           ...state,

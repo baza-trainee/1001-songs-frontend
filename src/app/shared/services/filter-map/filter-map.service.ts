@@ -36,21 +36,29 @@ export class FilterMapService {
     // return foundMarkers.length;
   }
 
-  filterMarkers(selectOptions: SongFilter) {
-    // const markers = this.store.selectSnapshot(MapState.getMarkersList);
-    // if (this.isFilteredEmpty(selectOptions)) {
-    //   return markers;
-    // }
-    // return markers.filter((marker) => {
-    //   return (
-    //     (!selectOptions.country.length || selectOptions.country.includes(marker.location.country)) &&
-    //     (!selectOptions.region.length || selectOptions.region.includes(marker.location.region)) &&
-    //     (!selectOptions.settlement.length || selectOptions.settlement.includes(marker.location.district_center)) &&
-    //     (!selectOptions.genre.length || selectOptions.genre.includes(marker.genre_cycle)) &&
-    //     (!selectOptions.title.length || selectOptions.title.includes(marker.title)) &&
-    //     (!selectOptions.found.length || selectOptions.found.includes(marker.found))
-    //   );
-    // });
+  filterMarkers(songs: Song[]): MarkerOfLocation[] {
+    const newMarkers: MarkerOfLocation[] = [
+      ...new Set(
+        songs.map((song) =>
+          JSON.stringify({
+            count: '0',
+            location__coordinates: song.location.coordinates,
+            location__official_name_city: song.location.official_name_city
+          })
+        )
+      )
+    ].map((el) => JSON.parse(el));
+
+    newMarkers.forEach((el) => {
+      el.count = this.countSongsTheLocation(songs, el.location__coordinates).toString();
+    });
+
+    return newMarkers;
+  }
+
+  countSongsTheLocation(songs: Song[], coordsId: string): number {
+    const count = songs.filter((song) => song.location.coordinates === coordsId);
+    return count.length;
   }
 
   isFilteredEmpty(selectOptions: SongFilter): boolean {
@@ -96,7 +104,7 @@ export class FilterMapService {
     newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
     newOptions.found = [...new Set(songs.map((song) => song.archive))];
     //newOptions.country = counties
-   //console.log('generateShowOptions > > > ', newOptions);
+    //console.log('generateShowOptions > > > ', newOptions);
     return newOptions;
   }
 
@@ -130,11 +138,11 @@ export class FilterMapService {
       const optionValues = option[1].map((el) => this.retranslateOption(optionKey, el));
       let req = `${optionKey}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
-      console.log(optionKey);
+     // console.log(optionKey);
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
 
-  //  console.log(fullRequest);
+     console.log(fullRequest);
 
     return this.http.get(fullRequest);
   }
