@@ -119,7 +119,7 @@ export class FilterMapState {
         let allOptions = {
           country: options.coruntries,
           region: options.regions,
-          city: response[1],
+          city_ua: response[1],
           title: '',
           genre: options.genres,
           found: response[2]

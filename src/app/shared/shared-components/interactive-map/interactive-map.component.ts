@@ -42,9 +42,9 @@ export class InteractiveMapComponent {
     public filterMapServices: FilterMapService
   ) {
     // console.log(this.markers)
-    this.markers$.subscribe((d) => {
-      this.markers = d;
-     //console.log(d)
+    this.markers$.subscribe((markers: MarkerOfLocation[]) => {
+      this.markers = markers;
+      //console.log(d)
     });
   }
 
@@ -73,7 +73,7 @@ export class InteractiveMapComponent {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
-   // console.log(marker)
+    // console.log(marker)
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }

@@ -65,7 +65,7 @@ export class FilterMapService {
     return (
       !selectOptions.country.length &&
       !selectOptions.region.length &&
-      !selectOptions.city.length &&
+      !selectOptions.city_ua.length &&
       !selectOptions.genre.length &&
       !selectOptions.title.length &&
       !selectOptions.found.length
@@ -100,7 +100,7 @@ export class FilterMapService {
     let newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => song.location.country))];
     newOptions.region = [...new Set(songs.map((song) => song.location.region))];
-    newOptions.city = [...new Set(songs.map((song) => song.location.official_name_city))];
+    newOptions.city_ua = [...new Set(songs.map((song) => song.location.official_name_city))];
     newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
     newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
     //newOptions.country = counties
@@ -131,11 +131,13 @@ export class FilterMapService {
   }
 
   fetchSongsByFilter(options: SongFilter) {
+    console.log(options)
     const selectedFilterOptions = Object.entries(options).filter((el) => el[1].length > 0);
     let fullRequest = API_URL + StatEndpoints.songs + '?';
     selectedFilterOptions.forEach((option: [string, string[]]) => {
       const optionKey = option[0];
       const optionValues = option[1].map((el) => this.retranslateOption(optionKey, el));
+      console.log(optionValues)
       let req = `${optionKey}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
      // console.log(optionKey);

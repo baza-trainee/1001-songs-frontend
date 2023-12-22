@@ -42,7 +42,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   form = new FormGroup({
     country: new FormControl<string[]>([]),
     region: new FormControl<string[]>([]),
-    city: new FormControl<string[]>([]),
+    city_ua: new FormControl<string[]>([]),
     genre: new FormControl<string[]>([]),
     title: new FormControl<string>(''),
     found: new FormControl<string[]>([])
@@ -70,16 +70,16 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
         startWith(this.form.getRawValue()),
         pairwise(),
         map(([previous, current]) => {
-          const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
-          return changedControl as keyof SongFilter;
+         // const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
+        //  return changedControl as keyof SongFilter;
         }),
         filter((key) => key !== null && key !== undefined)
       )
-      .subscribe((value: keyof SongFilter) => {
+     // .subscribe((value: keyof SongFilter) => {
        // console.log("filter is updated ");
         //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
        // this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
-      });
+    //  });
   }
 
   ngOnDestroy() {
