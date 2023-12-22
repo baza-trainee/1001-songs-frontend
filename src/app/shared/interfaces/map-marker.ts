@@ -24,5 +24,5 @@ export interface Marker {
 export interface MarkerOfLocation {
   count: string;
   location__coordinates: string;
-  location__official_name_city: string;
+  location__city_ua: string;
 }

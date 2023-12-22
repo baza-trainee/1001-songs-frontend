@@ -22,7 +22,8 @@ export const songs: Song[] = [
       recording_location: '51.259, 26.219',
       coordinates: ''
     },
-    archive: '',
+    archive_ua: '',
+    archive_eng: '',
     details: {
       id: 'ac54acd2-bf13-4517-bd51-5b8719ba1bc0',
       incipit: 'Ой рябая курка (веснянка)',
@@ -62,7 +63,8 @@ export const songs: Song[] = [
       recording_location: '51.259, 26.219',
       coordinates: ''
     },
-    archive: '',
+    archive_ua: '',
+    archive_eng: '',
     details: {
       id: '3e2565f2-4e1e-4874-9c85-f64fe966cbb2',
       incipit: 'Там у світі над землею (колядка)',

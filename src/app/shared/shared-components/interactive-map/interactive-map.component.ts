@@ -20,7 +20,7 @@ export class InteractiveMapComponent {
   @Input() popupType: string = 'default';
   @Input() markers: any = [
     {
-      location__official_name_city: 'Полтава',
+      location__city_ua: 'Полтава',
       location__coordinates: '49.64704142664784, 34.42447708',
       count: 1
     }
@@ -44,7 +44,8 @@ export class InteractiveMapComponent {
     // console.log(this.markers)
     this.markers$.subscribe((d) => {
       this.markers = d;
-      console.log(d)});
+     //console.log(d)
+    });
   }
 
   formatCords(cords: string) {
@@ -72,6 +73,7 @@ export class InteractiveMapComponent {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
+   // console.log(marker)
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }

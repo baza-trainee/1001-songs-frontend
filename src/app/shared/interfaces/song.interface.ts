@@ -18,7 +18,8 @@ export interface Song {
     recording_location: string;
     coordinates: string;
   };
-  archive: string;
+  archive_eng: string;
+  archive_ua: string;
   details: {
     id: string;
     incipit: string;

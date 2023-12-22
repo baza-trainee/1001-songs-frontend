@@ -102,7 +102,7 @@ export class FilterMapService {
     newOptions.region = [...new Set(songs.map((song) => song.location.region))];
     newOptions.city = [...new Set(songs.map((song) => song.location.official_name_city))];
     newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
-    newOptions.found = [...new Set(songs.map((song) => song.archive))];
+    newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
     //newOptions.country = counties
     //console.log('generateShowOptions > > > ', newOptions);
     return newOptions;

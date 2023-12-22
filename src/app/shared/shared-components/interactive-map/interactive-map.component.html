@@ -16,7 +16,7 @@
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
         <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
-          <h2 class="popup-map__title">{{ elem.location__official_name_city }}</h2>
+          <h2 class="popup-map__title">{{ elem.location__city_ua }}</h2>
           <p class="popup-map__count">
             {{ 'home.home-map.popup-count' | translate }} : {{ elem.count }}
           </p>
@@ -31,9 +31,9 @@
         <div class="popup-map__container">
           <!-- <img class="popup-map__img" [src]="selectedMarker.image" alt="Фото" /> -->
           <div class="popup-map__content">
-            <h2 class="popup-map__title">{{ selectedMarker.location__official_name_city }}, {{ selectedMarker.location__official_name_city }}</h2>
+            <h2 class="popup-map__title">{{ selectedMarker.location__city_ua }}, {{ selectedMarker.location__city_ua }}</h2>
             <p class="popup-map__count">
-              {{ 'home.home-map.popup-count' | translate }} : {{ filterMapServices.countSongsByOption(selectedMarker.location__official_name_city) }}
+              {{ 'home.home-map.popup-count' | translate }} : {{ filterMapServices.countSongsByOption(selectedMarker.location__city_ua) }}
             </p>
           </div>
         </div>

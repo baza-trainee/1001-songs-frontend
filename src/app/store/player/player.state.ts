@@ -43,10 +43,12 @@ export class PlayerState {
     const state = ctx.getState();
 
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
-      tap((songs) => {
+      tap((response: any) => {
+        console.log(response);
+        const newSongs: Song[] = response[0].list_songs;
         ctx.setState({
           ...state,
-          songsList: songs as Song[]
+          songsList: newSongs
         });
       })
     );

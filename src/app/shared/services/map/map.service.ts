@@ -18,7 +18,7 @@ export class MapService {
       id: song.id.toString(),
       title: song.title,
       genre_cycle: song.details['genre_cycle'],
-      found: song.archive,
+      found: song.archive_ua,
       image: song.media?.['photo_of_performers'] ? song.media['photo_of_performers'] : './assets/img/home/kiivImg.jpg',
       location: {
         country: song.location['country'],

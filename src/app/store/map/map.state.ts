@@ -31,6 +31,7 @@ export class MapState {
 
   @Selector()
   static getMarkersList(state: MapStateModel): MarkerOfLocation[] {
+  //  console.log(state.markersList)
     return state.markersList;
   }
   @Selector()
@@ -38,15 +39,15 @@ export class MapState {
     return state.filteredMarkerList;
   }
 
-  @Action(FilteredMarkers)
-  filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
-    // const state = ctx.getState();
-    // const markers = this.filterMapService.filterMarkers(action.options);
-    // ctx.setState({
-    //   ...state,
-    //   filteredMarkerList: markers
-    // });
-  }
+  // @Action(FilteredMarkers)
+  // filteredMarkers(ctx: StateContext<MapStateModel>, action: FilteredMarkers) {
+  //   // const state = ctx.getState();
+  //   // const markers = this.filterMapService.filterMarkers(action.options);
+  //   // ctx.setState({
+  //   //   ...state,
+  //   //   filteredMarkerList: markers
+  //   // });
+  // }
 
   @Action(ResetMarkers)
   resetMarkers(ctx: StateContext<MapStateModel>) {
@@ -58,16 +59,16 @@ export class MapState {
     });
   }
 
-  @Action(SetFilteredMarkers)
-  loadFilteredMarkers(ctx: StateContext<MapStateModel>, action: SetFilteredMarkers) {
-    const state = ctx.getState();
-    const newMarkers = this.filterMapService.filterMarkers(action.songs);
-   // console.log('loadFilteredMarkers', newMarkers);
-    ctx.setState({
-      ...state,
-      markersList: newMarkers
-    });
-  }
+  // @Action(SetFilteredMarkers)
+  // loadFilteredMarkers(ctx: StateContext<MapStateModel>, action: SetFilteredMarkers) {
+  //   const state = ctx.getState();
+  //   const newMarkers = this.filterMapService.filterMarkers(action.songs);
+  //   // console.log('loadFilteredMarkers', newMarkers);
+  //   ctx.setState({
+  //     ...state,
+  //     markersList: newMarkers
+  //   });
+  // }
 
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>) {
@@ -77,9 +78,12 @@ export class MapState {
     }
     this.store.dispatch(new SetIsLoading(1));
     return this.mapService.fetchMarkers().pipe(
-      map((response: any) => response[0]), //the expression need to avoid any type
+      map((response: any) => {
+       // console.log(response);
+        return response[0].list_markers;
+      }), //the expression need to avoid any type
       tap((markerList: MarkerOfLocation[]) => {
-        //  console.log(songs);
+        console.log(markerList);
         // const filteredSongs = songs.filter((song: Song) => song.location != null);
         //  const markers = filteredSongs.map((song: Song) => this.mapService.markerFromSong(song));
         ctx.setState({
