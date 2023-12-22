@@ -46,32 +46,18 @@ export class FilterMapState {
 
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
-    // console.log('action', action);
     const state = ctx.getState();
-    // const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
     const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);
-    //console.log(optionsWithLength);
     let onSelect: keyof SongFilter | undefined;
 
     if (optionsWithLength.length === 1) {
       onSelect = optionsWithLength[0][0] as keyof SongFilter;
     }
 
-    //  const showOptions = this.filterMapService.generateShowOptions(
-    //filterMarkers,
-    // action.selectedOptions,
-    //   state.allOptions
-    //state.showOptions,
-    // action.optionName,
-    // onSelect
-    //  );
-
     ctx.setState({
       ...state,
       selectedOptions: action.selectedOptions
-      //  showOptions
     });
   }
 
@@ -80,35 +66,11 @@ export class FilterMapState {
     const state = ctx.getState();
 
     const newOptions = this.filterMapService.generateShowOptions(state.allOptions, action.songs);
-   // console.log(newOptions);
     ctx.setState({
       ...state,
       showOptions: newOptions
     });
   }
-
-  // @Action(SetFilteredMarkers)
-  // loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: SetFilteredMarkers) {
-  //   const state = ctx.getState();
-
-  //   const allOptions = this.filterMapService.filterMarkers(action.songs);
-  //   ctx.setState({
-  //     ...state,
-  //     allOptions,
-  //     showOptions: allOptions
-  //   });
-  // }
-
-  // @Action(FilterSongs)
-  // filterSongs(ctx: StateContext<FilterMapStateModel>, action: FilterSongs) {
-  //   const state = ctx.getState();
-  //  this.filterMapService.fetchSongsByFilter(action.filter);
-  //   ctx.setState({
-  //     ...state,
-  //     // allOptions,
-  //     // showOptions: allOptions
-  //   });
-  // }
 
   @Action(InitFilterOptions)
   InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
@@ -124,12 +86,10 @@ export class FilterMapState {
           genre: options.genres,
           found: response[2]
         };
-       //  console.log(response);
 
         ctx.setState({
           ...state,
           allOptions: allOptions
-          //showOptions: allOptions
         });
       })
     );

@@ -95,7 +95,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   filerClear() {
     this.form.setValue(new SongFilter());
     // this.store.dispatch(new LoadFilteredMarkers(this.markers));
-    this.store.dispatch(new ResetMarkers());
+   // this.store.dispatch(new ResetMarkers());
   }
 
   onSubmit() {}

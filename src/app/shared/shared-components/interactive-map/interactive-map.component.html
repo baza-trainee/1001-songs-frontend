@@ -33,7 +33,7 @@
           <div class="popup-map__content">
             <h2 class="popup-map__title">{{ selectedMarker.location__city_ua }}, {{ selectedMarker.location__city_ua }}</h2>
             <p class="popup-map__count">
-              {{ 'home.home-map.popup-count' | translate }} : {{ filterMapServices.countSongsByOption(selectedMarker.location__city_ua) }}
+              {{ 'home.home-map.popup-count' | translate }} : {{ selectedMarker.count }}
             </p>
           </div>
         </div>

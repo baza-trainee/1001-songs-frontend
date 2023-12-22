@@ -9,7 +9,7 @@ import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { FetchSongs, FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
+import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 
 @Component({
@@ -29,8 +29,6 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new FetchMarkers());
     this.store.dispatch(new FetchSongs(new SongFilter()));
-
-  //  this.markers$.subscribe(d => console.log(d))
   }
 
   ngOnDestroy(): void {

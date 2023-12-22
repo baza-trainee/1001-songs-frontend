@@ -1,5 +1,5 @@
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { SongFilter } from '../../shared/interfaces/map-marker';
+import { MarkerOfLocation, SongFilter } from '../../shared/interfaces/map-marker';
 
 export class FetchMarkers {
   static readonly type = '[Map] Set';
@@ -14,7 +14,7 @@ export class FilteredMarkers {
 export class ResetMarkers {
   static readonly type = '[Map] Reset Markers';
 
-  constructor() {}
+  constructor(public markers: MarkerOfLocation[]) {}
 }
 
 export class SetFilteredMarkers {

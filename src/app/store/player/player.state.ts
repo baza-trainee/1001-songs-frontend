@@ -7,6 +7,8 @@ import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { FetchSongById, FetchSongs, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { songs } from 'src/app/mock-data/songs';
+import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
+import { ResetMarkers } from '../map/map.actions';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -44,8 +46,10 @@ export class PlayerState {
 
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: any) => {
-        console.log(response);
+        console.log('SONGS : Main response', response);
         const newSongs: Song[] = response[0].list_songs;
+        const newMarkers: MarkerOfLocation[] = response[1].list_markers;
+        this.store.dispatch(new ResetMarkers(newMarkers));
         ctx.setState({
           ...state,
           songsList: newSongs
@@ -119,19 +123,4 @@ export class PlayerState {
     );
   }
 
-  @Action(FetchSongsByLocation)
-  fetchSongsByLocation(ctx: StateContext<PlayerStateModel>, action: FetchSongsByLocation) {
-    const state = ctx.getState();
-    this.store.dispatch(new SetIsLoading(1));
-    return this.cloudService.getSongsByLocation(action.locationName).pipe(
-      tap((songs: Song[]) => {
-        console.log(songs);
-        ctx.setState({
-          ...state,
-          songsList: [...songs]
-        });
-        this.store.dispatch(new SetIsLoading(-1));
-      })
-    );
-  }
 }

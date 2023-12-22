@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Marker, MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
-import { cordsMarkers } from 'src/app/mock-data/markers';
+import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { FilterMapService } from '../../services/filter-map/filter-map.service';
 import { MapState } from 'src/app/store/map/map.state';
 import { Select } from '@ngxs/store';
@@ -41,10 +40,8 @@ export class InteractiveMapComponent {
     private _translate: TranslateService,
     public filterMapServices: FilterMapService
   ) {
-    // console.log(this.markers)
     this.markers$.subscribe((markers: MarkerOfLocation[]) => {
       this.markers = markers;
-      //console.log(d)
     });
   }
 
@@ -73,7 +70,6 @@ export class InteractiveMapComponent {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
-    // console.log(marker)
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
