@@ -23,7 +23,7 @@ export class MapService {
       location: {
         country: song.location['country'],
         region: song.location['region'],
-        district_center: song.location['official_name_city'],
+        district_center: song.location['city_ua'],
         recording_location: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) }
       }
     };

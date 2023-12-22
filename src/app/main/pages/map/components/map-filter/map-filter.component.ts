@@ -36,7 +36,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   form = new FormGroup({
     country: new FormControl<string[]>([]),
     region: new FormControl<string[]>([]),
-    city_ua: new FormControl<string[]>([]),
+    city: new FormControl<string[]>([]),
     genre: new FormControl<string[]>([]),
     title: new FormControl<string>(''),
     found: new FormControl<string[]>([])

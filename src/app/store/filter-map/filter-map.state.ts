@@ -47,7 +47,7 @@ export class FilterMapState {
   @Action(UpdateOptions)
   updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
     const state = ctx.getState();
-   
+
     const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);
     let onSelect: keyof SongFilter | undefined;
 
@@ -78,10 +78,11 @@ export class FilterMapState {
 
     return this.mapService.fetchMarkers().pipe(
       tap((response: any) => {
+        console.log(response);
         let allOptions = {
           country: options.coruntries,
           region: options.regions,
-          city_ua: response[1],
+          city: response[1],
           title: '',
           genre: options.genres,
           found: response[2]

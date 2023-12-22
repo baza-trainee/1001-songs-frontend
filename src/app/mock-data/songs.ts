@@ -17,7 +17,8 @@ export const songs: Song[] = [
       administrative_code: '118',
       ethnos: 'Україна',
       ethnographic_district: "Прип'ятське Полісся Західне: Волинське, Стир",
-      official_name_city: 'Ромейки',
+      city_ua: 'Ромейки',
+      city_eng: 'Romeiky',
       unofficial_name_city: '-',
       recording_location: '51.259, 26.219',
       coordinates: ''
@@ -58,7 +59,8 @@ export const songs: Song[] = [
       administrative_code: '118',
       ethnos: 'Україна',
       ethnographic_district: "Прип'ятське Полісся Західне: Волинське, Стир",
-      official_name_city: 'Ромейки',
+      city_ua: 'Ромейки',
+      city_eng: 'Romeiky',
       unofficial_name_city: '-',
       recording_location: '51.259, 26.219',
       coordinates: ''

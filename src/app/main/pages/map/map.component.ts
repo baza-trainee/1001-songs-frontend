@@ -39,7 +39,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
     let params: SongFilter = new SongFilter();
-    params.city_ua = [marker.location__city_ua];
+    params.city = [marker.location__city_ua];
     this.store.dispatch(new FetchSongs(params));
   }
 

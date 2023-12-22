@@ -21,7 +21,7 @@ export class FilterMapService {
     let newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => song.location.country))];
     newOptions.region = [...new Set(songs.map((song) => song.location.region))];
-    newOptions.city_ua = [...new Set(songs.map((song) => song.location.official_name_city))];
+    newOptions.city = [...new Set(songs.map((song) => song.location.city_ua))];
     newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
     newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
     return newOptions;
