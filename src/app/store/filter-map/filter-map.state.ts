@@ -78,7 +78,7 @@ export class FilterMapState {
 
     return this.mapService.fetchMarkers().pipe(
       tap((response: any) => {
-        console.log(response);
+        //console.log(response);
         let allOptions = {
           country: options.coruntries,
           region: options.regions,

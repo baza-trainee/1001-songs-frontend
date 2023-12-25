@@ -7,6 +7,7 @@ import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { SongFilter } from '../../interfaces/map-marker';
 import { CountriesSelectOptions, RegionsSelectOptions, GenresSelectOptions } from 'src/app/static-data/filter-options';
 import { Song } from '../../interfaces/song.interface';
+import * as options from 'src/app/static-data/filter-options';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,12 @@ export class FilterMapService {
   ) {}
 
   generateShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
+    //  console.log(allOptions);
     let newOptions = new SongFilter();
-    newOptions.country = [...new Set(songs.map((song) => song.location.country))];
-    newOptions.region = [...new Set(songs.map((song) => song.location.region))];
+    newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
+    newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
     newOptions.city = [...new Set(songs.map((song) => song.location.city_ua))];
-    newOptions.genre = [...new Set(songs.map((song) => song.details.genre_cycle))];
+    newOptions.genre = [...new Set(songs.map((song) => this.getTranslateKey('genre', song.details.genre_cycle)))];
     newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
     return newOptions;
   }
@@ -34,7 +36,7 @@ export class FilterMapService {
     let fullRequest = API_URL + StatEndpoints.songs + '?';
     selectedFilterOptions.forEach((option: [string, string[]]) => {
       const optionKey = this.preprocesFilterOptionName(option[0]);
-      const optionValues = option[1].map((el) => this.retranslateOption(optionKey, el));
+      const optionValues = option[1].map((el) => this.getOptionValueByKey(optionKey, el));
       let req = `${optionKey}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
     });
@@ -45,18 +47,34 @@ export class FilterMapService {
     return this.http.get(fullRequest);
   }
 
-  private retranslateOption(optionName: string, optionValue: string) {
+  private getTranslateKey(optionName: string, optionValue: string) {
     if (optionName === 'country') {
       const target = CountriesSelectOptions.find((country) => country.value === optionValue);
-      return target ? target.value : '';
+      return target ? target.key : '';
     } else if (optionName === 'regions') {
       const target = RegionsSelectOptions.find((region) => region.value === optionValue);
-      return target ? target.value : '';
+      return target ? target.key : '';
     } else if (optionName === 'genre') {
       const target = GenresSelectOptions.find((region) => region.value === optionValue);
-      return target ? target.value : '';
+      return target ? target.key : '';
     } else {
       return optionValue;
+    }
+  }
+
+  private getOptionValueByKey(optionName: string, optionKey: string) {
+    console.log(optionKey);
+    if (optionName === 'country') {
+      const target = CountriesSelectOptions.find((country) => country.key === optionKey);
+      return target ? target.value : '';
+    } else if (optionName === 'regions') {
+      const target = RegionsSelectOptions.find((region) => region.key === optionKey);
+      return target ? target.value : '';
+    } else if (optionName === 'genre') {
+      const target = GenresSelectOptions.find((region) => region.key === optionKey);
+      return target ? target.value : '';
+    } else {
+      return optionKey;
     }
   }
 
@@ -71,6 +89,9 @@ export class FilterMapService {
   private preprocesFilterOptionName(option: string) {
     if (option === 'found') {
       return 'archive_ua';
+    }
+    if (option === 'city') {
+      return 'city_ua';
     } else {
       return option;
     }
@@ -80,4 +101,6 @@ export class FilterMapService {
     const patch = '%20';
     return strWithSpaces.trim().replaceAll(' ', patch);
   }
+
+  getCityOptions(availableCities: string[]) {}
 }
