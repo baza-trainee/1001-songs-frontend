@@ -38,6 +38,7 @@ export const CountriesSelectOptions: SongFilterOption[] = [
   { key: 'filterOptions.countries.ukraine', value: 'Україна' },
   { key: 'filterOptions.countries.russia', value: 'росія' }
 ];
+
 export const RegionsSelectOptions: SongFilterOption[] = [
   { key: 'filterOptions.regions.ivanoFrankivsk', value: 'Івано-Франківська область' },
   { key: 'filterOptions.regions.crimea', value: 'Автономна республіка Крим' },

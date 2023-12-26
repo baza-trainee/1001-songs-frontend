@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { filter, map, Observable, pairwise, startWith, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +42,10 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
     found: new FormControl<string[]>([])
   });
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private _translate: TranslateService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     // if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
@@ -51,10 +54,18 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._translate.onLangChange.subscribe((translateState: any) => {
+      console.log('update options after language change')
+      this.songs.subscribe((songs) => {
+        this.store.dispatch(new SetShownOptions(songs));
+       // this.store.dispatch(new SetFilteredMarkers(songs));
+      });
+    });
+
     this.store.dispatch(new InitFilterOptions()).subscribe(() => {
       this.songs.subscribe((songs) => {
         this.store.dispatch(new SetShownOptions(songs));
-        this.store.dispatch(new SetFilteredMarkers(songs));
+       // this.store.dispatch(new SetFilteredMarkers(songs));
       });
     });
 

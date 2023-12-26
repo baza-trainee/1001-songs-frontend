@@ -66,6 +66,7 @@ export class FilterMapState {
     const state = ctx.getState();
 
     const newOptions = this.filterMapService.generateShowOptions(state.allOptions, action.songs);
+    
     ctx.setState({
       ...state,
       showOptions: newOptions

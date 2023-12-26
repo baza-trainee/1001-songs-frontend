@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
-import { catchError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 import { SongFilter } from '../../interfaces/map-marker';
 import { CountriesSelectOptions, RegionsSelectOptions, GenresSelectOptions } from 'src/app/static-data/filter-options';
 import { Song } from '../../interfaces/song.interface';
 import * as options from 'src/app/static-data/filter-options';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,36 @@ import * as options from 'src/app/static-data/filter-options';
 export class FilterMapService {
   constructor(
     private http: HttpClient,
-    private store: Store
+    private store: Store,
+    private _translate: TranslateService
   ) {}
 
-  generateShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
-    //  console.log(allOptions);
+  generateShowOptions(allOptions: SongFilter, songs: Song[]) {
+    // console.log(this._translate);
+    if (this._translate.store.currentLang === 'en') {
+      return this.generateEngShowOptions(allOptions, songs);
+    } else {
+      return this.generateUaShowOptions(allOptions, songs);
+    }
+  }
+
+  generateUaShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
     let newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
     newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
     newOptions.city = [...new Set(songs.map((song) => song.location.city_ua))];
     newOptions.genre = [...new Set(songs.map((song) => this.getTranslateKey('genre', song.details.genre_cycle)))];
     newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
+    return newOptions;
+  }
+
+  generateEngShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
+    let newOptions = new SongFilter();
+    newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
+    newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
+    newOptions.city = [...new Set(songs.map((song) => song.location.city_eng))];
+    newOptions.genre = [...new Set(songs.map((song) => this.getTranslateKey('genre', song.details.genre_cycle)))];
+    newOptions.found = [...new Set(songs.map((song) => song.archive_eng))];
     return newOptions;
   }
 
@@ -88,10 +108,10 @@ export class FilterMapService {
 
   private preprocesFilterOptionName(option: string) {
     if (option === 'found') {
-      return 'archive_ua';
+      return this._translate.store.currentLang === 'en' ? 'archive_eng' : 'archive_ua';
     }
     if (option === 'city') {
-      return 'city_ua';
+      return this._translate.store.currentLang === 'en' ? 'city_eng' : 'city_ua';
     } else {
       return option;
     }
