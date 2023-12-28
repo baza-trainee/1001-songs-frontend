@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   templateUrl: './interactive-map.component.html',
   styleUrls: ['./interactive-map.component.scss']
 })
-export class InteractiveMapComponent {
+export class InteractiveMapComponent implements OnInit {
   @Input() popupType: string = 'default';
   @Input() markers: any = [
     {
@@ -42,6 +42,13 @@ export class InteractiveMapComponent {
   ) {
     this.markers$.subscribe((markers: MarkerOfLocation[]) => {
       this.markers = markers;
+    });
+  }
+
+  ngOnInit(): void {
+    this._translate.onLangChange.subscribe((translateState: any) => {
+      console.log(this.markers);
+      this.markers$.subscribe((d) => console.log(d));
     });
   }
 

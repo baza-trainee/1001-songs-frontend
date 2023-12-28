@@ -83,15 +83,15 @@ export class FilterMapService {
   }
 
   private getOptionValueByKey(optionName: string, optionKey: string) {
-    console.log(optionKey);
+    console.log(optionName,optionKey);
     if (optionName === 'country') {
       const target = CountriesSelectOptions.find((country) => country.key === optionKey);
       return target ? target.value : '';
-    } else if (optionName === 'regions') {
+    } else if (optionName === 'region') {
       const target = RegionsSelectOptions.find((region) => region.key === optionKey);
       return target ? target.value : '';
     } else if (optionName === 'genre') {
-      const target = GenresSelectOptions.find((region) => region.key === optionKey);
+      const target = GenresSelectOptions.find((genre) => genre.key === optionKey);
       return target ? target.value : '';
     } else {
       return optionKey;

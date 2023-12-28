@@ -27,7 +27,7 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new FetchMarkers());
+   // this.store.dispatch(new FetchMarkers());
     this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 

@@ -55,7 +55,7 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._translate.onLangChange.subscribe((translateState: any) => {
-      console.log('update options after language change')
+     // console.log('update options after language change')
       this.songs.subscribe((songs) => {
         this.store.dispatch(new SetShownOptions(songs));
        // this.store.dispatch(new SetFilteredMarkers(songs));

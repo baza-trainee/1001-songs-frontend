@@ -12,22 +12,22 @@ import { Song } from '../../interfaces/song.interface';
 export class MapService {
   constructor(private http: HttpClient) {}
 
-  markerFromSong(song: Song): Marker {
-    const cords = song.location.recording_location.split(',');
-    return {
-      id: song.id.toString(),
-      title: song.title,
-      genre_cycle: song.details['genre_cycle'],
-      found: song.archive_ua,
-      image: song.media?.['photo_of_performers'] ? song.media['photo_of_performers'] : './assets/img/home/kiivImg.jpg',
-      location: {
-        country: song.location['country'],
-        region: song.location['region'],
-        district_center: song.location['city_ua'],
-        recording_location: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) }
-      }
-    };
-  }
+  // markerFromSong(song: Song): Marker {
+  //   const cords = song.location.recording_location.split(',');
+  //   return {
+  //     id: song.id.toString(),
+  //     title: song.title,
+  //     genre_cycle: song.details['genre_cycle'],
+  //     found: song.archive_ua,
+  //     image: song.media?.['photo_of_performers'] ? song.media['photo_of_performers'] : './assets/img/home/kiivImg.jpg',
+  //     location: {
+  //       country: song.location['country'],
+  //       region: song.location['region'],
+  //       district_center: song.location['city_ua'],
+  //       recording_location: { lat: Number.parseFloat(cords[0]), lng: Number.parseFloat(cords[1]) }
+  //     }
+  //   };
+  // }
 
   fetchMarkers() {
     return this.http.get(API_URL + StatEndpoints.markers).pipe(
