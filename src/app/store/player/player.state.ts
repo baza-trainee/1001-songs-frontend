@@ -4,11 +4,11 @@ import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { SetIsLoading } from '../app/app.actions';
 import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongById, FetchSongs, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
-import { songs } from 'src/app/mock-data/songs';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
+import { MapService } from 'src/app/shared/services/map/map.service';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -27,6 +27,7 @@ export class PlayerState {
   constructor(
     private cloudService: CloudService,
     private filterMapService: FilterMapService,
+    private mapService: MapService,
     private store: Store
   ) {}
 
@@ -48,7 +49,9 @@ export class PlayerState {
       tap((response: any) => {
         console.log('SONGS : Main response', response);
         const newSongs: Song[] = response[0].list_songs;
-        const newMarkers: MarkerOfLocation[] = response[1].list_markers;
+        const newMarkers: MarkerOfLocation[] = response[1].list_markers.map(
+          (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
+        );
         this.store.dispatch(new ResetMarkers(newMarkers));
         ctx.setState({
           ...state,
@@ -122,5 +125,4 @@ export class PlayerState {
       })
     );
   }
-
 }

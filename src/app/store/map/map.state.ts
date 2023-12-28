@@ -20,11 +20,7 @@ export interface MapStateModel {
 })
 @Injectable()
 export class MapState {
-  constructor(
-    private mapService: MapService,
-    private filterMapService: FilterMapService,
-    private store: Store
-  ) {}
+  constructor() {}
 
   @Selector()
   static getMarkersList(state: MapStateModel): MarkerOfLocation[] {
@@ -44,5 +40,4 @@ export class MapState {
       markersList: action.markers
     });
   }
-
 }

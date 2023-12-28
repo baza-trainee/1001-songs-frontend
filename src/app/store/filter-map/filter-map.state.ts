@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { FilterSongs, InitFilterOptions, SetShownOptions, UpdateOptions } from './filter-map.actions';
+import { InitFilterOptions, SetShownOptions, UpdateOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
-import { map, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 export interface FilterMapStateModel {
   selectedOptions: SongFilter;
@@ -65,8 +65,8 @@ export class FilterMapState {
   setShownOptions(ctx: StateContext<FilterMapStateModel>, action: SetShownOptions) {
     const state = ctx.getState();
 
-    const newOptions = this.filterMapService.generateShowOptions(state.allOptions, action.songs);
-    
+    const newOptions = this.filterMapService.generateShowOptions(action.songs);
+
     ctx.setState({
       ...state,
       showOptions: newOptions
@@ -77,7 +77,7 @@ export class FilterMapState {
   InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
     const state = ctx.getState();
 
-    return this.mapService.fetchMarkers().pipe(
+    return this.filterMapService.fetchFilterOptions().pipe(
       tap((response: any) => {
         //console.log(response);
         let allOptions = {

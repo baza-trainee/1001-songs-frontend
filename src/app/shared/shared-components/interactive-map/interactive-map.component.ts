@@ -77,6 +77,7 @@ export class InteractiveMapComponent implements OnInit {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
+    console.log(marker)
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }

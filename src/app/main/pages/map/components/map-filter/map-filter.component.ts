@@ -11,7 +11,6 @@ import { MarkerOfLocation, SongFilter } from '../../../../../shared/interfaces/m
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
-import { SetFilteredMarkers } from '../../../../../store/map/map.actions';
 import { FetchSongs } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';

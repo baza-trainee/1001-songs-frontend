@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { Marker, MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
-import { FetchMarkers } from 'src/app/store/map/map.actions';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
@@ -39,7 +38,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
     let params: SongFilter = new SongFilter();
-    params.city = [marker.location__city_ua];
+    params.city = [marker.location__city];
     this.store.dispatch(new FetchSongs(params));
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
-import { Observable, catchError } from 'rxjs';
+import { catchError } from 'rxjs';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 import { SongFilter } from '../../interfaces/map-marker';
@@ -16,20 +16,18 @@ import { TranslateService } from '@ngx-translate/core';
 export class FilterMapService {
   constructor(
     private http: HttpClient,
-    private store: Store,
     private _translate: TranslateService
   ) {}
 
-  generateShowOptions(allOptions: SongFilter, songs: Song[]) {
-    // console.log(this._translate);
+  generateShowOptions(songs: Song[]) {
     if (this._translate.store.currentLang === 'en') {
-      return this.generateEngShowOptions(allOptions, songs);
+      return this.generateEngShowOptions(songs);
     } else {
-      return this.generateUaShowOptions(allOptions, songs);
+      return this.generateUaShowOptions(songs);
     }
   }
 
-  generateUaShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
+  generateUaShowOptions(songs: Song[]): SongFilter {
     let newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
     newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
@@ -39,7 +37,7 @@ export class FilterMapService {
     return newOptions;
   }
 
-  generateEngShowOptions(allOptions: SongFilter, songs: Song[]): SongFilter {
+  generateEngShowOptions(songs: Song[]): SongFilter {
     let newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
     newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
@@ -55,9 +53,9 @@ export class FilterMapService {
     });
     let fullRequest = API_URL + StatEndpoints.songs + '?';
     selectedFilterOptions.forEach((option: [string, string[]]) => {
-      const optionKey = this.preprocesFilterOptionName(option[0]);
-      const optionValues = option[1].map((el) => this.getOptionValueByKey(optionKey, el));
-      let req = `${optionKey}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
+      const optionName = this.preprocesFilterOptionName(option[0]);
+      const optionValues = option[1].map((selectedOption) => this.getOptionValueByKey(optionName, selectedOption));
+      let req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
@@ -83,7 +81,6 @@ export class FilterMapService {
   }
 
   private getOptionValueByKey(optionName: string, optionKey: string) {
-    console.log(optionName,optionKey);
     if (optionName === 'country') {
       const target = CountriesSelectOptions.find((country) => country.key === optionKey);
       return target ? target.value : '';
@@ -122,5 +119,11 @@ export class FilterMapService {
     return strWithSpaces.trim().replaceAll(' ', patch);
   }
 
-  getCityOptions(availableCities: string[]) {}
+  fetchFilterOptions() {
+    return this.http.get(API_URL + StatEndpoints.markers).pipe(
+      catchError(async (error) => {
+        console.error(error);
+      })
+    );
+  }
 }
