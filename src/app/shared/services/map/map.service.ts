@@ -10,6 +10,6 @@ export class MapService {
   constructor(private http: HttpClient) {}
 
   modifyMarker(marker: { location__city_ua: string; location__coordinates: string; count: number }): MarkerOfLocation {
-    return { ...marker, location__city: marker.location__city_ua, count: marker.count + '' };
+    return { location__city: marker.location__city_ua, location__coordinates: marker.location__coordinates, count: marker.count + '' };
   }
 }

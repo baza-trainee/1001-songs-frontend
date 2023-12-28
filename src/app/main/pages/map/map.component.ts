@@ -26,7 +26,6 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-   // this.store.dispatch(new FetchMarkers());
     this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
@@ -37,7 +36,7 @@ export class MapComponent implements OnInit, OnDestroy {
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
-    let params: SongFilter = new SongFilter();
+    const params: SongFilter = new SongFilter();
     params.city = [marker.location__city];
     this.store.dispatch(new FetchSongs(params));
   }

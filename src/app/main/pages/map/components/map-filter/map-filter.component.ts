@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { filter, map, Observable, pairwise, startWith, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -22,7 +22,7 @@ import { Song } from 'src/app/shared/interfaces/song.interface';
   templateUrl: './map-filter.component.html',
   styleUrls: ['./map-filter.component.scss']
 })
-export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
+export class MapFilterComponent implements OnInit, OnDestroy {
   // @Input() markers!: MarkerOfLocation[];
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SongFilter>;
@@ -46,38 +46,29 @@ export class MapFilterComponent implements OnChanges, OnInit, OnDestroy {
     private _translate: TranslateService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (changes['markers'] && changes['markers'].currentValue !== changes['markers'].previousValue) {
-    //   this.store.dispatch(new LoadFilteredMarkers(this.markers));
-    // }
-  }
-
   ngOnInit(): void {
-    this._translate.onLangChange.subscribe((translateState: any) => {
-     // console.log('update options after language change')
+    this._translate.onLangChange.subscribe(() => {
       this.songs.subscribe((songs) => {
         this.store.dispatch(new SetShownOptions(songs));
-       // this.store.dispatch(new SetFilteredMarkers(songs));
       });
     });
 
     this.store.dispatch(new InitFilterOptions()).subscribe(() => {
       this.songs.subscribe((songs) => {
         this.store.dispatch(new SetShownOptions(songs));
-       // this.store.dispatch(new SetFilteredMarkers(songs));
       });
     });
 
-    this.form.valueChanges.pipe(
-      takeUntil(this.destroy$),
-      startWith(this.form.getRawValue()),
-      pairwise(),
-      map(([previous, current]) => {
-        // const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
-        //  return changedControl as keyof SongFilter;
-      }),
-      filter((key) => key !== null && key !== undefined)
-    );
+    // this.form.valueChanges.pipe(
+    //   takeUntil(this.destroy$),
+    //   startWith(this.form.getRawValue()),
+    //   pairwise(),
+    //   map(([previous, current]) => {
+    //     // const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
+    //     //  return changedControl as keyof SongFilter;
+    //   }),
+    //   filter((key) => key !== null && key !== undefined)
+    // );
     // .subscribe((value: keyof SongFilter) => {
     // console.log("filter is updated ");
     //this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));

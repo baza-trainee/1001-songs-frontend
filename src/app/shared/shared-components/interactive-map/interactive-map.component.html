@@ -16,7 +16,7 @@
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
         <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
-          <h2 class="popup-map__title">{{ elem.location__city_ua }}</h2>
+          <h2 class="popup-map__title">{{ elem.location__city }}</h2>
           <p class="popup-map__count">
             {{ 'home.home-map.popup-count' | translate }} : {{ elem.count }}
           </p>

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngxs/store';
 import { catchError } from 'rxjs';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
 import { SongFilter } from '../../interfaces/map-marker';
 import { CountriesSelectOptions, RegionsSelectOptions, GenresSelectOptions } from 'src/app/static-data/filter-options';
 import { Song } from '../../interfaces/song.interface';
-import * as options from 'src/app/static-data/filter-options';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
@@ -28,7 +26,7 @@ export class FilterMapService {
   }
 
   generateUaShowOptions(songs: Song[]): SongFilter {
-    let newOptions = new SongFilter();
+    const newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
     newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
     newOptions.city = [...new Set(songs.map((song) => song.location.city_ua))];
@@ -38,7 +36,7 @@ export class FilterMapService {
   }
 
   generateEngShowOptions(songs: Song[]): SongFilter {
-    let newOptions = new SongFilter();
+    const newOptions = new SongFilter();
     newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
     newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
     newOptions.city = [...new Set(songs.map((song) => song.location.city_eng))];
@@ -55,7 +53,7 @@ export class FilterMapService {
     selectedFilterOptions.forEach((option: [string, string[]]) => {
       const optionName = this.preprocesFilterOptionName(option[0]);
       const optionValues = option[1].map((selectedOption) => this.getOptionValueByKey(optionName, selectedOption));
-      let req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
+      const req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);

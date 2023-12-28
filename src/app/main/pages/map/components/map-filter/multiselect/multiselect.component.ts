@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -26,18 +26,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule
   ]
 })
-export class MultiselectComponent implements OnInit {
+export class MultiselectComponent {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) options!: string[];
   @Input({ required: true }) name!: string;
   constructor(private _translate: TranslateService) {}
-
-  ngOnInit(): void {
-    this._translate.onLangChange.subscribe((translateState: any) => {
-      //console.log(translateState)
-     // console.log(this._translate)
-    });
-  }
 
   onSelectionChange(event: MatSelectChange) {
     this.control.setValue(event.value);

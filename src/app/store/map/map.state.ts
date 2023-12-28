@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { MapService } from 'src/app/shared/services/map/map.service';
 import { ResetMarkers } from './map.actions';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
-import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
 
 export interface MapStateModel {
   markersList: MarkerOfLocation[];
