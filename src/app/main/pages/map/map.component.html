@@ -1,6 +1,6 @@
 <div class="map">
   <app-interactive-map
-    *ngIf="filteredMarkers$ | async as filteredMarkers"
+    *ngIf="markers$| async as filteredMarkers"
     [markers]="filteredMarkers"
     (markerClicked)="handleMapEmit($event, player)"
   ></app-interactive-map>

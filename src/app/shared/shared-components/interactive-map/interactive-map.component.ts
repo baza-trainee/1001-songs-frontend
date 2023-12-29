@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { FilterMapService } from '../../services/filter-map/filter-map.service';
 import { MapState } from 'src/app/store/map/map.state';
@@ -19,11 +19,11 @@ import { Song } from '../../interfaces/song.interface';
 })
 export class InteractiveMapComponent implements OnInit, OnDestroy {
   @Input() popupType: string = 'default';
-  @Input() markers: any = [
+  @Input() markers: MarkerOfLocation[] = [
     {
       location__city: 'Полтава',
       location__coordinates: '49.64704142664784, 34.42447708',
-      count: 1
+      count: '1'
     }
   ];
   @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
@@ -51,7 +51,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((translateState: any) => {
+    this._translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((translateState: LangChangeEvent) => {
       const currentLang = translateState.lang;
       this.songs$.pipe(takeUntil(this.destroy$)).subscribe((songs) => {
         if (currentLang === 'en') {

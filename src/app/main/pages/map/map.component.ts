@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Marker, MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
+import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
@@ -20,7 +20,7 @@ import { MapFilterComponent } from './components/map-filter/map-filter.component
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
-  @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
+  // @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
   private subscription: Subscription = new Subscription();
 
   constructor(private store: Store) {}

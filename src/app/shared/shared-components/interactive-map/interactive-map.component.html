@@ -12,7 +12,7 @@
         <map-marker
           #marker="mapMarker"
           [position]="formatCords(elem.location__coordinates)"
-          [options]="{ icon: getCustomMarkerIcon(elem.id) }"
+          [options]="{ icon: getCustomMarkerIcon(elem.location__coordinates) }"
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
         <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
