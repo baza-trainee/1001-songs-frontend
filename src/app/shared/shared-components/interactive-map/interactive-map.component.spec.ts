@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InteractiveMapComponent } from './interactive-map.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { Marker, MarkerOfLocation } from '../../interfaces/map-marker';
+import { MarkerOfLocation } from '../../interfaces/map-marker';
 import { FilterMapService } from '../../services/filter-map/filter-map.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
