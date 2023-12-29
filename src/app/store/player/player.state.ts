@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { SetIsLoading } from '../app/app.actions';
-import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongById, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
@@ -25,7 +23,6 @@ export interface PlayerStateModel {
 @Injectable()
 export class PlayerState {
   constructor(
-    private cloudService: CloudService,
     private filterMapService: FilterMapService,
     private mapService: MapService,
     private store: Store
@@ -110,20 +107,5 @@ export class PlayerState {
       ...state,
       selecteSong: {} as Song
     });
-  }
-
-  @Action(FetchSongById)
-  fetchSongById(ctx: StateContext<PlayerStateModel>, action: FetchSongById) {
-    const state = ctx.getState();
-    this.store.dispatch(new SetIsLoading(1));
-    return this.cloudService.getSongById(action.id).pipe(
-      tap((song: Song) => {
-        ctx.setState({
-          ...state,
-          selecteSong: song
-        });
-        this.store.dispatch(new SetIsLoading(-1));
-      })
-    );
   }
 }
