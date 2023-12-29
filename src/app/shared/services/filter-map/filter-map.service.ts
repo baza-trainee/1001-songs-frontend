@@ -118,10 +118,11 @@ export class FilterMapService {
   }
 
   fetchFilterOptions() {
-    return this.http.get(API_URL + StatEndpoints.markers).pipe(
-      catchError(async (error) => {
-        console.error(error);
-      })
-    );
+    return this.http.get(API_URL + StatEndpoints.markers)
+    // .pipe(
+    //   catchError(async (error) => {
+    //     console.error(error);
+    //   })
+    // );
   }
 }

@@ -7,7 +7,6 @@ import { FilterMapService } from '../../shared/services/filter-map/filter-map.se
 import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { tap } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
 
 export interface FilterMapStateModel {
   selectedOptions: SongFilter;
@@ -62,15 +61,15 @@ export class FilterMapState {
     const state = ctx.getState();
 
     return this.filterMapService.fetchFilterOptions().pipe(
-     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      tap((response: any) => {
+      tap((response: object) => {
+        const modifiedResponse = Object.values(response);
         const allOptions: SongFilter = {
           country: options.coruntries,
           region: options.regions,
-          city: response[1].list_cities ,
+          city: modifiedResponse[1].list_cities,
           title: '',
           genre: options.genres,
-          found: response[2].list_archives
+          found: modifiedResponse[2].list_archives
         };
 
         ctx.setState({
@@ -82,11 +81,3 @@ export class FilterMapState {
   }
 }
 
-// {
-// country: string[];
-// region: string[];
-// city: string[];
-// title: string;
-// genre: string[];
-// found: string[];
-// }

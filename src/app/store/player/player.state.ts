@@ -46,11 +46,11 @@ export class PlayerState {
     const state = ctx.getState();
 
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
-      /* tslint:disable-next-line */
-      tap((response: any) => {
+      tap((response: object) => {
         console.log('SONGS : Main response', response);
-        const newSongs: Song[] = response[0].list_songs;
-        const newMarkers: MarkerOfLocation[] = response[1].list_markers.map(
+        const modifiedResponse = Object.values(response);
+        const newSongs: Song[] = modifiedResponse[0].list_songs;
+        const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
           (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
         );
         this.store.dispatch(new ResetMarkers(newMarkers));
