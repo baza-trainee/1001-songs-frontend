@@ -9,6 +9,14 @@ export interface Article {
   category: string;
   date: string;
 }
+export interface DataArticle {
+  id: number;
+  type_of_news: string;
+  date: string;
+  news_title: string;
+  location: string;
+  photo: string;
+}
 
 export interface Author {
   seekers: string[];
@@ -16,3 +24,4 @@ export interface Author {
   video: string;
   records: string;
 }
+

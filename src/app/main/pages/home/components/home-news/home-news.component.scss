@@ -1,3 +1,4 @@
+/* stylelint-disable */
 @import '../../../../../../typography/typography';
 
 img {
@@ -32,6 +33,7 @@ img {
 
     &-item {
       position: relative;
+      cursor: pointer;
       border-top: 1px solid var(--text-color-primary);
       padding: 16px 0;
       width: 47.7%;
@@ -40,6 +42,12 @@ img {
       font-weight: 400;
       line-height: 24px;
       color: var(--text-color-primary);
+      transition: all .5s ease;
+
+      // eslint-disable-next-line no-use-before-define
+      &:hover .news__all-link {
+        transform: rotate(45deg);
+      }
     }
 
     &-link {
@@ -49,6 +57,7 @@ img {
       right: 0;
       top: 16px;
       background-image: url('../../../../../../assets/img/home/icons/arrow_outward.svg');
+      transition: all .5s ease;
     }
 
     &-title {
@@ -62,9 +71,17 @@ img {
 
   &__main {
     width: 50%;
+    cursor: pointer;
+    transition: all .5s ease;
+
+    &:hover {
+      transform: scale(1.005);
+    }
 
     &-img {
       width: 100%;
+      max-height: 320px;
+      object-fit: cover;
       vertical-align: bottom;
       margin-bottom: 24px;
     }
@@ -116,8 +133,15 @@ img {
         right: 0;
         top: 50%;
         transform: translateY(-50%);
+        animation: none;
         background-image: url('../../../../../../assets/img/home/icons/arrow_forward.svg');
       }
+
+      &:hover::before {
+        animation: move-animation .5s infinite alternate;
+      }
+
+
     }
   }
 }
@@ -264,5 +288,11 @@ img {
         margin: 17px 0 14px;
       }
     }
+  }
+}
+
+@keyframes move-animation {
+  to {
+    right: -8px;
   }
 }
