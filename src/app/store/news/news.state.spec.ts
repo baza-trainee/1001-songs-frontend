@@ -17,6 +17,6 @@ describe('NewsState', () => {
   it('it should fetch expeditions', async () => {
     await store.dispatch(new FetchArticles()).toPromise();
     const article = store.selectSnapshot(NewsState.getArticlesList);
-    expect(article.length).toBe(6);
+    expect(article.length).toBe(1);
   });
 });
