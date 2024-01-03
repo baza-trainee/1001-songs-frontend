@@ -3,6 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeNewsComponent } from './home-news.component';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, RouterModule} from "@angular/router";
+import {NgxsModule} from "@ngxs/store";
+import {NewsState} from "../../../../../store/news/news.state";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('HomeNewsComponent', () => {
   let component: HomeNewsComponent;
@@ -11,7 +14,7 @@ describe('HomeNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterModule.forRoot([]), HomeNewsComponent],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterModule.forRoot([]), HomeNewsComponent, NgxsModule.forRoot([NewsState])],
       providers: [TranslateService,
         {
           provide: ActivatedRoute,
@@ -26,7 +29,7 @@ describe('HomeNewsComponent', () => {
     });
     translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(HomeNewsComponent);
-    component = new HomeNewsComponent(translateService);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

@@ -5,7 +5,6 @@ import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable, Subject, skip, takeUntil } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
@@ -33,7 +32,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   constructor(
     private multiAudioService: MultiAudioService,
     private audioService: AudioService,
-    private cloudService: CloudService,
     private store: Store
   ) {
     this.state$ = this.multiAudioService.getMultichannelState();
@@ -86,8 +84,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
-    const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
-    this.playStream(urls);
+    //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
+    this.playStream(file.media.multichannel_audio);
   }
 
   muteToggle(index: number) {

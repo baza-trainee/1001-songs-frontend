@@ -16,11 +16,12 @@ import {Song} from "../../../../../../shared/interfaces/song.interface";
 import {FetchSongsByLocation} from "../../../../../../store/player/player.actions";
 import {TranslateModule} from "@ngx-translate/core";
 import {scienceCategories} from "../../../../../../static-data/categoriesList";
+import {ImageSliderComponent} from "../../shared-components/image-slider/image-slider.component";
 
 @Component({
   selector: 'app-science-songs',
   standalone: true,
-  imports: [CommonModule, BreadcrumbsComponent, MultichanelPlayerComponent, StereoPlayerComponent, PlaylistSongCardComponent, TranslateModule],
+  imports: [CommonModule, BreadcrumbsComponent, MultichanelPlayerComponent, StereoPlayerComponent, PlaylistSongCardComponent, TranslateModule, ImageSliderComponent],
   templateUrl: './science-songs.component.html',
   styleUrls: ['./science-songs.component.scss']
 })

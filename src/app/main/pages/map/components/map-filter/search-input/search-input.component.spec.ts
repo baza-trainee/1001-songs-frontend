@@ -26,7 +26,7 @@ describe('SearchInputComponent', () => {
     fixture = TestBed.createComponent(SearchInputComponent);
     component = fixture.componentInstance;
     component.control = new FormControl();
-    component.options = ['Option1', 'Option2'];
+    component.options = 'Option1';
 
     fixture.detectChanges();
   });

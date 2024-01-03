@@ -2,15 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
 import { PlayerState } from './player.state';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PlayerState', () => {
- // let store: Store;
   let state: PlayerState;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([PlayerState]), HttpClientModule]
+      imports: [NgxsModule.forRoot([PlayerState]), HttpClientModule, TranslateModule.forRoot()]
     });
-   // store = TestBed.inject(Store);
     state = TestBed.inject(PlayerState);
   });
 

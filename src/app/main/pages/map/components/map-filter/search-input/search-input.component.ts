@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SearchInputComponent {
   @Input({ required: true }) control!: FormControl;
-  @Input({ required: true }) options!: string[];
+  @Input({ required: true }) options!: string;
   @Input({ required: true }) name!: string;
 
   constructor() {}

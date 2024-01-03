@@ -6,7 +6,6 @@ import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { Select, Store } from '@ngxs/store';
-import { CloudService } from 'src/app/shared/services/audio/cloud.service';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 
@@ -32,11 +31,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   constructor(
     private audioService: AudioService,
     private multiAudioService: MultiAudioService,
-    private cloudService: CloudService,
     private store: Store
-  ) {
-    // this.audioService.showStereoPlayer$.subscribe((showStereoPlayer) => {});
-  }
+  ) {}
 
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
@@ -73,7 +69,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.multiAudioService.stopAll();
     this.audioService.stop();
-    this.playStream(this.cloudService.preparateGoogleDriveFileUrl(file.media.stereo_audio));
+    this.playStream(file.media.stereo_audio);
   }
 
   pause() {

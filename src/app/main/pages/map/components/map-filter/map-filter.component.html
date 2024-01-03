@@ -26,7 +26,7 @@
           <div class="filter__location">
             <div class="filter__search filter__title-container">
               <h3 class="filter__body-title">{{ 'map.filter.search' | translate }}</h3>
-              <button class="filter__clear" (click)="filerClear()">
+              <button class="filter__clear" (click)="clearFilter()">
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <use xlink:href="./assets/sprites.svg#filterClear"></use>
                 </svg>
@@ -60,9 +60,9 @@
 
 
             <app-multiselect
-              [control]="form.controls.settlement"
-              [options]="options.settlement"
-              [name]="filterCategory.settlement"
+              [control]="form.controls.city"
+              [options]="options.city"
+              [name]="filterCategory.city"
             ></app-multiselect>
 
 
@@ -85,7 +85,7 @@
             ></app-multiselect>
 
 
-            <button class="filter__submit" type="submit" (click)="onSubmit()">{{ 'map.filter.button-submit' | translate }}</button>
+            <button class="filter__submit" type="submit" (click)="filterSongs()">{{ 'map.filter.button-submit' | translate }}</button>
           </div>
         </div>
       </form>

@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { SetIsLoading } from '../app/app.actions';
-import { CloudService } from 'src/app/shared/services/audio/cloud.service';
-import { FetchSongById, FetchSongsByLocation, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
+import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
+import { ResetMarkers } from '../map/map.actions';
+import { MapService } from 'src/app/shared/services/map/map.service';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -21,7 +23,8 @@ export interface PlayerStateModel {
 @Injectable()
 export class PlayerState {
   constructor(
-    private cloudService: CloudService,
+    private filterMapService: FilterMapService,
+    private mapService: MapService,
     private store: Store
   ) {}
 
@@ -33,6 +36,27 @@ export class PlayerState {
   @Selector()
   static getSelectedSong(state: PlayerStateModel): Song {
     return state.selecteSong as Song;
+  }
+
+  @Action(FetchSongs)
+  fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
+    const state = ctx.getState();
+
+    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
+      tap((response: object) => {
+        console.log('SONGS : Main response', response);
+        const modifiedResponse = Object.values(response);
+        const newSongs: Song[] = modifiedResponse[0].list_songs;
+        const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
+          (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
+        );
+        this.store.dispatch(new ResetMarkers(newMarkers));
+        ctx.setState({
+          ...state,
+          songsList: newSongs
+        });
+      })
+    );
   }
 
   @Action(SelectNext)
@@ -83,35 +107,5 @@ export class PlayerState {
       ...state,
       selecteSong: {} as Song
     });
-  }
-
-  @Action(FetchSongById)
-  fetchSongById(ctx: StateContext<PlayerStateModel>, action: FetchSongById) {
-    const state = ctx.getState();
-    this.store.dispatch(new SetIsLoading(1));
-    return this.cloudService.getSongById(action.id).pipe(
-      tap((song: Song) => {
-        ctx.setState({
-          ...state,
-          selecteSong: song
-        });
-        this.store.dispatch(new SetIsLoading(-1));
-      })
-    );
-  }
-
-  @Action(FetchSongsByLocation)
-  fetchSongsByLocation(ctx: StateContext<PlayerStateModel>, action: FetchSongsByLocation) {
-    const state = ctx.getState();
-    this.store.dispatch(new SetIsLoading(1));
-    return this.cloudService.getSongsByLocation(action.locationName).pipe(
-      tap((songs: Song[]) => {
-        ctx.setState({
-          ...state,
-          songsList: [...songs]
-        });
-        this.store.dispatch(new SetIsLoading(-1));
-      })
-    );
   }
 }

@@ -4,6 +4,7 @@ import { MultichanelPlayerComponent } from './multichanel-player.component';
 import { NgxsModule } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MultichanelPlayerComponent', () => {
   let component: MultichanelPlayerComponent;
@@ -11,7 +12,7 @@ describe('MultichanelPlayerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MultichanelPlayerComponent, NgxsModule.forRoot([PlayerState]), HttpClientModule]
+      imports: [TranslateModule.forRoot(), MultichanelPlayerComponent, NgxsModule.forRoot([PlayerState]), HttpClientModule]
     });
     fixture = TestBed.createComponent(MultichanelPlayerComponent);
     component = fixture.componentInstance;

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngxs/store';
 import { catchError } from 'rxjs';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 
-import { Marker, SongFilter } from '../../interfaces/map-marker';
-import { MapState } from '../../../store/map/map.state';
+import { SongFilter } from '../../interfaces/map-marker';
+import { CountriesSelectOptions, RegionsSelectOptions, GenresSelectOptions } from 'src/app/static-data/filter-options';
+import { Song } from '../../interfaces/song.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,98 +14,83 @@ import { MapState } from '../../../store/map/map.state';
 export class FilterMapService {
   constructor(
     private http: HttpClient,
-    private store: Store
+    private _translate: TranslateService
   ) {}
 
-  countSongsByOption(option: string): number {
-    const filteredMarkers = this.store.selectSnapshot(MapState.getFilteredMarkerList);
-
-    const foundMarkers = filteredMarkers.filter((marker) => {
-      return (
-        marker.location.country.toLowerCase().includes(option.toLowerCase()) ||
-        marker.location.region.toLowerCase().includes(option.toLowerCase()) ||
-        marker.genre_cycle.toLowerCase().includes(option.toLowerCase()) ||
-        marker.found.toLowerCase().includes(option.toLowerCase()) ||
-        marker.location.district_center.toLowerCase().includes(option.toLowerCase())
-      );
-    });
-
-    return foundMarkers.length;
-  }
-
-  filterMarkers(selectOptions: SongFilter): Marker[] {
-    const markers = this.store.selectSnapshot(MapState.getMarkersList);
-    if (this.isFilteredEmpty(selectOptions)) {
-      return markers;
-    }
-    return markers.filter((marker) => {
-      return (
-        (!selectOptions.country.length || selectOptions.country.includes(marker.location.country)) &&
-        (!selectOptions.region.length || selectOptions.region.includes(marker.location.region)) &&
-        (!selectOptions.settlement.length || selectOptions.settlement.includes(marker.location.district_center)) &&
-        (!selectOptions.genre.length || selectOptions.genre.includes(marker.genre_cycle)) &&
-        (!selectOptions.title.length || selectOptions.title.includes(marker.title)) &&
-        (!selectOptions.found.length || selectOptions.found.includes(marker.found))
-      );
-    });
-  }
-
-  isFilteredEmpty(selectOptions: SongFilter): boolean {
-    return (
-      !selectOptions.country.length &&
-      !selectOptions.region.length &&
-      !selectOptions.settlement.length &&
-      !selectOptions.genre.length &&
-      !selectOptions.title.length &&
-      !selectOptions.found.length
-    );
-  }
-
-  generateShowOptions(
-    filterMarkers: Marker[],
-    selectedOptions: SongFilter,
-    allOptions: SongFilter,
-    showOptions: SongFilter,
-    optionName: keyof SongFilter,
-    onlySelectOptionName: keyof SongFilter | undefined
-  ): SongFilter {
-    if (this.isFilteredEmpty(selectedOptions)) {
-      return allOptions;
-    } else if (optionName && selectedOptions[optionName].length) {
-      return {
-        ...this.createFilterByMarker(filterMarkers),
-        [optionName]: showOptions[optionName]
-      };
-    } else if (onlySelectOptionName && selectedOptions[onlySelectOptionName].length) {
-      return {
-        ...this.createFilterByMarker(filterMarkers),
-        [onlySelectOptionName]: allOptions[onlySelectOptionName]
-      };
+  generateShowOptions(songs: Song[]) {
+    if (this._translate.store.currentLang === 'en') {
+      return this.generateEngShowOptions(songs);
     } else {
-      return { ...this.createFilterByMarker(filterMarkers) };
+      return this.generateUaShowOptions(songs);
     }
   }
 
-  createFilterByMarker(markers: Marker[]): SongFilter {
-    const selectedOptions = new SongFilter();
+  generateUaShowOptions(songs: Song[]): SongFilter {
+    const newOptions = new SongFilter();
+    newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
+    newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
+    newOptions.city = [...new Set(songs.map((song) => song.location.city_ua))];
+    newOptions.genre = [...new Set(songs.map((song) => this.getTranslateKey('genre', song.details.genre_cycle)))];
+    newOptions.found = [...new Set(songs.map((song) => song.archive_ua))];
+    return newOptions;
+  }
 
-    markers.forEach((item) => {
-      selectedOptions.country.push(item.location.country);
-      selectedOptions.region.push(item.location.region);
-      selectedOptions.settlement.push(item.location.district_center);
-      selectedOptions.title.push(item.title);
-      selectedOptions.genre.push(item.genre_cycle);
-      selectedOptions.found.push(item.found);
+  generateEngShowOptions(songs: Song[]): SongFilter {
+    const newOptions = new SongFilter();
+    newOptions.country = [...new Set(songs.map((song) => this.getTranslateKey('country', song.location.country)))];
+    newOptions.region = [...new Set(songs.map((song) => this.getTranslateKey('regions', song.location.region)))];
+    newOptions.city = [...new Set(songs.map((song) => song.location.city_eng))];
+    newOptions.genre = [...new Set(songs.map((song) => this.getTranslateKey('genre', song.details.genre_cycle)))];
+    newOptions.found = [...new Set(songs.map((song) => song.archive_eng))];
+    return newOptions;
+  }
+
+  fetchSongsByFilter(options: SongFilter) {
+    const selectedFilterOptions = Object.entries(options).filter((el) => {
+      return el[1].length > 0;
     });
+    let fullRequest = API_URL + StatEndpoints.songs + '?';
+    selectedFilterOptions.forEach((option: [string, string[]]) => {
+      const optionName = this.preprocesFilterOptionName(option[0]);
+      const optionValues = option[1].map((selectedOption) => this.getOptionValueByKey(optionName, selectedOption));
+      const req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
+      fullRequest += req;
+    });
+    fullRequest = fullRequest.slice(0, fullRequest.length - 1);
 
-    selectedOptions.country = [...new Set(selectedOptions.country)];
-    selectedOptions.region = [...new Set(selectedOptions.region)];
-    selectedOptions.settlement = [...new Set(selectedOptions.settlement)];
-    selectedOptions.title = [...new Set(selectedOptions.title)];
-    selectedOptions.genre = [...new Set(selectedOptions.genre)];
-    selectedOptions.found = [...new Set(selectedOptions.found)];
+    console.log(fullRequest);
 
-    return selectedOptions;
+    return this.http.get(fullRequest);
+  }
+
+  private getTranslateKey(optionName: string, optionValue: string) {
+    if (optionName === 'country') {
+      const target = CountriesSelectOptions.find((country) => country.value === optionValue);
+      return target ? target.key : '';
+    } else if (optionName === 'regions') {
+      const target = RegionsSelectOptions.find((region) => region.value === optionValue);
+      return target ? target.key : '';
+    } else if (optionName === 'genre') {
+      const target = GenresSelectOptions.find((region) => region.value === optionValue);
+      return target ? target.key : '';
+    } else {
+      return optionValue;
+    }
+  }
+
+  private getOptionValueByKey(optionName: string, optionKey: string) {
+    if (optionName === 'country') {
+      const target = CountriesSelectOptions.find((country) => country.key === optionKey);
+      return target ? target.value : '';
+    } else if (optionName === 'region') {
+      const target = RegionsSelectOptions.find((region) => region.key === optionKey);
+      return target ? target.value : '';
+    } else if (optionName === 'genre') {
+      const target = GenresSelectOptions.find((genre) => genre.key === optionKey);
+      return target ? target.value : '';
+    } else {
+      return optionKey;
+    }
   }
 
   searchSongsByTitle(title: string) {
@@ -113,5 +99,30 @@ export class FilterMapService {
         console.error(error);
       })
     );
+  }
+
+  private preprocesFilterOptionName(option: string) {
+    if (option === 'found') {
+      return this._translate.store.currentLang === 'en' ? 'archive_eng' : 'archive_ua';
+    }
+    if (option === 'city') {
+      return this._translate.store.currentLang === 'en' ? 'city_eng' : 'city_ua';
+    } else {
+      return option;
+    }
+  }
+
+  private replaceSpaces(strWithSpaces: string) {
+    const patch = '%20';
+    return strWithSpaces.trim().replaceAll(' ', patch);
+  }
+
+  fetchFilterOptions() {
+    return this.http.get(API_URL + StatEndpoints.markers)
+    // .pipe(
+    //   catchError(async (error) => {
+    //     console.error(error);
+    //   })
+    // );
   }
 }

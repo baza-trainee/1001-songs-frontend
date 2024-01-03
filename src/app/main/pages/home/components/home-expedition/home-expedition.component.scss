@@ -129,7 +129,12 @@ img {
         right: 0;
         top: 50%;
         transform: translateY(-50%);
+        animation: none;
         background-image: url('../../../../../../assets/img/home/icons/arrow_forward.svg');
+      }
+
+      &:hover::before {
+        animation: move-animation .5s infinite alternate;
       }
     }
   }
@@ -266,5 +271,11 @@ img {
         margin-bottom: 4px;
       }
     }
+  }
+}
+
+@keyframes move-animation {
+  to {
+    right: -8px;
   }
 }

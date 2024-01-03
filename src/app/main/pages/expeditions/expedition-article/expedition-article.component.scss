@@ -24,7 +24,6 @@
 
     &-ua {
       width: 302px;
-
     }
   }
 
@@ -155,22 +154,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform .2s ease;
+      transition: transform 0.2s ease;
 
       &:hover {
         transform: scale(1.1);
       }
-    }
-  }
-
-  &__carousel {
-    padding: 80px 0;
-    background: var(--bg-color-screen);
-
-    &-title {
-      @include h2-desktop;
-
-      margin-bottom: 32px;
     }
   }
 }
@@ -296,14 +284,6 @@
         line-height: 24px;
       }
     }
-
-    &__carousel {
-      &-title {
-        font-size: 32px;
-        line-height: 40px;
-        margin-bottom: 16px;
-      }
-    }
   }
 }
 
@@ -312,4 +292,3 @@
     margin-top: 80px;
   }
 }
-

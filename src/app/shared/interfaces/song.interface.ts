@@ -13,12 +13,14 @@ export interface Song {
     administrative_code: string;
     ethnos: string;
     ethnographic_district: string;
-    official_name_city: string;
+    city_ua: string;
+    city_eng: string;
     unofficial_name_city: string;
     recording_location: string;
     coordinates: string;
   };
-  archive: string;
+  archive_eng: string;
+  archive_ua: string;
   details: {
     id: string;
     incipit: string;

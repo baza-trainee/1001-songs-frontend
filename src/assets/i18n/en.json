@@ -1,4 +1,97 @@
 {
+  "filterOptions": {
+    "countries": {
+      "belarus": "Belarus",
+      "lithuania": "Lithuania",
+      "moldova": "Moldova",
+      "poland": "Poland",
+      "romania": "Romania",
+      "slovakia": "Slovakia",
+      "hungary": "Hungary",
+      "ukraine": "Ukraine",
+      "russia": "Russia"
+    },
+    "regions": {
+      "ivanoFrankivsk": "Ivano-Frankivsk region",
+      "crimea": "Autonomous Republic of Crimea",
+      "brest": "Berestei region",
+      "bryansk": "Bryansk region",
+      "bilgorod": "Belgorod region",
+      "warmian": "Warmian-Masurian Voivodeship",
+      "greaterPoland": "Greater Poland Voivodeship",
+      "volgograd": "Volgograd region",
+      "volyn": "Volyn region",
+      "voronizh": " Voronizh region",
+      "vinnytsya": "Vinnytsia region",
+      "vitebsk": "Vitebsk region",
+      "gomel": "Gomel region",
+      "grodno": "Grodno region",
+      "dnipro": "Dnipropetovsk region",
+      "donetsk": " Donetsk region",
+      "zhytomyr": "Zhytomyr region",
+      "zakarpattia": "Zakarpattia region",
+      "zaporizhia": "Zaporizhia region",
+      "westPomeranian": "West Pomeranian Voivodeship",
+      "kyiv": "Kyiv region",
+      "krasnodar": "Krasnodar Territory",
+      "kurks": "Kursk region",
+      "kuyavianPomeranian": "Kuyavian-Pomeranian Voivodeship",
+      "khirovohrad": "Khirovohrad region",
+      "lodz": "Łódź Voivodeship",
+      "luhansk": "Luhansk region",
+      "lviv": "Lviv region",
+      "lublin": "Lublin Voivodeship",
+      "lubusk": "Lubusk Voivodeship",
+      "masovian": "Masovian Voivodeship",
+      "lesserPoland": "Lesser Poland Voivodeship",
+      "mykolayiv": "Mykolayiv region",
+      "mohyliv": "Mohyliv region",
+      "minsk": "Minsk region",
+      "kyivCiity": "Kyiv city",
+      "minskCity": "Minsk city",
+      "sevastopolCiy": "Sevastopol city",
+      "lowerSilesian": "Lower Silesian Voivodeship",
+      "odesa": "Odesa region",
+      "opole": "Opole Voivodeship",
+      "poltava": "Poltava region",
+      "pomeranian": "Pomeranian Voivodeship",
+      "pskov": "Pskov region",
+      "subcarpathian": "Subcarpathian Voivodeship",
+      "podlaskie": "Podlaskie Voivodeship",
+      "rostov": "Rostov region",
+      "rivne": "Rivne region",
+      "swietokrzyskie ": "Świętokrzyskie Voivodeship",
+      "smolensk": "Smolensk region",
+      "sumy": "Sumy region",
+      "silezian": "Silesian Voivodeship",
+      "ternopil": "Ternopil region",
+      "kharkiv": "Kharkiv region",
+      "kherson": "Kherson region",
+      "khmelnytskyi": "Khmelnytskyi region",
+      "cherkasy": "Cherkasy region",
+      "chernivtsi": "Chernivtsi region",
+      "chernihiv": "Chernihiv region"
+    },
+    "genres": {
+      "spring": "Spring",
+      "wedding": "Wedding",
+      "harvest": "Harves",
+      "trinity": "Green sunday(Trinity)",
+      "winter": "Winter",
+      "lullabies": "Lullabies",
+      "kolyada": "Kolodiy",
+      "mowing": "Moving",
+      "kupalo": "Kupalo",
+      "lyrics": "Lyrics",
+      "shrovetide": "Shrovetide",
+      "occasion": "Occasion",
+      "autumn": "Autumn",
+      "funeral": "Funeral",
+      "rantsyuvannya": "Rantsyuvannya",
+      "christening": "Families: Christenings",
+      "christFeast": "Families: Feast"
+    }
+  },
   "header": {
     "nav-menu": {
       "about": "About",
@@ -417,13 +510,14 @@
         }
       }
     },
-  "cycle": {
+    "cycle": {
       "path": {
         "home": "Home"
       }
     },
     "songs": {
-      "player-title": "Listen to the song"
+      "player-title": "Listen to the song",
+      "illustrations": "Illustrations"
     },
     "song-page": {
       "video": "Video",

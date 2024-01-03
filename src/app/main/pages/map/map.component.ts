@@ -4,12 +4,11 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Marker } from 'src/app/shared/interfaces/map-marker';
-import { FetchMarkers } from 'src/app/store/map/map.actions';
+import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { FetchSongsByLocation, ResetSong } from 'src/app/store/player/player.actions';
+import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 
 @Component({
@@ -20,23 +19,26 @@ import { MapFilterComponent } from './components/map-filter/map-filter.component
   imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
 export class MapComponent implements OnInit, OnDestroy {
-  @Select(MapState.getMarkersList) markers$!: Observable<Marker[]>;
-  @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
+  @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
+  // @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
   private subscription: Subscription = new Subscription();
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new FetchMarkers());
+    this.store.dispatch(new FetchSongs(new SongFilter()));
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  handleMapEmit(marker: Marker, target: HTMLElement) {
+  handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
     this.scrollToElement(target);
     this.store.dispatch(new ResetSong());
-    this.store.dispatch(new FetchSongsByLocation(marker.location.district_center));
+    const params: SongFilter = new SongFilter();
+    params.city = [marker.location__city];
+    this.store.dispatch(new FetchSongs(params));
   }
 
   scrollToElement(element: HTMLElement): void {

@@ -1,16 +1,12 @@
-import { Marker, SongFilter } from '../../shared/interfaces/map-marker';
+import { Song } from 'src/app/shared/interfaces/song.interface';
+export class InitFilterOptions {
+  static readonly type = '[Filter Map] Init filter options';
 
-export class UpdateOptions {
-  static readonly type = '[Filter Map] Update Show Options';
-
-  constructor(
-    public selectedOptions: SongFilter,
-    public optionName: keyof SongFilter,
-    public markers: Marker[]
-  ) {}
+  constructor() {}
 }
-export class LoadFilteredMarkers {
-  static readonly type = '[Filter Map] Load Filtered Markers';
 
-  constructor(public markers: Marker[]) {}
+export class SetShownOptions {
+  static readonly type = '[Filter Map] Set shown options';
+
+  constructor(public songs: Song[]) {}
 }

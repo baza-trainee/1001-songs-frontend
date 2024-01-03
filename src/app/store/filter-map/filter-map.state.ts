@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { SongFilter } from '../../shared/interfaces/map-marker';
-import { LoadFilteredMarkers, UpdateOptions } from './filter-map.actions';
+import { InitFilterOptions, SetShownOptions } from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
+import * as options from 'src/app/static-data/filter-options';
+import { MapService } from 'src/app/shared/services/map/map.service';
+import { tap } from 'rxjs';
 
 export interface FilterMapStateModel {
   selectedOptions: SongFilter;
@@ -21,7 +24,10 @@ export interface FilterMapStateModel {
 })
 @Injectable()
 export class FilterMapState {
-  constructor(private filterMapService: FilterMapService) {}
+  constructor(
+    private filterMapService: FilterMapService,
+    private mapService: MapService
+  ) {}
 
   @Selector()
   static getSelectedOptions(state: FilterMapStateModel): SongFilter {
@@ -38,44 +44,40 @@ export class FilterMapState {
     return state.allOptions;
   }
 
-  @Action(UpdateOptions)
-  updateOptions(ctx: StateContext<FilterMapStateModel>, action: UpdateOptions) {
+  @Action(SetShownOptions)
+  setShownOptions(ctx: StateContext<FilterMapStateModel>, action: SetShownOptions) {
     const state = ctx.getState();
-    const filterMarkers = this.filterMapService.filterMarkers(action.selectedOptions);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const optionsWithLength = Object.entries(action.selectedOptions).filter(([key, value]) => value.length > 0);
-    let onSelect: keyof SongFilter | undefined;
-
-    if (optionsWithLength.length === 1) {
-      onSelect = optionsWithLength[0][0] as keyof SongFilter;
-    }
-
-    const showOptions = this.filterMapService.generateShowOptions(
-      filterMarkers,
-      action.selectedOptions,
-      state.allOptions,
-      state.showOptions,
-      action.optionName,
-      onSelect
-    );
+    const newOptions = this.filterMapService.generateShowOptions(action.songs);
 
     ctx.setState({
       ...state,
-      selectedOptions: action.selectedOptions,
-      showOptions
+      showOptions: newOptions
     });
   }
 
-  @Action(LoadFilteredMarkers)
-  loadFilteredMarkers(ctx: StateContext<FilterMapStateModel>, action: LoadFilteredMarkers) {
+  @Action(InitFilterOptions)
+  InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
     const state = ctx.getState();
 
-    const allOptions = this.filterMapService.createFilterByMarker(action.markers);
-    ctx.setState({
-      ...state,
-      allOptions,
-      showOptions: allOptions
-    });
+    return this.filterMapService.fetchFilterOptions().pipe(
+      tap((response: object) => {
+        const modifiedResponse = Object.values(response);
+        const allOptions: SongFilter = {
+          country: options.coruntries,
+          region: options.regions,
+          city: modifiedResponse[1].list_cities,
+          title: '',
+          genre: options.genres,
+          found: modifiedResponse[2].list_archives
+        };
+
+        ctx.setState({
+          ...state,
+          allOptions: allOptions
+        });
+      })
+    );
   }
 }
+
