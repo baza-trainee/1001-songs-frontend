@@ -72,6 +72,7 @@ footer.footer {
           &:hover {
             background: var(--bg-color-footer);
             color: var(--text-color-accent);
+            border: 2px solid var(--text-color-accent);
             transition: all 0.2s linear;
           }
         }
