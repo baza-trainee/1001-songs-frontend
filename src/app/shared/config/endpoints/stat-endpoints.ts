@@ -4,5 +4,6 @@ export const StatEndpoints = {
   markers: 'map',
   expeditions: 'expeditions',
   news: 'news',
-  songs: 'songs'
+  songs: 'songs',
+  education: 'educational_section'
 };
