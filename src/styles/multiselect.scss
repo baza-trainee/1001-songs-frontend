@@ -133,19 +133,4 @@
   height: auto !important;
 }
 
-// eslint-disable-next-line no-use-before-define
-.mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
-  width: 1280px;
-}
 
-@media (width <=1440px) {
-  // eslint-disable-next-line no-use-before-define
-  .mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
-    max-width: 1280px;
-  }
-}
-
-// eslint-disable-next-line no-use-before-define
-.cdk-overlay-pane {
-  max-width: 90vw !important;
-}
