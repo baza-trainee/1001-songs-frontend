@@ -34,7 +34,7 @@
       }
 
       .songs__player {
-        min-width: 987px;
+        width: 100%;
 
         .player__title{
           @include body-desktop;
@@ -49,23 +49,30 @@
 
       .playlist__titles {
         display: grid;
-        grid-template-columns: 0.4fr 1.5fr 1.6fr 0.6fr 0.3fr;
+        grid-template-columns: 0.25fr 0.9fr 1.91fr 0.65fr 0.2fr;
         justify-items: start;
         align-items: center;
-        grid-gap: 16px;
+        grid-gap: 22px;
         margin-bottom: 12px;
         padding: 0 12px;
 
         .titles {
           @include caption-desktop;
+
+          width: 100%;
+        }
+
+        .title__photo {
+          width: 72px;
         }
       }
     }
 
     .title__record__info {
       min-width: 255px;
+      width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 0.81fr 1.16fr;
       gap: 16px;
     }
 
@@ -85,8 +92,6 @@
         }
 
         .songs__player {
-          min-width: 743px;
-
           .player__container {
             justify-content: flex-start;
 
@@ -101,33 +106,25 @@
   }
 }
 
-@media (width <= 1023px) {
+@media (width <= 1120px) {
+  .container {
+    margin: 0 48px;
+  }
+}
+
+@media (width <= 1024px) {
   .songs {
-    padding: 60px 0;
+    padding: 80px 0;
 
-    .container{
-      margin: 0 48px;
-
+    .container {
       .songs__info {
         .songs__counter {
-          min-width: 105px;
-
           .counter__title {
             text-align: center;
-          }
-
-          .counter__result {
-            height: 102px;
           }
         }
 
         .songs__player {
-          .player__title  {
-            width: 110px;
-            margin: 0 auto 12px;
-            text-align: center;
-          }
-
           .player__container {
             display: block;
 
@@ -144,12 +141,12 @@
       }
 
       .songs__playlist {
-        padding: 60px 0;
+        padding: 80px 0;
 
         .playlist__titles {
-          grid-template-columns: 0.4fr 1.9fr 0.9fr 0.6fr 0.2fr;
-
+          grid-template-columns: 0.15fr 0.7fr 0.8fr 0.6fr 0.2fr;
         }
+
 
         .title__record__info {
           min-width: auto;
@@ -161,12 +158,49 @@
   }
 }
 
-@media (width <= 767px) {
+@media (width <= 768px) {
+  .songs {
+    padding: 60px 0;
+
+    .container {
+      margin: 0 32px;
+
+      .songs__playlist {
+        padding: 60px 0;
+
+        .playlist__titles {
+          display: none;
+        }
+      }
+
+      .songs__info {
+        .songs__player {
+          .player__title {
+            text-align: center;
+            width: 110px;
+            margin: 0 auto 12px;
+          }
+        }
+
+        .songs__counter {
+          min-width: 105px;
+          width: 105px;
+
+          .counter__result {
+            min-height: 102px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 630px) {
   .songs {
     padding: 48px 0;
 
     .container{
-      margin: 0 32px;
+      margin: 0 16px;
 
       .songs__info {
         display: block;
@@ -174,11 +208,12 @@
 
         .songs__counter {
           margin-right: 0;
+          width: 100%;
           margin-bottom: 48px;
 
           .counter__result {
             width: 235px;
-            height: 58px;
+            min-height: auto;
             margin: 0 auto;
           }
         }
@@ -235,18 +270,5 @@
   }
 }
 
-@media (width <=675px) {
-  .songs {
-    .container {
-      margin: 0 32px;
-    }
-  }
-}
 
-@media (width <=465px) {
-  .songs {
-    .container {
-      margin: 0 16px;
-    }
-  }
-}
+

@@ -7,7 +7,7 @@
   pointer-events: none;
   opacity: 0.5;
   position: relative;
-  
+
   &::before {
     content: '';
     width: 40px;
@@ -106,7 +106,15 @@
   }
 }
 
-@media (width <= 1023px) {
+@media (width <=1024) {
+  .player__container {
+    .player__timeline {
+      width: 100%;
+    }
+  }
+}
+
+@media (width <= 768px) {
   .player__container {
     display: block;
 
@@ -121,7 +129,7 @@
   }
 }
 
-@media (width <= 767px) {
+@media (width <= 630px) {
   .player__container {
     margin: 0 auto;
     padding: 16px;
