@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription} from 'rxjs';
@@ -19,7 +19,7 @@ import { Slide } from 'src/app/shared/interfaces/slide.interface';
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
-export class NewsArticleComponent implements OnInit, OnDestroy {
+export class NewsArticleComponent implements OnDestroy {
   @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
 
   sliderTitle!: string;
@@ -31,12 +31,10 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
     private translateService: TranslateService
   ) {
     this.getTranslation();
+    this.store.dispatch(new FetchNews()).subscribe(() => {
+      this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
+    });
     this.subscriptions.push(this.translateService.onLangChange.subscribe(() => this.getTranslation()));
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(new FetchNews());
-    this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
   }
 
   ngOnDestroy(): void {

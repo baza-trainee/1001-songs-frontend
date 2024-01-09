@@ -42,7 +42,7 @@ export class NewsState {
 
     if (!selectArticle) return;
 
-
+    // console.log('setSelectedArticle state:', ctx.getState());
     return ctx.setState({
       ...state,
       selectedArticle: selectArticle
@@ -52,7 +52,6 @@ export class NewsState {
   @Action(FetchNews)
   fetchNews(ctx: StateContext<NewsStateModel>) {
     this.store.dispatch(new SetIsLoading(1));
-
     return combineLatest([
       this.articlesService.fetchNewsDetail(),
       this.articlesService.fetchNews()
@@ -64,9 +63,8 @@ export class NewsState {
           const state = ctx.getState();
           ctx.setState({
             ...state,
-            articlesList: combinedData
+            articlesList: combinedData.slice()
           });
-          console.log(ctx.getState())
           this.store.dispatch(new SetIsLoading(-1));
         })
     );
