@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from "@angular/common";
@@ -12,6 +12,7 @@ import {ArticlesService} from "../../../shared/services/news/articles.service";
 import {newsCategories} from "../../../shared/enums/newsCategories";
 import {FetchArticles} from "../../../store/news/news.actions";
 import {NewsState} from "../../../store/news/news.state";
+import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 
 
 @Component({
@@ -19,18 +20,10 @@ import {NewsState} from "../../../store/news/news.state";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
   standalone: true,
-  imports: [
-    TranslateModule,
-    RouterOutlet,
-    RouterLink,
-    ArticleItemComponent,
-    FilterComponent,
-    CommonModule,
-  ],
-  providers: [{provide: ArticlesService, useClass: ArticlesService}]
+  imports: [TranslateModule, RouterOutlet, RouterLink, ArticleItemComponent, FilterComponent, CommonModule, MatPaginatorModule],
+  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
-
-export class NewsComponent implements OnDestroy {
+export class NewsComponent implements OnInit, OnDestroy {
   @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
   categories: newsCategories[] = Object.values(newsCategories);
   public articles!: Article[];
@@ -42,7 +35,29 @@ export class NewsComponent implements OnDestroy {
     this.articlesSubscription = this.setArticles$.subscribe((data) => {
       this.articles = data;
       this.filteredArticle = data;
+      this.pagedItems = this.filteredArticle.slice(0, this.itemsPerPage);
     });
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  currentPage: number = 1;
+  itemsPerPage: number = 3;
+  pagedItems: Article[] = [];
+
+  pageChanged(event: { pageIndex: number }): void {
+    this.currentPage = event.pageIndex + 1;
+    this.setPagedItems();
+  }
+
+  setPagedItems(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    this.pagedItems = this.filteredArticle.slice(startIndex, endIndex);
+  }
+
+  ngOnInit(): void {
+    this.setPagedItems();
   }
 
   ngOnDestroy() {

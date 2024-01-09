@@ -8,9 +8,16 @@
     </div>
     <div class="cards__wrap">
       <app-article-item
-        *ngFor="let item of filteredArticle"
-        [article]="item"
+              *ngFor="let item of pagedItems"
+              [article]="item"
       />
     </div>
+    <mat-paginator
+            [length]="filteredArticle.length"
+            [pageSize]="itemsPerPage"
+            [showFirstLastButtons]="true"
+            (page)="pageChanged($event)"
+            class="pagination"
+    ></mat-paginator>
   </div>
 </section>
