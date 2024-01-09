@@ -7,7 +7,9 @@
           <a
             class="news__all-item"
             *ngIf="item"
-            [routerLink]="'/news/' + item.id"
+            (click)="redirectToNews(item.id)"
+            (keydown)="redirectToNews(item.id)"
+            tabindex="0"
           >
             <span class="news__all-link"></span>
             <p class="news__all-date">{{ item.date }}</p>
@@ -16,13 +18,13 @@
           </a>
         </ng-container>
       </div>
-      <div class="news__main" *ngIf="articles[0]">
-        <a class="news__main-item" [routerLink]="'/news/' + articles[0].id">
-          <img class="news__main-img" [src]="articles[0].images[0]" alt="{{ articles[0].title }}">
+      <div class="news__main" *ngIf="mainArticle">
+        <a class="news__main-item" (click)="redirectToNews(mainArticle.id)" (keydown)="redirectToNews(mainArticle.id)" tabindex="0">
+          <img class="news__main-img" [src]="mainArticle.images[0]" alt="{{ mainArticle.title }}">
           <div class="news__main-info">
-            <p class="news__main-date">{{ articles[0].date }}</p>
-            <h4 class="news__main-title">{{ articles[0].title }}</h4>
-            <p class="news__main-location">{{ articles[0].location }}</p>
+            <p class="news__main-date">{{ mainArticle.date }}</p>
+            <h4 class="news__main-title">{{ mainArticle.title }}</h4>
+            <p class="news__main-location">{{ mainArticle.location }}</p>
           </div>
         </a>
       </div>
