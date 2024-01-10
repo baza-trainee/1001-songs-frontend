@@ -1,0 +1,25 @@
+<ul class="pagination">
+    <li><a class="pagination__first" [class.disabled]="1 === currentPage">
+        <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+            <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
+        </svg>
+    </a></li>
+    <li><a class="pagination__prev" [class.disabled]="1 === currentPage">
+        <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+            <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
+        </svg>
+    </a></li>
+    <li *ngFor="let page of pages" >
+        <a [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0">{{ page }}</a>
+    </li>
+    <li><a class="pagination__next" [class.disabled]="pages.length === currentPage">
+        <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+            <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
+        </svg>
+    </a></li>
+    <li><a class="pagination__last" [class.disabled]="pages.length === currentPage">
+        <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+            <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
+        </svg>
+    </a></li>
+</ul>

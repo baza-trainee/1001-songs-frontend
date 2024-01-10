@@ -12,6 +12,7 @@ import {ArticlesService} from "../../../shared/services/news/articles.service";
 import {newsCategories} from "../../../shared/enums/newsCategories";
 import {FetchArticles} from "../../../store/news/news.actions";
 import {NewsState} from "../../../store/news/news.state";
+import {PaginationComponent} from "../../../shared/shared-components/pagination/pagination.component";
 
 
 @Component({
@@ -19,17 +20,9 @@ import {NewsState} from "../../../store/news/news.state";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
   standalone: true,
-  imports: [
-    TranslateModule,
-    RouterOutlet,
-    RouterLink,
-    ArticleItemComponent,
-    FilterComponent,
-    CommonModule,
-  ],
-  providers: [{provide: ArticlesService, useClass: ArticlesService}]
+  imports: [TranslateModule, RouterOutlet, RouterLink, ArticleItemComponent, FilterComponent, CommonModule, PaginationComponent],
+  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
-
 export class NewsComponent implements OnDestroy {
   @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
   categories: newsCategories[] = Object.values(newsCategories);
@@ -43,6 +36,24 @@ export class NewsComponent implements OnDestroy {
       this.articles = data;
       this.filteredArticle = data;
     });
+  }
+
+  itemsPerPage = 1;
+  currentPage = 1;
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredArticle.length / this.itemsPerPage);
+  }
+
+  get itemsOnCurrentPage(): Article[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.filteredArticle.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    console.log(this.currentPage)
   }
 
   ngOnDestroy() {
