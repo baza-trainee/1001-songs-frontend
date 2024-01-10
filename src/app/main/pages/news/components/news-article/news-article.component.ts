@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Select, Store } from '@ngxs/store';
-import { filter, first, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription} from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { NewsState } from '../../../../../store/news/news.state';
 import { Article } from '../../../../../shared/interfaces/article.interface';
 import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
-import { FetchArticles, SetSelectedArticle } from '../../../../../store/news/news.actions';
+import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.actions';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
 
@@ -19,41 +19,26 @@ import { Slide } from 'src/app/shared/interfaces/slide.interface';
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
-export class NewsArticleComponent implements OnInit {
+export class NewsArticleComponent implements OnDestroy {
   @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
-  @Select(NewsState.getArticlesList) articles$!: Observable<Article[]>;
 
   sliderTitle!: string;
-  private langChangeSubscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private router: Router,
     private translateService: TranslateService
   ) {
     this.getTranslation();
-    this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
-      this.getTranslation(); 
+    this.store.dispatch(new FetchNews()).subscribe(() => {
+      this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
     });
+    this.subscriptions.push(this.translateService.onLangChange.subscribe(() => this.getTranslation()));
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(new FetchArticles());
-
-    this.articles$
-      .pipe(
-        filter((articles) => articles.length > 0),
-        first()
-      )
-      .subscribe((articles) => {
-        const id: number = this.route.snapshot.params['id'];
-        if (articles.some((article: Article) => +article.id === +id)) {
-          this.store.dispatch(new SetSelectedArticle(+id));
-        } else {
-          this.router.navigate(['/404']);
-        }
-      });
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
@@ -107,9 +92,5 @@ export class NewsArticleComponent implements OnInit {
     this.translateService.get('news.article.latest-news').subscribe((translated: string) => {
       this.sliderTitle = translated;
     });
-  }
-
-  changeLanguage() {
-    this.langChangeSubscription.unsubscribe();
   }
 }

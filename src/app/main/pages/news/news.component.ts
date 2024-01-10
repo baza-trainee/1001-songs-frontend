@@ -10,7 +10,7 @@ import {FilterComponent} from "../../../shared/shared-components/filter/filter.c
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";
 import {newsCategories} from "../../../shared/enums/newsCategories";
-import {FetchArticles} from "../../../store/news/news.actions";
+import {FetchNews} from "../../../store/news/news.actions";
 import {NewsState} from "../../../store/news/news.state";
 import {PaginationComponent} from "../../../shared/shared-components/pagination/pagination.component";
 
@@ -33,7 +33,7 @@ export class NewsComponent implements OnDestroy {
   currentPage: number = 1;
 
   constructor(private store: Store) {
-    this.store.dispatch(new FetchArticles());
+    this.store.dispatch(new FetchNews());
     this.articlesSubscription = this.setArticles$.subscribe((data) => {
       this.articles = data.slice();
       this.filteredArticle = data.slice();

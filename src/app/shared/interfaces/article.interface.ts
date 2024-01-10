@@ -11,6 +11,21 @@ export interface Article {
 }
 export interface DataArticle {
   id: number;
+  news_title: string;
+  date: string;
+  location: string;
+  photo1: string;
+  text1: string;
+  photo2: string;
+  text2: string;
+  author: string;
+  editor: string;
+  news: number;
+  photos: [];
+}
+
+export interface DataNews {
+  id: number;
   type_of_news: string;
   date: string;
   news_title: string;
