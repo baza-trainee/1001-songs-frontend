@@ -30,8 +30,11 @@
 
     &.active {
       background-color: var(--bg-color-accent);
-      border-color: var(--bg-color-accent);
+      border: 1px solid var(--bg-color-accent);
       border-radius: 50%;
+      &:hover {
+        border: 1px solid var(--bg-color-accent);
+      }
     }
 
     &.disabled {
