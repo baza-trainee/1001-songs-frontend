@@ -36,7 +36,7 @@ export class ArticlesService {
                 category: categoryName ? categoryName : "" ,
                 date: articleItem.date
             };
-        });
+        }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       }
 
     fetchNewsDetail(): Observable<DataArticle[]> {

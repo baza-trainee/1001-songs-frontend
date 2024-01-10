@@ -22,4 +22,13 @@ export class PaginationComponent {
       this.pageChange.emit(page);
     }
   }
+  goToNextPage(): void {
+    const nextPage = this.currentPage < this.totalPages ? this.currentPage + 1 : this.totalPages;
+    this.pageChange.emit(nextPage);
+  }
+
+  goToPrevPage(): void {
+    const prevPage = this.currentPage > 1 ? this.currentPage - 1 : 1;
+    this.pageChange.emit(prevPage);
+  }
 }
