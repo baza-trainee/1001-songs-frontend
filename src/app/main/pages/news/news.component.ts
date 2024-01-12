@@ -90,7 +90,7 @@ export class NewsComponent implements OnDestroy {
     if (label === 'Усі') {
       this.filteredArticle = this.articles.slice();
     } else {
-      this.filteredArticle = this.articles.filter((article) => article.category === label);
+      this.filteredArticle = this.articles.filter((article) => article.type_of_news === label);
     }
 
     this.itemsOnCurrentPage;

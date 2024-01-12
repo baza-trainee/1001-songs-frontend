@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import {combineLatest, map, tap} from 'rxjs';
+import { map, tap} from 'rxjs';
 
 import {Article} from '../../shared/interfaces/article.interface';
 import { ArticlesService } from '../../shared/services/news/articles.service';
@@ -42,7 +42,6 @@ export class NewsState {
 
     if (!selectArticle) return;
 
-    // console.log('setSelectedArticle state:', ctx.getState());
     return ctx.setState({
       ...state,
       selectedArticle: selectArticle
@@ -52,21 +51,21 @@ export class NewsState {
   @Action(FetchNews)
   fetchNews(ctx: StateContext<NewsStateModel>) {
     this.store.dispatch(new SetIsLoading(1));
-    return combineLatest([
-      this.articlesService.fetchNewsDetail(),
-      this.articlesService.fetchNews()
-    ]).pipe(
-        map(([dataArticle, dataNews]) => {
-          return this.articlesService.combineArticle(dataArticle, dataNews);
+    return this.articlesService.fetchNews().pipe(
+        map((articleData) => {
+          return articleData
+              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+              .map((article, index) => ({ ...article, id: index + 1 }));
         }),
-        tap((combinedData: Article[]) => {
+        tap((dataNews: Article[]) => {
           const state = ctx.getState();
           ctx.setState({
             ...state,
-            articlesList: combinedData.slice()
+            articlesList: dataNews.slice()
           });
           this.store.dispatch(new SetIsLoading(-1));
         })
     );
   }
+
 }

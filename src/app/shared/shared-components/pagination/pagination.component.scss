@@ -32,6 +32,7 @@
       background-color: var(--bg-color-accent);
       border: 1px solid var(--bg-color-accent);
       border-radius: 50%;
+
       &:hover {
         border: 1px solid var(--bg-color-accent);
       }
@@ -45,6 +46,12 @@
         background-color: transparent;
       }
     }
+  }
+}
+
+@media (width <=600px) {
+  .pagination {
+    justify-content: center;
   }
 }
 

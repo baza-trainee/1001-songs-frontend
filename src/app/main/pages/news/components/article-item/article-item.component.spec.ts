@@ -36,12 +36,18 @@ describe('ArticleItemComponent', () => {
     component = fixture.componentInstance;
 
     component.article = {
-      images: ['url1', 'url2'],
-      location: 'Some Location',
       id: 1,
-      text: ['Text1', 'Text2'],
-      title: 'Sample Title',
-      eventDate: '2023-09-26'
+      news_title: "Заголовок новости",
+      type_of_news: "Важные события",
+      date: "2024-01-12",
+      location: "Город",
+      photo_1: "url_1.jpg",
+      text_1: "Текст новости",
+      photo_2: "url_2.jpg",
+      text_2: "Дополнительный текст новости",
+      author: "Имя Автора",
+      editor: "Имя Редактора",
+      svitliny: "Свитлина",
     };
 
     fixture.detectChanges();

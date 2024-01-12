@@ -93,4 +93,8 @@ export class NewsArticleComponent implements OnDestroy {
       this.sliderTitle = translated;
     });
   }
+
+  replaceCommaWithBr(inputString: string): string {
+    return inputString.replace(/, /g, '<br>');
+  }
 }
