@@ -25,12 +25,12 @@ import {PaginationComponent} from "../../../shared/shared-components/pagination/
 })
 export class NewsComponent implements OnDestroy {
   @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
-  categories: newsCategories[] = Object.values(newsCategories);
+  public categories: newsCategories[] = Object.values(newsCategories);
   public articles!: Article[];
   public filteredArticle!: Article[];
   private readonly articlesSubscription?: Subscription;
-  itemsPerPage: number = 3;
-  currentPage: number = 1;
+  public itemsPerPage: number = 3;
+  public currentPage: number = 1;
 
   constructor(private store: Store) {
     this.store.dispatch(new FetchNews());
