@@ -390,6 +390,22 @@
     </symbol>
   </defs>
 
+  <defs class="pagination">
+    <symbol id="paginationPrevNext">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10.06 12L11 11.06L7.94667 8L11 4.94L10.06 4L6.06 8L10.06 12Z" fill="#131313"/>
+      </svg>
+    </symbol>
+
+    <symbol id="paginationFirstLast">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M11.728 12L12.668 11.06L9.61464 8L12.668 4.94L11.728 4L7.72797 8L11.728 12Z" fill="#131313"/>
+        <path d="M7.33344 12L8.27344 11.06L5.2201 8L8.27344 4.94L7.33344 4L3.33344 8L7.33344 12Z" fill="#131313"/>
+      </svg>
+    </symbol>
+
+  </defs>
+
   <defs class="expedition">
     <symbol id="ua">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 292" fill="none">

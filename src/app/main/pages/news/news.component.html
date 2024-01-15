@@ -1,16 +1,24 @@
 <section class="news wrapper">
   <div class="news__container">
-    <div class="news__title">
-      {{ 'news.title' | translate }}
+    <div>
+      <div class="news__title">
+        {{ 'news.title' | translate }}
+      </div>
+      <div class="filter__wrap">
+        <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+      </div>
+      <div class="cards__wrap">
+        <app-article-item
+            *ngFor="let item of itemsOnCurrentPage"
+            [article]="item"
+        />
+      </div>
     </div>
-    <div class="filter__wrap">
-      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
-    </div>
-    <div class="cards__wrap">
-      <app-article-item
-        *ngFor="let item of filteredArticle"
-        [article]="item"
-      />
-    </div>
+    <app-pagination
+      [totalPages]="totalPages"
+      [currentPage]="currentPage"
+      (pageChange)="changePage($event)"
+    ></app-pagination>
   </div>
 </section>
+<!--*ngFor="let item of filteredArticle"-->
