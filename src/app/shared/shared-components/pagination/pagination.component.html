@@ -15,7 +15,7 @@
         </li>
         <li *ngFor="let page of getPagesToShow()" >
             <a [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</a>
-            <span *ngIf="page === 0">...</span>
+            <span class="pagination__skip" *ngIf="page === 0">...</span>
         </li>
         <li *ngIf="currentPage === 1 && totalPages > maxVisiblePages" >
             <a (click)="goToPage(totalPages)" (keydown)="goToPage(totalPages)" tabindex="0">{{ totalPages }}</a>

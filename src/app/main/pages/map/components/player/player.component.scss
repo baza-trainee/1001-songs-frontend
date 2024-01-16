@@ -36,7 +36,7 @@
       .songs__player {
         width: 100%;
 
-        .player__title{
+        .player__title {
           @include body-desktop;
 
           margin-bottom: 12px;
@@ -75,7 +75,6 @@
       grid-template-columns: 0.81fr 1.16fr;
       gap: 16px;
     }
-
   }
 }
 
