@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {Observable, Subscription} from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
-import {Observable, Subscription} from 'rxjs';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { Select, Store } from '@ngxs/store';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import {PaginationComponent} from "../../../../../shared/shared-components/pagination/pagination.component";
@@ -28,7 +29,7 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnDestroy{
   screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
@@ -67,5 +68,11 @@ export class PlayerComponent {
 
   changePage(page: number): void {
     this.currentPage = page;
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
