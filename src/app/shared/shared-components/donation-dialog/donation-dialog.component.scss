@@ -104,7 +104,10 @@ $close-btn-size: 20px;
       gap: 8px;
 
       &:hover {
-        background: var(--bg-color-accent);
+        background: rgba(255, 255, 255, 0);
+        color: black;
+        border: 2px solid var(--text-color-accent);
+        transition: all 0.2s linear;
       }
 
       &:active {

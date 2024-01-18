@@ -1,0 +1,54 @@
+<ng-container *ngIf="totalPages > 1">
+    <ul class="pagination">
+        <li><a class="pagination__first" (click)="goToPage(1)" (keydown)="goToPage(1)" tabindex="0" [class.disabled]="1 === currentPage">
+            <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+                <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
+            </svg>
+        </a></li>
+        <li><a class="pagination__prev" [class.disabled]="1 === currentPage" (click)="goToPrevPage()" (keydown)="goToPrevPage()" tabindex="0">
+            <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+                <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
+            </svg>
+        </a></li>
+        <li *ngIf="currentPage === totalPages && totalPages > maxVisiblePages" >
+            <a (click)="goToPage(1)" (keydown)="goToPage(1)" tabindex="0">{{ 1 }}</a>
+        </li>
+        <li *ngFor="let page of getPagesToShow()" >
+            <a [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</a>
+            <span class="pagination__skip" *ngIf="page === 0">...</span>
+        </li>
+        <li *ngIf="currentPage === 1 && totalPages > maxVisiblePages" >
+            <a (click)="goToPage(totalPages)" (keydown)="goToPage(totalPages)" tabindex="0">{{ totalPages }}</a>
+        </li>
+        <li><a class="pagination__next" [class.disabled]="pages.length === currentPage" (click)="goToNextPage()" (keydown)="goToNextPage()" tabindex="0">
+            <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+                <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
+            </svg>
+        </a></li>
+        <li><a class="pagination__last" (click)="goToPage(pages.length)" (keydown)="goToPage(pages.length)" tabindex="0" [class.disabled]="pages.length === currentPage">
+            <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
+                <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
+            </svg>
+        </a></li>
+    </ul>
+</ng-container>
+
+<!--<ng-container *ngIf="totalPages > 1">-->
+<!--    <div class="pagination flex">-->
+<!--        <button-->
+<!--                class="pagination-btn"-->
+<!--                [ngClass]="{ 'active': currentPage === 1 }"-->
+<!--                (click)="goToPage( 1)"-->
+<!--        >1</button>-->
+<!--        <button-->
+<!--                class="pagination-btn"-->
+<!--                *ngFor="let page of getPagesToShow()"-->
+<!--                [ngClass]="{ 'active': page.isActive }"-->
+<!--                (click)="goToPage(Number(page.value))"-->
+<!--        >{{ page.value }}</button>-->
+<!--        <button-->
+<!--                class="pagination-btn"-->
+<!--                (click)="goToPage(totalPages)"-->
+<!--                [ngClass]="{ 'active': currentPage === totalPages }"-->
+<!--        >{{ totalPages }}</button>-->
+<!--    </div>-->

@@ -10,7 +10,7 @@ import { StereoPlayerComponent } from '../player/stereo-player/stereo-player.com
 import { MultichanelPlayerComponent } from '../player/multichanel-player/multichanel-player.component';
 import { Song } from '../../../../../shared/interfaces/song.interface';
 import { PlayerState } from '../../../../../store/player/player.state';
-import { FetchSongById, ResetSong } from '../../../../../store/player/player.actions';
+import { ResetSong, SelectSong } from '../../../../../store/player/player.actions';
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 import {BreadcrumbsComponent} from "../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
@@ -48,7 +48,8 @@ export class SongMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new FetchSongById(this.route.snapshot.params['id']));
+    this.store.dispatch(new SelectSong(this.route.snapshot.params['id']));
+    
     this.state$ = this.audioService.getState();
     this.state$
       .pipe(

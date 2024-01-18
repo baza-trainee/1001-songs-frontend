@@ -1,7 +1,7 @@
 <div class="card" routerLink="{{article.id}}">
   <div class="card__header">
     <div class="card__header-event">
-      {{ article.eventDate }}
+      {{ article.date }}
     </div>
     <div class="arrow__icon" routerLink="{{ article.id }}">
       <svg width="24" height="24" viewBox="0 0 24 24">
@@ -10,9 +10,9 @@
     </div>
   </div>
   <div class="card__body">
-    <div class="card__image-item" [style.background-image]="'url(' + article.images[0] + ')'"></div>
+    <div class="card__image-item" [style.background-image]="'url(' + article.photo_1 + ')'"></div>
     <div class="card__title">
-      <div class="card__title-name">{{ article.title }}</div>
+      <div class="card__title-name">{{ article.news_title }}</div>
       <div class="card__title-place">({{ article.location }})</div>
     </div>
   </div>

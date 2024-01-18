@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {catchError} from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
-import {DataArticle} from "../../interfaces/article.interface";
+import {Article} from "../../interfaces/article.interface";
 import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
 
 
@@ -11,13 +11,14 @@ import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
 })
 
 export class ArticlesService {
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  fetchArticles() {
-    return this.http.get<DataArticle[]>(`${API_URL}${StatEndpoints.news}`).pipe(
-      catchError(async (error) => {
-        console.error(error);
-      })
-    );
-  }
+    fetchNews(): Observable<Article[]> {
+        return this.http.get<Article[]>(`${API_URL}${StatEndpoints.news}`).pipe(
+            catchError(error => {
+                console.error(error);
+                return of([]);
+            })
+        );
+    }
 }

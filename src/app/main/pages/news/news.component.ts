@@ -10,8 +10,9 @@ import {FilterComponent} from "../../../shared/shared-components/filter/filter.c
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";
 import {newsCategories} from "../../../shared/enums/newsCategories";
-import {FetchArticles} from "../../../store/news/news.actions";
+import {FetchNews} from "../../../store/news/news.actions";
 import {NewsState} from "../../../store/news/news.state";
+import {PaginationComponent} from "../../../shared/shared-components/pagination/pagination.component";
 
 
 @Component({
@@ -19,30 +20,41 @@ import {NewsState} from "../../../store/news/news.state";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
   standalone: true,
-  imports: [
-    TranslateModule,
-    RouterOutlet,
-    RouterLink,
-    ArticleItemComponent,
-    FilterComponent,
-    CommonModule,
-  ],
-  providers: [{provide: ArticlesService, useClass: ArticlesService}]
+  imports: [TranslateModule, RouterOutlet, RouterLink, ArticleItemComponent, FilterComponent, CommonModule, PaginationComponent],
+  providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
-
 export class NewsComponent implements OnDestroy {
   @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
-  categories: newsCategories[] = Object.values(newsCategories);
+  public categories: newsCategories[] = Object.values(newsCategories);
   public articles!: Article[];
   public filteredArticle!: Article[];
   private readonly articlesSubscription?: Subscription;
+  public itemsPerPage: number = 3;
+  public currentPage: number = 1;
 
   constructor(private store: Store) {
-    this.store.dispatch(new FetchArticles());
+    this.store.dispatch(new FetchNews());
     this.articlesSubscription = this.setArticles$.subscribe((data) => {
-      this.articles = data;
-      this.filteredArticle = data;
+      this.articles = data.slice();
+      this.filteredArticle = data.slice();
     });
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredArticle.length / this.itemsPerPage);
+  }
+
+  get itemsOnCurrentPage(): Article[] {
+    if (this.filteredArticle.length <= this.itemsPerPage) return this.filteredArticle;
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return this.filteredArticle.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
   }
 
   ngOnDestroy() {
@@ -52,6 +64,7 @@ export class NewsComponent implements OnDestroy {
   }
 
   filteredCategory(category: string): void {
+    this.currentPage = 1;
     let label: string = 'Усі';
     switch (category) {
       case 'meetings':
@@ -75,9 +88,12 @@ export class NewsComponent implements OnDestroy {
     }
 
     if (label === 'Усі') {
-      this.filteredArticle = this.articles;
+      this.filteredArticle = this.articles.slice();
     } else {
-      this.filteredArticle = this.articles.filter((article) => article.category === label);
+      this.filteredArticle = this.articles.filter((article) => article.type_of_news === label);
     }
+
+    this.itemsOnCurrentPage;
+    this.totalPages;
   }
 }
