@@ -36,6 +36,7 @@ export class PlaylistSongCardComponent implements OnInit {
     private _translate: TranslateService,
     private store: Store
   ) {}
+  
   ngOnInit(): void {
     this.hasMedia = this.song.media ? true : false;
   }
