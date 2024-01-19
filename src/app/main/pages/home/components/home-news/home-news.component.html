@@ -30,10 +30,14 @@
       </div>
     </div>
     <div class="news__router">
-      <a
+      <button
         class="news__router-link"
         [routerLink]="'/news'"
-      >{{'home.home-news.router-link' | translate}}</a>
+      >{{'home.home-news.router-link' | translate}}
+        <svg class="news__router-arrow" width="24" height="24">
+          <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+        </svg>
+      </button>
     </div>
   </div>
 </section>

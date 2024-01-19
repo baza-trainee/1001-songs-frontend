@@ -1,0 +1,100 @@
+
+
+@mixin primary-button($bg-color: var(--text-color-accent), $text-color: var(--text-color-primary), $hover-bg-color: var(--bg-color-footer)) {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: $bg-color;
+  color: $text-color;
+  text-align: center;
+  font-family: var(--primary-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  border: 2px solid $bg-color;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background: $hover-bg-color;
+    color: $bg-color;
+  }
+}
+
+@mixin secondary-button($bg-color: var(--text-color-accent), $hover-border-color: var(--bg-color-footer)) {
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  background-color: transparent;
+  transition: all .3s ease-in-out;
+  color: $bg-color;
+  font-family: var(--primary-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  border: 2px solid $bg-color;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid $hover-border-color;
+  }
+}
+
+@mixin text-button() {
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  font-family: var(--primary-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  position: relative;
+  padding: 2px;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    right: 0;
+    bottom: 0;
+    background-color: var(--text-color-accent);
+    transition: width .2s linear;
+  }
+
+  &::after {
+    left: 0;
+  }
+
+  &.active,
+  &:hover {
+    outline: none;
+
+    &::before,
+    &::after {
+      width: 50%;
+    }
+  }
+}
+
+@mixin small-text-button() {
+  display: inline-block;
+  font-family: var(--primary-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -9,6 +9,7 @@
       display: flex;
       gap: 80px;
       flex-direction: column;
+      padding-top: 48px;
     }
 
     &__video {
@@ -250,6 +251,10 @@
   .song {
     &-page {
       margin-top: 80px;
+
+      &__detail {
+        padding-top: 28px;
+      }
     }
   }
 }
