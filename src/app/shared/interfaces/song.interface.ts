@@ -31,7 +31,12 @@ export interface Song {
   media: {
     id: string;
     stereo_audio: string;
-    multichannel_audio: string[];
+    multichannel_audio1: string;
+    multichannel_audio2: string;
+    multichannel_audio3: string;
+    multichannel_audio4: string;
+    multichannel_audio5: string;
+    multichannel_audio6: string;
     video_file: string;
     text: string;
     photo_of_performers: string;

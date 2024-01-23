@@ -37,7 +37,9 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.stop();
-      if (song.media && song.media.multichannel_audio.length > 1) {
+      const channels = this.multiAudioService.getChannles(song);
+      console.log('channels ', channels);
+      if (song.media && this.multiAudioService.getChannles(song).length > 1) {
         this.showStereoPlayer = false;
       } else {
         this.showStereoPlayer = true;
