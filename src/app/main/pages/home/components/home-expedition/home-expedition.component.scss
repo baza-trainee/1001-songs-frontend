@@ -1,4 +1,5 @@
 @import '../../../../../../typography/typography';
+@import '../../../../../../typography/buttons';
 
 img {
   width: 100%;
@@ -57,17 +58,7 @@ img {
     }
 
     &-btn {
-      display: inline-block;
-      padding: 12px 22px;
-      border-radius: 100px;
-      background-color: var(--bg-color-accent);
-      border: 2px solid var(--bg-color-accent);
-      transition: all .3s ease;
-
-      &:hover {
-        background-color: transparent;
-        color: var(--bg-color-accent);;
-      }
+      @include primary-button;
     }
   }
 
@@ -112,30 +103,21 @@ img {
   }
 
   &__router {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 
     &-link {
       @include link-desktop($font_size: 16px, $line-height: 24px, $font-weight: $font-weight-semibolt);
+      @include text-button;
 
-      font-family: "Open Sans", sans-serif;
-      padding-right: 31px;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-      &::before {
-        position: absolute;
-        content: '';
-        width: 24px;
-        height: 24px;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        animation: none;
-        background-image: url('../../../../../../assets/img/home/icons/arrow_forward.svg');
-      }
-
-      &:hover::before {
-        animation: move-animation .5s infinite alternate;
-      }
+    &-arrow {
+      transform: rotate(45deg);
     }
   }
 }
@@ -271,11 +253,5 @@ img {
         margin-bottom: 4px;
       }
     }
-  }
-}
-
-@keyframes move-animation {
-  to {
-    right: -8px;
   }
 }

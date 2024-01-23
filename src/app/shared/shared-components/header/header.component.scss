@@ -1,4 +1,5 @@
 @import '../../../../typography/typography';
+@import '../../../../typography/buttons';
 
 ul,
 li,
@@ -62,35 +63,7 @@ a {
 
         &__item-link {
           @include link-desktop;
-
-          position: relative;
-          padding: 7px 0;
-
-          &::before,
-          &::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            right: 0;
-            bottom: 0;
-            background-color: var(--bg-color-accent);
-            transition: width .2s linear;
-          }
-
-          &::after {
-            left: 0;
-          }
-
-          &.active,
-          &:hover {
-            outline: none;
-
-            &::before,
-            &::after {
-              width: 50%;
-            }
-          }
+          @include text-button;
         }
       }
     }
@@ -126,6 +99,7 @@ a {
           border: 1px solid var(--text-color-primary);
           border-radius: 50%;
           text-transform: uppercase;
+          transition: all .3s ease-in-out;
 
           @include button-desktop;
 
@@ -141,20 +115,7 @@ a {
 
       &__donate {
         &-button {
-          width: 150px;
-          height: 48px;
-          background: var(--text-color-accent);
-          border-radius: 100px;
-          border: 1px solid transparent;
-
-          @include button-desktop;
-
-          &:hover {
-            background: var(--bg-color-footer);
-            color: var(--text-color-accent);
-            border: 2px solid var(--text-color-accent);
-            transition: all 0.2s linear;
-          }
+          @include primary-button;
         }
       }
     }

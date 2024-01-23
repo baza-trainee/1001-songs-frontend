@@ -1,5 +1,6 @@
 @import '../../../../../../../typography/typography';
 @import '../../../../../../../typography/fonts';
+@import '../../../../../../../typography/buttons';
 @import '../../../../../../../typography/colors';
 
 .nomedia {
@@ -47,13 +48,9 @@
     }
 
     .song__card__btn {
-      @include button-desktop;
+      @include secondary-button;
 
-      padding: 12px 24px;
-      text-align: center;
-      border-radius: 100px;
-      border: 2px solid var(--text-color-accent);
-      cursor: pointer;
+      color: var(--text-color-primary);
     }
 
     .song__card__listen {
@@ -173,8 +170,14 @@
       text-align: center;
       margin-right: 114px;
       border-radius: 100px;
+      background-color: transparent;
       border: 2px solid var(--text-color-accent);
       cursor: pointer;
+      transition: all .3s ease-in-out;
+
+      &:hover {
+        border: 2px solid var(--bg-color-footer);
+      }
     }
   }
 

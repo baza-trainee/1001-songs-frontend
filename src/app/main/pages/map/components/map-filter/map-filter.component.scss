@@ -1,3 +1,5 @@
+@import '../../../../../../typography/buttons';
+
 .filter {
   &__box {
     width: 315px;
@@ -66,16 +68,14 @@
   }
 
   &__clear {
+    @include primary-button;
+
     display: flex;
     border-radius: 12px;
-    background: #FFF068;
     padding: 2px 4px;
     justify-content: center;
     align-items: center;
-    font-family: 'Open Sans', sans-serif;
-    border: none;
     font-size: 12px;
-    font-style: normal;
     font-weight: 400;
     line-height: 16px;
     gap: 4px;
@@ -88,23 +88,10 @@
   }
 
   &__submit {
+    @include primary-button;
+
     margin-top: 18px;
-    display: flex;
     width: 100%;
-    padding: 12px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 100px;
-    background: var(--bg-color-yellow);
-    color: var(--primary-font);
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
-    border: none;
   }
 
   &__location {
