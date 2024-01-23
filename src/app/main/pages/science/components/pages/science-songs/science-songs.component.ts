@@ -80,7 +80,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
       const category = scienceCategories.find((category) => category.routerLink === params['category']);
-      const subCategory = category?.genreGroups.flatMap((group) => group.subCategories).find((sub) => sub.query === params['id']);
+      const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);
 
       subCategory?.title ? (this.title = subCategory.title) : this.router.navigate(['/404']);
     });

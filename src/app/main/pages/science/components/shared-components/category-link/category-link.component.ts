@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./category-link.component.scss']
 })
 export class CategoryLinkComponent {
-  @Input() category: string = 'Hello world';
+  @Input() category: string = '';
   @Input() imgUrl: string = 'https://baza-trainee.github.io/1001-songs-frontend/assets/img/home/expedition3.jpg';
 }

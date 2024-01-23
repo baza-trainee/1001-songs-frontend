@@ -5,7 +5,7 @@ export interface GenreSubCategory {
 
 export interface GenreGroup {
   title: string;
-  subCategories: GenreSubCategory[];
+  genres: GenreSubCategory[];
 }
 
 export interface ScienceCategory {

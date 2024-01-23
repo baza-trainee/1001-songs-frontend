@@ -24,7 +24,7 @@
           <a
             href="#"
             class="cycle__subcategory-link"
-            *ngFor="let link of sub.subCategories;"
+            *ngFor="let link of sub.genres;"
             [routerLink]="link.query"
           >
             {{ link.title | translate}}
