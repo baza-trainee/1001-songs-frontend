@@ -4,6 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -11,7 +12,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), ErrorComponent, NgxsModule.forRoot([AppState])],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, ErrorComponent, NgxsModule.forRoot([AppState])],
       providers: [
         TranslateService,
         {
