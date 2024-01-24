@@ -20,6 +20,7 @@ import {FetchSongsByLocation} from "../../../../../../store/player/player.action
 import {scienceCategories} from "../../../../../../static-data/categoriesList";
 import {ImageSliderComponent} from "../../shared-components/image-slider/image-slider.component";
 import {PaginationComponent} from "../../../../../../shared/shared-components/pagination/pagination.component";
+import { EducationService } from 'src/app/shared/services/education/education.service';
 
 @Component({
   selector: 'app-science-songs',
@@ -52,7 +53,8 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private educationService: EducationService
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
@@ -77,6 +79,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.educationService.fetchSongsByGenre('Засівання').subscribe(d => console.log(d))
     this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
       const category = scienceCategories.find((category) => category.routerLink === params['category']);

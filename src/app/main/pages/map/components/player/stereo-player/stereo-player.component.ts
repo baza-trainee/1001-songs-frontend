@@ -38,7 +38,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.stop();
       const channels = this.multiAudioService.getChannles(song);
-      console.log('channels ', channels);
       if (song.media && this.multiAudioService.getChannles(song).length > 1) {
         this.showStereoPlayer = false;
       } else {

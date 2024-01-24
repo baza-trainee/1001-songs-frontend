@@ -5,5 +5,6 @@ export const StatEndpoints = {
   expeditions: 'expeditions',
   news: 'news',
   songs: 'songs',
-  education: 'educational_section'
+  education: 'educational_section',
+  scienceSongs: 'songs_es'
 };

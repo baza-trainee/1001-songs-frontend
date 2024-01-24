@@ -6,11 +6,9 @@ import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
   providedIn: 'root'
 })
 export class EducationService {
-
   constructor(private http: HttpClient) {}
 
-  fetchExpeditions() {
-    return this.http.get(`${API_URL}${StatEndpoints.education}`);
+  fetchSongsByGenre(genre: string) {
+    return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}?genre=${genre}`);
   }
-  
 }
