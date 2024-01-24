@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
+import {Observable} from "rxjs";
+import {Footer} from "../../interfaces/footer";
+import {FooterService} from "../../services/footer/footer.service";
 
 @Component({
     selector: 'app-footer',
@@ -15,11 +18,14 @@ import { DonationDialogComponent } from '../donation-dialog/donation-dialog.comp
 })
 export class FooterComponent {
   public navLinks = navLinksHeader;
-
+  public footerInfo$!: Observable<Footer[]>;
   constructor(
     private _translate: TranslateService,
-    public dialog: MatDialog
-  ){}
+    public dialog: MatDialog,
+    private footerService: FooterService
+  ){
+    this.footerInfo$ = this.footerService.fetchFooterInfo();
+  }
 
   openDonationDialog() {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });

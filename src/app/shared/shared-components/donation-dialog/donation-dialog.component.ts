@@ -16,7 +16,7 @@ import {Donation} from "../../interfaces/donation";
 })
 
 export class DonationDialogComponent {
-  donation$: Observable<Donation[]> = this.donationService.fetchLastDonation();
+  donation$!: Observable<Donation[]>;
 
   actions = { copy: 'Copy IBAN', bmc: 'Buy Me A Coffe', patreon: 'Patreon' };
   purposeMessage = "Безповоротна фінансова допомога від прізвище, ім'я, по-батькові.";
@@ -26,7 +26,9 @@ export class DonationDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: unknown,
     public clipboard: Clipboard,
     private donationService: DonationService
-  ) {}
+  ) {
+    this.donation$ = this.donationService.fetchLastDonation();
+  }
 
   copyIBAN() {
     this.clipboard.copy(this.iban);
