@@ -11,11 +11,12 @@ import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrum
 import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.actions';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
+import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
 
 @Component({
   selector: 'app-news-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent, ShareComponent],
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })

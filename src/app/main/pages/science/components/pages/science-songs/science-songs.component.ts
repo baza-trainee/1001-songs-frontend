@@ -16,10 +16,11 @@ import {
 } from "../../../../map/components/player/playlist-song-card/playlist-song-card.component";
 import {PlayerState} from "../../../../../../store/player/player.state";
 import {Song} from "../../../../../../shared/interfaces/song.interface";
-import {FetchSongsByLocation} from "../../../../../../store/player/player.actions";
+import {FetchSongs, FetchSongsByLocation} from "../../../../../../store/player/player.actions";
 import {scienceCategories} from "../../../../../../static-data/categoriesList";
 import {ImageSliderComponent} from "../../shared-components/image-slider/image-slider.component";
 import {PaginationComponent} from "../../../../../../shared/shared-components/pagination/pagination.component";
+import {SongFilter} from "../../../../../../shared/interfaces/map-marker";
 
 @Component({
   selector: 'app-science-songs',
@@ -54,6 +55,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store
   ) {
+    this.store.dispatch(new FetchSongs(new SongFilter()));
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
     });

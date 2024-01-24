@@ -9,16 +9,17 @@ import {Song} from "../../../../../../shared/interfaces/song.interface";
 import {StreamState} from "../../../../../../shared/interfaces/stream-state.interface";
 import {ActivatedRoute} from "@angular/router";
 import {AudioService} from "../../../../../../shared/services/audio/audio.service";
-import {FetchSongById, ResetSong} from "../../../../../../store/player/player.actions";
+import {ResetSong, SelectSong} from "../../../../../../store/player/player.actions";
 import {
   MultichanelPlayerComponent
 } from "../../../../map/components/player/multichanel-player/multichanel-player.component";
 import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
+import {ShareComponent} from "../../../../../../shared/shared-components/share/share.component";
 
 @Component({
   selector: 'app-science-song',
   standalone: true,
-  imports: [CommonModule, BreadcrumbsComponent, TranslateModule, MultichanelPlayerComponent, StereoPlayerComponent],
+  imports: [CommonModule, BreadcrumbsComponent, TranslateModule, MultichanelPlayerComponent, StereoPlayerComponent, ShareComponent],
   templateUrl: './science-song.component.html',
   styleUrls: ['./science-song.component.scss']
 })
@@ -50,7 +51,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new FetchSongById(this.route.snapshot.params['idSong']));
+    this.store.dispatch(new SelectSong(this.route.snapshot.params['idSong']));
     this.state$ = this.audioService.getState();
     this.state$
       .pipe(

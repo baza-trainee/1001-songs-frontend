@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
-import { ClipboardModule, ClipboardService } from 'ngx-clipboard';
+import { ClipboardModule} from 'ngx-clipboard';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogRef } from '@angular/cdk/dialog';
 import { ShareModal } from '../../enums/icons.enum';
 import { ShareModalLink } from '../../enums/navLinks.enum';
+import {ShareService} from "../../services/share/share.service";
 
 @Component({
   selector: 'app-share-modal',
@@ -18,43 +19,29 @@ import { ShareModalLink } from '../../enums/navLinks.enum';
 export class ShareModalComponent {
   protected readonly ShareModal = ShareModal;
   protected readonly ShareModalLink = ShareModalLink;
-  fbLink = 'https://www.facebook.com/sharer/sharer.php?';
-  navUrl!: string;
+
 
   constructor(
-    private clipboardService: ClipboardService,
     private snackBar: MatSnackBar,
-    public dialogRef: DialogRef
-  ) {
+    public dialogRef: DialogRef,
+    private shareService: ShareService
+  ) {}
+
+  shareOnFacebook(): void {
+    this.shareService.shareOnFacebook(window.location.href);
   }
 
-  shareOnFacebook() {
-    const searchParams = new URLSearchParams();
-    searchParams.set('u', window.location.href);
-    const navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
-    window.open(navUrl, '_blank');
+  shareOnTelegram(): void {
+    this.shareService.shareOnTelegram(window.location.href);
   }
 
-  shareOnInstagram() {
-    const searchParams = new URLSearchParams();
-    searchParams.set('u', window.location.href);
-    const navUrl = 'https://www.instagram.com/share?' + searchParams;
-    window.open(navUrl, '_blank');
+  shareOnInstagram(): void {
+    this.shareService.shareOnInstagram(window.location.href);
   }
 
-  shareOnTelegram() {
-    const searchParams = new URLSearchParams();
-    searchParams.set('url', window.location.href);
-    const navUrl = 'https://t.me/share/url?' + searchParams;
-    window.open(navUrl, '_blank');
-  }
- 
   copyCurrentUrl(): void {
-    const currentURL: string = window.location.href;
-
-    this.clipboardService.copyFromContent(currentURL);
+    this.shareService.copyCurrentUrl(window.location.href);
     this.openSnackBar();
-    // this.closeDialog();
   }
 
   private openSnackBar(): void {

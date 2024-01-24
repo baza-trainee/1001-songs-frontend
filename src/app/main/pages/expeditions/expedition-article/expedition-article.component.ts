@@ -12,11 +12,12 @@ import { FetchExpeditions, SetSelectedExpedition } from '../../../../store/exped
 import { BreadcrumbsComponent } from '../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
+import {ShareComponent} from "../../../../shared/shared-components/share/share.component";
 
 @Component({
   selector: 'app-expedition-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, VideoPlayerComponent, BreadcrumbsComponent, SliderComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, VideoPlayerComponent, BreadcrumbsComponent, SliderComponent, ShareComponent],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })

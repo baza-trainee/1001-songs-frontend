@@ -39,11 +39,30 @@
           <span>{{ 'header.pop-up-menu.title' | translate }}</span>
         </div>
         <ul class="social__list">
-          <li class="social__item"><a class="social__fb" href="#">Facebook</a></li>
-          <li class="social__item"><a class="social__inst" href="#">Instagram</a></li>
-          <li class="social__item"><a class="social__tg" href="#">Telegram</a></li>
           <li class="social__item">
-            <a class="social__copy" href="#">{{ 'header.pop-up-menu.copy' | translate }}</a>
+            <a class="social__fb"
+               href="#"
+               (click)="shareOnFacebook()"
+               (keyup)="shareOnFacebook()"
+            >Facebook</a></li>
+          <li class="social__item">
+            <a class="social__inst"
+               href="#"
+               (click)="shareOnInstagram()"
+               (keyup)="shareOnInstagram()"
+            >Instagram</a></li>
+          <li class="social__item">
+            <a class="social__tg"
+               href="#"
+               (click)="shareOnTelegram()"
+               (keyup)="shareOnTelegram()"
+            >Telegram</a></li>
+          <li class="social__item">
+            <a class="social__copy"
+               href="#"
+               (click)="copyCurrentUrl()"
+               (keyup)="copyCurrentUrl()"
+            >{{ 'header.pop-up-menu.copy' | translate }}</a>
           </li>
         </ul>
       </div>

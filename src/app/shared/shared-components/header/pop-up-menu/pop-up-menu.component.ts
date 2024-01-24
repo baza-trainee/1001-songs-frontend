@@ -3,13 +3,15 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { navLinksHeader } from 'src/app/shared/enums/navLinks.enum';
+import {ShareService} from "../../../services/share/share.service";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-pop-up-menu',
   templateUrl: './pop-up-menu.component.html',
   styleUrls: ['./pop-up-menu.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, TranslateModule, CommonModule]
+  imports: [RouterLink, RouterLinkActive, TranslateModule, CommonModule, MatSnackBarModule]
 })
 export class PopUpMenuComponent implements OnInit {
   @Output() isPopupOpenChange = new EventEmitter<boolean>();
@@ -18,7 +20,11 @@ export class PopUpMenuComponent implements OnInit {
   public lang!: boolean;
   public navLinks = navLinksHeader;
   public isPopupOpen: boolean = true;
-  constructor(private _translate: TranslateService) {}
+  constructor(
+    private _translate: TranslateService,
+    private shareService: ShareService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.checkLang();
@@ -38,5 +44,29 @@ export class PopUpMenuComponent implements OnInit {
   togglePopUp() {
     this.isPopupOpen = !this.isPopupOpen;
     this.isPopupOpenChange.emit(this.isPopupOpen);
+  }
+  shareOnFacebook(): void {
+    this.shareService.shareOnFacebook(window.location.href);
+  }
+
+  shareOnTelegram(): void {
+    this.shareService.shareOnTelegram(window.location.href);
+  }
+
+  shareOnInstagram(): void {
+    this.shareService.shareOnInstagram(window.location.href);
+  }
+
+  copyCurrentUrl(): void {
+    this.shareService.copyCurrentUrl(window.location.href);
+    this.openSnackBar();
+  }
+
+  private openSnackBar(): void {
+    this.snackBar.open('URL was copied', '', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 1000
+    });
   }
 }

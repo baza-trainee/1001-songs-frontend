@@ -90,6 +90,7 @@ export class PlayerState {
   selectSong(ctx: StateContext<PlayerStateModel>, action: SelectSong) {
     const state = ctx.getState();
     const selectedSong = state.songsList.find((song: Song) => song.id === action.selectedSongId);
+      console.log(selectedSong)
     if (!selectedSong) {
       return;
     }
