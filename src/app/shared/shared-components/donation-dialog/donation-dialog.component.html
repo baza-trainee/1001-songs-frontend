@@ -1,4 +1,4 @@
-<div class="donation" *ngIf="donationInfo$ | async as donatInfo ">
+<div class="donation" *ngIf="donation$ | async as donat">
   <div class="donation__close">
     <span mat-button mat-dialog-close class="donation__close-btn">
       <svg width="18" height="18" viewBox="0 0 20 20">
@@ -6,46 +6,49 @@
       </svg>
     </span>
   </div>
-  <h1 class="donation__title">{{ donatInfo.info }}</h1>
+  <h1 class="donation__title">{{ donat[0].info.organization }}</h1>
   <div class="donation__credentials">
-    <div>ЄДРПОУ:{{ register }}.</div>
-    <div>IBAN:{{ donatInfo.iban }}.</div>
-    <div>АТ КБ "ПРИВАТБАНК"</div>
+    <div>{{ donat[0].info.edrpou }}.</div>
+    <div>{{ donat[0].info.iban }}.</div>
+    <div>{{ donat[0].info.bank }}</div>
   </div>
 
   <div class="donation__purpose">
     <span class="donation__purpose-title"> Призначення платежу:</span>
-    <span class="donation__purpose-message">"{{ purposeMessage }}"</span>
+    <span class="donation__purpose-message">{{ donat[0].info.purpose }}</span>
   </div>
 
   <div mat-dialog-actions class="donation__actions">
     <div mat-dialog-actions class="donation__actions-qr">
-      <img src="assets/img/home/Donation/privat-qr.png" alt="Graphic key" />
+      <img [src]="donat[0].qr" alt="Graphic key" />
       <span class="donation__actions-caption">QRкод (Приват24)</span>
     </div>
     <div mat-dialog-actions class="donation__actions-options">
-      <button class="donation__actions-button" (click)="copyIBAN()" (keypress)="copyIBAN()" tabindex="0">
+      <button class="donation__actions-button" (click)="clipboard.copy(donat[0].iban)" (keypress)="clipboard.copy(donat[0].iban)" tabindex="0">
         <svg width="24" height="24" viewBox="0 0 24 24">
-          <use xlink:href="./assets/sprites.svg#copy"></use></svg
-        >{{ actions.copy }}
+          <use xlink:href="./assets/sprites.svg#copy"></use>
+        </svg>
+        {{ actions.copy }}
       </button>
       <a
         class="donation__actions-button"
-        href="https://www.buymeacoffee.com/kolyskova"
+        [href]="donat[0].coffee"
         target="_blank"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
-          <use xlink:href="./assets/sprites.svg#buyMeCoffee"></use></svg
-        >{{ actions.bmc }}
+          <use xlink:href="./assets/sprites.svg#buyMeCoffee"></use>
+        </svg>
+        {{ actions.bmc }}
       </a>
       <a
         class="donation__actions-button"
-        href="https://www.patreon.com/KolyskovaMuseum"
+        [href]="donat[0].patreon"
         target="_blank"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
-          <use xlink:href="./assets/sprites.svg#patreon"></use></svg
-        >{{ actions.patreon }}
+          <use xlink:href="./assets/sprites.svg#patreon"></use>
+        </svg>
+          {{ actions.patreon }}
         </a>
     </div>
   </div>
