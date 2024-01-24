@@ -40,7 +40,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
-      if (song.media && song.media.multichannel_audio.length > 1) {
+      if (song.media && this.multiAudioService.getChannles(song).length > 1) {
         this.openFile(song);
         this.isVisible = true;
       } else {
@@ -85,7 +85,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.audioService.stop();
     this.multiAudioService.stopAll();
     //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
-    this.playStream(file.media.multichannel_audio);
+    this.playStream(this.multiAudioService.getChannles(file));
   }
 
   muteToggle(index: number) {
