@@ -29,10 +29,10 @@ export class ScienceCycleComponent implements OnInit {
     this.checkAndSetSelectedCategory();
   }
 
-  getScienceSongs(genre: string) {
-    const theGenre = genres.find((g) => g.translateKey === genre);
-    console.log(theGenre);
-  }
+  // getScienceSongs(genre: string) {
+  //   const theGenre = genres.find((g) => g.translateKey === genre);
+  //   console.log(theGenre);
+  // }
 
   private checkAndSetSelectedCategory() {
     if (this.route.params) {

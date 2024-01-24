@@ -26,7 +26,6 @@
             class="cycle__subcategory-link"
             *ngFor="let link of sub.genres;"
             [routerLink]="link.query"
-            (click)="getScienceSongs(link.title)"
           >
             {{ link.title | translate}}
           <span class="cycle__subcategory-arrow">

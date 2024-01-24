@@ -1,4 +1,4 @@
-const genreKeyPath = 'science.genres.';
+const genreKeyPath = '';
 
 export const genres = [
   { translateKey: genreKeyPath + 'instrumental-ensembles', value: 'Інструментальні капели. Троїста музика' },
