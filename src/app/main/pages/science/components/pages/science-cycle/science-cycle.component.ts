@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {take} from "rxjs";
-import {TranslateModule} from "@ngx-translate/core";
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { take } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {RecommendedSourcesComponent} from "../../shared-components/recommended-sources/recommended-sources.component";
-import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
-import {ScienceCategory} from "../../../../../../shared/interfaces/science.interface";
-import {scienceCategories} from "../../../../../../static-data/categoriesList";
+import { RecommendedSourcesComponent } from '../../shared-components/recommended-sources/recommended-sources.component';
+import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
+import { ScienceCategory } from '../../../../../../shared/interfaces/science.interface';
+import { scienceCategories } from '../../../../../../static-data/categoriesList';
+import { genres } from 'src/app/static-data/scientific-genres';
 
 @Component({
   selector: 'app-science-cycle',
@@ -22,18 +23,23 @@ export class ScienceCycleComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.checkAndSetSelectedCategory();
   }
 
+  getScienceSongs(genre: string) {
+    const theGenre = genres.find((g) => g.translateKey === genre);
+    console.log(theGenre);
+  }
+
   private checkAndSetSelectedCategory() {
     if (this.route.params) {
-      this.route.params.pipe(take(1)).subscribe(params => {
+      this.route.params.pipe(take(1)).subscribe((params) => {
         const categories: ScienceCategory[] = scienceCategories;
         this.categoryName = params['category'];
-        const selectedCategory = categories.find(category => category.routerLink === this.categoryName);
+        const selectedCategory = categories.find((category) => category.routerLink === this.categoryName);
         if (selectedCategory) {
           this.category = selectedCategory;
         } else {
@@ -42,6 +48,4 @@ export class ScienceCycleComponent implements OnInit {
       });
     }
   }
-
-
 }
