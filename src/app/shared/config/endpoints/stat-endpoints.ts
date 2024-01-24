@@ -4,5 +4,7 @@ export const StatEndpoints = {
   markers: 'map',
   expeditions: 'expeditions',
   news: 'news',
-  songs: 'songs'
+  songs: 'songs',
+  donation: 'modal_window',
+  footer: 'footer',
 };
