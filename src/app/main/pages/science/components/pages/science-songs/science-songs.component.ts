@@ -11,7 +11,7 @@ import { StereoPlayerComponent } from '../../../../map/components/player/stereo-
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { PlayerState } from '../../../../../../store/player/player.state';
 import { Song } from '../../../../../../shared/interfaces/song.interface';
-import { FetchSongsByLocation } from '../../../../../../store/player/player.actions';
+import { FetchScienceSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
@@ -77,8 +77,9 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const genre = this.route.snapshot.params['id'];
     const genreParam = genres.find((g) => g.translateKey === genre)?.value;
-    console.log(genreParam);
-    this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
+    //console.log(genreParam);
+   // this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
+    this.store.dispatch(new FetchScienceSongs(genreParam as string));
     this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
       const category = scienceCategories.find((category) => category.routerLink === params['category']);

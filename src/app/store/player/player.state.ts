@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchScienceSongs, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
 import { MapService } from 'src/app/shared/services/map/map.service';
+import { EducationService } from 'src/app/shared/services/education/education.service';
 
 export interface PlayerStateModel {
   songsList: Song[];
@@ -23,6 +24,7 @@ export interface PlayerStateModel {
 @Injectable()
 export class PlayerState {
   constructor(
+    private educationService: EducationService,
     private filterMapService: FilterMapService,
     private mapService: MapService,
     private store: Store
@@ -54,6 +56,20 @@ export class PlayerState {
         ctx.setState({
           ...state,
           songsList: newSongs
+        });
+      })
+    );
+  }
+
+  @Action(FetchScienceSongs)
+  fetchScienceSongs(ctx: StateContext<PlayerStateModel>, action: FetchScienceSongs) {
+    const state = ctx.getState();
+
+    return this.educationService.fetchSongsByGenre(action.genre).pipe(
+      tap((scienceSongs) => {
+        ctx.setState({
+          ...state,
+          songsList: scienceSongs as Song[]
         });
       })
     );

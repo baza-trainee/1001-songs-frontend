@@ -1,4 +1,4 @@
-import { SongFilter } from "src/app/shared/interfaces/map-marker";
+import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 
 export class FetchSongsByLocation {
   static readonly type = '[Player] Get';
@@ -35,4 +35,10 @@ export class FetchSongs {
   static readonly type = '[Player] Fetch songs';
 
   constructor(public filter: SongFilter) {}
+}
+
+export class FetchScienceSongs {
+  static readonly type = '[Player] Fetch sciense section songs';
+
+  constructor(public genre: string) {}
 }
