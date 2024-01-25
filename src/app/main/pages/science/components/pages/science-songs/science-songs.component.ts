@@ -11,12 +11,13 @@ import { StereoPlayerComponent } from '../../../../map/components/player/stereo-
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { PlayerState } from '../../../../../../store/player/player.state';
 import { Song } from '../../../../../../shared/interfaces/song.interface';
-import { FetchScienceSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
+import { FetchScienceSongs, FetchSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { genres } from 'src/app/static-data/scientific-genres';
+import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 
 @Component({
   selector: 'app-science-songs',
@@ -52,6 +53,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     private store: Store,
     private educationService: EducationService
   ) {
+    this.store.dispatch(new FetchSongs(new SongFilter()));
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
     });

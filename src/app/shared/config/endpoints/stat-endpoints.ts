@@ -6,5 +6,7 @@ export const StatEndpoints = {
   news: 'news',
   songs: 'songs',
   education: 'educational_section',
-  scienceSongs: 'songs_es'
+  scienceSongs: 'songs_es',
+  donation: 'modal_window',
+  footer: 'footer',
 };

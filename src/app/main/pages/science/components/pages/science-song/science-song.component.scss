@@ -122,42 +122,11 @@
       padding: 12px 24px;
       border-radius: 100px;
       border: 2px solid var(--text-color-extra-2);
-      cursor: not-allowed;
       background-color: transparent;
     }
 
     &-mobile {
       display: none;
-    }
-  }
-
-  &__share {
-    display: flex;
-    align-items: center;
-
-    &-title {
-      color: var(--text-color-popup-menu);
-      font-weight: 400;
-      margin-right: 24px;
-    }
-
-    &-links {
-      display: flex;
-      gap: 16px;
-    }
-
-    &-link {
-      padding: 8px;
-      border: 1px solid var(--text-color-popup-menu);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform .2s ease;
-
-      &:hover {
-        transform: scale(1.1);
-      }
     }
   }
 
@@ -310,11 +279,6 @@
         align-items: stretch;
       }
     }
-
-    &__share {
-      display: flex;
-      justify-content: space-between;
-    }
   }
 }
 
@@ -342,12 +306,6 @@
     &__video {
       &-container {
         height: 206px;
-      }
-    }
-
-    &__share {
-      &-links {
-        gap: 7px;
       }
     }
 

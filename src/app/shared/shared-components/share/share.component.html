@@ -1,0 +1,41 @@
+<div class="share {{className}}">
+  <span class="share-title">{{ 'news.article.about-article.share' | translate }}</span>
+  <div class="share__container">
+    <button
+            class="share-link"
+            (click)="shareOnFacebook()"
+            (keyup)="shareOnFacebook()"
+    >
+      <svg width="24" height="24">
+        <use xlink:href="./assets/sprites.svg#fbNews"></use>
+      </svg>
+    </button>
+    <button
+            (click)="shareOnInstagram()"
+            (keyup)="shareOnInstagram()"
+            class="share-link share__inst"
+    >
+      <svg width="24" height="24">
+        <use xlink:href="./assets/sprites.svg#instNews"></use>
+      </svg>
+    </button>
+    <button
+            class="share-link"
+            (click)="shareOnTelegram()"
+            (keyup)="shareOnTelegram()"
+    >
+      <svg width="24" height="24">
+        <use xlink:href="./assets/sprites.svg#tgNews"></use>
+      </svg>
+    </button>
+    <button
+            class="share-link"
+            (click)="copyCurrentUrl()"
+            (keyup)="copyCurrentUrl()"
+    >
+      <svg width="24" height="24">
+        <use xlink:href="./assets/sprites.svg#copyNews"></use>
+      </svg>
+    </button>
+  </div>
+</div>

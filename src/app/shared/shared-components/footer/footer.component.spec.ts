@@ -3,6 +3,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FooterComponent } from './footer.component';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -10,7 +11,7 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), FooterComponent, MatDialogModule],
+      imports: [TranslateModule.forRoot(), FooterComponent, HttpClientTestingModule, MatDialogModule],
       providers: [
         TranslateService,
         {

@@ -36,37 +36,17 @@
           <app-multichanel-player></app-multichanel-player>
 
           <div class="song__player-btns">
-            <button class="song__player-download">
+            <a class="song__player-download"
+               [href]="song.media.stereo_audio"
+               [download]="song.media.stereo_audio"
+               target="_blank"
+            >
               <svg width="24" height="24">
                 <use xlink:href="./assets/sprites.svg#download"></use>
               </svg>
               {{ 'science.song-page.header.download' | translate }}
-            </button>
-            <div class="song__share">
-              <span class="song__share-title">{{ 'science.song-page.header.share' | translate }} </span>
-              <div class="song__share-links">
-                <a href="#" class="song__share-link">
-                  <svg width="24" height="24">
-                    <use xlink:href="./assets/sprites.svg#fbNews"></use>
-                  </svg>
-                </a>
-                <a href="#" class="song__share-link">
-                  <svg width="24" height="24">
-                    <use xlink:href="./assets/sprites.svg#instNews"></use>
-                  </svg>
-                </a>
-                <a href="#" class="song__share-link">
-                  <svg width="24" height="24">
-                    <use xlink:href="./assets/sprites.svg#tgNews"></use>
-                  </svg>
-                </a>
-                <a href="#" class="song__share-link">
-                  <svg width="24" height="24">
-                    <use xlink:href="./assets/sprites.svg#copyNews"></use>
-                  </svg>
-                </a>
-              </div>
-            </div>
+            </a>
+            <app-share></app-share>
           </div>
         </div>
       </div>
@@ -83,31 +63,7 @@
           </svg>
           {{ 'science.song-page.header.download' | translate }}
         </button>
-        <div class="song__share">
-          <span class="song__share-title">{{ 'science.song-page.header.share' | translate }} </span>
-          <div class="song__share-links">
-            <a href="#" class="song__share-link">
-              <svg width="24" height="24">
-                <use xlink:href="./assets/sprites.svg#fbNews"></use>
-              </svg>
-            </a>
-            <a href="#" class="song__share-link">
-              <svg width="24" height="24">
-                <use xlink:href="./assets/sprites.svg#instNews"></use>
-              </svg>
-            </a>
-            <a href="#" class="song__share-link">
-              <svg width="24" height="24">
-                <use xlink:href="./assets/sprites.svg#tgNews"></use>
-              </svg>
-            </a>
-            <a href="#" class="song__share-link">
-              <svg width="24" height="24">
-                <use xlink:href="./assets/sprites.svg#copyNews"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
+        <app-share className="song"></app-share>
       </div>
 
     </div>

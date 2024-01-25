@@ -33,6 +33,7 @@ export class SongMapComponent implements OnInit, OnDestroy {
   ];
   slideIndex = 0;
   state$!: Observable<StreamState>;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store,
@@ -49,7 +50,7 @@ export class SongMapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new SelectSong(this.route.snapshot.params['id']));
-    
+
     this.state$ = this.audioService.getState();
     this.state$
       .pipe(

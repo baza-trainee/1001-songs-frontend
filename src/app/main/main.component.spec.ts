@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from '../store/app/app.state';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -11,7 +12,7 @@ describe('MainComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [TranslateModule.forRoot(), MainComponent, NgxsModule.forRoot([AppState])],
+    imports: [TranslateModule.forRoot(), MainComponent, HttpClientTestingModule, NgxsModule.forRoot([AppState])],
     providers: [{
             provide: ActivatedRoute, useValue: {}
         }]
