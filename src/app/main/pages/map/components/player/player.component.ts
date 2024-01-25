@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -29,7 +37,10 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnDestroy{
+export class PlayerComponent implements AfterViewInit, OnDestroy{
+  @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
+  distanceToTop!: number;
+  heightHeader!: number;
   screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
@@ -41,7 +52,7 @@ export class PlayerComponent implements OnDestroy{
 
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
-
+  isFixed: boolean = false;
   location = 'Ромейки';
 
   constructor(
@@ -50,9 +61,27 @@ export class PlayerComponent implements OnDestroy{
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
+      // setTimeout(() => {
+      //   console.log("st ", this.distanceToTop)
+      // }, 1000)
     });
   }
 
+  @HostListener('window:resize')
+  onResize() {
+    if (window.innerWidth > 768) {
+      this.heightHeader = 108;
+    } else if (window.innerWidth <= 768) {
+      this.heightHeader = 96;
+    } else {
+      this.heightHeader = 80;
+    }
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader
+  }
   get totalPages(): number {
     return Math.ceil(this.songs.length / this.itemsPerPage);
   }
@@ -74,5 +103,10 @@ export class PlayerComponent implements OnDestroy{
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.distanceToTop = this.fixedContainer.nativeElement.getBoundingClientRect().top;
+    this.onResize();
   }
 }

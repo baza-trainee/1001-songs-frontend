@@ -3,11 +3,14 @@
 @import '../../../../../../typography/colors';
 
 .songs {
-  padding: 80px 0;
+  padding: 50px 0 80px;
 
   .container {
+    position: relative;
+
     .songs__info {
       display: flex;
+      padding-top: 30px;
 
       .songs__counter {
         min-width: 161px;
@@ -78,10 +81,35 @@
   }
 }
 
-@media (width <= 1439px) {
-  .songs {
-    padding: 80px 0;
+.fix {
+  position: fixed;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
 
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 100vw;
+    height: calc(100% + 50px);
+    z-index: -1;
+    box-shadow: 0 8px 16px 8px rgba(15, 15, 15, 20%);
+  }
+}
+
+@media (width <= 1439px) {
+  .fix {
+    max-width: 1024px;
+  }
+
+  .songs {
     .container{
       max-width: 1024px;
 
@@ -106,6 +134,10 @@
 }
 
 @media (width <= 1120px) {
+  .fix {
+    max-width: calc(100% - 96px);
+  }
+
   .container {
     margin: 0 48px;
   }
@@ -113,8 +145,6 @@
 
 @media (width <= 1024px) {
   .songs {
-    padding: 80px 0;
-
     .container {
       .songs__info {
         .songs__counter {
@@ -158,8 +188,12 @@
 }
 
 @media (width <= 768px) {
+  .fix {
+    max-width: calc(100% - 64px);
+  }
+
   .songs {
-    padding: 60px 0;
+    padding: 30px 0 60px;
 
     .container {
       margin: 0 32px;
@@ -195,8 +229,12 @@
 }
 
 @media (width <= 630px) {
+  .fix {
+    max-width: calc(100% - 32px);
+  }
+
   .songs {
-    padding: 48px 0;
+    padding: 18px 0 48px;
 
     .container{
       margin: 0 16px;
