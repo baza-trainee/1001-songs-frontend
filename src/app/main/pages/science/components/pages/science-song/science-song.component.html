@@ -36,7 +36,9 @@
           <app-multichanel-player></app-multichanel-player>
 
           <div class="song__player-btns">
-            <button class="song__player-download">
+            <button class="song__player-download"
+               (click)="downloadSong(song.media.stereo_audio)"
+            >
               <svg width="24" height="24">
                 <use xlink:href="./assets/sprites.svg#download"></use>
               </svg>
