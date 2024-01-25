@@ -64,8 +64,4 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());
   }
-
-  downloadSong(href: string) {
-    window.location.href = href;
-  }
 }

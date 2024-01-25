@@ -36,14 +36,16 @@
           <app-multichanel-player></app-multichanel-player>
 
           <div class="song__player-btns">
-            <button class="song__player-download"
-               (click)="downloadSong(song.media.stereo_audio)"
+            <a class="song__player-download"
+               [href]="song.media.stereo_audio"
+               [download]="song.media.stereo_audio"
+               target="_blank"
             >
               <svg width="24" height="24">
                 <use xlink:href="./assets/sprites.svg#download"></use>
               </svg>
               {{ 'science.song-page.header.download' | translate }}
-            </button>
+            </a>
             <app-share></app-share>
           </div>
         </div>
