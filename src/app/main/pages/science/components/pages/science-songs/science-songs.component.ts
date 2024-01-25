@@ -53,10 +53,10 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     private store: Store,
     private educationService: EducationService
   ) {
-    this.store.dispatch(new FetchSongs(new SongFilter()));
-    this.subscription = this.songs$.subscribe((data) => {
-      if (data) this.songs = data.slice();
-    });
+    // this.store.dispatch(new FetchSongs(new SongFilter()));
+    // this.subscription = this.songs$.subscribe((data) => {
+    //   if (data) this.songs = data.slice();
+    // });
   }
 
   get totalPages(): number {
@@ -80,7 +80,8 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     const genre = this.route.snapshot.params['id'];
     const genreParam = genres.find((g) => g.translateKey === genre)?.value;
     //console.log(genreParam);
-   // this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
+    this.songs$.subscribe((scienseSongs) => (this.songs = scienseSongs));
+    // this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
     this.store.dispatch(new FetchScienceSongs(genreParam as string));
     this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
