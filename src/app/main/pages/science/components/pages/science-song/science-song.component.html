@@ -70,7 +70,8 @@
     <div class="song__box song__text">
       <div></div>
       <div class="song__text-box">
-        <div class="song__text-content" [innerHTML]="song.media && song.media.text ? song.media.text : 'No text available'"></div>
+        <div class="song__text-content" *ngIf="song.media.text" [innerHTML]="song.media.text | formatText"></div>
+        <div class="song__text-content" *ngIf="!song.media.text">No text available</div>
       </div>
     </div>
     <div class="song__box song__info">

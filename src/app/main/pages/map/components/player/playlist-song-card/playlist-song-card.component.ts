@@ -9,6 +9,8 @@ import { Song } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
+import {AudioService} from "../../../../../../shared/services/audio/audio.service";
+import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 
 @Component({
   selector: 'app-playlist-song-card',
@@ -20,7 +22,8 @@ import { RouterLink } from '@angular/router';
     TranslateModule,
     MatIconModule,
     MatExpansionModule,
-    RouterLink
+    RouterLink,
+    FormatTextPipe
   ],
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
@@ -28,21 +31,32 @@ import { RouterLink } from '@angular/router';
 export class PlaylistSongCardComponent implements OnInit {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
+  @Input() isShowDetail: boolean = true;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
+  isPlay: boolean = false;
+  isSelectSong: boolean = false;
 
   constructor(
     private _translate: TranslateService,
-    private store: Store
+    private store: Store,
+    private audioService: AudioService
   ) {}
-  
+
   ngOnInit(): void {
     this.hasMedia = this.song.media ? true : false;
   }
 
   openCurrentFile() {
-    this.store.dispatch(new SelectSong(this.song.id));
+    if (!this.isSelectSong) {
+      this.store.dispatch(new SelectSong(this.song.id));
+      this.isPlay = true;
+      this.isSelectSong = true;
+    } else {
+      this.isPlay ? this.audioService.pause() : this.audioService.play();
+      this.isPlay = !this.isPlay;
+    }
   }
 
   toggleVisibility() {

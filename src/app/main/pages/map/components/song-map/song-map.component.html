@@ -9,7 +9,8 @@
         <div class="song-page__text">
           <h2 class="song-page__text-title">{{song.title}}</h2>
           <h6 class="song-page__text-genre">{{song.details.genre_cycle}}</h6>
-          <div class="song-page__text-content" [innerHTML]="song.media && song.media.text ? song.media.text : 'No text available'"></div>
+          <div class="song-page__text-content" *ngIf="song.media.text" [innerHTML]="song.media.text | formatText"></div>
+          <div class="song-page__text-content" *ngIf="!song.media.text">No text available</div>
         </div>
         <div class="song-page__carousel">
           <div class="song-page__carousel-box">

@@ -12,11 +12,12 @@ import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.ac
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
 import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
+import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
 
 @Component({
   selector: 'app-news-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent, ShareComponent],
+  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent, ShareComponent, FormatTextPipe],
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })

@@ -7,22 +7,12 @@
         <h1 class="article__title">{{ article.news_title }}</h1>
         <p class="article__date">{{ article.date }} • {{ article.location }}</p>
       </div>
-      <div class="article__text">
-        <ng-container *ngIf="article.text_1.split('\\n')">
-          <p class="article__box">{{ article.text_1.split('\\n')[0] }}</p>
-          <img class="article__img" [src]="article.photo_1" [alt]="article.news_title" />
-          <p class="article__box">{{ article.text_1.split('\\n')[1] }}</p>
-        </ng-container>
-      </div>
+      <img *ngIf="article.photo_1" class="article__img" [src]="article.photo_1" [alt]="article.news_title" />
+      <div *ngIf="article.text_1" class="article__box article__text" [innerHTML]="article.text_1 | formatText"></div>
       <div class="article__box">
-        <img class="article__sub-img" [src]="article.photo_2" [alt]="article.news_title" />
+        <img *ngIf="article.photo_2" class="article__sub-img" [src]="article.photo_2" [alt]="article.news_title" />
       </div>
-      <div class="article__text">
-        <ng-container *ngIf="article.text_2.split('\\n')">
-          <p class="article__box">{{ article.text_2.split('\\n')[0] }}</p>
-          <p class="article__box">{{ article.text_2.split('\\n')[1] }}</p>
-        </ng-container>
-      </div>
+      <div class="article__box article__text" [innerHTML]="article.text_2 | formatText"></div>
       <div class="article__box">
         <h2 class="article__sub-title">{{ 'news.article.about-article.title' | translate }}</h2>
         <div class="article__about">

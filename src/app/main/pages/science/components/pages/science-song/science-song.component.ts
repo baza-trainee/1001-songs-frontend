@@ -15,11 +15,20 @@ import {
 } from "../../../../map/components/player/multichanel-player/multichanel-player.component";
 import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
 import {ShareComponent} from "../../../../../../shared/shared-components/share/share.component";
+import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 
 @Component({
   selector: 'app-science-song',
   standalone: true,
-  imports: [CommonModule, BreadcrumbsComponent, TranslateModule, MultichanelPlayerComponent, StereoPlayerComponent, ShareComponent],
+  imports: [
+    CommonModule,
+    BreadcrumbsComponent,
+    TranslateModule,
+    MultichanelPlayerComponent,
+    StereoPlayerComponent,
+    ShareComponent,
+    FormatTextPipe
+  ],
   templateUrl: './science-song.component.html',
   styleUrls: ['./science-song.component.scss']
 })

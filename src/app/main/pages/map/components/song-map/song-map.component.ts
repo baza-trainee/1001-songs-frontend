@@ -14,11 +14,21 @@ import { ResetSong, SelectSong } from '../../../../../store/player/player.action
 import { AudioService } from '../../../../../shared/services/audio/audio.service';
 import { StreamState } from '../../../../../shared/interfaces/stream-state.interface';
 import {BreadcrumbsComponent} from "../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
+import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
 
 @Component({
   selector: 'app-song-map',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, PlayerComponent, StereoPlayerComponent, MultichanelPlayerComponent, BreadcrumbsComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    RouterLink,
+    PlayerComponent,
+    StereoPlayerComponent,
+    MultichanelPlayerComponent,
+    BreadcrumbsComponent,
+    FormatTextPipe
+  ],
   templateUrl: './song-map.component.html',
   styleUrls: ['./song-map.component.scss']
 })
