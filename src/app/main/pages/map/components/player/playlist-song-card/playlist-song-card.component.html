@@ -15,9 +15,14 @@
       </div>
     </div>
 
-    <div class="song__card__btn btn-detail" (click)="toggleVisibility()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
+    <div class="song__card__btn btn-detail"*ngIf="isShowDetail; else routerButton" (click)="toggleVisibility()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
       {{ 'map.player.songs-list.song-card.detail-button' | translate }}
     </div>
+    <ng-template #routerButton>
+      <div class="song__card__btn btn-detail" [routerLink]="song.id">
+        {{ 'map.player.songs-list.song-card.detail-button' | translate }}
+      </div>
+    </ng-template>
 
     <div class="song__card__listen">
       <mat-icon *ngIf="!hasMedia" class="nomedia" aria-hidden="false" aria-label="Example home icon" fontIcon="music_off"></mat-icon>
@@ -31,7 +36,7 @@
       </button>
     </div>
   </div>
-  <div class="song__card__detail" *ngIf="isOpened">
+  <div class="song__card__detail" *ngIf="isOpened && isShowDetail">
     <div class="detail__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
 
     <div class="detail__info">

@@ -31,6 +31,7 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 export class PlaylistSongCardComponent implements OnInit {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
+  @Input() isShowDetail: boolean = true;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
