@@ -34,7 +34,7 @@
     </section>
   </div>
 
-  <div *ngIf="articlesList$ | async as articles" class="article__slider">
-    <app-slider [sliderItems]="sliderService.convertNewsToSlide(articles.slice(0, 7))" [title]="sliderTitle"></app-slider>
+  <div *ngIf="article.id" class="article__slider">
+    <app-slider [sliderItems]="sliderItems" [title]="sliderTitle"></app-slider>
   </div>
 </ng-container>
