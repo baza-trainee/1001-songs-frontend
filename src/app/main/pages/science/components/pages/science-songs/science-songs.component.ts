@@ -18,6 +18,7 @@ import { PaginationComponent } from '../../../../../../shared/shared-components/
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { genres } from 'src/app/static-data/scientific-genres';
 import { SongFilter } from 'src/app/shared/interfaces/map-marker';
+import { SciencePlayerComponent } from '../../science-player/science-player.component';
 
 @Component({
   selector: 'app-science-songs',
@@ -26,7 +27,7 @@ import { SongFilter } from 'src/app/shared/interfaces/map-marker';
     CommonModule,
     BreadcrumbsComponent,
     MultichanelPlayerComponent,
-    StereoPlayerComponent,
+    SciencePlayerComponent,
     PlaylistSongCardComponent,
     TranslateModule,
     ImageSliderComponent,
