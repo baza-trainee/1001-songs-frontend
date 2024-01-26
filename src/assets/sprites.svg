@@ -178,6 +178,15 @@
       </svg>
     </symbol>
 
+    <symbol id="pauseDesktop">
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" fill="#FEFEFE"/>
+        <rect x="0.5" y="0.5" width="71" height="71" rx="11.5" stroke="#DDDDDD"/>
+        <rect x="26" y="25" width="10" height="24" rx="4" fill="#282828"/>
+        <rect x="38" y="25" width="10" height="24" rx="4" fill="#282828"/>
+      </svg>
+    </symbol>
+
     <symbol id="playMobile">
       <svg class="listen__mobile" width="56" height="56" viewBox="0 0 56 56" fill="none"
            xmlns="http://www.w3.org/2000/svg">
@@ -188,6 +197,15 @@
         />
         <rect x="0.388889" y="0.388889" width="55.2222" height="55.2222" rx="8.94444"
               stroke="#DDDDDD" stroke-width="0.777778" />
+      </svg>
+    </symbol>
+
+    <symbol id="pauseMobile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <rect x="0.5" y="0.5" width="55" height="55" rx="8.5" fill="#FEFEFE"/>
+        <rect x="0.5" y="0.5" width="55" height="55" rx="8.5" stroke="#DDDDDD"/>
+        <rect x="20" y="25" width="10" height="25" rx="4" fill="#282828"/>
+        <rect x="34" y="25" width="10" height="25" rx="4" fill="#282828"/>
       </svg>
     </symbol>
 
