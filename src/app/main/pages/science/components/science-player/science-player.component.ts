@@ -1,10 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
-// import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
-import { PlayerState } from 'src/app/store/player/player.state';
-import { Song } from 'src/app/shared/interfaces/song.interface';
 import { Select, Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
@@ -25,7 +21,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
 
   showStereoPlayer: boolean = true;
 
-  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<ScienceSong>;
   state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;
@@ -39,21 +35,9 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song : any ) => {
-      console.log("SCIENCE player ", song )
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song: ScienceSong) => {
       this.stop();
-      // const channels = this.multiAudioService.getChannles(song);
-      // if (song.media && this.multiAudioService.getChannles(song).length > 1) {
-      //   this.showStereoPlayer = false;
-      // } else {
-      //   this.showStereoPlayer = true;
-      // }
-      // if (song.media && song.media.stereo_audio) {
-      //   this.openFile(song);
-      // }
-;
       if (song.media && song.media && song.media.audio_example) {
-        console.log("Try to play the song")
         this.openFile(song);
       }
     });

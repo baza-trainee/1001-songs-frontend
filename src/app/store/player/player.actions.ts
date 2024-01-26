@@ -36,9 +36,3 @@ export class FetchSongs {
 
   constructor(public filter: SongFilter) {}
 }
-
-// export class FetchScienceSongs {
-//   static readonly type = '[Player] Fetch es songs';
-
-//   constructor(public genre: string) {}
-// }

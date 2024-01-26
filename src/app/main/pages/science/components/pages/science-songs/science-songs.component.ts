@@ -56,7 +56,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store,
-    private educationService: EducationService
+    //private educationService: EducationService
   ) {
     // this.store.dispatch(new FetchSongs(new SongFilter()));
     // this.subscription = this.songs$.subscribe((data) => {
@@ -84,14 +84,11 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const genre = this.route.snapshot.params['id'];
     const genreParam = genres.find((g) => g.translateKey === genre)?.value;
-    //console.log(genreParam);
     this.songs$.subscribe((scienseSongs) => {
-      // console.log(scienseSongs);
       this.songs = scienseSongs;
     });
-    // this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
     this.store.dispatch(new FetchScienceSongs(genreParam as string));
-    this.store.dispatch(new FetchSongsByLocation('Ромейки'));
+    //this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
       const category = scienceCategories.find((category) => category.routerLink === params['category']);
       const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);

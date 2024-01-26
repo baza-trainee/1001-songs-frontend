@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { Song } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
@@ -15,8 +14,6 @@ import { SelectSong } from 'src/app/store/education/es-player.actions';
   standalone: true,
   imports: [
     CommonModule,
-    // StereoPlayerComponent,
-    // MultichanelPlayerComponent,
     SciencePlayerComponent,
     TranslateModule,
     MatIconModule,
