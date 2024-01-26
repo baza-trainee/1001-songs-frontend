@@ -11,7 +11,7 @@ import { StereoPlayerComponent } from '../../../../map/components/player/stereo-
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { PlayerState } from '../../../../../../store/player/player.state';
 import { Song } from '../../../../../../shared/interfaces/song.interface';
-import { FetchScienceSongs, FetchSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
+import { FetchSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
@@ -19,6 +19,10 @@ import { EducationService } from 'src/app/shared/services/education/education.se
 import { genres } from 'src/app/static-data/scientific-genres';
 import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { SciencePlayerComponent } from '../../science-player/science-player.component';
+import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
+import { ESPlayerState } from 'src/app/store/education/es-player.state';
+import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { ESPlaylistSongCardComponent } from '../../es-playlist-song-card/es-playlist-song-card.component';
 
 @Component({
   selector: 'app-science-songs',
@@ -26,9 +30,9 @@ import { SciencePlayerComponent } from '../../science-player/science-player.comp
   imports: [
     CommonModule,
     BreadcrumbsComponent,
-    MultichanelPlayerComponent,
+    // MultichanelPlayerComponent,
     SciencePlayerComponent,
-    PlaylistSongCardComponent,
+    ESPlaylistSongCardComponent,
     TranslateModule,
     ImageSliderComponent,
     PaginationComponent
@@ -37,10 +41,10 @@ import { SciencePlayerComponent } from '../../science-player/science-player.comp
   styleUrls: ['./science-songs.component.scss']
 })
 export class ScienceSongsComponent implements OnInit, OnDestroy {
-  @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
+  @Select(ESPlayerState.getSongs) songs$!: Observable<ScienceSong[]>;
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
-  songs: Song[] = [];
+  songs: ScienceSong[] = [];
   private readonly subscription?: Subscription;
   title!: string;
   about1: string =
@@ -64,7 +68,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     return Math.ceil(this.songs.length / this.itemsPerPage);
   }
 
-  get itemsOnCurrentPage(): Song[] {
+  get itemsOnCurrentPage(): ScienceSong[] {
     if (this.songs.length <= this.itemsPerPage) return this.songs;
 
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -81,7 +85,10 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     const genre = this.route.snapshot.params['id'];
     const genreParam = genres.find((g) => g.translateKey === genre)?.value;
     //console.log(genreParam);
-    this.songs$.subscribe((scienseSongs) => (this.songs = scienseSongs));
+    this.songs$.subscribe((scienseSongs) => {
+      // console.log(scienseSongs);
+      this.songs = scienseSongs;
+    });
     // this.educationService.fetchSongsByGenre(genreParam as string).subscribe((songs: any) => (this.songs = songs));
     this.store.dispatch(new FetchScienceSongs(genreParam as string));
     this.store.dispatch(new FetchSongsByLocation('Ромейки'));

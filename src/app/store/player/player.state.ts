@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { FetchScienceSongs, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import {  FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
@@ -61,19 +61,19 @@ export class PlayerState {
     );
   }
 
-  @Action(FetchScienceSongs)
-  fetchScienceSongs(ctx: StateContext<PlayerStateModel>, action: FetchScienceSongs) {
-    const state = ctx.getState();
+  // @Action(FetchScienceSongs)
+  // fetchScienceSongs(ctx: StateContext<PlayerStateModel>, action: FetchScienceSongs) {
+  //   const state = ctx.getState();
 
-    return this.educationService.fetchSongsByGenre(action.genre).pipe(
-      tap((scienceSongs) => {
-        ctx.setState({
-          ...state,
-          songsList: scienceSongs as Song[]
-        });
-      })
-    );
-  }
+  //   return this.educationService.fetchSongsByGenre(action.genre).pipe(
+  //     tap((scienceSongs) => {
+  //       ctx.setState({
+  //         ...state,
+  //         songsList: scienceSongs as Song[]
+  //       });
+  //     })
+  //   );
+  // }
 
   @Action(SelectNext)
   selectNext(ctx: StateContext<PlayerStateModel>) {
@@ -104,6 +104,7 @@ export class PlayerState {
 
   @Action(SelectSong)
   selectSong(ctx: StateContext<PlayerStateModel>, action: SelectSong) {
+    console.log('common song player select')
     const state = ctx.getState();
     const selectedSong = state.songsList.find((song: Song) => song.id === action.selectedSongId);
       console.log(selectedSong)

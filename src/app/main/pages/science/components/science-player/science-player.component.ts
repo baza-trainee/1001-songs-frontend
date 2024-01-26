@@ -11,6 +11,7 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { ESPlayerState } from 'src/app/store/education/es-player.state';
 
 @Component({
   selector: 'app-science-player',
@@ -24,7 +25,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
 
   showStereoPlayer: boolean = true;
 
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;

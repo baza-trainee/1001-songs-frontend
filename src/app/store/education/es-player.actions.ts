@@ -11,7 +11,7 @@ export class FetchSongById {
   constructor(public id: string) {}
 }
 export class SelectSong {
-  static readonly type = '[Player] Set';
+  static readonly type = '[Player] Set educational song';
 
   constructor(public selectedSongId: string) {}
 }
@@ -37,8 +37,8 @@ export class FetchSongs {
   constructor(public filter: SongFilter) {}
 }
 
-// export class FetchScienceSongs {
-//   static readonly type = '[Player] Fetch es songs';
+export class FetchScienceSongs {
+  static readonly type = '[Player] Fetch sciense section songs';
 
-//   constructor(public genre: string) {}
-// }
+  constructor(public genre: string) {}
+}
