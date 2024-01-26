@@ -10,9 +10,9 @@ import { Article } from '../../../../../shared/interfaces/article.interface';
 import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.actions';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
-import { Slide } from 'src/app/shared/interfaces/slide.interface';
 import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
+import {SliderService} from "../../../../../shared/services/slider/slider.service";
 
 @Component({
   selector: 'app-news-article',
@@ -23,6 +23,7 @@ import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
 })
 export class NewsArticleComponent implements OnDestroy {
   @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
+  @Select(NewsState.getArticlesList) articlesList$!: Observable<Article[]>;
 
   sliderTitle!: string;
   private subscriptions: Subscription[] = [];
@@ -30,7 +31,8 @@ export class NewsArticleComponent implements OnDestroy {
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    public sliderService: SliderService
   ) {
     this.getTranslation();
     this.store.dispatch(new FetchNews()).subscribe(() => {
@@ -42,53 +44,6 @@ export class NewsArticleComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
-  imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
-
-  sliderItems: Slide[] = [
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина1',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина2',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина3',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина4',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина5',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина6',
-      description: 'Короткий опис',
-      location: 'Локація'
-    }
-  ];
 
   getTranslation() {
     this.translateService.get('news.article.latest-news').subscribe((translated: string) => {

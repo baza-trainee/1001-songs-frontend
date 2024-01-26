@@ -1,21 +1,31 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy, OnInit,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { debounceTime, fromEvent, Observable, Subscription } from 'rxjs';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { Slide } from '../../interfaces/slide.interface';
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, TranslateModule, RouterLink],
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
+
 export class SliderComponent implements OnInit, OnDestroy {
   @Input() sliderItems!: Slide[];
-  @Input() colorScheme: string = 'default';
   @Input() title!: string;
+  @Input() routerLink: string = '/news';
 
   @ViewChild('track') set track(el: ElementRef<HTMLDivElement>) {
     this.trackRef = el.nativeElement;
@@ -30,6 +40,8 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.slideWidth = (el?.nativeElement.offsetWidth || 0) + this.gap;
   }
 
+  constructor (private router: Router) {}
+
   sliderContainerRef: HTMLDivElement | null = null;
   trackRef: HTMLDivElement | null = null;
   slideRef: HTMLDivElement | null = null;
@@ -39,6 +51,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   index: number = 0;
   gap: number = 24;
   defaultSlideWidth: number = 302;
+  translateX: number = 0;
 
   trackWidth = 0;
   sliderWidth = 0;
@@ -54,28 +67,50 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.sliderWidth = this.sliderContainerRef?.offsetWidth || 0;
     this.slideWidth = (this.slideRef?.offsetWidth || this.defaultSlideWidth) + this.gap;
     this.trackWidth = this.trackRef?.offsetWidth || 0;
+    this.defaultSlideWidth = 302;
   }
 
-  changeIndex(value: number) {
-    this.index = value;
-    this.updateBtnsStatus();
+  prevSlide(): void {
+    if (this.index > 0) this.index--;
+    this.updateBtnsStatus()
+  }
+
+  nextSlide(): void {
+    if (this.index < this.sliderItems.length - 1) this.index++;
+    this.updateBtnsStatus()
   }
 
   updateBtnsStatus() {
     this.prevIsDisabled = this.index === 0;
-    this.nextIsDisabled = this.trackWidth - this.index * this.slideWidth <= this.sliderWidth;
-  }
-
-  ngOnInit() {
-    this.resizeObservable$ = fromEvent(window, 'resize').pipe(debounceTime(300));
-
-    this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
-      this.setSliderWidths();
-      this.changeIndex(0);
-    });
+    this.nextIsDisabled = this.isNextButtonDisabled();
   }
 
   ngOnDestroy() {
     this.resizeSubscription$.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.resizeObservable$ = fromEvent(window, 'resize').pipe(debounceTime(300));
+    this.setSliderWidths();
+
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
+      this.setSliderWidths();
+      this.index = 0;
+    });
+  }
+
+  getTranslateX() {
+    this.translateX = this.index * (this.defaultSlideWidth + this.gap);
+    this.updateBtnsStatus();
+    if (this.translateX >= this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap) {
+      return -(this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap);
+    }
+    return -this.translateX;
+  }
+
+  isNextButtonDisabled(): boolean {
+    return (
+      this.translateX >= this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap || this.index === this.sliderItems.length - 1
+    );
   }
 }

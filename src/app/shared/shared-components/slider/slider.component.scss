@@ -1,14 +1,16 @@
 @import '/src/typography/typography';
 
 .container {
-  min-width: 100%;
-  padding-top: 80px;
-  background-color: var(--bg-color-screen);
-  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 0;
+  overflow: hidden;
 
   .slider {
-    width: 1280px;
-    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
 
     &__title {
       @include h2-desktop;
@@ -19,18 +21,13 @@
     }
 
     &__container {
-      height: 500px;
-      margin: 36px 0 0;
-      overflow: hidden;
-
       .track {
         display: inline-flex;
         gap: 24px;
         transition: transform 0.5s;
+        align-items: stretch;
 
         .slide {
-          height: 348px;
-          width: 302px;
           flex-shrink: 0;
           box-sizing: border-box;
           overflow: hidden;
@@ -38,12 +35,12 @@
           &__item {
             width: 100%;
             height: 100%;
-            box-sizing: border-box;
 
             &-img {
               height: 180px;
               width: 100%;
               border-radius: 8px;
+              object-fit: cover;
             }
 
             &-date {
@@ -73,65 +70,30 @@
         }
       }
 
-      .nav {
-        width: 100%;
-        margin-top: 46px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: baseline;
-        gap: 8px;
-
-        .prev {
-          transform: rotate(180deg);
-        }
-
-        .prev,
-        .next {
-          background-color: transparent;
-          border: none;
-          width: 40px;
-          height: 40px;
-          cursor: pointer;
-
-          &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed !important;
-          }
-        }
-      }
     }
-  }
-}
 
-.container.default {
-  background-color: var(--bg-color-screen);
-}
-
-.container.white {
-  background-color: #fff;
-}
-
-@media (width <=1024px) {
-  .container {
-    margin-top: 0;
-    padding-top: 80px;
-
-    .slider {
+    &__nav {
       width: 100%;
-      padding: 0 0 0 48px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 8px;
 
-      &__container {
-        width: 976px;
+      .prev {
+        transform: rotate(180deg);
+      }
 
-        .track {
-          .slide {
-            height: 348px;
-            width: 293px;
-          }
-        }
+      .prev,
+      .next {
+        background-color: transparent;
+        border: none;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
 
-        .nav {
-          padding-right: 48px;
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed !important;
         }
       }
     }
@@ -140,41 +102,46 @@
 
 @media (width <=768px) {
   .container {
-    margin-top: 0;
-
     .slider {
-      width: 100%;
-      padding: 0 0 0 32px;
-
-      &__container {
-        width: 736px;
-
-        .nav {
-          padding-right: 32px;
-        }
-      }
+      gap: 32px;
     }
   }
 }
 
 @media (width <=390px) {
   .container {
-    padding-top: 32px;
-
     .slider {
-      padding: 0 0 0 16px;
-
       &__title {
         @include h2-mobile;
       }
-
-      &__container {
-        width: 374px;
-
-        .nav {
-          padding-right: 16px;
-        }
-      }
     }
+  }
+}
+
+@media (width <=1440px) {
+  .container {
+    margin-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media (width <=1024px) {
+  .container {
+    margin-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (width <=768px) {
+  .container {
+    margin-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (width <=465px) {
+  .container {
+    margin-left: 16px;
+    padding: 48px 16px 48px 0;
   }
 }

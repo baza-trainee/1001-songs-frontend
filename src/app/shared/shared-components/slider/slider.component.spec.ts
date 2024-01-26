@@ -10,8 +10,12 @@ describe('SliderComponent', () => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), SliderComponent]
     });
+
     fixture = TestBed.createComponent(SliderComponent);
     component = fixture.componentInstance;
+
+    component.sliderItems = [];
+
     fixture.detectChanges();
   });
 

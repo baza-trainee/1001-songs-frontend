@@ -30,7 +30,7 @@ export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   imageWidth = 520;
 
   gap: number = 24;
-  imageHeight = 292;
+  imageHeight: number = 292;
   sliderWidth!: number;
   translateX!: number;
 

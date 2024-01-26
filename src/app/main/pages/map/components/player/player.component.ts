@@ -61,9 +61,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
-      // setTimeout(() => {
-      //   console.log("st ", this.distanceToTop)
-      // }, 1000)
     });
   }
 
@@ -106,7 +103,11 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   }
 
   ngAfterViewInit(): void {
-    this.distanceToTop = this.fixedContainer.nativeElement.getBoundingClientRect().top;
-    this.onResize();
+    setTimeout(() => {
+      if (this.fixedContainer) {
+        this.distanceToTop = this.fixedContainer.nativeElement.getBoundingClientRect().top;
+        this.onResize();
+      }
+    });
   }
 }

@@ -1,10 +1,10 @@
-<div class="container" [ngClass]="colorScheme">
+<div class="container">
   <div class="slider">
     <h3 class="slider__title">{{ title }}</h3>
     <div class="slider__container" #sliderContainer>
-      <div class="track" #track [ngStyle]="{ transform: 'translateX(-' + index * slideWidth + 'px)' }">
+      <div class="track" #track [ngStyle]="{'transform': 'translateX(' + getTranslateX() + 'px)'}">
         <div *ngFor="let item of sliderItems" class="slide" #slide>
-          <div class="slide__item">
+          <div class="slide__item" [ngStyle]="{ 'width': defaultSlideWidth + 'px' }">
             <img class="slide__item-img" src="{{ item.img }}" alt="Project photo" />
             <p class="slide__item-date">{{ item.date }}</p>
             <h4 class="slide__item-title">{{ item.title }}</h4>
@@ -13,19 +13,18 @@
           </div>
         </div>
       </div>
-
-      <div class="nav">
-        <button class="prev" (click)="changeIndex(index - 1)" [disabled]="prevIsDisabled">
-          <svg width="40" height="40" viewBox="0 0 48 48">
-            <use xlink:href="./assets/sprites.svg#arrowForward"></use>
-          </svg>
-        </button>
-        <button class="next" (click)="changeIndex(index + 1)" [disabled]="nextIsDisabled">
-          <svg width="40" height="40" viewBox="0 0 48 48">
-            <use xlink:href="./assets/sprites.svg#arrowForward"></use>
-          </svg>
-        </button>
-      </div>
+    </div>
+    <div class="slider__nav">
+      <button class="prev" (click)="prevSlide()" [disabled]="prevIsDisabled">
+        <svg width="40" height="40" viewBox="0 0 48 48">
+          <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+        </svg>
+      </button>
+      <button class="next" (click)="nextSlide()" [disabled]="nextIsDisabled">
+        <svg width="40" height="40" viewBox="0 0 48 48">
+          <use xlink:href="./assets/sprites.svg#arrowForward"></use>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
