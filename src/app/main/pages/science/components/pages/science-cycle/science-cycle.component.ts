@@ -8,7 +8,6 @@ import { RecommendedSourcesComponent } from '../../shared-components/recommended
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ScienceCategory } from '../../../../../../shared/interfaces/science.interface';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
-import { genres } from 'src/app/static-data/scientific-genres';
 
 @Component({
   selector: 'app-science-cycle',
@@ -28,11 +27,6 @@ export class ScienceCycleComponent implements OnInit {
   ngOnInit(): void {
     this.checkAndSetSelectedCategory();
   }
-
-  // getScienceSongs(genre: string) {
-  //   const theGenre = genres.find((g) => g.translateKey === genre);
-  //   console.log(theGenre);
-  // }
 
   private checkAndSetSelectedCategory() {
     if (this.route.params) {

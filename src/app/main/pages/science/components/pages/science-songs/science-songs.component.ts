@@ -4,20 +4,11 @@ import { Observable, Subscription, take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { MultichanelPlayerComponent } from '../../../../map/components/player/multichanel-player/multichanel-player.component';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
-import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
-import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
-import { PlayerState } from '../../../../../../store/player/player.state';
-import { Song } from '../../../../../../shared/interfaces/song.interface';
-import { FetchSongs, FetchSongsByLocation } from '../../../../../../store/player/player.actions';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
-import { EducationService } from 'src/app/shared/services/education/education.service';
 import { genres } from 'src/app/static-data/scientific-genres';
-import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { SciencePlayerComponent } from '../../science-player/science-player.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
@@ -30,7 +21,6 @@ import { ESPlaylistSongCardComponent } from '../../es-playlist-song-card/es-play
   imports: [
     CommonModule,
     BreadcrumbsComponent,
-    // MultichanelPlayerComponent,
     SciencePlayerComponent,
     ESPlaylistSongCardComponent,
     TranslateModule,
@@ -56,12 +46,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store,
-    //private educationService: EducationService
   ) {
-    // this.store.dispatch(new FetchSongs(new SongFilter()));
-    // this.subscription = this.songs$.subscribe((data) => {
-    //   if (data) this.songs = data.slice();
-    // });
   }
 
   get totalPages(): number {
@@ -88,7 +73,6 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
       this.songs = scienseSongs;
     });
     this.store.dispatch(new FetchScienceSongs(genreParam as string));
-    //this.store.dispatch(new FetchSongsByLocation('Ромейки'));
     this.route.params.pipe(take(1)).subscribe((params) => {
       const category = scienceCategories.find((category) => category.routerLink === params['category']);
       const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);

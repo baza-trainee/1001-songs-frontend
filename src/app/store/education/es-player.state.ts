@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { FetchScienceSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './es-player.actions';
-import { MapService } from 'src/app/shared/services/map/map.service';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 
