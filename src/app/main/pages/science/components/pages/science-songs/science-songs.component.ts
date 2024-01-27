@@ -45,9 +45,8 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store,
-  ) {
-  }
+    private store: Store
+  ) {}
 
   get totalPages(): number {
     return Math.ceil(this.songs.length / this.itemsPerPage);
@@ -67,6 +66,7 @@ export class ScienceSongsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.route.snapshot) return;
     const genre = this.route.snapshot.params['id'];
     const genreParam = genres.find((g) => g.translateKey === genre)?.value;
     this.songs$.subscribe((scienseSongs) => {
