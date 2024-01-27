@@ -280,237 +280,119 @@
   "science": {
     "stub": "Сторінка 'Освітній розділ' у розробці",
     "title": "Освітній розділ",
-    "categories": {
-      "winters": {
-        "title": "Пісні зимового циклу",
-        "early-traditional": {
-          "title": "Ранньотрадиційний репертуар",
-          "subcategories": {
-            "childrens": "Дитячі  колядки та щедрівки",
-            "praise": "Величальні колядки та щедрівки",
-            "carnival": "Пісні до новорічних карнавальних процесів (Коза, Меланка, Гоготуха, Кінь)",
-            "sowing": "Засівання"
-          }
-        },
-        "late": {
-          "title": "Колядки пізнього походження (християнські)",
-          "subcategories": {
-            "church-canticles": "Різдвяні канти (церковні колядки)",
-            "christmas-psalms": "Різдвяні псальми",
-            "parody-carols": "Пародійні колядки",
-            "nativity-scene": "Вертеп (живий, ляльковий)"
-          }
-        }
-      },
-      "spring": {
-        "title": "Пісні весняного циклу",
-        "early-spring": {
-          "title": "Рання весна. Перехід зима/весна",
-          "subcategories": {
-            "farewell-to-winter": "Проводи Зими",
-            "spring-summons": "Колодка (Колодій)",
-            "shrovetide-songs": "Масляні пісні",
-            "welcoming-spring": "Зустріч весни. Заклички",
-            "spring-rituals": "Креснянка",
-            "porridge": "Каша"
-          }
-        },
-        "spring-equinox": {
-          "title": "Період весняного рівнодення. Великдень",
-          "subcategories": {
-            "easter-morning-songs": "Великодні ранцівки (волочебні)",
-            "spring-dances": "Весняні танки та ігри, гаївки"
-          }
-        },
-        "green-holidays": {
-          "title": "Зелені свята",
-          "subcategories": {
-            "arrow-funeral": "Похорон Стріли",
-            "bush-walking": "Водіння Куста",
-            "mermaid-farewell": "Проводи русалок. Русальні пісні"
-          }
-        }
-      },
-      "summer": {
-        "title": "Пісні літнього циклу",
-        "kupala-songs": {
-          "title": "Купальсько-петрівські пісні",
-          "subcategories": {
-            "kupala": "Купальсько-петрівські пісні"
-          }
-        },
-        "harvest": {
-          "title": "Жнивні пісні",
-          "subcategories": {
-            "harvest": "Жнивні пісні"
-          }
-        },
-        "early-lyrical": {
-          "title": "Приурочені ліричні пісні ранньої стилістики",
-          "subcategories": {
-            "berry-picking": "Ягідні",
-            "harvest-thanks": "Спасовки",
-            "scything-songs": "Строкові",
-            "mower-songs": "Косарські",
-            "summer-feelings": "Літо",
-            "before-harvest": "До полоття"
-          }
-        }
-      },
-      "wedding": {
-        "title": "Весільні пісні",
-        "pre-wedding-rituals": {
-          "title": "Передвесільні обряди і пісні",
-          "subcategories": {
-            "pre-wedding": "Передвесільні обряди і пісні"
-          }
-        },
-        "wedding-ceremony": {
-          "title": "Весілля. Недільні обряди і пісні",
-          "subcategories": {
-            "wedding-ceremony": "Весілля. Недільні обряди і пісні"
-          }
-        },
-        "post-wedding-customs": {
-          "title": "Післявесільні звичаї і пісні",
-          "subcategories": {
-            "post-wedding": "Післявесільні звичаї і пісні"
-          }
-        }
-      },
-      "family": {
-        "title": "Родини і хрестини. Материнський і дитячий фольклор",
-        "musical-decoration": {
-          "title": "Музичне оформлення народин і хрестин",
-          "subcategories": {
-            "birth-christening": "Народини та хрестини"
-          }
-        },
-        "maternal-folk": {
-          "title": "Музичні жанри «материнського фольклору»",
-          "subcategories": {
-            "lullabies": "Колискові пісні",
-            "nursery-rhymes": "Забавлянки",
-            "singing-tales": "Казки зі співом"
-          }
-        },
-        "children's-repertoire": {
-          "title": "Пісні дитячого репертуару",
-          "subcategories": {
-            "carols": "Колядки, щедрівки",
-            "spring-songs": "Веснянки",
-            "occasional-choruses": "Оказіональні приспівки до дощу, сонця, птахів"
-          }
-        }
-      },
-      "ordinary-songs": {
-        "title": "Звичайні пісні",
-        "lyrical": {
-          "title": "Ліричні пісні (за музичними ознаками)",
-          "subcategories": {
-            "early": "Ранні ліричні пісні",
-            "polyphonic": "Багатоголосні пісні з сольним виводом"
-          }
-        },
-        "lyrical-songs-by-theme": {
-          "title": "Ліричні пісні (за тематикою)",
-          "subcategories": {
-            "love": "Про кохання",
-            "family": "Про родинні відносини",
-            "ballads": "Балади",
-            "chumak": "Чумацькі пісні",
-            "barge-hauler": "Бурлацькі пісні",
-            "hirer": "Наймитські пісні",
-            "cossack-historical": "Козацькі пісні, історичні пісні",
-            "recruit-soldier-drayman": "Рекрутські пісні, солдатські пісні, жовнірські пісні",
-            "humorous": "Жартівливі пісні"
-          }
-        },
-        "kolomyiky": {
-          "title": "Коломийки",
-          "subcategories": {
-            "kolomyiky": "Коломийки"
-          }
-        },
-        "dances-choruses": {
-          "title": "Приспівки",
-          "subcategories": {
-            "dances-choruses": "Приспівки до танців"
-          }
-        },
-        "later-era-song-creations": {
-          "title": "Пісенна творчість пізнішого часу",
-          "subcategories": {
-            "folk-romances-cruel-romances": "Народні романси. Жорстокі романси",
-            "shooter-insurgent-songs": "Стрілецькі та повстанські пісні",
-            "psalms": "Псальми",
-            "kychi": "Кічі",
-            "chants": "Частушки"
-          }
-        }
-      },
-      "musical-epos": {
-        "title": "Музичний епос",
-        "byliny": {
-          "title": "Билини",
-          "subcategories": {
-            "kiev-cycle-byliny": "Билини київського циклу"
-          }
-        },
-        "dumas": {
-          "title": "Думи",
-          "subcategories": {
-            "kobzar-artistry": "Кобзарство. Думи"
-          }
-        },
-        "traditional-lyrical": {
-          "title": "Традиційний лірницький репертуар",
-          "subcategories": {
-            "lyre-playing-psalms": "Лірництво. Псальми і канти"
-          }
-        }
-      },
-      "instrumental-music": {
-        "title": "Інструментальна музика. Народні танці",
-        "ukrainian-traditional": {
-          "title": "Українські традиційні музичні інструменти",
-          "subcategories": {
-            "self-playing": "Самозвучні",
-            "wind": "Духові",
-            "string": "Струнні",
-            "percussion": "Ударні"
-          }
-        },
-        "instrumental-ensembles": {
-          "title": "Інструментальні капели. «Троїста музика»",
-          "subcategories": {
-            "instrumental-ensembles": "Інструментальні капели. «Троїста музика»"
-          }
-        },
-        "dance-music": {
-          "title": "Танцювальна музична культура українців",
-          "subcategories": {
-            "ritual-dances": "Питомі танці",
-            "influx-dances": "Напливові танці"
-          }
-        }
-      },
-      "funeral-music": {
-        "title": "Традиційний похорон: музичне оформлення",
-        "lamentation": {
-          "title": "Голосіння",
-          "subcategories": {
-            "lamentation": "Голосіння"
-          }
-        },
-        "memorial-psalms": {
-          "title": "Поминальні псальми",
-          "subcategories": {
-            "memorial-psalms": "Поминальні псальми"
-          }
-        }
-      }
+    "primary-categories": {
+      "winters": "Пісні зимового циклу",
+      "spring": "Пісні весняного циклу",
+      "summer": "Пісні літнього циклу",
+      "wedding": "Весільні пісні",
+      "family": "Родини і хрестини. Материнський і дитячий фольклор",
+      "ordinary-songs": "Звичайні пісні",
+      "musical-epos": "Музичний епос",
+      "instrumental-music": "Інструментальна музика. Народні танці",
+      "funeral-music": "Традиційний похорон: музичне оформлення"
     },
+
+    "sub-categories": {
+      "early-traditional": "Ранньотрадиційний репертуар",
+      "late": "Колядки пізнього походження (християнські)",
+      "early-spring": "Рання весна. Перехід зима/весна",
+      "spring-equinox": "Період весняного рівнодення. Великдень",
+      "green-holidays": "Зелені свята",
+      "kupala-songs": "Купальсько-петрівські пісні",
+      "harvest": "Жнивні пісні",
+      "early-lyrical": "Приурочені ліричні пісні ранньої стилістики",
+      "pre-wedding-rituals": "Передвесільні обряди і пісні",
+      "wedding-ceremony": "Весілля. Недільні обряди і пісні",
+      "post-wedding-customs": "Післявесільні звичаї і пісні",
+      "musical-decoration": "Музичне оформлення народин і хрестин",
+      "maternal-folk": "Музичні жанри «материнського фольклору»",
+      "children's-repertoire": "Пісні дитячого репертуару",
+      "lyrical": "Ліричні пісні (за музичними ознаками)",
+      "lyrical-songs-by-theme": "Ліричні пісні (за тематикою)",
+      "kolomyiky": "Коломийки",
+      "dances-choruses": "Приспівки",
+      "later-era-song-creations": "Пісенна творчість пізнішого часу",
+      "byliny": "Билини",
+      "dumas": "Думи",
+      "traditional-lyrical": "Традиційний лірницький репертуар",
+      "ukrainian-traditional": "Українські традиційні музичні інструменти",
+      "instrumental-ensembles": "Інструментальні капели. «Троїста музика»",
+      "dance-music": "Танцювальна музична культура українців",
+      "funeral-music": "Традиційний похорон: музичне оформлення",
+      "lamentation": "Голосіння",
+      "memorial-psalms": "Поминальні псальми"
+    },
+
+    "genres": {
+      "instrumental-ensembles": "Інструментальні капели. Троїста музика",
+      "polyphonic": "Багатоголосні пісні з сольним виводом",
+      "ballads": "Балади",
+      "kiev-cycle-byliny": "Билини київського циклу",
+      "barge-hauler": "Бурлацькі пісні",
+      "easter-morning-songs": "Великодні ранцівки (волочебні)",
+      "praise": "Величальні колядки та щедрівки",
+      "nativity-scene": "Вертеп (живий, ляльковий)",
+      "spring-songs": "Веснянки",
+      "spring-dances": "Весняні танки та ігри, гаївки",
+      "wedding-ceremony": "Весілля. Недільні обряди і пісні",
+      "bush-walking": "Водіння Куста",
+      "lamentation": "Голосіння",
+      "childrens": "Дитячі  колядки та щедрівки",
+      "before-harvest": "До полоття",
+      "wind": "Духові",
+      "humorous": "Жартівливі пісні",
+      "harvest": "Жнивні пісні",
+      "nursery-rhymes": "Забавлянки",
+      "sowing": "Засівання",
+      "welcoming-spring": "Зустріч весни. Заклички",
+      "singing-tales": "Казки зі співом",
+      "porridge": "Каша",
+      "kobzar-artistry": "Кобзарство. Думи",
+      "cossack-historical": "Козацькі пісні, історичні пісні",
+      "lullabies": "Колискові пісні",
+      "spring-summons": "Колодка (Колодій)",
+      "kolomyiky": "Коломийки",
+      "carols": "Колядки, щедрівки",
+      "mower-songs": "Косарські",
+      "spring-rituals": "Креснянка",
+      "kupala": "Купальсько-петрівські пісні",
+      "kychi": "Кічі",
+      "lyre-playing-psalms": "Лірництво. Псальми і канти",
+      "summer-feelings": "Літо",
+      "shrovetide-songs": "Масляні пісні",
+      "hirer": "Наймитські пісні",
+      "influx-dances": "Напливові танці",
+      "birth-christening": "Народини та хрестини",
+      "folk-romances-cruel-romances": "Народні романси. Жорстокі романси",
+      "occasional-choruses": "Оказіональні приспівки до дощу, сонця, птахів",
+      "parody-carols": "Пародійні колядки",
+      "pre-wedding": "Передвесільні обряди і пісні",
+      "ritual-dances": "Питомі танці",
+      "memorial-psalms": "Поминальні псальми",
+      "arrow-funeral": "Похорон Стріли",
+      "dances-choruses": "Приспівки до танців",
+      "love": "Про кохання",
+      "family": "Про родинні відносини",
+      "farewell-to-winter": "Проводи Зими",
+      "psalms": "Псальми",
+      "post-wedding": "Післявесільні звичаї і пісні",
+      "carnival": "Пісні до новорічних карнавальних процесів (Коза, Меланка, Гоготуха, Кінь)",
+      "early": "Ранні ліричні пісні",
+      "recruit-soldier-drayman": "Рекрутські пісні, солдатські пісні, жовнірські пісні",
+      "mermaid-farewell": "Проводи русалок. Русальні пісні",
+      "church-canticles": "Різдвяні канти (церковні колядки)",
+      "christmas-psalms": "Різдвяні псальми",
+      "self-playing": "Самозвучні",
+      "harvest-thanks": "Спасовки",
+      "scything-songs": "Строкові",
+      "string": "Струнні",
+      "shooter-insurgent-songs": "Стрілецькі та повстанські пісні",
+      "percussion": "Ударні",
+      "chants": "Частушки",
+      "chumak": "Чумацькі пісні",
+      "berry-picking": "Ягідні"
+    },
+
     "cycle": {
       "path": {
         "home": "Головна"

@@ -279,237 +279,118 @@
   "science": {
     "stub": "Page 'Educational Section' under development",
     "title": "Education section",
-    "categories": {
-      "winters": {
-        "title": "Winter Songs",
-        "early-traditional": {
-          "title": "Early Traditional Repertoire",
-          "subcategories": {
-            "childrens": "Children's Carols and Well-wishing Songs",
-            "praise": "Praise Carols and Well-wishing Songs",
-            "carnival": "Songs for New Year Carnival Processions (Goat, Malanka, Gogotukha, Horse)",
-            "sowing": "Sowing"
-          }
-        },
-        "late": {
-          "title": "Late Origin Carols (Christian)",
-          "subcategories": {
-            "church-canticles": "Christmas Canticles (Church Carols)",
-            "christmas-psalms": "Christmas Psalms",
-            "parody-carols": "Parody Carols",
-            "nativity-scene": "Nativity Scene (Live, Puppet)"
-          }
-        }
-      },
-      "spring": {
-        "title": "Spring Songs",
-        "early-spring": {
-          "title": "Early Spring. Transition from Winter to Spring",
-          "subcategories": {
-            "farewell-to-winter": "Farewell to Winter",
-            "spring-summons": "Kolodko (Kolodiy)",
-            "shrovetide-songs": "Maslenitsa Songs",
-            "welcoming-spring": "Welcoming Spring",
-            "spring-rituals": "Kresnyanka",
-            "porridge": "Porridge"
-          }
-        },
-        "spring-equinox": {
-          "title": "Spring Equinox. Easter",
-          "subcategories": {
-            "easter-morning-songs": "Easter Morning Songs (Volochyebni)",
-            "spring-dances": "Spring Dances and Games, Grove Songs"
-          }
-        },
-        "green-holidays": {
-          "title": "Green Holidays",
-          "subcategories": {
-            "arrow-funeral": "Arrow Funeral",
-            "bush-walking": "Bush Walking",
-            "mermaid-farewell": "Mermaid Farewell"
-          }
-        }
-      },
-      "summer": {
-        "title": "Summer Songs",
-        "kupala-songs": {
-          "title": "Kupala-Petriv Songs",
-          "subcategories": {
-            "kupala": "Kupala-Petriv Songs"
-          }
-        },
-        "harvest": {
-          "title": "Harvest Songs",
-          "subcategories": {
-            "harvest": "Harvest Songs"
-          }
-        },
-        "early-lyrical": {
-          "title": "Early Lyrical Songs",
-          "subcategories": {
-            "berry-picking": "Berry Picking",
-            "harvest-thanks": "Harvest Thanks",
-            "scything-songs": "Scything Songs",
-            "mower-songs": "Mower Songs",
-            "summer-feelings": "Summer Feelings",
-            "before-harvest": "Before Harvest"
-          }
-        }
-      },
-      "wedding": {
-        "title": "Wedding Songs",
-        "pre-wedding-rituals": {
-          "title": "Pre-Wedding Rituals and Songs",
-          "subcategories": {
-            "pre-wedding": "Pre-Wedding Rituals and Songs"
-          }
-        },
-        "wedding-ceremony": {
-          "title": "Wedding. Sunday Ceremonies and Songs",
-          "subcategories": {
-            "wedding-ceremony": "Wedding. Sunday Ceremonies and Songs"
-          }
-        },
-        "post-wedding-customs": {
-          "title": "Post-Wedding Customs and Songs",
-          "subcategories": {
-            "post-wedding": "Post-Wedding Customs and Songs"
-          }
-        }
-      },
-      "family": {
-        "title": "Families and Baptisms. Maternal and Children's Folklore",
-        "musical-decoration": {
-          "title": "Musical Decoration of Births and Baptisms",
-          "subcategories": {
-            "birth-christening": "Births and Baptisms"
-          }
-        },
-        "maternal-folk": {
-          "title": "Musical Genres of 'Maternal Folklore'",
-          "subcategories": {
-            "lullabies": "Lullabies",
-            "nursery-rhymes": "Nursery Rhymes",
-            "singing-tales": "Singing Tales"
-          }
-        },
-        "children's-repertoire": {
-          "title": "Children's Repertoire Songs",
-          "subcategories": {
-            "carols": "Carols, Well-wishing Songs",
-            "spring-songs": "Spring Songs",
-            "occasional-choruses": "Occasional Choruses for Rain, Sun, Birds"
-          }
-        }
-      },
-      "ordinary-songs": {
-        "title": "Ordinary Songs",
-        "lyrical": {
-          "title": "Lyrical Songs (By Musical Features)",
-          "subcategories": {
-            "early": "Early Lyrical Songs",
-            "polyphonic": "Polyphonic Songs with Solo Output"
-          }
-        },
-        "lyrical-songs-by-theme": {
-          "title": "Lyrical Songs (By Theme)",
-          "subcategories": {
-            "love": "About Love",
-            "family": "About Family Relations",
-            "ballads": "Ballads",
-            "chumak": "Chumak Songs",
-            "barge-hauler": "Barge Hauler Songs",
-            "hirer": "Hirer Songs",
-            "cossack-historical": "Cossack Songs, Historical Songs",
-            "recruit-soldier-drayman": "Recruit Songs, Soldier Songs, Drayman Songs",
-            "humorous": "Humorous Songs"
-          }
-        },
-        "kolomyiky": {
-          "title": "Kolomyiky",
-          "subcategories": {
-            "kolomyiky": "Kolomyiky"
-          }
-        },
-        "dances-choruses": {
-          "title": "Choruses",
-          "subcategories": {
-            "dances-choruses": "Choruses for Dances"
-          }
-        },
-        "later-era-song-creations": {
-          "title": "Later Era Song Creations",
-          "subcategories": {
-            "folk-romances-cruel-romances": "Folk Romances. Cruel Romances",
-            "shooter-insurgent-songs": "Shooter and Insurgent Songs",
-            "psalms": "Psalms",
-            "kychi": "Kychi",
-            "chants": "Chants"
-          }
-        }
-      },
-      "musical-epos": {
-        "title": "Musical Epic",
-        "byliny": {
-          "title": "Byliny",
-          "subcategories": {
-            "kiev-cycle-byliny": "Byliny of the Kyiv Cycle"
-          }
-        },
-        "dumas": {
-          "title": "Dumas",
-          "subcategories": {
-            "kobzar-artistry": "Kobzar Artistry. Dumas"
-          }
-        },
-        "traditional-lyrical": {
-          "title": "Traditional Lyric Repertoire",
-          "subcategories": {
-            "lyre-playing-psalms": "Lyre Playing. Psalms and Canticles"
-          }
-        }
-      },
-      "instrumental-music": {
-        "title": "Instrumental Music. Folk Dances",
-        "ukrainian-traditional": {
-          "title": "Ukrainian Traditional Musical Instruments",
-          "subcategories": {
-            "self-playing": "Self-Playing",
-            "wind": "Wind Instruments",
-            "string": "String Instruments",
-            "percussion": "Percussion Instruments"
-          }
-        },
-        "instrumental-ensembles": {
-          "title": "Instrumental Ensembles. 'Troista Music'",
-          "subcategories": {
-            "instrumental-ensembles": "Instrumental Ensembles. 'Troista Music'"
-          }
-        },
-        "dance-music": {
-          "title": "Dance Music Culture of Ukrainians",
-          "subcategories": {
-            "ritual-dances": "Ritual Dances",
-            "influx-dances": "Influx Dances"
-          }
-        }
-      },
-      "funeral-music": {
-        "title": "Traditional Funeral: Musical Decoration",
-        "lamentation": {
-          "title": "Lamentation",
-          "subcategories": {
-            "lamentation": "Lamentation"
-          }
-        },
-        "memorial-psalms": {
-          "title": "Memorial Psalms",
-          "subcategories": {
-            "memorial-psalms": "Memorial Psalms"
-          }
-        }
-      }
+    "primary-categories": {
+      "winters": "Winter Songs",
+      "spring": "Spring Songs",
+      "summer": "Summer Songs",
+      "wedding": "Wedding Songs",
+      "family": "Families and Baptisms. Maternal and Children's Folklore",
+      "ordinary-songs": "Ordinary Songs",
+      "musical-epos": "Musical Epic",
+      "instrumental-music": "Instrumental Music. Folk Dances",
+      "funeral-music": "Traditional Funeral: Musical Decoration"
     },
+
+    "sub-categories": {
+      "early-traditional": "Early Traditional Repertoire",
+      "late": "Late Origin Carols (Christian)",
+      "early-spring": "Early Spring. Transition from Winter to Spring",
+      "spring-equinox": "Spring Equinox. Easter",
+      "green-holidays": "Green Holidays",
+      "kupala-songs": "Kupala-Petriv Songs",
+      "harvest": "Harvest Songs",
+      "early-lyrical": "Early Lyrical Songs",
+      "pre-wedding-rituals": "Pre-Wedding Rituals and Songs",
+      "wedding-ceremony": "Wedding. Sunday Ceremonies and Songs",
+      "post-wedding-customs": "Post-Wedding Customs and Songs",
+      "musical-decoration": "Musical Decoration of Births and Baptisms",
+      "maternal-folk": "Musical Genres of 'Maternal Folklore'",
+      "children's-repertoire": "Children's Repertoire Songs",
+      "lyrical": "Lyrical Songs (By Musical Features)",
+      "lyrical-songs-by-theme": "Lyrical Songs (By Theme)",
+      "kolomyiky": "Kolomyiky",
+      "dances-choruses": "Choruses",
+      "later-era-song-creations": "Later Era Song Creations",
+      "byliny": "Byliny",
+      "dumas": "Dumas",
+      "traditional-lyrical": "Traditional Lyric Repertoire",
+      "ukrainian-traditional": "Ukrainian Traditional Musical Instruments",
+      "instrumental-ensembles": "Instrumental Ensembles. 'Troista Music'",
+      "dance-music": "Dance Music Culture of Ukrainians",
+      "lamentation": "Lamentation",
+      "memorial-psalms": "Memorial Psalms"
+    },
+
+    "genres": {
+      "instrumental-ensembles": "Instrumental Ensembles. 'Troista Music'",
+      "polyphonic": "Polyphonic Songs with Solo Output",
+      "ballads": "Ballads",
+      "kiev-cycle-byliny": "Byliny of the Kyiv Cycle",
+      "barge-hauler": "Barge Hauler Songs",
+      "easter-morning-songs": "Easter Morning Songs (Volochyebni)",
+      "praise": "Praise Carols and Well-wishing Songs",
+      "nativity-scene": "Nativity Scene (Live, Puppet)",
+      "spring-songs": "Spring Songs",
+      "spring-dances": "Spring Dances and Games, Grove Songs",
+      "wedding-ceremony": "Wedding. Sunday Ceremonies and Songs",
+      "bush-walking": "Bush Walking",
+      "lamentation": "Lamentation",
+      "childrens": "Children's Carols and Well-wishing Songs",
+      "before-harvest": "Before Harvest",
+      "wind": "Wind Instruments",
+      "humorous": "Humorous Songs",
+      "harvest": "Harvest Songs",
+      "nursery-rhymes": "Nursery Rhymes",
+      "sowing": "Sowing",
+      "welcoming-spring": "Welcoming Spring",
+      "singing-tales": "Singing Tales",
+      "porridge": "Porridge",
+      "kobzar-artistry": "Kobzar Artistry. Dumas",
+      "cossack-historical": "Cossack Songs, Historical Songs",
+      "lullabies": "Lullabies",
+      "spring-summons": "Kolodko (Kolodiy)",
+      "kolomyiky": "Kolomyiky",
+      "carols": "Carols, Well-wishing Songs",
+      "mower-songs": "Mower Songs",
+      "spring-rituals": "Kresnyanka",
+      "kupala": "Kupala-Petriv Songs",
+      "kychi": "Kychi",
+      "lyre-playing-psalms": "Lyre Playing. Psalms and Canticles",
+      "summer-feelings": "Summer Feelings",
+      "shrovetide-songs": "Maslenitsa Songs",
+      "hirer": "Hirer Songs",
+      "influx-dances": "Influx Dances",
+      "birth-christening": "Births and Baptisms",
+      "folk-romances-cruel-romances": "Folk Romances. Cruel Romances",
+      "occasional-choruses": "Occasional Choruses for Rain, Sun, Birds",
+      "parody-carols": "Parody Carols",
+      "pre-wedding": "Pre-Wedding Rituals and Songs",
+      "ritual-dances": "Ritual Dances",
+      "memorial-psalms": "Memorial Psalms",
+      "arrow-funeral": "Arrow Funeral",
+      "dances-choruses": "Choruses for Dances",
+      "love": "About Love",
+      "family": "About Family Relations",
+      "farewell-to-winter": "Farewell to Winter",
+      "psalms": "Psalms",
+      "post-wedding": "Post-Wedding Customs and Songs",
+      "carnival": "Songs for New Year Carnival Processions (Goat, Malanka, Gogotukha, Horse)",
+      "early": "Early Lyrical Songs",
+      "recruit-soldier-drayman": "Recruit Songs, Soldier Songs, Drayman Songs",
+      "mermaid-farewell": "Mermaid Farewell",
+      "church-canticles": "Christmas Canticles (Church Carols)",
+      "christmas-psalms": "Christmas Psalms",
+      "self-playing": "Self-Playing",
+      "harvest-thanks": "Harvest Thanks",
+      "scything-songs": "Scything Songs",
+      "string": "String Instruments",
+      "shooter-insurgent-songs": "Shooter and Insurgent Songs",
+      "percussion": "Percussion Instruments",
+      "chants": "Chants",
+      "chumak": "Chumak Songs",
+      "berry-picking": "Berry Picking"
+    },
+
     "cycle": {
       "path": {
         "home": "Home"
