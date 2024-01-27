@@ -1,9 +1,6 @@
-<div class="event">
+<div class="event" [routerLink]="event.id">
   <app-video-player class="event__player" [srcUrl]="event.mediaSrc"></app-video-player>
-  <div
-    [routerLink]="event.id"
-    style="cursor: pointer"
-  >
+  <div style="cursor: pointer">
     <p class="event__date">{{ event.eventDate }}</p>
     <p class="event__name">{{ event.name | slice: 0 : 22 }}</p>
     <p class="event__description">{{ event.shortDescription | slice: 0 : 30 }} </p>

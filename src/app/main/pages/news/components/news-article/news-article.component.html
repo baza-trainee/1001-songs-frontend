@@ -34,7 +34,7 @@
     </section>
   </div>
 
-  <div *ngIf="article.id">
-    <app-slider [sliderItems]="sliderItems" [title]="sliderTitle" colorScheme="default"></app-slider>
+  <div *ngIf="article.id" class="article__slider">
+    <app-slider [sliderItems]="sliderItems" [title]="sliderTitle"></app-slider>
   </div>
 </ng-container>

@@ -43,7 +43,7 @@ export class NewsArticleComponent implements OnDestroy {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
+  imgSrc = 'https://1001songs.s3.eu-central-1.amazonaws.com/Image.png';
 
   sliderItems: Slide[] = [
     {
