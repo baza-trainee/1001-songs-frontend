@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable, Subject, skip, takeUntil } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
+import { ResetSong, SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -102,6 +102,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   stop() {
     this.multiAudioService.stopAll();
+    this.store.dispatch(new ResetSong())
   }
 
   next() {
