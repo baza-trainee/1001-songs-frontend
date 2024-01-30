@@ -219,7 +219,7 @@
   }
 }
 
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
   .playlist__song__card {
     .song__card__header {
       grid-template-columns: 0.15fr 0.7fr 0.8fr 0.6fr 0.2fr;
@@ -247,7 +247,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .playlist__song__card {
     .song__card__header {
       grid-template-columns: 0.2fr 1fr 0.75fr 0.55fr 0fr;
@@ -279,7 +279,7 @@
   }
 }
 
-@media (width <= 767px) {
+@media (max-width: 767px) {
   .song__card__detail {
     flex-wrap: wrap;
     padding: 24px;
@@ -299,7 +299,7 @@
   }
 }
 
-@media (width <= 630px) {
+@media (max-width: 630px) {
   .playlist__song__card {
     .song__card__header {
       grid-template-columns: 0.4fr 2.8fr 0.5fr;

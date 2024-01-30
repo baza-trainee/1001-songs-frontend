@@ -200,7 +200,7 @@
   }
 }
 
-@media (width <=768px) {
+@media (max-width:768px) {
   .wrapper {
     padding: 0 31px 35px;
 
@@ -286,7 +286,7 @@
   }
 }
 
-@media (width <=421px) {
+@media (max-width:421px) {
   .wrapper {
     padding: 0 16px 35px;
 

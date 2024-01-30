@@ -9,7 +9,7 @@ img {
   width: 1280px;
 }
 
-@media (width <=1600px) {
+@media (max-width:1600px) {
   .container {
     width: 80vw;
   }

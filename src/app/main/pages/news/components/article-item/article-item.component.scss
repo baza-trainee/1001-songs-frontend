@@ -80,7 +80,7 @@
   width: 100%;
 }
 
-@media (width <=1024px) {
+@media (max-width:1024px) {
   .card {
     &__image-item {
       height: 236px;
@@ -98,7 +98,7 @@
   }
 }
 
-@media (width <=889px) {
+@media (max-width:889px) {
   .card {
     &__image-item {
       width: 50%;
@@ -122,7 +122,7 @@
 
 }
 
-@media (width <=465px) {
+@media (max-width:465px) {
   .card {
     margin-bottom: 33px;
 
