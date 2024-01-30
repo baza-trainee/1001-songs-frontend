@@ -106,7 +106,7 @@ img {
 
 }
 
-@media (max-width:1376px) {
+@media (width <=1376px) {
   .container {
     margin: 0 48px;
     max-width: 93%;
@@ -115,7 +115,7 @@ img {
   }
 }
 
-@media (max-width: 790px) {
+@media (width <= 790px) {
   .container {
     padding: 60px 0;
     margin: 0 32px;
@@ -128,7 +128,7 @@ img {
   }
 }
 
-@media (max-width: 500px) {
+@media (width <= 500px) {
   .container {
     padding: 48px 0;
     margin: 0 16px;

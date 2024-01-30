@@ -44,7 +44,7 @@ a {
   padding: 0;
 }
 
-@media (max-width:1376px) {
+@media (width <=1376px) {
   .container {
     max-width: 100%;
   }

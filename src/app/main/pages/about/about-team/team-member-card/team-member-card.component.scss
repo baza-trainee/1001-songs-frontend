@@ -22,7 +22,7 @@
   }
 }
 
-@media (max-width:1024px) {
+@media (width <=1024px) {
   .member {
     &__photo {
       height: 401px;
@@ -30,7 +30,7 @@
   }
 }
 
-@media (max-width:768px) {
+@media (width <=768px) {
   .member {
     &__photo {
       height: 463px;
@@ -38,7 +38,7 @@
   }
 }
 
-@media (max-width:390px) {
+@media (width <=390px) {
   .member {
     &__photo {
       width: 100%;

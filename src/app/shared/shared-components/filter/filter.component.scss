@@ -34,7 +34,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .news {
     &__filter-item {
       margin-right: 49px;
@@ -46,7 +46,7 @@
   }
 }
 
-@media (min-width: 880px) {
+@media (width >= 880px) {
   .news {
     &__filter {
       width: auto;

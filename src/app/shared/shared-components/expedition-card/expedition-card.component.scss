@@ -36,7 +36,7 @@
   }
 }
 
-@media (max-width: 1025px) {
+@media (width <= 1025px) {
   .event {
     width: 293px;
 
@@ -48,7 +48,7 @@
   }
 }
 
-@media (max-width: 769px) {
+@media (width <= 769px) {
   .event {
     width: 340px;
 
@@ -67,7 +67,7 @@
   }
 }
 
-@media (max-width: 391px) {
+@media (width <= 391px) {
   .event {
     height: 338px;
     width: 358px;

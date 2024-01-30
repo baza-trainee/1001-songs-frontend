@@ -187,14 +187,14 @@
   }
 }
 
-@media (max-width:1440px) {
+@media (width <=1440px) {
   .container {
     max-width: 1280px;
     margin: 0 80px;
   }
 }
 
-@media (max-width:1094px) {
+@media (width <=1094px) {
   .song {
     &__player {
       &-desctop {
@@ -208,7 +208,7 @@
   }
 }
 
-@media (max-width:1024px) {
+@media (width <=1024px) {
   .container {
     margin: 0 48px;
   }
@@ -226,7 +226,7 @@
   }
 }
 
-@media (max-width:768px) {
+@media (width <=768px) {
   .container {
     margin: 0 32px;
   }
@@ -264,13 +264,13 @@
   }
 }
 
-@media (max-width:675px) {
+@media (width <=675px) {
   .song {
     margin-top: 96px;
   }
 }
 
-@media (max-width:667px) {
+@media (width <=667px) {
   .song {
     &__player {
       &-btns {
@@ -282,7 +282,7 @@
   }
 }
 
-@media (max-width:465px) {
+@media (width <=465px) {
   .container {
     margin: 0 16px;
   }

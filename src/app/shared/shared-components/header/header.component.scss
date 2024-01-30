@@ -148,7 +148,7 @@ a {
 
 /* Common styles for screens 1023px - 768px wide and smaller */
 
-@media (max-width: 1023px) {
+@media (width <= 1023px) {
   .switcher {
     display: none !important;
   }
@@ -216,7 +216,7 @@ a {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .header {
     .nav {
       padding: 0 44px 0 32px;
@@ -260,7 +260,7 @@ a {
   }
 }
 
-@media (max-width: 421px) {
+@media (width <= 421px) {
   .header {
     .nav {
       padding: 0 16px;

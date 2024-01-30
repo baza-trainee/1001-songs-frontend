@@ -95,7 +95,7 @@
 
 }
 
-@media (max-width: 1439px) {
+@media (width <= 1439px) {
   .player__container {
     justify-content: flex-start;
 
@@ -106,7 +106,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .player__container {
     .player__timeline {
       width: 100%;
@@ -114,7 +114,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .player__container {
     display: block;
 
@@ -129,7 +129,7 @@
   }
 }
 
-@media (max-width: 630px) {
+@media (width <= 630px) {
   .player__container {
     margin: 0 auto;
     padding: 16px;

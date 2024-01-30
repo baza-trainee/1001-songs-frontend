@@ -30,7 +30,7 @@
   }
 }
 
-@media (max-width:465px) {
+@media (width <=465px) {
   .player {
     &__control {
       width: 48px !important;
