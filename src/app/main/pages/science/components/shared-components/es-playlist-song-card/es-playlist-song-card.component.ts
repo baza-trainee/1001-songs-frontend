@@ -24,17 +24,15 @@ import { SelectSong } from 'src/app/store/education/es-player.actions';
   styleUrls: ['./es-playlist-song-card.component.scss']
 })
 export class ESPlaylistSongCardComponent implements OnInit {
-  screenWidth: number = 0;
   @Input() song: ScienceSong = {} as ScienceSong;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
-  isOpened: boolean = false;
 
   constructor(
     private _translate: TranslateService,
     private store: Store
   ) {}
-  
+
   ngOnInit(): void {
     this.hasMedia = this.song.media ? true : false;
   }
@@ -44,21 +42,5 @@ export class ESPlaylistSongCardComponent implements OnInit {
   }
 
   toggleVisibility() {
-    this.isOpened = !this.isOpened;
-    // this.song.isDetailOpen = !this.song.isDetailOpen;
-  }
-
-  handleKeyUpEvent(event: Event) {
-    if (event && event.isTrusted) {
-      this.toggleMobileVisibility();
-    }
-  }
-
-  toggleMobileVisibility() {
-    this.screenWidth = window.innerWidth;
-    if (this.screenWidth < 768) {
-      // this.song.isDetailOpen = !this.song.isDetailOpen;
-    }
-    return;
   }
 }

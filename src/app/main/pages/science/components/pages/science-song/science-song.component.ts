@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {Select, Store} from "@ngxs/store";
-import {PlayerState} from "../../../../../../store/player/player.state";
 import {filter, first, Observable} from "rxjs";
 import {Song} from "../../../../../../shared/interfaces/song.interface";
 import {StreamState} from "../../../../../../shared/interfaces/stream-state.interface";
@@ -16,6 +15,9 @@ import {
 import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
 import {ShareComponent} from "../../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
+import {ScienceSong} from "../../../../../../shared/interfaces/science-song.interface";
+import {ESPlayerState} from "../../../../../../store/education/es-player.state";
+import {VideoPlayerComponent} from "../../../../../../shared/shared-components/video-player/video-player.component";
 
 @Component({
   selector: 'app-science-song',
@@ -27,13 +29,14 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
     MultichanelPlayerComponent,
     StereoPlayerComponent,
     ShareComponent,
-    FormatTextPipe
+    FormatTextPipe,
+    VideoPlayerComponent
   ],
   templateUrl: './science-song.component.html',
   styleUrls: ['./science-song.component.scss']
 })
 export class ScienceSongComponent implements OnInit, OnDestroy {
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<ScienceSong>;
 
   staticVideoImgUrl: string[] = ['./assets/img/player/video_mock.png'];
 
