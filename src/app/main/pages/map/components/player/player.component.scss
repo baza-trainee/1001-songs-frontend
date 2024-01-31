@@ -104,7 +104,7 @@
   }
 }
 
-@media (width <= 1439px) {
+@media (max-width: 1439px) {
   .fix {
     max-width: 1024px;
   }
@@ -133,7 +133,7 @@
   }
 }
 
-@media (width <= 1120px) {
+@media (max-width: 1120px) {
   .fix {
     max-width: calc(100% - 96px);
   }
@@ -143,7 +143,7 @@
   }
 }
 
-@media (width <= 1024px) {
+@media (max-width: 1024px) {
   .songs {
     .container {
       .songs__info {
@@ -187,7 +187,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .fix {
     max-width: calc(100% - 64px);
   }
@@ -228,7 +228,7 @@
   }
 }
 
-@media (width <= 630px) {
+@media (max-width: 630px) {
   .fix {
     max-width: calc(100% - 32px);
   }

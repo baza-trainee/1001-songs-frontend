@@ -10,6 +10,9 @@
         "message": "Class selectors should be written in kebab-case or BEM-style with double underscores."
       }
     ],
-    "color-function-notation": null
+    "color-function-notation": null,
+     "media-feature-name-no-unknown": [true, {
+       "ignoreMediaFeatureNames": ["max-width", "min-width"]
+     }]
    }
  }

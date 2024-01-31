@@ -181,7 +181,7 @@ footer.footer {
   }
 }
 
-@media (width <= 1226px) {
+@media (max-width: 1226px) {
   footer.footer {
     .container {
       max-width: 1024px;
@@ -252,7 +252,7 @@ footer.footer {
   }
 }
 
-@media (width <= 1023px) {
+@media (max-width: 1023px) {
   footer.footer {
     padding: 60px 0 32px;
 
@@ -328,7 +328,7 @@ footer.footer {
   }
 }
 
-@media (width <= 767px) {
+@media (max-width: 767px) {
   footer.footer {
     padding: 48px 0 28px;
 
