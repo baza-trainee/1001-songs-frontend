@@ -11,6 +11,6 @@
       }
     ],
     "color-function-notation": null,
-     "media-feature-range-notation": "always"
+     "media-feature-parentheses-space-inside": "always"
    }
  }
