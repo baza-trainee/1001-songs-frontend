@@ -11,8 +11,6 @@
       }
     ],
     "color-function-notation": null,
-     "media-feature-name-no-unknown": [true, {
-       "ignoreMediaFeatureNames": ["max-width", "min-width"]
-     }]
+     "media-feature-range-notation": "always"
    }
  }
