@@ -3,7 +3,7 @@ import {ScienceCategory} from "../shared/interfaces/science.interface";
 export const scienceCategories: ScienceCategory[] = [
   {
     title: "science.primary-categories.winters",
-    url: 'https://drive.google.com/uc?export=view&id=1T3rYJ7HC8fMMhZgXuEl5N90B68tWdOJa',
+    url: 'https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/winters.jfif',
     routerLink: 'winters',
     genreGroups: [
       {
@@ -28,7 +28,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.spring",
-    url: 'https://drive.google.com/uc?export=download&id=1YBIFwScM4Uy7y_cnX9sbIdV5tviopune',
+    url: 'https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/spring.jfif',
     routerLink: "spring",
     genreGroups: [
       {
@@ -61,7 +61,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.summer",
-    url: 'https://drive.google.com/uc?export=download&id=11e5XIZg594CljkAdS3nt3ZpS-2o4DAqV',
+    url: 'https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/summer.jfif',
     routerLink: "summer",
     genreGroups: [
       {
@@ -91,7 +91,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.wedding",
-    url: "https://drive.google.com/uc?export=download&id=1haZ94ZyWoaj860o-LJl-Ekz3KfSCSoN1",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/wedding.jfif",
     routerLink: "wedding",
     genreGroups: [
       {
@@ -116,7 +116,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.family",
-    url: "https://drive.google.com/uc?export=download&id=1KAaf_N2EIxwRFeK9ejQZjTmn6OJFco0f",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/family.jfif",
     routerLink: "family",
     genreGroups: [
       {
@@ -145,8 +145,8 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.ordinary-songs",
-    url: "https://drive.google.com/uc?export=download&id=1bgZpKDm_9hQQC0UZlmgxp4YQDYehwgee",
-    routerLink: "shrove",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/ordinary.jfif",
+    routerLink: "ordinary",
     genreGroups: [
       {
         title: "science.sub-categories.lyrical",
@@ -195,7 +195,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.musical-epos",
-    url: "https://drive.google.com/uc?export=download&id=1vW77qHA6dTv57Xr7Uq237G9snXt6_A9q",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/epos.jfif",
     routerLink: "epos",
     genreGroups: [
       {
@@ -220,7 +220,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.instrumental-music",
-    url: "https://drive.google.com/uc?export=download&id=1IQVLLGc0a_LsaBIESyQM1yGPooQUVolx",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/instumental.jfif",
     routerLink: "instrumental",
     genreGroups: [
       {
@@ -247,7 +247,7 @@ export const scienceCategories: ScienceCategory[] = [
   },
   {
     title: "science.primary-categories.funeral-music",
-    url: "https://drive.google.com/uc?export=download&id=1rRLcjLb1YrGYWxktc8L1gn1cYKsEL0Do",
+    url: "https://1001-fe-data-storage.s3.eu-north-1.amazonaws.com/science-categories-images/science-categories-images/funeral.jpg",
     routerLink: "funeral",
     genreGroups: [
       {
