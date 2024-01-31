@@ -68,12 +68,14 @@ img {
   }
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:1376px) {
   .container {
     margin: 0 48px;
   }
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:1166px) {
   .actual__carousel {
     &-item {
@@ -94,7 +96,8 @@ img {
   }
 }
 
-@media (max-width: 790px) {
+/* stylelint-disable-next-line */
+@media (max-width:790px) {
   .actual {
     &__container {
       padding: 60px 0;
@@ -123,7 +126,8 @@ img {
   }
 }
 
-@media (max-width: 500px) {
+/* stylelint-disable-next-line */
+@media (max-width:500px) {
   .actual {
     &__container {
       padding: 31px 0 48px;

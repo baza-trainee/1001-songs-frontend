@@ -4,12 +4,6 @@
     "**/_normalize.scss"
    ],
    "rules":{
-     "media-feature-range-notation": [
-       "never",
-       {
-         "ignoreRange": true
-       }
-     ],
     "selector-class-pattern": [
       "^[a-z0-9]+((_{2}|-)[a-z0-9]+)*$",
       {

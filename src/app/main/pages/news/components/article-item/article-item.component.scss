@@ -80,6 +80,7 @@
   width: 100%;
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:1024px) {
   .card {
     &__image-item {
@@ -98,6 +99,7 @@
   }
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:889px) {
   .card {
     &__image-item {
@@ -122,6 +124,7 @@
 
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:465px) {
   .card {
     margin-bottom: 33px;

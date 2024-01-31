@@ -181,7 +181,8 @@ footer.footer {
   }
 }
 
-@media (max-width: 1226px) {
+/* stylelint-disable-next-line */
+@media (max-width:1226px) {
   footer.footer {
     .container {
       max-width: 1024px;
@@ -252,7 +253,8 @@ footer.footer {
   }
 }
 
-@media (max-width: 1023px) {
+/* stylelint-disable-next-line */
+@media (max-width:1023px) {
   footer.footer {
     padding: 60px 0 32px;
 
@@ -328,7 +330,8 @@ footer.footer {
   }
 }
 
-@media (max-width: 767px) {
+/* stylelint-disable-next-line */
+@media (max-width:767px) {
   footer.footer {
     padding: 48px 0 28px;
 

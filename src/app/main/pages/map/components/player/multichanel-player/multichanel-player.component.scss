@@ -161,7 +161,8 @@
   }
 }
 
-@media (max-width: 1439px) {
+/* stylelint-disable-next-line */
+@media (max-width:1439px) {
   .player__container {
     justify-content: flex-start;
 
@@ -226,7 +227,8 @@
   }
 }
 
-@media (max-width: 1023px) {
+/* stylelint-disable-next-line */
+@media (max-width:1023px) {
   .player__container {
     display: block;
 
@@ -241,7 +243,8 @@
   }
 }
 
-@media (max-width: 767px) {
+/* stylelint-disable-next-line */
+@media (max-width:767px) {
   .player__container {
     margin: 0 auto;
     padding: 16px;

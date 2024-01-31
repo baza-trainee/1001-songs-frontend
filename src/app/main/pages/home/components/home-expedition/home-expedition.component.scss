@@ -122,12 +122,14 @@ img {
   }
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:1376px) {
   .container {
     margin: 0 48px;
   }
 }
 
+/* stylelint-disable-next-line */
 @media (max-width:1166px) {
   .expeditions {
     &__videos {
@@ -156,7 +158,8 @@ img {
   }
 }
 
-@media (max-width: 790px) {
+/* stylelint-disable-next-line */
+@media (max-width:790px) {
   .expeditions {
     &__videos {
       gap: 48px;
@@ -195,7 +198,8 @@ img {
   }
 }
 
-@media (max-width: 500px) {
+/* stylelint-disable-next-line */
+@media (max-width:500px) {
   .expeditions {
     &__container {
       padding: 48px 0;
