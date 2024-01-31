@@ -15,9 +15,9 @@
           {{ 'map.player.player-title' | translate }} <b>{{ song.title }}</b>
         </div>
 
-        <app-stereo-player #stereoPlayer></app-stereo-player>
+        <app-stereo-player #stereoPlayer [stereoOnly]="stereoOnly"></app-stereo-player>
 
-        <app-multichanel-player #multiChanelPlayer></app-multichanel-player>
+        <app-multichanel-player #multiChanelPlayer [stereoOnly]="stereoOnly"></app-multichanel-player>
       </div>
     </div>
 

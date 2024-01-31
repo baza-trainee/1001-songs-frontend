@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Input,
   OnDestroy,
   ViewChild
 } from '@angular/core';
@@ -39,6 +40,7 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
 })
 export class PlayerComponent implements AfterViewInit, OnDestroy{
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
+  @Input() stereoOnly: boolean = false;
   distanceToTop!: number;
   heightHeader!: number;
   screenWidth: number = 0;

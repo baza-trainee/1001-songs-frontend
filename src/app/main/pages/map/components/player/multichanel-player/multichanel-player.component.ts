@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
+  @Input() stereoOnly: boolean = false;
 
   isPreloader = false;
 
@@ -40,7 +41,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
-      if (song.media && this.multiAudioService.getChannles(song).length > 1) {
+      if (song.media && this.multiAudioService.getChannles(song).length > 1 && !this.stereoOnly) {
         this.openFile(song);
         this.isVisible = true;
       } else {

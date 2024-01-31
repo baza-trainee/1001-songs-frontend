@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
@@ -19,6 +19,7 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
+  @Input() stereoOnly: boolean = false;
   showStereoPlayer: boolean = true;
 
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
@@ -38,7 +39,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.stop();
       const channels = this.multiAudioService.getChannles(song);
-      if (song.media && channels.length > 1) {
+      if (song.media && channels.length > 1 && !this.stereoOnly) {
         this.showStereoPlayer = false;
       } else {
         this.showStereoPlayer = true;
