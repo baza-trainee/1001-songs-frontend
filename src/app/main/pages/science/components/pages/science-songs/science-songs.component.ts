@@ -9,11 +9,11 @@ import { scienceCategories } from '../../../../../../static-data/categoriesList'
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
 import { genres } from 'src/app/static-data/scientific-genres';
-import { SciencePlayerComponent } from '../../science-player/science-player.component';
+import { SciencePlayerComponent } from '../../shared-components/science-player/science-player.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
 import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
-import { ESPlaylistSongCardComponent } from '../../es-playlist-song-card/es-playlist-song-card.component';
+import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 
 @Component({
   selector: 'app-science-songs',

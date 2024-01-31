@@ -108,14 +108,14 @@
 }
 
 
-@media (width < 525px) {
+@media (max-width: 525px) {
   .dialog__image {
     max-width: 100%;
   }
 }
 
 
-@media (width < 418px) {
+@media (max-width: 418px) {
   ::ng-deep {
     #cdk-overlay-0,
     .cdk-overlay-pane{

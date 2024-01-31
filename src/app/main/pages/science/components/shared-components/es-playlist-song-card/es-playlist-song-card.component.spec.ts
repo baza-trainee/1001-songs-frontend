@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
+import {ActivatedRoute} from "@angular/router";
 
 describe('PlaylistSongCardComponent', () => {
   let component: ESPlaylistSongCardComponent;
@@ -12,7 +13,10 @@ describe('PlaylistSongCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ESPlaylistSongCardComponent, TranslateModule.forRoot(), NgxsModule.forRoot([PlayerState]), HttpClientModule]
+      imports: [ESPlaylistSongCardComponent, TranslateModule.forRoot(), NgxsModule.forRoot([PlayerState]), HttpClientModule],
+      providers: [{
+        provide: ActivatedRoute, useValue: {}
+      }]
     });
     fixture = TestBed.createComponent(ESPlaylistSongCardComponent);
     component = fixture.componentInstance;
