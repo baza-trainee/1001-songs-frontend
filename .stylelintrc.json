@@ -11,6 +11,9 @@
       }
     ],
     "color-function-notation": null,
-     "media-feature-parentheses-space-inside": "always"
+     "declaration-property-value-disallowed-list": {
+       "min-width": ["/<=/"],
+       "max-width": ["/<=/"]
+     }
    }
  }
