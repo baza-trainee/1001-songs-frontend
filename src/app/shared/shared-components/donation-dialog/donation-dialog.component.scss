@@ -124,13 +124,13 @@ img {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width:  768px) {
   ::ng-deep .custom-modalbox {
     width: 511px;
   }
 }
 
-@media (max-width: 391px) {
+@media (max-width:  391px) {
   ::ng-deep .custom-modalbox {
     min-width: 98vw;
     overflow: hidden;

@@ -123,14 +123,14 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1376px) {
+@media (max-width: 1376px) {
   .container {
     margin: 0 48px;
   }
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1166px) {
+@media (max-width: 1166px) {
   .expeditions {
     &__videos {
       flex-wrap: wrap;
@@ -159,7 +159,7 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:790px) {
+@media (max-width: 790px) {
   .expeditions {
     &__videos {
       gap: 48px;
@@ -199,7 +199,7 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:500px) {
+@media (max-width: 500px) {
   .expeditions {
     &__container {
       padding: 48px 0;

@@ -23,7 +23,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .member {
     &__photo {
       height: 401px;
@@ -32,7 +32,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .member {
     &__photo {
       height: 463px;
@@ -41,7 +41,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:390px) {
+@media (max-width: 390px) {
   .member {
     &__photo {
       width: 100%;

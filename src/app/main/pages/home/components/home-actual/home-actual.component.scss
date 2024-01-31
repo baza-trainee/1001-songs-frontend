@@ -69,14 +69,14 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1376px) {
+@media (max-width: 1376px) {
   .container {
     margin: 0 48px;
   }
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1166px) {
+@media (max-width: 1166px) {
   .actual__carousel {
     &-item {
       width: 33%;
@@ -97,7 +97,7 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:790px) {
+@media (max-width: 790px) {
   .actual {
     &__container {
       padding: 60px 0;
@@ -127,7 +127,7 @@ img {
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:500px) {
+@media (max-width: 500px) {
   .actual {
     &__container {
       padding: 31px 0 48px;

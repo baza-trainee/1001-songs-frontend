@@ -101,7 +101,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .container {
     .slider {
       gap: 32px;
@@ -110,7 +110,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:390px) {
+@media (max-width: 390px) {
   .container {
     .slider {
       &__title {
@@ -121,7 +121,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1440px) {
+@media (max-width: 1440px) {
   .container {
     margin-left: 80px;
     padding-right: 80px;
@@ -129,7 +129,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .container {
     margin-left: 48px;
     padding-right: 48px;
@@ -137,7 +137,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .container {
     margin-left: 32px;
     padding-right: 32px;
@@ -145,7 +145,7 @@
 }
 
 /* stylelint-disable-next-line */
-@media (max-width:465px) {
+@media (max-width: 465px) {
   .container {
     margin-left: 16px;
     padding: 48px 16px 48px 0;
