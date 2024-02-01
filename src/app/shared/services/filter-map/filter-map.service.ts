@@ -58,7 +58,7 @@ export class FilterMapService {
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
 
-    console.log(fullRequest);
+    // console.log(fullRequest);
 
     return this.http.get(fullRequest);
   }

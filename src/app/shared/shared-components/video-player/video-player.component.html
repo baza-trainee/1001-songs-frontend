@@ -1,7 +1,7 @@
 <div class="player">
   <img *ngIf="isPreviewDisplayed" [src]="previewUrl | sanitize" alt="Expedition image" />
   <button class="player__control"
-          *ngIf="isPreviewDisplayed"
+          *ngIf="isPreviewDisplayed && widthIcon"
           [style.width.px]="widthIcon"
           [style.height.px]="widthIcon"
           (click)="playVideo()"

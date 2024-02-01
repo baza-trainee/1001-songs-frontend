@@ -43,6 +43,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   @Input() stereoOnly: boolean = false;
   distanceToTop!: number;
   heightHeader!: number;
+  isPlay!: boolean;
   screenWidth: number = 0;
   serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
@@ -81,8 +82,13 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   onScroll() {
     this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader
   }
+
   get totalPages(): number {
     return Math.ceil(this.songs.length / this.itemsPerPage);
+  }
+
+  handleIsPlayChange(isPlay: boolean) {
+    this.isPlay = isPlay;
   }
 
   get itemsOnCurrentPage(): Song[] {
@@ -98,12 +104,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
     this.currentPage = page;
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.fixedContainer) {
@@ -111,5 +111,11 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
         this.onResize();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

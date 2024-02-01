@@ -44,7 +44,7 @@ export class PlayerState {
 
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: object) => {
-        console.log('SONGS : Main response', response);
+        // console.log('SONGS : Main response', response);
         const modifiedResponse = Object.values(response);
         const newSongs: Song[] = modifiedResponse[0].list_songs;
         const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
@@ -88,10 +88,9 @@ export class PlayerState {
 
   @Action(SelectSong)
   selectSong(ctx: StateContext<PlayerStateModel>, action: SelectSong) {
-    console.log('common song player select');
     const state = ctx.getState();
     const selectedSong = state.songsList.find((song: Song) => song.id === action.selectedSongId);
-    console.log(selectedSong);
+
     if (!selectedSong) {
       return;
     }

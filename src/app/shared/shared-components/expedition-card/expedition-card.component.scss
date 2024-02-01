@@ -6,6 +6,17 @@
   flex-direction: column;
   width: 302px;
   cursor: pointer;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    scale: 1.01;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
   &__player {
     border-radius: 8px;
@@ -20,7 +31,7 @@
   }
 
   &__name {
-    @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $primary-fonts);
+    @include h6-desktop($font-size: 24px, $line-height: 30px, $font-family: $primary-fonts);
   }
 
   &__description {
@@ -31,12 +42,10 @@
 
   &__location {
     @include caption-desktop;
-
-    margin-top: 8px;
   }
 }
 
-@media (width <= 1025px) {
+@media (max-width: 1025px) {
   .event {
     width: 293px;
 
@@ -48,7 +57,7 @@
   }
 }
 
-@media (width <= 769px) {
+@media (max-width: 769px) {
   .event {
     width: 340px;
 
@@ -67,7 +76,7 @@
   }
 }
 
-@media (width <= 391px) {
+@media (max-width: 391px) {
   .event {
     height: 338px;
     width: 358px;

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
@@ -20,6 +20,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
   @Input() stereoOnly: boolean = false;
+  @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
   showStereoPlayer: boolean = true;
 
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
@@ -76,10 +77,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   pause() {
     this.audioService.pause();
+    this.isPlay.emit(false);
   }
 
   play() {
     this.audioService.play();
+    this.isPlay.emit(true);
   }
 
   stop() {
@@ -88,10 +91,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   next() {
     this.store.dispatch(new SelectNext());
+    this.isPlay.emit(true);
   }
 
   previous() {
     this.store.dispatch(new SelectPrev());
+    this.isPlay.emit(true);
   }
 
   backward(currentTime: number | undefined) {

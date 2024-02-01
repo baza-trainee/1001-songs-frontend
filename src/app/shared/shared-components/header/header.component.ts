@@ -33,6 +33,7 @@ export class HeaderComponent {
   public changeLang: boolean = true;
   public menuSwitcherOff: boolean = true;
   public navLinks = navLinksHeader;
+  public isShowTextSearch = false;
 
   public lang = 'Eng';
 
@@ -65,8 +66,15 @@ export class HeaderComponent {
     this._translate.use(this.changeLang ? 'ua' : 'en');
   }
 
+  openSearch() {
+    this.isShowTextSearch = true;
+    setTimeout(() => {
+      this.isShowTextSearch = false;
+    }, 3000);
+  }
+
   openDonationDialog() {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
   }
-  
+
 }

@@ -35,7 +35,7 @@
       <div class="popup-map" [ngClass]="{ active: selectedMarker }">
         <button class="popup-map__close" (click)="onCloseInfoWindow()">+</button>
         <div class="popup-map__container">
-          <!-- <img class="popup-map__img" [src]="selectedMarker.image" alt="Фото" /> -->
+           <img class="popup-map__img" [src]="imgSrs[randomIndex]" alt="Фото" />
           <div class="popup-map__content">
             <h2 class="popup-map__title">{{ selectedMarker.location__city }}, {{ selectedMarker.location__city }}</h2>
             <p class="popup-map__count">

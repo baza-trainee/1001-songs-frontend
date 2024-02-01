@@ -9,6 +9,12 @@ $radius: 15px;
   position: relative;
   border-radius: $radius;
   overflow: hidden;
+  cursor: pointer;
+
+  &:hover span {
+    transform: rotate(-45deg);
+  }
+
 
   .link {
     @include link-desktop($font-size: 24px);
@@ -30,6 +36,7 @@ $radius: 15px;
     span {
       width: 20px;
       height: 24px;
+      transition: all .3s ease-in-out;
     }
   }
 
@@ -40,7 +47,7 @@ $radius: 15px;
   }
 }
 
-@media (width <= 1025px) {
+@media (max-width: 1025px) {
   .card {
     height: 200px;
 
@@ -51,7 +58,7 @@ $radius: 15px;
 }
 
 
-@media (width <= 769px) {
+@media (max-width: 769px) {
   .card {
     height: 200px;
 
@@ -61,7 +68,7 @@ $radius: 15px;
   }
 }
 
-@media (width <= 391px) {
+@media (max-width: 391px) {
   .card {
     height: 200px;
 

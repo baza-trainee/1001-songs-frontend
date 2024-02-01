@@ -9,6 +9,7 @@ export class SongFilter {
 
 export interface Marker {
   id: string;
+  img: string;
   title: string;
   genre_cycle: string;
   found: string;

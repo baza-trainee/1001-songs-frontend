@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { SciencePlayerComponent } from '../science-player/science-player.component';
 import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 import { SelectSong } from 'src/app/store/education/es-player.actions';
+import {AudioService} from "../../../../../../shared/services/audio/audio.service";
 
 @Component({
   selector: 'app-es-playlist-song-card',
@@ -25,12 +26,15 @@ import { SelectSong } from 'src/app/store/education/es-player.actions';
 })
 export class ESPlaylistSongCardComponent implements OnInit {
   @Input() song: ScienceSong = {} as ScienceSong;
+  @Input() isSelect! : boolean;
+  @Input() isPlay!: boolean;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
 
   constructor(
     private _translate: TranslateService,
-    private store: Store
+    private store: Store,
+    private audioService: AudioService
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +42,12 @@ export class ESPlaylistSongCardComponent implements OnInit {
   }
 
   openCurrentFile() {
-    this.store.dispatch(new SelectSong(this.song.id));
-  }
-
-  toggleVisibility() {
+    if (!this.isSelect) {
+      this.store.dispatch(new SelectSong(this.song.id));
+      this.isPlay = true;
+    } else {
+      this.isPlay ? this.audioService.pause() : this.audioService.play();
+      this.isPlay = !this.isPlay;
+    }
   }
 }

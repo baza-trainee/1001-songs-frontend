@@ -17,13 +17,13 @@
   }
 }
 
-@media (width <=768px) {
+@media (max-width: 768px) {
   .map {
     margin-top: 96px;
   }
 }
 
-@media (width <=421px) {
+@media (max-width: 421px) {
   .map {
     margin-top: 80px;
   }
