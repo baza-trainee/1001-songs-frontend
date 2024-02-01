@@ -94,6 +94,7 @@
     }
   },
   "header": {
+    "search-invalid": "Функція тимчасово недоступна",
     "nav-menu": {
       "about": "Про проєкт",
       "map": "Мапа",
@@ -121,7 +122,7 @@
       "reporting": "Звітність",
       "policy": "Політика приватності",
       "terms": "Правила та умови використання",
-      "copyright": "Розробка BazaTraineeUkraine 2023. Всі права захищені"
+      "copyright": "Розробка BazaTraineeUkraine 2024. Всі права захищені"
     }
   },
   "home": {

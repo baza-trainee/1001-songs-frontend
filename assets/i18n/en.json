@@ -93,6 +93,7 @@
     }
   },
   "header": {
+    "search-invalid": "The feature is temporarily unavailable",
     "nav-menu": {
       "about": "About",
       "map": "Map",
@@ -120,7 +121,7 @@
       "reporting": "Reporting",
       "policy": "Privacy policy",
       "terms": "Terms and conditions of use",
-      "copyright": "Developed by BazaTraineeUkraine 2023. All rights reserved"
+      "copyright": "Developed by BazaTraineeUkraine 2024. All rights reserved"
     }
   },
   "home": {
