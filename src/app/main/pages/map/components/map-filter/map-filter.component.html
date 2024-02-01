@@ -49,6 +49,7 @@
               [control]="form.controls.country"
               [options]="options.country"
               [name]="filterCategory.country"
+              (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
 
@@ -56,6 +57,7 @@
               [control]="form.controls.region"
               [options]="options.region"
               [name]="filterCategory.region"
+              (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
 
@@ -63,6 +65,7 @@
               [control]="form.controls.city"
               [options]="options.city"
               [name]="filterCategory.city"
+              (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
 
@@ -75,6 +78,7 @@
               [control]="form.controls.genre"
               [options]="options.genre"
               [name]="filterCategory.genre"
+              (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
 
@@ -82,6 +86,7 @@
               [control]="form.controls.found"
               [options]="options.found"
               [name]="filterCategory.found"
+              (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -30,7 +30,12 @@ export class MultiselectComponent {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) options!: string[];
   @Input({ required: true }) name!: string;
+  @Output() selectionOnBlur = new EventEmitter<string>()
   constructor(private _translate: TranslateService) {}
+
+  sendBlur(){
+    this.selectionOnBlur.emit()
+  }
 
   onSelectionChange(event: MatSelectChange) {
     this.control.setValue(event.value);
@@ -40,10 +45,12 @@ export class MultiselectComponent {
     const value = this.control.value as string[];
     this.removeFirst(value, option);
     this.control.setValue(value);
+    this.selectionOnBlur.emit()
   }
 
   clearSelections(): void {
     this.control.setValue([]);
+    this.selectionOnBlur.emit()
   }
 
   private removeFirst<T>(array: T[], toRemove: T): void {

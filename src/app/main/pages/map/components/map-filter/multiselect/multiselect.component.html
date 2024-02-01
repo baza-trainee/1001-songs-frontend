@@ -4,7 +4,8 @@
     placeholder="{{ name | translate }}"
     multiple
     [formControl]="control"
-    (selectionChange)="onSelectionChange($event)">
+    (selectionChange)="onSelectionChange($event)"
+    (blur)="sendBlur()">
     <mat-select-trigger>
       <mat-chip-listbox>
         <mat-chip
