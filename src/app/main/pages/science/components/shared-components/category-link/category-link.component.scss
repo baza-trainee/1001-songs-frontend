@@ -9,6 +9,12 @@ $radius: 15px;
   position: relative;
   border-radius: $radius;
   overflow: hidden;
+  cursor: pointer;
+
+  &:hover span {
+    transform: rotate(-45deg);
+  }
+
 
   .link {
     @include link-desktop($font-size: 24px);
@@ -30,6 +36,7 @@ $radius: 15px;
     span {
       width: 20px;
       height: 24px;
+      transition: all .3s ease-in-out;
     }
   }
 

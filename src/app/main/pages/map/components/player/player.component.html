@@ -15,7 +15,11 @@
           {{ 'map.player.player-title' | translate }} <b>{{ song.title }}</b>
         </div>
 
-        <app-stereo-player #stereoPlayer [stereoOnly]="stereoOnly"></app-stereo-player>
+        <app-stereo-player
+          #stereoPlayer
+          [stereoOnly]="stereoOnly"
+          (isPlay)="handleIsPlayChange($event)"
+        ></app-stereo-player>
 
         <app-multichanel-player #multiChanelPlayer [stereoOnly]="stereoOnly"></app-multichanel-player>
       </div>
@@ -32,9 +36,13 @@
         <div></div>
         <div class="titles title__listen">{{ 'map.player.songs-list.titles.listen' | translate }}</div>
       </div>
-      <div>
+      <div *ngIf="selectedSong$ | async as selectSong">
         <div *ngFor="let song of itemsOnCurrentPage">
-          <app-playlist-song-card [song]="song"></app-playlist-song-card>
+          <app-playlist-song-card
+            [song]="song"
+            [isSelectSong]="selectSong.id === song.id"
+            [isPlay]="isPlay"
+          ></app-playlist-song-card>
         </div>
       </div>
     </div>

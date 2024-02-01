@@ -79,14 +79,25 @@ a {
 
       &__search {
         height: 24px;
+        position: relative;
 
         &-img {
           width: 24px;
           height: 24px;
+          opacity: .4;
 
           &:hover {
             cursor: pointer;
           }
+        }
+
+        &-invalid {
+          color: var(--error-red);
+          position: absolute;
+          left: 50%;
+          text-wrap: nowrap;
+          top: calc(100% + 15px);
+          transform: translateX(-50%);
         }
       }
 

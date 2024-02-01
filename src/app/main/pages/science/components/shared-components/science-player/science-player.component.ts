@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
@@ -22,6 +22,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
   showStereoPlayer: boolean = true;
 
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<ScienceSong>;
+  @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
   state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;
@@ -69,22 +70,27 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
 
   pause() {
     this.audioService.pause();
+    this.isPlay.emit(false);
   }
 
   play() {
     this.audioService.play();
+    this.isPlay.emit(true);
   }
 
   stop() {
     this.audioService.stop();
+
   }
 
   next() {
     this.store.dispatch(new SelectNext());
+    this.isPlay.emit(true);
   }
 
   previous() {
     this.store.dispatch(new SelectPrev());
+    this.isPlay.emit(true);
   }
 
   backward(currentTime: number | undefined) {

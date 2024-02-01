@@ -9,6 +9,7 @@ import { Select } from '@ngxs/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
+import {srcPopapImgInMap} from "../../../static-data/img-popap-map";
 
 @Component({
   selector: 'app-interactive-map',
@@ -27,10 +28,11 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     }
   ];
   @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
-
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
-
+  imgSrs: string[] = srcPopapImgInMap;
+  destroy$: Subject<void> = new Subject<void>();
+  public randomIndex: number = 0;
   private currentInfoWindow: MapInfoWindow | null = null;
   selectedMarker: MarkerOfLocation | null = null;
   showInfoWindow: boolean = false;
@@ -39,7 +41,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     zoom: 6,
     options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
   };
-  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private _translate: TranslateService,
@@ -51,6 +52,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.randomIndex = this.getRandomIndex();
     this._translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((translateState: LangChangeEvent) => {
       const currentLang = translateState.lang;
       this.songs$.pipe(takeUntil(this.destroy$)).subscribe((songs) => {
@@ -87,7 +89,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     }
     infoWindow.open(marker);
     this.currentInfoWindow = infoWindow;
-
     this.onMarkerClick(elem);
   }
 
@@ -99,6 +100,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
+    if (this.selectedMarker?.location__city !== marker.location__city) this.randomIndex = this.getRandomIndex();
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
@@ -115,5 +117,8 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
           ? './assets/img/home/icons/place-hover.svg'
           : './assets/img/home/icons/place.svg'
     };
+  }
+  getRandomIndex(): number {
+    return Math.floor(Math.random() * this.imgSrs.length);
   }
 }

@@ -82,7 +82,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   filterSongs() {
-    console.log(this.form.value);
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 

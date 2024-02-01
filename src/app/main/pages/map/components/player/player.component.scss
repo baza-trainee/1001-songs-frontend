@@ -248,6 +248,14 @@
         display: block;
         margin: 0 auto;
 
+        &.fix {
+          padding-top: 0;
+
+          .songs__counter {
+            display: none;
+          }
+        }
+        /* stylelint-disable-next-line */
         .songs__counter {
           margin-right: 0;
           width: 100%;

@@ -6,6 +6,17 @@
   flex-direction: column;
   width: 302px;
   cursor: pointer;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    scale: 1.01;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
   &__player {
     border-radius: 8px;
@@ -20,7 +31,7 @@
   }
 
   &__name {
-    @include h6-desktop($font-size: 24px, $line-height: 50px, $font-family: $primary-fonts);
+    @include h6-desktop($font-size: 24px, $line-height: 30px, $font-family: $primary-fonts);
   }
 
   &__description {
@@ -31,8 +42,6 @@
 
   &__location {
     @include caption-desktop;
-
-    margin-top: 8px;
   }
 }
 

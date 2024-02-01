@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StereoPlayerComponent } from '../stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
@@ -31,12 +31,13 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 export class PlaylistSongCardComponent implements OnInit {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
+  @Input() isSelectSong! : boolean;
   @Input() isShowDetail: boolean = true;
+  @Input() isPlay!: boolean;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
-  isPlay: boolean = false;
-  isSelectSong: boolean = false;
+  // isSelectSong: boolean = false;
 
   constructor(
     private _translate: TranslateService,
@@ -52,7 +53,6 @@ export class PlaylistSongCardComponent implements OnInit {
     if (!this.isSelectSong) {
       this.store.dispatch(new SelectSong(this.song.id));
       this.isPlay = true;
-      this.isSelectSong = true;
     } else {
       this.isPlay ? this.audioService.pause() : this.audioService.play();
       this.isPlay = !this.isPlay;

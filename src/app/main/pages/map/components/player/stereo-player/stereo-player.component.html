@@ -22,7 +22,7 @@
         </svg>
       </button>
       <button class="btn__player pause" (click)="pause()" *ngIf="state.playing">
-        <svg width="32" height="31" viewBox="0 0 32 31">
+        <svg width="31" height="31" viewBox="0 0 32 31">
           <use xlink:href="./assets/sprites.svg#pauseDesktopBtn"></use>
         </svg>
       </button>
@@ -44,12 +44,12 @@
         </svg>
       </button>
       <button class="btn__player__mobile play" (click)="play()" [disabled]="state.error" *ngIf="!state.playing">
-        <svg width="74" height="74" viewBox="0 0 74 74">
+        <svg width="55" height="55" viewBox="0 0 74 74">
           <use xlink:href="./assets/sprites.svg#playMobileBtn"></use>
         </svg>
       </button>
       <button class="btn__player__mobile pause" (click)="pause()" *ngIf="state.playing">
-        <svg width="74" height="74" viewBox="0 0 74 74">
+        <svg width="55" height="55" viewBox="0 0 74 74">
           <use xlink:href="./assets/sprites.svg#pauseMobileBtn"></use>
         </svg>
       </button>
