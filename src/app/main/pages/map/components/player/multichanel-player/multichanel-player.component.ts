@@ -66,7 +66,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   synchronizeTracs() {
     setTimeout(() => {
-      this.multiAudioService.seekTo(Number(0));
+      // this.multiAudioService.seekTo(Number(0));
+      this.pause();
     }, 500);
   }
 

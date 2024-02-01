@@ -59,32 +59,25 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.form.valueChanges.pipe(
-      takeUntil(this.destroy$),
-      startWith(this.form.getRawValue()),
-      pairwise(),
-      map(([previous, current]) => {
-        //  console.log('previous ::: ', previous);
-        //  console.log('current ::: ', current);
-        const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
-       // console.log(changedControl)
-         return changedControl as keyof SongFilter;
-      }),
-      
-      filter((key) => key !== null && key !== undefined),
-      //filter((key) => key === 'country')
-    )
-    .subscribe((value: keyof SongFilter) => {
-   // console.log("filter is updated ");
-    // this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
-    // this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
-    // this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
-     });
+    // this.form.valueChanges.pipe(
+    //   takeUntil(this.destroy$),
+    //   startWith(this.form.getRawValue()),
+    //   pairwise(),
+    //   map(([previous, current]) => {
+    //     const changedControl = Object.keys(current).find((key) => current[key as keyof SongFilter] !== previous[key as keyof SongFilter]);
+    //      return changedControl as keyof SongFilter;
+    //   }),
+    //   filter((key) => key !== null && key !== undefined),
+    // )
+    // .subscribe((value: keyof SongFilter) => {
+    // // this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+    // // this.store.dispatch(new FilteredMarkers(this.form.value as SongFilter));
+    // // this.store.dispatch(new UpdateOptions(this.form.value as SongFilter, value));
+    //  });
   }
 
   selectBlur(){
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
-     console.log("blur")
   }
 
   ngOnDestroy() {
