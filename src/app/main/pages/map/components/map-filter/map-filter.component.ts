@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Observable, Subject, filter, map, pairwise, startWith, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -76,7 +76,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     //  });
   }
 
-  selectBlur(){
+  selectBlur() {
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
