@@ -5,7 +5,7 @@
     multiple
     [formControl]="control"
     (selectionChange)="onSelectionChange($event)"
-    (blur)="sendBlur()">
+    (closed)="sendBlur()">
     <mat-select-trigger>
       <mat-chip-listbox>
         <mat-chip
