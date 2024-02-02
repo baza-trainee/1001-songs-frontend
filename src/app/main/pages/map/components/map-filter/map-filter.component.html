@@ -41,9 +41,7 @@
               [name]="filterCategory.title"
             ></app-search-input>
 
-
             <h3 class="filter__body-title">{{ 'map.filter.locations' | translate }}</h3>
-
 
             <app-multiselect
               [control]="form.controls.country"
@@ -52,14 +50,12 @@
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
-
             <app-multiselect
               [control]="form.controls.region"
               [options]="options.region"
               [name]="filterCategory.region"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
-
 
             <app-multiselect
               [control]="form.controls.city"
@@ -68,11 +64,9 @@
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
-
           </div>
           <div class="filter__song">
             <h3 class="filter__body-title">{{ 'map.filter.song' | translate }}</h3>
-
 
             <app-multiselect
               [control]="form.controls.genre"
@@ -81,14 +75,12 @@
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
-
             <app-multiselect
               [control]="form.controls.found"
               [options]="options.found"
               [name]="filterCategory.found"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
-
 
             <button class="filter__submit" type="submit" (click)="filterSongs()">{{ 'map.filter.button-submit' | translate }}</button>
           </div>
