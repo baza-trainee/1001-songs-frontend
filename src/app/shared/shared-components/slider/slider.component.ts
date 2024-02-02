@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
+  ElementRef, HostListener,
   Input,
   OnDestroy, OnInit,
   ViewChild
@@ -12,6 +12,8 @@ import { debounceTime, fromEvent, Observable, Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { Slide } from '../../interfaces/slide.interface';
 import {Router, RouterLink} from "@angular/router";
+import {Store} from "@ngxs/store";
+import {SetSelectedArticle} from "../../../store/news/news.actions";
 
 @Component({
   selector: 'app-slider',
@@ -25,92 +27,105 @@ import {Router, RouterLink} from "@angular/router";
 export class SliderComponent implements OnInit, OnDestroy {
   @Input() sliderItems!: Slide[];
   @Input() title!: string;
-  @Input() routerLink: string = '/news';
+  @Input() link!: string;
 
-  @ViewChild('track') set track(el: ElementRef<HTMLDivElement>) {
-    this.trackRef = el.nativeElement;
-    this.trackWidth = el.nativeElement.offsetWidth;
-  }
-  @ViewChild('sliderContainer') set sliderContainer(el: ElementRef<HTMLDivElement>) {
-    this.sliderContainerRef = el.nativeElement;
-    this.sliderWidth = el.nativeElement.offsetWidth;
-  }
-  @ViewChild('slide') set slide(el: ElementRef<HTMLDivElement> | undefined) {
-    this.slideRef = el?.nativeElement || null;
-    this.slideWidth = (el?.nativeElement.offsetWidth || 0) + this.gap;
-  }
+  @ViewChild('track') track!: ElementRef<HTMLDivElement>;
+  @ViewChild('sliderContainer') sliderContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('slide') slide!: ElementRef<HTMLDivElement>;
 
-  constructor (private router: Router) {}
+  private resizeObservable$!: Observable<Event>;
+  private resizeSubscription$!: Subscription;
 
-  sliderContainerRef: HTMLDivElement | null = null;
-  trackRef: HTMLDivElement | null = null;
-  slideRef: HTMLDivElement | null = null;
+  // Properties for the slider
+  private sliderContainerWidth!: number;
+  private gap: number = 24;
+  public defaultSlideWidth: number = 302;
 
-  sliderTitle!: string;
+  // Properties for managing slider position and navigation
+  private minTranslateX!: number;
+  private maxTranslateX: number = 0;
+  public translateX: number = 0;
+  public prevIsDisabled = true;
+  public nextIsDisabled = false;
 
-  index: number = 0;
-  gap: number = 24;
-  defaultSlideWidth: number = 302;
-  translateX: number = 0;
+  // Properties for dragging the slider
+  private dragStartX: number = 0;
+  private prevDragX: number = 0;
+  private isDragging: boolean = false;
 
-  trackWidth = 0;
-  sliderWidth = 0;
-  slideWidth = 0;
-
-  resizeObservable$!: Observable<Event>;
-  resizeSubscription$!: Subscription;
-
-  prevIsDisabled: boolean = true;
-  nextIsDisabled: boolean = false;
-
-  setSliderWidths() {
-    this.sliderWidth = this.sliderContainerRef?.offsetWidth || 0;
-    this.slideWidth = (this.slideRef?.offsetWidth || this.defaultSlideWidth) + this.gap;
-    this.trackWidth = this.trackRef?.offsetWidth || 0;
-    this.defaultSlideWidth = 302;
-  }
-
-  prevSlide(): void {
-    if (this.index > 0) this.index--;
-    this.updateBtnsStatus()
-  }
-
-  nextSlide(): void {
-    if (this.index < this.sliderItems.length - 1) this.index++;
-    this.updateBtnsStatus()
-  }
-
-  updateBtnsStatus() {
-    this.prevIsDisabled = this.index === 0;
-    this.nextIsDisabled = this.isNextButtonDisabled();
-  }
-
-  ngOnDestroy() {
-    this.resizeSubscription$.unsubscribe();
-  }
+  constructor(
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     this.resizeObservable$ = fromEvent(window, 'resize').pipe(debounceTime(300));
-    this.setSliderWidths();
-
-    this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
-      this.setSliderWidths();
-      this.index = 0;
-    });
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(() => this.setSliderWidths());
+    setTimeout(() => this.setSliderWidths());
   }
 
-  getTranslateX() {
-    this.translateX = this.index * (this.defaultSlideWidth + this.gap);
-    this.updateBtnsStatus();
-    if (this.translateX >= this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap) {
-      return -(this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap);
+  ngOnDestroy(): void {
+    this.resizeSubscription$.unsubscribe();
+  }
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    const touch = event.touches[0];
+    this.isDragging = true;
+    this.dragStartX = touch.clientX;
+    this.prevDragX = touch.clientX;
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    if (this.isDragging) {
+      const touch = event.touches[0];
+      const diffX = touch.clientX - this.prevDragX;
+
+      this.translateX += diffX;
+      this.prevDragX = touch.clientX;
+
+      if (this.translateX < this.minTranslateX) this.translateX = this.minTranslateX;
+      if (this.translateX > this.maxTranslateX) this.translateX = this.maxTranslateX;
     }
-    return -this.translateX;
   }
 
-  isNextButtonDisabled(): boolean {
-    return (
-      this.translateX >= this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderWidth - this.gap || this.index === this.sliderItems.length - 1
-    );
+  @HostListener('touchend')
+  onTouchEnd(): void {
+    if (this.isDragging) {
+      this.isDragging = false;
+      this.updateBtnsStatus();
+    }
+  }
+
+  setSliderWidths(): void {
+    this.sliderContainerWidth = this.sliderContainer.nativeElement.offsetWidth;
+    this.minTranslateX = -(this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderContainerWidth - this.gap);
+  }
+
+  prevSlide(): void {
+    if (this.translateX >= this.minTranslateX) {
+      this.translateX += this.defaultSlideWidth + this.gap;
+    }
+    this.updateBtnsStatus();
+  }
+
+  nextSlide(): void {
+    if (this.translateX <= this.maxTranslateX) {
+      this.translateX -= this.defaultSlideWidth + this.gap;
+    }
+    this.updateBtnsStatus();
+  }
+
+  navigateTo(id: number) {
+    this.store.dispatch(new SetSelectedArticle(id));
+    this.router.navigate([this.link + '/' + id]);
+  }
+
+  updateBtnsStatus() {
+    if (this.translateX < this.minTranslateX) this.translateX = this.minTranslateX;
+    if (this.translateX > this.maxTranslateX) this.translateX = this.maxTranslateX;
+
+    this.prevIsDisabled = this.translateX === this.maxTranslateX;
+    this.nextIsDisabled =  this.translateX === this.minTranslateX;
   }
 }
