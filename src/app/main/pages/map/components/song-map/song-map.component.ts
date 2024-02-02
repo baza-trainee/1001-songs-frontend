@@ -74,7 +74,6 @@ export class SongMapComponent implements OnInit, OnDestroy {
     );
   }
 
-
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
