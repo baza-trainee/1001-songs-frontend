@@ -2,14 +2,15 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
-import { FilterMapService } from '../../services/filter-map/filter-map.service';
+import {MarkerOfLocation, SongFilter} from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
-import { Select } from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
-import {srcPopapImgInMap} from "../../../static-data/img-popap-map";
+import { srcPopapImgInMap } from "../../../static-data/img-popap-map";
+import {Router} from "@angular/router";
+import {FetchSongs} from "../../../store/player/player.actions";
 
 @Component({
   selector: 'app-interactive-map',
@@ -44,7 +45,8 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
 
   constructor(
     private _translate: TranslateService,
-    public filterMapServices: FilterMapService
+    private router: Router,
+    private store: Store
   ) {
     this.markers$.subscribe((markers: MarkerOfLocation[]) => {
       this.markers = markers;
@@ -118,7 +120,16 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
           : './assets/img/home/icons/place.svg'
     };
   }
+
   getRandomIndex(): number {
     return Math.floor(Math.random() * this.imgSrs.length);
+  }
+
+  navigateTo(marker: MarkerOfLocation) {
+    const updatedFilter: SongFilter = new SongFilter();
+    updatedFilter.city.push(marker.location__city as string);
+
+    this.store.dispatch(new FetchSongs(updatedFilter as SongFilter));
+    this.router.navigate(['/map']);
   }
 }

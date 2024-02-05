@@ -7,8 +7,8 @@
   position: relative;
 
   &__tape {
-    position: absolute;
-    bottom: 17px;
+    position: relative;
+    overflow: hidden;
     z-index: 1;
     width: 100%
   }
@@ -54,38 +54,30 @@
     }
 
     &-button {
-      @include primary-button;
+      &-donat {
+        @include primary-button;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
 
-      svg {
-        fill: var(--text-color-primary);
-      }
-
-      &:hover {
         svg {
-          fill: var(--text-color-accent);
-          transition: all 0.2s linear;
+          fill: var(--text-color-primary);
+        }
+
+        &:hover {
+          svg {
+            fill: var(--text-color-accent);
+            transition: all 0.3s linear;
+          }
         }
       }
 
-      &:last-child {
-        background: transparent;
-        transition: all 0.2s linear;
-        border: 2px solid var(--text-color-accent);
-
-        @include button-desktop;
-
-        color: var(--text-color-accent);
-
-        &:last-child:hover {
-          border: 2px solid var(--bg-color-footer);
-          color: var(--text-color-accent);
-        }
+      &-share {
+        @include secondary-button;
       }
+
     }
   }
 }
@@ -118,7 +110,7 @@
 
     &__info {
       max-height: 220px;
-      inset: 420px 0 60px;
+      inset: 400px 0 60px;
       width: auto;
       position: absolute;
 
@@ -211,7 +203,7 @@
     &__info {
       max-width: 358px;
       position: absolute;
-      inset: 320px 0 48px;
+      inset: 300px 0 48px;
 
       &-title {
         margin: 0 0 20px;
