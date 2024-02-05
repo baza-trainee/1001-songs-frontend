@@ -105,6 +105,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   selectBlur() {
+    this.form.get('title')?.setValue('');
+    this.titles = [];
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
