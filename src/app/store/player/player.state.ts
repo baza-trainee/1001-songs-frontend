@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import { FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
@@ -36,6 +36,23 @@ export class PlayerState {
   @Selector()
   static getSelectedSong(state: PlayerStateModel): Song {
     return state.selecteSong as Song;
+  }
+
+  @Action(FetchSongById)
+  fetchSongById(ctx: StateContext<PlayerStateModel>, action: FetchSongById) {
+    const state = ctx.getState();
+
+    return this.filterMapService.fetchSongById(action.id).pipe(
+      tap((foudedSong: Object) => {
+        const song = foudedSong as Song;
+        const songMarker = { count: '1', location__coordinates: song.location.coordinates, location__city: song.location.city_ua };
+        this.store.dispatch(new ResetMarkers([songMarker as MarkerOfLocation]));
+        ctx.setState({
+          ...state,
+          songsList: [song as Song]
+        });
+      })
+    );
   }
 
   @Action(FetchSongs)

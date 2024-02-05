@@ -50,15 +50,21 @@ export class FilterMapService {
       return el[1].length > 0;
     });
     let fullRequest = API_URL + StatEndpoints.songs + '?';
-    selectedFilterOptions.forEach((option: [string, string[]]) => {
+    let searchRequest = '';
+    selectedFilterOptions.forEach((option: [string, string[] | string]) => {
       const optionName = this.preprocesFilterOptionName(option[0]);
+      if (typeof option[1] === 'string') {
+        const searchQuery = `${optionName}=${this.replaceSpaces(option[1])}&`;
+        fullRequest += searchQuery;
+        return;
+      }
       const optionValues = option[1].map((selectedOption) => this.getOptionValueByKey(optionName, selectedOption));
       const req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
       fullRequest += req;
     });
     fullRequest = fullRequest.slice(0, fullRequest.length - 1);
 
-    // console.log(fullRequest);
+    console.log(fullRequest);
 
     return this.http.get(fullRequest);
   }
@@ -101,6 +107,12 @@ export class FilterMapService {
     );
   }
 
+  fetchSongById(id: string) {
+    const url = API_URL + StatEndpoints.songs;
+    const option = id ? '/' + id : '';
+    return this.http.get(url + option);
+  }
+
   private preprocesFilterOptionName(option: string) {
     if (option === 'found') {
       return this._translate.store.currentLang === 'en' ? 'archive_eng' : 'archive_ua';
@@ -118,7 +130,7 @@ export class FilterMapService {
   }
 
   fetchFilterOptions() {
-    return this.http.get(API_URL + StatEndpoints.markers)
+    return this.http.get(API_URL + StatEndpoints.markers);
     // .pipe(
     //   catchError(async (error) => {
     //     console.error(error);
