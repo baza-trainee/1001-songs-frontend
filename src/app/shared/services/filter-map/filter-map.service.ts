@@ -50,7 +50,7 @@ export class FilterMapService {
       return el[1].length > 0;
     });
     let fullRequest = API_URL + StatEndpoints.songs + '?';
-    let searchRequest = '';
+    //let searchRequest = '';
     selectedFilterOptions.forEach((option: [string, string[] | string]) => {
       const optionName = this.preprocesFilterOptionName(option[0]);
       if (typeof option[1] === 'string') {
