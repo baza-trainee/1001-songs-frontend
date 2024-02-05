@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -27,10 +26,18 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SearchInputComponent {
   @Input({ required: true }) control!: FormControl;
-  @Input({ required: true }) options!: string;
+  @Input({ required: true }) options!: { title: string; id: string }[];
   @Input({ required: true }) name!: string;
+
+  @Output() songSelected = new EventEmitter<{ title: string; id: string }>();
 
   constructor() {}
 
-  filteredOptions!: Observable<string[]>;
+  onSongSelected(ev: { title: string; id: string }) {
+    this.songSelected.emit(ev);
+  }
+
+  getSongTitle(song: { title: string; id: string }) {
+    return song.title;
+  }
 }
