@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, filter, take, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
@@ -50,6 +50,14 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
         this.isPreloader = false;
       }
     });
+
+    this.state$
+      .pipe(takeUntil(this.destroy$))
+      .pipe(filter((ev) => ev.canplay))
+      .pipe(take(1))
+      .subscribe(() => {
+        this.pause();
+      });
   }
 
   ngOnDestroy() {
@@ -81,7 +89,6 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
 
   stop() {
     this.audioService.stop();
-
   }
 
   next() {

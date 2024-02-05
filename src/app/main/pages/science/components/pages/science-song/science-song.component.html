@@ -1,26 +1,26 @@
 <div class="container" *ngIf="selectedSong$ | async as song">
-
   <section class="song" *ngIf="song.id">
-
     <app-breadcrumbs></app-breadcrumbs>
-<!--    <pre>{{song | json}}</pre>-->
+    <!--    <pre>{{song | json}}</pre>-->
     <div class="song__box song__header">
       <div class="song__carousel">
         <div class="song__carousel-box">
-          <div class="song__carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ 'active': i === slideIndex }">
-            <img [src]="photo.url" [alt]="photo.alt">
+          <div class="song__carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ active: i === slideIndex }">
+            <img [src]="photo.url" [alt]="photo.alt" />
           </div>
         </div>
         <div class="song__carousel-info">
-          <p><span>{{ slideIndex + 1 }}/{{ photos.length }}</span>  {{ 'science.song-page.header.photos' | translate }}</p>
+          <p>
+            <span>{{ slideIndex + 1 }}/{{ photos.length }}</span> {{ 'science.song-page.header.photos' | translate }}
+          </p>
         </div>
         <div class="song__carousel-nav">
-          <button class="song__carousel-prev" (click)="prevSlide()" [ngClass]="{ 'disabled': slideIndex === 0 }">
+          <button class="song__carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
             <svg width="40" height="40" viewBox="0 0 48 48">
               <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
             </svg>
           </button>
-          <button class="song__carousel-next" (click)="nextSlide()" [ngClass]="{ 'disabled': slideIndex === photos.length - 1 }">
+          <button class="song__carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === photos.length - 1 }">
             <svg width="40" height="40" viewBox="0 0 48 48">
               <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
             </svg>
@@ -52,9 +52,8 @@
       </div>
     </div>
     <div class="song__player-mobile">
-      <app-stereo-player></app-stereo-player>
-
-      <app-multichanel-player></app-multichanel-player>
+   
+      <app-science-player></app-science-player>
 
       <div class="song__player-btns">
         <button class="song__player-download">
@@ -99,20 +98,21 @@
       </div>
     </div>
     <div class="song__box song__video">
-      <div><h4 class="song__title-sub">{{ 'science.song-page.video' | translate }}</h4></div>
+      <div>
+        <h4 class="song__title-sub">{{ 'science.song-page.video' | translate }}</h4>
+      </div>
       <div class="song__video-box">
-
-<!--        <app-video-player [srcUrl]="song.media.video_example"></app-video-player>-->
+        <!--        <app-video-player [srcUrl]="song.media.video_example"></app-video-player>-->
         <div class="song__video-container" style="background-image: url({{ staticVideoImgUrl }});"></div>
       </div>
     </div>
     <div class="song__box song__map">
       <div>
         <h4 class="song__title-sub">{{ 'science.song-page.map' | translate }}</h4>
-        <div class="song__info-descr"*ngIf="song.media.comment_map" [innerHTML]="song.media.comment_map | formatText"></div>
+        <div class="song__info-descr" *ngIf="song.media.comment_map" [innerHTML]="song.media.comment_map | formatText"></div>
       </div>
       <div>
-        <div class="song__map-container" style="background-image: url('./assets/img/Map.jpg');"></div>
+        <div class="song__map-container" style="background-image: url('./assets/img/Map.jpg')"></div>
       </div>
     </div>
   </section>
