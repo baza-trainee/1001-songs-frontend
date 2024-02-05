@@ -1,18 +1,19 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription} from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {first, Observable, Subscription} from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { NewsState } from '../../../../../store/news/news.state';
-import { Article } from '../../../../../shared/interfaces/article.interface';
-import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.actions';
+import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
+import { Article } from '../../../../../shared/interfaces/article.interface';
 import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
+import {SliderService} from "../../../../../shared/services/slider/slider.service";
 
 @Component({
   selector: 'app-news-article',
@@ -21,82 +22,39 @@ import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
-export class NewsArticleComponent implements OnDestroy {
+export class NewsArticleComponent implements OnInit, OnDestroy {
   @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
+  @Select(NewsState.getArticlesList) articlesList$!: Observable<Article[]>;
 
-  sliderTitle!: string;
+  public sliderItems!: Slide[];
   private subscriptions: Subscription[] = [];
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private translateService: TranslateService
-  ) {
-    this.getTranslation();
-    this.store.dispatch(new FetchNews()).subscribe(() => {
-      this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
-    });
-    this.subscriptions.push(this.translateService.onLangChange.subscribe(() => this.getTranslation()));
+    private sliderService: SliderService
+  ) {}
+
+  ngOnInit(): void {
+    this.initializeData();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
+  async initializeData() {
+    await this.store.dispatch(new FetchNews()).toPromise();
 
-  imgSrc = 'https://1001songs.s3.eu-central-1.amazonaws.com/Image.png';
-
-  sliderItems: Slide[] = [
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина1',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина2',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина3',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина4',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина5',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      img: this.imgSrc,
-      date: 'Дата події',
-      title: 'Новина6',
-      description: 'Короткий опис',
-      location: 'Локація'
-    }
-  ];
-
-  getTranslation() {
-    this.translateService.get('news.article.latest-news').subscribe((translated: string) => {
-      this.sliderTitle = translated;
-    });
+    this.subscriptions.push(
+      this.articlesList$.pipe(first()).subscribe(articles => {
+        this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
+        this.sliderItems = this.sliderService.convertNewsToSlide(articles);
+      })
+    );
   }
 
   replaceCommaWithBr(inputString: string): string {
     return inputString.replace(/, /g, '<br>');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

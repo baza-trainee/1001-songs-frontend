@@ -1,0 +1,35 @@
+<div class="songs__carousel">
+<!--  <div class="image-wrapper" [ngStyle]="{'transform': 'translateX(' + -currentImageIndex * (imageWidth + 24)+ 'px)'}">-->
+  <div #sliderContainer class="image-wrapper" [ngStyle]="{'transform': 'translateX(' + getTranslateX() + 'px)'}">
+    <div *ngFor="let image of images; let i = index">
+      <div class="image-container" (click)="openImagePopup(image)" (keydown.enter)="openImagePopup(image)" tabindex="0">
+        <img [src]="image" alt="Image {{ i }}" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+      </div>
+    </div>
+  </div>
+  <div class="songs__carousel-container">
+    <div class="song__carousel-info">
+      <p>
+        <ng-container *ngIf="isNextButtonDisabled(); else notDisabledText">
+          {{ images.length }} / {{ images.length }}
+        </ng-container>
+        <ng-template #notDisabledText>
+          {{ currentImageIndex + 1 }} / {{ images.length }}
+        </ng-template>
+        {{ 'science.songs.illustrations' | translate }}
+      </p>
+    </div>
+    <div class="songs__carousel-nav">
+      <button class="songs__carousel-prev" (click)="prevImage()" [disabled]="currentImageIndex === 0" [ngClass]="{ 'disabled': currentImageIndex === 0}">
+        <svg width="40" height="40" viewBox="0 0 48 48">
+          <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
+        </svg>
+      </button>
+      <button class="songs__carousel-next" (click)="nextImage()" [disabled]="isNextButtonDisabled()" [ngClass]="{ 'disabled': isNextButtonDisabled() }">
+        <svg width="40" height="40" viewBox="0 0 48 48">
+          <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

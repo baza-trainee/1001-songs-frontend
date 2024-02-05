@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
+
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
