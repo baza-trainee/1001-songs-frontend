@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, filter } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import { MarkerOfLocation, SongFilter } from '../../../../../shared/interfaces/m
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
-import { FetchSongs } from 'src/app/store/player/player.actions';
+import { FetchSongById, FetchSongs } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 
@@ -23,7 +23,6 @@ import { Song } from 'src/app/shared/interfaces/song.interface';
   styleUrls: ['./map-filter.component.scss']
 })
 export class MapFilterComponent implements OnInit, OnDestroy {
-  // @Input() markers!: MarkerOfLocation[];
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<SongFilter>;
   @Select(PlayerState.getSongs) songs!: Observable<Song[]>;
@@ -31,6 +30,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
+
+  localSongs: { title: string; id: string }[] = [];
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -40,6 +41,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     title: new FormControl<string>(''),
     found: new FormControl<string[]>([])
   });
+
+  titles: { title: string; id: string }[] = [];
 
   constructor(
     private store: Store,
@@ -59,6 +62,27 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       });
     });
 
+    this.songs.subscribe((songs) => {
+      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id }));
+    });
+
+    this.form
+      .get('title')
+      ?.valueChanges.pipe(
+        filter((query: string | null) => {
+          if (query && query.length <= 3) {
+            this.titles = [];
+          }
+          return query ? query.length >= 3 : false;
+        })
+      )
+
+      .subscribe((searchQuery) => {
+        const query = (searchQuery + '').trim().toLowerCase();
+        const filteredTitles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
+        this.titles = filteredTitles;
+      });
+
     // this.form.valueChanges.pipe(
     //   takeUntil(this.destroy$),
     //   startWith(this.form.getRawValue()),
@@ -76,7 +100,13 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     //  });
   }
 
+  getSelectedSong(event: { title: string; id: string }) {
+    this.store.dispatch(new FetchSongById(event.id));
+  }
+
   selectBlur() {
+    this.form.get('title')?.setValue('');
+    this.titles = [];
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
