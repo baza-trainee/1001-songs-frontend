@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StereoPlayerComponent } from '../stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
@@ -28,7 +28,7 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })
-export class PlaylistSongCardComponent implements OnInit {
+export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
   @Input() song: Song = {} as Song;
   @Input() isSelectSong! : boolean;
@@ -48,7 +48,9 @@ export class PlaylistSongCardComponent implements OnInit {
   ngOnInit(): void {
     this.hasMedia = this.song.media ? true : false;
   }
-
+  ngOnDestroy(): void {
+    this.audioService.pause();
+  }
   openCurrentFile() {
     if (!this.isSelectSong) {
       this.store.dispatch(new SelectSong(this.song.id));

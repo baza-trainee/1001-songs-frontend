@@ -1,18 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {Select, Store} from "@ngxs/store";
-import {filter, first, Observable} from "rxjs";
+import {Observable} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+
 import {Song} from "../../../../../../shared/interfaces/song.interface";
 import {StreamState} from "../../../../../../shared/interfaces/stream-state.interface";
-import {ActivatedRoute} from "@angular/router";
 import {AudioService} from "../../../../../../shared/services/audio/audio.service";
 import {ResetSong, SelectSong} from "../../../../../../store/player/player.actions";
 import {
   MultichanelPlayerComponent
 } from "../../../../map/components/player/multichanel-player/multichanel-player.component";
 import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
+import {BreadcrumbsComponent} from "../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component";
 import {ShareComponent} from "../../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 import {ScienceSong} from "../../../../../../shared/interfaces/science-song.interface";
@@ -64,13 +65,6 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new SelectSong(this.route.snapshot.params['idSong']));
-    this.state$ = this.audioService.getState();
-    this.state$
-      .pipe(
-        filter((value) => value.canplay),
-        first()
-      )
-      .subscribe(() => this.audioService.pause());
   }
 
   ngOnDestroy(): void {

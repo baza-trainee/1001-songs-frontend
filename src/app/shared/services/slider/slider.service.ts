@@ -9,8 +9,21 @@ export class SliderService {
 
   constructor() { }
 
+  convertImagesToSlide(imageArray: string[]): Slide[] {
+    return imageArray.map(img => {
+      return {
+        id: 0,
+        img: img,
+        date: '',
+        title: '',
+        description: "",
+        location: '',
+      };
+    });
+  }
+
   convertNewsToSlide(newsArray: Article[]): Slide[] {
-    return newsArray.map(news => {
+    return newsArray.splice(0, 10).map(news => {
       return {
         id: news.id,
         img: news.photo_1,

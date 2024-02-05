@@ -13,6 +13,9 @@ import { HomeExpeditionComponent } from './components/home-expedition/home-exped
 import { HomeNewsComponent } from './components/home-news/home-news.component';
 import { InteractiveMapComponent } from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
 import { DonationDialogComponent } from 'src/app/shared/shared-components/donation-dialog/donation-dialog.component';
+import {FetchSongs} from "../../../store/player/player.actions";
+import {SongFilter} from "../../../shared/interfaces/map-marker";
+import {Store} from "@ngxs/store";
 
 @Component({
   selector: 'app-home',
@@ -38,8 +41,11 @@ export class HomeComponent {
 
   constructor(
     private _translate: TranslateService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private store: Store
+  ) {
+    this.store.dispatch(new FetchSongs(new SongFilter()));
+  }
 
   openDialog(): void {
     const dialogConfig: MatDialogConfig = new MatDialogConfig();

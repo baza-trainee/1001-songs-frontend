@@ -19,6 +19,7 @@ import {
 } from "../../../../map/components/player/playlist-song-card/playlist-song-card.component";
 import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
 import {Song} from "../../../../../../shared/interfaces/song.interface";
+import {SliderComponent} from "../../../../../../shared/shared-components/slider/slider.component";
 
 @Component({
   selector: 'app-science-songs',
@@ -32,7 +33,8 @@ import {Song} from "../../../../../../shared/interfaces/song.interface";
     ImageSliderComponent,
     PaginationComponent,
     PlaylistSongCardComponent,
-    StereoPlayerComponent
+    StereoPlayerComponent,
+    SliderComponent
   ],
   templateUrl: './science-songs.component.html',
   styleUrls: ['./science-songs.component.scss']
