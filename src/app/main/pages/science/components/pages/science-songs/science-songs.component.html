@@ -31,9 +31,10 @@
       >
         <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
 
-        <app-science-player
-          (isPlay)="handleIsPlayChange($event)"
-        ></app-science-player>
+      <app-science-player
+        (isPlay)="handleIsPlayChange($event)"
+        [autoplay]="true"
+      ></app-science-player>
 
         <!-- <app-multichanel-player></app-multichanel-player> -->
 

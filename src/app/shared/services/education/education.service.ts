@@ -11,4 +11,9 @@ export class EducationService {
   fetchSongsByGenre(genre: string) {
     return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}?genre=${genre}`);
   }
+
+  fetchSongById(songId: string) {
+    const id = songId ? '/' + songId : '';
+    return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}${id}`);
+  }
 }
