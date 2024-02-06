@@ -106,12 +106,14 @@
 
 @media (max-width: 1439px) {
   .fix {
-    max-width: 1024px;
+    max-width: 1280px;
+    width: calc(100% - 160px);
   }
 
   .songs {
     .container{
-      max-width: 1024px;
+      max-width: 1280px;
+      margin: 0 80px;
 
       .songs__info {
         .songs__counter {
@@ -133,19 +135,15 @@
   }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1024px) {
   .fix {
     max-width: calc(100% - 96px);
   }
 
-  .container {
-    margin: 0 48px;
-  }
-}
-
-@media (max-width: 1024px) {
   .songs {
     .container {
+      margin: 0 48px;
+
       .songs__info {
         .songs__counter {
           .counter__title {
