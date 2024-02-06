@@ -63,7 +63,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   toggleVisibility() {
     this.isOpened = !this.isOpened;
-    // this.song.isDetailOpen = !this.song.isDetailOpen;
   }
 
   handleKeyUpEvent(event: Event) {
@@ -75,7 +74,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   toggleMobileVisibility() {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 768) {
-      // this.song.isDetailOpen = !this.song.isDetailOpen;
+      this.toggleVisibility()
     }
     return;
   }
