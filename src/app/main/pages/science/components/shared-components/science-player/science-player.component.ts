@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subject, Subscription, filter, first, take, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, filter, first, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
