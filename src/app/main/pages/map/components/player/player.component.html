@@ -17,6 +17,7 @@
 
         <app-stereo-player
           #stereoPlayer
+          [autoplay]="true"
           [stereoOnly]="stereoOnly"
           (isPlay)="handleIsPlayChange($event)"
         ></app-stereo-player>

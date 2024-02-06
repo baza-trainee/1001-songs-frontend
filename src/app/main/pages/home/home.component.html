@@ -9,19 +9,21 @@
           </p>
         </div>
         <div class="home__info-actions">
-          <a class="home__info-button" (click)="openDonationDialog()" (keypress)="openDonationDialog()" tabindex="0">
+          <a class="home__info-button-donat" (click)="openDonationDialog()" (keypress)="openDonationDialog()" tabindex="0">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#infoButton"></use>
             </svg>
             {{ 'home.actions.button-donate' | translate }}</a
           >
-          <a class="home__info-button" (click)="openDialog()" (keypress)="openDialog()" tabindex="0">
+          <a class="home__info-button-share" (click)="openDialog()" (keypress)="openDialog()" tabindex="0">
             <img [src]="homePageAssets.shareIcon" alt="img-share" />{{ 'home.actions.button-share' | translate }}</a
           >
         </div>
       </div>
     </div>
   </div>
+</section>
+<section class="home__tape">
   <app-home-tape class="home__tape"></app-home-tape>
 </section>
 <app-interactive-map [popupType]="'homeType'"></app-interactive-map>

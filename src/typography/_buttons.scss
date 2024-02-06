@@ -1,6 +1,6 @@
-
-
 @mixin primary-button($bg-color: var(--text-color-accent), $text-color: var(--text-color-primary), $hover-bg-color: var(--bg-color-footer)) {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   padding: 12px 24px;
   border-radius: 100px;
@@ -15,12 +15,33 @@
   border: 2px solid $bg-color;
   transition: all .3s ease-in-out;
   cursor: pointer;
+  z-index: 1;
 
   &:hover {
-    background: $hover-bg-color;
     color: $bg-color;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 50%;
+    height: 10px;
+    background-color: $hover-bg-color;
+    border-radius: 50%;
+    transition: all .3s ease-in-out;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  &:hover::before {
+    transform: translateX(-50%) translateY(0);
+    width: 200%;
+    height: 200%;
+  }
 }
+
 
 @mixin secondary-button($bg-color: var(--text-color-accent), $hover-border-color: var(--bg-color-footer)) {
   display: flex;

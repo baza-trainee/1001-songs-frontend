@@ -20,6 +20,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
   @Input() stereoOnly: boolean = false;
+  @Input() autoplay: boolean = false;
+
   @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
   showStereoPlayer: boolean = true;
 
@@ -51,11 +53,15 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     });
     this.state$ = this.audioService.getState();
 
-    this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
-      if (ev.canplay && this.isPreloader) {
-        this.isPreloader = false;
-        this.pause();
-      }
+    this.state$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((ev) => {
+        if (ev.canplay && this.isPreloader) {
+          this.isPreloader = false;
+          if (!this.autoplay) {
+            this.pause();
+          }
+        }
     });
   }
 
@@ -99,6 +105,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SelectPrev());
     this.isPlay.emit(true);
   }
+
+
 
   backward(currentTime: number | undefined) {
     this.audioService.seekTo(Number(currentTime) - this.REWIND_STEP);

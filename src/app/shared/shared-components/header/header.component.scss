@@ -95,7 +95,8 @@ a {
           color: var(--error-red);
           position: absolute;
           left: 50%;
-          text-wrap: nowrap;
+          white-space: nowrap;
+          font-size: 12px;
           top: calc(100% + 15px);
           transform: translateX(-50%);
         }
@@ -315,12 +316,19 @@ a {
         margin-right: 16px;
         min-width: 185px;
 
-        &__donate {
-          &-button {
-            margin-left: 10px;
+        &__search {
+          &-invalid {
+            top: calc(100% + 12px);
+            transform: translateX(-30%);
+          }
 
-            @include button-mobile;
+          &__donate {
+            &-button {
+              margin-left: 10px;
 
+              @include button-mobile;
+
+            }
           }
         }
       }

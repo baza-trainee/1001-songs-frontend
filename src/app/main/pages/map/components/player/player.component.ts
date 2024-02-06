@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {Observable, Subscription} from 'rxjs';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
@@ -44,8 +44,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   distanceToTop!: number;
   heightHeader!: number;
   isPlay!: boolean;
-  screenWidth: number = 0;
-  serverStaticImgPath: string = './assets/img/player/';
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
@@ -59,8 +57,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   location = 'Ромейки';
 
   constructor(
-    private _translate: TranslateService,
-    private store: Store
+    private _translate: TranslateService
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();

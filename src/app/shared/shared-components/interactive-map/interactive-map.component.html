@@ -43,7 +43,7 @@
             </p>
           </div>
         </div>
-        <a class="popup-map__btn" role="button" tabindex="0" (keypress)="listenToRecords()" (click)="listenToRecords()">{{
+        <a class="popup-map__btn" role="button" tabindex="0" (keydown)="navigateTo(selectedMarker)" (click)="navigateTo(selectedMarker)">{{
           'home.home-map.popup-btn' | translate
           }}</a>
       </div>
