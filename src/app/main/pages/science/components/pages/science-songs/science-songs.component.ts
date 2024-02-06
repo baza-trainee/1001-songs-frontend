@@ -41,6 +41,7 @@ import {SliderComponent} from "../../../../../../shared/shared-components/slider
 })
 export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
+  @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
   @Select(ESPlayerState.getSongs) songs$!: Observable<ScienceSong[]>;
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   public itemsPerPage: number = 10;
@@ -84,7 +85,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.heightHeader = 108;
     } else if (window.innerWidth <= 768) {
       this.heightHeader = 96;
-    } else {
+    } else if (window.innerWidth <= 421){
       this.gap = 32;
       this.heightHeader = 80;
     }
@@ -92,6 +93,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:scroll')
   onScroll() {
+    const distanceTop = this.calculateDistanceToTop();
+    if (this.distanceToTop <= distanceTop || !this.distanceToTop) this.distanceToTop = this.calculateDistanceToTop();
     this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader
   }
 
@@ -121,12 +124,14 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.fixedContainer) {
-        this.distanceToTop = this.fixedContainer.nativeElement.getBoundingClientRect().top;
-        this.onResize();
-      }
+      if (this.playerContainer) this.distanceToTop = this.calculateDistanceToTop();
     });
+  }
 
+  calculateDistanceToTop(): number {
+    this.onResize();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return this.playerContainer.nativeElement.getBoundingClientRect().top + scrollTop;
   }
 
   ngOnDestroy(): void {
