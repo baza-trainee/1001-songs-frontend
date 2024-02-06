@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, filter, first, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
@@ -23,6 +23,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
   showStereoPlayer: boolean = true;
 
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<ScienceSong>;
+  @Input() autoplay: boolean = false;
   @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
   state$!: Observable<StreamState>;
   subState!: Subscription;
@@ -48,6 +49,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
+        this.stopOnLoaded()
       }
     });
   }
@@ -56,6 +58,18 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
     this.stop();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
+  }
+
+  stopOnLoaded() {
+    this.state$
+      .pipe(takeUntil(this.destroy$))
+      .pipe(filter((ev) => ev.canplay))
+      .pipe(first())
+      .subscribe(() => {
+        if (!this.autoplay) {
+          this.pause();
+        }
+      });
   }
 
   playStream(url: string) {
@@ -81,7 +95,6 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
 
   stop() {
     this.audioService.stop();
-
   }
 
   next() {

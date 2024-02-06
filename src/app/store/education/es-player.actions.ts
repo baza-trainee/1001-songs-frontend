@@ -6,7 +6,7 @@ export class FetchSongsByLocation {
   constructor(public locationName: string) {}
 }
 export class FetchSongById {
-  static readonly type = '[Player] Get by Id';
+  static readonly type = '[Player] Get education song by Id';
 
   constructor(public id: string) {}
 }
