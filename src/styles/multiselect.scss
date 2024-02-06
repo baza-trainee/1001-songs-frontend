@@ -144,6 +144,7 @@ app-news {
   top: 0 !important;
   left: 50% !important;
   max-width: 1280px;
+  pointer-events: none;
   width: calc(100% - 160px);
   height: 100%;
   margin: 0 !important;
@@ -153,7 +154,7 @@ app-news {
 .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom .gmnoprint {
   left: calc(100% - 40px) !important;
   top: calc(100% - 140px) !important;
-
+  pointer-events: fill;
 }
 
 @media (max-width: 1024px) {

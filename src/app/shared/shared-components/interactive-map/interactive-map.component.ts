@@ -44,7 +44,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     options: {
       mapId: 'bcf460a73f14398b',
       disableDefaultUI: true,
-      zoomControl: this.zoomControl,
+      zoomControl: this.zoomControl
     }
   };
 
