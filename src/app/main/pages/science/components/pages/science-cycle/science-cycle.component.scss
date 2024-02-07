@@ -30,9 +30,8 @@ img {
     @include body-desktop;
 
     &-box {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+      column-count: 2;
+      column-gap: 40px;
     }
   }
 
@@ -70,14 +69,14 @@ img {
       position: relative;
 
       &::before,
-      &::after{
-        content: "";
+      &::after {
+        content: '';
         position: absolute;
         bottom: 0;
         width: 50%;
         height: 1px;
         background-color: var(--text-color-primary);
-        transition: all .2s linear;
+        transition: all 0.2s linear;
       }
 
       &::before {
@@ -90,7 +89,7 @@ img {
 
       &:hover {
         &::before,
-        &::after{
+        &::after {
           width: 0;
         }
 
@@ -106,8 +105,7 @@ img {
       top: 18px;
       width: 24px;
       height: 24px;
-      transition: transform .2s linear;
-
+      transition: transform 0.2s linear;
     }
   }
 }
@@ -187,5 +185,3 @@ img {
     }
   }
 }
-
-
