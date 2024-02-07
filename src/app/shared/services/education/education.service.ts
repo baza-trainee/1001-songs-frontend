@@ -16,4 +16,8 @@ export class EducationService {
     const id = songId ? '/' + songId : '';
     return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}${id}`);
   }
+
+  fetchESData() {
+    return this.http.get(`${API_URL}${StatEndpoints.education}`);
+  }
 }

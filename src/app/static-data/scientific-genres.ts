@@ -1,5 +1,17 @@
 const genreKeyPath = '';
 
+export enum genreCycles {
+  winters = 'Пісні зимового циклу',
+  spring = 'Пісні весняного циклу',
+  summer = 'Пісні літнього циклу',
+  wedding = 'Весільні пісні',
+  family = 'Родини і хрестини. Материнський і дитячий фольклор',
+  'ordinary-songs' = 'Звичайні пісні',
+  'musical-epos' = 'Музичний епос',
+  'instrumental-music' = 'Інструментальна музика. Народні танці',
+  'funeral-music' = 'Традиційний похорон: музичне оформлення'
+}
+
 export const genres = [
   { translateKey: genreKeyPath + 'instrumental-ensembles', value: 'Інструментальні капели. Троїста музика' },
   { translateKey: genreKeyPath + 'polyphonic', value: 'Багатоголосні пісні з сольним виводом' },
