@@ -15,7 +15,7 @@ export interface ScienceCategory {
   genreGroups: GenreGroup[];
 }
 
-export interface SongsCycle {
+export interface SongsPrimaryCategory {
   id: 0;
   title: string;
   description: string;
