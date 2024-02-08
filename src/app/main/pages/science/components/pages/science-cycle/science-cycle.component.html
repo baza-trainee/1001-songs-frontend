@@ -6,7 +6,7 @@
     <h1 class="cycle__title">{{ category.title | translate }}</h1>
     <div class="cycle__description">
       <div class="cycle__description-box">
-        {{songsCycle.description}}
+        {{ songsCycle.description  }}
       </div>
     </div>
     <ng-container *ngFor="let sub of category.genreGroups; let i = index">
