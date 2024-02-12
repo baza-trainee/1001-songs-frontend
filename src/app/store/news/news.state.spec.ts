@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
 import {NewsState} from "./news.state";
-import {FetchNews} from "./news.actions";
 
 describe('NewsState', () => {
   let store: Store;
