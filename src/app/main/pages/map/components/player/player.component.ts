@@ -40,10 +40,13 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
 })
 export class PlayerComponent implements AfterViewInit, OnDestroy{
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
+  @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
   @Input() stereoOnly: boolean = false;
   distanceToTop!: number;
   heightHeader!: number;
+  paddingTop!: number;
   isPlay!: boolean;
+  heightMap: number = 694;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
@@ -68,16 +71,20 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   onResize() {
     if (window.innerWidth > 768) {
       this.heightHeader = 108;
+      this.paddingTop = 50;
     } else if (window.innerWidth <= 768) {
       this.heightHeader = 96;
-    } else {
+      this.paddingTop = 30;
+    } else if (window.innerWidth <= 630){
       this.heightHeader = 80;
+      this.paddingTop = 18;
     }
   }
 
   @HostListener('window:scroll')
   onScroll() {
-    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader
+    if (this.distanceToTop <= this.heightMap + this.heightHeader || !this.distanceToTop) this.distanceToTop = this.calculateDistanceToTop();
+    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
   }
 
   get totalPages(): number {
@@ -103,11 +110,14 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.fixedContainer) {
-        this.distanceToTop = this.fixedContainer.nativeElement.getBoundingClientRect().top;
-        this.onResize();
-      }
+      if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
     });
+  }
+
+  calculateDistanceToTop(): number {
+    this.onResize();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return this.songsContainer.nativeElement.getBoundingClientRect().top + this.paddingTop + scrollTop;
   }
 
   ngOnDestroy(): void {

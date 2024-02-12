@@ -21,6 +21,7 @@ import {FetchSongs} from "../../../store/player/player.actions";
 })
 export class InteractiveMapComponent implements OnInit, OnDestroy {
   @Input() popupType: string = 'default';
+  @Input() zoomControl: boolean = false;
   @Input() markers: MarkerOfLocation[] = [
     {
       location__city: 'Полтава',
@@ -40,7 +41,11 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   mapOptions = {
     center: { lat: 48.379433, lng: 31.165579 },
     zoom: 6,
-    options: { mapId: 'bcf460a73f14398b', disableDefaultUI: true }
+    options: {
+      mapId: 'bcf460a73f14398b',
+      disableDefaultUI: true,
+      zoomControl: this.zoomControl
+    }
   };
 
   constructor(
@@ -54,6 +59,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (this.zoomControl) this.mapOptions.options.zoomControl = this.zoomControl;
     this.randomIndex = this.getRandomIndex();
     this._translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((translateState: LangChangeEvent) => {
       const currentLang = translateState.lang;

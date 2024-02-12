@@ -30,17 +30,17 @@
         <div class="partners__title"> {{ 'footer.partners' | translate }} </div>
         <div class="partners__items">
           <div class="partners__item">
-            <a href="https://knmau.com.ua/nauka/laboratoriya-etnomuzikologiyi/">
+            <a href="https://knmau.com.ua/nauka/laboratoriya-etnomuzikologiyi/" target="_blank">
               <img src="assets/img/partners/partner-1.png" alt="Науково-дослідна лабораторія етномузикології НМАУ" class="partners__logo">
             </a>
           </div>
           <div class="partners__item">
-            <a href="https://lnma.edu.ua/kafedry/kafedra-muzychnoji-folklorystyky-ta-pndlme/">
+            <a href="https://lnma.edu.ua/kafedry/kafedra-muzychnoji-folklorystyky-ta-pndlme/" target="_blank">
               <img src="assets/img/partners/partner-2.png" alt="Лабораторія музичної етнології ЛНМА" class="partners__logo">
             </a>
           </div>
           <div class="partners__item">
-            <a href="https://baza-trainee.tech/ua">
+            <a href="https://baza-trainee.tech/ua" target="_blank">
               <img src="assets/img/partners/partner-3.png" alt="Baza Trainee Ukraine" class="partners__logo">
             </a>
           </div>
@@ -48,26 +48,26 @@
       </div>
       <div class="footer__rules">
           <ul>
-            <li><a [href]="info[0].reporting"> {{ 'footer.rules.reporting' | translate }} </a></li>
-            <li><a [href]="info[0].privacy_policy"> {{ 'footer.rules.policy' | translate }} </a></li>
-            <li><a [href]="info[0].rules_and_terms"> {{ 'footer.rules.terms' | translate }} </a></li>
+            <li><a [href]="info[0].reporting" target="_blank"> {{ 'footer.rules.reporting' | translate }} </a></li>
+            <li><a [href]="info[0].privacy_policy" target="_blank"> {{ 'footer.rules.policy' | translate }} </a></li>
+            <li><a [href]="info[0].rules_and_terms" target="_blank"> {{ 'footer.rules.terms' | translate }} </a></li>
           </ul>
       </div>
 
       <div class="footer__contacts">
         <div class="contacts__title"> {{ 'footer.contacts.title' | translate }} </div>
 
-        <div class="contacts__email">
+        <div class="contacts__email" target="_blank">
           <a href="mailto:{{info[0].email}}"> {{ info[0].email }} </a>
         </div>
 
         <div class="contacts__social">
-          <a [href]="info[0].facebook" class="social__item">
+          <a [href]="info[0].facebook" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconFb"></use>
             </svg>
           </a>
-          <a [href]="info[0].youtube" class="social__item">
+          <a [href]="info[0].youtube" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconYouTube"></use>
             </svg>

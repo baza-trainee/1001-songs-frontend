@@ -23,24 +23,26 @@
       <app-image-slider/>
     </div>
     <h4 class="songs__title-sub">Фольклорні записи</h4>
-    <div class="songs__player"
-         #fixedContainer
-         [ngClass]="{'fix': isFixed}"
-         [ngStyle]="{'top.px': isFixed ? heightHeader : '0'}"
-    >
-      <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
+    <div #playerContainer>
+      <div class="songs__player"
+           #fixedContainer
+           [ngClass]="{'fix': isFixed}"
+           [ngStyle]="{'top.px': isFixed ? heightHeader : '0'}"
+      >
+        <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
 
       <app-science-player
         (isPlay)="handleIsPlayChange($event)"
         [autoplay]="true"
       ></app-science-player>
 
-      <!-- <app-multichanel-player></app-multichanel-player> -->
+        <!-- <app-multichanel-player></app-multichanel-player> -->
 
+      </div>
     </div>
     <div class="songs__playlist"
          *ngIf="songs$ | async as songs"
-         [ngStyle]="{'margin-top.px': isFixed ? fixedContainer.clientHeight + gap : '0'}"
+         [ngStyle]="{'margin-top.px': isFixed ? fixedContainer.clientHeight : '0'}"
     >
       <div class="songs__playlist-titles">
         <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>

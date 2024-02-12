@@ -16,7 +16,11 @@
             {{ 'home.actions.button-donate' | translate }}</a
           >
           <a class="home__info-button-share" (click)="openDialog()" (keypress)="openDialog()" tabindex="0">
-            <img [src]="homePageAssets.shareIcon" alt="img-share" />{{ 'home.actions.button-share' | translate }}</a
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <use xlink:href="./assets/sprites.svg#shareButton"></use>
+            </svg>
+            {{ 'home.actions.button-share' | translate }}
+          </a
           >
         </div>
       </div>
