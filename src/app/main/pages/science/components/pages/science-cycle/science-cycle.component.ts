@@ -9,7 +9,6 @@ import { BreadcrumbsComponent } from '../../../../../../shared/shared-components
 import { ScienceCategory, SongsPrimaryCategory } from '../../../../../../shared/interfaces/science.interface';
 import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { EducationService } from 'src/app/shared/services/education/education.service';
-import { genreCycles } from 'src/app/static-data/scientific-genres';
 
 @Component({
   selector: 'app-science-cycle',
@@ -40,13 +39,13 @@ export class ScienceCycleComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAndSetSelectedCategory();
-    const currentCycle = this.route.snapshot.params['category'];
-    const cycle = genreCycles[currentCycle as keyof typeof genreCycles];
-    this.educationService.fetchESData().subscribe((d: any) => {
-      const data = d.find((el: any) => el.title === cycle);
-      console.log(data);
-      this.songsCycle = data;
-    });
+   // const currentCycle = this.route.snapshot.params['category'];
+    // const cycle = genreCycles[currentCycle as keyof typeof genreCycles];
+    // this.educationService.fetchESData().subscribe((d: any) => {
+    //   const data = d.find((el: any) => el.title === cycle);
+    //   console.log(data);
+    //   this.songsCycle = data;
+    // });
   }
 
   private checkAndSetSelectedCategory() {

@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
 import { recomendations } from './components/shared-components/category-link/recomendations';
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
-import { ScienceCategory } from "../../../shared/interfaces/science.interface";
-import { scienceCategories } from "../../../static-data/categoriesList";
+import { ScienceCategory } from '../../../shared/interfaces/science.interface';
+import { scienceCategories } from '../../../static-data/categoriesList';
+import { EducationService } from 'src/app/shared/services/education/education.service';
 
 @Component({
   selector: 'app-science',
@@ -35,8 +36,16 @@ export class ScienceComponent implements OnInit {
   recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
+  intro: string = 'hello';
+
+  constructor(private educationService: EducationService) {}
 
   ngOnInit(): void {
+    this.educationService.fetchESData().subscribe((data: object) => {
+      const responseObject = data as { description: string };
+      this.intro = responseObject.description;
+    });
+
     this.recomendationPages = Array.from(
       Array(Math.floor(recomendations!.length / this.PAGE_SIZE) + (recomendations.length % this.PAGE_SIZE)).keys()
     ).map((el) => el + 1);
