@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScienceCycleComponent } from './science-cycle.component';
-import {ActivatedRoute} from "@angular/router";
-import {of} from "rxjs";
-import {TranslateModule} from "@ngx-translate/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ScienceCycleComponent', () => {
   let component: ScienceCycleComponent;
@@ -12,7 +13,7 @@ describe('ScienceCycleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ScienceCycleComponent, TranslateModule.forRoot(), BrowserAnimationsModule],
+      imports: [ScienceCycleComponent, TranslateModule.forRoot(), BrowserAnimationsModule, HttpClientModule],
       providers: [
         {
           provide: ActivatedRoute,
