@@ -9,7 +9,7 @@ import { recomendations } from './components/shared-components/category-link/rec
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
-import { ScienceCategory } from '../../../shared/interfaces/science.interface';
+import { EducationCategoryCard, ScienceCategory } from '../../../shared/interfaces/science.interface';
 import { scienceCategories } from '../../../static-data/categoriesList';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 
@@ -31,19 +31,26 @@ import { EducationService } from 'src/app/shared/services/education/education.se
 })
 export class ScienceComponent implements OnInit {
   PAGE_SIZE = 5;
-  categories: ScienceCategory[] = scienceCategories;
+  categories: EducationCategoryCard[] = [];
   recomendations? = recomendations;
   recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
-  intro: string = 'hello';
+  intro: string = '';
 
   constructor(private educationService: EducationService) {}
 
   ngOnInit(): void {
     this.educationService.fetchESData().subscribe((data: object) => {
-      const responseObject = data as { description: string };
+      const responseObject = data as { description: string; calendar_and_ritual_categories: [] };
       this.intro = responseObject.description;
+      const genres = responseObject.calendar_and_ritual_categories;
+      this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
+        title: genreGroup.title,
+        id: genreGroup.id,
+        media : genreGroup.media ? genreGroup.media: '/assets/songs.png'
+      }));
+      console.log(genres);
     });
 
     this.recomendationPages = Array.from(

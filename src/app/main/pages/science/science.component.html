@@ -7,9 +7,9 @@
     <div class="science__gallery">
       <div class="science__gallery-item" *ngFor="let category of categories">
         <app-category-link
-          [routerLink]="category.routerLink"
+          [gentreGroupId]="category.id"
           [category]="category.title | translate"
-          [imgUrl]="category.url"
+          [imgUrl]="category.media"
         ></app-category-link>
       </div>
     </div>

@@ -10,5 +10,6 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryLinkComponent {
   @Input() category: string = '';
+  @Input() gentreGroupId: string = '';
   @Input() imgUrl: string = 'https://baza-trainee.github.io/1001-songs-frontend/assets/img/home/expedition3.jpg';
 }

@@ -15,6 +15,13 @@ export interface ScienceCategory {
   genreGroups: GenreGroup[];
 }
 
+export interface EducationCategoryCard {
+  id: string;
+  title: string;
+  media: string;
+  // routerLink: string;
+}
+
 export interface SongsPrimaryCategory {
   id: 0;
   title: string;
