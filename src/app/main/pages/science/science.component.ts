@@ -50,7 +50,7 @@ export class ScienceComponent implements OnInit {
         id: genreGroup.id,
         media : genreGroup.media ? genreGroup.media: '/assets/songs.png'
       }));
-      console.log(genres);
+      // console.log(genres);
     });
 
     this.recomendationPages = Array.from(
