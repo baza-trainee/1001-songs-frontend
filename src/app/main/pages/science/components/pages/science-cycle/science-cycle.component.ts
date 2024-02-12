@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { take } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { RecommendedSourcesComponent } from '../../shared-components/recommended-sources/recommended-sources.component';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ScienceCategory, SongsPrimaryCategory } from '../../../../../../shared/interfaces/science.interface';
-import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScienceCycleComponent } from './science-cycle.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,12 +13,14 @@ describe('ScienceCycleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ScienceCycleComponent, TranslateModule.forRoot(), BrowserAnimationsModule, HttpClientModule],
+      imports: [ScienceCycleComponent, TranslateModule.forRoot(), BrowserAnimationsModule, HttpClientModule, RouterModule.forRoot([])],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({ category: 'someCategory' })
+            snapshot: {
+              params: of({ category: 'someCategory' })
+            }
           }
         }
       ]

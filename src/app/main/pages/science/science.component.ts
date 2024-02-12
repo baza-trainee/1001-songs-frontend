@@ -9,8 +9,7 @@ import { recomendations } from './components/shared-components/category-link/rec
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
-import { EducationCategoryCard, ScienceCategory } from '../../../shared/interfaces/science.interface';
-import { scienceCategories } from '../../../static-data/categoriesList';
+import { EducationCategoryCard } from '../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 
 @Component({
