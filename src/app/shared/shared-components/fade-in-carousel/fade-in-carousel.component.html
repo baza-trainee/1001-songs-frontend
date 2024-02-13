@@ -1,0 +1,24 @@
+<div class="carousel">
+  <div class="carousel-box" #box [ngStyle]="{'height': heightBox + 'px'}">
+    <div class="carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ active: i === slideIndex }">
+      <img [src]="photo" [alt]="'photo' + i" />
+    </div>
+  </div>
+  </div>
+  <div class="carousel-info">
+    <p>
+      <span>{{ slideIndex + 1 }}/{{ photos.length }}</span> {{ 'science.song-page.header.photos' | translate }}
+    </p>
+  <div class="carousel-nav">
+  <button class="carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
+      <svg width="40" height="40" viewBox="0 0 48 48">
+        <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
+      </svg>
+    </button>
+    <button class="carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === photos.length - 1 }">
+      <svg width="40" height="40" viewBox="0 0 48 48">
+        <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
+      </svg>
+    </button>
+  </div>
+</div>
