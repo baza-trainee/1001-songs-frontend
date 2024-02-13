@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+// import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Observable} from "rxjs";
 
 import { AboutTeamComponent } from './about-team/about-team.component';
@@ -72,7 +72,7 @@ export class AboutComponent {
     private translateService: TranslateService,
     private aboutService: AboutService,
     private formattingTextService: FormattingTextService,
-    private sanitizer: DomSanitizer
+    // private sanitizer: DomSanitizer
   ) {
     this.aboutContent$ = this.aboutService.fetchAboutContent();
     this.aboutContent$.subscribe(content => {
