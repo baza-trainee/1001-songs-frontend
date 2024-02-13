@@ -1,41 +1,33 @@
 <div class="container">
-  <section class="cycle" *ngIf="category">
-
+  <section class="cycle" >
     <app-breadcrumbs></app-breadcrumbs>
 
-    <h1 class="cycle__title">{{ category.title | translate }}</h1>
+    <h1 class="cycle__title">{{ categoryData.title }}</h1>
     <div class="cycle__description">
       <div class="cycle__description-box">
-        {{ songsCycle.description  }}
+        {{ categoryData.description }}
       </div>
     </div>
-    <ng-container *ngFor="let sub of category.genreGroups; let i = index">
-      <h4 class="cycle__title-sub">{{ sub.title | translate }}</h4>
+    <ng-container *ngFor="let sub of categoryData.song_subcategories; let i = index">
+      <h4 class="cycle__title-sub">{{ sub.title }}</h4>
       <div class="cycle__subcategory">
         <div class="cycle__img-box">
-          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="category.url" alt="Фото категорії">
+          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="category.url" alt="Фото категорії" />
         </div>
         <div class="cycle__subcategory-box">
-          <a
-            href="#"
-            class="cycle__subcategory-link"
-            *ngFor="let link of sub.genres;"
-            [routerLink]="link.query"
-          >
-            {{ link.title | translate}}
-          <span class="cycle__subcategory-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
-           </svg>
-          </span>
+          <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="link.id+''">
+            {{ link.title }}
+            <span class="cycle__subcategory-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+              </svg>
+            </span>
           </a>
         </div>
       </div>
     </ng-container>
     <div class="cycle__sources">
-
       <app-recommended-sources></app-recommended-sources>
-
     </div>
   </section>
 </div>

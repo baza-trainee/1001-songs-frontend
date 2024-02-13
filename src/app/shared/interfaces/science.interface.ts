@@ -15,6 +15,26 @@ export interface ScienceCategory {
   genreGroups: GenreGroup[];
 }
 
+export interface EducationPrimaryCategory {
+  id: 0;
+  title: string;
+  description: string;
+  recommendations: string;
+  song_subcategories: [
+    {
+      id: string;
+      title: string;
+      media: string;
+      education_genres: [
+        {
+          id: number;
+          title: string;
+        }
+      ];
+    }
+  ];
+}
+
 export interface EducationCategoryCard {
   id: string;
   title: string;

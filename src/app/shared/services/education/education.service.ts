@@ -18,7 +18,7 @@ export class EducationService {
   }
 
   fetchCategoryById(id: string) {
-    return this.http.get(`${API_URL}${StatEndpoints.education}/${id}`);
+    return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.educationCategory}/${id}`);
   }
 
   fetchESData() {

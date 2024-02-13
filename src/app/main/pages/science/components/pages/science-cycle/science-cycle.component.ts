@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RecommendedSourcesComponent } from '../../shared-components/recommended-sources/recommended-sources.component';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
-import { ScienceCategory, SongsPrimaryCategory } from '../../../../../../shared/interfaces/science.interface';
+import { EducationPrimaryCategory, ScienceCategory, SongsPrimaryCategory } from '../../../../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 
 @Component({
@@ -18,16 +18,7 @@ import { EducationService } from 'src/app/shared/services/education/education.se
 export class ScienceCycleComponent implements OnInit {
   category!: ScienceCategory;
   categoryName!: string;
-  songsCycle: SongsPrimaryCategory = {
-    id: 0,
-    title: 'string',
-    description: 'string',
-    photo1: 'string',
-    photo2: 'string',
-    photo3: 'string',
-    photo4: 'string',
-    photo5: 'string'
-  };
+  categoryData: EducationPrimaryCategory = {} as EducationPrimaryCategory;
 
   constructor(
     private router: Router,
@@ -39,7 +30,10 @@ export class ScienceCycleComponent implements OnInit {
     //  this.checkAndSetSelectedCategory();
 
     const categoryId = this.route.snapshot.params['category'];
-    this.educationService.fetchCategoryById(categoryId);
+    this.educationService.fetchCategoryById(categoryId).subscribe((d) => {
+      this.categoryData = d as EducationPrimaryCategory;
+      console.log(d);
+    });
 
     //console.log(' > > > ', d);
     // const currentCycle = this.route.snapshot.params['category'];
