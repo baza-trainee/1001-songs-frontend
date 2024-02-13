@@ -23,7 +23,7 @@ import {SafeHtmlPipe} from "../../../shared/pipes/safe-html.pipe";
 export class AboutComponent implements OnDestroy {
   private dataAboutContent$: Observable<DataAboutContent>;
   public aboutTeam$: Observable<AboutTeam[]>;
-  public content!: Content;
+  public content!: Content[];
   private subscription$: Subscription;
 
   constructor(
