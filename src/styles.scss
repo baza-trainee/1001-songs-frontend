@@ -88,29 +88,26 @@ iframe {
   height: 720px;
 }
 
-
 @media (max-width: 1024px) {
   .box {
     padding-left: 0;
   }
-
+  
   .main-content iframe,
   .main-content img {
     height: 524px;
   }
-
 }
 
 @media (max-width: 675px) {
   iframe {
     height: 396px;
   }
-
+  
   .main-content iframe,
   .main-content img {
     height: 396px;
   }
-
 }
 
 @media (max-width: 465px) {

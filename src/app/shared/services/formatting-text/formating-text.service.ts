@@ -5,9 +5,8 @@ import {Content} from "../../interfaces/about.interface";
   providedIn: 'root'
 })
 export class FormattingTextService {
-
-  constructor() {
-  }
+  
+  constructor() {}
 
   splitText(htmlString: string): Content[] {
     const contents = htmlString.match(/<[^>]+>([^<]*)<\/[^>]+>/g);
@@ -50,9 +49,9 @@ export class FormattingTextService {
       }
     });
 
-    const replacementArray: Content[] = [{text: "", images: []}]; // Преобразуем объект в массив
+    const replacementArray: Content[] = [{text: "", images: []}];
     imagesSrcs.forEach(src => {
-      replacementArray[0].images.push(src); // Обращаемся к элементу массива
+      replacementArray[0].images.push(src);
     });
 
     if (imagesIndexes.length > 0) {

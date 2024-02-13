@@ -2,6 +2,7 @@
 @import '/src/typography/fonts';
 @import '/src/typography/colors';
 
+
 .content {
   margin-bottom: 16px;
 }
@@ -20,13 +21,7 @@
 
   &__content {
     @include body-desktop($line-height: 28px, $font-size: 20px);
-
-    span {
-      font-size: 16px !important;
-      line-height: 28px !important;
-      color: var(--text-color-primary) !important;
-    }
-
+    
     .about__box {
       display: flex;
       flex-direction: column;
@@ -41,10 +36,6 @@
   &__description {
     @include body-desktop($line-height: 28px, $font-size: 20px);
   }
-}
-
-iframe {
-  height: 400px !important;
 }
 
 @media (max-width: 1024px) {

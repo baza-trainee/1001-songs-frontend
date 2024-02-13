@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {Observable, Subscription} from "rxjs";
 
@@ -10,6 +10,7 @@ import { FormattingTextService } from "../../../shared/services/formatting-text/
 import { AboutTeam, Content, DataAboutContent } from "../../../shared/interfaces/about.interface";
 import { FadeInCarouselComponent } from "../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 import {SafeHtmlPipe} from "../../../shared/pipes/safe-html.pipe";
+
 
 @Component({
   selector: 'app-about',
@@ -22,14 +23,13 @@ import {SafeHtmlPipe} from "../../../shared/pipes/safe-html.pipe";
 export class AboutComponent implements OnDestroy {
   private dataAboutContent$: Observable<DataAboutContent>;
   public aboutTeam$: Observable<AboutTeam[]>;
-  public content!: Content[];
+  public content!: Content;
   private subscription$: Subscription;
 
   constructor(
     private translateService: TranslateService,
     private aboutService: AboutService,
     private formattingTextService: FormattingTextService,
-    private elementRef: ElementRef, private renderer: Renderer2
   ) {
     this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
     this.aboutTeam$ = this.aboutService.fetchAboutTeam();
