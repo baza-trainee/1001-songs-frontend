@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {debounceTime, fromEvent, Observable, Subscription} from "rxjs";
 
 @Component({
@@ -19,6 +19,8 @@ export class FadeInCarouselComponent implements OnInit, OnDestroy {
   private resizeSubscription$!: Subscription;
   slideIndex: number = 0;
   heightBox: number = 0;
+
+  constructor(private _translate: TranslateService) {}
 
   nextSlide() {
     if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
