@@ -2,60 +2,29 @@
   <section class="about">
     <div class="about__box">
       <h2 class="about__title">{{ 'about.title' | translate }}</h2>
-      <p class="about__description">
-        Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus
-        aliquam et ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet
-        consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor
-        massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.
-      </p>
     </div>
+    <div class="about__content">
+      <ng-container *ngFor="let text of content; let i = index">
 
-    <img class="about__main-img" src="https://drive.google.com/uc?export=view&id=1_k_tunStJNrq7CnIEtTqEIkDcIAHf7y4" alt="about us photo" />
-    <div class="about__box">
-      <p class="about__description">
-        Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus
-        aliquam et ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet
-        consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor
-        massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.
-      </p>
-    </div>
-    <div class="about__box">
-      <div class="about__carousel">
-        <img
-          class="about__carousel-item"
-          src="https://drive.google.com/uc?export=view&id=1_k_tunStJNrq7CnIEtTqEIkDcIAHf7y4"
-          alt="about us photo"
-        />
-        <div class="about__carousel-nav">
-          <p class="about__carousel-nav__desrc"><span class="about__carousel-nav__count">1/2</span> Lorem ipsum</p>
-          <div class="nav__btns">
-            <button class="nav__btn__left">
-              <svg width="40" height="40" viewBox="0 0 48 48">
-                <use xlink:href="./assets/sprites.svg#arrowForward"></use>
-              </svg>
-            </button>
-            <button class="nav__btn__right">
-              <svg width="40" height="40" viewBox="0 0 48 48">
-                <use xlink:href="./assets/sprites.svg#arrowForward"></use>
-              </svg>
-            </button>
+        <ng-container *ngIf="Array.isArray(text); else elseBlock">
+          <div [ngClass]="{'about__box': i !== 1}" class="about__carousel">
+            <app-fade-in-carousel [photos]="text"></app-fade-in-carousel>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="about__box">
-      <p class="about__description">
-        Lorem ipsum dolor sit amet consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus
-        aliquam et ornare ut. Lorem dolor massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.Lorem ipsum dolor sit amet
-        consectetur. Placerat eget maecenas fusce ullamcorper vestibulum nunc nunc a porttitor. Urna purus aliquam et ornare ut. Lorem dolor
-        massa dictumst ac. Adipiscing pellentesque non molestie sapien sit hac.
-      </p>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          <div [ngClass]="{'about__box': i !== 1}"  [innerHTML]="text"></div>
+        </ng-template>
+      </ng-container>
     </div>
   </section>
 </div>
 
-<app-about-team></app-about-team>
+<ng-container *ngIf="aboutTeam$ | async as team">
+  <app-about-team [team]="team"></app-about-team>
+</ng-container>
 
 <div>
-  <app-slider [sliderItems]="sliderItems" [title]="'about.projects.title'"></app-slider>
+<!--  <app-slider [sliderItems]="sliderItems" [title]="'about.projects.title'"></app-slider>-->
 </div>
+

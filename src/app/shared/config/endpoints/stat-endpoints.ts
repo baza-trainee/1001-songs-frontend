@@ -10,4 +10,6 @@ export const StatEndpoints = {
   scienceSongs: 'songs_es',
   donation: 'modal_window',
   footer: 'footer',
+  about: 'about',
+  team: 'team',
 };

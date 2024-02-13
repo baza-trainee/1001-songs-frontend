@@ -44,9 +44,52 @@ a {
   padding: 0;
 }
 
+blockquote {
+  margin: 10px 0;
+  position: relative;
+  padding-left: 26px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--bg-color-accent);
+  }
+}
+
 @media (max-width:  1376px) {
   .container {
     max-width: 100%;
   }
 }
 
+.box {
+  max-width: 954px;
+  padding-left: 109px;
+
+}
+
+iframe {
+  height: 476px;
+}
+
+@media (max-width: 1024px) {
+  .box {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 675px) {
+  iframe {
+    height: 396px;
+  }
+}
+
+@media (max-width: 465px) {
+  iframe {
+    height: 200px;
+  }
+}

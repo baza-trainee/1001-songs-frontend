@@ -1,0 +1,70 @@
+@import '../../../../typography/typography';
+
+.carousel {
+  width: 100%;
+
+  &-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 12px;
+  }
+
+  &-nav {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-img {
+    transition: opacity 0.5s;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    img {
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  &-info {
+    @include body-desktop;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color-popup-menu);
+
+    span {
+      color: var(--text-color-primary);
+    }
+  }
+
+  &-prev {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &-prev,
+  &-next {
+    background-color: transparent;
+    border: none;
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+}

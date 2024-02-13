@@ -11,11 +11,18 @@ export class FooterService {
 
   constructor(private http: HttpClient) { }
 
-  fetchFooterInfo(): Observable<Footer[]> {
-    return this.http.get<Footer[]>(`${API_URL}${StatEndpoints.footer}`).pipe(
+  fetchFooterInfo(): Observable<Footer> {
+    return this.http.get<Footer>(`${API_URL}${StatEndpoints.footer}`).pipe(
       catchError((error) => {
         console.error(error);
-        return of([]);
+        return of({
+          reporting: '',
+          privacy_policy: '',
+          rules_and_terms: '',
+          email: '',
+          facebook_url: '',
+          youtube_url: ''
+        });
       })
     );
   }

@@ -48,9 +48,9 @@
       </div>
       <div class="footer__rules">
           <ul>
-            <li><a [href]="info[0].reporting" target="_blank"> {{ 'footer.rules.reporting' | translate }} </a></li>
-            <li><a [href]="info[0].privacy_policy" target="_blank"> {{ 'footer.rules.policy' | translate }} </a></li>
-            <li><a [href]="info[0].rules_and_terms" target="_blank"> {{ 'footer.rules.terms' | translate }} </a></li>
+            <li><a [href]="info.reporting" target="_blank"> {{ 'footer.rules.reporting' | translate }} </a></li>
+            <li><a [href]="info.privacy_policy" target="_blank"> {{ 'footer.rules.policy' | translate }} </a></li>
+            <li><a [href]="info.rules_and_terms" target="_blank"> {{ 'footer.rules.terms' | translate }} </a></li>
           </ul>
       </div>
 
@@ -58,16 +58,16 @@
         <div class="contacts__title"> {{ 'footer.contacts.title' | translate }} </div>
 
         <div class="contacts__email" target="_blank">
-          <a href="mailto:{{info[0].email}}"> {{ info[0].email }} </a>
+          <a href="mailto:{{info.email}}"> {{ info.email }} </a>
         </div>
 
         <div class="contacts__social">
-          <a [href]="info[0].facebook" class="social__item" target="_blank">
+          <a [href]="info.facebook_url" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconFb"></use>
             </svg>
           </a>
-          <a [href]="info[0].youtube" class="social__item" target="_blank">
+          <a [href]="info.youtube_url" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconYouTube"></use>
             </svg>

@@ -18,7 +18,7 @@ import {FooterService} from "../../services/footer/footer.service";
 })
 export class FooterComponent {
   public navLinks = navLinksHeader;
-  public footerInfo$!: Observable<Footer[]>;
+  public footerInfo$!: Observable<Footer>;
   constructor(
     private _translate: TranslateService,
     public dialog: MatDialog,
