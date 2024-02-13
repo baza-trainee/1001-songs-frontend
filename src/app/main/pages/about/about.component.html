@@ -4,16 +4,20 @@
       <h2 class="about__title">{{ 'about.title' | translate }}</h2>
     </div>
     <div class="about__content">
-      <ng-container *ngFor="let text of content; let i = index">
+      <ng-container *ngFor="let content of content; let i = index">
 
-        <ng-container *ngIf="Array.isArray(text); else elseBlock">
-          <div [ngClass]="{'about__box': i !== 1}" class="about__carousel">
-            <app-fade-in-carousel [photos]="text"></app-fade-in-carousel>
+        <ng-container *ngIf="content.images.length; else textBlock">
+          <div class="content about__carousel" [ngClass]="{'about__box': i !== 1}">
+            <app-fade-in-carousel [photos]="content.images"></app-fade-in-carousel>
           </div>
         </ng-container>
 
-        <ng-template #elseBlock>
-          <div [ngClass]="{'about__box': i !== 1}"  [innerHTML]="text"></div>
+        <ng-template #textBlock>
+          <div
+                  class="content"
+                  [ngClass]="{'main-content': i === 1, 'about__box': i !== 1}"
+                  [innerHTML]="content.text | safeHtml"
+          ></div>
         </ng-template>
       </ng-container>
     </div>

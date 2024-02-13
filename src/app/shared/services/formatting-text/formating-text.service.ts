@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
-
 import {Content} from "../../interfaces/about.interface";
 
 @Injectable({
@@ -8,37 +6,59 @@ import {Content} from "../../interfaces/about.interface";
 })
 export class FormattingTextService {
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor() {
+  }
 
-  splitText(htmlString: string): Content {
-    const pattern = /<p class="quill-slider">(.*?)<\/p>/g;
-    const indexImg: number = this.findIndexOfMultipleImages(htmlString, pattern);
+  splitText(htmlString: string): Content[] {
+    const contents = htmlString.match(/<[^>]+>([^<]*)<\/[^>]+>/g);
+    let result: Content[] = [];
+    if (contents) {
+      contents.filter(item => !item.includes("<br>"));
+      result = this.findCarousel(contents);
+    }
 
-    return htmlString.split(pattern)
-      .map((element, index) => {
-        if (index !== indexImg) {
-          return this.getSafeHtml(element);
-        } else {
-          return this.extractSrc(htmlString.split(pattern)[indexImg]);
+    return result
+  }
+
+  findCarousel(contents: string[]): Content[] {
+    const imagesIndexes: number[] = [];
+    const imagesSrcs: string[] = [];
+    let consecutiveImagesCount = 0;
+    let isNextImg = false;
+
+    const result: Content[] = [];
+
+    contents.forEach((item, index, array) => {
+      if (item.includes("<img")) {
+        result.push({images: [], text: ''})
+        consecutiveImagesCount++
+        isNextImg = index < array.length - 1 && array[index + 1].includes("<img");
+        const srcMatch = item.match(/src="([^"]+)"/);
+        if (srcMatch) {
+          imagesSrcs.push(srcMatch[1]);
         }
-      });
-  }
+        if (!isNextImg) {
+          if (consecutiveImagesCount > 1) {
+            imagesIndexes.push(index - consecutiveImagesCount + 1);
+            imagesIndexes.push(consecutiveImagesCount)
+          }
+          consecutiveImagesCount = 0;
+        }
+      } else {
+        result.push({images: [], text: item})
+        consecutiveImagesCount = 0;
+      }
+    });
 
-  private findIndexOfMultipleImages(paragraph: string, pattern: RegExp): number {
-    return paragraph.split(pattern)
-      .findIndex((str) => {
-        const imgCount = str.split('<img').length - 1;
-        return imgCount > 1;
-      });
-  }
+    const replacementArray: Content[] = [{text: "", images: []}]; // Преобразуем объект в массив
+    imagesSrcs.forEach(src => {
+      replacementArray[0].images.push(src); // Обращаемся к элементу массива
+    });
 
-  private extractSrc(paragraph: string): string[] {
-    const innerPattern = /<img src="(.*?)">/g;
-    const matches = paragraph.split(innerPattern);
-    return matches.filter(value => value.trim() !== "");
-  }
+    if (imagesIndexes.length > 0) {
+      result.splice(imagesIndexes[0], imagesIndexes[1], ...replacementArray);
+    }
 
-  private getSafeHtml(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+    return result;
   }
 }

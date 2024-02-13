@@ -1,4 +1,10 @@
 @import '/src/typography/typography';
+@import '/src/typography/fonts';
+@import '/src/typography/colors';
+
+.content {
+  margin-bottom: 16px;
+}
 
 .about {
   margin-top: 108px;
@@ -13,11 +19,13 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-
     @include body-desktop($line-height: 28px, $font-size: 20px);
+
+    span {
+      font-size: 16px !important;
+      line-height: 28px !important;
+      color: var(--text-color-primary) !important;
+    }
 
     .about__box {
       display: flex;

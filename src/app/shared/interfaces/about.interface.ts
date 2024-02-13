@@ -1,5 +1,3 @@
-import {SafeHtml} from "@angular/platform-browser";
-
 export interface DataAboutContent {
   id: number;
   content: string
@@ -12,4 +10,7 @@ export interface AboutTeam {
   description: string;
 }
 
-export interface Content extends Array<string[] | SafeHtml> {}
+export interface Content {
+  text: string
+  images: string[]
+}
