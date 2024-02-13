@@ -1,23 +1,11 @@
 export interface DonationData {
     id: number;
+    organization_name: string;
+    edrpou: number;
+    bank: string;
     info: string;
     iban: string;
-    coffee: string;
-    patreon: string;
-    qr: string;
-}
-export interface Donation {
-    id: number;
-    info: PaymentInfo;
-    iban: string;
-    coffee: string;
-    patreon: string;
-    qr: string;
-}
-export interface PaymentInfo {
-    organization: string;
-    edrpou: string;
-    iban: string;
-    bank: string;
-    purpose: string;
+    coffee_url: string;
+    patreon_url: string;
+    qr_code_url: string;
 }

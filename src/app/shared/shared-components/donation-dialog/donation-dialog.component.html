@@ -6,25 +6,25 @@
       </svg>
     </span>
   </div>
-  <h1 class="donation__title">{{ donat[0].info.organization }}</h1>
+  <h1 class="donation__title">{{ donat.organization_name }}</h1>
   <div class="donation__credentials">
-    <div>{{ donat[0].info.edrpou }}.</div>
-    <div>{{ donat[0].info.iban }}.</div>
-    <div>{{ donat[0].info.bank }}</div>
+    <div>ЄДРПОУ:{{ donat.edrpou }}.</div>
+    <div>{{ donat.iban }}.</div>
+    <div>{{ donat.bank }}</div>
   </div>
 
   <div class="donation__purpose">
     <span class="donation__purpose-title"> Призначення платежу:</span>
-    <span class="donation__purpose-message">{{ donat[0].info.purpose }}</span>
+    <span class="donation__purpose-message">{{ donat.info }}</span>
   </div>
 
   <div mat-dialog-actions class="donation__actions">
     <div mat-dialog-actions class="donation__actions-qr">
-      <img [src]="donat[0].qr" alt="Graphic key" />
+      <img [src]="donat.qr_code_url" alt="Graphic key" />
       <span class="donation__actions-caption">QRкод (Приват24)</span>
     </div>
     <div mat-dialog-actions class="donation__actions-options">
-      <button class="donation__actions-button" (click)="clipboard.copy(donat[0].iban)" (keypress)="clipboard.copy(donat[0].iban)" tabindex="0">
+      <button class="donation__actions-button" (click)="clipboard.copy(donat.iban)" (keypress)="clipboard.copy(donat.iban)" tabindex="0">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <use xlink:href="./assets/sprites.svg#copy"></use>
         </svg>
@@ -32,7 +32,7 @@
       </button>
       <a
         class="donation__actions-button"
-        [href]="donat[0].coffee"
+        [href]="donat.coffee_url"
         target="_blank"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@
       </a>
       <a
         class="donation__actions-button"
-        [href]="donat[0].patreon"
+        [href]="donat.patreon_url"
         target="_blank"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
