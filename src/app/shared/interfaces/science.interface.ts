@@ -19,7 +19,7 @@ export interface EducationPrimaryCategory {
   id: 0;
   title: string;
   description: string;
-  recommendations: string;
+  recommendations: string[];
   song_subcategories: [
     {
       id: string;

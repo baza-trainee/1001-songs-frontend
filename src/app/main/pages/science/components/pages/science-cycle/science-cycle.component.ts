@@ -19,6 +19,7 @@ export class ScienceCycleComponent implements OnInit {
   category!: ScienceCategory;
   categoryName!: string;
   categoryData: EducationPrimaryCategory = {} as EducationPrimaryCategory;
+  //recommendedSources = [''];
 
   constructor(
     private router: Router,
