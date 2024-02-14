@@ -32,6 +32,7 @@ export class ScienceComponent implements OnInit {
   PAGE_SIZE = 5;
   categories: EducationCategoryCard[] = [];
   recommendations = '';
+  recommendedSources = [''];
   recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
@@ -41,9 +42,15 @@ export class ScienceComponent implements OnInit {
 
   ngOnInit(): void {
     this.educationService.fetchESData().subscribe((data: object) => {
-      const responseObject = data as { description: string; calendar_and_ritual_categories: []; recommendations: string };
+      const responseObject = data as {
+        description: string;
+        calendar_and_ritual_categories: [];
+        recommendations: string;
+        recommended_sources: string[];
+      };
       this.intro = responseObject.description;
       this.recommendations = responseObject.recommendations;
+      this.recommendedSources = responseObject.recommended_sources;
       const genres = responseObject.calendar_and_ritual_categories;
       this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
         title: genreGroup.title,
