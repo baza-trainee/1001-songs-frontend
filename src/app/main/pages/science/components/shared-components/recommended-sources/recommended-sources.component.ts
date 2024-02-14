@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from '../arrow-down/arrow-down.component';
@@ -11,6 +11,8 @@ import { ArrowDownComponent } from '../arrow-down/arrow-down.component';
   styleUrls: ['./recommended-sources.component.scss']
 })
 export class RecommendedSourcesComponent {
+  @Input() data: string = '';
+  
   expansionSourcesArrow = 'bottom';
   rotateSourcesArrow() {
     this.expansionSourcesArrow = this.expansionSourcesArrow === 'bottom' ? 'top' : 'bottom';

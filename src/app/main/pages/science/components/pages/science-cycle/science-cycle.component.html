@@ -1,5 +1,5 @@
 <div class="container">
-  <section class="cycle" >
+  <section class="cycle">
     <app-breadcrumbs></app-breadcrumbs>
 
     <h1 class="cycle__title">{{ categoryData.title }}</h1>
@@ -12,10 +12,10 @@
       <h4 class="cycle__title-sub">{{ sub.title }}</h4>
       <div class="cycle__subcategory">
         <div class="cycle__img-box">
-          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="category.url" alt="Фото категорії" />
+          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="sub.media" alt="Ілюстрація до категорії" />
         </div>
         <div class="cycle__subcategory-box">
-          <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="link.id+''">
+          <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="link.id + ''">
             {{ link.title }}
             <span class="cycle__subcategory-arrow">
               <svg width="24" height="24" viewBox="0 0 24 24">
