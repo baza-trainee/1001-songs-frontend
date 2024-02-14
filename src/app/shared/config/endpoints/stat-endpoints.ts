@@ -11,6 +11,7 @@ export const StatEndpoints = {
   payment: 'payment',
   footer: 'footer',
   educationCategory: 'category',
+  educationGenre:'genre',
   about: 'about',
   team: 'team',
 };

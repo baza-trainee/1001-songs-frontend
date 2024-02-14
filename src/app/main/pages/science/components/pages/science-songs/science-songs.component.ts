@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, Subscription, take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,12 +14,12 @@ import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
 import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
-import {
-  PlaylistSongCardComponent
-} from "../../../../map/components/player/playlist-song-card/playlist-song-card.component";
-import {StereoPlayerComponent} from "../../../../map/components/player/stereo-player/stereo-player.component";
-import {Song} from "../../../../../../shared/interfaces/song.interface";
-import {SliderComponent} from "../../../../../../shared/shared-components/slider/slider.component";
+import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
+import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
+import { Song } from '../../../../../../shared/interfaces/song.interface';
+import { SliderComponent } from '../../../../../../shared/shared-components/slider/slider.component';
+import { EducationService } from 'src/app/shared/services/education/education.service';
+import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
 
 @Component({
   selector: 'app-science-songs',
@@ -51,19 +51,19 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   isPlay!: boolean;
   isFixed: boolean = false;
   gap: number = 48;
+  genreData = {} as EducationGenre;
 
   songs: ScienceSong[] = [];
   title!: string;
   private readonly subscription?: Subscription;
-  about1: string =
-    '<p>Діти (віком від п’яти до десяти/дванадцяти років) колядували/щедрували поодинці або невеличкими групками. Хлопчики і дівчатка могли ходити разом. Найчастіше бігали до родичів, сусідів, хрещених.</p> <p>У текстах дитячих колядок і щедрівок переважають мотиви випрошування дарів та ритуальні погрози господарям.</p> <p>Колядки/щедрівки дитячого репертуару мають вузький діапазон (секунда, терція, кварта). Пісні засновані на безкінечному повторі однієї (рідше двох) поспівок. Текст при цьому змінюється, рефрени дитячим пісням не властиві.</p>';
-  about2: string =
-    '<p>Зазвичай діти інтонують приблизно, спів часто переходить у скандування без чіткої висоти. Натомість ритм (три базові ритмічні формули) діти відтворюють чітко (див. на картах)</p>';
+  about1: string = '';
+  about2: string = '';
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private educationServices: EducationService
   ) {}
 
   get totalPages(): number {
@@ -85,7 +85,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.heightHeader = 108;
     } else if (window.innerWidth <= 768) {
       this.heightHeader = 96;
-    } else if (window.innerWidth <= 421){
+    } else if (window.innerWidth <= 421) {
       this.gap = 32;
       this.heightHeader = 80;
     }
@@ -95,7 +95,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   onScroll() {
     const distanceTop = this.calculateDistanceToTop();
     if (this.distanceToTop <= distanceTop || !this.distanceToTop) this.distanceToTop = this.calculateDistanceToTop();
-    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader
+    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
   }
 
   handleIsPlayChange(isPlay: boolean) {
@@ -108,18 +108,25 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.route.snapshot) return;
-    const genre = this.route.snapshot.params['id'];
-    const genreParam = genres.find((g) => g.translateKey === genre)?.value;
-    this.songs$.subscribe((scienseSongs) => {
-      this.songs = scienseSongs;
+    const genreId = this.route.snapshot.params['id'];
+    //console.log(genre);
+    this.educationServices.fetchGenreById(genreId).subscribe((d) => {
+      console.log(d);
     });
-    this.store.dispatch(new FetchScienceSongs(genreParam as string));
-    this.route.params.pipe(take(1)).subscribe((params) => {
-      const category = scienceCategories.find((category) => category.routerLink === params['category']);
-      const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);
+    this.educationServices.fetchSongsByGenreId(genreId).subscribe((d) => {
+      console.log(d);
+    });
+    // const genreParam = genres.find((g) => g.translateKey === genre)?.value;
+    // this.songs$.subscribe((scienseSongs) => {
+    //   this.songs = scienseSongs;
+    // });
+    // this.store.dispatch(new FetchScienceSongs(genreParam as string));
+    // this.route.params.pipe(take(1)).subscribe((params) => {
+    //   const category = scienceCategories.find((category) => category.routerLink === params['category']);
+    //   const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);
 
-      subCategory?.title ? (this.title = subCategory.title) : this.router.navigate(['/404']);
-    });
+    //   subCategory?.title ? (this.title = subCategory.title) : this.router.navigate(['/404']);
+    // });
   }
 
   ngAfterViewInit(): void {

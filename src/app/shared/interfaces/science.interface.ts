@@ -19,7 +19,7 @@ export interface EducationPrimaryCategory {
   id: 0;
   title: string;
   description: string;
-  recommendations: string[];
+  recommended_sources: string[];
   song_subcategories: [
     {
       id: string;
@@ -40,6 +40,13 @@ export interface EducationCategoryCard {
   title: string;
   media: string;
   // routerLink: string;
+}
+
+export interface EducationGenre {
+  id: 0;
+  title: string;
+  media: string[];
+  descriptio: string;
 }
 
 // export interface SongsPrimaryCategory {

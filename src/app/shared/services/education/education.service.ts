@@ -12,6 +12,10 @@ export class EducationService {
     return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}?genre=${genre}`);
   }
 
+  fetchSongsByGenreId(genreId: string) {
+    return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.educationGenre}/${genreId}/${StatEndpoints.songs}`);
+  }
+
   fetchSongById(songId: string) {
     const id = songId ? '/' + songId : '';
     return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}${id}`);
@@ -19,6 +23,10 @@ export class EducationService {
 
   fetchCategoryById(id: string) {
     return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.educationCategory}/${id}`);
+  }
+
+  fetchGenreById(id: string) {
+    return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.educationGenre}/${id}`);
   }
 
   fetchESData() {
