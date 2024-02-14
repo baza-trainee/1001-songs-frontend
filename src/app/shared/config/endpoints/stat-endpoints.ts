@@ -8,7 +8,9 @@ export const StatEndpoints = {
   songs: 'songs',
   education: 'education',
   scienceSongs: 'songs_es',
-  donation: 'modal_window',
+  payment: 'payment',
   footer: 'footer',
-  educationCategory: 'category'
+  educationCategory: 'category',
+  about: 'about',
+  team: 'team',
 };

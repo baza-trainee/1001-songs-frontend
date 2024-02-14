@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Clipboard } from '@angular/cdk/clipboard';
 import {DonationService} from "../../services/donation/donation.service";
 import {Observable} from "rxjs";
-import {Donation} from "../../interfaces/donation";
+import {DonationData} from "../../interfaces/donation";
 
 @Component({
   selector: 'app-donation-dialog',
@@ -16,7 +16,7 @@ import {Donation} from "../../interfaces/donation";
 })
 
 export class DonationDialogComponent {
-  donation$!: Observable<Donation[]>;
+  donation$!: Observable<DonationData>;
 
   actions = { copy: 'Copy IBAN', bmc: 'Buy Me A Coffe', patreon: 'Patreon' };
   purposeMessage = "Безповоротна фінансова допомога від прізвище, ім'я, по-батькові.";

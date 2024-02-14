@@ -1,64 +1,44 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import {Observable, Subscription} from "rxjs";
 
 import { AboutTeamComponent } from './about-team/about-team.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
-import { Slide } from 'src/app/shared/interfaces/slide.interface';
+import { AboutService } from "../../../shared/services/about/about.service";
+import { FormattingTextService } from "../../../shared/services/formatting-text/formating-text.service";
+import { AboutTeam, Content, DataAboutContent } from "../../../shared/interfaces/about.interface";
+import { FadeInCarouselComponent } from "../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
+import {SafeHtmlPipe} from "../../../shared/pipes/safe-html.pipe";
+
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent]
+  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent, FadeInCarouselComponent, SafeHtmlPipe]
 })
-export class AboutComponent {
-  imgSrc = 'https://drive.google.com/uc?export=view&id=1QpsMn5igy2b2ldRloUqVrpryy37v3d21';
-  sliderItems: Slide[] = [
-    {
-      img: this.imgSrc,
-      title: '1000 і 1 пісня',
-      description: 'Проєкт спрямований для підтримки фонду записів старовинних автентичних пісень українців.',
-      id: 0,
-      location: 'Локація',
-      date: 'Дата події',
-    },
-    {
-      id: 0,
-      img: this.imgSrc,
-      title: 'Назва проєкту2',
-      location: 'Локація',
-      date: 'Дата події',
-      description: 'Текст опис проєкту'
-    },
-    {
-      id: 0,
-      img: this.imgSrc,
-      title: 'Назва проєкту3',
-      location: 'Локація',
-      date: 'Дата події',
-      description: 'Текст опис проєкту'
-    },
-    {
-      id: 0,
-      img: this.imgSrc,
-      location: 'Локація',
-      date: 'Дата події',
-      title: 'Назва проєкту4',
-      description: 'Текст опис проєкту'
-    },
-    {
-      id: 0,
-      img: this.imgSrc,
-      location: 'Локація',
-      date: 'Дата події',
-      title: 'Назва проєкту5',
-      description: 'Текст опис проєкту'
-    }
-  ];
 
-  constructor(private translateService: TranslateService) {
+export class AboutComponent implements OnDestroy {
+  private dataAboutContent$: Observable<DataAboutContent>;
+  public aboutTeam$: Observable<AboutTeam[]>;
+  public content!: Content[];
+  private subscription$: Subscription;
+
+  constructor(
+    private translateService: TranslateService,
+    private aboutService: AboutService,
+    private formattingTextService: FormattingTextService,
+  ) {
+    this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
+    this.aboutTeam$ = this.aboutService.fetchAboutTeam();
+    this.subscription$ = this.dataAboutContent$.subscribe(content => {
+      this.content = this.formattingTextService.splitText(content.content);
+    });
   }
 
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
 }
