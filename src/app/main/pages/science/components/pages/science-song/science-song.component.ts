@@ -56,17 +56,17 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     private audioService: AudioService
   ) {}
 
+  ngOnInit() {
+    const params = this.route.snapshot.params;
+    this.store.dispatch(new FetchSongById(params['idSong']));
+  }
+
   nextSlide() {
     if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
   }
 
   prevSlide() {
     if (this.slideIndex !== 0) this.slideIndex--;
-  }
-
-  ngOnInit() {
-    const params = this.route.snapshot.params;
-    this.store.dispatch(new FetchSongById(params['idSong']));
   }
 
   ngOnDestroy(): void {

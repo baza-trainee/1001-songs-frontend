@@ -40,7 +40,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song: ScienceSong) => {
       this.stop();
-      if (song.media && song.media && song.media.audio_example) {
+      if (song.stereo_audio) {
         this.openFile(song);
       }
     });
@@ -49,7 +49,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
-        this.stopOnLoaded()
+        this.stopOnLoaded();
       }
     });
   }
@@ -80,7 +80,7 @@ export class SciencePlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.multiAudioService.stopAll();
     this.audioService.stop();
-    this.playStream(file.media.audio_example);
+    this.playStream(file.stereo_audio);
   }
 
   pause() {
