@@ -33,7 +33,7 @@ export class ScienceCycleComponent implements OnInit {
     const categoryId = this.route.snapshot.params['category'];
     this.educationService.fetchCategoryById(categoryId).subscribe((data: object) => {
       this.categoryData = data as EducationPrimaryCategory;
-      console.log(data);
+      //console.log(data);
     });
 
     //console.log(' > > > ', d);

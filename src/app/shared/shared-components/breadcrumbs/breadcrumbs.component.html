@@ -1,11 +1,11 @@
 <div class="breadcrumbs">
   <ul class="breadcrumbs__list">
     <li tabindex="0" (click)="redirectToPath(Links.home)" (keypress)="redirectToPath(Links.home)">
-      <a>{{ Links.home | translate }}</a>
+      <a>{{ Links.home  }}</a>
     </li>
 
     <li tabindex="0" *ngFor="let crumb of crumbs" (click)="redirectToPath(crumb)" (keypress)="redirectToPath(Links.home)">
-      &nbsp;&nbsp;/&nbsp;&nbsp; <a>{{ crumb | translate }}</a>
+      &nbsp;&nbsp;/&nbsp;&nbsp; <a>{{ crumb  }}</a>
     </li>
   </ul>
 </div>

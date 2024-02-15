@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbsTrasnslateKeys } from '../../enums/breadcrumbs.emum';
+import { crumbs } from '../../enums/breadcrumbs';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -26,22 +27,36 @@ export class BreadcrumbsComponent implements OnInit {
       this.setCrumbs(path);
     }
   }
+
   ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
       if (route instanceof NavigationEnd) {
         const path = route.urlAfterRedirects;
         this.setCrumbs(path);
+        // console.log(route);
       }
     });
+
+    //  console.log(this.router);
   }
 
   setCrumbs(path: string) {
-    const pathSegments = path
-      .split('/')
-      .filter((segment: string) => segment !== '')
-      .map((segment: string) => this.Links[segment as keyof typeof this.Links]);
+    //console.log(path);
+    const pathSegments = path.split('/').filter((segment: string) => segment !== '');
+    // .map((segment: string) => this.Links[segment as keyof typeof this.Links]);
+    const namedSegments: string[] = [];
+    pathSegments.reduce((a, c) => {
+      namedSegments.push(this.getSegmentName(a));
+      console.log(a);
+      return a + '/' + c;
+    });
     pathSegments.pop();
-    this.crumbs = [...pathSegments];
+    this.crumbs = [...namedSegments];
+  }
+
+  getSegmentName(key: string): string {
+    const target = crumbs.find((el: any) => el.key === key);
+    return target?.key ? target.name : key;
   }
 
   redirectToPath(segment: string) {

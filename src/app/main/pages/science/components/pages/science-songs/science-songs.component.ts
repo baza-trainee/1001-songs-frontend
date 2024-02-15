@@ -111,10 +111,10 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     const genreId = this.route.snapshot.params['id'];
     //console.log(genre);
     this.educationServices.fetchGenreById(genreId).subscribe((d) => {
-      console.log(d);
+    //  console.log(d);
     });
     this.educationServices.fetchSongsByGenreId(genreId).subscribe((d) => {
-      console.log(d);
+     // console.log(d);
     });
     // const genreParam = genres.find((g) => g.translateKey === genre)?.value;
     // this.songs$.subscribe((scienseSongs) => {
