@@ -7,7 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { SciencePlayerComponent } from '../science-player/science-player.component';
-import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 import { SelectSong } from 'src/app/store/education/es-player.actions';
 import {AudioService} from "../../../../../../shared/services/audio/audio.service";
 
@@ -26,7 +26,7 @@ import {AudioService} from "../../../../../../shared/services/audio/audio.servic
   styleUrls: ['./es-playlist-song-card.component.scss']
 })
 export class ESPlaylistSongCardComponent implements OnInit {
-  @Input() song: ScienceSong = {} as ScienceSong;
+  @Input() song: EducationSong = {} as EducationSong;
   @Input() isSelect! : boolean;
   @Input() isPlay!: boolean;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
@@ -42,7 +42,7 @@ export class ESPlaylistSongCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.hasMedia = this.song.media ? true : false;
+    this.hasMedia = this.song.stereo_audio ? true : false;
   }
 
   navigateTo(id: string) {
@@ -54,7 +54,7 @@ export class ESPlaylistSongCardComponent implements OnInit {
 
   openCurrentFile() {
     if (!this.isSelect) {
-      this.store.dispatch(new SelectSong(this.song.id));
+      this.store.dispatch(new SelectSong(this.song.id+''));
       this.isPlay = true;
     } else {
       this.isPlay ? this.audioService.pause() : this.audioService.play();

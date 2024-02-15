@@ -12,7 +12,7 @@ import { genres } from 'src/app/static-data/scientific-genres';
 import { SciencePlayerComponent } from '../../shared-components/science-player/science-player.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
-import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
@@ -42,7 +42,7 @@ import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
 export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
-  @Select(ESPlayerState.getSongs) songs$!: Observable<ScienceSong[]>;
+  @Select(ESPlayerState.getSongs) songs$!: Observable<EducationSong[]>;
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
@@ -53,7 +53,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   gap: number = 48;
   genreData = {} as EducationGenre;
 
-  songs: ScienceSong[] = [];
+  songs: EducationSong[] = [];
   title!: string;
   private readonly subscription?: Subscription;
   about1: string = '';
@@ -70,7 +70,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     return Math.ceil(this.songs.length / this.itemsPerPage);
   }
 
-  get itemsOnCurrentPage(): ScienceSong[] {
+  get itemsOnCurrentPage(): EducationSong[] {
     if (this.songs.length <= this.itemsPerPage) return this.songs;
 
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -109,17 +109,15 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     if (!this.route.snapshot) return;
     const genreId = this.route.snapshot.params['id'];
-    //console.log(genre);
-    this.educationServices.fetchGenreById(genreId).subscribe((d) => {
-    //  console.log(d);
+    this.educationServices.fetchGenreById(genreId).subscribe((data) => {
+      this.genreData = data as EducationGenre;
     });
-    this.educationServices.fetchSongsByGenreId(genreId).subscribe((d) => {
-     // console.log(d);
+   
+    this.store.dispatch(new FetchScienceSongs(genreId));
+    this.songs$.subscribe((scienseSongs) => {
+
+      this.songs = scienseSongs;
     });
-    // const genreParam = genres.find((g) => g.translateKey === genre)?.value;
-    // this.songs$.subscribe((scienseSongs) => {
-    //   this.songs = scienseSongs;
-    // });
     // this.store.dispatch(new FetchScienceSongs(genreParam as string));
     // this.route.params.pipe(take(1)).subscribe((params) => {
     //   const category = scienceCategories.find((category) => category.routerLink === params['category']);

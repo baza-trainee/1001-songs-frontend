@@ -1,3 +1,12 @@
+export interface EducationSong {
+  id: number;
+  title: string;
+  stereo_audio: string;
+  photos: [];
+  recording_location: string;
+  genre: string;
+}
+
 export interface ScienceSong {
   id: string;
   title: string;

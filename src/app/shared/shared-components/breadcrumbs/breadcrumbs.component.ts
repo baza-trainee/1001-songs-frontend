@@ -47,7 +47,7 @@ export class BreadcrumbsComponent implements OnInit {
     const namedSegments: string[] = [];
     pathSegments.reduce((a, c) => {
       namedSegments.push(this.getSegmentName(a));
-      console.log(a);
+     // console.log(a);
       return a + '/' + c;
     });
     pathSegments.pop();

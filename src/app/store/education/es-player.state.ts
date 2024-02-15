@@ -50,11 +50,12 @@ export class ESPlayerState {
   @Action(FetchScienceSongs)
   fetchScienceSongs(ctx: StateContext<ESPlayerStateModel>, action: FetchScienceSongs) {
     const state = ctx.getState();
-    return this.educationService.fetchSongsByGenre(action.genre).pipe(
+    return this.educationService.fetchSongsByGenreId(action.genre).pipe(
       tap((scienceSongs) => {
+        const s = scienceSongs as {items: []}
         ctx.setState({
           ...state,
-          songsList: scienceSongs as ScienceSong[]
+          songsList: s.items as ScienceSong[]
         });
       })
     );

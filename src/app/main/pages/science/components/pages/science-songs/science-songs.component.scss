@@ -57,10 +57,9 @@
     @include body-desktop($font-size: 20px, $line-height: 28px);
 
     &-box {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      width: 50%;
+      column-count: 2;
+      column-gap: 40px;
+      white-space: pre-line;
     }
   }
 

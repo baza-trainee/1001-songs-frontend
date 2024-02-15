@@ -46,7 +46,7 @@ export interface EducationGenre {
   id: 0;
   title: string;
   media: string[];
-  descriptio: string;
+  description: string;
 }
 
 // export interface SongsPrimaryCategory {
