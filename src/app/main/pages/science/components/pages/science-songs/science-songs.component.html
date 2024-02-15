@@ -24,7 +24,6 @@
     <div
       class="songs__playlist"
       *ngIf="songs$ | async as songs"
-      style="border: 2px solid red"
       [ngStyle]="{ 'margin-top.px': isFixed ? fixedContainer.clientHeight : '0' }"
     >
       <div class="songs__playlist-titles">
