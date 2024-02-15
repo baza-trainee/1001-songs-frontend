@@ -7,7 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { SciencePlayerComponent } from '../science-player/science-player.component';
-import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 import { SelectSong } from 'src/app/store/education/es-player.actions';
 import {AudioService} from "../../../../../../shared/services/audio/audio.service";
 

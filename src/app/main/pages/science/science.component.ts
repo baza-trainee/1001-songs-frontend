@@ -5,7 +5,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
 
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
-import { recomendations } from './components/shared-components/category-link/recomendations';
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
@@ -57,12 +56,7 @@ export class ScienceComponent implements OnInit {
         id: genreGroup.id,
         media: genreGroup.media ? genreGroup.media : '/assets/songs.png'
       }));
-      //console.log(responseObject);
     });
-
-    // this.recomendationPages = Array.from(
-    //   Array(Math.floor(recomendations!.length / this.PAGE_SIZE) + (recomendations.length % this.PAGE_SIZE)).keys()
-    // ).map((el) => el + 1);
   }
 
   rotateRecomendationArrow() {

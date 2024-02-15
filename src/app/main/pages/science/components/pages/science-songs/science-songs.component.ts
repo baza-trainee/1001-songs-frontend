@@ -1,18 +1,16 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subscription, take } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
-import { scienceCategories } from '../../../../../../static-data/categoriesList';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
-import { genres } from 'src/app/static-data/scientific-genres';
 import { SciencePlayerComponent } from '../../shared-components/science-player/science-player.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
-import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
@@ -112,19 +110,11 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.educationServices.fetchGenreById(genreId).subscribe((data) => {
       this.genreData = data as EducationGenre;
     });
-   
+
     this.store.dispatch(new FetchScienceSongs(genreId));
     this.songs$.subscribe((scienseSongs) => {
-
       this.songs = scienseSongs;
     });
-    // this.store.dispatch(new FetchScienceSongs(genreParam as string));
-    // this.route.params.pipe(take(1)).subscribe((params) => {
-    //   const category = scienceCategories.find((category) => category.routerLink === params['category']);
-    //   const subCategory = category?.genreGroups.flatMap((group) => group.genres).find((sub) => sub.query === params['id']);
-
-    //   subCategory?.title ? (this.title = subCategory.title) : this.router.navigate(['/404']);
-    // });
   }
 
   ngAfterViewInit(): void {

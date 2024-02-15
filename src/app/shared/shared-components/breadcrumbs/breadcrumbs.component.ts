@@ -33,21 +33,17 @@ export class BreadcrumbsComponent implements OnInit {
       if (route instanceof NavigationEnd) {
         const path = route.urlAfterRedirects;
         this.setCrumbs(path);
-        // console.log(route);
       }
     });
 
-    //  console.log(this.router);
   }
 
   setCrumbs(path: string) {
-    //console.log(path);
     const pathSegments = path.split('/').filter((segment: string) => segment !== '');
     // .map((segment: string) => this.Links[segment as keyof typeof this.Links]);
     const namedSegments: string[] = [];
     pathSegments.reduce((a, c) => {
       namedSegments.push(this.getSegmentName(a));
-     // console.log(a);
       return a + '/' + c;
     });
     pathSegments.pop();
@@ -55,7 +51,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   getSegmentName(key: string): string {
-    const target = crumbs.find((el: any) => el.key === key);
+    const target = crumbs.find((el) => el.key === key);
     return target?.key ? target.name : key;
   }
 
