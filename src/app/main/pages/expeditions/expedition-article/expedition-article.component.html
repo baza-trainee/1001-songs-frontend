@@ -1,6 +1,6 @@
-<ng-container *ngIf="selectedExpedition$ | async as article">
+<ng-container >
   <div class="container">
-    <section class="article" *ngIf="expeditionArticle.id">
+    <section class="article">
       <app-breadcrumbs></app-breadcrumbs>
 
       <div class="article__header">
@@ -14,20 +14,22 @@
           <p class="article__header-text">{{ expeditionArticle.short_description }}</p>
         </div>
         <div class="article__header-box article__header-ua">
-          <img src="../../../../../assets/img/ua.png" alt="" />
+          <img src="{{expeditionArticle.map_photo}}" alt="" heigh="200" width="300" />
         </div>
       </div>
 
-      <app-video-player class="article__player-main" [widthIcon]="72" [srcUrl]="article.video_1"></app-video-player>
+      <div [innerHTML]="expeditionArticle.content | safeHtml"></div> 
 
-      <div class="article__box article__text" *ngIf="article.text_1" [innerHTML]="article.text_1"></div>
-      <div class="article__box article__text article__accent" *ngIf="article.text_2" [innerHTML]="article.text_2"></div>
+    <!-- <app-video-player class="article__player-main" [widthIcon]="72" [srcUrl]="article.video_1"></app-video-player> -->
+
+      <!-- <div class="article__box article__text"  [innerHTML]="expeditionArticle.content"></div> -->
+      <!-- <div class="article__box article__text article__accent" *ngIf="article.text_2" [innerHTML]="article.text_2"></div>
       <div class="article__box article__text" *ngIf="article.text_3" [innerHTML]="article.text_3"></div>
       <div class="article__box article__text">
         <h2 class="article__sub-title">Обрядовий пісенний фольклор</h2>
         <div class="article__text" *ngIf="article.text_4" [innerHTML]="article.text_4"></div>
-      </div>
-      <div class="article__box">
+      </div> -->
+       <!--  <div class="article__box">
         <app-video-player class="article__player-sub" [srcUrl]="article.video_2"></app-video-player>
 
         <div class="article__player-descr">
@@ -114,12 +116,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <app-share class="article__box"></app-share>
     </section>
   </div>
 
-  <div *ngIf="article.id" class="article__slider">
+  <div *ngIf="expeditionArticle.id" class="article__slider">
     <app-slider [sliderItems]="sliderItems" [title]="sliderTitle" colorScheme="default"></app-slider>
   </div>
 </ng-container>

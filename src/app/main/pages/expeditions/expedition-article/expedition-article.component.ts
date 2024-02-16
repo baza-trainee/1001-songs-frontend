@@ -14,11 +14,21 @@ import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
 import { ShareComponent } from '../../../../shared/shared-components/share/share.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
+import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
 
 @Component({
   selector: 'app-expedition-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, VideoPlayerComponent, BreadcrumbsComponent, SliderComponent, ShareComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    RouterLink,
+    VideoPlayerComponent,
+    BreadcrumbsComponent,
+    SliderComponent,
+    ShareComponent,
+    SafeHtmlPipe
+  ],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })
@@ -44,26 +54,28 @@ export class ExpeditionArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new FetchExpeditions());
+    // this.store.dispatch(new FetchExpeditions());
     const expeditionId = this.route.snapshot.params['id'];
     console.log(expeditionId);
     this.expeditionSevice.fetchExpeditionById(expeditionId).subscribe((d) => {
       console.log(d);
+      const article = d as ExpeditionArticle;
+      this.expeditionArticle = article;
     });
 
-    this.expeditionList$
-      .pipe(
-        filter((articles) => articles.length > 0),
-        first()
-      )
-      .subscribe((articles) => {
-        const id: string = this.route.snapshot.params['id'];
-        if (articles.some((article: Iexpediton) => article.id === id)) {
-          this.store.dispatch(new SetSelectedExpedition(id));
-        } else {
-          this.router.navigate(['/404']);
-        }
-      });
+    // this.expeditionList$
+    //   .pipe(
+    //     filter((articles) => articles.length > 0),
+    //     first()
+    //   )
+    //   .subscribe((articles) => {
+    //     const id: string = this.route.snapshot.params['id'];
+    //     if (articles.some((article: Iexpediton) => article.id === id)) {
+    //       this.store.dispatch(new SetSelectedExpedition(id));
+    //     } else {
+    //       this.router.navigate(['/404']);
+    //     }
+    //   });
   }
 
   sliderItems: Slide[] = [
