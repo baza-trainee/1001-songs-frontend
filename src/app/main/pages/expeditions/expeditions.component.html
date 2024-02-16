@@ -21,8 +21,8 @@
 <!--        </li>-->
 <!--      </ul>-->
 <!--    </div>-->
-    <div class="expeditions__gallery" *ngIf="expeditions$ | async as expeditions">
-      <div *ngFor="let event of expeditions" class="expeditions__gallery__item">
+    <div class="expeditions__gallery" *ngIf="expeditionsList.length">
+      <div *ngFor="let event of expeditionsList" class="expeditions__gallery__item">
         <app-expedition-card [event]="event"></app-expedition-card>
       </div>
     </div>

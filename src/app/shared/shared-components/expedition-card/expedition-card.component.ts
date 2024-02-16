@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterLink} from "@angular/router";
 
-import Iexpediton from '../../interfaces/expedition.interface';
+import Iexpediton, { Expedition } from '../../interfaces/expedition.interface';
 import {SanitizePipe} from '../../pipes/sanitizer.pipe';
 import {VideoPlayerComponent} from '../video-player/video-player.component';
 
@@ -14,6 +14,6 @@ import {VideoPlayerComponent} from '../video-player/video-player.component';
   imports: [CommonModule, SanitizePipe, VideoPlayerComponent, RouterLink]
 })
 export class ExpeditionCardComponent {
-  @Input() event: Iexpediton = {} as Iexpediton;
+  @Input() event: Expedition = {} as Expedition;
 
 }

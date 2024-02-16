@@ -1,11 +1,20 @@
 export default interface Iexpediton {
-    id: string;
-    name: string;
-    shortDescription: string;
-    mediaSrc: string;
-    eventDate: Date | string;
-    location: string;
-  }
+  id: string;
+  name: string;
+  shortDescription: string;
+  mediaSrc: string;
+  eventDate: Date | string;
+  location: string;
+}
+
+export interface Expedition {
+  id: number;
+  title: string;
+  location: string;
+  short_description: string;
+  expedition_date: string;
+  preview_photo: string;
+}
 export interface ArticleExpedition {
   id: string;
   title: string;
@@ -38,4 +47,3 @@ export interface ArticleExpedition {
   video_inst: string;
   record: string;
 }
-
