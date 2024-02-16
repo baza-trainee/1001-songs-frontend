@@ -49,7 +49,6 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   redirectToPath(segment: string) {
-    console.log(segment);
     if (segment === this.homeLink.key) {
       this.router.navigateByUrl('/');
       return;
