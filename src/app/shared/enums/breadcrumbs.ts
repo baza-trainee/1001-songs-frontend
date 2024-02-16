@@ -1,6 +1,7 @@
 const sciencePath = 'science';
 export const crumbs = [
   { key: sciencePath + '', name: 'Освітній розділ' },
+  { key: 'expeditions', name: 'Експедиції' },
   {
     key: 1,
     name: 'Пісні зимового циклу'

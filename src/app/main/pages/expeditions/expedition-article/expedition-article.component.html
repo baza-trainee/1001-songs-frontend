@@ -1,17 +1,17 @@
 <ng-container *ngIf="selectedExpedition$ | async as article">
   <div class="container">
-    <section class="article" *ngIf="article.id">
+    <section class="article" *ngIf="expeditionArticle.id">
       <app-breadcrumbs></app-breadcrumbs>
 
       <div class="article__header">
         <div class="article__header-box article__box">
-          <h1 class="article__title">{{ article.title }}</h1>
+          <h1 class="article__title">{{ expeditionArticle.title }}</h1>
           <div class="article__date">
-            <span>{{ article.date_event }} • </span>
-            <span>{{ article.location }} • </span>
-            <span>{{ article.type_expedition }} експедиція</span>
+            <span>{{ expeditionArticle.expedition_date }} • </span>
+            <span>{{ expeditionArticle.location }} • </span>
+            <span>{{ expeditionArticle.category }} експедиція</span>
           </div>
-          <p class="article__header-text">{{ article.brief_description }}</p>
+          <p class="article__header-text">{{ expeditionArticle.short_description }}</p>
         </div>
         <div class="article__header-box article__header-ua">
           <img src="../../../../../assets/img/ua.png" alt="" />

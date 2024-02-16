@@ -15,6 +15,21 @@ export interface Expedition {
   expedition_date: string;
   preview_photo: string;
 }
+
+export interface ExpeditionArticle {
+  id: number;
+  title: string;
+  location: string;
+  short_description: string;
+  expedition_date: string;
+  map_photo: string;
+  category: string;
+  content: string;
+  authors: string[];
+  editors: string[];
+  photographers: string[];
+  recording: string[];
+}
 export interface ArticleExpedition {
   id: string;
   title: string;

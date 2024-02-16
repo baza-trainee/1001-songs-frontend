@@ -30,6 +30,10 @@ export class ExpeditionsService {
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}`);
   }
 
+  fetchExpeditionById(expeditionId: string) {
+    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${expeditionId}`);
+  }
+
   fetchExpeditions() {
     return this.http.get<Iexpediton[]>(`${environment.baseUrl}${StatEndpoints.expeditions}`).pipe(
       catchError(async (error) => {

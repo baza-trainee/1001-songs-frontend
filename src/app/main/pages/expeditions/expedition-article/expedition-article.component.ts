@@ -6,13 +6,14 @@ import { Select, Store } from '@ngxs/store';
 import { filter, first, Observable, Subscription } from 'rxjs';
 
 import { ExpeditionsState } from '../../../../store/expeditions/expeditions.state';
-import Iexpediton, { ArticleExpedition } from '../../../../shared/interfaces/expedition.interface';
+import Iexpediton, { ArticleExpedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
 import { VideoPlayerComponent } from '../../../../shared/shared-components/video-player/video-player.component';
 import { FetchExpeditions, SetSelectedExpedition } from '../../../../store/expeditions/expedition.actions';
 import { BreadcrumbsComponent } from '../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
-import {ShareComponent} from "../../../../shared/shared-components/share/share.component";
+import { ShareComponent } from '../../../../shared/shared-components/share/share.component';
+import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 
 @Component({
   selector: 'app-expedition-article',
@@ -24,6 +25,7 @@ import {ShareComponent} from "../../../../shared/shared-components/share/share.c
 export class ExpeditionArticleComponent implements OnInit {
   @Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<ArticleExpedition>;
   @Select(ExpeditionsState.getExpeditionsList) expeditionList$!: Observable<Iexpediton[]>;
+  expeditionArticle: ExpeditionArticle = {} as ExpeditionArticle;
 
   sliderTitle!: string;
   private langChangeSubscription: Subscription;
@@ -32,7 +34,8 @@ export class ExpeditionArticleComponent implements OnInit {
     private store: Store,
     private route: ActivatedRoute,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private expeditionSevice: ExpeditionsService
   ) {
     this.getTranslation();
     this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
@@ -42,6 +45,11 @@ export class ExpeditionArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new FetchExpeditions());
+    const expeditionId = this.route.snapshot.params['id'];
+    console.log(expeditionId);
+    this.expeditionSevice.fetchExpeditionById(expeditionId).subscribe((d) => {
+      console.log(d);
+    });
 
     this.expeditionList$
       .pipe(
