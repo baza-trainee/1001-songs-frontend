@@ -39,6 +39,7 @@ export class ESPlayerState {
     const state = ctx.getState();
     return this.educationService.fetchSongById(action.id).pipe(
       tap((data) => {
+        console.log(data)
         ctx.setState({
           ...state,
           selecteSong: data as ScienceSong
