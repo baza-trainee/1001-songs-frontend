@@ -35,7 +35,7 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
     this.getExpeditionsList(-1);
     this.getExpeditionCategories();
   }
-  
+
   ngOnDestroy(): void {
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
@@ -47,7 +47,6 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
   }
 
   getExpeditionsList(categoryId: number) {
-    const Id: number = categoryId;
     const params = { search: '', id: categoryId };
     this.expeditionsService
       .fetchExpeditionsListByParams(params)

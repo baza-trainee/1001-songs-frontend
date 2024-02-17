@@ -7,12 +7,12 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { Expedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
 import { VideoPlayerComponent } from '../../../../shared/shared-components/video-player/video-player.component';
-import { BreadcrumbsComponent } from '../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
 import { ShareComponent } from '../../../../shared/shared-components/share/share.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
+import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-expedition-article',

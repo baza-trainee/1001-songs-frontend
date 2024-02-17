@@ -5,7 +5,6 @@ import Iexpediton, { ArticleExpedition } from '../../interfaces/expedition.inter
 import { environment } from 'src/environments/environment';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { mockArticleExpedition } from '../../../mock-data/article-expedition';
-// import { expeditionsCategories } from '../../enums/expeditionsCategories';
 
 @Injectable({
   providedIn: 'root'
@@ -32,21 +31,25 @@ export class ExpeditionsService {
     const categoryIdParam = params.id && params.id > 0 ? `id=${params.id}` : '';
     const joinedParams = [searchParam, categoryIdParam].filter((el) => el !== '').join('&');
     const requestParams = joinedParams.length > 0 ? '?' + joinedParams : '';
-   // console.log(requestParams);
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`).pipe(
-      catchError(error => {
-          console.error(error);
-          return of({ items: [] });
+      catchError((error) => {
+        console.error(error);
+        return of({ items: [] });
       })
-  );;
+    );
   }
 
-  fetchExpeditionCategories(){
+  fetchExpeditionCategories() {
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.categories}`);
   }
 
   fetchExpeditionById(expeditionId: string) {
-    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${expeditionId}`);
+    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${expeditionId}`).pipe(
+      catchError(async (error) => {
+        console.error(error);
+        return of({})
+      })
+    );
   }
 
   fetchExpeditions() {
@@ -56,9 +59,4 @@ export class ExpeditionsService {
       })
     );
   }
-  // getCategoryIdByName(name: string): number {
-  //   console.log(name)
-  //   return 1;
-  //   //return expeditionsCategories[name as keyof typeof expeditionsCategories];
-  // }
 }

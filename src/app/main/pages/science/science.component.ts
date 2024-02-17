@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
@@ -28,7 +28,7 @@ import { Subject, takeUntil } from 'rxjs';
     RouterLink
   ]
 })
-export class ScienceComponent implements OnInit {
+export class ScienceComponent implements OnInit, OnDestroy {
   PAGE_SIZE = 5;
   categories: EducationCategoryCard[] = [];
   recommendations = '';

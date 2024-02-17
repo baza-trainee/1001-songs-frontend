@@ -24,6 +24,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!!!this.router) return
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
       if (route instanceof NavigationEnd) {
         const path = route.urlAfterRedirects;
