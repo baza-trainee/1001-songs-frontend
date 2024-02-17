@@ -9,9 +9,9 @@ import Iexpediton, { Expedition } from 'src/app/shared/interfaces/expedition.int
 import { ExpeditionCardComponent } from 'src/app/main/pages/expeditions/expedition-card/expedition-card.component';
 import { ExpeditionsState } from 'src/app/store/expeditions/expeditions.state';
 import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
-import { FetchExpeditions } from 'src/app/store/expeditions/expedition.actions';
 import { FilterComponent } from '../../../shared/shared-components/filter/filter.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
+import { expeditionsCategories } from 'src/app/shared/enums/expeditionsCategories';
 
 @Component({
   selector: 'app-expeditions',
@@ -28,20 +28,26 @@ export class ExpeditionsComponent implements OnInit {
   constructor(
     private store: Store,
     private expeditionsService: ExpeditionsService
-  ) {
-    this.store.dispatch(new FetchExpeditions());
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new FetchExpeditions());
-    this.expeditionsService.fetchExpeditionsList().subscribe((responseObj: object) => {
-      const response = responseObj as { items: [] };
-      this.expeditionsList = response.items;
-      console.log(responseObj);
-    });
+    this.getExpeditionsList('');
   }
 
   filteredCategory(category: string): void {
-    console.log(category);
+    this.getExpeditionsList(category);
+  }
+
+  getExpeditionsList(category: string) {
+    const categoryId = this.getCategoryIdByName(category);
+    const params = { search: '', id: Number.parseInt(categoryId) };
+    this.expeditionsService.fetchExpeditionsListByParams(params).subscribe((responseObj: object) => {
+      const response = responseObj as { items: [] };
+      this.expeditionsList = response.items;
+    });
+  }
+  getCategoryIdByName(name: string) {
+    const target = Object.entries(expeditionsCategories).find((el) => el[0] === name);
+    return target ? target[1] + '' : '';
   }
 }

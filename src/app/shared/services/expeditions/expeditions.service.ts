@@ -26,8 +26,17 @@ export class ExpeditionsService {
     return article;
   }
 
-  fetchExpeditionsList() {
-    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}`);
+  // fetchExpeditionsList(searchParam: string) {
+  //   const params = searchParam ? `&search=${searchParam}` : '';
+  //   return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${params}`);
+  // }
+  fetchExpeditionsListByParams(params: { search: string; id?: number }) {
+    const searchParam = params.search ? `search=${params.search}` : '';
+    const categoryIdParam = params.id ? `id=${params.id}` : '';
+    const joinedParams = [searchParam, categoryIdParam].filter((el) => el !== '').join('&');
+    const requestParams = joinedParams.length > 0 ? '?' + joinedParams : '';
+
+    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`);
   }
 
   fetchExpeditionById(expeditionId: string) {
