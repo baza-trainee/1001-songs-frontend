@@ -10,6 +10,7 @@ import { RecommendedSourcesComponent } from './components/shared-components/reco
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
 import { EducationCategoryCard } from '../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-science',
@@ -36,27 +37,40 @@ export class ScienceComponent implements OnInit {
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
   intro: string = '';
+  title: string = '';
+
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(private educationService: EducationService) {}
 
   ngOnInit(): void {
-    this.educationService.fetchESData().subscribe((data: object) => {
-      const responseObject = data as {
-        description: string;
-        calendar_and_ritual_categories: [];
-        recommendations: string;
-        recommended_sources: string[];
-      };
-      this.intro = responseObject.description;
-      this.recommendations = responseObject.recommendations;
-      this.recommendedSources = responseObject.recommended_sources;
-      const genres = responseObject.calendar_and_ritual_categories;
-      this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
-        title: genreGroup.title,
-        id: genreGroup.id,
-        media: genreGroup.media ? genreGroup.media : '/assets/songs.png'
-      }));
-    });
+    this.educationService
+      .fetchESData()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseObject: object) => {
+        const data = responseObject as {
+          title: string;
+          description: string;
+          calendar_and_ritual_categories: [];
+          recommendations: string;
+          recommended_sources: string[];
+        };
+        this.title = data.title;
+        this.intro = data.description;
+        this.recommendations = data.recommendations;
+        this.recommendedSources = data.recommended_sources;
+        const genres = data.calendar_and_ritual_categories;
+        this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
+          title: genreGroup.title,
+          id: genreGroup.id,
+          media: genreGroup.media ? genreGroup.media : '/assets/songs.png'
+        }));
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 
   rotateRecomendationArrow() {
