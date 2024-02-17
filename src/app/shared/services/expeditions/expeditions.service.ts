@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import Iexpediton, { ArticleExpedition } from '../../interfaces/expedition.interface';
 import { environment } from 'src/environments/environment';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { mockArticleExpedition } from '../../../mock-data/article-expedition';
+// import { expeditionsCategories } from '../../enums/expeditionsCategories';
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +27,22 @@ export class ExpeditionsService {
     return article;
   }
 
-  // fetchExpeditionsList(searchParam: string) {
-  //   const params = searchParam ? `&search=${searchParam}` : '';
-  //   return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${params}`);
-  // }
   fetchExpeditionsListByParams(params: { search: string; id?: number }) {
     const searchParam = params.search ? `search=${params.search}` : '';
-    const categoryIdParam = params.id ? `id=${params.id}` : '';
+    const categoryIdParam = params.id && params.id > 0 ? `id=${params.id}` : '';
     const joinedParams = [searchParam, categoryIdParam].filter((el) => el !== '').join('&');
     const requestParams = joinedParams.length > 0 ? '?' + joinedParams : '';
+    console.log(requestParams);
+    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`).pipe(
+      catchError(error => {
+          console.error(error);
+          return of({ items: [] });
+      })
+  );;
+  }
 
-    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`);
+  fetchExpeditionCategories(){
+    return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.categories}`);
   }
 
   fetchExpeditionById(expeditionId: string) {
@@ -49,5 +55,10 @@ export class ExpeditionsService {
         console.error(error);
       })
     );
+  }
+  getCategoryIdByName(name: string): number {
+    console.log(name)
+    return 1;
+    //return expeditionsCategories[name as keyof typeof expeditionsCategories];
   }
 }

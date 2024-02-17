@@ -6,7 +6,7 @@ import { Select, Store } from '@ngxs/store';
 import { filter, first, Observable, Subscription } from 'rxjs';
 
 import { ExpeditionsState } from '../../../../store/expeditions/expeditions.state';
-import Iexpediton, { ArticleExpedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
+import Iexpediton, { ArticleExpedition, Expedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
 import { VideoPlayerComponent } from '../../../../shared/shared-components/video-player/video-player.component';
 import { FetchExpeditions, SetSelectedExpedition } from '../../../../store/expeditions/expedition.actions';
 import { BreadcrumbsComponent } from '../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
@@ -33,12 +33,13 @@ import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
   styleUrls: ['./expedition-article.component.scss']
 })
 export class ExpeditionArticleComponent implements OnInit {
-  @Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<ArticleExpedition>;
-  @Select(ExpeditionsState.getExpeditionsList) expeditionList$!: Observable<Iexpediton[]>;
+  //@Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<ArticleExpedition>;
+  // @Select(ExpeditionsState.getExpeditionsList) expeditionList$!: Observable<Iexpediton[]>;
   expeditionArticle: ExpeditionArticle = {} as ExpeditionArticle;
 
   sliderTitle!: string;
-  private langChangeSubscription: Subscription;
+  // private langChangeSubscription: Subscription;
+  linkedExpeditions: Expedition[] = [] as Expedition[];
 
   constructor(
     private store: Store,
@@ -47,20 +48,25 @@ export class ExpeditionArticleComponent implements OnInit {
     private translateService: TranslateService,
     private expeditionSevice: ExpeditionsService
   ) {
-    this.getTranslation();
-    this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
-      this.getTranslation();
-    });
+    // this.getTranslation();
+    // this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
+    //   this.getTranslation();
+    // });
   }
 
   ngOnInit(): void {
     // this.store.dispatch(new FetchExpeditions());
     const expeditionId = this.route.snapshot.params['id'];
-    console.log(expeditionId);
-    this.expeditionSevice.fetchExpeditionById(expeditionId).subscribe((d) => {
-      console.log(d);
-      const article = d as ExpeditionArticle;
+    this.expeditionSevice.fetchExpeditionById(expeditionId).subscribe((data) => {
+      const article = data as ExpeditionArticle;
       this.expeditionArticle = article;
+      //const categoryId = Number.parseInt(article.);
+      this.expeditionSevice
+        .fetchExpeditionsListByParams({ search: '', id: this.expeditionSevice.getCategoryIdByName(article.category) })
+        .subscribe((responseObj) => {
+          const responseData = responseObj as { items: [] };
+          console.log(responseData.items);
+        });
     });
 
     // this.expeditionList$
@@ -129,15 +135,15 @@ export class ExpeditionArticleComponent implements OnInit {
     }
   ];
 
-  getTranslation() {
-    this.translateService.get('expeditions.article.latest-news').subscribe((translated: string) => {
-      this.sliderTitle = translated;
-    });
-  }
+  // getTranslation() {
+  //   this.translateService.get('expeditions.article.latest-news').subscribe((translated: string) => {
+  //     this.sliderTitle = translated;
+  //   });
+  // }
 
-  changeLanguage() {
-    this.langChangeSubscription.unsubscribe();
-  }
+  // changeLanguage() {
+  //   this.langChangeSubscription.unsubscribe();
+  // }
 }
 // @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
 // @Select(NewsState.getArticlesList) articles$!: Observable<Article[]>;

@@ -9,7 +9,7 @@ export enum expeditionCategories {
 }
 
 export enum expeditionsCategories {
-  all = '',
+  all = 0,
   exploring = 1,
   static = 2,
   interdisciplinary = 3,

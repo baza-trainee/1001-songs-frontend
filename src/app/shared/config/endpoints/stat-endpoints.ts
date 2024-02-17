@@ -3,6 +3,7 @@ export const StatEndpoints = {
   markers: 'map',
   expeditions: 'expeditions',
   expedition: 'expedition',
+  categories: 'categories',
   news: 'news',
   songs: 'songs',
   song: 'song',

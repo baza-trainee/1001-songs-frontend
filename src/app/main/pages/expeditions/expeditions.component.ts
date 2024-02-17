@@ -8,10 +8,8 @@ import { Select, Store } from '@ngxs/store';
 import Iexpediton, { Expedition } from 'src/app/shared/interfaces/expedition.interface';
 import { ExpeditionCardComponent } from 'src/app/main/pages/expeditions/expedition-card/expedition-card.component';
 import { ExpeditionsState } from 'src/app/store/expeditions/expeditions.state';
-import { expeditionCategories } from 'src/app/shared/enums/expeditionsCategories';
 import { FilterComponent } from '../../../shared/shared-components/filter/filter.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
-import { expeditionsCategories } from 'src/app/shared/enums/expeditionsCategories';
 
 @Component({
   selector: 'app-expeditions',
@@ -22,7 +20,9 @@ import { expeditionsCategories } from 'src/app/shared/enums/expeditionsCategorie
 })
 export class ExpeditionsComponent implements OnInit {
   @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
-  categories: expeditionCategories[] = Object.values(expeditionCategories);
+  expeditionCategories: { id: number; title: string }[] = [{ id: 0, title: 'string' }];
+  categories = ['Усі'];
+
   expeditionsList: Expedition[] = [];
 
   constructor(
@@ -31,23 +31,30 @@ export class ExpeditionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getExpeditionsList('');
+    this.getExpeditionsList(-1);
+    this.getExpeditionCategories();
   }
 
-  filteredCategory(category: string): void {
-    this.getExpeditionsList(category);
+  filteredCategory(categoryTitle: string): void {
+    const category = this.expeditionCategories.find((el) => el.title === categoryTitle);
+    this.getExpeditionsList(category ? category.id : -1);
   }
 
-  getExpeditionsList(category: string) {
-    const categoryId = this.getCategoryIdByName(category);
-    const params = { search: '', id: Number.parseInt(categoryId) };
+  getExpeditionsList(categoryId: number) {
+    const Id: number = categoryId;
+    const params = { search: '', id: categoryId };
     this.expeditionsService.fetchExpeditionsListByParams(params).subscribe((responseObj: object) => {
+      console.log(responseObj);
       const response = responseObj as { items: [] };
       this.expeditionsList = response.items;
     });
   }
-  getCategoryIdByName(name: string) {
-    const target = Object.entries(expeditionsCategories).find((el) => el[0] === name);
-    return target ? target[1] + '' : '';
+
+  getExpeditionCategories() {
+    this.expeditionsService.fetchExpeditionCategories().subscribe((responseArray) => {
+      const list = responseArray as { id: number; title: string }[];
+      this.expeditionCategories = list;
+      this.categories = [...this.categories, ...list.map((el: { title: string }) => el.title)];
+    });
   }
 }
