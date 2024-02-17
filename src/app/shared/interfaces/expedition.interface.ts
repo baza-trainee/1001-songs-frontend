@@ -23,7 +23,7 @@ export interface ExpeditionArticle {
   short_description: string;
   expedition_date: string;
   map_photo: string;
-  category: string;
+  category: { id: number; title: string };
   content: string;
   authors: string[];
   editors: string[];

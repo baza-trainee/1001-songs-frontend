@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { Select, Store } from '@ngxs/store';
 
@@ -18,12 +18,13 @@ import { ExpeditionsService } from 'src/app/shared/services/expeditions/expediti
   standalone: true,
   imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent]
 })
-export class ExpeditionsComponent implements OnInit {
+export class ExpeditionsComponent implements OnInit, OnDestroy {
   @Select(ExpeditionsState.getExpeditionsList) expeditions$?: Observable<Iexpediton[]>;
   expeditionCategories: { id: number; title: string }[] = [{ id: 0, title: 'string' }];
   categories = ['Усі'];
 
   expeditionsList: Expedition[] = [];
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private store: Store,
@@ -34,6 +35,11 @@ export class ExpeditionsComponent implements OnInit {
     this.getExpeditionsList(-1);
     this.getExpeditionCategories();
   }
+  
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
+  }
 
   filteredCategory(categoryTitle: string): void {
     const category = this.expeditionCategories.find((el) => el.title === categoryTitle);
@@ -43,18 +49,23 @@ export class ExpeditionsComponent implements OnInit {
   getExpeditionsList(categoryId: number) {
     const Id: number = categoryId;
     const params = { search: '', id: categoryId };
-    this.expeditionsService.fetchExpeditionsListByParams(params).subscribe((responseObj: object) => {
-      console.log(responseObj);
-      const response = responseObj as { items: [] };
-      this.expeditionsList = response.items;
-    });
+    this.expeditionsService
+      .fetchExpeditionsListByParams(params)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseObj: object) => {
+        const response = responseObj as { items: [] };
+        this.expeditionsList = response.items;
+      });
   }
 
   getExpeditionCategories() {
-    this.expeditionsService.fetchExpeditionCategories().subscribe((responseArray) => {
-      const list = responseArray as { id: number; title: string }[];
-      this.expeditionCategories = list;
-      this.categories = [...this.categories, ...list.map((el: { title: string }) => el.title)];
-    });
+    this.expeditionsService
+      .fetchExpeditionCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseArray) => {
+        const list = responseArray as { id: number; title: string }[];
+        this.expeditionCategories = list;
+        this.categories = [...this.categories, ...list.map((el: { title: string }) => el.title)];
+      });
   }
 }

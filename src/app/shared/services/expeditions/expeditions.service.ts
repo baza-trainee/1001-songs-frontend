@@ -32,7 +32,7 @@ export class ExpeditionsService {
     const categoryIdParam = params.id && params.id > 0 ? `id=${params.id}` : '';
     const joinedParams = [searchParam, categoryIdParam].filter((el) => el !== '').join('&');
     const requestParams = joinedParams.length > 0 ? '?' + joinedParams : '';
-    console.log(requestParams);
+   // console.log(requestParams);
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`).pipe(
       catchError(error => {
           console.error(error);
@@ -56,9 +56,9 @@ export class ExpeditionsService {
       })
     );
   }
-  getCategoryIdByName(name: string): number {
-    console.log(name)
-    return 1;
-    //return expeditionsCategories[name as keyof typeof expeditionsCategories];
-  }
+  // getCategoryIdByName(name: string): number {
+  //   console.log(name)
+  //   return 1;
+  //   //return expeditionsCategories[name as keyof typeof expeditionsCategories];
+  // }
 }

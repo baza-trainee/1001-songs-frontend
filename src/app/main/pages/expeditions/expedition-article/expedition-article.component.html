@@ -3,13 +3,13 @@
     <section class="article">
       <app-breadcrumbs></app-breadcrumbs>
 
-      <div class="article__header">
+      <div class="article__header" *ngIf="expeditionArticle.id">
         <div class="article__header-box article__box">
-          <h1 class="article__title">{{ expeditionArticle.title }}</h1>
+          <h1 class="article__title">{{ expeditionArticle.category.title }}</h1>
           <div class="article__date">
             <span>{{ expeditionArticle.expedition_date }} • </span>
             <span>{{ expeditionArticle.location }} • </span>
-            <span>{{ expeditionArticle.category }} експедиція</span>
+            <span>{{ expeditionArticle.category.title }} експедиція</span>
           </div>
           <p class="article__header-text">{{ expeditionArticle.short_description }}</p>
         </div>

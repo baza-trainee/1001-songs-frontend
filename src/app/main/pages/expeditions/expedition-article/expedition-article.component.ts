@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Select, Store } from '@ngxs/store';
-import { filter, first, Observable, Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Subject, takeUntil } from 'rxjs';
 
-import { ExpeditionsState } from '../../../../store/expeditions/expeditions.state';
-import Iexpediton, { ArticleExpedition, Expedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
+import { Expedition, ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
 import { VideoPlayerComponent } from '../../../../shared/shared-components/video-player/video-player.component';
-import { FetchExpeditions, SetSelectedExpedition } from '../../../../store/expeditions/expedition.actions';
 import { BreadcrumbsComponent } from '../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
@@ -32,56 +30,52 @@ import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })
-export class ExpeditionArticleComponent implements OnInit {
-  //@Select(ExpeditionsState.getSelectedExpedition) selectedExpedition$?: Observable<ArticleExpedition>;
-  // @Select(ExpeditionsState.getExpeditionsList) expeditionList$!: Observable<Iexpediton[]>;
+export class ExpeditionArticleComponent implements OnInit, OnDestroy {
   expeditionArticle: ExpeditionArticle = {} as ExpeditionArticle;
 
   sliderTitle!: string;
-  // private langChangeSubscription: Subscription;
   linkedExpeditions: Expedition[] = [] as Expedition[];
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
     private router: Router,
-    private translateService: TranslateService,
     private expeditionSevice: ExpeditionsService
-  ) {
-    // this.getTranslation();
-    // this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
-    //   this.getTranslation();
-    // });
-  }
+  ) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(new FetchExpeditions());
     const expeditionId = this.route.snapshot.params['id'];
-    this.expeditionSevice.fetchExpeditionById(expeditionId).subscribe((data) => {
-      const article = data as ExpeditionArticle;
-      this.expeditionArticle = article;
-      //const categoryId = Number.parseInt(article.);
-      this.expeditionSevice
-        .fetchExpeditionsListByParams({ search: '', id: this.expeditionSevice.getCategoryIdByName(article.category) })
-        .subscribe((responseObj) => {
-          const responseData = responseObj as { items: [] };
-          console.log(responseData.items);
-        });
-    });
+    this.expeditionSevice
+      .fetchExpeditionById(expeditionId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        const article = data as ExpeditionArticle;
+        this.expeditionArticle = article;
+        this.expeditionSevice
+          .fetchExpeditionsListByParams({ search: '', id: article.category.id })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((responseObj) => {
+            const responseData = responseObj as { items: [] };
+            this.sliderItems = responseData.items.map((el) => this.sliderItemFromExpedition(el));
+          });
+      });
+  }
 
-    // this.expeditionList$
-    //   .pipe(
-    //     filter((articles) => articles.length > 0),
-    //     first()
-    //   )
-    //   .subscribe((articles) => {
-    //     const id: string = this.route.snapshot.params['id'];
-    //     if (articles.some((article: Iexpediton) => article.id === id)) {
-    //       this.store.dispatch(new SetSelectedExpedition(id));
-    //     } else {
-    //       this.router.navigate(['/404']);
-    //     }
-    //   });
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
+  }
+
+  sliderItemFromExpedition(expedition: Expedition): Slide {
+    return {
+      id: expedition.id,
+      img: expedition.preview_photo,
+      date: expedition.expedition_date,
+      title: expedition.title,
+      description: expedition.short_description,
+      location: expedition.location
+    };
   }
 
   sliderItems: Slide[] = [
@@ -134,40 +128,4 @@ export class ExpeditionArticleComponent implements OnInit {
       location: 'Локація'
     }
   ];
-
-  // getTranslation() {
-  //   this.translateService.get('expeditions.article.latest-news').subscribe((translated: string) => {
-  //     this.sliderTitle = translated;
-  //   });
-  // }
-
-  // changeLanguage() {
-  //   this.langChangeSubscription.unsubscribe();
-  // }
 }
-// @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
-// @Select(NewsState.getArticlesList) articles$!: Observable<Article[]>;
-//
-// constructor(
-//   private store: Store,
-//   private route: ActivatedRoute,
-//   private router: Router
-// ) {}
-//
-// ngOnInit(): void {
-//   this.store.dispatch(new FetchArticles());
-//
-//   this.articles$
-//     .pipe(
-//       filter((articles) => articles.length > 0),
-//       first()
-//     )
-//     .subscribe((articles) => {
-//       const id: number = this.route.snapshot.params['id']
-//       if (articles.some((article: Article) => +article.id === +id)) {
-//         this.store.dispatch(new SetSelectedArticle(+id));
-//       } else {
-//         this.router.navigate(['/404']);
-//       }
-//     });
-// }
