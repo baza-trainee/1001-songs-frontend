@@ -3,8 +3,8 @@
   <img [src]="event.preview_photo" width="400" height="270" alt="photo">
   <div class="event__container" style="cursor: pointer">
     <p class="event__date">{{ event.expedition_date }}</p>
-    <p class="event__name">{{ event.title | slice: 0 : 22 }}</p>
-    <p class="event__description">{{ event.short_description | slice: 0 : 30 }}</p>
-    <p class="event__location">{{ event.location | slice: 0 : 30 }}</p>
+    <p class="event__name">{{ event.title }}</p>
+    <p class="event__description">{{ event.short_description }}</p>
+    <p class="event__location">{{ event.location }}</p>
   </div>
 </div>
