@@ -53,7 +53,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
         const article = data as ExpeditionArticle;
         this.expeditionArticle = article;
         this.expeditionSevice
-          .fetchExpeditionsListByParams({ search: '', id: article.category.id })
+          .fetchExpeditionsListByParams({ search: '', id: article.category.id, exclude: article.id })
           .pipe(takeUntil(this.destroy$))
           .subscribe((responseObj) => {
             const responseData = responseObj as { items: [] };

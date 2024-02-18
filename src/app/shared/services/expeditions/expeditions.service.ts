@@ -26,11 +26,13 @@ export class ExpeditionsService {
     return article;
   }
 
-  fetchExpeditionsListByParams(params: { search: string; id?: number }) {
+  fetchExpeditionsListByParams(params: { search: string; id?: number; exclude?: number }) {
     const searchParam = params.search ? `search=${params.search}` : '';
     const categoryIdParam = params.id && params.id > 0 ? `id=${params.id}` : '';
-    const joinedParams = [searchParam, categoryIdParam].filter((el) => el !== '').join('&');
+    const excludeIdParam = params.exclude ? `expedition_exclude=${params.exclude}` : '';
+    const joinedParams = [searchParam, categoryIdParam, excludeIdParam].filter((el) => el !== '').join('&');
     const requestParams = joinedParams.length > 0 ? '?' + joinedParams : '';
+    console.log(requestParams);
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${StatEndpoints.filter}${requestParams}`).pipe(
       catchError((error) => {
         console.error(error);
@@ -47,7 +49,7 @@ export class ExpeditionsService {
     return this.http.get(`${API_URL}/${StatEndpoints.expedition}/${expeditionId}`).pipe(
       catchError(async (error) => {
         console.error(error);
-        return of({})
+        return of({});
       })
     );
   }
