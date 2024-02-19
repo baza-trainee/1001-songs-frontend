@@ -10,6 +10,7 @@ import { AppState } from 'src/app/store/app/app.state';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
+import { GeneralSearchComponent } from './general-search/general-search.component';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,8 @@ import { DonationDialogComponent } from '../donation-dialog/donation-dialog.comp
     TranslateModule,
     PreloaderComponent,
     NgxsModule,
-    MatDialogModule
+    MatDialogModule,
+    GeneralSearchComponent
   ]
 })
 export class HeaderComponent {
@@ -76,5 +78,4 @@ export class HeaderComponent {
   openDonationDialog() {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
   }
-
 }
