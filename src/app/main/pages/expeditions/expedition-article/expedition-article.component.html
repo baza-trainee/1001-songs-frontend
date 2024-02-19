@@ -1,11 +1,11 @@
-<ng-container >
+<ng-container>
   <div class="container">
     <section class="article">
       <app-breadcrumbs></app-breadcrumbs>
 
       <div class="article__header" *ngIf="expeditionArticle.id">
         <div class="article__header-box article__box">
-          <h1 class="article__title">{{ expeditionArticle.category.title }}</h1>
+          <h1 class="article__title">{{ expeditionArticle.title }}</h1>
           <div class="article__date">
             <span>{{ expeditionArticle.expedition_date }} • </span>
             <span>{{ expeditionArticle.location }} • </span>
@@ -14,13 +14,13 @@
           <p class="article__header-text">{{ expeditionArticle.short_description }}</p>
         </div>
         <div class="article__header-box article__header-ua">
-          <img src="{{expeditionArticle.map_photo}}" alt="" heigh="200" width="300" />
+          <img src="{{ expeditionArticle.map_photo }}" alt="" heigh="200" width="300" />
         </div>
       </div>
 
-      <div [innerHTML]="expeditionArticle.content | safeHtml"></div> 
+      <div [innerHTML]="expeditionArticle.content | safeHtml"></div>
 
-    <!-- <app-video-player class="article__player-main" [widthIcon]="72" [srcUrl]="article.video_1"></app-video-player> -->
+      <!-- <app-video-player class="article__player-main" [widthIcon]="72" [srcUrl]="article.video_1"></app-video-player> -->
 
       <!-- <div class="article__box article__text"  [innerHTML]="expeditionArticle.content"></div> -->
       <!-- <div class="article__box article__text article__accent" *ngIf="article.text_2" [innerHTML]="article.text_2"></div>
@@ -29,7 +29,7 @@
         <h2 class="article__sub-title">Обрядовий пісенний фольклор</h2>
         <div class="article__text" *ngIf="article.text_4" [innerHTML]="article.text_4"></div>
       </div> -->
-       <!--  <div class="article__box">
+      <!--  <div class="article__box">
         <app-video-player class="article__player-sub" [srcUrl]="article.video_2"></app-video-player>
 
         <div class="article__player-descr">

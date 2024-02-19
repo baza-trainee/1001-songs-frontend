@@ -34,7 +34,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
   expeditionArticle: ExpeditionArticle = {} as ExpeditionArticle;
 
   sliderTitle!: string;
-  linkedExpeditions: Expedition[] = [] as Expedition[];
+  sliderItems: Slide[] = [] as Slide[];
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -78,54 +78,54 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
     };
   }
 
-  sliderItems: Slide[] = [
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1KOmDG0mYK7oFhJXW611dE4EMPSsMuP27',
-      date: 'Дата події',
-      title: 'Назва експедиції1',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1JJF93dE4_1HofkG3z3XxiAXZmYm3isxn',
-      date: 'Дата події',
-      title: 'Назва експедиції2',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1Z2aE2YCQJBnf3EA8BpKEN3BJLiJ-Du46',
-      date: 'Дата події',
-      title: 'Назва експедиції3',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1S5DHNWuANY70a4IkXPZc620B6T0jO1Pz',
-      date: 'Дата події',
-      title: 'Назва експедиції4',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1JJF93dE4_1HofkG3z3XxiAXZmYm3isxn',
-      date: 'Дата події',
-      title: 'Назва експедиції5',
-      description: 'Короткий опис',
-      location: 'Локація'
-    },
-    {
-      id: 0,
-      img: 'https://drive.google.com/uc?export=view&id=1S5DHNWuANY70a4IkXPZc620B6T0jO1Pz',
-      date: 'Дата події',
-      title: 'Назва експедиції6',
-      description: 'Короткий опис',
-      location: 'Локація'
-    }
-  ];
+  // sliderItems: Slide[] = [
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1KOmDG0mYK7oFhJXW611dE4EMPSsMuP27',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції1',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   },
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1JJF93dE4_1HofkG3z3XxiAXZmYm3isxn',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції2',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   },
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1Z2aE2YCQJBnf3EA8BpKEN3BJLiJ-Du46',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції3',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   },
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1S5DHNWuANY70a4IkXPZc620B6T0jO1Pz',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції4',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   },
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1JJF93dE4_1HofkG3z3XxiAXZmYm3isxn',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції5',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   },
+  //   {
+  //     id: 0,
+  //     img: 'https://drive.google.com/uc?export=view&id=1S5DHNWuANY70a4IkXPZc620B6T0jO1Pz',
+  //     date: 'Дата події',
+  //     title: 'Назва експедиції6',
+  //     description: 'Короткий опис',
+  //     location: 'Локація'
+  //   }
+  // ];
 }
