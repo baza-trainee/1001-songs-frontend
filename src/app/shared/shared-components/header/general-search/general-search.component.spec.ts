@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneralSearchComponent } from './general-search.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GeneralSearchComponent', () => {
   let component: GeneralSearchComponent;
@@ -8,7 +9,7 @@ describe('GeneralSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [GeneralSearchComponent]
+      imports: [GeneralSearchComponent, HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(GeneralSearchComponent);
     component = fixture.componentInstance;

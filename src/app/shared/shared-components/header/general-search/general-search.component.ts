@@ -53,7 +53,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  onExpeditionSelected(ev: any) {
+  onExpeditionSelected(ev:{id: number}) {
     this.search.setValue('');
     this.showInputSearch = false;
     this.router.navigateByUrl(`/${StatEndpoints.expeditions}/${ev.id}`);
