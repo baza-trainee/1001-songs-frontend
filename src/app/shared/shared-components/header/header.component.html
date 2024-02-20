@@ -23,7 +23,7 @@
       </ul>
     </div>
     <div class="actions" tabindex="3">
-      
+
       <div class="actions__search" >
         <app-general-search></app-general-search>
         <!-- <svg class="actions__search-img">
@@ -31,15 +31,15 @@
         </svg> -->
         <span *ngIf="isShowTextSearch" class="actions__search-invalid">{{ 'header.search-invalid' | translate }}</span>
       </div>
-      <div class="actions__lang">
-        <ul class="actions__lang-list">
-          <li class="actions__lang-item" (click)="selectLang()" (keyup.space)="selectLang()" tabindex="4">
-            <span>
-              {{ lang }}
-            </span>
-          </li>
-        </ul>
-      </div>
+<!--      <div class="actions__lang">-->
+<!--        <ul class="actions__lang-list">-->
+<!--          <li class="actions__lang-item" (click)="selectLang()" (keyup.space)="selectLang()" tabindex="4">-->
+<!--            <span>-->
+<!--              {{ lang }}-->
+<!--            </span>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
       <div class="actions__donate">
         <button class="actions__donate-button"
           (click)="openDonationDialog()"

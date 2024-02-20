@@ -8,6 +8,7 @@
     [options]="mapOptions.options">
     <map-marker
       *ngFor="let marker of markers"
+      class="custom-marker"
       [position]="{ lat: marker.latitude, lng: marker.longitude }"
       [options]="{ icon: getCustomMarkerIcon({ lat: marker.latitude, lng: marker.longitude }) }"
       (mapClick)="onMarkerClick(marker)"
@@ -17,6 +18,7 @@
       <ng-container *ngFor="let elem of markers">
         <map-marker
           #marker="mapMarker"
+          class="custom-marker"
           [position]="{ lat: elem.latitude, lng: elem.longitude }"
           [options]="{ icon: getCustomMarkerIcon({ lat: elem.latitude, lng: elem.longitude }) }"
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
@@ -26,6 +28,7 @@
           <p class="popup-map__count">
             {{ 'home.home-map.popup-count' | translate }} : {{ elem.song_count }}
           </p>
+          <a>Послухати</a>
         </map-info-window>
       </ng-container>
     </ng-container>

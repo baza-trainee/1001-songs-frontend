@@ -13,26 +13,32 @@ import { ShareComponent } from '../../../../shared/shared-components/share/share
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
 import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
+import {Content} from "../../../../shared/interfaces/about.interface";
+import {FormattingTextService} from "../../../../shared/services/formatting-text/formating-text.service";
+import {
+    FadeInCarouselComponent
+} from "../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 
 @Component({
   selector: 'app-expedition-article',
   standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    RouterLink,
-    VideoPlayerComponent,
-    BreadcrumbsComponent,
-    SliderComponent,
-    ShareComponent,
-    SafeHtmlPipe
-  ],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        RouterLink,
+        VideoPlayerComponent,
+        BreadcrumbsComponent,
+        SliderComponent,
+        ShareComponent,
+        SafeHtmlPipe,
+        FadeInCarouselComponent
+    ],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })
 export class ExpeditionArticleComponent implements OnInit, OnDestroy {
   expeditionArticle: ExpeditionArticle = {} as ExpeditionArticle;
-
+  content!: Content[];
   sliderItems: Slide[] = [];
   destroy$: Subject<void> = new Subject<void>();
   private subscriptions: Subscription[] = [];
@@ -42,8 +48,11 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
     private store: Store,
     private route: ActivatedRoute,
     private router: Router,
-    private expeditionSevice: ExpeditionsService
-  ) {}
+    private expeditionSevice: ExpeditionsService,
+    private formattingTextService: FormattingTextService
+  ) {
+      this.content = this.formattingTextService.splitText(this.expeditionArticle.content);
+  }
 
   ngOnInit(): void {
     if (this.route.params) {

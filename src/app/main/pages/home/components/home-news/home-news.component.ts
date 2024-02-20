@@ -6,7 +6,6 @@ import {Article} from "../../../../../shared/interfaces/article.interface";
 import {Observable, Subscription} from "rxjs";
 import {Select, Store} from "@ngxs/store";
 import {NewsState} from "../../../../../store/news/news.state";
-import {FetchNews, SetSelectedArticle} from "../../../../../store/news/news.actions";
 
 @Component({
   selector: 'app-home-news',
@@ -15,18 +14,18 @@ import {FetchNews, SetSelectedArticle} from "../../../../../store/news/news.acti
   templateUrl: './home-news.component.html',
   styleUrls: ['./home-news.component.scss']
 })
+
 export class HomeNewsComponent implements OnInit, OnDestroy {
   @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
   public articles!: Article[];
   public mainArticle!: Article;
   private readonly articlesSubscription?: Subscription;
 
-  constructor(private _translate: TranslateService,
-              private store: Store,
-              private router: Router
-  ) {
-    this.store.dispatch(new FetchNews());
-  }
+  constructor(
+      private _translate: TranslateService,
+      private store: Store,
+      private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.setArticles$.subscribe((data) => {
@@ -43,7 +42,6 @@ export class HomeNewsComponent implements OnInit, OnDestroy {
 
   redirectToNews(id: number | undefined) {
     if (id) {
-      this.store.dispatch(new SetSelectedArticle(id));
       this.router.navigate(['/news/' + id])
     } else {
       this.router.navigate(['/404'])

@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 import {KeyValuePipe, NgFor} from '@angular/common';
 
 import {TranslateModule} from "@ngx-translate/core";
+import {NewsCategory} from "../../interfaces/article.interface";
 
 @Component({
   selector: 'app-filter',
@@ -11,22 +12,21 @@ import {TranslateModule} from "@ngx-translate/core";
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  @Input() categories: string[] = [];
-  public selectedFilterIndex: number = 0;
+  @Input({required: true}) categories!: NewsCategory[];
+  public selectedFilterId: number = 0;
   public startX: number = 0;
   public currentX: number = 0;
   public translateX: number = 0;
   private maxSlide: number = 0;
   private isDragging!: boolean;
 
-  @Output() filteredCategories = new EventEmitter<string>();
+  @Output() filteredCategories = new EventEmitter<number>();
   @ViewChild('slide', {read: ElementRef}) slide!: ElementRef;
 
 
-  filterArticles(index: number, category: string) {
-    if (index >= 0) this.selectedFilterIndex = index;
-    const nameCategory = category.split('.');
-    this.filteredCategories.emit(nameCategory.pop()!);
+  filterArticles(id: number) {
+    this.selectedFilterId = id;
+    this.filteredCategories.emit(id);
   }
 
   // slider for string

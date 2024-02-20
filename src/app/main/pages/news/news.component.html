@@ -1,21 +1,23 @@
 <section class="news wrapper">
   <div class="news__container">
-    <div>
+    <div class="news__box">
       <div class="news__title">
         {{ 'news.title' | translate }}
       </div>
-      <div class="filter__wrap">
+
+      <div class="filter__wrap" *ngIf="categories$ | async as categories">
         <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
       </div>
-      <div class="cards__wrap">
+
+      <div class="cards__wrap" *ngIf="newsResponse$ | async as response">
         <app-article-item
-            *ngFor="let item of itemsOnCurrentPage"
+            *ngFor="let item of response.items"
             [article]="item"
         />
       </div>
     </div>
     <app-pagination
-      [totalPages]="totalPages"
+      [totalPages]="totalPage"
       [currentPage]="currentPage"
       (pageChange)="changePage($event)"
     ></app-pagination>

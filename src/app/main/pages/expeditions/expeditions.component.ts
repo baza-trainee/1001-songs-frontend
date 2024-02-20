@@ -41,10 +41,10 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  filteredCategory(categoryTitle: string): void {
-    const category = this.expeditionCategories.find((el) => el.title === categoryTitle);
-    this.getExpeditionsList(category ? category.id : -1);
-  }
+  // filteredCategory(categoryTitle: id): void {
+  //   const category = this.expeditionCategories.find((el) => el.title === categoryTitle);
+  //   this.getExpeditionsList(category ? category.id : -1);
+  // }
 
   getExpeditionsList(categoryId: number) {
     const params = { search: '', id: categoryId };

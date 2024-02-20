@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Article} from "../../interfaces/article.interface";
+import { NewsItem} from "../../interfaces/article.interface";
 import {Slide} from "../../interfaces/slide.interface";
 
 @Injectable({
@@ -9,27 +9,14 @@ export class SliderService {
 
   constructor() { }
 
-  convertImagesToSlide(imageArray: string[]): Slide[] {
-    return imageArray.map(img => {
-      return {
-        id: 0,
-        img: img,
-        date: '',
-        title: '',
-        description: "",
-        location: '',
-      };
-    });
-  }
-
-  convertNewsToSlide(newsArray: Article[]): Slide[] {
+  convertNewsToSlide(newsArray: NewsItem[]): Slide[] {
     return newsArray.splice(0, 10).map(news => {
       return {
         id: news.id,
-        img: news.photo_1,
-        date: news.date,
-        title: news.news_title,
-        description: "Коротккий опис",
+        img: news.preview_photo,
+        date: news.created_at,
+        title: news.title,
+        description: news.short_description,
         location: news.location,
       };
     });

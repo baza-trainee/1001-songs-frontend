@@ -4,7 +4,6 @@ export const StatEndpoints = {
   expeditions: 'expeditions',
   expedition: 'expedition',
   categories: 'categories',
-  news: 'news',
   songs: 'songs',
   song: 'song',
   education: 'education',
@@ -26,5 +25,10 @@ export const StatEndpoints = {
   map: {
     geotag: 'map/filter/geotag'
   },
-  projects: 'projects'
+  projects: 'projects',
+  news: {
+    news: 'news/news',
+    categories: 'news/categories'
+  }
+
 };

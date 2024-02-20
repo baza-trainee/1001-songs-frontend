@@ -3,16 +3,27 @@
     <div
       class="news__filter-item"
       tabindex="0"
-      *ngFor="let category of categories; let i = index"
-      (click)="filterArticles(i, category)"
-      (keydown.enter)="filterArticles(i, category)"
-      [class.news__filter-selected]="i === selectedFilterIndex"
+      (click)="filterArticles(0)"
+      (keydown.enter)="filterArticles(0)"
+      [class.news__filter-selected]="0 === selectedFilterId"
+      [style.transform]="'translateX(' + translateX + 'px)'"
+      (touchend)="onTouchEnd()"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
+    >Усі</div>
+    <div
+      class="news__filter-item"
+      tabindex="0"
+      *ngFor="let category of categories;"
+      (click)="filterArticles(category.id)"
+      (keydown.enter)="filterArticles(category.id)"
+      [class.news__filter-selected]="category.id === selectedFilterId"
       [style.transform]="'translateX(' + translateX + 'px)'"
       (touchend)="onTouchEnd()"
       (touchstart)="onTouchStart($event)"
       (touchmove)="onTouchMove($event)"
     >
-      {{ category | translate }}
+      {{ category.name | translate }}
     </div>
   </div>
 </div>

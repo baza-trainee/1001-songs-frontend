@@ -18,7 +18,24 @@
         </div>
       </div>
 
-      <div [innerHTML]="expeditionArticle.content | safeHtml"></div>
+      <div class="article__content">
+
+        <ng-container *ngFor="let content of content; let i = index">
+
+          <ng-container *ngIf="content.images.length; else textBlock">
+            <div class="content about__carousel" [ngClass]="{'about__box': i !== 1}">
+              <app-fade-in-carousel [photos]="content.images"></app-fade-in-carousel>
+            </div>
+          </ng-container>
+          <ng-template #textBlock>
+            <div
+                    class="content"
+                    [ngClass]="{'main-content': i === 1, 'about__box': i !== 1}"
+                    [innerHTML]="content.text | safeHtml"
+            ></div>
+          </ng-template>
+        </ng-container>
+      </div>
 
 <!--      <app-video-player class="article__player-main" [widthIcon]="72" [srcUrl]="article.video_1"></app-video-player> &ndash;&gt;-->
 

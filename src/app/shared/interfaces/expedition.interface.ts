@@ -30,6 +30,7 @@ export interface ExpeditionArticle {
   photographers: string[];
   recording: string[];
 }
+
 export interface ArticleExpedition {
   id: string;
   title: string;

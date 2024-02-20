@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import {Article} from "../../../../../shared/interfaces/article.interface";
+import { NewsItem } from "../../../../../shared/interfaces/article.interface";
 
 @Component({
   selector: 'app-article-item',
@@ -11,7 +11,7 @@ import {Article} from "../../../../../shared/interfaces/article.interface";
   styleUrls: ['./article-item.component.scss']
 })
 export class ArticleItemComponent {
-  @Input() article!: Article;
+  @Input() article!: NewsItem;
 
   constructor() {}
 }

@@ -1,57 +1,58 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Select, Store } from '@ngxs/store';
-import {first, Observable, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { NewsState } from '../../../../../store/news/news.state';
-import { FetchNews, SetSelectedArticle } from '../../../../../store/news/news.actions';
 import { BreadcrumbsComponent } from 'src/app/shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
-import { Article } from '../../../../../shared/interfaces/article.interface';
 import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
 import {SliderService} from "../../../../../shared/services/slider/slider.service";
+import {NewsArticle, NewsResponse} from "../../../../../shared/interfaces/article.interface";
+import {ArticlesService} from "../../../../../shared/services/news/articles.service";
+import {
+  FadeInCarouselComponent
+} from "../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
+import {SafeHtmlPipe} from "../../../../../shared/pipes/safe-html.pipe";
+import {Content} from "../../../../../shared/interfaces/about.interface";
+import {FormattingTextService} from "../../../../../shared/services/formatting-text/formating-text.service";
 
 @Component({
   selector: 'app-news-article',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent, ShareComponent, FormatTextPipe],
+  imports: [CommonModule, TranslateModule, RouterLink, BreadcrumbsComponent, SliderComponent, ShareComponent, FormatTextPipe, FadeInCarouselComponent, SafeHtmlPipe],
   templateUrl: './news-article.component.html',
   styleUrls: ['./news-article.component.scss']
 })
 export class NewsArticleComponent implements OnInit, OnDestroy {
-  @Select(NewsState.getSelectedArticle) selectedArticle$!: Observable<Article>;
-  @Select(NewsState.getArticlesList) articlesList$!: Observable<Article[]>;
-
+  public article$!: Observable<NewsArticle>
   public sliderItems!: Slide[];
-  private subscriptions: Subscription[] = [];
+  public content!: Content[];
+  private readonly subscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store,
     private route: ActivatedRoute,
-    private sliderService: SliderService
+    private sliderService: SliderService,
+    private formattingTextService: FormattingTextService,
+    private articleService: ArticlesService
   ) {}
 
   ngOnInit(): void {
-    this.initializeData();
-  }
-
-  async initializeData() {
-    await this.store.dispatch(new FetchNews()).toPromise();
-
-    this.subscriptions.push(
-      this.articlesList$.pipe(first()).subscribe(articles => {
-        this.store.dispatch(new SetSelectedArticle(this.route.snapshot.params['id']));
-        this.sliderItems = this.sliderService.convertNewsToSlide(articles);
-      })
-    );
-  }
-
-  replaceCommaWithBr(inputString: string): string {
-    return inputString.replace(/, /g, '<br>');
+    if (this.route.params) {
+      this.subscriptions.push(this.route.params.subscribe(params => {
+        this.article$ = this.articleService.fetchNewsById(params['id']);
+      }));
+    }
+    if (this.article$) {
+      this.subscriptions.push(this.article$.subscribe(response => {
+        this.content = this.formattingTextService.splitText(response.content);
+      }));
+    }
+    this.subscriptions.push(this.articleService.fetchNews().subscribe(response => {
+      this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
+    }));
   }
 
   ngOnDestroy(): void {
