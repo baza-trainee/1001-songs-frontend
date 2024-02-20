@@ -11,7 +11,7 @@
       <div class="song__info__genre">{{ song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
         {{ song.city ? song.city : 'Unknown' }},
-        {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }}
+        <!-- {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }} -->
       </div>
     </div>
 
@@ -80,7 +80,7 @@
         <div class="ethnographic__region__title">
           {{ 'map.player.songs-list.song-card.song-card-detail.ethnographic-region' | translate }}
         </div>
-        <div class="ethnographic__region__region">{{ song.city }}, {{ song.ethnographic_district }}</div>
+        <div class="ethnographic__region__region">{{ song.city }}</div>
       </div>
       <button class="info__btn__more__detail" [routerLink]="song.id + ''">
         {{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}

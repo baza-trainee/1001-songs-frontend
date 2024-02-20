@@ -10,4 +10,9 @@ export class PlayerService {
   fetchSongs() {
     return this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`);
   }
+
+  fetchSongById(id: number) {
+    return this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}/${id}`);
+  }
+
 }

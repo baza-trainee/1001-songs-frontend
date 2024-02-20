@@ -10,8 +10,6 @@ import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
 import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
-import { API_URL, StatEndpoints } from 'src/app/shared/config/endpoints/stat-endpoints';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-map',
