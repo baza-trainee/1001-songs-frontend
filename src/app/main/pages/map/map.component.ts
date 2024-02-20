@@ -27,14 +27,14 @@ export class MapComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private http: HttpClient
+    // private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.store.dispatch(new FetchSongs(new SongFilter()));
-    this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`).subscribe((d) => {
-      console.log(d);
-    });
+    // this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`).subscribe((d) => {
+    //   console.log(d);
+    // });
   }
 
   ngOnDestroy(): void {
