@@ -7,6 +7,61 @@ export class SongFilter {
   found: string[] = [];
 }
 
+export interface MultiSelect {
+  name: string,
+  id: number,
+  song_count: number
+}
+
+export interface OptionsSongFilter {
+  country: CountryDropdown[];
+  region: RegionDropdown[];
+  city: CityDropdown[];
+  genre: GenreDropdown[];
+  found: FoundDropdown[];
+}
+
+export interface SelectedOptionsSongFilter {
+  country: number[];
+  region: number[];
+  city: number[];
+  genre: number[];
+  found: number[];
+}
+
+export interface CountryDropdown {
+  id: number,
+  name: string,
+  song_count: number,
+}
+
+export interface RegionDropdown {
+  id: number,
+  name: string,
+  song_count: number,
+  country_id: number
+}
+
+export interface CityDropdown {
+  id: number,
+  name: string,
+  country_id: number,
+  region_id: number,
+  song_count: number
+}
+
+export interface GenreDropdown {
+  id: number;
+  name: string;
+  song_count: number;
+}
+
+export interface FoundDropdown {
+  id: number;
+  name: string;
+  song_count: number;
+}
+
 export interface Marker {
   id: string;
   img: string;

@@ -12,4 +12,11 @@ export const StatEndpoints = {
   footer: 'footer',
   about: 'about',
   team: 'team',
+  mapFilter: {
+    countries: 'filter/location/countries',
+    regions: 'filter/location/regions',
+    cities: 'filter/location/cities',
+    founds: 'filter/song/funds',
+    genres: 'filter/song/genres'
+  }
 };

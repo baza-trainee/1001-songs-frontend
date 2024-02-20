@@ -8,6 +8,7 @@ import {DataAboutContent, AboutTeam} from "../../interfaces/about.interface";
 @Injectable({
   providedIn: 'root'
 })
+
 export class AboutService {
   constructor(
       private http: HttpClient

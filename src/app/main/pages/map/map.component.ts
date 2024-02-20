@@ -10,6 +10,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
 import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
+import {InitFilterOptions} from "../../../store/filter-map/filter-map.actions";
 
 @Component({
   selector: 'app-map',
@@ -26,7 +27,8 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new FetchSongs(new SongFilter()));
+    // this.store.dispatch(new FetchSongs(new SongFilter()));
+    this.store.dispatch(new InitFilterOptions());
   }
 
   ngOnDestroy(): void {

@@ -29,7 +29,6 @@ describe('MultiselectComponent', () => {
     fixture = TestBed.createComponent(MultiselectComponent);
     component = fixture.componentInstance;
     component.control = new FormControl();
-    component.options = ['Option1', 'Option2'];
 
     fixture.detectChanges();
   });

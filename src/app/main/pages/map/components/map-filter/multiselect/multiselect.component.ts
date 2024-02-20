@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MultiSelect, OptionsSongFilter} from "../../../../../../shared/interfaces/map-marker";
+import {Observable, Subscription} from "rxjs";
+import {Select} from "@ngxs/store";
+import {FilterMapState} from "../../../../../../store/filter-map/filter-map.state";
 
 @Component({
   selector: 'app-multiselect',
@@ -26,24 +30,46 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule
   ]
 })
-export class MultiselectComponent {
+
+export class MultiselectComponent implements OnChanges {
   @Input({ required: true }) control!: FormControl;
-  @Input({ required: true }) options!: string[];
+  @Input({ required: true }) options!: MultiSelect[];
   @Input({ required: true }) name!: string;
-  @Output() selectionOnBlur = new EventEmitter<string>()
+  @Output() selectionOnBlur = new EventEmitter<string>();
+
+  @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
+
+  selectedOption: MultiSelect[] = [];
+  private subscription!: Subscription;
+
   constructor(private _translate: TranslateService) {}
 
   sendBlur(){
-    this.selectionOnBlur.emit()
+    this.selectionOnBlur.emit();
   }
 
-  onSelectionChange(event: MatSelectChange) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && changes['options'].currentValue) {
+      const newOptions: MultiSelect[] = changes['options'].currentValue;
+      this.selectedOption = newOptions.filter(option => this.control.value.includes(option.id));
+      // console.log(newOptions);
+      // this.selectedOption = newOptions;
+    }
+  }
+
+  findOption(optionId: number[]): MultiSelect[] {
+    return this.options.filter(option => optionId.includes(option.id));
+  }
+
+  onSelectionChange(event: MatSelectChange): void {
     this.control.setValue(event.value);
+    this.selectedOption = this.findOption(event.value);
   }
 
-  removeOption(option: string): void {
-    const value = this.control.value as string[];
+  removeOption(option: number): void {
+    const value = this.control.value;
     this.removeFirst(value, option);
+    this.selectedOption = this.selectedOption.filter(item => item.id !== option);
     this.control.setValue(value);
     this.selectionOnBlur.emit()
   }
