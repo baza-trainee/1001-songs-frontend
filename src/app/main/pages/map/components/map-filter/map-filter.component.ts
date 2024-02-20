@@ -32,7 +32,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
   @Select(PlayerState.getSongs) songs!: Observable<Song[]>;
-  @Output() changeFilter = new EventEmitter<MarkerOfLocation[]>();
+  @Output() changeFilter = new EventEmitter<SongFilter>();
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
@@ -87,6 +87,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   selectBlur() {
     this.form.get('title')?.setValue('');
     this.titles = [];
+    this.changeFilter.emit(this.form.value as SongFilter)
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter))
   }

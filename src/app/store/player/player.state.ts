@@ -63,24 +63,10 @@ export class PlayerState {
   fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
 
-    return this.playerService.fetchSongs().pipe(
+    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: object) => {
         console.log('SONGS : Main response', response);
         const data = response as { items: PlaylistSong[] };
-
-       // const modifiedResponse = Object.values(response);
-        // const newSongs: Song[] = modifiedResponse[0].list_songs;
-        // const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
-        //   (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
-        // );
-        // this.store.dispatch(new ResetMarkers(newMarkers));
-        // console.log('SONGS : Main response', response);
-        const modifiedResponse = Object.values(response);
-        const newSongs: Song[] = modifiedResponse[0].list_songs;
-        const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
-          // (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
-        );
-        this.store.dispatch(new ResetMarkers(newMarkers));
         ctx.setState({
           ...state,
           songs: data.items
