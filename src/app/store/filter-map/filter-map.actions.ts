@@ -1,4 +1,4 @@
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import {SongFilter} from "../../shared/interfaces/map-marker";
 export class InitFilterOptions {
   static readonly type = '[Filter Map] Init filter options';
 
@@ -8,5 +8,5 @@ export class InitFilterOptions {
 export class SetShownOptions {
   static readonly type = '[Filter Map] Set shown options';
 
-  constructor(public songs: Song[]) {}
+  constructor(public formValue: SongFilter) {}
 }

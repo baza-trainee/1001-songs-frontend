@@ -27,10 +27,13 @@ export const google = {
 };
 
 export const fakeSelectedMarker: MarkerOfLocation = {
-  location__city: 'Рокитне',
-  location__coordinates: '51.264868970215396, 25.1289613',
-  count: '2'
+  id: 0,
+  city: 'string',
+  latitude: 44,
+  longitude: 55,
+  song_count: 2
 };
+
 class googleMock {}
 
 describe('InteractiveMapComponent', () => {

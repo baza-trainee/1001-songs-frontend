@@ -21,6 +21,9 @@
     </div>
 
     <ng-container  *ngIf="showOptions$ | async as options">
+
+<!--      <pre>{{options | json}}</pre>-->
+
       <form [formGroup]="form">
         <div class="filter__body" [ngClass]="{'hidden': !isShowFilter}">
           <div class="filter__location">
@@ -46,21 +49,21 @@
 
             <app-multiselect
               [control]="form.controls.country"
-              [options]="options.country"
+              [options]="options.country | transformToMultiselect"
               [name]="filterCategory.country"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
             <app-multiselect
               [control]="form.controls.region"
-              [options]="options.region"
+              [options]="options.region | transformToMultiselect"
               [name]="filterCategory.region"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
             <app-multiselect
               [control]="form.controls.city"
-              [options]="options.city"
+              [options]="options.city | transformToMultiselect"
               [name]="filterCategory.city"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
@@ -71,18 +74,17 @@
 
             <app-multiselect
               [control]="form.controls.genre"
-              [options]="options.genre"
+              [options]="options.genre | transformToMultiselect"
               [name]="filterCategory.genre"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
 
             <app-multiselect
-              [control]="form.controls.found"
-              [options]="options.found"
+              [control]="form.controls.fund"
+              [options]="options.fund | transformToMultiselect"
               [name]="filterCategory.found"
               (selectionOnBlur)="selectBlur()"
             ></app-multiselect>
-
             <button class="filter__submit" type="submit" (click)="filterSongs()">{{ 'map.filter.button-submit' | translate }}</button>
           </div>
         </div>

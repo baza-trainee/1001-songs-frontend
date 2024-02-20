@@ -49,8 +49,8 @@ export class PlayerState {
     return this.filterMapService.fetchSongById(action.id).pipe(
       tap((foudedSong: unknown) => {
         const song = foudedSong as Song;
-        const songMarker = { count: '1', location__coordinates: song.location.coordinates, location__city: song.location.city_ua };
-        this.store.dispatch(new ResetMarkers([songMarker as MarkerOfLocation]));
+        // const songMarker = { count: '1', location__coordinates: song.location.coordinates, location__city: song.location.city_ua };
+        // this.store.dispatch(new ResetMarkers([songMarker as MarkerOfLocation]));
         ctx.setState({
           ...state,
           songsList: [song as Song]
@@ -74,6 +74,13 @@ export class PlayerState {
         //   (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
         // );
         // this.store.dispatch(new ResetMarkers(newMarkers));
+        // console.log('SONGS : Main response', response);
+        const modifiedResponse = Object.values(response);
+        const newSongs: Song[] = modifiedResponse[0].list_songs;
+        const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
+          // (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
+        );
+        this.store.dispatch(new ResetMarkers(newMarkers));
         ctx.setState({
           ...state,
           songs: data.items

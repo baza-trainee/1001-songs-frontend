@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { ResetMarkers } from './map.actions';
+import {FetchMarkers, ResetMarkers} from './map.actions';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
+import {MapService} from "../../shared/services/map/map.service";
 
 export interface MapStateModel {
   markersList: MarkerOfLocation[];
@@ -18,7 +19,7 @@ export interface MapStateModel {
 })
 @Injectable()
 export class MapState {
-  constructor() {}
+  constructor(private mapService: MapService) {}
 
   @Selector()
   static getMarkersList(state: MapStateModel): MarkerOfLocation[] {
@@ -37,5 +38,16 @@ export class MapState {
       ...state,
       markersList: action.markers
     });
+  }
+
+  @Action(FetchMarkers)
+  fetchMarkers(ctx: StateContext<MapStateModel>, action: FetchMarkers) {
+    const state = ctx.getState();
+    this.mapService.fetchMarker(action.options).subscribe((response) => {
+      ctx.setState({
+        ...state,
+        markersList: response
+      });
+    })
   }
 }

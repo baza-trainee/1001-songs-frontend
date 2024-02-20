@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { SongFilter } from '../../shared/interfaces/map-marker';
-import { InitFilterOptions, SetShownOptions } from './filter-map.actions';
+import {OptionsSongFilter, SelectedOptionsSongFilter} from '../../shared/interfaces/map-marker';
+import {InitFilterOptions, SetShownOptions} from './filter-map.actions';
 import { FilterMapService } from '../../shared/services/filter-map/filter-map.service';
-import * as options from 'src/app/static-data/filter-options';
 import { MapService } from 'src/app/shared/services/map/map.service';
-import { tap } from 'rxjs';
 
 export interface FilterMapStateModel {
-  selectedOptions: SongFilter;
-  showOptions: SongFilter;
-  allOptions: SongFilter;
+  idSelected: SelectedOptionsSongFilter;
+  selectedOptions: OptionsSongFilter;
+  showOptions: OptionsSongFilter;
+  allOptions: OptionsSongFilter;
 }
 
 @State<FilterMapStateModel>({
   name: 'filterMap',
   defaults: {
-    selectedOptions: new SongFilter(),
-    showOptions: new SongFilter(),
-    allOptions: new SongFilter()
+    idSelected: {} as SelectedOptionsSongFilter,
+    selectedOptions: {} as OptionsSongFilter,
+    showOptions: {} as OptionsSongFilter,
+    allOptions: {} as OptionsSongFilter
   }
 })
+
 @Injectable()
 export class FilterMapState {
   constructor(
@@ -30,17 +31,17 @@ export class FilterMapState {
   ) {}
 
   @Selector()
-  static getSelectedOptions(state: FilterMapStateModel): SongFilter {
+  static getSelectedOptions(state: FilterMapStateModel): OptionsSongFilter {
     return state.selectedOptions;
   }
 
   @Selector()
-  static getShowOptions(state: FilterMapStateModel): SongFilter {
+  static getShowOptions(state: FilterMapStateModel): OptionsSongFilter {
     return state.showOptions;
   }
 
   @Selector()
-  static getAllOptions(state: FilterMapStateModel): SongFilter {
+  static getAllOptions(state: FilterMapStateModel): OptionsSongFilter {
     return state.allOptions;
   }
 
@@ -48,36 +49,25 @@ export class FilterMapState {
   setShownOptions(ctx: StateContext<FilterMapStateModel>, action: SetShownOptions) {
     const state = ctx.getState();
 
-    const newOptions = this.filterMapService.generateShowOptions(action.songs);
-
-    ctx.setState({
-      ...state,
-      showOptions: newOptions
-    });
+    this.filterMapService.setOptions(action.formValue).subscribe(response => {
+      ctx.setState({
+        ...state,
+        showOptions: response
+      });
+    })
   }
 
   @Action(InitFilterOptions)
   InitFilterOptions(ctx: StateContext<FilterMapStateModel>) {
     const state = ctx.getState();
 
-    return this.filterMapService.fetchFilterOptions().pipe(
-      tap((response: object) => {
-        const modifiedResponse = Object.values(response);
-        const allOptions: SongFilter = {
-          country: options.coruntries,
-          region: options.regions,
-          city: modifiedResponse[1].list_cities,
-          title: '',
-          genre: options.genres,
-          found: modifiedResponse[2].list_archives
-        };
-
-        ctx.setState({
-          ...state,
-          allOptions: allOptions
-        });
-      })
-    );
+    this.filterMapService.setOptions().subscribe((response: OptionsSongFilter) => {
+      ctx.setState({
+        ...state,
+        showOptions: response,
+        allOptions: response
+      });
+    });
   }
 }
 

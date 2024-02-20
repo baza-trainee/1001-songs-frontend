@@ -8,8 +8,8 @@
     [options]="mapOptions.options">
     <map-marker
       *ngFor="let marker of markers"
-      [position]="formatCords(marker.location__coordinates)"
-      [options]="{ icon: getCustomMarkerIcon(marker.location__coordinates) }"
+      [position]="{ lat: marker.latitude, lng: marker.longitude }"
+      [options]="{ icon: getCustomMarkerIcon({ lat: marker.latitude, lng: marker.longitude }) }"
       (mapClick)="onMarkerClick(marker)"
     >
     </map-marker>
@@ -17,14 +17,14 @@
       <ng-container *ngFor="let elem of markers">
         <map-marker
           #marker="mapMarker"
-          [position]="formatCords(elem.location__coordinates)"
-          [options]="{ icon: getCustomMarkerIcon(elem.location__coordinates) }"
+          [position]="{ lat: elem.latitude, lng: elem.longitude }"
+          [options]="{ icon: getCustomMarkerIcon({ lat: elem.latitude, lng: elem.longitude }) }"
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
         <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
-          <h2 class="popup-map__title">{{ elem.location__city }}</h2>
+          <h2 class="popup-map__title">{{ elem.city }}</h2>
           <p class="popup-map__count">
-            {{ 'home.home-map.popup-count' | translate }} : {{ elem.count }}
+            {{ 'home.home-map.popup-count' | translate }} : {{ elem.song_count }}
           </p>
         </map-info-window>
       </ng-container>
@@ -37,9 +37,9 @@
         <div class="popup-map__container">
            <img class="popup-map__img" [src]="imgSrs[randomIndex]" alt="Фото" />
           <div class="popup-map__content">
-            <h2 class="popup-map__title">{{ selectedMarker.location__city }}, {{ selectedMarker.location__city }}</h2>
+            <h2 class="popup-map__title">{{ selectedMarker.city }}</h2>
             <p class="popup-map__count">
-              {{ 'home.home-map.popup-count' | translate }} : {{ selectedMarker.count }}
+              {{ 'home.home-map.popup-count' | translate }} : {{ selectedMarker.song_count }}
             </p>
           </div>
         </div>

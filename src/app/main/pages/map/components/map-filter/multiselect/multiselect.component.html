@@ -9,16 +9,16 @@
     <mat-select-trigger>
       <mat-chip-listbox>
         <mat-chip
-          *ngFor="let option of control.value"
+          *ngFor="let option of selectedOption"
           class="multiselect__chip"
           [removable]="true"
-          (removed)="removeOption(option)">
+          (removed)="removeOption(option.id)">
           <mat-icon matChipRemove>
             <svg width="16" height="16" viewBox="0 0 16 16">
               <use xlink:href="./assets/sprites.svg#chipClear"></use>
             </svg>
           </mat-icon>
-          {{ option | translate}}
+          {{ option.name.length > 16 ? option.name.slice(0, 16) + '...' : option.name }} ({{ option.song_count }})
         </mat-chip>
       </mat-chip-listbox>
       <button class="multiselect__clear" (click)="clearSelections()">
@@ -29,8 +29,8 @@
         </mat-icon>
       </button>
     </mat-select-trigger>
-    <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option">
-      {{ option | translate }}
+    <mat-option class="multiselect__option" *ngFor="let option of options" [value]="option.id">
+      {{ option.name }} ({{option.song_count}})
     </mat-option>
   </mat-select>
 </mat-form-field>

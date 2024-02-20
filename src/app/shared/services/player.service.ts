@@ -8,11 +8,11 @@ import { API_URL, StatEndpoints } from '../config/endpoints/stat-endpoints';
 export class PlayerService {
   constructor(private http: HttpClient) {}
   fetchSongs() {
-    return this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`);
+    return this.http.get(`${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}`);
   }
 
   fetchSongById(id: number) {
-    return this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}/${id}`);
+    return this.http.get(`${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}/${id}`);
   }
 
 }
