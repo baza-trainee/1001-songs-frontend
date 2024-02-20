@@ -73,14 +73,11 @@ export class FilterMapService {
             if (Array.isArray(value)) {
                 if(value.length) {
                     value.forEach((id: string[]) => {
-                        console.log(value)
                         strID += `&${searchParam}_id=${id}`;
                     });
                 }
             }
         });
-
-        console.log(endpoint + strID)
 
         return this.http.get<T>(endpoint + strID).pipe(
             catchError((error: HttpErrorResponse) => {
