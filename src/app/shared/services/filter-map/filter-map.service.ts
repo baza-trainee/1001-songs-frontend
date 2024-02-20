@@ -8,7 +8,7 @@ import {
     CityDropdown,
     CountryDropdown,
     RegionDropdown,
-    FoundDropdown,
+    FundDropdown,
     GenreDropdown, OptionsSongFilter, SongFilter,
 } from '../../interfaces/map-marker';
 
@@ -26,15 +26,15 @@ export class FilterMapService {
         const region$ = this.fetchDropdown<RegionDropdown[]>(API_URL + StatEndpoints.mapFilter.regions, queryParams);
         const city$ = this.fetchDropdown<CityDropdown[]>(API_URL + StatEndpoints.mapFilter.cities, queryParams);
         const genre$ = this.fetchDropdown<GenreDropdown[]>(API_URL + StatEndpoints.mapFilter.genres, queryParams);
-        const found$ = this.fetchDropdown<FoundDropdown[]>(API_URL + StatEndpoints.mapFilter.founds, queryParams);
+        const fund$ = this.fetchDropdown<FundDropdown[]>(API_URL + StatEndpoints.mapFilter.funds, queryParams);
 
-        return zip(country$, region$, city$, genre$, found$).pipe(
-            map(([country, region, city, genre, found]) => ({
+        return zip(country$, region$, city$, genre$, fund$).pipe(
+            map(([country, region, city, genre, fund]) => ({
                 country,
                 region,
                 city,
                 genre,
-                found
+                fund
             }))
         );
     }
@@ -73,11 +73,14 @@ export class FilterMapService {
             if (Array.isArray(value)) {
                 if(value.length) {
                     value.forEach((id: string[]) => {
+                        console.log(value)
                         strID += `&${searchParam}_id=${id}`;
                     });
                 }
             }
         });
+
+        console.log(endpoint + strID)
 
         return this.http.get<T>(endpoint + strID).pipe(
             catchError((error: HttpErrorResponse) => {

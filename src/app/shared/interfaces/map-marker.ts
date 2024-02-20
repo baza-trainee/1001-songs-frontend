@@ -4,7 +4,7 @@ export class SongFilter {
   city: string[] = [];
   title: string = '';
   genre: string[] = [];
-  found: string[] = [];
+  fund: string[] = [];
 }
 
 export interface MultiSelect {
@@ -18,7 +18,7 @@ export interface OptionsSongFilter {
   region: RegionDropdown[];
   city: CityDropdown[];
   genre: GenreDropdown[];
-  found: FoundDropdown[];
+  fund: FundDropdown[];
 }
 
 export interface SelectedOptionsSongFilter {
@@ -26,7 +26,7 @@ export interface SelectedOptionsSongFilter {
   region: number[];
   city: number[];
   genre: number[];
-  found: number[];
+  fund: number[];
 }
 
 export interface CountryDropdown {
@@ -56,7 +56,7 @@ export interface GenreDropdown {
   song_count: number;
 }
 
-export interface FoundDropdown {
+export interface FundDropdown {
   id: number;
   name: string;
   song_count: number;

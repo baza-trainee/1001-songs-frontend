@@ -44,7 +44,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     city: new FormControl<string[]>([]),
     genre: new FormControl<string[]>([]),
     title: new FormControl<string>(''),
-    found: new FormControl<string[]>([])
+    fund: new FormControl<string[]>([])
   });
 
   titles: { title: string; id: string }[] = [];

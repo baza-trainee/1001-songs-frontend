@@ -20,7 +20,7 @@ export const StatEndpoints = {
     countries: 'filter/location/countries',
     regions: 'filter/location/regions',
     cities: 'filter/location/cities',
-    founds: 'filter/song/funds',
+    funds: 'filter/song/funds',
     genres: 'filter/song/genres'
   }
 };
