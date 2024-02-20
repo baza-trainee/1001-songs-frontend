@@ -4,22 +4,28 @@
 
     <div class="song__card__name__info">
       <div class="name__info__name">{{ song.title | slice: 0 : 40 }}</div>
-      <div class="name__info__album">Українська народна пісня</div>
+      <div class="name__info__album">{{ song.fund | slice: 0 : 20 }}</div>
     </div>
 
     <div class="song__card__song__info">
-      <div class="song__info__genre">{{ song.details && song.details.genre_cycle ? song.details.genre_cycle : 'Unknown' }}</div>
+      <div class="song__info__genre">{{ song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
-        {{ song.location && song.location.city_ua ? song.location.city_ua : 'Unknown' }},
-        {{ song.location && song.location.region ? song.location.region : 'Unknown' }}
+        {{ song.city ? song.city : 'Unknown' }},
+        {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }}
       </div>
     </div>
 
-    <div class="song__card__btn btn-detail"*ngIf="isShowDetail; else routerButton" (click)="toggleVisibility()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
+    <div
+      class="song__card__btn btn-detail"
+      *ngIf="isShowDetail; else routerButton"
+      (click)="toggleVisibility()"
+      (keyup)="handleKeyUpEvent($event)"
+      tabindex="0"
+    >
       {{ 'map.player.songs-list.song-card.detail-button' | translate }}
     </div>
     <ng-template #routerButton>
-      <div class="song__card__btn btn-detail" [routerLink]="song.id">
+      <div class="song__card__btn btn-detail" [routerLink]="song.id + ''">
         {{ 'map.player.songs-list.song-card.detail-button' | translate }}
       </div>
     </ng-template>
@@ -27,10 +33,26 @@
     <div class="song__card__listen">
       <mat-icon *ngIf="!hasMedia" class="nomedia" aria-hidden="false" aria-label="Example home icon" fontIcon="music_off"></mat-icon>
       <button *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="openCurrentFile()">
-        <svg *ngIf="!isPlay || !isSelectSong" class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          *ngIf="!isPlay || !isSelectSong"
+          class="listen__desktop"
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <use xlink:href="./assets/sprites.svg#playDesktop"></use>
         </svg>
-        <svg *ngIf="isPlay && isSelectSong" class="listen__desktop" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          *ngIf="isPlay && isSelectSong"
+          class="listen__desktop"
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <use xlink:href="./assets/sprites.svg#pauseDesktop"></use>
         </svg>
       </button>
@@ -58,14 +80,16 @@
         <div class="ethnographic__region__title">
           {{ 'map.player.songs-list.song-card.song-card-detail.ethnographic-region' | translate }}
         </div>
-        <div class="ethnographic__region__region">{{ song.location.city_ua }}, {{ song.location.region }}</div>
+        <div class="ethnographic__region__region">{{ song.city }}, {{ song.ethnographic_district }}</div>
       </div>
-      <button class="info__btn__more__detail" [routerLink]="song.id">{{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}</button>
+      <button class="info__btn__more__detail" [routerLink]="song.id + ''">
+        {{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}
+      </button>
     </div>
 
     <div class="detail__song__text">
-      <div class="song__text__content" *ngIf="song.media.text" [innerHTML]="song.media.text | formatText"></div>
-      <div class="song__text__content" *ngIf="!song.media.text">No text available</div>
+      <div class="song__text__content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
+      <div class="song__text__content" *ngIf="!song.song_text">No text available</div>
     </div>
   </div>
 </div>

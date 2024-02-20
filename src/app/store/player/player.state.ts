@@ -11,7 +11,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 
 export interface PlayerStateModel {
   songsList: Song[];
-  selecteSong: Song;
+  selecteSong: PlaylistSong;
   songs: PlaylistSong[];
 }
 
@@ -19,7 +19,7 @@ export interface PlayerStateModel {
   name: 'playlist',
   defaults: {
     songsList: [],
-    selecteSong: {} as Song,
+    selecteSong: {} as PlaylistSong,
     songs: []
   }
 })
@@ -38,8 +38,8 @@ export class PlayerState {
   }
 
   @Selector()
-  static getSelectedSong(state: PlayerStateModel): Song {
-    return state.selecteSong as Song;
+  static getSelectedSong(state: PlayerStateModel): PlaylistSong {
+    return state.selecteSong as PlaylistSong;
   }
 
   @Action(FetchSongById)
@@ -85,34 +85,34 @@ export class PlayerState {
   @Action(SelectNext)
   selectNext(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
-    const nextSongIndex = state.songsList.indexOf(state.selecteSong) + 1;
+    const nextSongIndex = state.songs.indexOf(state.selecteSong) + 1;
     const songsListLength = state.songsList.length;
     if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
       return;
     }
     return ctx.setState({
       ...state,
-      selecteSong: state.songsList[nextSongIndex]
+      selecteSong: state.songs[nextSongIndex]
     });
   }
 
   @Action(SelectPrev)
   selectPrev(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
-    const nextSongIndex = state.songsList.indexOf(state.selecteSong) - 1;
+    const nextSongIndex = state.songs.indexOf(state.selecteSong) - 1;
     if (nextSongIndex < 0) {
       return;
     }
     return ctx.setState({
       ...state,
-      selecteSong: state.songsList[nextSongIndex]
+      selecteSong: state.songs[nextSongIndex]
     });
   }
 
   @Action(SelectSong)
   selectSong(ctx: StateContext<PlayerStateModel>, action: SelectSong) {
     const state = ctx.getState();
-    const selectedSong = state.songsList.find((song: Song) => song.id === action.selectedSongId);
+    const selectedSong = state.songs.find((song: PlaylistSong) => song.id === action.selectedSongId);
 
     if (!selectedSong) {
       return;
@@ -129,7 +129,7 @@ export class PlayerState {
 
     return ctx.setState({
       ...state,
-      selecteSong: {} as Song
+      selecteSong: {} as PlaylistSong
     });
   }
 }

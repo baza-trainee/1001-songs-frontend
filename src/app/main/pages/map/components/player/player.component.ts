@@ -18,7 +18,7 @@ import { Select } from '@ngxs/store';
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
 
@@ -51,11 +51,11 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
-  songs: Song[] = [];
+  songs: PlaylistSong[] = [];
   private readonly subscription?: Subscription;
 
-  @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
   isFixed: boolean = false;
   location = 'Ромейки';
 
@@ -98,7 +98,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     this.isPlay = isPlay;
   }
 
-  get itemsOnCurrentPage(): Song[] {
+  get itemsOnCurrentPage(): PlaylistSong[] {
     if (this.songs.length <= this.itemsPerPage) return this.songs;
 
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;

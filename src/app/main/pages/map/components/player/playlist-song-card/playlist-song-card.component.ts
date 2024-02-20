@@ -5,7 +5,7 @@ import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-pl
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { SelectSong } from 'src/app/store/player/player.actions';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
@@ -30,7 +30,7 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
 })
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
-  @Input() song: Song = {} as Song;
+  @Input() song: PlaylistSong = {} as PlaylistSong;
   @Input() isSelectSong! : boolean;
   @Input() isShowDetail: boolean = true;
   @Input() isPlay!: boolean;
@@ -46,7 +46,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.hasMedia = this.song.media ? true : false;
+    this.hasMedia = this.song.stereo_audio ? true : false;
   }
   ngOnDestroy(): void {
     this.audioService.pause();
