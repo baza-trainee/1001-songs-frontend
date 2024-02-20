@@ -25,5 +25,6 @@ export const StatEndpoints = {
   },
   map: {
     geotag: 'map/filter/geotag'
-  }
+  },
+  projects: 'projects'
 };

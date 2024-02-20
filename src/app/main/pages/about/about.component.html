@@ -29,7 +29,7 @@
   <app-about-team [team]="team"></app-about-team>
 </ng-container>
 
-<div>
-<!--  <app-slider [sliderItems]="sliderItems" [title]="'about.projects.title'"></app-slider>-->
-</div>
+<ng-container *ngIf="projectsSlides">
+  <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
+</ng-container>
 

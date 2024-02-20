@@ -6,3 +6,5 @@ export interface Slide {
   description: string;
   location: string;
 }
+
+

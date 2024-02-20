@@ -13,7 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Slide } from '../../interfaces/slide.interface';
 import {Router, RouterLink} from "@angular/router";
 import {Store} from "@ngxs/store";
-import {SetSelectedArticle} from "../../../store/news/news.actions";
 
 @Component({
   selector: 'app-slider',
@@ -67,6 +66,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
   }
+
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
     const touch = event.touches[0];
@@ -117,7 +117,6 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(id: number) {
-    this.store.dispatch(new SetSelectedArticle(id));
     this.router.navigate([this.link + '/' + id]);
   }
 

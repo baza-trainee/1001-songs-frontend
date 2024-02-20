@@ -1,8 +1,8 @@
 <div class="event" [routerLink]="event.id + ''">
   <!-- <app-video-player class="event__player" [widthIcon]="0" [srcUrl]="event.preview_photo"></app-video-player> -->
   <img [src]="event.preview_photo" width="400" height="270" alt="photo">
+  <span class="event__date">{{ event.expedition_date }}</span>
   <div class="event__container" style="cursor: pointer">
-    <p class="event__date">{{ event.expedition_date }}</p>
     <p class="event__name">{{ event.title }}</p>
     <p class="event__description">{{ event.short_description }}</p>
     <p class="event__location">{{ event.location }}</p>
