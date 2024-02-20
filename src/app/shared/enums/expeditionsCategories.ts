@@ -7,3 +7,13 @@ export enum expeditionCategories {
   videoOfRitual = 'expeditions.categories.video-of-ritual',
   digitalRecord = 'expeditions.categories.digital-record'
 }
+
+export enum expeditionsCategories {
+  all = 0,
+  exploring = 1,
+  static = 2,
+  interdisciplinary = 3,
+  thematic = 4,
+  'video-of-ritual' = 5,
+  'digital-record' = 6
+}

@@ -15,6 +15,26 @@ export interface ScienceCategory {
   genreGroups: GenreGroup[];
 }
 
+export interface EducationPrimaryCategory {
+  id: 0;
+  title: string;
+  description: string;
+  recommended_sources: string[];
+  song_subcategories: [
+    {
+      id: string;
+      title: string;
+      media: string;
+      education_genres: [
+        {
+          id: number;
+          title: string;
+        }
+      ];
+    }
+  ];
+}
+
 export interface EducationCategoryCard {
   id: string;
   title: string;
@@ -22,16 +42,23 @@ export interface EducationCategoryCard {
   // routerLink: string;
 }
 
-export interface SongsPrimaryCategory {
+export interface EducationGenre {
   id: 0;
   title: string;
+  media: string[];
   description: string;
-  photo1: string;
-  photo2: string;
-  photo3: string;
-  photo4: string;
-  photo5: string;
 }
+
+// export interface SongsPrimaryCategory {
+//   id: 0;
+//   title: string;
+//   description: string;
+//   photo1: string;
+//   photo2: string;
+//   photo3: string;
+//   photo4: string;
+//   photo5: string;
+// }
 
 // export interface ScienceSubcategory {
 //   title: string;

@@ -38,11 +38,11 @@ export class ESPlayerState {
   fetchSongById(ctx: StateContext<ESPlayerStateModel>, action: FetchSongById) {
     const state = ctx.getState();
     return this.educationService.fetchSongById(action.id).pipe(
-      tap(data =>{
+      tap((data) => {
         ctx.setState({
           ...state,
           selecteSong: data as ScienceSong
-        })
+        });
       })
     );
   }
@@ -50,11 +50,12 @@ export class ESPlayerState {
   @Action(FetchScienceSongs)
   fetchScienceSongs(ctx: StateContext<ESPlayerStateModel>, action: FetchScienceSongs) {
     const state = ctx.getState();
-    return this.educationService.fetchSongsByGenre(action.genre).pipe(
+    return this.educationService.fetchSongsByGenreId(action.genre).pipe(
       tap((scienceSongs) => {
+        const s = scienceSongs as { items: [] };
         ctx.setState({
           ...state,
-          songsList: scienceSongs as ScienceSong[]
+          songsList: s.items as ScienceSong[]
         });
       })
     );
@@ -90,7 +91,7 @@ export class ESPlayerState {
   @Action(SelectSong)
   selectSong(ctx: StateContext<ESPlayerStateModel>, action: SelectSong) {
     const state = ctx.getState();
-    const selectedSong = state.songsList.find((song: ScienceSong) => song.id === action.selectedSongId);
+    const selectedSong = state.songsList.find((song: ScienceSong) => song.id + '' === action.selectedSongId);
     if (!selectedSong) {
       return;
     }

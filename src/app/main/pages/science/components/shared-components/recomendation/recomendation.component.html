@@ -10,10 +10,8 @@
       <app-arrow-down [direction]="expansionRecomendationArrow"></app-arrow-down>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <ng-container *ngFor="let recomendation of recomendations">
-    <p>
-      {{ recomendation }}
-    </p>
+  <ng-container>
+    <div [innerHTML]="recommendations"></div>
     <br />
   </ng-container>
   <div class="recomendations__pagination">

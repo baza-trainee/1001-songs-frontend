@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
 
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
-import { recomendations } from './components/shared-components/category-link/recomendations';
 import { RecomendationComponent } from './components/shared-components/recomendation/recomendation.component';
 import { RecommendedSourcesComponent } from './components/shared-components/recommended-sources/recommended-sources.component';
 import { CategoryLinkComponent } from './components/shared-components/category-link/category-link.component';
 import { EducationCategoryCard } from '../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-science',
@@ -28,33 +28,49 @@ import { EducationService } from 'src/app/shared/services/education/education.se
     RouterLink
   ]
 })
-export class ScienceComponent implements OnInit {
+export class ScienceComponent implements OnInit, OnDestroy {
   PAGE_SIZE = 5;
   categories: EducationCategoryCard[] = [];
-  recomendations? = recomendations;
+  recommendations = '';
+  recommendedSources = [''];
   recomendationPages: number[] = [1];
   expansionRecomendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
   intro: string = '';
+  title: string = '';
+
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(private educationService: EducationService) {}
 
   ngOnInit(): void {
-    this.educationService.fetchESData().subscribe((data: object) => {
-      const responseObject = data as { description: string; calendar_and_ritual_categories: [] };
-      this.intro = responseObject.description;
-      const genres = responseObject.calendar_and_ritual_categories;
-      this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
-        title: genreGroup.title,
-        id: genreGroup.id,
-        media : genreGroup.media ? genreGroup.media: '/assets/songs.png'
-      }));
-      // console.log(genres);
-    });
+    this.educationService
+      .fetchESData()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseObject: object) => {
+        const data = responseObject as {
+          title: string;
+          description: string;
+          calendar_and_ritual_categories: [];
+          recommendations: string;
+          recommended_sources: string[];
+        };
+        this.title = data.title;
+        this.intro = data.description;
+        this.recommendations = data.recommendations;
+        this.recommendedSources = data.recommended_sources;
+        const genres = data.calendar_and_ritual_categories;
+        this.categories = genres.map((genreGroup: EducationCategoryCard) => ({
+          title: genreGroup.title,
+          id: genreGroup.id,
+          media: genreGroup.media ? genreGroup.media : '/assets/songs.png'
+        }));
+      });
+  }
 
-    this.recomendationPages = Array.from(
-      Array(Math.floor(recomendations!.length / this.PAGE_SIZE) + (recomendations.length % this.PAGE_SIZE)).keys()
-    ).map((el) => el + 1);
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 
   rotateRecomendationArrow() {

@@ -29,18 +29,14 @@
       </div>
       <div class="song__player">
         <h1 class="song__title">{{ song.title }}</h1>
-        <p class="song__player-genre">{{ song.genre }}</p>
+        <p class="song__player-genre">{{ song.genres ? song.genres[0]: '' }}</p>
         <div class="song__player-desctop">
           <app-stereo-player></app-stereo-player>
 
           <app-multichanel-player></app-multichanel-player>
 
           <div class="song__player-btns">
-            <a class="song__player-download"
-               [href]="song.media.audio_example"
-               [download]="song.media.audio_example"
-               target="_blank"
-            >
+            <a class="song__player-download" [href]="song.stereo_audio" [download]="song.stereo_audio" target="_blank">
               <svg width="24" height="24">
                 <use xlink:href="./assets/sprites.svg#download"></use>
               </svg>
@@ -52,7 +48,6 @@
       </div>
     </div>
     <div class="song__player-mobile">
-   
       <app-science-player></app-science-player>
 
       <div class="song__player-btns">
@@ -64,36 +59,35 @@
         </button>
         <app-share className="song"></app-share>
       </div>
-
     </div>
     <div class="song__box song__text">
       <div></div>
       <div class="song__text-box">
-        <div class="song__text-content" *ngIf="song.text" [innerHTML]="song.text | formatText"></div>
-        <div class="song__text-content" *ngIf="!song.text">No text available</div>
+        <div class="song__text-content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
+        <div class="song__text-content" *ngIf="!song.song_text">No text available</div>
       </div>
     </div>
     <div class="song__box song__info">
       <div class="song__info-titles">
         <h4 class="song__title-sub">{{ 'science.song-page.info.title' | translate }}</h4>
-        <div class="song__info-descr" *ngIf="song.information" [innerHTML]="song.information | formatText"></div>
+        <div class="song__info-descr" *ngIf="song.song_description" [innerHTML]="song.song_description | formatText"></div>
       </div>
       <div class="song__info-box">
         <div>
           <span class="song__info-title">{{ 'science.song-page.info.place' | translate }}</span>
-          <p class="song__info-detail">{{ song.details.ethnographic_district }}</p>
+          <p class="song__info-detail">{{ song.ethnographic_district }}</p>
         </div>
         <div>
           <span class="song__info-title">{{ 'science.song-page.info.region' | translate }}</span>
-          <p class="song__info-detail">{{ song.details.recording_location }}</p>
+          <p class="song__info-detail">{{ song.location }}</p>
         </div>
         <div>
           <span class="song__info-title">{{ 'science.song-page.info.record' | translate }}</span>
-          <p class="song__info-detail">{{ song.details.author_recording }}</p>
+          <p class="song__info-detail">{{ song.collectors }}</p>
         </div>
         <div>
           <span class="song__info-title">{{ 'science.song-page.info.performers' | translate }}</span>
-          <p class="song__info-detail">{{ song.details.performers }}</p>
+          <p class="song__info-detail">{{ song.performers }}</p>
         </div>
       </div>
     </div>
@@ -109,7 +103,7 @@
     <div class="song__box song__map">
       <div>
         <h4 class="song__title-sub">{{ 'science.song-page.map' | translate }}</h4>
-        <div class="song__info-descr" *ngIf="song.media.comment_map" [innerHTML]="song.media.comment_map | formatText"></div>
+        <div class="song__info-descr" *ngIf="song.comment_map" [innerHTML]="song.comment_map | formatText"></div>
       </div>
       <div>
         <div class="song__map-container" style="background-image: url('./assets/img/Map.jpg')"></div>

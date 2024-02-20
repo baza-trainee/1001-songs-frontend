@@ -43,11 +43,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   staticVideoImgUrl: string[] = ['./assets/img/player/video_mock.png'];
 
   song!: Song;
-  photos = [
-    { url: './assets/img/Img.png', alt: '' },
-    { url: './assets/img/home/carousel2.jpg', alt: '' },
-    { url: './assets/img/home/carousel3.jpg', alt: '' }
-  ];
+  photos: { url: string; alt: string }[] = [{ url: '', alt: '' }];
   slideIndex = 0;
   state$!: Observable<StreamState>;
   constructor(
@@ -56,17 +52,23 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     private audioService: AudioService
   ) {}
 
+  ngOnInit() {
+    const params = this.route.snapshot.params;
+    this.store.dispatch(new FetchSongById(params['idSong']));
+
+    this.selectedSong$?.subscribe((scienceSong) => {
+      const photos = scienceSong.photos;
+      if (!photos || !photos.length) return;
+      this.photos = photos.map((el) => ({ url: el + '', alt: 'photo' }));
+    });
+  }
+
   nextSlide() {
     if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
   }
 
   prevSlide() {
     if (this.slideIndex !== 0) this.slideIndex--;
-  }
-
-  ngOnInit() {
-    const params = this.route.snapshot.params;
-    this.store.dispatch(new FetchSongById(params['idSong']));
   }
 
   ngOnDestroy(): void {

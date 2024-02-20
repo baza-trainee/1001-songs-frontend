@@ -1,6 +1,6 @@
 <div class="container">
   <div class="science">
-    <h2 class="science__title">{{ 'science.title' | translate }}</h2>
+    <h2 class="science__title">{{ title }}</h2>
     <p class="science__introduction">
       {{ intro }}
     </p>
@@ -14,10 +14,10 @@
       </div>
     </div>
     <div class="science__recomendations">
-      <app-recomendation></app-recomendation>
+      <app-recomendation [recommendations]="recommendations"></app-recomendation>
     </div>
     <div class="sciecnce__sources">
-      <app-recommended-sources></app-recommended-sources>
+      <app-recommended-sources [recommendedLnks]="recommendedSources"></app-recommended-sources>
     </div>
   </div>
 </div>

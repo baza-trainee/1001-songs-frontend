@@ -1,0 +1,17 @@
+<div class="search">
+  <mat-form-field class="search__box" *ngIf="showInputSearch">
+    <input class="search__input" matInput [formControl]="search" [matAutocomplete]="auto" placeholder="Exedition" />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="getExpeditionTitle"
+      (optionSelected)="onExpeditionSelected($event.option.value)"
+    >
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option.title | slice: 0 : 15 }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <svg class="search-img" (click)="activateSearch()">
+    <use xlink:href="./assets/sprites.svg#headerSearch"></use>
+  </svg>
+</div>

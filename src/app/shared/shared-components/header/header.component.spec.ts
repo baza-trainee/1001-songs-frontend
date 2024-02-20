@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -15,7 +16,14 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HeaderComponent, PopUpMenuComponent, NgxsModule.forRoot([AppState]), MatDialogModule],
+      imports: [
+        TranslateModule.forRoot(),
+        HeaderComponent,
+        PopUpMenuComponent,
+        NgxsModule.forRoot([AppState]),
+        MatDialogModule,
+        HttpClientTestingModule
+      ],
       providers: [
         TranslateService,
         {

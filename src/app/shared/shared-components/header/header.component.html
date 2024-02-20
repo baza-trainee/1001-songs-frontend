@@ -23,10 +23,12 @@
       </ul>
     </div>
     <div class="actions" tabindex="3">
-      <div class="actions__search" (click)="openSearch()" (keyup)="openSearch()" tabindex="0">
-        <svg class="actions__search-img">
+      
+      <div class="actions__search" >
+        <app-general-search></app-general-search>
+        <!-- <svg class="actions__search-img">
           <use xlink:href="./assets/sprites.svg#headerSearch"></use>
-        </svg>
+        </svg> -->
         <span *ngIf="isShowTextSearch" class="actions__search-invalid">{{ 'header.search-invalid' | translate }}</span>
       </div>
       <div class="actions__lang">
