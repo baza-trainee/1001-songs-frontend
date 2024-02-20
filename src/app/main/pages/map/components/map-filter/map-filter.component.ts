@@ -19,6 +19,7 @@ import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import {InitFilterOptions, SetShownOptions} from "../../../../../store/filter-map/filter-map.actions";
 import {TransformToMultiselectPipe} from "../../../../../shared/pipes/transform-to-multiselect.pipe";
+import {FetchMarkers} from "../../../../../store/map/map.actions";
 
 @Component({
   selector: 'app-map-filter',
@@ -87,6 +88,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.form.get('title')?.setValue('');
     this.titles = [];
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
+    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter))
   }
 
   ngOnDestroy() {
@@ -101,5 +103,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   clearFilter() {
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
+    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter))
   }
 }

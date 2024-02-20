@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {MarkerOfLocation, SongFilter} from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
 import {Select, Store} from '@ngxs/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
 import { srcPopapImgInMap } from "../../../static-data/img-popap-map";
@@ -24,9 +24,11 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   @Input() zoomControl: boolean = false;
   @Input() markers: MarkerOfLocation[] = [
     {
-      location__city: 'Полтава',
-      location__coordinates: '49.64704142664784, 34.42447708',
-      count: '1'
+      id: 0,
+      city: 'string',
+      latitude: 55.02,
+      longitude: 33.02,
+      song_count: 2
     }
   ];
   @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
@@ -61,22 +63,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.zoomControl) this.mapOptions.options.zoomControl = this.zoomControl;
     this.randomIndex = this.getRandomIndex();
-    this._translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((translateState: LangChangeEvent) => {
-      const currentLang = translateState.lang;
-      this.songs$.pipe(takeUntil(this.destroy$)).subscribe((songs) => {
-        if (currentLang === 'en') {
-          this.markers.forEach((marker: MarkerOfLocation) => {
-            const theSong = songs.find((song: Song) => song.location.coordinates === marker.location__coordinates);
-            marker.location__city = theSong ? theSong.location.city_eng : 'eng';
-          });
-        } else {
-          this.markers.forEach((marker: MarkerOfLocation) => {
-            const theSong = songs.find((song: Song) => song.location.coordinates === marker.location__coordinates);
-            marker.location__city = theSong ? theSong.location.city_ua : 'ua';
-          });
-        }
-      });
-    });
   }
 
   ngOnDestroy(): void {
@@ -84,12 +70,12 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  formatCords(cords: string) {
-    const localcords = cords.split(',');
-    const lat = Number.parseFloat(localcords[0]);
-    const lng = Number.parseFloat(localcords[1]);
-    return { lat, lng };
-  }
+  // formatCords(cords: string) {
+  //   const localcords = cords.split(',');
+  //   const lat = Number.parseFloat(localcords[0]);
+  //   const lng = Number.parseFloat(localcords[1]);
+  //   return { lat, lng };
+  // }
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: MarkerOfLocation) {
     if (this.currentInfoWindow) {
@@ -108,7 +94,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
-    if (this.selectedMarker?.location__city !== marker.location__city) this.randomIndex = this.getRandomIndex();
+    if (this.selectedMarker?.city !== marker.city) this.randomIndex = this.getRandomIndex();
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
@@ -118,10 +104,10 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     this.selectedMarker = null;
   }
 
-  getCustomMarkerIcon(cordsAsId: string): google.maps.Icon {
+  getCustomMarkerIcon(cordsAsId: {lat: number, lng: number}): google.maps.Icon {
     return {
       url:
-        this.selectedMarker?.location__coordinates === cordsAsId
+        this.selectedMarker?.latitude === cordsAsId.lat && this.selectedMarker?.longitude === cordsAsId.lng
           ? './assets/img/home/icons/place-hover.svg'
           : './assets/img/home/icons/place.svg'
     };
@@ -133,7 +119,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
 
   navigateTo(marker: MarkerOfLocation) {
     const updatedFilter: SongFilter = new SongFilter();
-    updatedFilter.city.push(marker.location__city as string);
+    updatedFilter.city.push(marker.city as string);
 
     this.store.dispatch(new FetchSongs(updatedFilter as SongFilter));
     this.router.navigate(['/map']);

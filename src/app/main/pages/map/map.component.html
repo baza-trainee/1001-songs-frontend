@@ -6,5 +6,7 @@
     (markerClicked)="handleMapEmit($event, player)"
   ></app-interactive-map>
   <app-map-filter *ngIf="markers$ | async as markers" class="map__filter container"></app-map-filter>
-  <div #player><app-player [stereoOnly]="true"></app-player></div>
+  <div #player>
+    <app-player *ngIf="isShowSongs" [stereoOnly]="true"></app-player>
+  </div>
 </div>

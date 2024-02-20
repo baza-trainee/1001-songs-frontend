@@ -22,5 +22,8 @@ export const StatEndpoints = {
     cities: 'filter/location/cities',
     funds: 'filter/song/funds',
     genres: 'filter/song/genres'
+  },
+  map: {
+    geotag: 'map/filter/geotag'
   }
 };
