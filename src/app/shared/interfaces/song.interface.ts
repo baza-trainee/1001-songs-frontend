@@ -1,3 +1,18 @@
+export interface PlaylistSong {
+  id: number;
+  title: string;
+  song_text: string;
+  collectors: string[];
+  recording_date: string;
+  stereo_audio: string;
+  video_url: string;
+  ethnographic_district: string;
+  photos: string[];
+  city: string;
+  genres: string[];
+  education_genres: string[];
+  fund: string;
+}
 export interface Song {
   id: string;
   title: string;

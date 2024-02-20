@@ -10,6 +10,8 @@ import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
 import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
+import { API_URL, StatEndpoints } from 'src/app/shared/config/endpoints/stat-endpoints';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-map',
@@ -23,10 +25,16 @@ export class MapComponent implements OnInit, OnDestroy {
   // @Select(MapState.getFilteredMarkerList) filteredMarkers$!: Observable<Marker[]>;
   private subscription: Subscription = new Subscription();
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(new FetchSongs(new SongFilter()));
+    this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`).subscribe((d) => {
+      console.log(d);
+    });
   }
 
   ngOnDestroy(): void {
