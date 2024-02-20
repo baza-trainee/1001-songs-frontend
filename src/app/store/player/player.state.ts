@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { FetchSongById, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
 import { ResetMarkers } from '../map/map.actions';
 import { MapService } from 'src/app/shared/services/map/map.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 export interface PlayerStateModel {
   songsList: Song[];
   selecteSong: Song;
+  songs: PlaylistSong[];
 }
 
 @State<PlayerStateModel>({
   name: 'playlist',
   defaults: {
     songsList: [],
-    selecteSong: {} as Song
+    selecteSong: {} as Song,
+    songs: []
   }
 })
 @Injectable()
@@ -25,12 +28,13 @@ export class PlayerState {
   constructor(
     private filterMapService: FilterMapService,
     private mapService: MapService,
-    private store: Store
+    private store: Store,
+    private playerService: PlayerService
   ) {}
 
   @Selector()
-  static getSongs(state: PlayerStateModel): Song[] {
-    return state.songsList;
+  static getSongs(state: PlayerStateModel): PlaylistSong[] {
+    return state.songs;
   }
 
   @Selector()
@@ -59,18 +63,20 @@ export class PlayerState {
   fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
 
-    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
+    return this.playerService.fetchSongs().pipe(
       tap((response: object) => {
-        // console.log('SONGS : Main response', response);
-        const modifiedResponse = Object.values(response);
-        const newSongs: Song[] = modifiedResponse[0].list_songs;
-        const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
-          (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
-        );
-        this.store.dispatch(new ResetMarkers(newMarkers));
+        console.log('SONGS : Main response', response);
+        const data = response as { items: PlaylistSong[] };
+
+       // const modifiedResponse = Object.values(response);
+        // const newSongs: Song[] = modifiedResponse[0].list_songs;
+        // const newMarkers: MarkerOfLocation[] = modifiedResponse[1].list_markers.map(
+        //   (marker: { location__city_ua: string; location__coordinates: string; count: number }) => this.mapService.modifyMarker(marker)
+        // );
+        // this.store.dispatch(new ResetMarkers(newMarkers));
         ctx.setState({
           ...state,
-          songsList: newSongs
+          songs: data.items
         });
       })
     );

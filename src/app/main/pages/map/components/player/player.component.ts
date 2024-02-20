@@ -6,12 +6,13 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  OnInit,
   ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {Observable, Subscription} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Select } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
@@ -19,7 +20,7 @@ import { MultichanelPlayerComponent } from './multichanel-player/multichanel-pla
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
-import {PaginationComponent} from "../../../../../shared/shared-components/pagination/pagination.component";
+import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
 
 @Component({
   selector: 'app-player',
@@ -38,7 +39,7 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements AfterViewInit, OnDestroy{
+export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
   @Input() stereoOnly: boolean = false;
@@ -53,17 +54,19 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   songs: Song[] = [];
   private readonly subscription?: Subscription;
 
-
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   isFixed: boolean = false;
   location = 'Ромейки';
 
-  constructor(
-    private _translate: TranslateService
-  ) {
+  constructor(private _translate: TranslateService) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
+    });
+  }
+  ngOnInit(): void {
+    this.songs$.subscribe((d) => {
+      console.log(d);
     });
   }
 
@@ -75,7 +78,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
     } else if (window.innerWidth <= 768) {
       this.heightHeader = 96;
       this.paddingTop = 30;
-    } else if (window.innerWidth <= 630){
+    } else if (window.innerWidth <= 630) {
       this.heightHeader = 80;
       this.paddingTop = 18;
     }
