@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Router, RouterLink} from '@angular/router';
-import {Article} from "../../../../../shared/interfaces/article.interface";
+import { Router, RouterLink } from '@angular/router';
 import {Observable, Subscription} from "rxjs";
-import {Select, Store} from "@ngxs/store";
-import {NewsState} from "../../../../../store/news/news.state";
+import {ArticlesService} from "../../../../../shared/services/news/articles.service";
+import {NewsResponse} from "../../../../../shared/interfaces/article.interface";
 
 @Component({
   selector: 'app-home-news',
@@ -16,22 +15,17 @@ import {NewsState} from "../../../../../store/news/news.state";
 })
 
 export class HomeNewsComponent implements OnInit, OnDestroy {
-  @Select(NewsState.getArticlesList) setArticles$!: Observable<Article[]>;
-  public articles!: Article[];
-  public mainArticle!: Article;
+  public newsResponse$!: Observable<NewsResponse>;
   private readonly articlesSubscription?: Subscription;
 
   constructor(
       private _translate: TranslateService,
-      private store: Store,
-      private router: Router
+      private router: Router,
+      private articleService: ArticlesService
   ) {}
 
   ngOnInit(): void {
-    this.setArticles$.subscribe((data) => {
-      this.articles = data.slice(1, 5);
-      this.mainArticle = data[0];
-    });
+    this.newsResponse$ = this.articleService.fetchNews({page: 1, size: 5});
   }
 
   ngOnDestroy() {

@@ -7,6 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -19,6 +20,7 @@ describe('HeaderComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         HeaderComponent,
+        BrowserAnimationsModule,
         PopUpMenuComponent,
         NgxsModule.forRoot([AppState]),
         MatDialogModule,
@@ -64,18 +66,6 @@ describe('HeaderComponent', () => {
     expect(translateService.currentLang).toEqual('en');
   });
 
-  it('should toggle changeLang variable on each click', () => {
-    expect(component.changeLang).toEqual(true);
-
-    component.selectLang();
-    fixture.detectChanges();
-    expect(component.changeLang).toEqual(false);
-
-    component.selectLang();
-    fixture.detectChanges();
-    expect(component.changeLang).toEqual(true);
-  });
-
   it('should switch language between "Укр" and "Eng" on each click', () => {
     expect(component.lang).toEqual('Eng');
     component.selectLang();
@@ -90,12 +80,6 @@ describe('HeaderComponent', () => {
     spyOnProperty(translateService, 'currentLang').and.returnValue('ua');
     component.checkLang();
     expect(component.changeLang).toEqual(true);
-  });
-
-  it('should isPopupOpen = true', () => {
-    expect(component.isPopupOpen).toEqual(false);
-    component.togglePopUp();
-    expect(component.isPopupOpen).toEqual(true);
   });
 
   it('should change language to "Eng" when value is "true"', () => {

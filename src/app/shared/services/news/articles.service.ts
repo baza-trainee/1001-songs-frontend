@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {catchError, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
-import {NewsArticle, NewsCategory, NewsResponse} from "../../interfaces/article.interface";
+import {Category, NewsArticle, NewsResponse} from "../../interfaces/article.interface";
 import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
 
 
@@ -22,8 +22,8 @@ export class ArticlesService {
         );
     }
 
-    fetchCategory(): Observable<NewsCategory[]> {
-        return this.http.get<NewsCategory[]>(`${API_URL}${StatEndpoints.news.categories}`).pipe(
+    fetchCategory(): Observable<Category[]> {
+        return this.http.get<Category[]>(`${API_URL}${StatEndpoints.news.categories}`).pipe(
             catchError(error => {
                 console.error(error);
                 return of([]);
@@ -31,14 +31,9 @@ export class ArticlesService {
         );
     }
 
-    fetchNews(page?: number, sizePage?: number, idCategory?: number): Observable<NewsResponse> {
-        let strSearch = "";
-        if (page) strSearch += `?page=${page}`;
-        if (idCategory) strSearch += `&category_id=${idCategory}`;
-        if (sizePage) strSearch += `&size=${sizePage}`;
+    fetchNews(params?: { category_id?: number; page?: number; size?: number }): Observable<NewsResponse> {
 
-
-        return this.http.get<NewsResponse>(`${API_URL}${StatEndpoints.news.news}` + strSearch).pipe(
+        return this.http.get<NewsResponse>(`${API_URL}${StatEndpoints.news.news}`, {params}).pipe(
             catchError(error => {
                 console.error(error);
                 return of({} as NewsResponse);

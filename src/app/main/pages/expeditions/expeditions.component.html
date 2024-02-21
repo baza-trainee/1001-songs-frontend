@@ -1,30 +1,23 @@
-<div class="container">
+<div class="container" >
   <div class="expeditions">
     <h2 class="expeditions__title">{{ 'expeditions.title' | translate }}</h2>
     <p class="expeditions__description">
       {{ 'expeditions.intro' | translate }}
     </p>
-    <div class="expeditions__categories">
-<!--      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />-->
+    <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
+      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
     </div>
-
-    <!--    <div>-->
-    <!--      <ul class="expeditions__categories">-->
-    <!--        <li-->
-    <!--          *ngFor="let category of categories | keyvalue; let i = index"-->
-    <!--          tabindex="0"-->
-    <!--          role="button"-->
-    <!--          (click)="selectCategory(i)"-->
-    <!--          (keypress)="selectCategory(i)"-->
-    <!--        >-->
-    <!--          <a [class.expeditions__selected-category]="i === selectedCategory"> {{ category.value | translate }}</a>-->
-    <!--        </li>-->
-    <!--      </ul>-->
-    <!--    </div>-->
-    <div class="expeditions__gallery" *ngIf="expeditionsList && expeditionsList.length">
-      <div *ngFor="let event of expeditionsList" class="expeditions__gallery__item">
-        <app-expedition-card [event]="event"></app-expedition-card>
+    <div class="expeditions__box">
+      <div class="expeditions__gallery" *ngIf="expeditionResponse$ | async as expedition">
+        <div *ngFor="let event of expedition.items" class="expeditions__gallery__item">
+          <app-expedition-card [event]="event"></app-expedition-card>
+        </div>
       </div>
     </div>
+    <app-pagination
+            [totalPages]="totalPage"
+            [currentPage]="currentPage"
+            (pageChange)="changePage($event)"
+    ></app-pagination>
   </div>
 </div>

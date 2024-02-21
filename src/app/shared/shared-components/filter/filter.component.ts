@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 import {KeyValuePipe, NgFor} from '@angular/common';
 
 import {TranslateModule} from "@ngx-translate/core";
-import {NewsCategory} from "../../interfaces/article.interface";
+import {Category} from "../../interfaces/article.interface";
 
 @Component({
   selector: 'app-filter',
@@ -12,7 +12,7 @@ import {NewsCategory} from "../../interfaces/article.interface";
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  @Input({required: true}) categories!: NewsCategory[];
+  @Input({required: true}) categories!: Category[];
   public selectedFilterId: number = 0;
   public startX: number = 0;
   public currentX: number = 0;

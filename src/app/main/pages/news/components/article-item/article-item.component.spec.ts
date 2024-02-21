@@ -3,10 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgxsModule } from '@ngxs/store';
 
 import { ArticleItemComponent } from './article-item.component';
-import { NewsState } from '../../../../../store/news/news.state';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {NewsItem} from "../../../../../shared/interfaces/article.interface";
 
@@ -16,7 +14,7 @@ describe('ArticleItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule, NgxsModule.forRoot([NewsState])],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
       providers: [
         {
           provide: ActivatedRoute,

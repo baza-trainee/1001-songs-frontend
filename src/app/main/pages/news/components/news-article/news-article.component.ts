@@ -10,7 +10,7 @@ import { Slide } from 'src/app/shared/interfaces/slide.interface';
 import {ShareComponent} from "../../../../../shared/shared-components/share/share.component";
 import {FormatTextPipe} from "../../../../../shared/pipes/format-text.pipe";
 import {SliderService} from "../../../../../shared/services/slider/slider.service";
-import {NewsArticle, NewsResponse} from "../../../../../shared/interfaces/article.interface";
+import {NewsArticle} from "../../../../../shared/interfaces/article.interface";
 import {ArticlesService} from "../../../../../shared/services/news/articles.service";
 import {
   FadeInCarouselComponent
@@ -40,19 +40,33 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.subscribeToRouteParams();
+    this.fetchArticleContent();
+    this.fetchSliderItems();
+  }
+
+  private subscribeToRouteParams(): void {
     if (this.route.params) {
       this.subscriptions.push(this.route.params.subscribe(params => {
         this.article$ = this.articleService.fetchNewsById(params['id']);
       }));
     }
+  }
+
+  private fetchArticleContent(): void {
     if (this.article$) {
       this.subscriptions.push(this.article$.subscribe(response => {
         this.content = this.formattingTextService.splitText(response.content);
       }));
     }
-    this.subscriptions.push(this.articleService.fetchNews().subscribe(response => {
-      this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
-    }));
+  }
+
+  private fetchSliderItems(): void {
+    this.subscriptions.push(
+        this.articleService.fetchNews().subscribe(response => {
+          this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
+        })
+    );
   }
 
   ngOnDestroy(): void {

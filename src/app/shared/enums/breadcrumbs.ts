@@ -18,7 +18,7 @@ export const crumbs = [
   },
   {
     key: 'news',
-    name: ''
+    name: 'Новини'
   },
   {
     key: 'expeditions',

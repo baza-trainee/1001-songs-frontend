@@ -26,6 +26,12 @@
     padding: 48px 0;
   }
 
+  &__box {
+    min-height: 300px;
+    transition: height 1s ease;
+    margin-bottom: 24px;
+  }
+
   &__gallery {
     display: flex;
     flex-wrap: wrap;

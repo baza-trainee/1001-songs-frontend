@@ -15,6 +15,7 @@ import { StatEndpoints } from 'src/app/shared/config/endpoints/stat-endpoints';
   templateUrl: './general-search.component.html',
   styleUrls: ['./general-search.component.scss']
 })
+
 export class GeneralSearchComponent implements OnInit, OnDestroy {
   search = new FormControl('search');
   options: { title: string; id: string }[] = [];
@@ -41,7 +42,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((searchWord) => {
-        this.expeditionsService.fetchExpeditionsListByParams({ search: searchWord + '' }).subscribe((resp) => {
+        this.expeditionsService.fetchExpeditions({ search: searchWord + '' }).subscribe((resp) => {
           const data = resp as { items: { title: string; id: number }[] };
           this.options = data.items.map((el) => ({ title: el.title, id: el.id + '' }));
         });

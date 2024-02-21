@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExpeditionCardComponent } from './expedition-card.component';
-import {TranslateModule} from "@ngx-translate/core";
-import {NgxsModule} from "@ngxs/store";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-import {ExpeditionsState} from "../../../../store/expeditions/expeditions.state";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
 
@@ -14,7 +12,7 @@ describe('ExpeditionCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ExpeditionCardComponent, TranslateModule.forRoot(), NgxsModule.forRoot([ExpeditionsState]), HttpClientTestingModule],
+      imports: [ExpeditionCardComponent, TranslateModule.forRoot(), HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,

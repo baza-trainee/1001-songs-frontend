@@ -12,7 +12,6 @@ import { debounceTime, fromEvent, Observable, Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { Slide } from '../../interfaces/slide.interface';
 import {Router, RouterLink} from "@angular/router";
-import {Store} from "@ngxs/store";
 
 @Component({
   selector: 'app-slider',
@@ -53,8 +52,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   private isDragging: boolean = false;
 
   constructor(
-    private router: Router,
-    private store: Store
+    private router: Router
   ) {}
 
   ngOnInit(): void {

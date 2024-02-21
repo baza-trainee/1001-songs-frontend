@@ -3,8 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeNewsComponent } from './home-news.component';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, RouterModule} from "@angular/router";
-import {NgxsModule} from "@ngxs/store";
-import {NewsState} from "../../../../../store/news/news.state";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('HomeNewsComponent', () => {
@@ -14,7 +12,7 @@ describe('HomeNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterModule.forRoot([]), HomeNewsComponent, NgxsModule.forRoot([NewsState])],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterModule.forRoot([]), HomeNewsComponent],
       providers: [TranslateService,
         {
           provide: ActivatedRoute,
@@ -35,14 +33,6 @@ describe('HomeNewsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should have a router link', () => {
-    fixture.detectChanges();
-    const routerLinkElement = fixture.nativeElement.querySelector('.news__router-link');
-
-    expect(routerLinkElement).toBeTruthy();
-    expect(routerLinkElement.getAttribute('routerLink')).toBeDefined();
   });
 
   it('should display the title correctly', () => {

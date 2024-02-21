@@ -4,33 +4,39 @@
 
   &__box {
     position: absolute;
-    width: 99%;
-    width: 200px;
-    left: -210px;
-    top: -10px;
-    border: 1px solid var(--color-input);
-    border-radius: 12px;
+    right: -7px;
+    top: 50%;
+    width: 0;
+    transform: translateY(-50%);
     color: var(--color-input);
+    border-radius: 12px;
+    border-bottom: 3px solid var(--bg-color-accent);
+    transition: all .3s ease;
+    opacity: 0;
+
+    &.show-box {
+      width: 250px;
+      opacity: 1;
+    }
   }
 
   &__input {
     display: flex;
     height: 48px;
-    padding: 10px 12px;
+    padding: 5px 10px;
     align-items: center;
     gap: 8px;
     font-family: 'Open Sans', sans-serif;
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    background: var(--text-color-secondary);
-    color: var(--color-input) !important;
+    color: var(--text-color-popup-menu) !important;
   }
 
   &-img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     opacity: 0.4;
 
     &:hover {

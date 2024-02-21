@@ -4,9 +4,8 @@ import { ExpeditionArticleComponent } from './expedition-article.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgxsModule } from '@ngxs/store';
-import { ExpeditionsState } from '../../../../store/expeditions/expeditions.state';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {ExpeditionsService} from "../../../../shared/services/expeditions/expeditions.service";
 
 describe('ExpeditionArticleComponent', () => {
   let component: ExpeditionArticleComponent;
@@ -17,11 +16,11 @@ describe('ExpeditionArticleComponent', () => {
       imports: [
         ExpeditionArticleComponent,
         TranslateModule.forRoot(),
-        NgxsModule.forRoot([ExpeditionsState]),
         HttpClientTestingModule,
         RouterModule.forRoot([])
       ],
       providers: [
+          ExpeditionsService,
         {
           provide: ActivatedRoute,
           useValue: {

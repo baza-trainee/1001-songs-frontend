@@ -1,11 +1,10 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from "@angular/common";
 import {Observable, Subscription} from "rxjs";
-import {Store} from "@ngxs/store";
 
-import {NewsCategory, NewsResponse} from "../../../shared/interfaces/article.interface";
+import {Category, NewsResponse} from "../../../shared/interfaces/article.interface";
 import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";
@@ -20,39 +19,54 @@ import {PaginationComponent} from "../../../shared/shared-components/pagination/
   providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
 
-export class NewsComponent implements OnDestroy {
+export class NewsComponent implements OnInit, OnDestroy {
   public newsResponse$!: Observable<NewsResponse>;
-  public categories$!: Observable<NewsCategory[]>;
-  private readonly articlesSubscription?: Subscription;
+  public categories$!: Observable<Category[]>;
+  private articlesSubscription?: Subscription;
 
   private itemsPerPage: number = 3;
   public currentPage: number = 1;
   public totalPage: number = 1;
 
   constructor(
-      private store: Store,
       private articleService: ArticlesService
-  ) {
-    this.newsResponse$ = this.articleService.fetchNews(this.currentPage, this.itemsPerPage);
-    this.categories$ = this.articleService.fetchCategory();
+  ) {}
 
-    this.articlesSubscription = this.newsResponse$.subscribe((response) => {
-      this.totalPage = response.pages;
-    })
+  ngOnInit() {
+    this.fetchNews();
+    this.fetchCategory();
+    this.fetchTotalPage();
+  }
+
+  fetchNews() {
+    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage});
+  }
+
+  fetchTotalPage() {
+    if (this.newsResponse$) {
+      this.articlesSubscription = this.newsResponse$.subscribe((response) => {
+        this.totalPage = response.pages;
+      })
+    }
+  }
+
+  fetchCategory() {
+    this.categories$ = this.articleService.fetchCategory();
   }
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.newsResponse$ = this.articleService.fetchNews(this.currentPage, this.itemsPerPage);
+    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage});
+  }
+
+  filteredCategory(id: number): void {
+    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage, category_id: id});
+    this.fetchTotalPage();
   }
 
   ngOnDestroy() {
     if (this.articlesSubscription) {
       this.articlesSubscription.unsubscribe();
     }
-  }
-
-  filteredCategory(id: number): void {
-    this.newsResponse$ = this.articleService.fetchNews(this.currentPage, this.itemsPerPage, id);
   }
 }

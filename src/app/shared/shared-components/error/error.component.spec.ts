@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from 'src/app/store/app/app.state';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -12,7 +13,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HttpClientTestingModule, ErrorComponent, NgxsModule.forRoot([AppState])],
+      imports: [TranslateModule.forRoot(), BrowserAnimationsModule, HttpClientTestingModule, ErrorComponent, NgxsModule.forRoot([AppState])],
       providers: [
         TranslateService,
         {
