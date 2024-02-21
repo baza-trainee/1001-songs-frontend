@@ -60,18 +60,14 @@ export class SongMapComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // this.initializeData();
     const songId = this.route.snapshot.params['id'];
     this.playerService.fetchSongById(songId).subscribe((response) => {
-      //  console.log(response);
       const data = response as Song;
       this.song = data;
       this.song$.next(this.playerService.getPlayerSong(data));
-      console.log(data.multichannels)
       if (data.multichannels.length > 0) {
         this.haveChannels = true;
       }
-      // this.song = data;
     });
   }
 

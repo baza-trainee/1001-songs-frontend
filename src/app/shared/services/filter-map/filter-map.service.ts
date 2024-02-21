@@ -47,11 +47,9 @@ export class FilterMapService {
   }
 
   fetchSongsByFilter(options: SongFilter) {
-    console.log(options);
-
     let fullRequest = `${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}`;
 
-    const search = options.title ? options.title : '';
+    const search = options.title ? `search=${options.title}` : '';
     const country = options.country.length ? options.country.map((country) => `country_id=${country}`) : '';
     const region = options.region.length ? options.region.map((region) => `region_id=${region}`) : '';
     const city = options.city.length ? options.city.map((city) => `city_id=${city}`) : '';
@@ -62,7 +60,7 @@ export class FilterMapService {
     const requestParams = fullParams.join('&');
     fullRequest += requestParams.length > 0 ? '?' + requestParams : '';
 
-   // console.log('REQUEST ', fullRequest);
+    // console.log('REQUEST ', fullRequest);
 
     return this.http.get(fullRequest);
   }

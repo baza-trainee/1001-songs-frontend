@@ -18,7 +18,6 @@ export class PlayerService {
   }
 
   getPlayerSong<T>(song: T): PlayerSong {
-    console.log(typeof song);
     const songData = song as { title: string; stereo_audio: string; multichannels: string[] };
     const channels = songData.multichannels ? songData.multichannels : [];
     return {
