@@ -115,7 +115,6 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(id: number) {
-    console.log(this.link + '/' + id)
     this.router.navigate([this.link + '/' + id]);
   }
 
