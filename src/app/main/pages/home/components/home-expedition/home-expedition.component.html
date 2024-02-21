@@ -1,23 +1,29 @@
-<section class="expeditions">
+<section class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
   <div class="container expeditions__container">
     <h2 class="expeditions__title">{{'home.home-expeditions.title' | translate}}</h2>
     <div class="expeditions__videos">
       <div class="expeditions__main">
-        <div class="expeditions__main-video">
-          <img class="expeditions__main-img" [src]="expeditionItems[0].img" alt="{{ expeditionItems[0].title }}">
-          <p class="expeditions__main-date">{{ expeditionItems[0].date }}</p>
-          <h4 class="expeditions__main-title">{{ expeditionItems[0].title }}</h4>
-          <p class="expeditions__main-location">{{ expeditionItems[0].location }}</p>
-          <a class="expeditions__main-btn" href="#">{{'home.home-expeditions.button' | translate}}</a>
+        <div class="expeditions__main-video" *ngIf="expedition.items[0] as expedition">
+          <img class="expeditions__main-img" [src]="expedition.preview_photo" alt="{{ expedition.title }}">
+          <p class="expeditions__main-date">{{ expedition.expedition_date | date: 'dd.MM.yyyy'  }}</p>
+          <h4 class="expeditions__main-title">{{ expedition.title }}</h4>
+          <p class="expeditions__main-location">{{ expedition.location }}</p>
+          <a class="expeditions__main-btn" (click)="redirectToNews(expedition.id)" (keydown)="redirectToNews(expedition.id)" tabindex="0">{{'home.home-expeditions.button' | translate}}</a>
         </div>
       </div>
       <div class="expeditions__all">
-        <div class="expeditions__all-video" *ngFor="let item of expeditionItems.slice(1)">
-          <img class="expeditions__all-img" [src]="item.img" alt="{{ item.title }}">
+        <div class="expeditions__all-video"
+             *ngFor="let item of expedition.items.slice(1, 5)"
+             (click)="redirectToNews(item.id)" (keydown)="redirectToNews(item.id)" tabindex="0"
+        >
+          <div class="expeditions__all-img">
+            <img [src]="item.preview_photo" alt="{{ item.title }}">
+            <span class="expeditions__all-play"></span>
+          </div>
           <div class="expeditions__all-content">
-            <p class="expeditions__all-date">{{ item.date }}</p>
+            <p class="expeditions__all-date">{{ item.expedition_date | date: 'dd.MM.yyyy' }}</p>
             <h4 class="expeditions__all-title">{{ item.title }}</h4>
-            <p class="expeditions__all-description">{{ item.shortDescription }}</p>
+<!--            <p class="expeditions__all-description">{{ item.short_description }}</p>-->
             <p class="expeditions__all-location">{{ item.location }}</p>
           </div>
         </div>

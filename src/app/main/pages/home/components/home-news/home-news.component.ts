@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
-import {Observable, Subscription} from "rxjs";
-import {ArticlesService} from "../../../../../shared/services/news/articles.service";
-import {NewsResponse} from "../../../../../shared/interfaces/article.interface";
+import { Observable } from "rxjs";
+import { ArticlesService } from "../../../../../shared/services/news/articles.service";
+import { NewsResponse } from "../../../../../shared/interfaces/article.interface";
 
 @Component({
   selector: 'app-home-news',
@@ -14,9 +14,8 @@ import {NewsResponse} from "../../../../../shared/interfaces/article.interface";
   styleUrls: ['./home-news.component.scss']
 })
 
-export class HomeNewsComponent implements OnInit, OnDestroy {
+export class HomeNewsComponent implements OnInit {
   public newsResponse$!: Observable<NewsResponse>;
-  private readonly articlesSubscription?: Subscription;
 
   constructor(
       private _translate: TranslateService,
@@ -26,12 +25,6 @@ export class HomeNewsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.newsResponse$ = this.articleService.fetchNews({page: 1, size: 5});
-  }
-
-  ngOnDestroy() {
-    if (this.articlesSubscription) {
-      this.articlesSubscription.unsubscribe();
-    }
   }
 
   redirectToNews(id: number | undefined) {
