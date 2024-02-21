@@ -3,7 +3,6 @@
     <h2 class="news__title">{{'home.home-news.title' | translate}}</h2>
     <div class="news__items" *ngIf="newsResponse$ | async as news">
       <div class="news__all">
-<!--        <pre>{{news.items | json }}</pre>-->
         <ng-container *ngFor="let item of news.items.slice(1, 6)">
           <a
             class="news__all-item"

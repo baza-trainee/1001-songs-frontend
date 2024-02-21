@@ -3,6 +3,7 @@ export const StatEndpoints = {
   markers: 'map',
   songs: 'songs',
   song: 'song',
+  filter: 'filter',
   education: 'education',
   scienceSongs: 'songs_es',
   payment: 'payment',
