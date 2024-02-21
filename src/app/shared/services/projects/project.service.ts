@@ -11,7 +11,7 @@ import {Project, ProjectData} from "../../interfaces/project.interface";
 })
 export class ProjectService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
     convertToSlide(obj: ProjectData): Slide {
         return {
@@ -32,8 +32,9 @@ export class ProjectService {
             })
         );
     }
-  fetchProjects(): Observable<ProjectData[]> {
-    return this.http.get<ProjectData[]>(`${API_URL}${StatEndpoints.projects}`).pipe(
+
+  fetchProjects(params?: {project_exclude?: string}): Observable<ProjectData[]> {
+    return this.http.get<ProjectData[]>(`${API_URL}${StatEndpoints.projects}`, {params}).pipe(
         catchError(error => {
           console.error(error);
           return of([]);

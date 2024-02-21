@@ -31,7 +31,7 @@ export class ArticlesService {
         );
     }
 
-    fetchNews(params?: { category_id?: number; page?: number; size?: number }): Observable<NewsResponse> {
+    fetchNews(params?: { category_id?: number; page?: number; size?: number, news_exclude?: number}): Observable<NewsResponse> {
 
         return this.http.get<NewsResponse>(`${API_URL}${StatEndpoints.news.news}`, {params}).pipe(
             catchError(error => {
