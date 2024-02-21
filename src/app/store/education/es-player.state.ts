@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { FetchScienceSongs, FetchSongById, ResetSong, SelectNext, SelectPrev, SelectSong } from './es-player.actions';
 import { EducationService } from 'src/app/shared/services/education/education.service';
-import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 
 export interface ESPlayerStateModel {
   songsList: EducationSong[];
