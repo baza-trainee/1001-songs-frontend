@@ -22,22 +22,27 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private readonly projects$: Observable<ProjectData[]>;
   public projectsSlides!: Slide[];
   private subscriptions: Subscription[] = [];
+
   constructor(
       private projectService: ProjectService,
       private route: ActivatedRoute
   ) {
     this.projects$ = this.projectService.fetchProjects();
-    if (this.projects$) {
-      this.subscriptions.push(this.projects$.subscribe(projects => {
-        this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
-      }));
-    }
+    this.subscribeToRouteParams();
   }
 
   ngOnInit(): void {
     if (this.project$) {
       this.subscriptions.push(this.projects$.subscribe(projects => {
         this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
+      }));
+    }
+  }
+
+  private subscribeToRouteParams(): void {
+    if (this.route.params) {
+      this.subscriptions.push(this.route.params.subscribe(params => {
+        this.project$ = this.projectService.fetchProjectById(params['id']);
       }));
     }
   }

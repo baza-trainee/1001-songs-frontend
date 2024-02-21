@@ -60,6 +60,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   filteredCategory(id: number): void {
+    this.currentPage = 1;
     this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage, category_id: id});
     this.fetchTotalPage();
   }

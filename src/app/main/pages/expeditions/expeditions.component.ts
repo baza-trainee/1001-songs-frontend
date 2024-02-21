@@ -59,6 +59,7 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
   }
 
   filteredCategory(id: number): void {
+    this.currentPage = 1;
     this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({page: this.currentPage, size: this.itemsPerPage, id: id});
     this.fetchTotalPage();
   }
