@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_URL, StatEndpoints } from '../config/endpoints/stat-endpoints';
-import { PlayerSong } from '../interfaces/song.interface';
+import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
+import { PlayerSong } from '../../interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root'

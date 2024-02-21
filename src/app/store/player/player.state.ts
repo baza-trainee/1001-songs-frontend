@@ -4,10 +4,8 @@ import { tap } from 'rxjs';
 import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { FetchSongById, FetchSongs, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
-import { MarkerOfLocation } from 'src/app/shared/interfaces/map-marker';
-import { ResetMarkers } from '../map/map.actions';
 import { MapService } from 'src/app/shared/services/map/map.service';
-import { PlayerService } from 'src/app/shared/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 export interface PlayerStateModel {
   songsList: Song[];

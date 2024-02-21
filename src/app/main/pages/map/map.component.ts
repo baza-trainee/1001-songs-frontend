@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
@@ -20,9 +20,9 @@ import { FetchMarkers } from '../../../store/map/map.actions';
   standalone: true,
   imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
-  private subscription: Subscription = new Subscription();
+  // private subscription: Subscription = new Subscription();
   isShowSongs = true;
 
   constructor(private store: Store) {}
@@ -36,9 +36,9 @@ export class MapComponent implements OnInit, OnDestroy {
     this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.subscription.unsubscribe();
+  // }
 
   onFilterChange(filter: SongFilter) {
     this.store.dispatch(new FetchSongs(filter));

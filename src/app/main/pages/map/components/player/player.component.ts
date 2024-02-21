@@ -21,7 +21,7 @@ import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-ca
 import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
-import { PlayerService } from 'src/app/shared/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-player',

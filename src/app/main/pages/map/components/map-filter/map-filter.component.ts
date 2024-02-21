@@ -7,7 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { SearchInputComponent } from './search-input/search-input.component';
-import { MarkerOfLocation, OptionsSongFilter, SongFilter } from '../../../../../shared/interfaces/map-marker';
+import {  OptionsSongFilter, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { FetchSongById, FetchSongs } from 'src/app/store/player/player.actions';

@@ -3,18 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
-import { BehaviorSubject, first, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 import { PlayerComponent } from '../player/player.component';
 import { StereoPlayerComponent } from '../player/stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../player/multichanel-player/multichanel-player.component';
 import { PlayerSong, Song } from '../../../../../shared/interfaces/song.interface';
 import { PlayerState } from '../../../../../store/player/player.state';
-import { FetchSongs, ResetSong, SelectSong } from '../../../../../store/player/player.actions';
+import { ResetSong } from '../../../../../store/player/player.actions';
 import { BreadcrumbsComponent } from '../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
-import { SongFilter } from '../../../../../shared/interfaces/map-marker';
-import { PlayerService } from 'src/app/shared/services/player.service';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-song-map',
