@@ -1,11 +1,10 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
-import { PlayerState } from 'src/app/store/player/player.state';
-import { Song } from 'src/app/shared/interfaces/song.interface';
-import { Select, Store } from '@ngxs/store';
+import { Observable, Subject, Subscription, of, takeUntil } from 'rxjs';
+import { PlayerSong } from 'src/app/shared/interfaces/song.interface';
+import { Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 
@@ -19,13 +18,13 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
-  @Input() stereoOnly: boolean = false;
+  // @Input() stereoOnly: boolean = false;
   @Input() autoplay: boolean = false;
+  @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
   @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
   showStereoPlayer: boolean = true;
 
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;
@@ -39,29 +38,21 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
-      this.stop();
-      const channels = this.multiAudioService.getChannles(song);
-      if (song.media && channels.length > 1 && !this.stereoOnly) {
-        this.showStereoPlayer = false;
-      } else {
-        this.showStereoPlayer = true;
-      }
-      if (song.media && song.media.stereo_audio) {
-        this.openFile(song);
+    this.song$.subscribe((playerSong) => {
+      if (playerSong.stereo) {
+        this.openFile(playerSong);
       }
     });
+
     this.state$ = this.audioService.getState();
 
-    this.state$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((ev) => {
-        if (ev.canplay && this.isPreloader) {
-          this.isPreloader = false;
-          if (!this.autoplay) {
-            this.pause();
-          }
+    this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
+      if (ev.canplay && this.isPreloader) {
+        this.isPreloader = false;
+        if (!this.autoplay) {
+          this.pause();
         }
+      }
     });
   }
 
@@ -75,11 +66,11 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.audioService.playStream(url).subscribe();
   }
 
-  openFile(file: Song) {
+  openFile(file: PlayerSong) {
     this.isPreloader = true;
     this.multiAudioService.stopAll();
     this.audioService.stop();
-    this.playStream(file.media.stereo_audio);
+    this.playStream(file.stereo);
   }
 
   pause() {
@@ -105,8 +96,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SelectPrev());
     this.isPlay.emit(true);
   }
-
-
 
   backward(currentTime: number | undefined) {
     this.audioService.seekTo(Number(currentTime) - this.REWIND_STEP);

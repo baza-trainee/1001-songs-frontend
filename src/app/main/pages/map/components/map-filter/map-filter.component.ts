@@ -1,25 +1,21 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import {filter, Observable, Subject} from 'rxjs';
+import { filter, Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { SearchInputComponent } from './search-input/search-input.component';
-import {
-  MarkerOfLocation,
-  OptionsSongFilter,
-  SongFilter
-} from '../../../../../shared/interfaces/map-marker';
+import {  OptionsSongFilter, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { FetchSongById, FetchSongs } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
-import {InitFilterOptions, SetShownOptions} from "../../../../../store/filter-map/filter-map.actions";
-import {TransformToMultiselectPipe} from "../../../../../shared/pipes/transform-to-multiselect.pipe";
-import {FetchMarkers} from "../../../../../store/map/map.actions";
+import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
+import { TransformToMultiselectPipe } from '../../../../../shared/pipes/transform-to-multiselect.pipe';
+import { FetchMarkers } from '../../../../../store/map/map.actions';
 
 @Component({
   selector: 'app-map-filter',
@@ -32,7 +28,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
   @Select(PlayerState.getSongs) songs!: Observable<Song[]>;
-  @Output() changeFilter = new EventEmitter<MarkerOfLocation[]>();
+  @Output() changeFilter = new EventEmitter<SongFilter>();
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
@@ -49,17 +45,15 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   });
 
   titles: { title: string; id: string }[] = [];
-  previousValue: SongFilter = {...this.form.value as SongFilter};
+  previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
-  constructor(
-    private store: Store,
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
 
     this.songs.subscribe((songs) => {
-      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id }));
+      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id + '' }));
     });
 
     this.form
@@ -87,8 +81,9 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   selectBlur() {
     this.form.get('title')?.setValue('');
     this.titles = [];
+    this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
-    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter))
+    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
   }
 
   ngOnDestroy() {
@@ -103,6 +98,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   clearFilter() {
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
-    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter))
+    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
   }
 }
