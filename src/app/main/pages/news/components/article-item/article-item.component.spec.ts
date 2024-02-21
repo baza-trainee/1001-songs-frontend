@@ -3,11 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgxsModule } from '@ngxs/store';
 
 import { ArticleItemComponent } from './article-item.component';
-import { NewsState } from '../../../../../store/news/news.state';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {NewsItem} from "../../../../../shared/interfaces/article.interface";
 
 describe('ArticleItemComponent', () => {
   let component: ArticleItemComponent;
@@ -15,7 +14,7 @@ describe('ArticleItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule, NgxsModule.forRoot([NewsState])],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -37,18 +36,21 @@ describe('ArticleItemComponent', () => {
 
     component.article = {
       id: 1,
-      news_title: "Заголовок новости",
-      type_of_news: "Важные события",
-      date: "2024-01-12",
-      location: "Город",
-      photo_1: "url_1.jpg",
-      text_1: "Текст новости",
-      photo_2: "url_2.jpg",
-      text_2: "Дополнительный текст новости",
-      author: "Имя Автора",
-      editor: "Имя Редактора",
-      svitliny: "Свитлина",
-    };
+      title: "Новость 1",
+      short_description: "Краткое описание новости 1",
+      preview_photo: "https://example.com/photo1.jpg",
+      created_at: "2024-02-20T00:00:00",
+      category: {
+        id: 1,
+        name: "Категория 1"
+      },
+      location: "Местоположение новости 1",
+      content: "<p>Содержание новости 1</p>",
+      authors: ["Автор 1", "Автор 2"],
+      editors: ["Редактор 1", "Редактор 2"],
+      photographers: ["Фотограф 1", "Фотограф 2"]
+    } as NewsItem;
+
 
     fixture.detectChanges();
   });

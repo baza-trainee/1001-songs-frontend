@@ -1,21 +1,29 @@
 @import '../../../../../typography/typography';
 
 .event {
-  height: 350px;
   display: flex;
+  align-items: stretch;
   flex-direction: column;
   width: 302px;
   cursor: pointer;
   transition: all .3s ease-in-out;
+  position: relative;
 
   &:hover {
     scale: 1.01;
+  }
+
+  img {
+    object-fit: cover;
+    height: 180px;
+    border-radius: 12px;
   }
 
   &__container {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-top: 10px;
   }
 
   &__player {
@@ -27,11 +35,44 @@
   &__date {
     @include caption-desktop;
 
-    margin-top: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 15px;
+    z-index: 1;
+    font-weight: bold;
+    color: var(--text-color-extra-1);
+    padding: 3px 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 10px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-color-accent)
+    }
+
+    &::before {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      width: calc(100% + 15px);
+      height: calc(100% + 15px);
+      border-radius: 0 0 0 15px;
+    }
   }
 
   &__name {
-    @include h6-desktop($font-size: 24px, $line-height: 30px, $font-family: $primary-fonts);
+    @include h6-desktop($font-size: 22px, $line-height: 28px, $font-family: $primary-fonts);
 
     white-space: nowrap;
     overflow: hidden;
@@ -46,7 +87,7 @@
 
   &__location {
     @include caption-desktop;
-    
+
     white-space: nowrap;
     overflow: hidden;
   }

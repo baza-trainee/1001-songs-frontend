@@ -11,11 +11,9 @@ import { environment } from './environments/environment';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
-import { ExpeditionsState } from './app/store/expeditions/expeditions.state';
 import { MapState } from './app/store/map/map.state';
 import { AppState } from './app/store/app/app.state';
 import { PlayerState } from './app/store/player/player.state';
-import { NewsState } from './app/store/news/news.state';
 import { FilterMapState } from './app/store/filter-map/filter-map.state';
 import { ESPlayerState } from './app/store/education/es-player.state';
 
@@ -26,7 +24,7 @@ export function createTranslateLoader(http: HttpClient) {
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
-      NgxsModule.forRoot([AppState, ExpeditionsState, MapState, NewsState, PlayerState, FilterMapState, ESPlayerState]),
+      NgxsModule.forRoot([AppState, MapState, PlayerState, FilterMapState, ESPlayerState]),
       BrowserModule,
       TranslateModule.forRoot({
         defaultLanguage: 'ua',

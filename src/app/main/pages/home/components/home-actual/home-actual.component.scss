@@ -1,124 +1,15 @@
 @import '../../../../../../typography/typography';
 
-img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.actual {
-  &__container {
-    padding: 80px 0;
-  }
-
-  &__title {
-    @include h2-desktop;
-
-    margin-bottom: 48px;
-  }
-
-  &__carousel {
-    &-container {
-      max-width: 100%;
-      margin-bottom: 48px;
-      display: flex;
-      gap: 24px;
-      overflow: hidden;
-      align-items: stretch;
-    }
-
-    &-item {
-      width: 23.6%;
-      padding-bottom: 24px;
-    }
-
-    &-img {
-      width: 100%;
-      border-radius: 16px;
-      vertical-align: bottom;
-    }
-
-    &-title {
-      @include h2-desktop($font_size: 24px, $line-height: 32px);
-
-      margin: 15px 0 11px;
-    }
-
-    &-description {
-      @include h2-desktop($font_size: 16px, $line-height: 24px);
-
-      font-family: "Open Sans", sans-serif;
-    }
-  }
-
-  &__nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-
-    &-item {
-      width: 56px;
-      height: 4px;
-      border-radius: 2px;
-      background-color: var(--text-color-extra-2);
-
-      &.active {
-        background-color: var(--bg-color-accent);
-      }
-    }
-  }
-}
-
 @media (max-width: 1376px) {
   .container {
     margin: 0 48px;
   }
 }
 
-@media (max-width: 1166px) {
-  .actual__carousel {
-    &-item {
-      width: 33%;
-
-      &:last-child {
-        display: none;
-      }
-    }
-
-    &-img {
-      height: 210px;
-    }
-
-    &-title {
-      margin: 15px 0 9px;
-    }
-  }
-}
-
 @media (max-width: 790px) {
   .actual {
     &__container {
-      padding: 60px 0;
       margin: 0 32px;
-    }
-
-    &__title {
-      margin-bottom: 32px;
-    }
-
-    &__carousel {
-      &-container {
-        margin-bottom: 32px;
-
-      }
-
-      &-item {
-        width: 50%;
-        min-height: 385px;
-
-        &:nth-last-child(-n+2) {
-          display: none;
-        }
-      }
     }
   }
 }
@@ -126,35 +17,7 @@ img {
 @media (max-width: 500px) {
   .actual {
     &__container {
-      padding: 31px 0 48px;
       margin: 0 16px;
-    }
-
-    &__title {
-      font-size: 32px;
-      line-height: 40px;
-      margin-bottom: 28px;
-    }
-
-    &__carousel {
-      &-container {
-        margin-bottom: 20px;
-      }
-
-      &-title {
-        font-size: 22px;
-        line-height: 28px;
-        margin: 13px 0 9px;
-      }
-
-      &-item {
-        width: 100%;
-        min-height: 348px;
-
-        &:nth-last-child(-n+3) {
-          display: none;
-        }
-      }
     }
   }
 }

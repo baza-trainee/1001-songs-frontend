@@ -1,40 +1,16 @@
-@import '../../../../../../typography/typography';
+@import '../../../../typography/typography';
 
-.article {
+.project {
+  @include body-desktop;
+
   margin-top: 108px;
   padding: 80px 0;
-
-  .content {
-    padding-bottom: 18px;
-  }
-
-  &__content {
-    padding-bottom: 16px;
-  }
-
-  &__date {
-    padding-bottom: 32px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 
   &__slider {
     background-color: var(--bg-color-screen);
-  }
-
-  @include body-desktop;
-
-
-  &__img {
-    height: 720px;
-    object-fit: cover;
-    vertical-align: bottom;
-    margin-bottom: 18px;
-  }
-
-  &__path {
-    a,
-    span {
-      @include body-desktop;
-    }
   }
 
   &__box {
@@ -45,7 +21,6 @@
   &__title {
     @include h2-desktop;
 
-    padding-top: 30px;
     margin-bottom: 32px;
   }
 
@@ -57,29 +32,17 @@
     gap: 48px;
   }
 
-  &__sub {
-    &-img {
-      height: 476px;
-      object-fit: cover;
-    }
-
-    &-title {
-      @include h4-mobile;
-
-      margin-bottom: 32px;
-    }
-  }
-
   &__about {
     display: flex;
     justify-content: space-between;
     gap: 24px;
+    font-size: 16px;
 
     &-title {
       color: var(--text-color-popup-menu);
       font-weight: 400;
       margin: 0;
-      padding-bottom: 32px;
+      padding-bottom: 10px;
     }
   }
 }
@@ -96,7 +59,7 @@
     margin: 0 48px;
   }
 
-  .article {
+  .project {
     &__img {
       height: 524px;
     }
@@ -118,7 +81,7 @@
     margin: 0 32px;
   }
 
-  .article {
+  .project {
     &__img {
       height: 396px;
     }
@@ -136,7 +99,7 @@
     margin: 0 32px;
   }
 
-  .article {
+  .project {
     margin-top: 96px;
   }
 }
@@ -146,7 +109,7 @@
     margin: 0 16px;
   }
 
-  .article {
+  .project {
     padding: 32px 0;
     gap: 32px;
 
@@ -187,7 +150,7 @@
 }
 
 @media (max-width: 421px) {
-  .article {
+  .project {
     margin-top: 80px;
   }
 }

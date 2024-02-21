@@ -1,0 +1,44 @@
+<ng-container *ngIf="project$ | async as project">
+    <div class="container">
+        <section class="project">
+            <h1>{{project.title}}</h1>
+            <div [innerHTML]="project.content | safeHtml"></div>
+
+            <div class="project__box project__text">
+                <h2 class="project__sub-title">{{ 'expeditions.article.about-article.title' | translate }}</h2>
+                <div class="project__about">
+                    <div class="project__about-box">
+                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.collectors' | translate }}:</h5>
+                        <div class="project__about-text" *ngFor="let author of project.authors">
+                            <p>{{ author }}</p>
+                        </div>
+                    </div>
+                    <div class="project__about-box">
+                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.editor' | translate }}:</h5>
+                        <div class="project__about-text" *ngFor="let editor of project.editors">
+                            <p>{{ editor }}</p>
+                        </div>
+                    </div>
+                    <div class="project__about-box">
+                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.video-editing' | translate }}:</h5>
+                        <div class="project__about-text" *ngFor="let photographer of project.photographers">
+                            <p>{{ photographer }}</p>
+                        </div>
+                    </div>
+                    <div class="project__about-box">
+                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.record' | translate }}:</h5>
+                        <div class="project__about-text" *ngFor="let recording of project.recording">
+                            <p>{{ recording }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-share class="article__box"></app-share>
+        </section>
+    </div>
+    <div class="project__slider">
+        <ng-container *ngIf="projectsSlides.length">
+            <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
+        </ng-container>
+    </div>
+</ng-container>

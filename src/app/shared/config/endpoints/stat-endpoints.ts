@@ -1,13 +1,9 @@
 export const API_URL = 'https://1000and1songs.com/api/v1/';
 export const StatEndpoints = {
   markers: 'map',
-  // map: 'map',
-  expeditions: 'expeditions',
-  expedition: 'expedition',
-  categories: 'categories',
-  news: 'news',
   songs: 'songs',
   song: 'song',
+  filter: 'filter',
   education: 'education',
   scienceSongs: 'songs_es',
   payment: 'payment',
@@ -16,7 +12,6 @@ export const StatEndpoints = {
   genre: 'genre',
   about: 'about',
   team: 'team',
-  filter: 'filter',
   mapFilter: {
     countries: 'filter/location/countries',
     regions: 'filter/location/regions',
@@ -26,5 +21,15 @@ export const StatEndpoints = {
   },
   map: {
     geotag: 'map/filter/geotag'
+  },
+  projects: 'projects',
+  news: {
+    news: 'news/news',
+    categories: 'news/categories'
+  },
+  expeditions: {
+    expeditions: 'expedition/filter',
+    expedition: 'expedition',
+    categories: 'expedition/categories'
   }
 };

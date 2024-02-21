@@ -10,16 +10,21 @@
     flex-grow: 1;
     display: flex;
     margin: 0 auto;
-    padding-top: 193px;
+    padding-top: 148px;
     padding-bottom: 80px;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
   }
 
+  &__box {
+    min-height: 550px;
+  }
+
   &__title {
     @include h2-mobile($font-size: 40px);
 
+    line-height: 65px;
     padding-bottom: 19px;
   }
 }

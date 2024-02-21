@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgxsModule } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { NewsArticleComponent } from './news-article.component';
-import { NewsState } from '../../../../../store/news/news.state';
 import {ActivatedRoute} from "@angular/router";
 
 describe('NewsArticleComponent', () => {
@@ -13,7 +11,7 @@ describe('NewsArticleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NewsArticleComponent, TranslateModule.forRoot(), NgxsModule.forRoot([NewsState]), HttpClientTestingModule],
+      imports: [NewsArticleComponent, TranslateModule.forRoot(), HttpClientTestingModule],
       providers: [{
         provide: ActivatedRoute, useValue: {}
       }]

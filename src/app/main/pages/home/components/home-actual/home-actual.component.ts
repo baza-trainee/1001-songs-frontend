@@ -1,50 +1,39 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {Slide} from "../../../../../shared/interfaces/slide.interface";
+import {ProjectService} from "../../../../../shared/services/projects/project.service";
+import {Observable, Subscription} from "rxjs";
+import {SliderComponent} from "../../../../../shared/shared-components/slider/slider.component";
+import {ProjectData} from "../../../../../shared/interfaces/project.interface";
 
-export interface CarouselItem {
-  imgSrc: string,
-  imgAlt: string,
-  title: string,
-  description: string
-
-}
 @Component({
   selector: 'app-home-actual',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, SliderComponent],
   templateUrl: './home-actual.component.html',
   styleUrls: ['./home-actual.component.scss']
 })
-export class HomeActualComponent {
+export class HomeActualComponent implements OnInit, OnDestroy {
+  private readonly projects$: Observable<ProjectData[]>;
+  public projectsSlides!: Slide[];
+  private projectsSubscription: Subscription | undefined;
 
-  constructor(private _translate: TranslateService) {
+  constructor(private _translate: TranslateService, private projectService: ProjectService) {
+    this.projects$ = this.projectService.fetchProjects();
   }
 
-  carouselItems: CarouselItem[] = [
-    {
-      imgSrc: './assets/img/home/carousel1.jpg',
-      imgAlt: '1000 і 1 пісня',
-      title: '1000 і 1 пісня',
-      description: 'Проєкт спрямований для підтримки фонду записів старовинних автентичних пісень українців.'
-    },
-    {
-      imgSrc: './assets/img/home/carousel3.jpg',
-      imgAlt: 'Назва проєкту',
-      title: 'Назва проєкту',
-      description: 'Текст опис проєкту'
-    },
-    {
-      imgSrc: './assets/img/home/carousel3.jpg',
-      imgAlt: 'Назва проєкту',
-      title: 'Назва проєкту',
-      description: 'Текст опис проєкту'
-    },
-    {
-      imgSrc: './assets/img/home/carousel4.jpg',
-      imgAlt: 'Назва проєкту',
-      title: 'Назва проєкту',
-      description: 'Текст опис проєкту'
+  ngOnInit(): void {
+    if(this.projects$) {
+      this.projectsSubscription = this.projects$.subscribe(projects => {
+        this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
+      });
     }
-  ]
+  }
+
+  ngOnDestroy(): void {
+    if (this.projectsSubscription) {
+      this.projectsSubscription.unsubscribe();
+    }
+  }
 }

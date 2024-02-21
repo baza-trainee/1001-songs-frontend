@@ -174,3 +174,9 @@ app-news {
     width: calc(100% - 32px) !important;
   }
 }
+
+/* stylelint-disable selector-class-pattern */
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+/* stylelint-enable selector-class-pattern */
