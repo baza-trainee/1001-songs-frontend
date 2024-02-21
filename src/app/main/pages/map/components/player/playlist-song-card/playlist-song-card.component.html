@@ -8,7 +8,7 @@
     </div>
 
     <div class="song__card__song__info">
-      <div class="song__info__genre">{{ song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
+      <div class="song__info__genre">{{  song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
         {{ song.city ? song.city : 'Unknown' }},
         <!-- {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }} -->
