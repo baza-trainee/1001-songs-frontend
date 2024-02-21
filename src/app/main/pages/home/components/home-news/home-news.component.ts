@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { ArticlesService } from "../../../../../shared/services/news/articles.service";
 import { NewsResponse } from "../../../../../shared/interfaces/article.interface";
 
+
 @Component({
   selector: 'app-home-news',
   standalone: true,
@@ -14,8 +15,9 @@ import { NewsResponse } from "../../../../../shared/interfaces/article.interface
   styleUrls: ['./home-news.component.scss']
 })
 
-export class HomeNewsComponent implements OnInit {
+export class HomeNewsComponent implements OnInit, OnDestroy {
   public newsResponse$!: Observable<NewsResponse>;
+  private readonly articlesSubscription?: Subscription;
 
   constructor(
       private _translate: TranslateService,
