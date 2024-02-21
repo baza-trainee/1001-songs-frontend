@@ -3,18 +3,18 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { FetchScienceSongs, FetchSongById, ResetSong, SelectNext, SelectPrev, SelectSong } from './es-player.actions';
 import { EducationService } from 'src/app/shared/services/education/education.service';
-import { ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong, ScienceSong } from 'src/app/shared/interfaces/science-song.interface';
 
 export interface ESPlayerStateModel {
-  songsList: ScienceSong[];
-  selecteSong: ScienceSong;
+  songsList: EducationSong[];
+  selecteSong: EducationSong;
 }
 
 @State<ESPlayerStateModel>({
   name: 'esplaylist',
   defaults: {
     songsList: [],
-    selecteSong: {} as ScienceSong
+    selecteSong: {} as EducationSong
   }
 })
 @Injectable()
@@ -25,12 +25,12 @@ export class ESPlayerState {
   ) {}
 
   @Selector()
-  static getSongs(state: ESPlayerStateModel): ScienceSong[] {
+  static getSongs(state: ESPlayerStateModel): EducationSong[] {
     return state.songsList;
   }
 
   @Selector()
-  static getSelectedSong(state: ESPlayerStateModel): ScienceSong {
+  static getSelectedSong(state: ESPlayerStateModel): EducationSong {
     return state.selecteSong;
   }
 
@@ -41,7 +41,7 @@ export class ESPlayerState {
       tap((data) => {
         ctx.setState({
           ...state,
-          selecteSong: data as ScienceSong
+          selecteSong: data as EducationSong
         });
       })
     );
@@ -55,7 +55,7 @@ export class ESPlayerState {
         const s = scienceSongs as { items: [] };
         ctx.setState({
           ...state,
-          songsList: s.items as ScienceSong[]
+          songsList: s.items as EducationSong[]
         });
       })
     );
@@ -91,7 +91,8 @@ export class ESPlayerState {
   @Action(SelectSong)
   selectSong(ctx: StateContext<ESPlayerStateModel>, action: SelectSong) {
     const state = ctx.getState();
-    const selectedSong = state.songsList.find((song: ScienceSong) => song.id + '' === action.selectedSongId);
+    console.log(action)
+    const selectedSong = state.songsList.find((song: EducationSong) => song.id + '' === action.selectedSongId);
     if (!selectedSong) {
       return;
     }
@@ -107,7 +108,7 @@ export class ESPlayerState {
 
     return ctx.setState({
       ...state,
-      selecteSong: {} as ScienceSong
+      selecteSong: {} as EducationSong
     });
   }
 }

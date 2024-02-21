@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,6 +7,7 @@ import { RecommendedSourcesComponent } from '../../shared-components/recommended
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { EducationPrimaryCategory, ScienceCategory } from '../../../../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-science-cycle',
@@ -15,11 +16,11 @@ import { EducationService } from 'src/app/shared/services/education/education.se
   templateUrl: './science-cycle.component.html',
   styleUrls: ['./science-cycle.component.scss']
 })
-export class ScienceCycleComponent implements OnInit {
+export class ScienceCycleComponent implements OnInit, OnDestroy {
   category!: ScienceCategory;
   categoryName!: string;
   categoryData: EducationPrimaryCategory = {} as EducationPrimaryCategory;
-  //recommendedSources = [''];
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -28,36 +29,16 @@ export class ScienceCycleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //  this.checkAndSetSelectedCategory();
-
     const categoryId = this.route.snapshot.params['category'];
-    this.educationService.fetchCategoryById(categoryId).subscribe((data: object) => {
-      this.categoryData = data as EducationPrimaryCategory;
-      //console.log(data);
-    });
-
-    //console.log(' > > > ', d);
-    // const currentCycle = this.route.snapshot.params['category'];
-    // const cycle = genreCycles[currentCycle as keyof typeof genreCycles];
-    // this.educationService.fetchESData().subscribe((d: any) => {
-    //   const data = d.find((el: any) => el.title === cycle);
-    //   console.log(data);
-    //   this.songsCycle = data;
-    // });
+    this.educationService
+      .fetchCategoryById(categoryId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: object) => {
+        this.categoryData = data as EducationPrimaryCategory;
+      });
   }
-
-  // private checkAndSetSelectedCategory() {
-  //   if (this.route.params) {
-  //     this.route.params.pipe(take(1)).subscribe((params) => {
-  //       const categories: ScienceCategory[] = scienceCategories;
-  //       this.categoryName = params['category'];
-  //       const selectedCategory = categories.find((category) => category.routerLink === this.categoryName);
-  //       if (selectedCategory) {
-  //         this.category = selectedCategory;
-  //       } else {
-  //         this.router.navigate(['/404']);
-  //       }
-  //     });
-  //   }
-  // }
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
+  }
 }

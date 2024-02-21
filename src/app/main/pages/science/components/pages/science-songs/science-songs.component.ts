@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, filter, map, takeUntil, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,10 +14,11 @@ import { EducationSong } from 'src/app/shared/interfaces/science-song.interface'
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
-import { Song } from '../../../../../../shared/interfaces/song.interface';
+import { PlayerSong, Song } from '../../../../../../shared/interfaces/song.interface';
 import { SliderComponent } from '../../../../../../shared/shared-components/slider/slider.component';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-science-songs',
@@ -41,7 +42,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
   @Select(ESPlayerState.getSongs) songs$!: Observable<EducationSong[]>;
-  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<EducationSong>;
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
   distanceToTop!: number;
@@ -53,16 +54,35 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   songs: EducationSong[] = [];
   title!: string;
-  private readonly subscription?: Subscription;
-  about1: string = '';
-  about2: string = '';
+  // private readonly subscription?: Subscription;
+  playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private store: Store,
-    private educationServices: EducationService
+    private educationServices: EducationService,
+    private playerService: PlayerService
   ) {}
+
+  ngOnInit(): void {
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((educationSong) => {
+      this.playerSong$.next(this.playerService.getPlayerSong(educationSong));
+    });
+
+    if (!this.route.snapshot) return;
+    const genreId = this.route.snapshot.params['id'];
+    this.educationServices.fetchGenreById(genreId).subscribe((data) => {
+      this.genreData = data as EducationGenre;
+    });
+
+    this.store.dispatch(new FetchScienceSongs(genreId));
+    this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
+      this.songs = scienseSongs;
+    });
+  }
 
   get totalPages(): number {
     return Math.ceil(this.songs.length / this.itemsPerPage);
@@ -104,19 +124,6 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.currentPage = page;
   }
 
-  ngOnInit(): void {
-    if (!this.route.snapshot) return;
-    const genreId = this.route.snapshot.params['id'];
-    this.educationServices.fetchGenreById(genreId).subscribe((data) => {
-      this.genreData = data as EducationGenre;
-    });
-
-    this.store.dispatch(new FetchScienceSongs(genreId));
-    this.songs$.subscribe((scienseSongs) => {
-      this.songs = scienseSongs;
-    });
-  }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.playerContainer) this.distanceToTop = this.calculateDistanceToTop();
@@ -130,8 +137,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 }
