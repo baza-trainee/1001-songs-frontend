@@ -16,7 +16,14 @@
       <div class="songs__player" #fixedContainer [ngClass]="{ fix: isFixed }" [ngStyle]="{ 'top.px': isFixed ? heightHeader : '0' }">
         <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
 
-        <app-science-player (isPlay)="handleIsPlayChange($event)" [autoplay]="true"></app-science-player>
+        <!-- <app-science-player (isPlay)="handleIsPlayChange($event)" [autoplay]="true"></app-science-player> -->
+        <app-stereo-player
+          #stereoPlayer
+          [autoplay]="true"
+          (isPlay)="handleIsPlayChange($event)"
+          [song$]="playerSong$"
+        ></app-stereo-player>
+
 
         <!-- <app-multichanel-player></app-multichanel-player> -->
       </div>
@@ -40,7 +47,7 @@
         <div class="" *ngFor="let song of itemsOnCurrentPage">
           <app-es-playlist-song-card
             [song]="song"
-            [isSelect]="selectSong.id === song.id + ''"
+            [isSelect]="selectSong.id === song.id "
             [isPlay]="isPlay"
           ></app-es-playlist-song-card>
         </div>

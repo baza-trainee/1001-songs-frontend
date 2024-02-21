@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Observable, Subject, filter, skip, take, takeUntil } from 'rxjs';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { Observable, Subject, filter, of, skip, take, takeUntil } from 'rxjs';
+import { PlayerSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { ResetSong, SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
@@ -20,7 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
-  @Input() stereoOnly: boolean = false;
+  // @Input() stereoOnly: boolean = false;
+  @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
   isPreloader = false;
 
@@ -39,14 +40,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
+    this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
-      if (song.media && this.multiAudioService.getChannles(song).length > 1 && !this.stereoOnly) {
-        this.openFile(song);
-        this.isVisible = true;
-      } else {
-        this.isVisible = false;
-      }
+      this.openFile(song);
+      this.isVisible = true;
     });
 
     this.state$
@@ -95,13 +92,12 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.multiAudioService.playStreamAll(urls).subscribe();
   }
 
-  openFile(file: Song) {
-    //  this.currentFile = file;
+  openFile(file: PlayerSong) {
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
     //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
-    this.playStream(this.multiAudioService.getChannles(file));
+    this.playStream(file.channels);
   }
 
   muteToggle(index: number) {

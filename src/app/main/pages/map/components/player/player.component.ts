@@ -6,20 +6,22 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  OnInit,
   ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {Observable, Subscription} from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Select } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
-import {PaginationComponent} from "../../../../../shared/shared-components/pagination/pagination.component";
+import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-player',
@@ -38,7 +40,7 @@ import {PaginationComponent} from "../../../../../shared/shared-components/pagin
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements AfterViewInit, OnDestroy{
+export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
   @Input() stereoOnly: boolean = false;
@@ -50,20 +52,25 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
-  songs: Song[] = [];
+  songs: PlaylistSong[] = [];
   private readonly subscription?: Subscription;
 
-
-  @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
+  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
   isFixed: boolean = false;
-  location = 'Ромейки';
+  playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
 
   constructor(
-    private _translate: TranslateService
+    // private _translate: TranslateService,
+    private playerService: PlayerService
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
+    });
+  }
+  ngOnInit(): void {
+    this.selectedSong$?.subscribe((playlistSong) => {
+      this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
     });
   }
 
@@ -75,7 +82,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
     } else if (window.innerWidth <= 768) {
       this.heightHeader = 96;
       this.paddingTop = 30;
-    } else if (window.innerWidth <= 630){
+    } else if (window.innerWidth <= 630) {
       this.heightHeader = 80;
       this.paddingTop = 18;
     }
@@ -95,7 +102,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy{
     this.isPlay = isPlay;
   }
 
-  get itemsOnCurrentPage(): Song[] {
+  get itemsOnCurrentPage(): PlaylistSong[] {
     if (this.songs.length <= this.itemsPerPage) return this.songs;
 
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;

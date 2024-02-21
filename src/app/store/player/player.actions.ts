@@ -13,7 +13,7 @@ export class FetchSongById {
 export class SelectSong {
   static readonly type = '[Player] Set';
 
-  constructor(public selectedSongId: string) {}
+  constructor(public selectedSongId: number) {}
 }
 export class ResetSong {
   static readonly type = '[Player] Reset';

@@ -5,12 +5,15 @@ export class SongFilter {
   title: string = '';
   genre: string[] = [];
   fund: string[] = [];
+  constructor(city: string[] = []) {
+    this.city = [...city];
+  }
 }
 
 export interface MultiSelect {
-  name: string,
-  id: number,
-  song_count: number
+  name: string;
+  id: number;
+  song_count: number;
 }
 
 export interface OptionsSongFilter {
@@ -30,24 +33,24 @@ export interface SelectedOptionsSongFilter {
 }
 
 export interface CountryDropdown {
-  id: number,
-  name: string,
-  song_count: number,
+  id: number;
+  name: string;
+  song_count: number;
 }
 
 export interface RegionDropdown {
-  id: number,
-  name: string,
-  song_count: number,
-  country_id: number
+  id: number;
+  name: string;
+  song_count: number;
+  country_id: number;
 }
 
 export interface CityDropdown {
-  id: number,
-  name: string,
-  country_id: number,
-  region_id: number,
-  song_count: number
+  id: number;
+  name: string;
+  country_id: number;
+  region_id: number;
+  song_count: number;
 }
 
 export interface GenreDropdown {

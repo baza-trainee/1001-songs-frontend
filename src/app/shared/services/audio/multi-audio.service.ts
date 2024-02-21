@@ -5,7 +5,6 @@ import { events } from '../../enums/audio.enum';
 import { format } from 'date-fns';
 import { Store } from '@ngxs/store';
 import { ResetSong } from 'src/app/store/player/player.actions';
-import { Song } from '../../interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -196,20 +195,5 @@ export class MultiAudioService {
 
   getMultichannelState(): Observable<StreamState[]> {
     return this.multichannelStateSubject.asObservable();
-  }
-
-  getChannles(song: Song): string[] {
-    if (song.media) {
-      return [
-        song.media.multichannel_audio1 ? song.media.multichannel_audio1 : '',
-        song.media.multichannel_audio1 ? song.media.multichannel_audio2 : '',
-        song.media.multichannel_audio1 ? song.media.multichannel_audio3 : '',
-        song.media.multichannel_audio1 ? song.media.multichannel_audio4 : '',
-        song.media.multichannel_audio1 ? song.media.multichannel_audio5 : '',
-        song.media.multichannel_audio1 ? song.media.multichannel_audio6 : ''
-      ].filter((el) => el);
-    } else {
-      return [];
-    }
   }
 }

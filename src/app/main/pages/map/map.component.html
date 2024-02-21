@@ -1,11 +1,15 @@
 <div class="map">
   <app-interactive-map
-    *ngIf="markers$| async as filteredMarkers"
+    *ngIf="markers$ | async as filteredMarkers"
     [markers]="filteredMarkers"
     [zoomControl]="true"
     (markerClicked)="handleMapEmit($event, player)"
   ></app-interactive-map>
-  <app-map-filter *ngIf="markers$ | async as markers" class="map__filter container"></app-map-filter>
+  <app-map-filter
+    *ngIf="markers$ | async as markers"
+    (changeFilter)="onFilterChange($event)"
+    class="map__filter container"
+  ></app-map-filter>
   <div #player>
     <app-player *ngIf="isShowSongs" [stereoOnly]="true"></app-player>
   </div>

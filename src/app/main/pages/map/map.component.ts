@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import {MarkerOfLocation, SongFilter} from 'src/app/shared/interfaces/map-marker';
+import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { ResetSong } from 'src/app/store/player/player.actions';
+import { FetchSongs } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
-import {InitFilterOptions} from "../../../store/filter-map/filter-map.actions";
-import {FetchMarkers} from "../../../store/map/map.actions";
+import { InitFilterOptions } from '../../../store/filter-map/filter-map.actions';
+import { FetchMarkers } from '../../../store/map/map.actions';
 
 @Component({
   selector: 'app-map',
@@ -20,26 +20,35 @@ import {FetchMarkers} from "../../../store/map/map.actions";
   standalone: true,
   imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
-  private subscription: Subscription = new Subscription();
-  isShowSongs = false;
+  // private subscription: Subscription = new Subscription();
+  isShowSongs = true;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    // this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`).subscribe((d) => {
+    //   console.log(d);
+    // });
     this.store.dispatch(new InitFilterOptions());
     this.store.dispatch(new FetchMarkers(new SongFilter()));
+    this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  // ngOnDestroy(): void {
+  //   this.subscription.unsubscribe();
+  // }
+
+  onFilterChange(filter: SongFilter) {
+    this.store.dispatch(new FetchSongs(filter));
   }
 
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
+    const filter = new SongFilter([marker.id + '']);
     this.scrollToElement(target);
-    this.store.dispatch(new ResetSong());
-    // this.store.dispatch(ResetMarkers(marker))
+    this.store.dispatch(new FetchMarkers(filter));
+    this.store.dispatch(new FetchSongs(filter));
   }
 
   scrollToElement(element: HTMLElement): void {
