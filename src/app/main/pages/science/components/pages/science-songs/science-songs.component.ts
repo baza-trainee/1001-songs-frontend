@@ -1,20 +1,19 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, Observable, Subject, Subscription, filter, map, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
-import { SciencePlayerComponent } from '../../shared-components/science-player/science-player.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
 import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
-import { PlayerSong, Song } from '../../../../../../shared/interfaces/song.interface';
+import { PlayerSong } from '../../../../../../shared/interfaces/song.interface';
 import { SliderComponent } from '../../../../../../shared/shared-components/slider/slider.component';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
@@ -26,7 +25,6 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
   imports: [
     CommonModule,
     BreadcrumbsComponent,
-    SciencePlayerComponent,
     ESPlaylistSongCardComponent,
     TranslateModule,
     ImageSliderComponent,

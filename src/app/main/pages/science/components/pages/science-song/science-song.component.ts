@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-import { Song } from '../../../../../../shared/interfaces/song.interface';
+import { PlayerSong, Song } from '../../../../../../shared/interfaces/song.interface';
 import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { ResetSong } from '../../../../../../store/player/player.actions';
@@ -18,7 +18,7 @@ import { ScienceSong } from '../../../../../../shared/interfaces/science-song.in
 import { ESPlayerState } from '../../../../../../store/education/es-player.state';
 import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
 import { FetchSongById } from 'src/app/store/education/es-player.actions';
-import { SciencePlayerComponent } from '../../shared-components/science-player/science-player.component';
+import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-science-song',
@@ -31,8 +31,7 @@ import { SciencePlayerComponent } from '../../shared-components/science-player/s
     StereoPlayerComponent,
     ShareComponent,
     FormatTextPipe,
-    VideoPlayerComponent,
-    SciencePlayerComponent
+    VideoPlayerComponent
   ],
   templateUrl: './science-song.component.html',
   styleUrls: ['./science-song.component.scss']
@@ -46,10 +45,14 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   photos: { url: string; alt: string }[] = [{ url: '', alt: '' }];
   slideIndex = 0;
   state$!: Observable<StreamState>;
+  playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+  destroy$: Subject<void> = new Subject<void>();
+
   constructor(
     private route: ActivatedRoute,
     private store: Store,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private playerService: PlayerService
   ) {}
 
   ngOnInit() {
@@ -57,6 +60,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     this.store.dispatch(new FetchSongById(params['idSong']));
 
     this.selectedSong$?.subscribe((scienceSong) => {
+      this.playerSong$.next(this.playerService.getPlayerSong(scienceSong));
       const photos = scienceSong.photos;
       if (!photos || !photos.length) return;
       this.photos = photos.map((el) => ({ url: el + '', alt: 'photo' }));
@@ -73,5 +77,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 }

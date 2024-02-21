@@ -91,7 +91,6 @@ export class ESPlayerState {
   @Action(SelectSong)
   selectSong(ctx: StateContext<ESPlayerStateModel>, action: SelectSong) {
     const state = ctx.getState();
-    console.log(action)
     const selectedSong = state.songsList.find((song: EducationSong) => song.id + '' === action.selectedSongId);
     if (!selectedSong) {
       return;
