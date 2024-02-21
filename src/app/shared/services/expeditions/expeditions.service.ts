@@ -22,10 +22,11 @@ export class ExpeditionsService {
             })
         );
     }
+
     fetchData(id: string) {
        return this.fetchExpeditionById(id).pipe(
             switchMap((response) => {
-                return this.fetchExpeditions({id: response.category.id}).pipe(
+                return this.fetchExpeditions({id: response.category.id, expedition_exclude: id}).pipe(
                     map((slider) => ({content: response, sliderItem: slider}))
                 )
             })
@@ -41,7 +42,7 @@ export class ExpeditionsService {
         );
     }
 
-    fetchExpeditions(params: { search?: string; id?: number; page?: number; size?: number }) : Observable<ExpeditionListResponse> {
+    fetchExpeditions(params: { search?: string; id?: number; page?: number; size?: number, expedition_exclude?: string}) : Observable<ExpeditionListResponse> {
         return this.http.get<ExpeditionListResponse>(`${API_URL}${StatEndpoints.expeditions.expeditions}`, {params}).pipe(
           catchError( error => {
             console.error(error);

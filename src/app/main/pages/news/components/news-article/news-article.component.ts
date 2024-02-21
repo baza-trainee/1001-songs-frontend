@@ -42,7 +42,6 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeToRouteParams();
     this.fetchArticleContent();
-    this.fetchSliderItems();
   }
 
   private subscribeToRouteParams(): void {
@@ -56,14 +55,15 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   private fetchArticleContent(): void {
     if (this.article$) {
       this.subscriptions.push(this.article$.subscribe(response => {
+        this.fetchSliderItems(response.id);
         this.content = this.formattingTextService.splitText(response.content);
       }));
     }
   }
 
-  private fetchSliderItems(): void {
+  private fetchSliderItems(id: number): void {
     this.subscriptions.push(
-        this.articleService.fetchNews().subscribe(response => {
+        this.articleService.fetchNews({news_exclude: id}).subscribe(response => {
           this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
         })
     );
