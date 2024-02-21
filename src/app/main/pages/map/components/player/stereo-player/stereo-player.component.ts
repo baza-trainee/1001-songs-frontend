@@ -39,6 +39,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.song$.subscribe((playerSong) => {
+      console.log(playerSong)
       if (playerSong.stereo) {
         this.openFile(playerSong);
       }

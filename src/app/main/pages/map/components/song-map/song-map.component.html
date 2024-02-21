@@ -1,4 +1,4 @@
-<div class="container"*ngIf="selectedSong$ | async as song">
+<div class="container"*ngIf=" song.id">
   <section class="song-page">
 
     <app-breadcrumbs></app-breadcrumbs>
@@ -8,9 +8,9 @@
       <div class="song-page__info">
         <div class="song-page__text">
           <h2 class="song-page__text-title">{{song.title}}</h2>
-          <h6 class="song-page__text-genre">{{song.details.genre_cycle}}</h6>
-          <div class="song-page__text-content" *ngIf="song.media.text" [innerHTML]="song.media.text | formatText"></div>
-          <div class="song-page__text-content" *ngIf="!song.media.text">No text available</div>
+          <h6 class="song-page__text-genre">{{song.genres[0]}}</h6>
+          <div class="song-page__text-content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
+          <div class="song-page__text-content" *ngIf="!song.song_text">No text available</div>
         </div>
         <div class="song-page__carousel">
           <div class="song-page__carousel-box">
@@ -38,22 +38,22 @@
       <div class="song-page__player">
         <p class="song-page__player-title">{{"map.song-page.listen-song" | translate }}</p>
 
-        <app-stereo-player [autoplay]="false"></app-stereo-player>
+        <app-stereo-player [autoplay]="false" [stereoOnly]="!haveChannels" [song$]="song$"></app-stereo-player>
 
-        <app-multichanel-player></app-multichanel-player>
+        <app-multichanel-player [stereoOnly]="haveChannels"></app-multichanel-player>
       </div>
       <div class="song-page__song">
         <div class="song-page__song-box">
           <p class="song-page__song-title">{{"map.song-page.song-info.place" | translate }}</p>
           <p class="song-page__song-description">
-            {{ song.location.district_center }},
-            {{ song.location.region }},
-            {{ song.location.ethnographic_district }}
+            <!-- {{ song.location }}, -->
+            {{ song.location }},
+            {{ song.ethnographic_district }}
           </p>
         </div>
         <div class="song-page__song-box">
           <p class="song-page__song-title">{{"map.song-page.song-info.region" | translate }}</p>
-          <p class="song-page__song-description">{{ song.location.ethnographic_district }}</p>
+          <p class="song-page__song-description">{{ song.ethnographic_district }}</p>
         </div>
         <div class="song-page__song-box">
           <p class="song-page__song-title">{{"map.song-page.song-info.record" | translate }}</p>

@@ -19,7 +19,23 @@ export interface PlaylistSong {
   education_genres: string[];
   fund: string;
 }
+
 export interface Song {
+  id: number;
+  title: string;
+  song_text: string;
+  genres: string[];
+  video_url: string;
+  location: string;
+  ethnographic_district: string;
+  collectors: string[];
+  performers: string;
+  recording_date: string;
+  photos: string[];
+  stereo_audio: string;
+  multichannels: string[];
+}
+export interface Song1 {
   id: string;
   title: string;
   recording_date: string;
