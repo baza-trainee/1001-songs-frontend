@@ -18,7 +18,7 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
-  @Input() stereoOnly: boolean = false;
+  // @Input() stereoOnly: boolean = false;
   @Input() autoplay: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
@@ -39,7 +39,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.song$.subscribe((playerSong) => {
-      console.log(playerSong)
       if (playerSong.stereo) {
         this.openFile(playerSong);
       }

@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
-  @Input() stereoOnly: boolean = false;
+  // @Input() stereoOnly: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
   isPreloader = false;
@@ -40,16 +40,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.isVisible =this.stereoOnly;
     this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
-      this.openFile(song)
-      // if (song.media && this.multiAudioService.getChannles(song).length > 1 && !this.stereoOnly) {
-      //   this.openFile(song);
-      //   this.isVisible = true;
-      // } else {
-      //   this.isVisible = false;
-      // }
+      this.openFile(song);
+      this.isVisible = true;
     });
 
     this.state$
@@ -99,12 +93,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   openFile(file: PlayerSong) {
-    //  this.currentFile = file;
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
     //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
-    this.playStream((file.channels));
+    this.playStream(file.channels);
   }
 
   muteToggle(index: number) {

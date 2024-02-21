@@ -1,33 +1,34 @@
-<div class="container"*ngIf=" song.id">
+<div class="container" *ngIf="song.id">
   <section class="song-page">
-
     <app-breadcrumbs></app-breadcrumbs>
 
     <div class="song-page__detail" *ngIf="song.id">
       <div class="song-page__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
       <div class="song-page__info">
         <div class="song-page__text">
-          <h2 class="song-page__text-title">{{song.title}}</h2>
-          <h6 class="song-page__text-genre">{{song.genres[0]}}</h6>
+          <h2 class="song-page__text-title">{{ song.title }}</h2>
+          <h6 class="song-page__text-genre">{{ song.genres[0] }}</h6>
           <div class="song-page__text-content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
           <div class="song-page__text-content" *ngIf="!song.song_text">No text available</div>
         </div>
         <div class="song-page__carousel">
           <div class="song-page__carousel-box">
-            <div class="song-page__carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ 'active': i === slideIndex }">
-              <img [src]="photo.url" [alt]="photo.alt">
+            <div class="song-page__carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ active: i === slideIndex }">
+              <img [src]="photo.url" [alt]="photo.alt" />
             </div>
           </div>
           <div class="song-page__carousel-info">
-            <p><span>{{ slideIndex + 1 }}/{{ photos.length }}</span> {{"map.song-page.photos" | translate }}</p>
+            <p>
+              <span>{{ slideIndex + 1 }}/{{ photos.length }}</span> {{ 'map.song-page.photos' | translate }}
+            </p>
           </div>
           <div class="song-page__carousel-nav">
-            <button class="song-page__carousel-prev" (click)="prevSlide()" [ngClass]="{ 'disabled': slideIndex === 0 }">
+            <button class="song-page__carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
               <svg width="40" height="40" viewBox="0 0 48 48">
                 <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
               </svg>
             </button>
-            <button class="song-page__carousel-next" (click)="nextSlide()" [ngClass]="{ 'disabled': slideIndex === photos.length - 1 }">
+            <button class="song-page__carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === photos.length - 1 }">
               <svg width="40" height="40" viewBox="0 0 48 48">
                 <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
               </svg>
@@ -36,15 +37,15 @@
         </div>
       </div>
       <div class="song-page__player">
-        <p class="song-page__player-title">{{"map.song-page.listen-song" | translate }}</p>
+        <p class="song-page__player-title">{{ 'map.song-page.listen-song' | translate }}</p>
 
-        <app-stereo-player [autoplay]="false" [stereoOnly]="!haveChannels" [song$]="song$"></app-stereo-player>
+        <app-stereo-player [autoplay]="false" *ngIf="!haveChannels" [song$]="song$"></app-stereo-player>
 
-        <app-multichanel-player [stereoOnly]="haveChannels"></app-multichanel-player>
+        <app-multichanel-player *ngIf="haveChannels" [song$]="song$"></app-multichanel-player>
       </div>
       <div class="song-page__song">
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{"map.song-page.song-info.place" | translate }}</p>
+          <p class="song-page__song-title">{{ 'map.song-page.song-info.place' | translate }}</p>
           <p class="song-page__song-description">
             <!-- {{ song.location }}, -->
             {{ song.location }},
@@ -52,19 +53,19 @@
           </p>
         </div>
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{"map.song-page.song-info.region" | translate }}</p>
+          <p class="song-page__song-title">{{ 'map.song-page.song-info.region' | translate }}</p>
           <p class="song-page__song-description">{{ song.ethnographic_district }}</p>
         </div>
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{"map.song-page.song-info.record" | translate }}</p>
+          <p class="song-page__song-title">{{ 'map.song-page.song-info.record' | translate }}</p>
           <p class="song-page__song-description">{{ song.collectors }}</p>
         </div>
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{"map.song-page.song-info.performers" | translate }}</p>
+          <p class="song-page__song-title">{{ 'map.song-page.song-info.performers' | translate }}</p>
           <p class="song-page__song-description">{{ song.performers }}</p>
         </div>
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{"map.song-page.song-info.data" | translate }}</p>
+          <p class="song-page__song-title">{{ 'map.song-page.song-info.data' | translate }}</p>
           <p class="song-page__song-description">{{ song.recording_date }}</p>
         </div>
       </div>

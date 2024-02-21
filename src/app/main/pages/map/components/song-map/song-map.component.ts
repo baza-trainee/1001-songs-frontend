@@ -67,6 +67,7 @@ export class SongMapComponent implements OnInit, OnDestroy {
       const data = response as Song;
       this.song = data;
       this.song$.next(this.playerService.getPlayerSong(data));
+      console.log(data.multichannels)
       if (data.multichannels.length > 0) {
         this.haveChannels = true;
       }
