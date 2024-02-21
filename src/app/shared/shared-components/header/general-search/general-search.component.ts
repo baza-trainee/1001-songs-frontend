@@ -6,7 +6,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { Subject, debounceTime, filter, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
-import { StatEndpoints } from 'src/app/shared/config/endpoints/stat-endpoints';
 
 @Component({
   selector: 'app-general-search',
@@ -57,11 +56,13 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
   onExpeditionSelected(ev:{id: number}) {
     this.search.setValue('');
     this.showInputSearch = false;
-    this.router.navigateByUrl(`/${StatEndpoints.expeditions}/${ev.id}`);
+    this.router.navigateByUrl(`/expeditions/${ev.id}`);
   }
+
   getExpeditionTitle(expedition: { title: string; id: string }) {
     return expedition.title;
   }
+
   activateSearch() {
     this.showInputSearch = !this.showInputSearch;
   }
