@@ -47,31 +47,22 @@ export class FilterMapService {
   }
 
   fetchSongsByFilter(options: SongFilter) {
-    // console.log(options);
+    console.log(options);
 
-    let fullRequest = `${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}?`;
-    //let searchRequest = '';
+    let fullRequest = `${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}`;
 
-    const selectedFilterOptions = Object.entries(options).filter((el) => {
-      console.log(el);
-      return el[1].length > 0;
-    });
-    // let fullRequest = API_URL + StatEndpoints.songs + '?';
-    //let searchRequest = '';
-    selectedFilterOptions.forEach((option: [string, string[] | string]) => {
-      //const optionName = this.preprocesFilterOptionName(option[0]);
-      // if (typeof option[1] === 'string') {
-      //   const searchQuery = `${optionName}=${this.replaceSpaces(option[1])}&`;
-      //   fullRequest += searchQuery;
-      //   return;
-      // }
-      // const optionValues = option[1].map((selectedOption) => this.getOptionValueByKey(optionName, selectedOption));
-      // const req = `${optionName}=${optionValues.map((el) => this.replaceSpaces(el)).join(',')}&`;
-      // fullRequest += req;
-    });
-    fullRequest = fullRequest.slice(0, fullRequest.length - 1);
+    const search = options.title ? options.title : '';
+    const country = options.country.length ? options.country.map((country) => `country_id=${country}`) : '';
+    const region = options.region.length ? options.region.map((region) => `region_id=${region}`) : '';
+    const city = options.city.length ? options.city.map((city) => `city_id=${city}`) : '';
+    const genre = options.genre.length ? options.genre.map((genre) => `genre_id=${genre}`) : '';
+    const fund = options.fund.length ? options.fund.map((fund) => `fund_id=${fund}`) : '';
+    const fullParams = [search, ...country, ...region, ...city, ...genre, ...fund];
 
-    console.log('REQUEST ', fullRequest);
+    const requestParams = fullParams.join('&');
+    fullRequest += requestParams.length > 0 ? '?' + requestParams : '';
+
+   // console.log('REQUEST ', fullRequest);
 
     return this.http.get(fullRequest);
   }

@@ -65,9 +65,9 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
   ngOnInit(): void {
-    this.songs$.subscribe((d) => {
-      // console.log('PlaylistSong', d);
-    });
+    // this.songs$.subscribe((d) => {
+    //   // console.log('PlaylistSong', d);
+    // });
   }
 
   @HostListener('window:resize')
