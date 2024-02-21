@@ -1,3 +1,9 @@
+export interface PlayerSong {
+  title: string;
+  stereo: string;
+  channels: string[];
+}
+
 export interface PlaylistSong {
   id: number;
   title: string;

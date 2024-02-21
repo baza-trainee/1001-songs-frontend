@@ -11,16 +11,17 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Select } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
+import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-player',
@@ -57,17 +58,20 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
   isFixed: boolean = false;
-  location = 'Ромейки';
+  playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
 
-  constructor(private _translate: TranslateService) {
+  constructor(
+    // private _translate: TranslateService,
+    private playerService: PlayerService
+  ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
     });
   }
   ngOnInit(): void {
-    // this.songs$.subscribe((d) => {
-    //   // console.log('PlaylistSong', d);
-    // });
+    this.selectedSong$?.subscribe((playlistSong) => {
+      this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
+    });
   }
 
   @HostListener('window:resize')

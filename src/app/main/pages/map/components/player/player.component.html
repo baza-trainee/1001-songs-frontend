@@ -20,6 +20,7 @@
           [autoplay]="true"
           [stereoOnly]="stereoOnly"
           (isPlay)="handleIsPlayChange($event)"
+          [song$]="playerSong"
         ></app-stereo-player>
 
         <app-multichanel-player #multiChanelPlayer [stereoOnly]="stereoOnly"></app-multichanel-player>

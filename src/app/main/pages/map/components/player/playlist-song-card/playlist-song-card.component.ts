@@ -5,7 +5,7 @@ import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-pl
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { SelectSong } from 'src/app/store/player/player.actions';
-import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
