@@ -61,8 +61,6 @@ export class FilterMapService {
     const requestParams = fullParams.join('&');
     fullRequest += requestParams.length > 0 ? '?' + requestParams : '';
 
-    console.log('REQUEST ', fullRequest);
-
     return this.http.get(fullRequest).pipe(
       catchError(() => {
         return [{} as PlaylistSong];

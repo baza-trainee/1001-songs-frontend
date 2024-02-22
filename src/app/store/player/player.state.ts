@@ -79,8 +79,6 @@ export class PlayerState {
 
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: object) => {
-        console.log(response)
-        
         const data = response as { items: PlaylistSong[] };
         if(!data.items) {
           ctx.setState({

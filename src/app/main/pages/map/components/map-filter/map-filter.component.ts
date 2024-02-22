@@ -67,7 +67,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
       .subscribe(() => {
         this.songs.pipe().subscribe((songs) => {
-          console.log(songs)
           this.autocompleteSongs = songs.map((song) => ({ title: song.title, id: song.id }));
         });
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter))
