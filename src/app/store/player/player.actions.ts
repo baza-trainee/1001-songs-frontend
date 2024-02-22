@@ -10,6 +10,12 @@ export class FetchSongById {
 
   constructor(public id: string) {}
 }
+
+export class FindSongById {
+  static readonly type = '[Player] Find by Id';
+
+  constructor(public id: number) {}
+}
 export class SelectSong {
   static readonly type = '[Player] Set';
 
