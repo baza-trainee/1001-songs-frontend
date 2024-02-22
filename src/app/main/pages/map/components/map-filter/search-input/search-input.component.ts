@@ -30,11 +30,16 @@ export class SearchInputComponent {
   @Input({ required: true }) name!: string;
 
   @Output() songSelected = new EventEmitter<{ title: string; id: number }>();
+  @Output() searchBlur = new EventEmitter<string>();
 
   constructor() {}
 
   onSongSelected(ev: { title: string; id: number }) {
     this.songSelected.emit(ev);
+  }
+
+  onSearchBlur(event: any) {
+    this.searchBlur.emit(event);
   }
 
   getSongTitle(song: { title: string; id: number }) {

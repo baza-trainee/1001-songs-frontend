@@ -5,6 +5,7 @@
     [formControl]="control"
     [matAutocomplete]="auto"
     placeholder="{{ name | translate }}"
+    (blur)="onSearchBlur(control.value)"
   />
   <mat-autocomplete
     class="multiselect"

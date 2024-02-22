@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { filter, Observable, Subject } from 'rxjs';
+import { debounce, debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -52,11 +52,11 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
 
-    
-
     this.form
       .get('title')
-      ?.valueChanges.pipe(
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .pipe(debounceTime(500))
+      .pipe(
         filter((query: string | null) => {
           if (query && query.length <= 3) {
             this.autocompleteSongs = [];
@@ -67,9 +67,14 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
       .subscribe(() => {
         this.songs.pipe().subscribe((songs) => {
+          // console.log(songs);
+          if (!!!songs) {
+            this.autocompleteSongs = [];
+            return;
+          }
           this.autocompleteSongs = songs.map((song) => ({ title: song.title, id: song.id }));
         });
-        this.store.dispatch(new FetchSongs(this.form.value as SongFilter))
+        this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
       });
   }
 
@@ -82,11 +87,16 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   selectBlur() {
-    this.form.get('title')?.setValue('');
+    console.log('BLUR');
+    //this.form.get('title')?.setValue('');
     this.autocompleteSongs = [];
     this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
+  }
+
+  searchBlur(ev: any) {
+    console.log('searchBlur', ev);
   }
 
   ngOnDestroy() {
