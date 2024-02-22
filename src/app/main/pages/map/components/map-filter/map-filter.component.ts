@@ -74,8 +74,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       });
   }
 
-  getSelectedSong(event: { title: string; id: string }) {
-    this.store.dispatch(new FindSongById(Number.parseInt(event.id)));
+  getSelectedSong(event: { title: string; id: number }) {
+    this.store.dispatch(new FindSongById(event.id));
     const filter = new SongFilter();
     filter.title = event.title;
     this.store.dispatch(new FetchMarkers(filter));

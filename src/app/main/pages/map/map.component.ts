@@ -10,7 +10,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
 import { FetchSongs } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
-import { InitFilterOptions } from '../../../store/filter-map/filter-map.actions';
+import { InitFilterOptions, SetShownOptions } from '../../../store/filter-map/filter-map.actions';
 import { FetchMarkers } from '../../../store/map/map.actions';
 
 @Component({

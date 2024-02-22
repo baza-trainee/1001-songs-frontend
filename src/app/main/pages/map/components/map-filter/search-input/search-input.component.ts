@@ -29,15 +29,15 @@ export class SearchInputComponent {
   @Input({ required: true }) options!: { title: string; id: number }[];
   @Input({ required: true }) name!: string;
 
-  @Output() songSelected = new EventEmitter<{ title: string; id: string }>();
+  @Output() songSelected = new EventEmitter<{ title: string; id: number }>();
 
   constructor() {}
 
-  onSongSelected(ev: { title: string; id: string }) {
+  onSongSelected(ev: { title: string; id: number }) {
     this.songSelected.emit(ev);
   }
 
-  getSongTitle(song: { title: string; id: string }) {
+  getSongTitle(song: { title: string; id: number }) {
     return song.title;
   }
 }
