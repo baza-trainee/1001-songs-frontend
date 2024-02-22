@@ -31,7 +31,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   public aboutTeam$: Observable<AboutTeam[]>;
   public content!: Content[];
-  public projectsSlides!: Slide[];
+  public projectsSlides: Slide[] = [];
 
 
   constructor(

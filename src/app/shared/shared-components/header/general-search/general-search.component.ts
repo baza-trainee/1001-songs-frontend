@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { CommonModule, SlicePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -16,15 +23,15 @@ import { Router } from '@angular/router';
 })
 
 export class GeneralSearchComponent implements OnInit, OnDestroy {
+  @ViewChild('searchField') searchField!: ElementRef;
   search = new FormControl('search');
-  options: { title: string; id: string }[] = [];
-
+  options: { title: string; id: string; img: string}[] = [];
   showInputSearch = false;
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private expeditionsService: ExpeditionsService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -42,10 +49,18 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
       )
       .subscribe((searchWord) => {
         this.expeditionsService.fetchExpeditions({ search: searchWord + '' }).subscribe((resp) => {
-          const data = resp as { items: { title: string; id: number }[] };
-          this.options = data.items.map((el) => ({ title: el.title, id: el.id + '' }));
+          const data = resp as { items: { title: string; id: number; preview_photo: string}[] };
+          this.options = data.items.map((el) => ({ title: el.title, id: el.id + '', img: el.preview_photo + '' }));
         });
       });
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const clickedInside = this.searchField.nativeElement.contains(event.target);
+    if (!clickedInside && this.showInputSearch) {
+      this.showInputSearch = false;
+    }
   }
 
   ngOnDestroy(): void {
@@ -64,6 +79,8 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
   }
 
   activateSearch() {
-    this.showInputSearch = !this.showInputSearch;
+    setTimeout(() => {
+      this.showInputSearch = !this.showInputSearch;
+    })
   }
 }

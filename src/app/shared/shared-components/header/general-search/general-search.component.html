@@ -1,14 +1,19 @@
 <div class="search">
   <mat-form-field class="search__box" [ngClass]="{'show-box': showInputSearch}">
-    <input class="search__input" matInput [formControl]="search" [matAutocomplete]="auto" placeholder="Експедиції" />
+    <input #searchField class="search__input" matInput [formControl]="search" [matAutocomplete]="auto" placeholder="Експедиції" />
     <mat-autocomplete
       #auto="matAutocomplete"
       [displayWith]="getExpeditionTitle"
       (optionSelected)="onExpeditionSelected($event.option.value)"
     >
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{ option.title | slice: 0 : 20 }}...
-      </mat-option>
+      <div class="search__options options">
+        <mat-option *ngFor="let option of options" [value]="option">
+          <div class="search__options-box">
+            <img class="search__options-img" [src]="option.img" [alt]="option.title">
+            <span>{{ option.title.length > 50 ? option.title.substring(0, 50) + '...' : option.title }}</span>
+          </div>
+        </mat-option>
+      </div>
     </mat-autocomplete>
   </mat-form-field>
   <svg class="search-img" (click)="activateSearch()">

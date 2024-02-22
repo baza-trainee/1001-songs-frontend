@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef, HostListener,
   Input,
@@ -45,6 +45,8 @@ export class SliderComponent implements OnInit, OnDestroy {
   public translateX: number = 0;
   public prevIsDisabled = true;
   public nextIsDisabled = false;
+  public isShowButton!: boolean;
+
 
   // Properties for dragging the slider
   private dragStartX: number = 0;
@@ -52,7 +54,8 @@ export class SliderComponent implements OnInit, OnDestroy {
   private isDragging: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -98,6 +101,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   setSliderWidths(): void {
     this.sliderContainerWidth = this.sliderContainer.nativeElement.offsetWidth;
     this.minTranslateX = -(this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.sliderContainerWidth - this.gap);
+    this.updateBtnsStatus();
   }
 
   prevSlide(): void {
@@ -124,5 +128,12 @@ export class SliderComponent implements OnInit, OnDestroy {
 
     this.prevIsDisabled = this.translateX === this.maxTranslateX;
     this.nextIsDisabled =  this.translateX === this.minTranslateX;
+
+    if (this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.gap <= this.sliderContainerWidth) {
+      this.isShowButton = false;
+    } else {
+      this.isShowButton = true;
+    }
+    this.cdr.detectChanges();
   }
 }

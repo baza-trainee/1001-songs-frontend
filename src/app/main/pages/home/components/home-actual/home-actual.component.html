@@ -1,6 +1,6 @@
 <section class="actual">
   <div class="container actual__container">
-    <ng-container *ngIf="projectsSlides">
+    <ng-container *ngIf="projectsSlides.length">
       <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
     </ng-container>
   </div>

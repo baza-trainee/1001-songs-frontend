@@ -16,7 +16,7 @@ import {ProjectData} from "../../../../../shared/interfaces/project.interface";
 })
 export class HomeActualComponent implements OnInit, OnDestroy {
   private readonly projects$: Observable<ProjectData[]>;
-  public projectsSlides!: Slide[];
+  public projectsSlides: Slide[] = [];
   private projectsSubscription: Subscription | undefined;
 
   constructor(private _translate: TranslateService, private projectService: ProjectService) {

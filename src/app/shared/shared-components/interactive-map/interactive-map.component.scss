@@ -90,7 +90,20 @@ img {
       @include primary-button;
     }
   }
+}
 
+.custom-info-window {
+  cursor: pointer;
+
+  p {
+    padding-bottom: 10px;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 @media (max-width: 1376px) {

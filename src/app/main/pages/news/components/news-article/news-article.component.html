@@ -53,7 +53,7 @@
     </section>
   </div>
 
-  <div *ngIf="sliderItems" class="article__slider">
+  <div *ngIf="sliderItems.length" class="article__slider">
     <app-slider [sliderItems]="sliderItems" [title]="'news.article.latest-news'" [link]="'/news'"></app-slider>
   </div>
 </ng-container>
