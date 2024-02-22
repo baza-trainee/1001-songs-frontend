@@ -30,7 +30,7 @@
 <section class="home__tape">
   <app-home-tape class="home__tape"></app-home-tape>
 </section>
-<app-interactive-map [popupType]="'homeType'"></app-interactive-map>
+<app-interactive-map [popupType]="'homeType'" (markerClicked)="handleMapEmit($event)"></app-interactive-map>
 <app-home-actual></app-home-actual>
 <app-home-expedition></app-home-expedition>
 <app-home-news></app-home-news>

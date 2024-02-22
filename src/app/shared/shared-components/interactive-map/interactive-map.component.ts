@@ -2,15 +2,15 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {MarkerOfLocation, SongFilter} from 'src/app/shared/interfaces/map-marker';
+import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { MapState } from 'src/app/store/map/map.state';
-import {Select, Store} from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
-import { srcPopapImgInMap } from "../../../static-data/img-popap-map";
-import {Router} from "@angular/router";
-import {FetchSongs} from "../../../store/player/player.actions";
+import { srcPopapImgInMap } from '../../../static-data/img-popap-map';
+import { Router } from '@angular/router';
+import { FetchSongs } from '../../../store/player/player.actions';
 
 @Component({
   selector: 'app-interactive-map',
@@ -104,7 +104,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     this.selectedMarker = null;
   }
 
-  getCustomMarkerIcon(cordsAsId: {lat: number, lng: number}): google.maps.Icon {
+  getCustomMarkerIcon(cordsAsId: { lat: number; lng: number }): google.maps.Icon {
     return {
       url:
         this.selectedMarker?.latitude === cordsAsId.lat && this.selectedMarker?.longitude === cordsAsId.lng
@@ -118,10 +118,11 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(marker: MarkerOfLocation) {
-    const updatedFilter: SongFilter = new SongFilter();
-    updatedFilter.city.push(marker.city as string);
+    // console.log(marker);
 
-    this.store.dispatch(new FetchSongs(updatedFilter as SongFilter));
-    this.router.navigate(['/map']);
+    const filter: SongFilter = new SongFilter([marker.id + '']);
+
+   // this.store.dispatch(new FetchSongs(filter));
+    this.router.navigate(['/map'], { state: { filter } });
   }
 }

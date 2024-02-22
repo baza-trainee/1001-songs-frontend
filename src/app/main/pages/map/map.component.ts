@@ -22,23 +22,25 @@ import { FetchMarkers } from '../../../store/map/map.actions';
 })
 export class MapComponent implements OnInit {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
-  // private subscription: Subscription = new Subscription();
   isShowSongs = true;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store // private router: Router,
+    // private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    // this.http.get(`${API_URL}${StatEndpoints.map}/${StatEndpoints.filter}/${StatEndpoints.songs}`).subscribe((d) => {
-    //   console.log(d);
-    // });
     this.store.dispatch(new InitFilterOptions());
-    this.store.dispatch(new FetchMarkers(new SongFilter()));
-    this.store.dispatch(new FetchSongs(new SongFilter()));
+    const filter = history.state.filter as SongFilter;
+    if (filter && filter.city) {
+      // history.state.filter = null;
+      this.store.dispatch(new FetchMarkers(filter));
+      this.store.dispatch(new FetchSongs(filter));
+    } else {
+      this.store.dispatch(new FetchMarkers(new SongFilter()));
+      this.store.dispatch(new FetchSongs(new SongFilter()));
+    }
   }
-
-  // ngOnDestroy(): void {
-  //   this.subscription.unsubscribe();
-  // }
 
   onFilterChange(filter: SongFilter) {
     this.store.dispatch(new FetchSongs(filter));
