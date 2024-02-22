@@ -10,7 +10,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { OptionsSongFilter, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
-import { FetchSongById, FetchSongs, FindSongById, SelectSong } from 'src/app/store/player/player.actions';
+import { FetchSongs, FindSongById } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
@@ -74,7 +74,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       });
   }
 
-  getSelectedSong(event: { title: string; id: string }) { 
+  getSelectedSong(event: { title: string; id: string }) {
     this.store.dispatch(new FindSongById(Number.parseInt(event.id)));
     const filter = new SongFilter();
     filter.title = event.title;
