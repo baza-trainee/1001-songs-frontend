@@ -52,7 +52,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new InitFilterOptions());
 
     this.songs.subscribe((songs) => {
-      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id + '' }));
+      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id.toString() }));
     });
 
     this.form

@@ -50,7 +50,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
       .subscribe((searchWord) => {
         this.expeditionsService.fetchExpeditions({ search: searchWord + '' }).subscribe((resp) => {
           const data = resp as { items: { title: string; id: number; preview_photo: string}[] };
-          this.options = data.items.map((el) => ({ title: el.title, id: el.id + '', img: el.preview_photo }));
+          this.options = data.items.map((el) => ({ title: el.title, id: el.id + '', img: el.preview_photo + '' }));
         });
       });
   }
