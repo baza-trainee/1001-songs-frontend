@@ -26,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SearchInputComponent {
   @Input({ required: true }) control!: FormControl;
-  @Input({ required: true }) options!: { title: string; id: string }[];
+  @Input({ required: true }) options!: { title: string; id: number }[];
   @Input({ required: true }) name!: string;
 
   @Output() songSelected = new EventEmitter<{ title: string; id: string }>();
