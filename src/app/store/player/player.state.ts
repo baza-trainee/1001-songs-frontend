@@ -49,6 +49,7 @@ export class PlayerState {
     if (!selectedSong) {
       return;
     }
+    // console.log(selectedSong)
     return ctx.setState({
       ...state,
       songs: [selectedSong]

@@ -44,7 +44,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     fund: new FormControl<string[]>([])
   });
 
-  titles: { title: string; id: number }[] = [];
+  autocompleteSongs: { title: string; id: number }[] = [];
   previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
   constructor(private store: Store) {}
@@ -52,29 +52,29 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
 
-    this.songs.subscribe((songs) => {
-      this.localSongs = songs.map((song) => ({ title: song.title, id: song.id }));
-    });
+    
 
     this.form
       .get('title')
       ?.valueChanges.pipe(
         filter((query: string | null) => {
           if (query && query.length <= 3) {
-            this.titles = [];
+            this.autocompleteSongs = [];
           }
           return query ? query.length >= 3 : false;
         })
       )
 
-      .subscribe((searchQuery) => {
-        const query = (searchQuery + '').trim().toLowerCase();
-        const filteredTitles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
-        this.titles = filteredTitles;
+      .subscribe(() => {
+        this.songs.pipe().subscribe((songs) => {
+          this.autocompleteSongs = songs.map((song) => ({ title: song.title, id: song.id }));
+        });
+        this.store.dispatch(new FetchSongs(this.form.value as SongFilter))
       });
   }
 
   getSelectedSong(event: { title: string; id: number }) {
+    this.autocompleteSongs = [];
     this.store.dispatch(new FindSongById(event.id));
     const filter = new SongFilter();
     filter.title = event.title;
@@ -83,7 +83,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
   selectBlur() {
     this.form.get('title')?.setValue('');
-    this.titles = [];
+    this.autocompleteSongs = [];
     this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));

@@ -40,7 +40,7 @@
 
             <app-search-input
               [control]="form.controls.title"
-              [options]="titles"
+              [options]="autocompleteSongs"
               [name]="filterCategory.title"
               (songSelected)="getSelectedSong($event)"
             ></app-search-input>
