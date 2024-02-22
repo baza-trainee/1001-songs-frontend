@@ -68,7 +68,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
       .subscribe((searchQuery) => {
         const query = (searchQuery + '').trim().toLowerCase();
-        this.titles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
+        const filteredTitles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
+        this.titles = filteredTitles;
       });
   }
 
