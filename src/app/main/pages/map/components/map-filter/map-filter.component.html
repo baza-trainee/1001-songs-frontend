@@ -17,12 +17,9 @@
           [style.transform]="!isShowFilter ? ' rotate(0deg)' : 'rotate(180deg)'">
         <use xlink:href="./assets/sprites.svg#arrowFilterShow"></use>
       </svg>
-
     </div>
 
     <ng-container  *ngIf="showOptions$ | async as options">
-
-<!--      <pre>{{options | json}}</pre>-->
 
       <form [formGroup]="form">
         <div class="filter__body" [ngClass]="{'hidden': !isShowFilter}">

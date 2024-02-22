@@ -45,7 +45,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   });
 
   titles: { title: string; id: string }[] = [];
-  previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
   constructor(private store: Store) {}
 
@@ -69,8 +68,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
       .subscribe((searchQuery) => {
         const query = (searchQuery + '').trim().toLowerCase();
-        const filteredTitles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
-        this.titles = filteredTitles;
+        this.titles = this.localSongs.filter((song) => song.title.toLowerCase().includes(query));
       });
   }
 

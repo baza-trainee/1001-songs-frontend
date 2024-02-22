@@ -23,7 +23,7 @@
           [options]="{ icon: getCustomMarkerIcon({ lat: elem.latitude, lng: elem.longitude }) }"
           (mapClick)="openInfoWindow(marker, infoWindow, elem)"
         ></map-marker>
-        <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()">
+        <map-info-window #infoWindow="mapInfoWindow" class="custom-info-window" (click)="listenToRecords()" (closeclick)="onCloseInfoWindow()">
           <h2 class="popup-map__title">{{ elem.city }}</h2>
           <p class="popup-map__count">
             {{ 'home.home-map.popup-count' | translate }} : {{ elem.song_count }}

@@ -6,13 +6,16 @@
     [matAutocomplete]="auto"
     placeholder="{{ name | translate }}"
   />
-  <mat-autocomplete 
-    #auto="matAutocomplete" 
-    [displayWith]="getSongTitle" 
+  <mat-autocomplete
+    class="multiselect"
+    #auto="matAutocomplete"
+    [displayWith]="getSongTitle"
     (optionSelected)="onSongSelected($event.option.value)"
   >
-    <mat-option *ngFor="let option of options " [value]="option">
-      {{ option.title }}
-    </mat-option>
+    <div class="options">
+      <mat-option *ngFor="let option of options " [value]="option">
+        {{ option.title }}
+      </mat-option>
+    </div>
   </mat-autocomplete>
 </mat-form-field>
