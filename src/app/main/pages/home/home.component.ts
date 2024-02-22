@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
   }
 
-  handleMapEmit(ev: any) {
-    console.log(ev);
-  }
+  // handleMapEmit(ev: any) {
+  //   console.log(ev);
+  // }
 }

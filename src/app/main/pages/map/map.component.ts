@@ -10,7 +10,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
 import { FetchSongs } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
-import { InitFilterOptions, SetShownOptions } from '../../../store/filter-map/filter-map.actions';
+import { InitFilterOptions } from '../../../store/filter-map/filter-map.actions';
 import { FetchMarkers } from '../../../store/map/map.actions';
 
 @Component({
@@ -26,19 +26,21 @@ export class MapComponent implements OnInit {
 
   constructor(
     private store: Store // private router: Router,
-    // private route: ActivatedRoute
-  ) {}
+  ) // private route: ActivatedRoute
+  {}
 
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
-    const filter = history.state.filter as SongFilter;
-    if (filter && filter.city) {
-      // history.state.filter = null;
-      this.store.dispatch(new FetchMarkers(filter));
-      this.store.dispatch(new FetchSongs(filter));
-    } else {
-      this.store.dispatch(new FetchMarkers(new SongFilter()));
-      this.store.dispatch(new FetchSongs(new SongFilter()));
+    if (history.state) {
+      const filter = history.state.filter as SongFilter;
+      if (filter && filter.city) {
+        // history.state.filter = null;
+        this.store.dispatch(new FetchMarkers(filter));
+        this.store.dispatch(new FetchSongs(filter));
+      } else {
+        this.store.dispatch(new FetchMarkers(new SongFilter()));
+        this.store.dispatch(new FetchSongs(new SongFilter()));
+      }
     }
   }
 

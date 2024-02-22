@@ -10,7 +10,6 @@ import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
 import { srcPopapImgInMap } from '../../../static-data/img-popap-map';
 import { Router } from '@angular/router';
-import { FetchSongs } from '../../../store/player/player.actions';
 
 @Component({
   selector: 'app-interactive-map',
