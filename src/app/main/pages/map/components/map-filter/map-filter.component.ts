@@ -53,7 +53,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new InitFilterOptions());
 
     this.songs.subscribe((songs) => {
-      console.log(songs)
       this.localSongs = songs.map((song) => ({ title: song.title, id: song.id }));
     });
 
@@ -77,7 +76,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
   getSelectedSong(event: { title: string; id: string }) { 
     this.store.dispatch(new FindSongById(Number.parseInt(event.id)));
-    const filter = new SongFilter([event.id]);
+    const filter = new SongFilter();
+    filter.title = event.title;
     this.store.dispatch(new FetchMarkers(filter));
   }
 
