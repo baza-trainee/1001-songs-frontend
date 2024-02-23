@@ -33,7 +33,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   isShowFilter = false;
   private destroy$ = new Subject<void>();
 
-  localSongs: { title: string; id: string }[] = [];
+  localSongs: string[] = [];
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
