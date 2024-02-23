@@ -31,8 +31,13 @@ export class SearchInputComponent {
 
   @Output() songSelected = new EventEmitter<string>();
   @Output() searchBlur = new EventEmitter<string>();
+  @Output() searchFocused = new EventEmitter<string>();
 
   constructor() {}
+
+  onFocusInput(){
+   this.searchFocused.emit(this.control.value)
+  }
 
   onSongSelected(songTitle: string) {
     this.songSelected.emit(songTitle);

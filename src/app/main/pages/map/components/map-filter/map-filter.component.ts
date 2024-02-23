@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
+import { debounceTime, filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -47,6 +47,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   autocompleteSongs: string[] = [];
   previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
+  songSub$!: Subscription;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.form
       .get('title')
       ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .pipe(debounceTime(500))
+
       .pipe(
         filter((query: string | null) => {
           if (query && query.length <= 3) {
@@ -64,8 +66,9 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           return query ? query.length >= 3 : false;
         })
       )
+      .pipe(debounceTime(500))
       .subscribe(() => {
-        this.songs.pipe().subscribe((songs) => {
+        this.songSub$ = this.songs.subscribe((songs) => {
           if (!songs) {
             this.autocompleteSongs = [];
             return;
@@ -73,19 +76,23 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           this.autocompleteSongs = songs.map((song) => song.title);
         });
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+        // this.songSub$.unsubscribe()
       });
   }
 
+  onFocusSearch(titleSong: string) {
+    return titleSong;
+  }
+
   getSelectedSong(songTitle: string) {
+    this.songSub$.unsubscribe();
     this.autocompleteSongs = [];
     this.store.dispatch(new FindSongById(songTitle));
     const filter = new SongFilter();
-    filter.title = songTitle;
     this.store.dispatch(new FetchMarkers(filter));
   }
 
   selectBlur() {
-    //this.form.get('title')?.setValue('');
     this.autocompleteSongs = [];
     this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
