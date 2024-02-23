@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounceTime, filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { debounceTime, filter, Observable, skip, Subject, Subscription, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -68,7 +68,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       )
       .pipe(debounceTime(500))
       .subscribe(() => {
-        this.songSub$ = this.songs.subscribe((songs) => {
+        console.log('search input emmits')
+        this.songSub$ = this.songs.pipe(skip(1)).subscribe((songs) => {
           if (!songs) {
             this.autocompleteSongs = [];
             return;
