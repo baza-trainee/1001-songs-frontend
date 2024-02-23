@@ -90,6 +90,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.autocompleteSongs = [];
     this.store.dispatch(new FindSongById(songTitle));
     const filter = new SongFilter();
+    filter.title = songTitle;
     this.store.dispatch(new FetchMarkers(filter));
   }
 
