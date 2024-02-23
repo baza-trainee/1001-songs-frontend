@@ -5,7 +5,9 @@
 
 footer.footer {
   padding: 80px 0 32px;
-  background-color: var(--bg-color-footer);
+  background-image: url("https://raw.githubusercontent.com/shytuleva24/photos-in-1001songs/main/Rectangle%20337.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .container {
     max-width: 1440px;
@@ -57,8 +59,6 @@ footer.footer {
       }
 
       .footer__donate{
-        min-width: 302px;
-
         button {
           @include primary-button;
         }
@@ -68,6 +68,7 @@ footer.footer {
     .footer__bottom {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin: 32px 0;
 
       .footer__partners {
@@ -102,6 +103,7 @@ footer.footer {
       }
 
       .footer__rules {
+        width: 100%;
         margin: 0 24px;
         font-family: "Open Sans", sans-serif;
         font-size: 12px;
@@ -109,7 +111,10 @@ footer.footer {
         color: var(--text-color-extra-2);
         line-height: 16px;
 
+
         ul {
+          display: flex;
+          gap: 16px;
           li {
             margin-bottom: 32px;
 
@@ -118,14 +123,14 @@ footer.footer {
             }
 
             &:hover {
-              color: var(--text-color-primary);
+              text-decoration: underline;
             }
           }
         }
       }
 
      .footer__contacts {
-       min-width: 302px;
+       text-align: right;
 
        .contacts__title{
          font-family: "Open Sans", sans-serif;
@@ -225,7 +230,6 @@ footer.footer {
 
             li {
               width: 100%;
-
             }
           }
         }

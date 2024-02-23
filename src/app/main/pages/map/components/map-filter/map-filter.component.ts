@@ -52,7 +52,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
 
-    
+
 
     this.form
       .get('title')

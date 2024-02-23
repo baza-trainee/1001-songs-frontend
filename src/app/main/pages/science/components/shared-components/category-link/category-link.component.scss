@@ -10,6 +10,12 @@ $radius: 15px;
   border-radius: $radius;
   overflow: hidden;
   cursor: pointer;
+  transition: all .3s ease;
+
+  &:hover {
+    scale: 1.01;
+    //box-shadow: 18px 18px 6px -5px rgba(0,0,0,0.1);
+  }
 
   &:hover span {
     transform: rotate(-45deg);
