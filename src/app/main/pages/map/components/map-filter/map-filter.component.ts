@@ -10,7 +10,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { OptionsSongFilter, SongFilter } from '../../../../../shared/interfaces/map-marker';
 import { FilterMapState } from '../../../../../store/filter-map/filter-map.state';
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
-import { FetchSongs, FindSongById } from 'src/app/store/player/player.actions';
+import { FetchSongs, FindSongByTitle } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from 'src/app/shared/interfaces/song.interface';
 import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
@@ -57,7 +57,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.form
       .get('title')
       ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(300))
       .pipe(
         filter((query: string | null) => {
           if (query && query.length <= 3) {
@@ -88,7 +88,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   getSelectedSong(songTitle: string) {
     this.songSub$.unsubscribe();
     this.autocompleteSongs = [];
-    this.store.dispatch(new FindSongById(songTitle));
+    this.store.dispatch(new FindSongByTitle(songTitle));
     const filter = new SongFilter();
     filter.title = songTitle;
     this.store.dispatch(new FetchMarkers(filter));
@@ -115,6 +115,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   clearFilter() {
+    // this.autocompleteSongs = [];
     this.songSub$.unsubscribe();
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));

@@ -11,8 +11,8 @@ export class FetchSongById {
   constructor(public id: string) {}
 }
 
-export class FindSongById {
-  static readonly type = '[Player] Find song by Id';
+export class FindSongByTitle {
+  static readonly type = '[Player] Find song by title';
 
   constructor(public songTitle: string) {}
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
-import { FetchSongById, FetchSongs, FindSongById, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongs, FindSongByTitle, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
@@ -40,8 +40,8 @@ export class PlayerState {
     return state.selecteSong as PlaylistSong;
   }
 
-  @Action(FindSongById)
-  findSongById(ctx: StateContext<PlayerStateModel>, action: FindSongById) {
+  @Action(FindSongByTitle)
+  findSongByTitle(ctx: StateContext<PlayerStateModel>, action: FindSongByTitle) {
     const state = ctx.getState();
     const selectedSong = state.songs.find((song: PlaylistSong) => song.title === action.songTitle);
     if (!selectedSong) {
