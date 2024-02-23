@@ -81,6 +81,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   onFocusSearch(titleSong: string) {
+    this.autocompleteSongs = [];
     return titleSong;
   }
 
@@ -113,6 +114,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   clearFilter() {
+    this.songSub$.unsubscribe();
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
