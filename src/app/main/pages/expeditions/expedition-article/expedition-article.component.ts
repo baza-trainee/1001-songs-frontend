@@ -16,23 +16,23 @@ import {
     FadeInCarouselComponent
 } from "../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 import { SliderService } from "../../../../shared/services/slider/slider.service";
-import { Content } from "../../../../shared/interfaces/about.interface";
-import { FormattingTextService } from "../../../../shared/services/formatting-text/formating-text.service";
+import {ContentTextComponent} from "../../../../shared/shared-components/content-text/content-text.component";
 
 @Component({
   selector: 'app-expedition-article',
   standalone: true,
-    imports: [
-        CommonModule,
-        TranslateModule,
-        RouterLink,
-        VideoPlayerComponent,
-        BreadcrumbsComponent,
-        SliderComponent,
-        ShareComponent,
-        SafeHtmlPipe,
-        FadeInCarouselComponent
-    ],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    RouterLink,
+    VideoPlayerComponent,
+    BreadcrumbsComponent,
+    SliderComponent,
+    ShareComponent,
+    SafeHtmlPipe,
+    FadeInCarouselComponent,
+    ContentTextComponent
+  ],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
 })
@@ -40,14 +40,12 @@ import { FormattingTextService } from "../../../../shared/services/formatting-te
 export class ExpeditionArticleComponent implements OnInit, OnDestroy {
     public expeditionArticle!: ExpeditionArticle;
     public sliderItems: Slide[] = [];
-    public content!: Content[];
     private readonly subscriptions: Subscription[] = [];
 
 
     constructor(
         private route: ActivatedRoute,
         private expeditionService: ExpeditionsService,
-        private formattingTextService: FormattingTextService,
         private sliderService: SliderService
     ) {}
 
@@ -65,7 +63,6 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
                 }))
                 .subscribe(({content, sliderItem}) => {
                     this.expeditionArticle = content;
-                    this.content = this.formattingTextService.splitText(content.content);
                     this.sliderItems = this.sliderService.sliderItemFromExpedition(sliderItem.items);
             })
         );

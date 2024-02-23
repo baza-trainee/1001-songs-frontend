@@ -8,10 +8,6 @@
     padding-bottom: 18px;
   }
 
-  &__content {
-    padding-bottom: 16px;
-  }
-
   &__date {
     padding-bottom: 32px;
   }
@@ -24,7 +20,7 @@
 
 
   &__img {
-    height: 720px;
+    height: 500px;
     object-fit: cover;
     vertical-align: bottom;
     margin-bottom: 18px;
@@ -39,7 +35,7 @@
 
   &__box {
     max-width: 954px;
-    padding-left: 109px;
+    margin-bottom: 48px;
   }
 
   &__title {
@@ -79,7 +75,7 @@
       color: var(--text-color-popup-menu);
       font-weight: 400;
       margin: 0;
-      padding-bottom: 32px;
+      padding-bottom: 8px;
     }
   }
 }

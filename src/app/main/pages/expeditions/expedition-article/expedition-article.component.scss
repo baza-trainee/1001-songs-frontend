@@ -5,7 +5,7 @@
   padding: 80px 0;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 28px;
 
   &__slider {
     background-color: var(--bg-color-screen);
@@ -15,6 +15,7 @@
 
   img {
     width: 100%;
+    object-fit: contain;
   }
 
   &__header {
@@ -27,7 +28,7 @@
     }
 
     &-ua {
-      width: 302px;
+      width: 30%;
     }
   }
 
@@ -57,7 +58,6 @@
 
   &__box {
     max-width: 845px;
-    margin-left: 109px;
   }
 
   &__title {

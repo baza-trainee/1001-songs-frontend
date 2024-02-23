@@ -3,29 +3,17 @@
     <section class="article" *ngIf="article.id">
       <app-breadcrumbs></app-breadcrumbs>
 
+      <h1 class="article__title">{{ article.title }}</h1>
+      <p class="article__date">{{ article.created_at | date: 'dd.MM.yyyy' }} • {{ article.location }}</p>
+
       <div class="article__box">
-        <h1 class="article__title">{{ article.title }}</h1>
-        <p class="article__date">{{ article.created_at | date: 'dd.MM.yyyy' }} • {{ article.location }}</p>
-      </div>
-      <img *ngIf="article.preview_photo" class="article__img" [src]="article.preview_photo" [alt]="article.title" />
-      <div class="article__content">
-        <ng-container *ngFor="let content of content; let i = index">
+        <img *ngIf="article.preview_photo" class="article__img" [src]="article.preview_photo" [alt]="article.title" />
 
-          <ng-container *ngIf="content.images.length; else textBlock">
-            <div class="content article__carousel" [ngClass]="{'article__box': i !== 1}">
-              <app-fade-in-carousel [photos]="content.images"></app-fade-in-carousel>
-            </div>
-          </ng-container>
-
-          <ng-template #textBlock>
-            <div
-                    class="content"
-                    [ngClass]="{'main-content': i === 1, 'article__box': i !== 1}"
-                    [innerHTML]="content.text | safeHtml"
-            ></div>
-          </ng-template>
-        </ng-container>
+        <div class="article__content">
+          <app-content-text [content]="article.content"></app-content-text>
+        </div>
       </div>
+
       <div class="article__box">
         <h2 class="article__sub-title">{{ 'news.article.about-article.title' | translate }}</h2>
         <div class="article__about">

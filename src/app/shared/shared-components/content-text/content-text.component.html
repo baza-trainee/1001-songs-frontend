@@ -1,0 +1,18 @@
+<div class="content">
+  <ng-container *ngFor="let content of renderedText; let i = index">
+
+    <ng-container *ngIf="content.images.length; else textBlock">
+      <div class="content carousel" [ngClass]="{'box': i !== 1}">
+        <app-fade-in-carousel [photos]="content.images"></app-fade-in-carousel>
+      </div>
+    </ng-container>
+
+    <ng-template #textBlock>
+      <div
+        class="content"
+        [ngClass]="{'main-content': i === 1, 'box': i !== 1}"
+        [innerHTML]="content.text | safeHtml"
+      ></div>
+    </ng-template>
+  </ng-container>
+</div>

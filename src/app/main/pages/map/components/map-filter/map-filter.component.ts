@@ -57,7 +57,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.form
       .get('title')
       ?.valueChanges.pipe(takeUntil(this.destroy$))
-
+      .pipe(debounceTime(500))
       .pipe(
         filter((query: string | null) => {
           if (query && query.length <= 3) {
