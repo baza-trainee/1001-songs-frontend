@@ -12,16 +12,16 @@
   padding: 80px 0;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 28px;
 
   &__box {
     max-width: 954px;
-    padding-left: 109px;
+    //padding-left: 109px;
   }
 
   &__content {
     @include body-desktop($line-height: 28px, $font-size: 20px);
-    
+
     .about__box {
       display: flex;
       flex-direction: column;

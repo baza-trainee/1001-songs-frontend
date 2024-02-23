@@ -6,7 +6,7 @@
   &-box {
     position: relative;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     border-radius: 12px;
   }
 
@@ -41,9 +41,9 @@
   &-info {
     @include body-desktop;
 
+    padding: 0 5px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     color: var(--text-color-popup-menu);
 
     span {

@@ -22,12 +22,15 @@ export class PaginationComponent {
       this.pageChange.emit(page);
     }
   }
+  
   goToNextPage(): void {
+    if (this.pages.length === this.currentPage) return;
     const nextPage = this.currentPage < this.totalPages ? this.currentPage + 1 : this.totalPages;
     this.pageChange.emit(nextPage);
   }
 
   goToPrevPage(): void {
+    if (this.currentPage === 1) return;
     const prevPage = this.currentPage > 1 ? this.currentPage - 1 : 1;
     this.pageChange.emit(prevPage);
   }
