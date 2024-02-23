@@ -68,7 +68,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       )
       .pipe(debounceTime(500))
       .subscribe(() => {
-        console.log('search input emmits')
         this.songSub$ = this.songs.pipe(skip(1)).subscribe((songs) => {
           if (!songs) {
             this.autocompleteSongs = [];
