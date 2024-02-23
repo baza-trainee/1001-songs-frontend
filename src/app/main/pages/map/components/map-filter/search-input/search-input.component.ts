@@ -26,23 +26,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SearchInputComponent {
   @Input({ required: true }) control!: FormControl;
-  @Input({ required: true }) options!: { title: string; id: number }[];
+  @Input({ required: true }) options: string[] = ['hello'];
   @Input({ required: true }) name!: string;
 
-  @Output() songSelected = new EventEmitter<{ title: string; id: number }>();
+  @Output() songSelected = new EventEmitter<string>();
   @Output() searchBlur = new EventEmitter<string>();
 
   constructor() {}
 
-  onSongSelected(ev: { title: string; id: number }) {
-    this.songSelected.emit(ev);
+  onSongSelected(songTitle: string) {
+    this.songSelected.emit(songTitle);
   }
 
-  onSearchBlur(event: any) {
+  onSearchBlur(event: string) {
     this.searchBlur.emit(event);
-  }
-
-  getSongTitle(song: { title: string; id: number }) {
-    return song.title;
   }
 }

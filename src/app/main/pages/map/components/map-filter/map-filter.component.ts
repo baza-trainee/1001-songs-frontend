@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounce, debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
+import { debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -44,7 +44,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     fund: new FormControl<string[]>([])
   });
 
-  autocompleteSongs: { title: string; id: number }[] = [];
+  autocompleteSongs: string[] = [];
   previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
   constructor(private store: Store) {}
@@ -64,30 +64,27 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           return query ? query.length >= 3 : false;
         })
       )
-
       .subscribe(() => {
         this.songs.pipe().subscribe((songs) => {
-          // console.log(songs);
-          if (!!!songs) {
+          if (!songs) {
             this.autocompleteSongs = [];
             return;
           }
-          this.autocompleteSongs = songs.map((song) => ({ title: song.title, id: song.id }));
+          this.autocompleteSongs = songs.map((song) => song.title);
         });
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
       });
   }
 
-  getSelectedSong(event: { title: string; id: number }) {
+  getSelectedSong(songTitle: string) {
     this.autocompleteSongs = [];
-    this.store.dispatch(new FindSongById(event.id));
+    this.store.dispatch(new FindSongById(songTitle));
     const filter = new SongFilter();
-    filter.title = event.title;
+    filter.title = songTitle;
     this.store.dispatch(new FetchMarkers(filter));
   }
 
   selectBlur() {
-    console.log('BLUR');
     //this.form.get('title')?.setValue('');
     this.autocompleteSongs = [];
     this.changeFilter.emit(this.form.value as SongFilter);
@@ -95,8 +92,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
   }
 
-  searchBlur(ev: any) {
-    console.log('searchBlur', ev);
+  searchBlur(ev: string) {
+    return ev;
   }
 
   ngOnDestroy() {

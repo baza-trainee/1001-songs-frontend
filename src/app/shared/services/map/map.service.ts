@@ -28,12 +28,11 @@ export class MapService {
   }
 
   fetchMarker(queryParams: SongFilter = new SongFilter()): Observable<MarkerOfLocation[]> {
-    console.log(queryParams)
     const strID: string = this.buildQueryStringFromParams(queryParams);
     return this.http.get<MarkerOfLocation[]>(API_URL + StatEndpoints.map.geotag + strID).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return of([]); // Возвращаем массив пустой массив в случае ошибки
+        return of([]); 
       })
     );
   }

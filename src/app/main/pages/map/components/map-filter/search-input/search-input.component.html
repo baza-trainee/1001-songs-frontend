@@ -7,15 +7,10 @@
     placeholder="{{ name | translate }}"
     (blur)="onSearchBlur(control.value)"
   />
-  <mat-autocomplete
-    class="multiselect"
-    #auto="matAutocomplete"
-    [displayWith]="getSongTitle"
-    (optionSelected)="onSongSelected($event.option.value)"
-  >
+  <mat-autocomplete class="multiselect" #auto="matAutocomplete" (optionSelected)="onSongSelected($event.option.value)">
     <div class="options">
-      <mat-option *ngFor="let option of options " [value]="option">
-        {{ option.title }}
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option }}
       </mat-option>
     </div>
   </mat-autocomplete>
