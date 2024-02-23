@@ -15,6 +15,12 @@ export class SelectSong {
 
   constructor(public selectedSongId: string) {}
 }
+export class ResetSongs {
+  static readonly type = '[Player] Reset songs';
+
+  constructor() {}
+}
+
 export class ResetSong {
   static readonly type = '[Player] Reset';
 
