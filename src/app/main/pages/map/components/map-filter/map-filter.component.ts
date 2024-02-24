@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, takeUntil } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, takeUntil, tap } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,6 +34,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   localSongs: string[] = [];
+  emitCounter = 0;
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -54,10 +55,16 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
     this.form
       .get('title')
-      ?.valueChanges.pipe(debounceTime(300))
+      ?.valueChanges.pipe(
+        tap((search) => {
+          if (search === '') {
+            this.autocompleteSongs = [];
+          }
+        })
+      )
       .pipe(takeUntil(this.destroy$))
-      .pipe(combineLatestWith(this.songs.pipe(skip(1))))
-
+      .pipe(combineLatestWith(this.songs))
+      .pipe(debounceTime(300))
       .pipe(
         distinctUntilChanged((p, c) => {
           const [pSearch, pSongs] = p;
@@ -68,16 +75,23 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       .pipe(
         filter((emits) => {
           const search = emits[0];
-          if(search && search.length < 3) this.autocompleteSongs = []
+          if (search && search.length < 3) this.autocompleteSongs = [];
           return search && search.length > 2 ? true : false;
         })
       )
       .subscribe((combinedEmits) => {
         const songs = combinedEmits[1];
+        console.log('sessin ', this.emitCounter);
         // const [search, songs] = combinedEmits;
-        if (songs) {
+         console.log(songs)
+        
+        if (songs && this.emitCounter) {
           this.autocompleteSongs = songs.map((song) => song.title);
+          
+        } else {
+          this.autocompleteSongs = [];
         }
+        this.emitCounter = 1;
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
       });
   }
@@ -98,7 +112,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   onFocusSearch(titleSong: string) {
-    if(titleSong === ''){
+    if (titleSong === '') {
       this.autocompleteSongs = [];
     }
     //return titleSong;
