@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounceTime, filter, Observable, skip, Subject, Subscription, takeUntil } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { FilterMapState } from '../../../../../store/filter-map/filter-map.state
 import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { FetchSongs, FindSongByTitle } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Song } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { InitFilterOptions, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
 import { TransformToMultiselectPipe } from '../../../../../shared/pipes/transform-to-multiselect.pipe';
 import { FetchMarkers } from '../../../../../store/map/map.actions';
@@ -27,7 +27,7 @@ import { FetchMarkers } from '../../../../../store/map/map.actions';
 export class MapFilterComponent implements OnInit, OnDestroy {
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
-  @Select(PlayerState.getSongs) songs!: Observable<Song[]>;
+  @Select(PlayerState.getSongs) songs!: Observable<PlaylistSong[]>;
   @Output() changeFilter = new EventEmitter<SongFilter>();
   filterCategory = mapFilter;
   isShowFilter = false;
@@ -47,8 +47,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   autocompleteSongs: string[] = [];
   previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
-  songSub$!: Subscription;
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -56,38 +54,55 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
     this.form
       .get('title')
-      ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .pipe(debounceTime(300))
+      ?.valueChanges.pipe(debounceTime(300))
+      .pipe(combineLatestWith(this.songs.pipe(skip(1))))
+
       .pipe(
-        filter((query: string | null) => {
-          if (query && query.length <= 3) {
-            this.autocompleteSongs = [];
-          }
-          return query ? query.length >= 3 : false;
+        distinctUntilChanged((p, c) => {
+          const [pSearch, pSongs] = p;
+          const [cSearch, cSongs] = c;
+          return this.compareArray(cSongs, pSongs) && pSearch === cSearch;
         })
       )
-      .pipe(debounceTime(500))
-      .subscribe(() => {
-        this.songSub$ = this.songs.pipe(skip(1)).subscribe((songs) => {
-          if (!songs) {
-            this.autocompleteSongs = [];
-            return;
-          }
+      .pipe(
+        filter((emits) => {
+          const search = emits[0];
+          if(search && search.length < 3) this.autocompleteSongs = []
+          return search && search.length > 2 ? true : false;
+        })
+      )
+      .subscribe((combinedEmits) => {
+        const [search, songs] = combinedEmits;
+        if (songs) {
           this.autocompleteSongs = songs.map((song) => song.title);
-        });
+        }
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
-        // this.songSub$.unsubscribe()
       });
   }
 
+  private compareArray(a1: PlaylistSong[], a2: PlaylistSong[]): boolean {
+    let isEqual = true;
+    if ((a1 === undefined && a2 !== undefined) || (a1 !== undefined && a2 === undefined)) return false;
+    if (a1 === undefined && a2 === undefined) return true;
+    if (a1.length !== a2.length) {
+      return false;
+    }
+    for (const i in a1) {
+      if (JSON.stringify(a1[i]) !== JSON.stringify(a2[i])) {
+        isEqual = false;
+      }
+    }
+    return isEqual;
+  }
+
   onFocusSearch(titleSong: string) {
-    this.autocompleteSongs = [];
-    return titleSong;
+    if(titleSong === ''){
+      this.autocompleteSongs = [];
+    }
+    //return titleSong;
   }
 
   getSelectedSong(songTitle: string) {
-    this.songSub$.unsubscribe();
-    this.autocompleteSongs = [];
     this.store.dispatch(new FindSongByTitle(songTitle));
     const filter = new SongFilter();
     filter.title = songTitle;
@@ -95,7 +110,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   selectBlur() {
-    this.autocompleteSongs = [];
     this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
@@ -115,8 +129,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   clearFilter() {
-    // this.autocompleteSongs = [];
-    this.songSub$.unsubscribe();
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
