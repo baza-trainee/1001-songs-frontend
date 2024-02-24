@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -55,6 +55,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.form
       .get('title')
       ?.valueChanges.pipe(debounceTime(300))
+      .pipe(takeUntil(this.destroy$))
       .pipe(combineLatestWith(this.songs.pipe(skip(1))))
 
       .pipe(
