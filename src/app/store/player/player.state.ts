@@ -77,7 +77,7 @@ export class PlayerState {
       tap((response: object) => {
         const data = response as { items: PlaylistSong[] };
         // console.log('fetchsons by filter', response)
-        if(!data.items) {
+        if (!data.items) {
           ctx.setState({
             ...state,
             songs: [{} as PlaylistSong]
@@ -95,7 +95,7 @@ export class PlayerState {
   selectNext(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
     const nextSongIndex = state.songs.indexOf(state.selecteSong) + 1;
-    const songsListLength = state.songsList.length;
+    const songsListLength = state.songs.length;
     if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
       return;
     }
