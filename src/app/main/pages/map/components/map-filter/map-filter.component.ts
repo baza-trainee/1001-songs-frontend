@@ -73,7 +73,8 @@ export class MapFilterComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((combinedEmits) => {
-        const [search, songs] = combinedEmits;
+        const songs = combinedEmits[1];
+        // const [search, songs] = combinedEmits;
         if (songs) {
           this.autocompleteSongs = songs.map((song) => song.title);
         }
