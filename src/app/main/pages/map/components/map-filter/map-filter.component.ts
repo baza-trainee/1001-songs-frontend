@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -81,9 +81,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       )
       .subscribe((combinedEmits) => {
         const songs = combinedEmits[1];
-        console.log('sessin ', this.emitCounter);
-        // const [search, songs] = combinedEmits;
-         console.log(songs)
         
         if (songs && this.emitCounter) {
           this.autocompleteSongs = songs.map((song) => song.title);
