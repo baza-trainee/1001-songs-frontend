@@ -1,13 +1,11 @@
 @import '../../../../typography/typography';
 
-.container {
-  display: flex;
+section {
   margin: 148px auto 80px;
   max-width: 1440px;
 }
 
 .expeditions {
-  width: 100%;
   margin-right: 80px;
   margin-left: 80px;
 
@@ -23,7 +21,8 @@
   }
 
   &__categories {
-    padding: 48px 0;
+    margin-left: 80px;
+    padding: 28px 0;
   }
 
   &__box {
@@ -36,6 +35,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
+
+    &-item {
+      width: calc(25% - 18px);
+    }
   }
 
   &__selected-category {
@@ -43,8 +46,18 @@
   }
 }
 
+@media (max-width: 1346px) {
+  .expeditions {
+    &__gallery {
+      &-item {
+        width: calc(33.3% - 16px);
+      }
+    }
+  }
+}
+
 @media (max-width: 1025px) {
-  .container {
+  section {
     margin-top: 148px;
     margin-bottom: 80px;
   }
@@ -52,11 +65,25 @@
   .expeditions {
     margin-right: 48px;
     margin-left: 48px;
+
+    &__categories {
+      margin-left: 48px;
+    }
+  }
+}
+
+@media (max-width: 981px) {
+  .expeditions {
+    &__gallery {
+      &-item {
+        width: calc(50% - 12px);
+      }
+    }
   }
 }
 
 @media (max-width: 769px) {
-  .container {
+  section {
     margin-top: 130px;
     margin-bottom: 80px;
   }
@@ -64,8 +91,11 @@
   .expeditions {
     margin-right: 32px;
     margin-left: 32px;
-    width: 100%;
     overflow: hidden;
+
+    &__categories {
+      margin-left: 32px;
+    }
 
     &__title {
       @include h2-desktop($line-height: 35px);
@@ -85,16 +115,30 @@
   }
 }
 
+@media (max-width: 645px) {
+  .expeditions {
+    &__gallery {
+      &-item {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
 @media (max-width: 391px) {
-  .container {
-    width: 358px;
+  section {
     margin-top: 105px;
     margin-bottom: 48px;
   }
 
   .expeditions {
     overflow: visible;
-    margin: 0 auto;
+    margin: 0 16px;
+
+    &__categories {
+      margin-left: 16px;
+    }
 
     &__title {
       @include h2-mobile($line-height: 35px);
