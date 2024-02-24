@@ -25,8 +25,8 @@ export class MapComponent implements OnInit {
   isShowSongs = true;
 
   constructor(
-    private store: Store // private router: Router,
-  ) // private route: ActivatedRoute
+    private store: Store 
+  ) 
   {}
 
   ngOnInit(): void {
@@ -34,7 +34,6 @@ export class MapComponent implements OnInit {
     if (history.state) {
       const filter = history.state.filter as SongFilter;
       if (filter && filter.city) {
-        // history.state.filter = null;
         this.store.dispatch(new FetchMarkers(filter));
         this.store.dispatch(new FetchSongs(filter));
       } else {

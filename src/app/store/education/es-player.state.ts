@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
-import { FetchScienceSongs, FetchSongById, ResetSong, SelectNext, SelectPrev, SelectSong } from './es-player.actions';
+import { FetchScienceSongs, FetchSongById, ResetSong, ResetSongs, SelectNext, SelectPrev, SelectSong } from './es-player.actions';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 
@@ -108,6 +108,16 @@ export class ESPlayerState {
     return ctx.setState({
       ...state,
       selecteSong: {} as EducationSong
+    });
+  }
+
+  @Action(ResetSongs)
+  resetSongs(ctx: StateContext<ESPlayerStateModel>) {
+    const state = ctx.getState();
+
+    return ctx.setState({
+      ...state,
+      songsList: []
     });
   }
 }

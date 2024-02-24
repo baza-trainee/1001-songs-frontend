@@ -32,7 +32,7 @@ export class MapService {
     return this.http.get<MarkerOfLocation[]>(API_URL + StatEndpoints.map.geotag + strID).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return of([]); // Возвращаем массив пустой массив в случае ошибки
+        return of([]); 
       })
     );
   }

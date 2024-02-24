@@ -17,7 +17,7 @@ import { FormatTextPipe } from '../../../../../../shared/pipes/format-text.pipe'
 import { ScienceSong } from '../../../../../../shared/interfaces/science-song.interface';
 import { ESPlayerState } from '../../../../../../store/education/es-player.state';
 import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
-import { FetchSongById } from 'src/app/store/education/es-player.actions';
+import { FetchSongById, ResetSongs } from 'src/app/store/education/es-player.actions';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
@@ -58,6 +58,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const params = this.route.snapshot.params;
     this.store.dispatch(new FetchSongById(params['idSong']));
+    this.store.dispatch(new ResetSongs());
 
     this.selectedSong$?.subscribe((scienceSong) => {
       this.playerSong$.next(this.playerService.getPlayerSong(scienceSong));

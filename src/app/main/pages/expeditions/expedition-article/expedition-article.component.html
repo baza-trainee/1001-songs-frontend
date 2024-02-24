@@ -20,8 +20,9 @@
       </div>
 
       <div class="article__content">
-        <div [innerHTML]="expeditionArticle.content | safeHtml"></div>
+        <app-content-text [content]="expeditionArticle.content"></app-content-text>
       </div>
+
       <div class="article__box article__text">
         <h2 class="article__sub-title">{{ 'expeditions.article.about-article.title' | translate }}</h2>
         <div class="article__about">

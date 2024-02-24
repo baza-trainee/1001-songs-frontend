@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { PlaylistSong, Song } from 'src/app/shared/interfaces/song.interface';
-import { FetchSongById, FetchSongs, FindSongById, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
+import { FetchSongById, FetchSongs, FindSongByTitle, ResetSong, SelectNext, SelectPrev, SelectSong } from './player.actions';
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
@@ -40,16 +40,13 @@ export class PlayerState {
     return state.selecteSong as PlaylistSong;
   }
 
-  @Action(FindSongById)
-  findSongById(ctx: StateContext<PlayerStateModel>, action: FindSongById) {
+  @Action(FindSongByTitle)
+  findSongByTitle(ctx: StateContext<PlayerStateModel>, action: FindSongByTitle) {
     const state = ctx.getState();
-
-    const selectedSong = state.songs.find((song: PlaylistSong) => song.id === action.id);
-
+    const selectedSong = state.songs.find((song: PlaylistSong) => song.title === action.songTitle);
     if (!selectedSong) {
       return;
     }
-    // console.log(selectedSong)
     return ctx.setState({
       ...state,
       songs: [selectedSong]
@@ -76,11 +73,11 @@ export class PlayerState {
   @Action(FetchSongs)
   fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
-
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: object) => {
         const data = response as { items: PlaylistSong[] };
-        if(!data.items) {
+        // console.log('fetchsons by filter', response)
+        if (!data.items) {
           ctx.setState({
             ...state,
             songs: [{} as PlaylistSong]
@@ -98,7 +95,7 @@ export class PlayerState {
   selectNext(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
     const nextSongIndex = state.songs.indexOf(state.selecteSong) + 1;
-    const songsListLength = state.songsList.length;
+    const songsListLength = state.songs.length;
     if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
       return;
     }
