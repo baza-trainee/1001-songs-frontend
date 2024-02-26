@@ -4,10 +4,11 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  width: 302px;
+  width: 100%;
   cursor: pointer;
   transition: all .3s ease-in-out;
   position: relative;
+  height: 100%;
 
   &:hover {
     scale: 1.01;
@@ -15,15 +16,16 @@
 
   img {
     object-fit: cover;
-    height: 180px;
+    height: 70%;
+    min-height: 70%;
     border-radius: 12px;
   }
 
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-top: 10px;
+    gap: 5px;
+    padding-top: 5px;
   }
 
   &__player {
@@ -72,12 +74,12 @@
   }
 
   &__name {
-    @include h6-desktop($font-size: 20px, $line-height: 24px, $font-family: $primary-fonts);
+    @include h6-desktop($font-size: 19px, $line-height: 25px, $font-family: $primary-fonts);
   }
 
   &__location {
-    @include caption-desktop;
-
+    @include caption-desktop($font-size: 14px, $color: var(----color-input));
+    opacity: .8;
     white-space: nowrap;
     overflow: hidden;
   }
@@ -85,8 +87,6 @@
 
 @media (max-width: 1025px) {
   .event {
-    width: 293px;
-
     &__media {
       img {
         width: 293px;
@@ -97,8 +97,6 @@
 
 @media (max-width: 769px) {
   .event {
-    width: 340px;
-
     &__player {
       height: 200px;
     }
@@ -116,17 +114,12 @@
 
 @media (max-width: 391px) {
   .event {
-    height: 338px;
-    width: 358px;
+    height: auto;
 
     &__media {
       img {
         width: 358px;
       }
-    }
-
-    &__date {
-      margin-top: 18px;
     }
 
     &__name {

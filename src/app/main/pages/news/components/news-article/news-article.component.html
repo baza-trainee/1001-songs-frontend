@@ -6,6 +6,9 @@
       <h1 class="article__title">{{ article.title }}</h1>
       <p class="article__date">{{ article.created_at | date: 'dd.MM.yyyy' }} • {{ article.location }}</p>
 
+      <h1 class="article__title">{{ article.title }}</h1>
+      <p class="article__date">{{ article.created_at | date: 'dd.MM.yyyy' }} • {{ article.location }}</p>
+
       <div class="article__box">
         <img *ngIf="article.preview_photo" class="article__img" [src]="article.preview_photo" [alt]="article.title" />
 
