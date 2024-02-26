@@ -35,6 +35,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
   localSongs: string[] = [];
   emitCounter = 0;
+  songFound = false;
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -56,6 +57,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       .get('title')
       ?.valueChanges.pipe(
         tap((search) => {
+          this.songFound = false;
           if (search === '') {
             this.autocompleteSongs = [];
           }
@@ -87,6 +89,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           this.autocompleteSongs = [];
         }
         this.emitCounter = 1;
+        if (this.songFound) return;
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
         this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
       });
@@ -119,6 +122,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   getSelectedSong(songTitle: string) {
+    this.songFound = true;
     this.store.dispatch(new FindSongByTitle(songTitle));
     const filter = new SongFilter();
     filter.title = songTitle;
