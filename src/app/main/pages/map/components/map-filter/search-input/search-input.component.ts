@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatChipsModule } from '@angular/material/chips';
@@ -28,6 +28,8 @@ export class SearchInputComponent {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) options: string[] = ['hello'];
   @Input({ required: true }) name!: string;
+  @ViewChild(MatAutocompleteTrigger)
+  autocompleteTrigger!: MatAutocompleteTrigger;
 
   @Output() songSelected = new EventEmitter<string>();
   @Output() searchBlur = new EventEmitter<string>();
@@ -36,13 +38,15 @@ export class SearchInputComponent {
 
   constructor() {}
 
-  onKeyPressed(event: KeyboardEvent){
-    if(event.key === 'Enter')
-    this.enterPressed.emit('event')
+  onKeyPressed(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.enterPressed.emit();
+      this.autocompleteTrigger.closePanel();
+    }
   }
 
-  onFocusInput(){
-   this.searchFocused.emit(this.control.value)
+  onFocusInput() {
+    this.searchFocused.emit(this.control.value);
   }
 
   onSongSelected(songTitle: string) {
