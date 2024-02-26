@@ -5,8 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-import { PlayerSong, Song } from '../../../../../../shared/interfaces/song.interface';
-import { StreamState } from '../../../../../../shared/interfaces/stream-state.interface';
+import { PlayerSong } from '../../../../../../shared/interfaces/song.interface';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { ResetSong } from '../../../../../../store/player/player.actions';
 import { MultichanelPlayerComponent } from '../../../../map/components/player/multichanel-player/multichanel-player.component';
@@ -14,11 +13,12 @@ import { StereoPlayerComponent } from '../../../../map/components/player/stereo-
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ShareComponent } from '../../../../../../shared/shared-components/share/share.component';
 import { FormatTextPipe } from '../../../../../../shared/pipes/format-text.pipe';
-import { ScienceSong } from '../../../../../../shared/interfaces/science-song.interface';
+import { Genre, ScienceSong } from '../../../../../../shared/interfaces/science-song.interface';
 import { ESPlayerState } from '../../../../../../store/education/es-player.state';
 import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
 import { FetchSongById, ResetSongs } from 'src/app/store/education/es-player.actions';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
+import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-science-song',
@@ -38,13 +38,10 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
 })
 export class ScienceSongComponent implements OnInit, OnDestroy {
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<ScienceSong>;
+  breadcrumbs: Breadcrumbs[] = [];
 
-  staticVideoImgUrl: string[] = ['./assets/img/player/video_mock.png'];
-
-  song!: Song;
   photos: { url: string; alt: string }[] = [{ url: '', alt: '' }];
   slideIndex = 0;
-  state$!: Observable<StreamState>;
   playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
   destroy$: Subject<void> = new Subject<void>();
 
@@ -61,11 +58,25 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetSongs());
 
     this.selectedSong$?.subscribe((scienceSong) => {
+      if (scienceSong.genres) this.breadcrumbs = this.getPathBreadcrumbs(scienceSong.genres);
       this.playerSong$.next(this.playerService.getPlayerSong(scienceSong));
       const photos = scienceSong.photos;
       if (!photos || !photos.length) return;
       this.photos = photos.map((el) => ({ url: el + '', alt: 'photo' }));
     });
+  }
+
+  getPathBreadcrumbs(genres: Genre[]): Breadcrumbs[] {
+    const breadcrumbs: Breadcrumbs[] = [];
+    const idGenre = this.route.snapshot.params['idGenre'];
+    const idCategory = this.route.snapshot.params['idCategory'];
+    const genre: Genre | undefined = genres.find(item => item.id.toString() === idGenre.toString());
+    breadcrumbs.push({name: 'Освітній розділ', path: '/education'});
+    if (genre) {
+      breadcrumbs.push({name: genre.main_category.title, path: `/education/category/${idCategory}`})
+      breadcrumbs.push({name: genre.title, path: `/education/category/${idCategory}/genre/${idGenre}`})
+    }
+    return breadcrumbs;
   }
 
   nextSlide() {

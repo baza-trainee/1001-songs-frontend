@@ -1,15 +1,16 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
 import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
-import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
+import {EducationSong} from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
@@ -18,6 +19,7 @@ import { SliderComponent } from '../../../../../../shared/shared-components/slid
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
+import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-science-songs',
@@ -36,13 +38,16 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
   templateUrl: './science-songs.component.html',
   styleUrls: ['./science-songs.component.scss']
 })
+
 export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
   @Select(ESPlayerState.getSongs) songs$!: Observable<EducationSong[]>;
   @Select(ESPlayerState.getSelectedSong) selectedSong$?: Observable<EducationSong>;
+
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
+  breadcrumbs: Breadcrumbs[] = [];
   distanceToTop!: number;
   heightHeader!: number;
   isPlay!: boolean;
@@ -52,13 +57,11 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   songs: EducationSong[] = [];
   title!: string;
-  // private readonly subscription?: Subscription;
   playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
 
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private store: Store,
     private educationServices: EducationService,
@@ -74,12 +77,26 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     const genreId = this.route.snapshot.params['idGenre'];
     this.educationServices.fetchGenreById(genreId).subscribe((data) => {
       this.genreData = data as EducationGenre;
+      this.breadcrumbs = this.getPathBreadcrumbs(this.genreData);
     });
 
     this.store.dispatch(new FetchScienceSongs(genreId));
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
       this.songs = scienseSongs;
     });
+  }
+
+  getPathBreadcrumbs(genre: EducationGenre): Breadcrumbs[] {
+    const breadcrumbs: Breadcrumbs[] = [];
+    const idCategory = this.route.snapshot.params['idCategory'];
+
+    breadcrumbs.push({name: 'Освітній розділ', path: '/education'});
+
+    if (genre) {
+      breadcrumbs.push({name: genre.main_category.title, path: `/education/category/${idCategory}`})
+    }
+
+    return breadcrumbs;
   }
 
   get totalPages(): number {

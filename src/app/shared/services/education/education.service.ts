@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
+import {Observable} from "rxjs";
+import {EducationSection} from "../../interfaces/science.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EducationService {
   constructor(private http: HttpClient) {}
-
-  // fetchSongsByGenre(genre: string) {
-  //   return this.http.get(`${API_URL}${StatEndpoints.scienceSongs}?genre=${genre}`);
-  // }
 
   fetchSongsByGenreId(genreId: string) {
     return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.genre}/${genreId}/${StatEndpoints.songs}`);
@@ -29,7 +27,7 @@ export class EducationService {
     return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.genre}/${id}`);
   }
 
-  fetchESData() {
-    return this.http.get(`${API_URL}${StatEndpoints.education}`);
+  fetchESData(): Observable<EducationSection> {
+    return this.http.get<EducationSection>(`${API_URL}${StatEndpoints.education}`);
   }
 }

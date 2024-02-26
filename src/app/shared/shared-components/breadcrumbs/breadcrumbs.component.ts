@@ -1,65 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { crumbs } from '../../enums/breadcrumbs';
+import { Router, RouterLink } from "@angular/router";
+import {Breadcrumbs} from "../../interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-breadcrumbs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent {
-  homeLink = { key: 'home', name: 'Головна' };
-  breadcrumbs: { path: string; name: string }[] = [];
+  @Input({required: true}) breadcrumbs: Breadcrumbs[] = [];
+  public homeLink: Breadcrumbs = { path: '', name: 'Головна' };
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    const url = window.location.href;
-    const path = url.split('#')[1];
-    if (path) {
-      this.setCrumbs(path);
-    }
-  }
+  constructor(private router: Router) {}
 
-  // ngOnInit(): void {
-  // this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((route: NavigationEnd | unknown) => {
-  //   if (route instanceof NavigationEnd) {
-  //     const path = route.urlAfterRedirects;
-  // this.setCrumbs(this.path);
-  //   }
-  // });
-  //}
-
-  setCrumbs(path: string) {
-    const pathSegments = path.split('/').filter((segment: string) => segment !== '');
-    const crumbs: { path: string; name: string }[] = [];
-    pathSegments.reduce((a, c) => {
-      crumbs.push({ path: a, name: this.getSegmentName(a) });
-      return a + '/' + c;
-    });
-    pathSegments.pop();
-    this.breadcrumbs = [...crumbs];
-  }
-
-  getSegmentName(key: string): string {
-    const target = crumbs.find((el) => el.key === key);
-    return target?.key ? target.name : key;
-  }
-
-  redirectToPath(segment: string) {
-    if (segment === this.homeLink.key) {
-      this.router.navigateByUrl('/');
-      return;
-    }
-
-    const clearedPath = window.location.href.split('#');
-    const targetPath = segment;
-    const basePath = clearedPath[1].split(targetPath);
-    const targetUrl = basePath[0] + targetPath;
-    this.router.navigateByUrl(targetUrl);
+  redirectToPath(path: string) {
+    this.router.navigateByUrl(path);
   }
 }

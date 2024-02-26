@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { BreadcrumbsComponent } from '../../../../../shared/shared-components/br
 import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 import {VideoPlayerComponent} from "../../../../../shared/shared-components/video-player/video-player.component";
+import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-song-map',
@@ -45,11 +46,11 @@ export class SongMapComponent implements OnInit, OnDestroy {
   slideIndex = 0;
 
   private subscriptions: Subscription[] = [];
+  breadcrumbs: Breadcrumbs[] = [{path: 'map', name: 'Мапа'}];
 
   constructor(
     private route: ActivatedRoute,
     private store: Store,
-    private router: Router,
     private playerService: PlayerService
   ) {}
 

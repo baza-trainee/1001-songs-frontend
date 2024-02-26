@@ -9,7 +9,7 @@ export interface EducationSong {
 
 export interface ScienceSong {
   id: 6;
-  genres: string[];
+  genres: Genre[];
   title: string;
   stereo_audio: string;
   song_text: string;
@@ -22,4 +22,17 @@ export interface ScienceSong {
   comment_map: string;
   map_photo: string;
   photos: [];
+}
+
+export interface Genre {
+  id: number;
+  title: string;
+  sub_category: {
+    id: number;
+    title: string;
+  };
+  main_category: {
+    id: number;
+    title: string;
+  };
 }
