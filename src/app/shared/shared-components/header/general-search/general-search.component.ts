@@ -40,7 +40,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(500))
       .pipe(
         filter((search) => {
-          if (search && search.length > 2) return true;
+          if (search && search.length > 1) return true;
           else {
             this.options = [];
             return false;
@@ -82,5 +82,14 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.showInputSearch = !this.showInputSearch;
     })
+  }
+  routerExpeditions(event: Event) {
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.key === 'Enter') {
+      const searchValue = (event.target as HTMLInputElement).value;
+      this.search.setValue('');
+      this.showInputSearch = false;
+      this.router.navigateByUrl(`/expeditions?search=${searchValue}`);
+    }
   }
 }

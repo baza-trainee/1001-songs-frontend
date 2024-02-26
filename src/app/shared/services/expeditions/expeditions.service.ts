@@ -11,6 +11,7 @@ import {Category} from "../../interfaces/article.interface";
 @Injectable({
   providedIn: 'root'
 })
+
 export class ExpeditionsService {
   constructor(private http: HttpClient) {}
 

@@ -1,9 +1,24 @@
 <div class="container" >
   <div class="expeditions">
-    <h2 class="expeditions__title">{{ 'expeditions.title' | translate }}</h2>
-    <p class="expeditions__description">
-      {{ 'expeditions.intro' | translate }}
-    </p>
+    <ng-container *ngIf="searchValue; else noSearchResults">
+      <ng-container *ngIf="expeditionResponse$ | async as expedition; else preloader">
+        <h2 *ngIf="expedition.total; else noResult">
+          Результати пошуку: {{ expedition.total }} {{ expedition.total === 1 ? 'експедиція' : expedition.total <= 4 ? 'експедиції' : 'експедицій' }}
+        </h2>
+      </ng-container>
+      <ng-template #noResult>
+        <h2>За вашим запитом експедицій не знайдено</h2>
+      </ng-template>
+      <ng-template #preloader>
+        <h2>Завантаження...</h2>
+      </ng-template>
+    </ng-container>
+    <ng-template #noSearchResults>
+      <h2  class="expeditions__title">{{ 'expeditions.title' | translate }}</h2>
+      <p class="expeditions__description">
+        {{ 'expeditions.intro' | translate }}
+      </p>
+    </ng-template>
     <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
       <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
     </div>

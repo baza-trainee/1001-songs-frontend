@@ -117,11 +117,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(marker: MarkerOfLocation) {
-    // console.log(marker);
-
     const filter: SongFilter = new SongFilter([marker.id + '']);
-
-   // this.store.dispatch(new FetchSongs(filter));
     this.router.navigate(['/map'], { state: { filter } });
   }
 }

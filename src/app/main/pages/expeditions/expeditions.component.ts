@@ -10,6 +10,7 @@ import { FilterComponent } from '../../../shared/shared-components/filter/filter
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { Category } from "../../../shared/interfaces/article.interface";
 import { PaginationComponent } from "../../../shared/shared-components/pagination/pagination.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-expeditions',
@@ -18,23 +19,26 @@ import { PaginationComponent } from "../../../shared/shared-components/paginatio
   standalone: true,
   imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent, PaginationComponent]
 })
+
 export class ExpeditionsComponent implements OnInit, OnDestroy {
   public expeditionCategories$!: Observable<Category[]>;
   private articlesSubscription?: Subscription;
+  private queryParamsSubscription?: Subscription;
   public expeditionResponse$!: Observable<ExpeditionListResponse>;
   public totalPage: number = 1;
+  public searchValue: string = "";
 
   private itemsPerPage: number = 12;
   public currentPage: number = 1;
 
   constructor(
-    private expeditionsService: ExpeditionsService
+    private expeditionsService: ExpeditionsService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.fetchExpeditions();
     this.fetchCategory();
-    this.fetchTotalPage();
   }
 
   fetchCategory() {
@@ -42,7 +46,14 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
   }
 
   fetchExpeditions() {
-    this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({page: this.currentPage, size: this.itemsPerPage});
+    if (!this.route.queryParams) return;
+
+    this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+      params['search'] ? this.searchValue = params['search'] : this.searchValue = "";
+
+      this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({search: this.searchValue, page: this.currentPage, size: this.itemsPerPage});
+      this.fetchTotalPage();
+    });
   }
 
   fetchTotalPage () {
@@ -60,13 +71,12 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
 
   filteredCategory(id: number): void {
     this.currentPage = 1;
-    this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({page: this.currentPage, size: this.itemsPerPage, id: id});
+    this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({search: this.searchValue, page: this.currentPage, size: this.itemsPerPage, id: id});
     this.fetchTotalPage();
   }
 
   ngOnDestroy(): void {
-    if (this.articlesSubscription) {
-      this.articlesSubscription.unsubscribe();
-    }
+    if (this.articlesSubscription) this.articlesSubscription.unsubscribe();
+    if (this.queryParamsSubscription) this.queryParamsSubscription.unsubscribe();
   }
 }

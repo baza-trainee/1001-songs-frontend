@@ -11,6 +11,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
 import {AudioService} from "../../../../../../shared/services/audio/audio.service";
 import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
+import {VideoPlayerComponent} from "../../../../../../shared/shared-components/video-player/video-player.component";
+import {SafeHtmlPipe} from "../../../../../../shared/pipes/safe-html.pipe";
 
 @Component({
   selector: 'app-playlist-song-card',
@@ -23,7 +25,9 @@ import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
     MatIconModule,
     MatExpansionModule,
     RouterLink,
-    FormatTextPipe
+    FormatTextPipe,
+    VideoPlayerComponent,
+    SafeHtmlPipe
   ],
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']

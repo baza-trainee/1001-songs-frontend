@@ -3,7 +3,7 @@
     <app-breadcrumbs></app-breadcrumbs>
     <!--    <pre>{{song | json}}</pre>-->
     <div class="song__box song__header">
-      <div class="song__carousel">
+      <div class="song__carousel" *ngIf="song.photos">
         <div class="song__carousel-box">
           <div class="song__carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ active: i === slideIndex }">
             <img [src]="photo.url" [alt]="photo.alt" />
@@ -95,7 +95,10 @@
       </div>
       <div class="song__video-box">
         <!--        <app-video-player [srcUrl]="song.media.video_example"></app-video-player>-->
-        <div class="song__video-container" style="background-image: url({{ staticVideoImgUrl }});"></div>
+        <div class="song__video-container">
+          <app-video-player [srcUrl]="song.video_url"></app-video-player>
+        </div>
+<!--        <div class="song__video-container" style="background-image: url({{ staticVideoImgUrl }});"></div>-->
       </div>
     </div>
     <div class="song__box song__map">
@@ -104,7 +107,7 @@
         <div class="song__info-descr" *ngIf="song.comment_map" [innerHTML]="song.comment_map | formatText"></div>
       </div>
       <div>
-        <div class="song__map-container" style="background-image: url('./assets/img/Map.jpg')"></div>
+        <div class="song__map-container" style="background-image: url({{song.map_photo}})"></div>
       </div>
     </div>
   </section>

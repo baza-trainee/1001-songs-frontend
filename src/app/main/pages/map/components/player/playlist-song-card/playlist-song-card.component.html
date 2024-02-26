@@ -3,15 +3,17 @@
     <div class="song__card__img"></div>
 
     <div class="song__card__name__info">
-      <div class="name__info__name">{{ song.title | slice: 0 : 40 }}</div>
-      <div class="name__info__album">{{ song.fund | slice: 0 : 20 }}</div>
+      <div class="name__info__name" *ngIf="song.title">
+        {{ song.title.length > 50 ? song.title.substring(0, 50) + '...' : song.title }}
+      </div>
+<!--      <div class="name__info__album">{{ song.fund | slice: 0 : 20 }}</div>-->
     </div>
 
     <div class="song__card__song__info">
       <div class="song__info__genre">{{  song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
-        {{ song.city ? song.city : 'Unknown' }},
-        <!-- {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }} -->
+        {{ song.city ? song.city : '...' }}
+<!--         {{ song.ethnographic_district ? song.ethnographic_district : 'Unknown' }}-->
       </div>
     </div>
 
@@ -58,8 +60,13 @@
       </button>
     </div>
   </div>
-  <div class="song__card__detail" *ngIf="isOpened && isShowDetail">
-    <div class="detail__video" style="background-image: url({{ staticVideoImgUrl }});"></div>
+  <div class="song__card__detail" *ngIf="isShowDetail" [ngClass]="{'opened': isOpened}">
+<!--    <div class="detail__video" style="background-image: url({{ staticVideoImgUrl }});"></div>-->
+    <div class="detail__video">
+      <app-video-player [srcUrl]="song.video_url"></app-video-player>
+    </div>
+
+
 
     <div class="detail__info">
       <div class="info__date__record">
@@ -80,7 +87,7 @@
         <div class="ethnographic__region__title">
           {{ 'map.player.songs-list.song-card.song-card-detail.ethnographic-region' | translate }}
         </div>
-        <div class="ethnographic__region__region">{{ song.city }}</div>
+        <div class="ethnographic__region__region">{{ song.ethnographic_district }}</div>
       </div>
       <button class="info__btn__more__detail" [routerLink]="song.id + ''">
         {{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}
@@ -89,7 +96,7 @@
 
     <div class="detail__song__text">
       <div class="song__text__content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
-      <div class="song__text__content" *ngIf="!song.song_text">No text available</div>
+      <div class="song__text__content" *ngIf="!song.song_text">Текст пісні відсутній...</div>
     </div>
   </div>
 </div>

@@ -1,6 +1,13 @@
 <div class="search">
   <mat-form-field class="search__box" [ngClass]="{'show-box': showInputSearch}">
-    <input #searchField class="search__input" matInput [formControl]="search" [matAutocomplete]="auto" placeholder="Експедиції" />
+    <input
+      (keydown.enter)="routerExpeditions($event)"
+      #searchField class="search__input"
+      matInput
+      [formControl]="search"
+      [matAutocomplete]="auto"
+      placeholder="Експедиції"
+    />
     <mat-autocomplete
       #auto="matAutocomplete"
       [displayWith]="getExpeditionTitle"
