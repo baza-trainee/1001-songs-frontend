@@ -19,9 +19,10 @@
         {{ 'expeditions.intro' | translate }}
       </p>
     </ng-template>
-    <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
-      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
-    </div>
+  </div>
+  <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
+    <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+  </div>
   <div class="expeditions">
     <div class="expeditions__box">
       <div class="expeditions__gallery" *ngIf="expeditionResponse$ | async as expedition">
