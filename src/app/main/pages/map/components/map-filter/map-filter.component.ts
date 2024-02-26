@@ -35,6 +35,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
   localSongs: string[] = [];
   emitCounter = 0;
+  songFound = false;
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -46,7 +47,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   });
 
   autocompleteSongs: string[] = [];
-  previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
   constructor(private store: Store) {}
 
@@ -57,6 +57,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       .get('title')
       ?.valueChanges.pipe(
         tap((search) => {
+          this.songFound = false;
           if (search === '') {
             this.autocompleteSongs = [];
           }
@@ -84,12 +85,13 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
         if (songs && this.emitCounter) {
           this.autocompleteSongs = songs.map((song) => song.title);
-
         } else {
           this.autocompleteSongs = [];
         }
         this.emitCounter = 1;
+        if (this.songFound) return;
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+        this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
       });
   }
 
@@ -108,14 +110,19 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     return isEqual;
   }
 
+  onEnterPressed() {
+    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+    this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
+  }
+
   onFocusSearch(titleSong: string) {
     if (titleSong === '') {
       this.autocompleteSongs = [];
     }
-    //return titleSong;
   }
 
   getSelectedSong(songTitle: string) {
+    this.songFound = true;
     this.store.dispatch(new FindSongByTitle(songTitle));
     const filter = new SongFilter();
     filter.title = songTitle;
@@ -138,10 +145,12 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   filterSongs() {
-    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+    // this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
-  clearFilter() {
+  clearFilter(event: MouseEvent) {
+    const pointerEvent = event as PointerEvent;
+    if (!pointerEvent.pointerType) return;
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));

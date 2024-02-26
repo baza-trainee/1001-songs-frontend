@@ -44,7 +44,8 @@ export class MapComponent implements OnInit {
   }
 
   onFilterChange(filter: SongFilter) {
-    this.store.dispatch(new FetchSongs(filter));
+   // this.store.dispatch(new FetchSongs(filter));
+   return filter;
   }
 
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {

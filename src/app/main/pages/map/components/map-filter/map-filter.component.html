@@ -26,7 +26,7 @@
           <div class="filter__location">
             <div class="filter__search filter__title-container">
               <h3 class="filter__body-title">{{ 'map.filter.search' | translate }}</h3>
-              <button class="filter__clear" (click)="clearFilter()">
+              <button class="filter__clear" (click)="clearFilter($event)" >
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <use xlink:href="./assets/sprites.svg#filterClear"></use>
                 </svg>
@@ -42,6 +42,7 @@
               (songSelected)="getSelectedSong($event)"
               (searchBlur)="searchBlur($event)"
               (searchFocused)="onFocusSearch($event)"
+              (enterPressed)="onEnterPressed()"
             ></app-search-input>
 
             <h3 class="filter__body-title">{{ 'map.filter.locations' | translate }}</h3>

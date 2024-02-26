@@ -60,8 +60,6 @@ export class PlayerState {
     return this.filterMapService.fetchSongById(action.id).pipe(
       tap((foudedSong: unknown) => {
         const song = foudedSong as Song;
-        // const songMarker = { count: '1', location__coordinates: song.location.coordinates, location__city: song.location.city_ua };
-        // this.store.dispatch(new ResetMarkers([songMarker as MarkerOfLocation]));
         ctx.setState({
           ...state,
           songsList: [song as Song]
@@ -76,7 +74,6 @@ export class PlayerState {
     return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
       tap((response: object) => {
         const data = response as { items: PlaylistSong[] };
-        // console.log('fetchsons by filter', response)
         if (!data.items) {
           ctx.setState({
             ...state,
