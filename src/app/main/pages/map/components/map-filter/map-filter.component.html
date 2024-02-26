@@ -42,6 +42,7 @@
               (songSelected)="getSelectedSong($event)"
               (searchBlur)="searchBlur($event)"
               (searchFocused)="onFocusSearch($event)"
+              (enterPressed)="onEnterPressed($event)"
             ></app-search-input>
 
             <h3 class="filter__body-title">{{ 'map.filter.locations' | translate }}</h3>

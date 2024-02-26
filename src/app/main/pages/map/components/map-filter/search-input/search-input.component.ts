@@ -32,8 +32,14 @@ export class SearchInputComponent {
   @Output() songSelected = new EventEmitter<string>();
   @Output() searchBlur = new EventEmitter<string>();
   @Output() searchFocused = new EventEmitter<string>();
+  @Output() enterPressed = new EventEmitter<string>();
 
   constructor() {}
+
+  onKeyPressed(event: KeyboardEvent){
+    if(event.key === 'Enter')
+    this.enterPressed.emit('event')
+  }
 
   onFocusInput(){
    this.searchFocused.emit(this.control.value)

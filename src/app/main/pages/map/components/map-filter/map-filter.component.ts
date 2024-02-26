@@ -46,7 +46,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   });
 
   autocompleteSongs: string[] = [];
-  previousValue: SongFilter = { ...(this.form.value as SongFilter) };
+  // previousValue: SongFilter = { ...(this.form.value as SongFilter) };
 
   constructor(private store: Store) {}
 
@@ -106,6 +106,11 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       }
     }
     return isEqual;
+  }
+
+  onEnterPressed(ev: any){
+    console.log(this.form.value)
+    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
   onFocusSearch(titleSong: string) {
