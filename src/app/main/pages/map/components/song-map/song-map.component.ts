@@ -14,6 +14,7 @@ import { ResetSong } from '../../../../../store/player/player.actions';
 import { BreadcrumbsComponent } from '../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
+import {VideoPlayerComponent} from "../../../../../shared/shared-components/video-player/video-player.component";
 
 @Component({
   selector: 'app-song-map',
@@ -26,7 +27,8 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
     StereoPlayerComponent,
     MultichanelPlayerComponent,
     BreadcrumbsComponent,
-    FormatTextPipe
+    FormatTextPipe,
+    VideoPlayerComponent
   ],
   templateUrl: './song-map.component.html',
   styleUrls: ['./song-map.component.scss']
@@ -35,17 +37,10 @@ export class SongMapComponent implements OnInit, OnDestroy {
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
 
-  playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
-
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   song$: BehaviorSubject<PlayerSong> = new BehaviorSubject<PlayerSong>({} as PlayerSong);
   song: Song = {} as Song;
   haveChannels = false;
-  photos = [
-    { url: './assets/img/home/carousel1.jpg', alt: '' },
-    { url: './assets/img/home/carousel2.jpg', alt: '' },
-    { url: './assets/img/home/carousel3.jpg', alt: '' }
-  ];
 
   slideIndex = 0;
 
@@ -71,22 +66,12 @@ export class SongMapComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
+    if (this.slideIndex < this.song.photos.length - 1) this.slideIndex++;
   }
 
   prevSlide() {
     if (this.slideIndex !== 0) this.slideIndex--;
   }
-
-  // async initializeData() {
-  //   await this.store.dispatch(new FetchSongs(new SongFilter())).toPromise();
-
-  //   this.subscriptions.push(
-  //     this.songs$.pipe(first()).subscribe(() => {
-  //       this.store.dispatch(new SelectSong(this.route.snapshot.params['id']));
-  //     })
-  //   );
-  // }
 
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());

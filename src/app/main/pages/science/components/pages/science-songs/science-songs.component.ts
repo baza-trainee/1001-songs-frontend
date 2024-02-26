@@ -71,7 +71,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (!this.route.snapshot) return;
-    const genreId = this.route.snapshot.params['id'];
+    const genreId = this.route.snapshot.params['idGenre'];
     this.educationServices.fetchGenreById(genreId).subscribe((data) => {
       this.genreData = data as EducationGenre;
     });
@@ -83,11 +83,12 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get totalPages(): number {
+    if (!this.songs) return 1;
     return Math.ceil(this.songs.length / this.itemsPerPage);
   }
 
   get itemsOnCurrentPage(): EducationSong[] {
-    if (this.songs.length <= this.itemsPerPage) return this.songs;
+    if (this.totalPages <= 1) return this.songs;
 
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;

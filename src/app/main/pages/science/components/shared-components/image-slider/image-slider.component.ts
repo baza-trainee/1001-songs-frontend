@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
+  ElementRef, Input,
   OnDestroy,
   OnInit,
   ViewChild
@@ -24,6 +24,7 @@ import {ImagePopupComponent} from "../image-popup/image-popup.component";
   styleUrls: ['./image-slider.component.scss']
 })
 export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input({required: true}) images: string[] = [];
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
   currentImageIndex = 0;
@@ -36,12 +37,6 @@ export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resizeObservable$!: Observable<Event>;
   resizeSubscription$!: Subscription;
-
-  images = [
-    './assets/img/science/Img_1.jpg',
-    './assets/img/science/Img_2.jpg',
-    './assets/img/science/Img_1.jpg'
-  ];
 
   constructor(public dialog: MatDialog) {}
 
@@ -78,6 +73,7 @@ export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTranslateX(): number {
+    if (!this.images) return 0;
     this.translateX = this.currentImageIndex * (this.imageWidth + this.gap);
     if (this.sliderWidth <= 452) {
       this.imageWidth = this.sliderWidth;
@@ -93,6 +89,7 @@ export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   isNextButtonDisabled(): boolean {
+    if (!this.images) return false;
     return this.translateX > (this.images.length * (this.imageWidth + this.gap) - this.sliderWidth) - this.gap || this.currentImageIndex === this.images.length - 1;
   }
 

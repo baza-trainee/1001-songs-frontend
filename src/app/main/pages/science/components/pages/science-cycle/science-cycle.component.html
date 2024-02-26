@@ -15,7 +15,7 @@
           <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="sub.media" alt="Ілюстрація до категорії" />
         </div>
         <div class="cycle__subcategory-box">
-          <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="link.id + ''">
+          <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="'genre/' + link.id">
             {{ link.title }}
             <span class="cycle__subcategory-arrow">
               <svg width="24" height="24" viewBox="0 0 24 24">

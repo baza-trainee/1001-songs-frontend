@@ -8,11 +8,11 @@ import { ScienceComponent } from './pages/science/science.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SongMapComponent } from './pages/map/components/song-map/song-map.component';
 import { NewsArticleComponent } from './pages/news/components/news-article/news-article.component';
-import {ExpeditionArticleComponent} from "./pages/expeditions/expedition-article/expedition-article.component";
-import {ScienceCycleComponent} from "./pages/science/components/pages/science-cycle/science-cycle.component";
-import {ScienceSongsComponent} from "./pages/science/components/pages/science-songs/science-songs.component";
-import {ScienceSongComponent} from "./pages/science/components/pages/science-song/science-song.component";
-import {ProjectComponent} from "./pages/project/project.component";
+import { ExpeditionArticleComponent } from "./pages/expeditions/expedition-article/expedition-article.component";
+import { ScienceCycleComponent } from "./pages/science/components/pages/science-cycle/science-cycle.component";
+import { ScienceSongsComponent } from "./pages/science/components/pages/science-songs/science-songs.component";
+import { ScienceSongComponent } from "./pages/science/components/pages/science-song/science-song.component";
+import { ProjectComponent } from "./pages/project/project.component";
 
 export const MAIN_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
@@ -32,19 +32,18 @@ export const MAIN_ROUTES: Routes = [
   },
   { path: 'expeditions',
     children: [
-      { path: '', component: ExpeditionsComponent },
+      { path: '', component: ExpeditionsComponent},
       { path: ':id', component: ExpeditionArticleComponent }
     ]
   },
-  { path: 'science', component: ScienceComponent },
   { path: 'expeditions', component: ExpeditionsComponent },
   {
-    path: 'science',
+    path: 'education',
     children: [
-      { path: '', component: ScienceComponent },
-      { path: ':category', component: ScienceCycleComponent },
-      { path: ':category/:id', component: ScienceSongsComponent },
-      { path: ':category/:id/:idSong', component: ScienceSongComponent }
+      { path: '', component: ScienceComponent},
+      { path: 'category/:idCategory', component: ScienceCycleComponent },
+      { path: 'category/:idCategory/genre/:idGenre', component: ScienceSongsComponent },
+      { path: 'category/:categoryId/genre/:idGenre/song/:idSong', component: ScienceSongComponent }
     ]
   },
   { path: 'project/:id', component: ProjectComponent },

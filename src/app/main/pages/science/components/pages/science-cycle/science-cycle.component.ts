@@ -29,7 +29,7 @@ export class ScienceCycleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const categoryId = this.route.snapshot.params['category'];
+    const categoryId = this.route.snapshot.params['idCategory'];
     this.educationService
       .fetchCategoryById(categoryId)
       .pipe(takeUntil(this.destroy$))

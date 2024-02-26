@@ -8,7 +8,7 @@ enum NavLinksEnum {
 
 export const navLinksHeader = [
   { name: NavLinksEnum.About, route: '/about' },
-  { name: NavLinksEnum.Education, route: '/science' },
+  { name: NavLinksEnum.Education, route: '/education' },
   { name: NavLinksEnum.Expedition, route: '/expeditions' },
   { name: NavLinksEnum.Map, route: '/map' },
   { name: NavLinksEnum.News, route: '/news' }

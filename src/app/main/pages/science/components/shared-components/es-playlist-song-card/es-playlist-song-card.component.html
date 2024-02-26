@@ -16,7 +16,7 @@
 
     <div
       class="song__card__btn btn-detail"
-      [routerLink]="song.id + ''"
+      [routerLink]="'song/' + song.id"
       (click)="openCurrentFile()"
       (keyup)="openCurrentFile()"
       tabindex="0"

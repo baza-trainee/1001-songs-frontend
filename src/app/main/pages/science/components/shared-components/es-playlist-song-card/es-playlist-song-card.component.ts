@@ -46,7 +46,8 @@ export class ESPlaylistSongCardComponent implements OnInit {
   navigateTo(id: string) {
     if (window.innerWidth < 768) {
       this.store.dispatch(new SelectSong(id));
-      this.router.navigate([id], { relativeTo: this.route });    }
+      this.router.navigate([id], { relativeTo: this.route });
+    }
     return;
   }
 

@@ -21,6 +21,7 @@
 .playlist__song__card {
   .song__card__header {
     position: relative;
+    background-color: #fff;
     z-index: 2;
     width: 100%;
     padding: 12px;
@@ -88,20 +89,30 @@
 }
 
 .song__card__detail {
-  display: grid;
-  grid-template-columns: 7.5fr 3.1fr 4fr;
-  gap: 24px;
-  position: relative;
-  top: -12px;
-  z-index: 1;
-  padding: 17px 24px 24px;
-  background-color: var(--bg-color-screen);
-  border-bottom-right-radius: 12px;
-  border-bottom-left-radius: 12px;
-  box-shadow: 1px 0 18px 0 rgba(0, 0, 0, 10%) inset;
-  margin-bottom: 12px;
-  align-items: stretch;
-  justify-content: space-between;
+  opacity: 0;
+  top: -100px;
+  position: absolute;
+  pointer-events: none;
+
+  &.opened {
+    pointer-events: auto;
+    transition: all .2s ease-in-out;
+    display: grid;
+    grid-template-columns: 7.5fr 3.1fr 4fr;
+    gap: 24px;
+    top: -12px;
+    position: relative;
+    z-index: 1;
+    padding: 17px 24px 24px;
+    background-color: var(--bg-color-screen);
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: 1px 0 18px 0 rgba(0, 0, 0, 10%) inset;
+    margin-bottom: 12px;
+    align-items: stretch;
+    justify-content: space-between;
+    opacity: 1;
+  }
 
   .detail__video {
     background-size: cover;
