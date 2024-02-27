@@ -19,6 +19,9 @@ import { VideoPlayerComponent } from '../../../../../../shared/shared-components
 import { FetchSongById, ResetSongs } from 'src/app/store/education/es-player.actions';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.interface";
+import {
+  FadeInCarouselComponent
+} from "../../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 
 @Component({
   selector: 'app-science-song',
@@ -31,7 +34,8 @@ import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.int
     StereoPlayerComponent,
     ShareComponent,
     FormatTextPipe,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    FadeInCarouselComponent
   ],
   templateUrl: './science-song.component.html',
   styleUrls: ['./science-song.component.scss']
@@ -77,14 +81,6 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
       breadcrumbs.push({name: genre.title, path: `/education/category/${idCategory}/genre/${idGenre}`})
     }
     return breadcrumbs;
-  }
-
-  nextSlide() {
-    if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
-  }
-
-  prevSlide() {
-    if (this.slideIndex !== 0) this.slideIndex--;
   }
 
   ngOnDestroy(): void {

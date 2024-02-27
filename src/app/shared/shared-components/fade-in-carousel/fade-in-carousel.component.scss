@@ -25,6 +25,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
 
     img {
       border-radius: 12px;
@@ -35,6 +36,7 @@
 
     &.active {
       opacity: 1;
+      pointer-events: auto;
     }
   }
 
@@ -43,8 +45,14 @@
 
     padding: 0 5px;
     display: flex;
+    gap: 8px;
     justify-content: space-between;
     color: var(--text-color-popup-menu);
+
+    &.column {
+      flex-direction: column;
+      align-items: center;
+    }
 
     span {
       color: var(--text-color-primary);

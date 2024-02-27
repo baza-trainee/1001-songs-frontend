@@ -1,14 +1,24 @@
 <div class="carousel">
-  <div class="carousel-box" #box [ngStyle]="{'height': heightBox + 'px'}">
-    <div class="carousel-img" *ngFor="let photo of photos; let i = index" [ngClass]="{ active: i === slideIndex }">
-      <img [src]="photo" [alt]="'photo' + i" />
+  <div class="carousel-box" #box [style.height.px]="heightImage ? heightImage : heightBox">
+    <div class="carousel-img"
+         *ngFor="let photo of photos; let i = index"
+         [ngClass]="{ active: i === slideIndex }"
+    >
+      <img
+        [src]="photo"
+        [alt]="'photo' + i"
+        (click)="openImagePopup(photos, i)"
+        (keydown)="openImagePopup(photos, i)"
+        tabindex="0"
+      />
     </div>
   </div>
-  </div>
-  <div class="carousel-info">
-    <p>
-      <span>{{ slideIndex + 1 }}/{{ photos.length }}</span> Фото
-    </p>
+</div>
+<div class="carousel-info {{classInfo}}">
+  <p>
+    <span>{{ slideIndex + 1 }}/{{ photos.length }}</span>
+    <span> {{ title }}</span>
+  </p>
   <div class="carousel-nav">
   <button class="carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
       <svg width="40" height="40" viewBox="0 0 48 48">

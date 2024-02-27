@@ -204,7 +204,6 @@ app-news {
   }
 }
 
-.cdk-overlay-pane {
-  width: 500px !important;
-  margin-left: -250px;
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  overflow: hidden;
 }

@@ -2,6 +2,10 @@ import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angul
 import { CommonModule } from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {debounceTime, fromEvent, Observable, Subscription} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  ImagePopupComponent
+} from "../../../main/pages/science/components/shared-components/image-popup/image-popup.component";
 
 @Component({
   selector: 'app-fade-in-carousel',
@@ -12,6 +16,9 @@ import {debounceTime, fromEvent, Observable, Subscription} from "rxjs";
 })
 export class FadeInCarouselComponent implements OnInit, OnDestroy {
   @Input({required: true}) photos!: string[];
+  @Input() title: string = 'Фото';
+  @Input() classInfo: string = '';
+  @Input() heightImage!: number;
 
   @ViewChild('box') boxCarousel!: ElementRef<HTMLDivElement>;
 
@@ -20,7 +27,10 @@ export class FadeInCarouselComponent implements OnInit, OnDestroy {
   slideIndex: number = 0;
   heightBox: number = 0;
 
-  constructor(private _translate: TranslateService) {}
+  constructor(
+    private _translate: TranslateService,
+    public dialog: MatDialog
+  ) {}
 
   nextSlide() {
     if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
@@ -38,6 +48,12 @@ export class FadeInCarouselComponent implements OnInit, OnDestroy {
   }
   setSliderWidths(): void {
     this.heightBox = this.boxCarousel.nativeElement.offsetWidth * 0.61;
+  }
+
+  openImagePopup(images: string[], index: number) {
+    this.dialog.open(ImagePopupComponent, {
+      data: { images: images, index: index }
+    });
   }
 
   ngOnDestroy(): void {

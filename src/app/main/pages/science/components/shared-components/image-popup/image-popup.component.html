@@ -1,4 +1,14 @@
-<div class="container">
-  <img [src]="data.imageSrc" alt="Popup Image">
+<section class="popup">
+  <div class="popup__container">
+    <img *ngIf="data.images" [src]="data.images[data.index]" [alt]="'Image ' + data.index">
+    <div class="popup__nav" *ngIf="data.index || data.index === 0">
+      <button class="prev" (click)="prevImage()" [disabled]="data.index === 0">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_left"></mat-icon>
+      </button>
+      <button class="next" (click)="nextImage()" [disabled]="data.index === data.images.length - 1">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_right"></mat-icon>
+      </button>
+    </div>
+  </div>
+</section>
 
-</div>
