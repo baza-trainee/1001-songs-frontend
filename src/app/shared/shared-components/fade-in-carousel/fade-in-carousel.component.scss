@@ -25,6 +25,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
 
     img {
       border-radius: 12px;
@@ -35,6 +36,7 @@
 
     &.active {
       opacity: 1;
+      pointer-events: auto;
     }
   }
 

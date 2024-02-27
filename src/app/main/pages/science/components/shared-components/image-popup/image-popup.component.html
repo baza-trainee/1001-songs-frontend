@@ -1,4 +1,10 @@
-<div class="container">
-  <img [src]="data.imageSrc" alt="Popup Image">
+<section class="popup">
+  <div class="popup__container">
+    <img [src]="data.images[data.index]" [alt]="'Image ' + data.index">
+    <div class="popup__nav">
+      <button (click)="prevImage()" *ngIf="data.index > 0" [disabled]="data.index === 0">Предыдущее</button>
+      <button (click)="nextImage()" *ngIf="data.index < data.images.length - 1" [disabled]="data.index === data.images.length - 1">Следующее</button>
+    </div>
+  </div>
+</section>
 
-</div>

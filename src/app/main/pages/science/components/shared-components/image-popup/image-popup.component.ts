@@ -10,5 +10,17 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
   styleUrls: ['./image-popup.component.scss']
 })
 export class ImagePopupComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { imageSrc: string }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { images: string[], index: number }) {}
+
+  prevImage() {
+    if (this.data.index > 0) {
+      this.data.index--;
+    }
+  }
+
+  nextImage() {
+    if (this.data.index < this.data.images.length - 1) {
+      this.data.index++;
+    }
+  }
 }

@@ -26,7 +26,7 @@ export class HomeActualComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if(this.projects$) {
       this.projectsSubscription = this.projects$.subscribe(projects => {
-        this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
+       if (projects) this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
       });
     }
   }
