@@ -26,7 +26,6 @@ img {
     padding-bottom: 16px;
     position: absolute;
     width: 302px;
-    height: 480px;
     border-radius: 16px;
     background-color: #fff;
     overflow: hidden;
@@ -71,13 +70,13 @@ img {
     }
 
     &__content {
-      padding: 16px;
+      padding: 25px 16px;
     }
 
     &__title {
       @include overline-desktop($color: $color-primary);
 
-      padding: 9px 0;
+      padding-bottom: 10px;
     }
 
     &__count {

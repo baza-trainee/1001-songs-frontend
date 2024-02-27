@@ -79,6 +79,7 @@
 
   &__location {
     @include caption-desktop($font-size: 14px, $color: var(----color-input));
+
     opacity: .8;
     white-space: nowrap;
     overflow: hidden;

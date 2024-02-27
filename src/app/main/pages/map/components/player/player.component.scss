@@ -106,7 +106,7 @@
 
 @media (max-width: 1439px) {
   .fix {
-    max-width: 1280px;
+    max-width: calc(100% - 160px);
   }
 
   .songs {
