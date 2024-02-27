@@ -8,7 +8,6 @@ import { Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatSliderModule } from '@angular/material/slider';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stereo-player',
@@ -20,7 +19,6 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
-  // @Input() stereoOnly: boolean = false;
   @Input() autoplay: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
@@ -32,7 +30,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   isPreloader = false;
 
   destroy$: Subject<void> = new Subject<void>();
-  // volume = new FormControl<number>(0);
 
   constructor(
     private audioService: AudioService,

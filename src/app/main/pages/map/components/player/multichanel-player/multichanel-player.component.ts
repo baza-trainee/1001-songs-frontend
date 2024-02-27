@@ -88,6 +88,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  setUpVolume(eventObj: any) {
+    const volumeValue = eventObj.target.value;
+    this.multiAudioService.setUpVolume(volumeValue )
+  }
+
   playStream(urls: string[]) {
     this.multiAudioService.playStreamAll(urls).subscribe();
   }
