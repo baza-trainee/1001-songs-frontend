@@ -4,7 +4,7 @@ import {catchError, Observable, of} from "rxjs";
 
 import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
 import {Slide} from "../../interfaces/slide.interface";
-import {Project, ProjectData} from "../../interfaces/project.interface";
+import {Project, ProjectData, ProjectItem} from "../../interfaces/project.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,14 @@ export class ProjectService {
 
     constructor(private http: HttpClient) { }
 
-    convertToSlide(obj: ProjectData): Slide {
+    convertToSlide(obj: ProjectItem): Slide {
         return {
             id: obj.id,
             img: obj.preview_photo,
-            date: '', // Укажите поле, содержащее дату
+            date: '',
             title: obj.title,
             description: obj.short_description,
-            location: '', // Укажите поле, содержащее местоположение
+            location: ''
         };
     }
 
@@ -33,11 +33,11 @@ export class ProjectService {
         );
     }
 
-  fetchProjects(params?: {project_exclude?: string}): Observable<ProjectData[]> {
-    return this.http.get<ProjectData[]>(`${API_URL}${StatEndpoints.projects}`, {params}).pipe(
+  fetchProjects(params?: {project_exclude?: string}): Observable<ProjectData> {
+    return this.http.get<ProjectData>(`${API_URL}${StatEndpoints.projects}`, {params}).pipe(
         catchError(error => {
           console.error(error);
-          return of([]);
+          return of({} as  ProjectData);
         })
     );
   }

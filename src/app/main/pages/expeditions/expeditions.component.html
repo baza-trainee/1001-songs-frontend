@@ -1,4 +1,4 @@
-<div class="container" >
+<section>
   <div class="expeditions">
     <ng-container *ngIf="searchValue; else noSearchResults">
       <ng-container *ngIf="expeditionResponse$ | async as expedition; else preloader">
@@ -19,20 +19,22 @@
         {{ 'expeditions.intro' | translate }}
       </p>
     </ng-template>
-    <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
-      <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
-    </div>
+  </div>
+  <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
+    <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+  </div>
+  <div class="expeditions">
     <div class="expeditions__box">
       <div class="expeditions__gallery" *ngIf="expeditionResponse$ | async as expedition">
-        <div *ngFor="let event of expedition.items" class="expeditions__gallery__item">
+        <div *ngFor="let event of expedition.items" class="expeditions__gallery-item">
           <app-expedition-card [event]="event"></app-expedition-card>
         </div>
       </div>
     </div>
     <app-pagination
-            [totalPages]="totalPage"
-            [currentPage]="currentPage"
-            (pageChange)="changePage($event)"
+      [totalPages]="totalPage"
+      [currentPage]="currentPage"
+      (pageChange)="changePage($event)"
     ></app-pagination>
   </div>
-</div>
+</section>

@@ -62,9 +62,10 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  setUpVolume(eventObj: any) {
-    const volumeValue = eventObj.target.value;
-    this.audioService.setUpVolume(volumeValue )
+  setUpVolume(eventObj: Event) {
+    const event = eventObj as { target: object };
+    const target = event.target as {value: number};
+    this.audioService.setUpVolume(target.value );
   }
 
   playStream(url: string) {

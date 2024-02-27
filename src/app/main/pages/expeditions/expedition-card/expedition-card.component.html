@@ -3,8 +3,7 @@
   <img [src]="event.preview_photo" width="400" height="270" alt="photo">
   <span class="event__date">{{ event.expedition_date }}</span>
   <div class="event__container" style="cursor: pointer">
-    <p class="event__name">{{ event.title }}</p>
-    <p class="event__description">{{ event.short_description }}</p>
     <p class="event__location">{{ event.location }}</p>
+    <p class="event__name" *ngIf="event.title">{{ event.title.length > 50 ? event.title.substring(0, 50) + '...' : event.title }}</p>
   </div>
 </div>

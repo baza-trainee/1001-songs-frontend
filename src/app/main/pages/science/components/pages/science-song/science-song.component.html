@@ -1,7 +1,6 @@
 <div class="container" *ngIf="selectedSong$ | async as song">
   <section class="song" *ngIf="song.id">
-    <app-breadcrumbs></app-breadcrumbs>
-    <!--    <pre>{{song | json}}</pre>-->
+    <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
     <div class="song__box song__header">
       <div class="song__carousel" *ngIf="song.photos">
         <div class="song__carousel-box">
@@ -29,7 +28,7 @@
       </div>
       <div class="song__player">
         <h1 class="song__title">{{ song.title }}</h1>
-        <p class="song__player-genre">{{ song.genres ? song.genres[0] : '' }}</p>
+        <p class="song__player-genre" *ngFor="let genre of song.genres">{{ genre.title }}</p>
         <div class="song__player-desctop">
           <app-stereo-player #stereoPlayer [autoplay]="true" [song$]="playerSong$"></app-stereo-player>
 

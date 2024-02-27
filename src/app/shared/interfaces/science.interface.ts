@@ -35,6 +35,20 @@ export interface EducationPrimaryCategory {
   ];
 }
 
+export interface EducationSection {
+  title: string;
+  description: string;
+  recommendations: string;
+  recommended_sources: string[];
+  calendar_and_ritual_categories: CalendarAndRitualCategory[];
+}
+
+export interface CalendarAndRitualCategory {
+  id: number;
+  title: string;
+  media: string;
+}
+
 export interface EducationCategoryCard {
   id: string;
   title: string;
@@ -47,21 +61,8 @@ export interface EducationGenre {
   title: string;
   media: string[];
   description: string;
+  main_category: {
+    id: number,
+    title: string
+  }
 }
-
-// export interface SongsPrimaryCategory {
-//   id: 0;
-//   title: string;
-//   description: string;
-//   photo1: string;
-//   photo2: string;
-//   photo3: string;
-//   photo4: string;
-//   photo5: string;
-// }
-
-// export interface ScienceSubcategory {
-//   title: string;
-//   urlImg?: string;
-//   links: string[];
-// }

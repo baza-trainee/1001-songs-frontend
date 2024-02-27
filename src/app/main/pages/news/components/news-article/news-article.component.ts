@@ -17,6 +17,7 @@ import {
 } from "../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 import { SafeHtmlPipe } from "../../../../../shared/pipes/safe-html.pipe";
 import { ContentTextComponent } from "../../../../../shared/shared-components/content-text/content-text.component";
+import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-news-article',
@@ -29,6 +30,7 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   public article$!: Observable<NewsArticle>
   public sliderItems!: Slide[];
   private readonly subscriptions: Subscription[] = [];
+  breadcrumbs: Breadcrumbs[] = [{path: 'news', name: 'Новини'}];
 
   constructor(
     private route: ActivatedRoute,

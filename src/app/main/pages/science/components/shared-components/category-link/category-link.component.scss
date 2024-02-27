@@ -10,6 +10,11 @@ $radius: 15px;
   border-radius: $radius;
   overflow: hidden;
   cursor: pointer;
+  transition: all .3s ease;
+
+  &:hover {
+    scale: 1.01;
+  }
 
   &:hover span {
     transform: rotate(-45deg);

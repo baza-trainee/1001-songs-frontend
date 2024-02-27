@@ -15,18 +15,18 @@ import { ScienceSongComponent } from "./pages/science/components/pages/science-s
 import { ProjectComponent } from "./pages/project/project.component";
 
 export const MAIN_ROUTES: Routes = [
-  { path: 'about', component: AboutComponent },
+  { path: 'about', component: AboutComponent},
   {
     path: 'map',
     children: [
-      { path: '', component: MapComponent },
+      { path: '', component: MapComponent},
       { path: ':id', component: SongMapComponent }
     ]
   },
   {
     path: 'news',
     children: [
-      { path: '', component: NewsComponent },
+      { path: '', component: NewsComponent},
       { path: ':id', component: NewsArticleComponent }
     ]
   },
@@ -36,16 +36,15 @@ export const MAIN_ROUTES: Routes = [
       { path: ':id', component: ExpeditionArticleComponent }
     ]
   },
-  { path: 'expeditions', component: ExpeditionsComponent },
   {
     path: 'education',
     children: [
       { path: '', component: ScienceComponent},
       { path: 'category/:idCategory', component: ScienceCycleComponent },
       { path: 'category/:idCategory/genre/:idGenre', component: ScienceSongsComponent },
-      { path: 'category/:categoryId/genre/:idGenre/song/:idSong', component: ScienceSongComponent }
+      { path: 'category/:idCategory/genre/:idGenre/song/:idSong', component: ScienceSongComponent }
     ]
   },
   { path: 'project/:id', component: ProjectComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent}
 ];

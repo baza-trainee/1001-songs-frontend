@@ -8,37 +8,19 @@
   color: $text-color;
   text-align: center;
   font-family: var(--primary-font);
+  white-space: nowrap;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
   border: 2px solid $bg-color;
-  transition: all .3s ease-in-out;
+  transition: all .4s ease-in-out;
   cursor: pointer;
   z-index: 1;
 
   &:hover {
-    color: $bg-color;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 50%;
-    height: 10px;
-    background-color: $hover-bg-color;
-    border-radius: 50%;
-    transition: all .3s ease-in-out;
-    transform: translateX(-50%);
-    z-index: -1;
-  }
-
-  &:hover::before {
-    transform: translateX(-50%) translateY(0);
-    width: 200%;
-    height: 200%;
+    box-shadow: 5px 8px 11px 0 rgba(0, 0, 0, 15%);
+    scale: 1.01;
   }
 }
 

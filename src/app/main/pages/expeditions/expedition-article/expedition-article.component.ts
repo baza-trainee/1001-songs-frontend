@@ -17,6 +17,7 @@ import {
 } from "../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 import { SliderService } from "../../../../shared/services/slider/slider.service";
 import {ContentTextComponent} from "../../../../shared/shared-components/content-text/content-text.component";
+import {Breadcrumbs} from "../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-expedition-article',
@@ -41,7 +42,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
     public expeditionArticle!: ExpeditionArticle;
     public sliderItems: Slide[] = [];
     private readonly subscriptions: Subscription[] = [];
-
+    breadcrumbs: Breadcrumbs[] = [{path: 'expeditions', name: 'Експедиції'}];
 
     constructor(
         private route: ActivatedRoute,

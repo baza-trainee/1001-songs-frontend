@@ -10,17 +10,15 @@ export class FormattingTextService {
 
   splitText(htmlString: string): Content[] {
     const contents = htmlString.split(/<\/?p>/).filter(Boolean);
-    const result: Content[] = [];
 
-    contents.forEach(elem => {
+    return contents.reduce((acc, elem) => {
       if ((elem.match(/<img/g) || []).length > 1) {
-        result.push({ text: "", images: this.getImageUrls(elem) });
+        acc.push({ text: "", images: this.getImageUrls(elem) });
       } else {
-        result.push({ text: elem, images: [] });
+        acc.push({ text: elem, images: [] });
       }
-    });
-
-    return result;
+      return acc
+    }, [] as Content[])
   }
 
   getImageUrls(urls: string): string[] {

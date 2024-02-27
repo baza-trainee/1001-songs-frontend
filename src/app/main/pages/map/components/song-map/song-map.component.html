@@ -1,6 +1,6 @@
 <div class="container" *ngIf="song.id">
   <section class="song-page">
-    <app-breadcrumbs></app-breadcrumbs>
+    <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
     <div class="song-page__detail" *ngIf="song.id">
       <div class="song-page__video">

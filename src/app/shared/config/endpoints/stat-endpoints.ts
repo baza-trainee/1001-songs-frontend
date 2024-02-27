@@ -1,4 +1,5 @@
 export const API_URL = 'https://1000and1songs.com/api/v1/';
+
 export const StatEndpoints = {
   markers: 'map',
   songs: 'songs',
@@ -23,6 +24,7 @@ export const StatEndpoints = {
     geotag: 'map/filter/geotag'
   },
   projects: 'projects',
+  partners: 'patners',
   news: {
     news: 'news/news',
     categories: 'news/categories'

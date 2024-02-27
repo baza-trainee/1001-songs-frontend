@@ -1,13 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+
 import { TranslateModule } from '@ngx-translate/core';
 
 import { RecommendedSourcesComponent } from '../../shared-components/recommended-sources/recommended-sources.component';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
-import { EducationPrimaryCategory, ScienceCategory } from '../../../../../../shared/interfaces/science.interface';
+import {
+  EducationPrimaryCategory,
+  ScienceCategory
+} from '../../../../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
-import { Subject, takeUntil } from 'rxjs';
+import {Breadcrumbs} from "../../../../../../shared/interfaces/breadcrumbs.interface";
 
 @Component({
   selector: 'app-science-cycle',
@@ -18,7 +23,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ScienceCycleComponent implements OnInit, OnDestroy {
   category!: ScienceCategory;
-  categoryName!: string;
+  breadcrumbs: Breadcrumbs[] = [];
   categoryData: EducationPrimaryCategory = {} as EducationPrimaryCategory;
   destroy$: Subject<void> = new Subject<void>();
 
@@ -30,6 +35,7 @@ export class ScienceCycleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const categoryId = this.route.snapshot.params['idCategory'];
+    this.breadcrumbs.push({name: 'Освітній розділ', path: '/education'});
     this.educationService
       .fetchCategoryById(categoryId)
       .pipe(takeUntil(this.destroy$))
@@ -37,6 +43,7 @@ export class ScienceCycleComponent implements OnInit, OnDestroy {
         this.categoryData = data as EducationPrimaryCategory;
       });
   }
+
   ngOnDestroy(): void {
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
