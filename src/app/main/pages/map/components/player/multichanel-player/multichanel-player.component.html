@@ -31,6 +31,16 @@
           <use xlink:href="./assets/sprites.svg#forwardDesktopBtn"></use>
         </svg>
       </button>
+      <div class="volume">
+        <input 
+          #volumeRange
+          type="range" 
+          min="0"
+          max="10" 
+          step="1" 
+          (input)="setUpVolume($event)" 
+        />
+      </div>
     </div>
     <div class="player__actions__mobile">
       <button class="btn__player__mobile backward" (click)="backward(slider.value)">

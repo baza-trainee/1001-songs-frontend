@@ -85,6 +85,10 @@ export class MultiAudioService {
     this.multichannelStateSubject.next(this.audioStates);
   }
 
+  setUpVolume(volumeValue: number){
+    this.tracks.forEach(audio => audio.volume = volumeValue/10)
+  }
+
   playStreamAll(urls: string[]) {
     this.stopAll();
     return this.playStream(urls).pipe(takeUntil(this.stop$));

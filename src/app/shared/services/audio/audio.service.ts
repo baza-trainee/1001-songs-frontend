@@ -48,6 +48,10 @@ export class AudioService {
     });
   }
 
+  setUpVolume(value: number){
+    this.audioObj.volume = value/10;
+  }
+
   playStream(url: string) {
     return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }

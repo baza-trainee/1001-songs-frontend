@@ -7,18 +7,18 @@ import { PlayerSong } from 'src/app/shared/interfaces/song.interface';
 import { Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-stereo-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatSliderModule],
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
 export class StereoPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
 
-  // @Input() stereoOnly: boolean = false;
   @Input() autoplay: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
@@ -60,6 +60,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.stop();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
+  }
+
+  setUpVolume(eventObj: Event) {
+    const event = eventObj as { target: object };
+    const target = event.target as {value: number};
+    this.audioService.setUpVolume(target.value );
   }
 
   playStream(url: string) {
