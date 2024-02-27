@@ -25,22 +25,22 @@
     <section class="footer__bottom">
       <div class="footer__partners">
         <div class="partners__title">{{ 'footer.partners' | translate }}</div>
-        <div class="partners__items">
-          <div class="partners__item">
-            <a href="{{ untamLink }}" target="_blank">
-              <img src="assets/img/partners/partner-1.png" alt="Науково-дослідна лабораторія етномузикології НМАУ" class="partners__logo" />
+        <div class="partners__items" *ngIf="footerPartners$ | async as partners">
+          <div class="partners__item" *ngFor="let partner of partners">
+            <a href="{{ partner.link }}" target="_blank">
+              <img [src]="partner.photo" alt="" class="partners__logo" />
             </a>
           </div>
-          <div class="partners__item">
-            <a href="{{ lnmaLink }}" target="_blank">
-              <img src="assets/img/partners/partner-2.png" alt="Лабораторія музичної етнології ЛНМА" class="partners__logo" />
-            </a>
-          </div>
-          <div class="partners__item">
-            <a href="{{ bazaLink }}" target="_blank">
-              <img src="assets/img/partners/partner-3.png" alt="Baza Trainee Ukraine" class="partners__logo" />
-            </a>
-          </div>
+<!--          <div class="partners__item">-->
+<!--            <a href="{{ lnmaLink }}" target="_blank">-->
+<!--              <img src="assets/img/partners/partner-2.png" alt="Лабораторія музичної етнології ЛНМА" class="partners__logo" />-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="partners__item">-->
+<!--            <a href="{{ bazaLink }}" target="_blank">-->
+<!--              <img src="assets/img/partners/partner-3.png" alt="Baza Trainee Ukraine" class="partners__logo" />-->
+<!--            </a>-->
+<!--          </div>-->
         </div>
       </div>
       <div class="footer__rules">

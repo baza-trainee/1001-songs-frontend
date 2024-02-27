@@ -10,8 +10,16 @@ export interface Project {
     recording: string[];
 }
 export interface ProjectData {
-    id: number;
-    title: string;
-    short_description: string;
-    preview_photo: string;
+  items: ProjectItem[];
+  total: number;
+  page: number;
+  size: number;
+  pages: number;
+}
+
+export interface ProjectItem {
+  id: number;
+  title: string;
+  short_description: string;
+  preview_photo: string;
 }
