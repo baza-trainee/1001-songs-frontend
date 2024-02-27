@@ -14,7 +14,7 @@ import { ResetSong } from '../../../../../store/player/player.actions';
 import { BreadcrumbsComponent } from '../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import {VideoPlayerComponent} from "../../../../../shared/shared-components/video-player/video-player.component";
+import { VideoPlayerComponent } from '../../../../../shared/shared-components/video-player/video-player.component';
 
 @Component({
   selector: 'app-song-map',
@@ -56,6 +56,7 @@ export class SongMapComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const songId = this.route.snapshot.params['id'];
     this.playerService.fetchSongById(songId).subscribe((response) => {
+      console.log(response);
       const data = response as Song;
       this.song = data;
       this.song$.next(this.playerService.getPlayerSong(data));

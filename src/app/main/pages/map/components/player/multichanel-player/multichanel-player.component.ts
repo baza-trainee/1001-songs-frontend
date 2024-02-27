@@ -25,7 +25,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   isPreloader = false;
 
-  isVisible: boolean = false;
+  isVisible: boolean = true;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
@@ -40,10 +40,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    //this.isVisible = true;
     this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
       this.openFile(song);
-      this.isVisible = true;
     });
 
     this.state$
