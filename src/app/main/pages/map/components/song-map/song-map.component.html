@@ -14,28 +14,7 @@
           <div class="song-page__text-content" *ngIf="!song.song_text">No text available</div>
         </div>
         <div class="song-page__carousel">
-          <div class="song-page__carousel-box">
-            <div class="song-page__carousel-img" *ngFor="let photo of song.photos; let i = index" [ngClass]="{ active: i === slideIndex }">
-              <img [src]="photo" [alt]="'Фото ' + i" />
-            </div>
-          </div>
-          <div class="song-page__carousel-info">
-            <p>
-              <span>{{ slideIndex + 1 }}/{{ song.photos.length }}</span> {{ 'map.song-page.photos' | translate }}
-            </p>
-          </div>
-          <div class="song-page__carousel-nav">
-            <button class="song-page__carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
-              <svg width="40" height="40" viewBox="0 0 48 48">
-                <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
-              </svg>
-            </button>
-            <button class="song-page__carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === song.photos.length - 1 }">
-              <svg width="40" height="40" viewBox="0 0 48 48">
-                <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
-              </svg>
-            </button>
-          </div>
+          <app-fade-in-carousel [photos]="song.photos" [classInfo]="'column'"></app-fade-in-carousel>
         </div>
       </div>
       <div class="song-page__player">

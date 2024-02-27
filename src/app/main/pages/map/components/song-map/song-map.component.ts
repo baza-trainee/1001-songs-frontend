@@ -16,6 +16,9 @@ import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 import {VideoPlayerComponent} from "../../../../../shared/shared-components/video-player/video-player.component";
 import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interface";
+import {
+  FadeInCarouselComponent
+} from "../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
 
 @Component({
   selector: 'app-song-map',
@@ -29,7 +32,8 @@ import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interfac
     MultichanelPlayerComponent,
     BreadcrumbsComponent,
     FormatTextPipe,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    FadeInCarouselComponent
   ],
   templateUrl: './song-map.component.html',
   styleUrls: ['./song-map.component.scss']
@@ -38,7 +42,6 @@ export class SongMapComponent implements OnInit, OnDestroy {
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
 
-  staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   song$: BehaviorSubject<PlayerSong> = new BehaviorSubject<PlayerSong>({} as PlayerSong);
   song: Song = {} as Song;
   haveChannels = false;
@@ -56,14 +59,14 @@ export class SongMapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const songId = this.route.snapshot.params['id'];
-    this.playerService.fetchSongById(songId).subscribe((response) => {
+    this.subscriptions.push(this.playerService.fetchSongById(songId).subscribe((response) => {
       const data = response as Song;
       this.song = data;
       this.song$.next(this.playerService.getPlayerSong(data));
       if (data.multichannels.length > 0) {
         this.haveChannels = true;
       }
-    });
+    }));
   }
 
   nextSlide() {

@@ -2,7 +2,7 @@
 <!--  <div class="image-wrapper" [ngStyle]="{'transform': 'translateX(' + -currentImageIndex * (imageWidth + 24)+ 'px)'}">-->
   <div #sliderContainer class="image-wrapper" [ngStyle]="{'transform': 'translateX(' + getTranslateX() + 'px)'}">
     <div *ngFor="let image of images; let i = index">
-      <div class="image-container" (click)="openImagePopup(image)" (keydown.enter)="openImagePopup(image)" tabindex="0">
+      <div class="image-container" (click)="openImagePopup(images, i)" (keydown.enter)="openImagePopup(images, i)" tabindex="0">
         <img [src]="image" alt="Image {{ i }}" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
       </div>
     </div>

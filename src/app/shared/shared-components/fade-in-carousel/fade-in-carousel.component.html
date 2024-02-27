@@ -1,5 +1,5 @@
 <div class="carousel">
-  <div class="carousel-box" #box [ngStyle]="{'height': heightBox + 'px'}">
+  <div class="carousel-box" #box [style.height.px]="heightImage ? heightImage : heightBox">
     <div class="carousel-img"
          *ngFor="let photo of photos; let i = index"
          [ngClass]="{ active: i === slideIndex }"
@@ -14,7 +14,7 @@
     </div>
   </div>
 </div>
-<div class="carousel-info">
+<div class="carousel-info {{classInfo}}">
   <p>
     <span>{{ slideIndex + 1 }}/{{ photos.length }}</span>
     <span> {{ title }}</span>

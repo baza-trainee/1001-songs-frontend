@@ -60,9 +60,9 @@ export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sliderWidth = this.sliderContainer.nativeElement.offsetWidth;
   }
 
-  openImagePopup(image: string): void {
+  openImagePopup(images: string[], index: number) {
     this.dialog.open(ImagePopupComponent, {
-      data: { imageSrc: image }
+      data: { images: images, index: index }
     });
   }
 

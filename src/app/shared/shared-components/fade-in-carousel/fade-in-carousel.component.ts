@@ -17,6 +17,8 @@ import {
 export class FadeInCarouselComponent implements OnInit, OnDestroy {
   @Input({required: true}) photos!: string[];
   @Input() title: string = 'Фото';
+  @Input() classInfo: string = '';
+  @Input() heightImage!: number;
 
   @ViewChild('box') boxCarousel!: ElementRef<HTMLDivElement>;
 
@@ -48,9 +50,9 @@ export class FadeInCarouselComponent implements OnInit, OnDestroy {
     this.heightBox = this.boxCarousel.nativeElement.offsetWidth * 0.61;
   }
 
-  openImagePopup(image: string[], i: number): void {
+  openImagePopup(images: string[], index: number) {
     this.dialog.open(ImagePopupComponent, {
-      data: { imageSrc: image, index: i }
+      data: { images: images, index: index }
     });
   }
 
