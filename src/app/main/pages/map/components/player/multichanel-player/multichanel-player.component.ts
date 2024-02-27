@@ -48,7 +48,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
     this.state$
       .pipe(takeUntil(this.destroy$))
-      .pipe(skip(1))
+      // .pipe(skip(1))
       .subscribe((states) => {
         const loading = states.filter((state) => !state.playing);
         if (!loading.length) {

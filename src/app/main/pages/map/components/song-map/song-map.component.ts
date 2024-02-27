@@ -35,7 +35,7 @@ import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interfac
   styleUrls: ['./song-map.component.scss']
 })
 export class SongMapComponent implements OnInit, OnDestroy {
-  @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
+  // @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
 
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
