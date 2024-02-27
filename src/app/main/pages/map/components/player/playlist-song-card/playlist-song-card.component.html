@@ -68,7 +68,7 @@
     <div class="detail__info">
       <div class="info__date__record">
         <div class="date__record__title">{{ 'map.player.songs-list.song-card.song-card-detail.record-date' | translate }}</div>
-        <div class="date__record__date">01.06.2020</div>
+        <div class="date__record__date">{{ song.recording_date | date: 'dd.MM.yyyy' }}</div>
       </div>
 
       <div class="info__collectors">

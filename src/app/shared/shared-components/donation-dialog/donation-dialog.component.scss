@@ -4,7 +4,9 @@
 $close-btn-size: 20px;
 
 /* stylelint-disable */
-
+.copy {
+  cursor: copy;
+}
 ::ng-deep .custom-modalbox {
   border-radius: 16px;
   overflow-y: auto;
