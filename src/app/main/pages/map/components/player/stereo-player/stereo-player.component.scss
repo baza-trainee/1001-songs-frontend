@@ -45,6 +45,14 @@
     align-items: center;
     justify-content: space-between;
 
+    .volume {
+      transform: rotate(-90deg);
+      input[type='range'] {
+        accent-color: #192a56;
+        width: 60px;
+      }
+    }
+
     .btn__player {
       width: 31px;
       height: 31px;

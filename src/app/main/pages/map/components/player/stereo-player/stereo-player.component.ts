@@ -7,11 +7,13 @@ import { PlayerSong } from 'src/app/shared/interfaces/song.interface';
 import { Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stereo-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatSliderModule],
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
@@ -30,6 +32,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   isPreloader = false;
 
   destroy$: Subject<void> = new Subject<void>();
+  // volume = new FormControl<number>(0);
 
   constructor(
     private audioService: AudioService,
@@ -60,6 +63,11 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.stop();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
+  }
+
+  setUpVolume(eventObj: any) {
+    const volumeValue = eventObj.target.value;
+    this.audioService.setUpVolume(volumeValue )
   }
 
   playStream(url: string) {
