@@ -30,6 +30,15 @@
   }
 }
 
+.volume {
+  transform: rotate(-90deg);
+  
+  input[type='range'] {
+    accent-color: #192a56;
+    width: 60px;
+  }
+}
+
 .player__container {
   width: 100%;
   padding: 17px 16px;
@@ -38,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
 
   .player__actions {
     width: 227px;

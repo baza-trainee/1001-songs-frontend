@@ -25,7 +25,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   isPreloader = false;
 
-  isVisible: boolean = false;
+  isVisible: boolean = true;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   state$: Observable<StreamState[]>;
 
@@ -40,10 +40,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    //this.isVisible = true;
     this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
       this.openFile(song);
-      this.isVisible = true;
     });
 
     this.state$
@@ -88,6 +88,12 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  setUpVolume(eventObj: Event) {
+    const event = eventObj as { target: object };
+    const target = event.target as {value: number};
+    this.multiAudioService.setUpVolume(target.value )
+  }
+
   playStream(urls: string[]) {
     this.multiAudioService.playStreamAll(urls).subscribe();
   }
@@ -96,7 +102,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
-    //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
     this.playStream(file.channels);
   }
 
@@ -137,7 +142,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     if (event && event.target && event.target) {
       const target = event.target as HTMLInputElement;
       const sliderValue: number = target.value as unknown as number;
-      this.audioService.seekTo(sliderValue);
+      this.multiAudioService.seekTo(sliderValue);
     }
   }
 }
