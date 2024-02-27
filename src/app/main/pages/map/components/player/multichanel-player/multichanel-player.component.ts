@@ -88,9 +88,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  setUpVolume(eventObj: any) {
-    const volumeValue = eventObj.target.value;
-    this.multiAudioService.setUpVolume(volumeValue )
+  setUpVolume(eventObj: Event) {
+    const event = eventObj as { target: object };
+    const target = event.target as {value: number};
+    this.multiAudioService.setUpVolume(target.value )
   }
 
   playStream(urls: string[]) {
@@ -101,7 +102,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
-    //const urls = file.media.multichannel_audio.map((url) => this.cloudService.preparateGoogleDriveFileUrl(url));
     this.playStream(file.channels);
   }
 
