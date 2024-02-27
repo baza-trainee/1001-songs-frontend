@@ -89,14 +89,13 @@ footer.footer {
            height: 64px;
            margin-right: 32px;
 
-           &:last-child {
-             margin-right: 0;
+           img {
+             max-width: 100%;
+             object-fit: contain;
            }
 
-           .partners__item {
-             img {
-               max-width: 100%;
-             }
+           &:last-child {
+             margin-right: 0;
            }
          }
         }

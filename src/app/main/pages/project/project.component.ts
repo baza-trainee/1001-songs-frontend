@@ -44,7 +44,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   private fetchSliderItems(id: string): void {
     this.subscriptions.push(this.projectService.fetchProjects({project_exclude: id}).subscribe(projects => {
-      this.projectsSlides = projects.map(project => this.projectService.convertToSlide(project));
+      this.projectsSlides = projects.items.map(project => this.projectService.convertToSlide(project));
     }));
 
   }

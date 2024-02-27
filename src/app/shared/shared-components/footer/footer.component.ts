@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
 import { Observable } from 'rxjs';
-import { FooterData } from '../../interfaces/footer';
+import {FooterData, FooterPartners} from '../../interfaces/footer';
 import { FooterService } from '../../services/footer/footer.service';
 
 @Component({
@@ -19,6 +19,7 @@ import { FooterService } from '../../services/footer/footer.service';
 export class FooterComponent implements OnInit {
   public navLinks = navLinksHeader;
   public footerInfo$!: Observable<FooterData>;
+  public footerPartners$!: Observable<FooterPartners[]>;
 
   untamLink = 'https://knmau.com.ua/nauka/laboratoriya-etnomuzikologiyi/';
   lnmaLink = 'https://lnma.edu.ua/kafedry/kafedra-muzychnoji-folklorystyky-ta-pndlme/';
@@ -31,6 +32,7 @@ export class FooterComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.footerInfo$ = this.footerService.fetchFooterInfo();
+    this.footerPartners$ = this.footerService.fetchFooterPartners();
   }
 
   openDonationDialog() {
