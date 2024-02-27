@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {catchError, map, Observable, of, switchMap} from 'rxjs';
+import {catchError, map, Observable, of, switchMap, throwError} from 'rxjs';
 import {
   ExpeditionArticle,
   ExpeditionListResponse
@@ -46,8 +46,18 @@ export class ExpeditionsService {
     fetchExpeditions(params: { search?: string; id?: number; page?: number; size?: number, expedition_exclude?: string}) : Observable<ExpeditionListResponse> {
         return this.http.get<ExpeditionListResponse>(`${API_URL}${StatEndpoints.expeditions.expeditions}`, {params}).pipe(
           catchError( error => {
-            console.error(error);
-            return of({} as ExpeditionListResponse);
+            if (error.status === 404) {
+              console.error('За вашим запитом нічого не знайденно');
+              return of({
+                items: [],
+                total: 0,
+                page: 0,
+                size: 0,
+                pages: 0,
+              });
+            } else {
+              return throwError(error);
+            }
           })
         );
     }

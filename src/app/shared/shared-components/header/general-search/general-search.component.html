@@ -20,6 +20,11 @@
             <span>{{ option.title.length > 50 ? option.title.substring(0, 50) + '...' : option.title }}</span>
           </div>
         </mat-option>
+        <mat-option *ngIf="!options.length && search.value">
+          <div class="search__options-box">
+            <span>За вашим запитом нічого не знайдено</span>
+          </div>
+        </mat-option>
       </div>
     </mat-autocomplete>
   </mat-form-field>

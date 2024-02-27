@@ -69,14 +69,6 @@ export class SongMapComponent implements OnInit, OnDestroy {
     }));
   }
 
-  nextSlide() {
-    if (this.slideIndex < this.song.photos.length - 1) this.slideIndex++;
-  }
-
-  prevSlide() {
-    if (this.slideIndex !== 0) this.slideIndex--;
-  }
-
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());

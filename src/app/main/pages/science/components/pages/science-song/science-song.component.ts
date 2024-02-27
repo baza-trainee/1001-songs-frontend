@@ -83,14 +83,6 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     return breadcrumbs;
   }
 
-  nextSlide() {
-    if (this.slideIndex < this.photos.length - 1) this.slideIndex++;
-  }
-
-  prevSlide() {
-    if (this.slideIndex !== 0) this.slideIndex--;
-  }
-
   ngOnDestroy(): void {
     this.store.dispatch(new ResetSong());
     this.destroy$.next(void 0);
