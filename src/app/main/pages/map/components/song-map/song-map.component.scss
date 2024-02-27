@@ -53,68 +53,6 @@
 
     &__carousel {
       width: 50%;
-
-      &-box {
-        height: 334px;
-        position: relative;
-        margin-bottom: 24px;
-      }
-
-      &-nav {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-      }
-
-      &-img {
-        transition: opacity 0.5s;
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        &.active {
-          opacity: 1;
-        }
-      }
-
-      &-info {
-        @include body-desktop;
-
-        color: var(--text-color-popup-menu);
-        text-align: center;
-        margin-bottom: 16px;
-
-        span {
-          color: var(--text-color-primary);
-        }
-      }
-
-      &-prev {
-        svg {
-          transform: rotate(180deg);
-        }
-      }
-
-      &-prev,
-      &-next {
-        background-color: transparent;
-        border: none;
-
-        &.disabled {
-          cursor: not-allowed;
-          opacity: 0.5;
-        }
-      }
     }
 
     &__player {
@@ -223,16 +161,6 @@
 
       &__video {
         height: 179px;
-      }
-
-      &__carousel {
-        &-box {
-          height: 168px;
-        }
-
-        &-img {
-          height: 168px;
-        }
       }
     }
   }
