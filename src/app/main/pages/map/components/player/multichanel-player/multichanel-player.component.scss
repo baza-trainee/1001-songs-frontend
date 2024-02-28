@@ -189,7 +189,7 @@
 }
 
 @media (max-width: 1439px) {
-  .player__container {
+  .player {
 
     .player__actions {
       width: 250px;
@@ -253,7 +253,7 @@
 }
 
 @media (max-width: 1023px) {
-  .player__container {
+  .player {
     display: block;
 
     .player__actions {
@@ -268,7 +268,7 @@
 }
 
 @media (max-width: 767px) {
-  .player__container {
+  .player {
     margin: 0 auto;
     padding: 16px;
 

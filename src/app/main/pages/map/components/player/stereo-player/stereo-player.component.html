@@ -1,6 +1,6 @@
 <div *ngIf="state$ | async as state">
   <div
-    class="player__container"
+    class="player"
     *ngIf="showStereoPlayer"
     [class.inactive]="!state.canplay"
     [class.loading]="isPreloader"
