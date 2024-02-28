@@ -195,7 +195,16 @@ export class MultiAudioService {
     });
   }
 
-  private multichannelStateSubject: BehaviorSubject<StreamState[]> = new BehaviorSubject<StreamState[]>([]);
+  private multichannelStateSubject: BehaviorSubject<StreamState[]> = new BehaviorSubject<StreamState[]>([{
+    playing: false,
+    muted: false,
+    readableCurrentTime: '',
+    readableDuration: '',
+    duration: 0,
+    currentTime: 0,
+    canplay: false,
+    error: true
+  }]);
 
   getMultichannelState(): Observable<StreamState[]> {
     return this.multichannelStateSubject.asObservable();

@@ -31,6 +31,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<void> = new Subject<void>();
 
+  // isPlaying = false;
+
   constructor(
     private multiAudioService: MultiAudioService,
     private audioService: AudioService,
@@ -40,7 +42,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    //this.isVisible = true;
+    this.isVisible = true;
     this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
       this.multiAudioService.stopAll();
       this.openFile(song);
@@ -51,6 +53,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       // .pipe(skip(1))
       .subscribe((states) => {
         const loading = states.filter((state) => !state.playing);
+        // console.log(states)
         if (!loading.length) {
           this.isPreloader = false;
         }
@@ -58,6 +61,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         if (canPlay.length) {
           this.synchronizeTracs();
         }
+        const nonPlayingTracks = states.filter((state) => !state.playing);
+       
       });
 
     this.state$
@@ -90,8 +95,8 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   setUpVolume(eventObj: Event) {
     const event = eventObj as { target: object };
-    const target = event.target as {value: number};
-    this.multiAudioService.setUpVolume(target.value )
+    const target = event.target as { value: number };
+    this.multiAudioService.setUpVolume(target.value);
   }
 
   playStream(urls: string[]) {
