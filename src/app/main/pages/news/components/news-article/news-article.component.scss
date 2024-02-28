@@ -38,10 +38,6 @@
     padding-bottom: 32px;
   }
 
-  &__slider {
-    background-color: var(--bg-color-screen);
-  }
-
   @include body-desktop;
 
 
@@ -119,7 +115,6 @@
   }
 
   .article {
-
     &__slider {
       display: block;
 

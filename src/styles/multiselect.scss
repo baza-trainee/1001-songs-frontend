@@ -119,8 +119,7 @@
     }
   }
 }
-
-// eslint-disable-next-line no-use-before-define
+/* stylelint-disable selector-class-pattern */
 .mat-content.mat-content-hide-toggle {
   margin: 0 !important;
 }
@@ -129,7 +128,6 @@
   gap: 16px;
 }
 
-// eslint-disable-next-line no-use-before-define
 .mat-expansion-panel-header.mat-expanded {
   height: auto !important;
 }
@@ -176,7 +174,6 @@ app-news {
   }
 }
 
-/* stylelint-disable selector-class-pattern */
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: transparent !important;
 }

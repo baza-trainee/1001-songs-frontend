@@ -177,6 +177,7 @@
     &-link {
       @include link-desktop;
       @include text-button;
+
       font-size: 14px;
       line-height: 18px;
       display: flex;
@@ -264,6 +265,7 @@
 
   &__location {
     @include caption-desktop($font-size: 12px, $line-height: 14px, $color: var(----color-input));
+
     margin: 0;
     opacity: .8;
     white-space: nowrap;
