@@ -61,7 +61,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         if (canPlay.length) {
           this.synchronizeTracs();
         }
-        const nonPlayingTracks = states.filter((state) => !state.playing);
+        // const nonPlayingTracks = states.filter((state) => !state.playing);
        
       });
 
