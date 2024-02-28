@@ -8,9 +8,9 @@
   </div>
   <h1 class="donation__title">{{ donat.organization_name }}</h1>
   <div class="donation__credentials">
-    <div>ЄДРПОУ:{{ donat.edrpou }}.</div>
-    <div>{{ donat.iban }}.</div>
-    <div>{{ donat.bank }}</div>
+    <div class="copy" tabindex="0" (keydown)="clipboard.copy(donat.edrpou.toString())" (click)="clipboard.copy(donat.edrpou.toString())">ЄДРПОУ: {{ donat.edrpou }}</div>
+    <div class="copy" tabindex="0" (keydown)="clipboard.copy(donat.iban.toString())" (click)="clipboard.copy(donat.iban.toString())">{{ donat.iban }}</div>
+    <div class="copy" tabindex="0" (keydown)="clipboard.copy(donat.bank.toString())" (click)="clipboard.copy(donat.bank.toString())">{{ donat.bank }}</div>
   </div>
 
   <div class="donation__purpose">
