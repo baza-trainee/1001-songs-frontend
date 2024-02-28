@@ -8,11 +8,12 @@ import { Store } from '@ngxs/store';
 import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-stereo-player',
   standalone: true,
-  imports: [CommonModule, MatSliderModule],
+  imports: [CommonModule, MatSliderModule, MatIconModule],
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
