@@ -1,12 +1,12 @@
-<div class="search">
+<div *ngIf="!isPopup" class="search">
   <mat-form-field class="search__box" [ngClass]="{'show-box': showInputSearch}">
     <input
-      (keydown.enter)="routerExpeditions($event)"
+      (keydown.enter)="routerExpeditions()"
       #searchField class="search__input"
       matInput
       [formControl]="search"
       [matAutocomplete]="auto"
-      placeholder="Експедиції"
+      placeholder="Знайти експедицію"
     />
     <mat-autocomplete
       #auto="matAutocomplete"
@@ -31,4 +31,48 @@
   <svg class="search-img" (click)="activateSearch()">
     <use xlink:href="./assets/sprites.svg#headerSearch"></use>
   </svg>
+</div>
+
+<!--search in popup -->
+<div *ngIf="isPopup" class="search-popup">
+  <mat-form-field class="search-popup__box">
+    <label class="search-popup__label" for="searchField">
+      <div>
+        <svg class="search-popup-img" (click)="activateSearch()">
+          <use xlink:href="./assets/sprites.svg#headerSearch"></use>
+        </svg>
+        <input
+          id="searchField" class="search-popup__input"
+          matInput
+          [formControl]="search"
+          [matAutocomplete]="auto"
+          placeholder="Знайти експедицію"
+        />
+      </div>
+      <button class="search-popup__submit" (click)="routerExpeditions()">
+        <svg class="search-popup__arrow" width="24" height="24">
+          <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+        </svg>
+      </button>
+    </label>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="getExpeditionTitle"
+      (optionSelected)="onExpeditionSelected($event.option.value)"
+    >
+      <div class="search-popup__options options">
+        <mat-option *ngFor="let option of options" [value]="option">
+          <div class="search-popup__options-box">
+            <img class="search-popup__options-img" [src]="option.img" [alt]="option.title">
+            <span>{{ option.title.length > 50 ? option.title.substring(0, 50) + '...' : option.title }}</span>
+          </div>
+        </mat-option>
+        <mat-option *ngIf="!options.length && search.value">
+          <div class="search-popup__options-box">
+            <span>За вашим запитом нічого не знайдено</span>
+          </div>
+        </mat-option>
+      </div>
+    </mat-autocomplete>
+  </mat-form-field>
 </div>

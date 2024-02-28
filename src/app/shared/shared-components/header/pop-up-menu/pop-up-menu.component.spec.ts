@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { PopUpMenuComponent } from './pop-up-menu.component';
 import { ActivatedRoute } from '@angular/router';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('PopUpMenuComponent', () => {
   let component: PopUpMenuComponent;
@@ -10,7 +12,7 @@ describe('PopUpMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [TranslateModule.forChild(), PopUpMenuComponent],
+    imports: [TranslateModule.forChild(), PopUpMenuComponent, HttpClientTestingModule, BrowserAnimationsModule],
     providers: [TranslateService, TranslateStore,{
       provide: ActivatedRoute,
       useValue: {
@@ -30,7 +32,7 @@ describe('PopUpMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    it('should set lang to true if currentLang is "en"', () => {
+  it('should set lang to true if currentLang is "en"', () => {
     spyOnProperty(translateService, 'currentLang', 'get').and.returnValue('en');
 
     component.checkLang();

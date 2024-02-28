@@ -1,9 +1,9 @@
 import {
   Component,
-  ElementRef,
-  HostListener,
+  ElementRef, EventEmitter,
+  HostListener, Input,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   ViewChild
 } from '@angular/core';
 import { CommonModule, SlicePipe } from '@angular/common';
@@ -24,6 +24,8 @@ import { Router } from '@angular/router';
 
 export class GeneralSearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchField') searchField!: ElementRef;
+  @Input() isPopup: boolean = false;
+  @Output() togglePopUp = new EventEmitter<boolean>;
   search = new FormControl('search');
   options: { title: string; id: string; img: string}[] = [];
   showInputSearch = false;
@@ -69,6 +71,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
   }
 
   onExpeditionSelected(ev:{id: number}) {
+    if (this.isPopup) this.togglePopUp.emit(true);
     this.search.setValue('');
     this.showInputSearch = false;
     this.router.navigateByUrl(`/expeditions/${ev.id}`);
@@ -83,13 +86,13 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
       this.showInputSearch = !this.showInputSearch;
     })
   }
-  routerExpeditions(event: Event) {
-    const keyboardEvent = event as KeyboardEvent;
-    if (keyboardEvent.key === 'Enter') {
-      const searchValue = (event.target as HTMLInputElement).value;
-      this.search.setValue('');
-      this.showInputSearch = false;
-      this.router.navigateByUrl(`/expeditions?search=${searchValue}`);
-    }
+
+  routerExpeditions() {
+    if (this.isPopup) this.togglePopUp.emit(true);
+    const searchValue = this.search.value;
+    this.search.setValue('');
+    this.showInputSearch = false;
+    this.router.navigateByUrl(`/expeditions?search=${searchValue}`);
+
   }
 }
