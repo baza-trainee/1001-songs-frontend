@@ -9,14 +9,17 @@
   </div>
   <div class="main">
     <div class="action">
-      <ul class="lang">
-        <li class="lang__item" [ngClass]="{ selected: !lang }" (click)="selectLang(true)" (keypress)="selectLang(true)" tabindex="12">
-          Укр
-        </li>
-        <li class="lang__item" [ngClass]="{ selected: lang }" (click)="selectLang(false)" (keydown)="selectLang(false)" tabindex="13">
-          Eng
-        </li>
-      </ul>
+      <div class="actions__search mobile">
+        <app-general-search [isPopup]="true" (togglePopUp)="togglePopUp()"></app-general-search>
+      </div>
+<!--      <ul class="lang">-->
+<!--        <li class="lang__item" [ngClass]="{ selected: !lang }" (click)="selectLang(true)" (keypress)="selectLang(true)" tabindex="12">-->
+<!--          Укр-->
+<!--        </li>-->
+<!--        <li class="lang__item" [ngClass]="{ selected: lang }" (click)="selectLang(false)" (keydown)="selectLang(false)" tabindex="13">-->
+<!--          Eng-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
     <div class="nav">
       <div class="nav__menu">

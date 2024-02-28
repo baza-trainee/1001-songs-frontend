@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { navLinksHeader } from 'src/app/shared/enums/navLinks.enum';
 import {ShareService} from "../../../services/share/share.service";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {GeneralSearchComponent} from "../general-search/general-search.component";
 
 @Component({
   selector: 'app-pop-up-menu',
   templateUrl: './pop-up-menu.component.html',
   styleUrls: ['./pop-up-menu.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, TranslateModule, CommonModule, MatSnackBarModule]
+    imports: [RouterLink, RouterLinkActive, TranslateModule ,CommonModule, MatSnackBarModule, GeneralSearchComponent]
 })
 export class PopUpMenuComponent implements OnInit {
   @Output() isPopupOpenChange = new EventEmitter<boolean>();
@@ -20,6 +21,7 @@ export class PopUpMenuComponent implements OnInit {
   public lang!: boolean;
   public navLinks = navLinksHeader;
   public isPopupOpen: boolean = true;
+
   constructor(
     private _translate: TranslateService,
     private shareService: ShareService,
@@ -45,6 +47,7 @@ export class PopUpMenuComponent implements OnInit {
     this.isPopupOpen = !this.isPopupOpen;
     this.isPopupOpenChange.emit(this.isPopupOpen);
   }
+
   shareOnFacebook(): void {
     this.shareService.shareOnFacebook(window.location.href);
   }

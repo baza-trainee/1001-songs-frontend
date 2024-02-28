@@ -48,6 +48,11 @@
 
     .action {
       margin-bottom: 46px;
+
+      &__search {
+        width: 100%;
+        position: relative;
+      }
     }
 
     .lang {
