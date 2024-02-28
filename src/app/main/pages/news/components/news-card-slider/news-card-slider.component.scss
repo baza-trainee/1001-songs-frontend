@@ -1,0 +1,91 @@
+@import '../../../../../../typography/typography';
+@import '../../../../../../typography/buttons';
+
+.news {
+  width: 100%;
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__all {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    img {
+      margin: 5px 0;
+      border-radius: 12px;
+    }
+
+    &-item {
+      position: relative;
+      cursor: pointer;
+      padding: 12px 0;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--text-color-primary);
+      transition: all .3s ease;
+
+      &:after {
+        content: "";
+        height: 1px;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        background-color: var(--text-color-primary);
+        transition: all .3s ease;
+      }
+
+      // eslint-disable-next-line no-use-before-define
+      &:hover .news__all-link {
+        transform: rotate(45deg);
+      }
+
+      &:hover:after {
+        left: calc(100% - 2px);
+      }
+    }
+
+    &-link {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      right: 0;
+      top: 16px;
+      background-image: url('../../../../../../assets/img/home/icons/arrow_outward.svg');
+      transition: all .5s ease;
+    }
+
+    &-title {
+      margin: 5px 0 8px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 23px;
+    }
+  }
+
+  &__router {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+
+
+    &-link {
+      @include link-desktop($font_size: 16px, $line-height: 24px, $font-weight: $font-weight-semibolt);
+      @include text-button;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    &-arrow {
+      transform: rotate(45deg);
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { Subscription, switchMap} from 'rxjs';
 
-import { ExpeditionArticle } from '../../../../shared/interfaces/expedition.interface';
+import {Expedition, ExpeditionArticle} from '../../../../shared/interfaces/expedition.interface';
 import { VideoPlayerComponent } from '../../../../shared/shared-components/video-player/video-player.component';
 import { SliderComponent } from 'src/app/shared/shared-components/slider/slider.component';
 import { Slide } from 'src/app/shared/interfaces/slide.interface';
@@ -18,6 +18,7 @@ import {
 import { SliderService } from "../../../../shared/services/slider/slider.service";
 import {ContentTextComponent} from "../../../../shared/shared-components/content-text/content-text.component";
 import {Breadcrumbs} from "../../../../shared/interfaces/breadcrumbs.interface";
+import {ExpeditionCardComponent} from "../expedition-card/expedition-card.component";
 
 @Component({
   selector: 'app-expedition-article',
@@ -32,7 +33,8 @@ import {Breadcrumbs} from "../../../../shared/interfaces/breadcrumbs.interface";
     ShareComponent,
     SafeHtmlPipe,
     FadeInCarouselComponent,
-    ContentTextComponent
+    ContentTextComponent,
+    ExpeditionCardComponent
   ],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
@@ -41,13 +43,15 @@ import {Breadcrumbs} from "../../../../shared/interfaces/breadcrumbs.interface";
 export class ExpeditionArticleComponent implements OnInit, OnDestroy {
     public expeditionArticle!: ExpeditionArticle;
     public sliderItems: Slide[] = [];
+    public sliderItemsDesktop!: Expedition[];
     private readonly subscriptions: Subscription[] = [];
     breadcrumbs: Breadcrumbs[] = [{path: 'expeditions', name: 'Експедиції'}];
 
     constructor(
         private route: ActivatedRoute,
         private expeditionService: ExpeditionsService,
-        private sliderService: SliderService
+        private sliderService: SliderService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -63,14 +67,19 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
                     return this.expeditionService.fetchData(id)
                 }))
                 .subscribe(({content, sliderItem}) => {
-                    this.expeditionArticle = content;
-                    this.sliderItems = this.sliderService.sliderItemFromExpedition(sliderItem.items);
-            })
+                  this.expeditionArticle = content;
+                  this.sliderItemsDesktop = sliderItem.items.slice(0, 4);
+                  this.sliderItems = this.sliderService.sliderItemFromExpedition(sliderItem.items);
+                })
         );
     }
 
-
-    ngOnDestroy(): void {
-        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    navigateTo(id: number) {
+      this.router.navigate([ '/expeditions/' + id]);
     }
+
+
+  ngOnDestroy(): void {
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 }

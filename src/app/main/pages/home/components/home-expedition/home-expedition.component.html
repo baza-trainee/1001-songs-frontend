@@ -18,10 +18,10 @@
         >
           <div class="expeditions__all-img">
             <img [src]="item.preview_photo" alt="{{ item.title }}">
+            <span class="expeditions__all-date">{{ item.expedition_date | date: 'dd.MM.yyyy' }}</span>
             <span class="expeditions__all-play"></span>
           </div>
           <div class="expeditions__all-content">
-            <p class="expeditions__all-date">{{ item.expedition_date | date: 'dd.MM.yyyy' }}</p>
             <h4 class="expeditions__all-title">{{ item.title }}</h4>
 <!--            <p class="expeditions__all-description">{{ item.short_description }}</p>-->
             <p class="expeditions__all-location">{{ item.location }}</p>

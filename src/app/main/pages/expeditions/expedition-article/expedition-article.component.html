@@ -18,9 +18,34 @@
         </div>
 
       </div>
-
-      <div class="article__content">
-        <app-content-text [content]="expeditionArticle.content"></app-content-text>
+      <div class="article__flex">
+        <div class="article__content">
+          <app-content-text [content]="expeditionArticle.content"></app-content-text>
+        </div>
+        <div class="article__slider-desktop" *ngIf="sliderItemsDesktop.length">
+          <div class="article__sticky" >
+            <div *ngFor="let item of sliderItemsDesktop">
+              <div class="event">
+                <img [src]="item.preview_photo" width="400" height="270" alt="photo">
+                <span class="event__date">{{ item.expedition_date }}</span>
+                <div class="event__container" style="cursor: pointer">
+                  <p class="event__name" *ngIf="item.title">{{ item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title }}</p>
+                  <p class="event__location">{{ item.location }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="article__router">
+              <button
+                class="article__router-link"
+                [routerLink]="'/expeditions'"
+              >{{'home.home-expeditions.router-link' | translate}}
+                <svg class="article__router-arrow" width="24" height="24">
+                  <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="article__box article__text">
@@ -55,7 +80,6 @@
       <app-share class="article__box"></app-share>
     </section>
   </div>
-
   <div class="article__slider" *ngIf="sliderItems.length">
     <app-slider [sliderItems]="sliderItems" [title]="'Пов’язані експедиції'" [link]="'/expeditions'"></app-slider>
   </div>

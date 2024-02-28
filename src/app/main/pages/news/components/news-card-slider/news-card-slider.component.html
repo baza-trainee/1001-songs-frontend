@@ -1,0 +1,31 @@
+<div class="news__items" *ngIf="items as news">
+  <div class="news__all">
+    <ng-container *ngFor="let item of news; let i = index">
+      <a
+        class="news__all-item"
+        *ngIf="item"
+        (click)="redirectToNews(item.id)"
+        (keydown)="redirectToNews(item.id)"
+        tabindex="0"
+      >
+        <span class="news__all-link"></span>
+        <p class="news__all-date">{{ item.created_at | date: 'dd.MM.yyyy' }}</p>
+        <img *ngIf="i === 0" class="news__all-img" [src]="item.preview_photo" alt="{{ item.title }}">
+        <h4 class="news__all-title">
+          {{ item.title.length > 55 ? item.title.substring(0, 55) + '...' : item.title }}
+        </h4>
+        <p class="news__all-location">{{ item.location }}</p>
+      </a>
+    </ng-container>
+  </div>
+  <div class="news__router">
+    <button
+      class="news__router-link"
+      [routerLink]="'/news'"
+    >{{'home.home-news.router-link' | translate}}
+      <svg class="news__router-arrow" width="24" height="24">
+        <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+      </svg>
+    </button>
+  </div>
+</div>
