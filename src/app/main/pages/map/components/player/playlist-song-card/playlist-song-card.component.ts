@@ -10,7 +10,6 @@ import { AudioService } from '../../../../../../shared/services/audio/audio.serv
 import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
-import { PlayerService } from 'src/app/shared/services/player/player.service';
 import {VideoPlayerComponent} from "../../../../../../shared/shared-components/video-player/video-player.component";
 
 @Component({
@@ -38,8 +37,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private audioService: AudioService,
-    private playerService: PlayerService
+    private audioService: AudioService
   ) {}
 
   ngOnInit(): void {
