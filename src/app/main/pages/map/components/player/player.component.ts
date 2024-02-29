@@ -12,7 +12,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
@@ -48,7 +48,6 @@ import { PlaylistSongDetailsComponent } from './playlist-song-details/playlist-s
 export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
-  // @Input() stereoOnly: boolean = false;
   distanceToTop!: number;
   heightHeader!: number;
   paddingTop!: number;
@@ -56,14 +55,19 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
+
   songs: PlaylistSong[] = [];
-  private readonly subscription?: Subscription;
 
   @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
   isFixed: boolean = false;
+
   playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
-  orderToAll$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
+
+  orderToCards$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
+  orderDetails$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
+
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     // private _translate: TranslateService,
@@ -71,18 +75,22 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     private store: Store,
     private audioService: AudioService
   ) {
-    this.subscription = this.songs$.subscribe((data) => {
+    this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       if (data) this.songs = data.slice();
     });
   }
   ngOnInit(): void {
-    this.selectedSong$?.subscribe((playlistSong) => {
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
       this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
     });
   }
 
   onPlayPauseClicked(order: Order) {
     this.handleOrders(order);
+  }
+  
+  onDeatailsShow(order: Order) {
+    this.orderDetails$.next({ id: order.id, type: '' });
   }
 
   @HostListener('window:resize')
@@ -116,12 +124,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   private handleOrders(order: Order) {
     if (order.type && order.type === 'play') {
       this.store.dispatch(new SelectSong(order.id));
-      this.orderToAll$.next({ id: order.id, type: 'play' });
+      this.orderToCards$.next({ id: order.id, type: 'play' });
       this.audioService.play();
     }
     if (order.type && order.type === 'pause') {
       this.store.dispatch(new SelectSong(order.id));
-      this.orderToAll$.next({ id: order.id, type: 'pause' });
+      this.orderToCards$.next({ id: order.id, type: 'pause' });
       this.audioService.pause();
     }
   }
@@ -152,8 +160,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 }

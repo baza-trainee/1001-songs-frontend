@@ -40,9 +40,10 @@
             [song]="song"
             [isSelectSong]="selectSong.id === song.id"
             (playPauseClicked)="onPlayPauseClicked($event)"
-            [order$]="orderToAll$"
+            [order$]="orderToCards$"
+            (showDeatails)="onDeatailsShow($event)"
           ></app-playlist-song-card>
-          <app-playlist-song-details></app-playlist-song-details>
+          <app-playlist-song-details  [song]="song" [order$]="orderDetails$"></app-playlist-song-details>
         </div>
       </div>
     </div>

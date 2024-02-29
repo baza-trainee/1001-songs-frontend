@@ -11,7 +11,7 @@ import { AudioService } from '../../../../../../shared/services/audio/audio.serv
 import { FormatTextPipe } from '../../../../../../shared/pipes/format-text.pipe';
 import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
 import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
@@ -48,11 +48,13 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   hasMedia: boolean = true;
   isOpened: boolean = false;
 
+  destroy$: Subject<void> = new Subject<void>();
+
   constructor(private audioService: AudioService) {}
 
   ngOnInit(): void {
     this.hasMedia = this.song.stereo_audio ? true : false;
-    this.order$.subscribe((order: Order) => {
+    this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
       this.handleInputOrder(order);
     });
   }
@@ -69,8 +71,10 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.audioService.pause();
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
-  
+
   playPauseSong() {
     if (this.isPlay) {
       this.playPauseClicked.emit({ id: this.song.id, type: 'pause' });
@@ -81,7 +85,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   toggleVisibility() {
     this.isOpened = !this.isOpened;
-    //this.showDeatails.emit
+    this.showDeatails.emit({ id: this.song.id, type: '' });
   }
 
   handleKeyUpEvent(event: Event) {

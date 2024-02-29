@@ -3,93 +3,23 @@
 @import '../../../../../../../typography/buttons';
 @import '../../../../../../../typography/colors';
 
-.nomedia {
-  font-size: 2em;
-  width: 70px;
-  height: 70px;
-  opacity: 0.8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: not-allowed;
-}
+// .nomedia {
+//   font-size: 2em;
+//   width: 70px;
+//   height: 70px;
+//   opacity: 0.8;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: not-allowed;
+// }
 
-.name__info__name {
-  font-weight: 600;
-}
+// .name__info__name {
+//   font-weight: 600;
+// }
 
-.playlist__song__card {
-  .song__card__header {
-    position: relative;
-    background-color: #fff;
-    z-index: 2;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
-    display: grid;
-    border-radius: 12px;
-    grid-template-columns: 0.25fr 0.9fr 1.91fr 0.65fr 0.2fr;
-    justify-items: start;
-    align-items: center;
-    grid-gap: 22px;
-    box-shadow: 1px 4px 16px 8px rgba(15, 15, 15, 15%);
 
-    @include body-desktop;
-
-    .song__card__img {
-      width: 72px;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      border-radius: 12px;
-      background-image: url('../../../../../../../assets/img/player/play.png');
-    }
-
-    .song__card__song__info {
-      display: grid;
-      grid-template-columns: 0.81fr 1.16fr;
-      min-width: 255px;
-      width: 100%;
-      gap: 16px;
-    }
-
-    .song__card__btn {
-      @include secondary-button;
-
-      color: var(--text-color-primary);
-    }
-
-    .song__card__listen {
-      max-width: 72px;
-      width: 100%;
-      cursor: pointer;
-
-      .btn__listen {
-        border: 0;
-        background: transparent;
-
-        &:disabled {
-          cursor: not-allowed;
-
-          svg {
-            opacity: 0.4;
-          }
-        }
-
-        .listen__mobile {
-          display: none;
-        }
-      }
-    }
-
-    &.active {
-      background-color: var(--bg-color-screen);
-      margin-bottom: 0;
-    }
-  }
-}
-
-.song__card__detail {
+.detail {
   opacity: 0;
   top: -100px;
   position: absolute;

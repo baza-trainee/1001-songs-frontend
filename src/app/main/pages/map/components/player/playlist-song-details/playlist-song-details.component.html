@@ -1,4 +1,4 @@
-<div class="song__card__detail" *ngIf="isShowDetail" [ngClass]="{'opened': isOpened}">
+<div class="detail" *ngIf="isShowDetail" [ngClass]="{'opened': isOpened}">
     <div class="detail__video">
       <app-video-player [srcUrl]="song.video_url"></app-video-player>
     </div>
