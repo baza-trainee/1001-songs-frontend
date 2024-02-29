@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="song__card__song__info">
+    <div class="song__card__song__info" >
       <div class="song__info__genre">{{ song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
         {{ song.city ? song.city : '...' }}
@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <!-- <div class="song__card__detail" *ngIf="isShowDetail" [ngClass]="{'opened': isOpened}">
+  <div class="song__card__detail" *ngIf="isShowDetail" [ngClass]="{'opened': isOpened}">
     <div class="detail__video">
       <app-video-player [srcUrl]="song.video_url"></app-video-player>
     </div>
@@ -102,5 +102,5 @@
       <div class="song__text__content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
       <div class="song__text__content" *ngIf="!song.song_text">Текст пісні відсутній...</div>
     </div>
-  </div> -->
+  </div>
 </div>

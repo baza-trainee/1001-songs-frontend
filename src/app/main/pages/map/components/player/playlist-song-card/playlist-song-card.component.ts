@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StereoPlayerComponent } from '../stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { PlaylistCardSong } from 'src/app/shared/interfaces/song.interface';
+import { PlaylistCardSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
@@ -34,7 +34,7 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
 })
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
-  @Input() song: PlaylistCardSong = {} as PlaylistCardSong;
+  @Input() song: PlaylistSong = {} as PlaylistSong;
   @Input() isSelectSong!: boolean;
   @Input() isShowDetail: boolean = true;
   @Input() isPlay!: boolean;
