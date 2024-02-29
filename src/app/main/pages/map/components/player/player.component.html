@@ -1,8 +1,6 @@
 <section class="songs" #songsContainer>
   <div class="container">
-    <div class="songs__info" #fixedContainer [ngClass]="{'fix': isFixed}"
-         [ngStyle]="{'top.px': isFixed ? heightHeader : 'auto'}"
-    >
+    <div class="songs__info" #fixedContainer [ngClass]="{ fix: isFixed }" [ngStyle]="{ 'top.px': isFixed ? heightHeader : 'auto' }">
       <div class="songs__counter" *ngIf="songs$ | async as songs">
         <div class="counter__title">{{ 'map.player.counter-title' | translate }}</div>
         <div class="counter__result">
@@ -15,18 +13,17 @@
           {{ 'map.player.player-title' | translate }} <b>{{ song.title }}</b>
         </div>
 
-        <app-stereo-player
-          #stereoPlayer
-          [autoplay]="true"
-          (isPlay)="handleIsPlayChange($event)"
-          [song$]="playerSong"
-        ></app-stereo-player>
+        <app-stereo-player #stereoPlayer [autoplay]="true" (isPlay)="handleIsPlayChange($event)" [song$]="playerSong"></app-stereo-player>
 
         <!-- <app-multichanel-player #multiChanelPlayer ></app-multichanel-player> -->
       </div>
     </div>
 
-    <div class="songs__playlist" *ngIf="songs$ | async as songs" [ngStyle]="{'margin-top.px': isFixed ? fixedContainer.clientHeight : '0'}">
+    <div
+      class="songs__playlist"
+      *ngIf="songs$ | async as songs"
+      [ngStyle]="{ 'margin-top.px': isFixed ? fixedContainer.clientHeight : '0' }"
+    >
       <div class="playlist__titles">
         <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>
         <div class="titles title__name">{{ 'map.player.songs-list.titles.name' | translate }}</div>
@@ -42,17 +39,13 @@
           <app-playlist-song-card
             [song]="song"
             [isSelectSong]="selectSong.id === song.id"
-           
             (playPauseClicked)="onPlayPauseClicked($event)"
             [order$]="orderToAll$"
           ></app-playlist-song-card>
+          <app-playlist-song-details></app-playlist-song-details>
         </div>
       </div>
     </div>
-    <app-pagination
-            [totalPages]="totalPages"
-            [currentPage]="currentPage"
-            (pageChange)="changePage($event)"
-    />
+    <app-pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageChange)="changePage($event)" />
   </div>
 </section>

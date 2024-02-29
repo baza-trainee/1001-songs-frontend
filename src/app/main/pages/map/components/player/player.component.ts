@@ -25,6 +25,7 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
 import { SelectSong } from 'src/app/store/player/player.actions';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { Order } from 'src/app/shared/interfaces/order.interface';
+import { PlaylistSongDetailsComponent } from './playlist-song-details/playlist-song-details.component';
 
 @Component({
   selector: 'app-player',
@@ -37,7 +38,8 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
     StereoPlayerComponent,
     MultichanelPlayerComponent,
     PlaylistSongCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    PlaylistSongDetailsComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './player.component.html',
@@ -46,7 +48,7 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
 export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
-  @Input() stereoOnly: boolean = false;
+  // @Input() stereoOnly: boolean = false;
   distanceToTop!: number;
   heightHeader!: number;
   paddingTop!: number;

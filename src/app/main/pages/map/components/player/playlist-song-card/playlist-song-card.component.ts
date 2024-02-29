@@ -23,10 +23,10 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
     MultichanelPlayerComponent,
     TranslateModule,
     MatIconModule,
-    MatExpansionModule,
+    // MatExpansionModule,
     RouterLink,
-    FormatTextPipe,
-    VideoPlayerComponent,
+    //FormatTextPipe,
+    // VideoPlayerComponent,
     SafeHtmlPipe
   ],
   templateUrl: './playlist-song-card.component.html',
@@ -34,7 +34,7 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
 })
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
-  @Input() song: PlaylistSong = {} as PlaylistSong;
+  @Input() song: PlaylistCardSong = {} as PlaylistCardSong;
   @Input() isSelectSong!: boolean;
   @Input() isShowDetail: boolean = true;
   @Input() isPlay!: boolean;
@@ -42,6 +42,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   @Input() order$: Observable<Order> = of({ id: 0, type: '' });
 
   @Output() playPauseClicked = new EventEmitter<Order>();
+  @Output() showDeatails = new EventEmitter<Order>();
 
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
@@ -69,6 +70,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.audioService.pause();
   }
+  
   playPauseSong() {
     if (this.isPlay) {
       this.playPauseClicked.emit({ id: this.song.id, type: 'pause' });
@@ -79,6 +81,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   toggleVisibility() {
     this.isOpened = !this.isOpened;
+    //this.showDeatails.emit
   }
 
   handleKeyUpEvent(event: Event) {
