@@ -23,12 +23,22 @@
     top: 120px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 12px;
   }
 
   &__slider {
     background-color: var(--bg-color-screen);
     display: none;
+
+    &-title {
+      @include h2-desktop;
+
+      font-size: 20px;
+      line-height: 21px;
+      margin: 0 0 7px;
+      justify-self: flex-start;
+      align-self: flex-start;
+    }
 
     &-desktop {
       position: relative;

@@ -4,9 +4,21 @@
 .news {
   width: 100%;
 
+
   &__items {
     display: flex;
     flex-direction: column;
+
+    &-title {
+      @include h2-desktop;
+
+      font-size: 28px;
+      line-height: 22px;
+      margin: 0 0 7px 0;
+      justify-self: flex-start;
+      align-self: flex-start;
+    }
+
   }
 
   &__all {
@@ -22,7 +34,7 @@
     &-item {
       position: relative;
       cursor: pointer;
-      padding: 12px 0;
+      padding: 12px 0 6px;
       font-family: "Open Sans", sans-serif;
       font-size: 16px;
       font-weight: 400;
@@ -55,16 +67,21 @@
       width: 24px;
       height: 24px;
       right: 0;
-      top: 16px;
+      top: 9px;
       background-image: url('../../../../../../assets/img/home/icons/arrow_outward.svg');
       transition: all .5s ease;
     }
 
     &-title {
-      margin: 5px 0 8px;
+      margin-bottom: 5px;
+      margin-top: 0;
       font-size: 16px;
       font-weight: 600;
       line-height: 23px;
+    }
+
+    &-location {
+      font-size: 14px;
     }
   }
 
