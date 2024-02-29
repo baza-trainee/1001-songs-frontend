@@ -127,50 +127,57 @@
     padding-bottom: 49px;
 
     .info__date__record {
-      margin-bottom: 24px;
+      margin-bottom: 12px;
 
       .date__record__title {
         @include caption-desktop;
 
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
 
       .date__record__date {
         @include body-desktop;
+
+        font-size: 16px;
       }
     }
 
     .info__collectors {
-      margin-bottom: 24px;
+      margin-bottom: 12px;
 
       .collectors__title {
         @include caption-desktop;
 
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
 
       .collectors__names {
         .names__names__list {
           @include body-desktop;
 
+          font-size: 16px;
+
+
           .names__list__item {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
           }
         }
       }
     }
 
     .info__ethnographic__region {
-      margin-bottom: 24px;
+      margin-bottom: 12px;
 
       .ethnographic__region__title {
         @include caption-desktop;
 
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
 
       .ethnographic__region__region {
         @include body-desktop;
+
+        font-size: 16px;
       }
     }
 

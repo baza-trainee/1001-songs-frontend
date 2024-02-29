@@ -53,19 +53,19 @@
       </div>
       <div class="song__info-box">
         <div>
-          <span class="song__info-title">{{ 'science.song-page.info.place' | translate }}</span>
+          <p class="song__info-title">{{ 'science.song-page.info.place' | translate }}</p>
           <p class="song__info-detail">{{ song.ethnographic_district }}</p>
         </div>
         <div>
-          <span class="song__info-title">{{ 'science.song-page.info.region' | translate }}</span>
+          <p class="song__info-title">{{ 'science.song-page.info.region' | translate }}</p>
           <p class="song__info-detail">{{ song.location }}</p>
         </div>
         <div>
-          <span class="song__info-title">{{ 'science.song-page.info.record' | translate }}</span>
-          <p class="song__info-detail">{{ song.collectors }}</p>
+          <p class="song__info-title">{{ 'science.song-page.info.record' | translate }}</p>
+          <p class="song__info-detail" *ngFor="let collector of song.collectors">{{ collector }} </p>
         </div>
         <div>
-          <span class="song__info-title">{{ 'science.song-page.info.performers' | translate }}</span>
+          <p class="song__info-title">{{ 'science.song-page.info.performers' | translate }}</p>
           <p class="song__info-detail">{{ song.performers }}</p>
         </div>
       </div>

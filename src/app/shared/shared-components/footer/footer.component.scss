@@ -3,6 +3,13 @@
 @import '../../../../typography/colors';
 @import '../../../../typography/buttons';
 
+.team {
+  font-weight: bold;
+  color: var(--bg-color-accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 footer.footer {
   padding: 80px 0 32px;
   background-image: url("https://raw.githubusercontent.com/shytuleva24/photos-in-1001songs/main/Rectangle%20337.jpg");

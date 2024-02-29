@@ -9,7 +9,18 @@
       <div class="song-page__info">
         <div class="song-page__text">
           <h2 class="song-page__text-title">{{ song.title }}</h2>
-          <h6 class="song-page__text-genre">{{ song.genres[0] }}</h6>
+          <div class="song-page__text-genre">
+            <p>
+              <span class="song-page__text-genre__title">Жанр: </span>
+              <span *ngFor="let genre of song.genres; let last = last">
+                {{ genre }}{{ !last ? ', ' : '' }}
+              </span>
+            </p>
+            <p>
+              <span class="song-page__text-genre__title">Дата запису: </span>
+              <span>{{ song.recording_date | date : 'dd.MM.yyyy' }}</span>
+            </p>
+          </div>
           <div class="song-page__text-content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
           <div class="song-page__text-content" *ngIf="!song.song_text">No text available</div>
         </div>
@@ -37,15 +48,14 @@
         </div>
         <div class="song-page__song-box">
           <p class="song-page__song-title">{{ 'map.song-page.song-info.record' | translate }}</p>
-          <p class="song-page__song-description">{{ song.collectors }}</p>
-        </div>
+          <p class="song__info-detail" *ngFor="let collector of song.collectors">{{ collector }} </p>        </div>
         <div class="song-page__song-box">
           <p class="song-page__song-title">{{ 'map.song-page.song-info.performers' | translate }}</p>
           <p class="song-page__song-description">{{ song.performers }}</p>
         </div>
         <div class="song-page__song-box">
-          <p class="song-page__song-title">{{ 'map.song-page.song-info.data' | translate }}</p>
-          <p class="song-page__song-description">{{ song.recording_date }}</p>
+          <p class="song-page__song-title">Фонд</p>
+          <p class="song-page__song-description">{{ song.fund.title }}</p>
         </div>
       </div>
     </div>

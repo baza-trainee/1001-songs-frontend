@@ -67,6 +67,7 @@
 .search-popup {
   width: 100%;
   position: relative;
+  display: none;
 
   &__box {
     position: absolute;
@@ -153,3 +154,8 @@
   }
 }
 
+@media (max-width: 646px) {
+  .search-popup {
+    display: block;
+  }
+}

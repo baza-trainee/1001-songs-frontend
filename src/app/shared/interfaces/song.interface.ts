@@ -34,7 +34,12 @@ export interface Song {
   photos: string[];
   stereo_audio: string;
   multichannels: string[];
+  fund: {
+    id: number,
+    title: string
+  }
 }
+
 export interface Song1 {
   id: string;
   title: string;
