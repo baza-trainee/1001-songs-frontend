@@ -8,9 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbsComponent } from '../../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { ImageSliderComponent } from '../../shared-components/image-slider/image-slider.component';
 import { PaginationComponent } from '../../../../../../shared/shared-components/pagination/pagination.component';
-import { FetchScienceSongs } from 'src/app/store/education/es-player.actions';
+import { FetchScienceSongs, SelectSong } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
-import {EducationSong} from 'src/app/shared/interfaces/science-song.interface';
+import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
 import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
@@ -19,7 +19,9 @@ import { SliderComponent } from '../../../../../../shared/shared-components/slid
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.interface";
+import { Breadcrumbs } from '../../../../../../shared/interfaces/breadcrumbs.interface';
+import { AudioService } from 'src/app/shared/services/audio/audio.service';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-science-songs',
@@ -38,7 +40,6 @@ import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.int
   templateUrl: './science-songs.component.html',
   styleUrls: ['./science-songs.component.scss']
 })
-
 export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
@@ -58,6 +59,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   songs: EducationSong[] = [];
   title!: string;
   playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+  orderToCards$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -65,7 +67,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store,
     private educationServices: EducationService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private audioService: AudioService
   ) {}
 
   ngOnInit(): void {
@@ -75,25 +78,55 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (!this.route.snapshot) return;
     const genreId = this.route.snapshot.params['idGenre'];
-    this.educationServices.fetchGenreById(genreId).subscribe((data) => {
-      this.genreData = data as EducationGenre;
-      this.breadcrumbs = this.getPathBreadcrumbs(this.genreData);
-    });
+
+    this.educationServices
+      .fetchGenreById(genreId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.genreData = data as EducationGenre;
+        this.breadcrumbs = this.getPathBreadcrumbs(this.genreData);
+      });
 
     this.store.dispatch(new FetchScienceSongs(genreId));
+
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
       this.songs = scienseSongs;
     });
+
+  }
+
+  onDeatailsShow(event: Order) {
+    return event;
+  }
+  onPlayPauseClicked(order: Order) {
+    this.serveOrders(order);
+  }
+
+  getcardSong(song: EducationSong) {
+    return this.playerService.getPlayerListCardSong(song);
+  }
+
+  private serveOrders(order: Order) {
+    if (order.type && order.type === 'play') {
+      this.store.dispatch(new SelectSong(order.id + ''));
+      this.orderToCards$.next({ id: order.id, type: 'play' });
+      this.audioService.play();
+    }
+    if (order.type && order.type === 'pause') {
+      this.store.dispatch(new SelectSong(order.id + ''));
+      this.orderToCards$.next({ id: order.id, type: 'pause' });
+      this.audioService.pause();
+    }
   }
 
   getPathBreadcrumbs(genre: EducationGenre): Breadcrumbs[] {
     const breadcrumbs: Breadcrumbs[] = [];
     const idCategory = this.route.snapshot.params['idCategory'];
 
-    breadcrumbs.push({name: 'Освітній розділ', path: '/education'});
+    breadcrumbs.push({ name: 'Освітній розділ', path: '/education' });
 
     if (genre) {
-      breadcrumbs.push({name: genre.main_category.title, path: `/education/category/${idCategory}`})
+      breadcrumbs.push({ name: genre.main_category.title, path: `/education/category/${idCategory}` });
     }
 
     return breadcrumbs;
@@ -132,8 +165,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
   }
 
-  handleIsPlayChange(isPlay: boolean) {
-    this.isPlay = isPlay;
+  handleIsPlayChange(order: Order) {
+    this.serveOrders(order);
   }
 
   changePage(page: number): void {

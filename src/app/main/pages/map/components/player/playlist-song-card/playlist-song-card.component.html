@@ -1,5 +1,11 @@
 <div class="playlist__song__card">
-  <div class="song__card__header" [ngClass]="{'opened': isOpened}" (click)="toggleMobileVisibility()" (keyup)="handleKeyUpEvent($event)" tabindex="0">
+  <div
+    class="song__card__header"
+    [ngClass]="{ opened: isOpened }"
+    (click)="toggleMobileVisibility()"
+    (keyup)="handleKeyUpEvent($event)"
+    tabindex="0"
+  >
     <div class="song__card__img"></div>
 
     <div class="song__card__name__info">
@@ -8,8 +14,8 @@
       </div>
     </div>
 
-    <div class="song__card__song__info">
-      <div class="song__info__genre">{{  song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
+    <div class="song__card__song__info" >
+      <div class="song__info__genre">{{ song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
       <div class="song__info__location">
         {{ song.city ? song.city : '...' }}
       </div>
@@ -17,7 +23,7 @@
 
     <div
       class="song__card__btn btn-detail"
-      *ngIf="isShowDetail; else routerButton"
+
       (click)="toggleVisibility()"
       (keyup)="handleKeyUpEvent($event)"
       tabindex="0"
@@ -32,9 +38,9 @@
 
     <div class="song__card__listen">
       <mat-icon *ngIf="!hasMedia" class="nomedia" aria-hidden="false" aria-label="Example home icon" fontIcon="music_off"></mat-icon>
-      <button *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="openCurrentFile()">
+      <button *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="playPauseSong()">
         <svg
-          *ngIf="!isPlay || !isSelectSong"
+          *ngIf="!isPlay"
           class="listen__desktop"
           width="72"
           height="72"
@@ -45,7 +51,7 @@
           <use xlink:href="./assets/sprites.svg#playDesktop"></use>
         </svg>
         <svg
-          *ngIf="isPlay && isSelectSong"
+          *ngIf="isPlay"
           class="listen__desktop"
           width="72"
           height="72"

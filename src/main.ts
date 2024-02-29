@@ -4,7 +4,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
 import { environment } from './environments/environment';
@@ -48,7 +48,7 @@ bootstrapApplication(AppComponent, {
       ],
 
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
-      withHashLocation()
+      // withHashLocation()
     ),
 
     provideAnimations()

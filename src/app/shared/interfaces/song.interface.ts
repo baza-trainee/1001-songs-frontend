@@ -1,7 +1,16 @@
 export interface PlayerSong {
+  id: number;
   title: string;
   stereo: string;
   channels: string[];
+}
+export interface PlaylistCardSong{
+  id: number;
+  title: string;
+  genres: string[];
+  stereo_audio: string;
+  // channels: string[];
+  city: string;
 }
 
 export interface PlaylistSong {
