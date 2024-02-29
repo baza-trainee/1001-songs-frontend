@@ -16,7 +16,6 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
   styleUrls: ['./playlist-song-details.component.scss']
 })
 export class PlaylistSongDetailsComponent implements OnInit, OnDestroy {
-  isShowDetail = true;
   isOpened = false;
   @Input() order$: Observable<Order> = of({ id: 0, type: '' });
   @Input() song: PlaylistSong = {} as PlaylistSong;
