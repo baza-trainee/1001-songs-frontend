@@ -14,6 +14,7 @@ export class EducationService {
   fetchSongsByGenreId(genreId: string) {
     return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.genre}/${genreId}/${StatEndpoints.songs}`).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.error(error);
         return of([] as EducationSong[]);
       })
     );
