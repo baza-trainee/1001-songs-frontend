@@ -13,15 +13,18 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
+import { PlayerSong, PlaylistCardSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
+import { SelectSong } from 'src/app/store/player/player.actions';
+import { AudioService } from 'src/app/shared/services/audio/audio.service';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-player',
@@ -47,7 +50,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   distanceToTop!: number;
   heightHeader!: number;
   paddingTop!: number;
-  isPlay!: boolean;
   heightMap: number = 694;
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
@@ -59,10 +61,13 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
   isFixed: boolean = false;
   playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+  orderToAll$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   constructor(
     // private _translate: TranslateService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private store: Store,
+    private audioService: AudioService
   ) {
     this.subscription = this.songs$.subscribe((data) => {
       if (data) this.songs = data.slice();
@@ -72,6 +77,10 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     this.selectedSong$?.subscribe((playlistSong) => {
       this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
     });
+  }
+
+  onPlayPauseClicked(order: Order) {
+    this.handleOrders(order);
   }
 
   @HostListener('window:resize')
@@ -98,8 +107,21 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     return Math.ceil(this.songs.length / this.itemsPerPage);
   }
 
-  handleIsPlayChange(isPlay: boolean) {
-    this.isPlay = isPlay;
+  handleIsPlayChange(order: Order) {
+    this.handleOrders(order);
+  }
+
+  private handleOrders(order: Order) {
+    if (order.type && order.type === 'play') {
+      this.store.dispatch(new SelectSong(order.id));
+      this.orderToAll$.next({ id: order.id, type: 'play' });
+      this.audioService.play();
+    }
+    if (order.type && order.type === 'pause') {
+      this.store.dispatch(new SelectSong(order.id));
+      this.orderToAll$.next({ id: order.id, type: 'pause' });
+      this.audioService.pause();
+    }
   }
 
   get itemsOnCurrentPage(): PlaylistSong[] {

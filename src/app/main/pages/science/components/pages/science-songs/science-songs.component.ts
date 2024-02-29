@@ -23,6 +23,7 @@ import { Breadcrumbs } from '../../../../../../shared/interfaces/breadcrumbs.int
 import { error } from 'selenium-webdriver';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-science-songs',
@@ -158,8 +159,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
   }
 
-  handleIsPlayChange(isPlay: boolean) {
-    this.isPlay = isPlay;
+  handleIsPlayChange(isPlay: Order) {
+    this.isPlay = false;
   }
 
   changePage(page: number): void {

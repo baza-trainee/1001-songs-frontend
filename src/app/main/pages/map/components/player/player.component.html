@@ -42,7 +42,9 @@
           <app-playlist-song-card
             [song]="song"
             [isSelectSong]="selectSong.id === song.id"
-            [isPlay]="isPlay"
+           
+            (playPauseClicked)="onPlayPauseClicked($event)"
+            [order$]="orderToAll$"
           ></app-playlist-song-card>
         </div>
       </div>

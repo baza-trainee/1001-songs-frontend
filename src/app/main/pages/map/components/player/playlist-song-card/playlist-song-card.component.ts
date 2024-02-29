@@ -1,18 +1,18 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StereoPlayerComponent } from '../stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from '../multichanel-player/multichanel-player.component';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { Store } from '@ngxs/store';
-import { SelectSong } from 'src/app/store/player/player.actions';
-import { PlaylistSong } from 'src/app/shared/interfaces/song.interface';
+import { TranslateModule } from '@ngx-translate/core';
+import { PlaylistCardSong } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
-import {AudioService} from "../../../../../../shared/services/audio/audio.service";
-import {FormatTextPipe} from "../../../../../../shared/pipes/format-text.pipe";
-import {VideoPlayerComponent} from "../../../../../../shared/shared-components/video-player/video-player.component";
-import {SafeHtmlPipe} from "../../../../../../shared/pipes/safe-html.pipe";
+import { AudioService } from '../../../../../../shared/services/audio/audio.service';
+import { FormatTextPipe } from '../../../../../../shared/pipes/format-text.pipe';
+import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
+import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
+import { Observable, of } from 'rxjs';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-playlist-song-card',
@@ -34,34 +34,46 @@ import {SafeHtmlPipe} from "../../../../../../shared/pipes/safe-html.pipe";
 })
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
-  @Input() song: PlaylistSong = {} as PlaylistSong;
-  @Input() isSelectSong! : boolean;
+  @Input() song: PlaylistCardSong = {} as PlaylistCardSong;
+  @Input() isSelectSong!: boolean;
   @Input() isShowDetail: boolean = true;
   @Input() isPlay!: boolean;
+
+  @Input() order$: Observable<Order> = of({ id: 0, type: '' });
+
+  @Output() playPauseClicked = new EventEmitter<Order>();
+
   staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
-  // isSelectSong: boolean = false;
 
-  constructor(
-    private _translate: TranslateService,
-    private store: Store,
-    private audioService: AudioService
-  ) {}
+  constructor(private audioService: AudioService) {}
 
   ngOnInit(): void {
     this.hasMedia = this.song.stereo_audio ? true : false;
+    this.order$.subscribe((order: Order) => {
+      this.handleInputOrder(order);
+    });
   }
+
+  private handleInputOrder(order: Order) {
+    if (order.id === this.song.id && order.type === 'play') {
+      this.isPlay = true;
+    } else if (order.id === this.song.id && order.type === 'pause') {
+      this.isPlay = false;
+    } else {
+      this.isPlay = false;
+    }
+  }
+
   ngOnDestroy(): void {
     this.audioService.pause();
   }
-  openCurrentFile() {
-    if (!this.isSelectSong) {
-      this.store.dispatch(new SelectSong(this.song.id));
-      this.isPlay = true;
+  playPauseSong() {
+    if (this.isPlay) {
+      this.playPauseClicked.emit({ id: this.song.id, type: 'pause' });
     } else {
-      this.isPlay ? this.audioService.pause() : this.audioService.play();
-      this.isPlay = !this.isPlay;
+      this.playPauseClicked.emit({ id: this.song.id, type: 'play' });
     }
   }
 
@@ -78,7 +90,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   toggleMobileVisibility() {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 768) {
-      this.toggleVisibility()
+      this.toggleVisibility();
     }
     return;
   }

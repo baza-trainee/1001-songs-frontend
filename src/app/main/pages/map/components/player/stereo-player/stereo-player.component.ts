@@ -9,6 +9,7 @@ import { SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-stereo-player',
@@ -23,12 +24,13 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   @Input() autoplay: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
 
-  @Output() isPlay: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() isPlay: EventEmitter<Order> = new EventEmitter<Order>();
   showStereoPlayer: boolean = true;
 
   state$!: Observable<StreamState>;
   subState!: Subscription;
   isPreloader = false;
+  currentSong!: PlayerSong;
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -41,6 +43,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.song$.subscribe((playerSong) => {
       if (playerSong.stereo) {
+        this.currentSong = playerSong;
         this.openFile(playerSong);
       }
     });
@@ -82,12 +85,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   pause() {
     this.audioService.pause();
-    this.isPlay.emit(false);
+    this.isPlay.emit({id: this.currentSong.id, type: 'pause'});
   }
 
   play() {
     this.audioService.play();
-    this.isPlay.emit(true);
+    this.isPlay.emit({id: this.currentSong.id, type: 'play'});
   }
 
   stop() {
@@ -96,12 +99,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   next() {
     this.store.dispatch(new SelectNext());
-    this.isPlay.emit(true);
+    this.isPlay.emit({id: this.currentSong.id, type: 'play'});
   }
 
   previous() {
     this.store.dispatch(new SelectPrev());
-    this.isPlay.emit(true);
+    this.isPlay.emit({id: this.currentSong.id, type: 'play'});
   }
 
   backward(currentTime: number | undefined) {
