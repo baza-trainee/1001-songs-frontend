@@ -8,6 +8,7 @@ import { DonationDialogComponent } from '../donation-dialog/donation-dialog.comp
 import { Observable } from 'rxjs';
 import {FooterData, FooterPartners} from '../../interfaces/footer';
 import { FooterService } from '../../services/footer/footer.service';
+import {TeamPopupComponent} from "./team-popup/team-popup.component";
 
 @Component({
   selector: 'app-footer',
@@ -37,5 +38,9 @@ export class FooterComponent implements OnInit {
 
   openDonationDialog() {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
+  }
+
+  openPopupTeam() {
+    this.dialog.open(TeamPopupComponent, { panelClass: 'custom-modalbox' });
   }
 }

@@ -16,7 +16,7 @@ export interface ScienceSong {
   song_description: string;
   location: string;
   ethnographic_district: string;
-  collectors: string;
+  collectors: string[];
   performers: string;
   video_url: string;
   comment_map: string;

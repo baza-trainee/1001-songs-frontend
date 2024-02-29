@@ -82,7 +82,11 @@
         <div class="collectors__title">{{ 'map.player.songs-list.song-card.song-card-detail.collectors' | translate }}</div>
         <div class="collectors__names">
           <ul class="names__names__list">
-            <li class="names__list__item">{{ song.collectors }}</li>
+            <li>
+              <span *ngFor="let collector of song.collectors; let last = last">
+                {{ collector }}{{ !last ? ', ' : '' }}
+              </span>
+            </li>
           </ul>
         </div>
       </div>
@@ -93,6 +97,12 @@
         </div>
         <div class="ethnographic__region__region">{{ song.ethnographic_district }}</div>
       </div>
+
+      <div class="info__date__record">
+        <div class="date__record__title">Фонд: </div>
+        <div class="date__record__date">{{ song.fund}}</div>
+      </div>
+
       <button class="info__btn__more__detail" [routerLink]="song.id + ''">
         {{ 'map.player.songs-list.song-card.song-card-detail.more-detail-button' | translate }}
       </button>

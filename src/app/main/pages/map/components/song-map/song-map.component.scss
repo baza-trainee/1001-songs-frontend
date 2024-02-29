@@ -33,9 +33,16 @@
       }
 
       &-genre {
-        @include body-desktop;
+        margin: 18px 0;
 
-        margin: 18px 0 24px;
+        p {
+          padding-bottom: 5px;
+        }
+
+        span {
+          font-size: 18px;
+          font-weight: 500;
+        }
       }
 
       &-content {
