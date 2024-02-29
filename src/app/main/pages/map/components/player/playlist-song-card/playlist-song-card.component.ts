@@ -10,12 +10,14 @@ import { AudioService } from '../../../../../../shared/services/audio/audio.serv
 import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
-import {VideoPlayerComponent} from "../../../../../../shared/shared-components/video-player/video-player.component";
+import { PlayerService } from 'src/app/shared/services/player/player.service';
+
 
 @Component({
   selector: 'app-playlist-song-card',
   standalone: true,
-  imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule, MatIconModule, RouterLink, SafeHtmlPipe, VideoPlayerComponent],
+  imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule, MatIconModule, RouterLink, SafeHtmlPipe],
+
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })
@@ -37,7 +39,9 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private audioService: AudioService
+    private audioService: AudioService,
+    private playerService: PlayerService
+
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
     this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
       this.handleInputOrder(order);
     });
+
   }
 
   private handleInputOrder(order: Order) {
