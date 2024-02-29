@@ -1,5 +1,13 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {KeyValuePipe, NgFor} from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
+import {KeyValuePipe, NgFor, NgIf} from '@angular/common';
 
 import {TranslateModule} from "@ngx-translate/core";
 import {Category} from "../../interfaces/article.interface";
@@ -7,22 +15,24 @@ import {Category} from "../../interfaces/article.interface";
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [NgFor, TranslateModule, KeyValuePipe],
+  imports: [NgFor, TranslateModule, KeyValuePipe, NgIf],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent {
+export class FilterComponent implements AfterViewInit {
   @Input({required: true}) categories!: Category[];
-  public selectedFilterId: number = 0;
+  @Input() selectedFilterId: number = 0;
   public startX: number = 0;
   public currentX: number = 0;
   public translateX: number = 0;
   private maxSlide: number = 0;
   private isDragging!: boolean;
-
   @Output() filteredCategories = new EventEmitter<number>();
   @ViewChild('slide', {read: ElementRef}) slide!: ElementRef;
 
+  ngAfterViewInit() {
+    this.selectedFilterId ? this.filterArticles(this.selectedFilterId) : this.filterArticles(0);
+  }
 
   filterArticles(id: number) {
     this.selectedFilterId = id;

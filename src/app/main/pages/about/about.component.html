@@ -3,8 +3,13 @@
     <div class="about__box">
       <h2 class="about__title">{{ 'about.title' | translate }}</h2>
     </div>
-    <div class="about__content" *ngIf="dataAboutContent$ | async as content">
-      <app-content-text [content]="content.content"></app-content-text>
+    <div>
+      <div class="about__content" *ngIf="dataAboutContent$ | async as content">
+        <app-content-text [content]="content.content"></app-content-text>
+      </div>
+      <div class="about__slider">
+
+      </div>
     </div>
   </section>
 </div>
@@ -13,7 +18,6 @@
   <app-about-team [team]="team"></app-about-team>
 </ng-container>
 
-<ng-container *ngIf="projectsSlides.length">
+<ng-container class="about__slider-mobile" *ngIf="projectsSlides.length">
   <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
 </ng-container>
-

@@ -65,7 +65,7 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   private fetchSliderItems(id: number): void {
     this.subscriptions.push(
         this.articleService.fetchNews({news_exclude: id}).subscribe(response => {
-          this.sliderItemsDesktop = response.items.slice(0, 4);
+          this.sliderItemsDesktop = response.items.slice(0, 3);
           this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
         })
     );

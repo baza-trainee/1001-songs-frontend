@@ -12,13 +12,16 @@ import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 
+
 @Component({
   selector: 'app-playlist-song-card',
   standalone: true,
   imports: [CommonModule, StereoPlayerComponent, MultichanelPlayerComponent, TranslateModule, MatIconModule, RouterLink, SafeHtmlPipe],
+
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })
+
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
   @Input() song: PlaylistCardSong = {} as PlaylistCardSong;
@@ -38,6 +41,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   constructor(
     private audioService: AudioService,
     private playerService: PlayerService
+
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
     this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
       this.handleInputOrder(order);
     });
+
   }
 
   private handleInputOrder(order: Order) {

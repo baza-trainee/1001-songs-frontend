@@ -21,7 +21,7 @@
     </ng-template>
   </div>
   <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
-    <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+    <app-filter [selectedFilterId]="idParamsCategory" [categories]="categories" (filteredCategories)="filteredCategory($event)" />
   </div>
   <div class="expeditions">
     <div class="expeditions__box">
