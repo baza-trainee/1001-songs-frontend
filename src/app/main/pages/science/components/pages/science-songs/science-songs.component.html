@@ -49,6 +49,8 @@
             [song]="song"
             [isSelect]="selectSong.id === song.id "
             [isPlay]="isPlay"
+            (playClicked)="onPlayClicked($event)"
+            [order$]="order$"
           ></app-es-playlist-song-card>
         </div>
       </div>

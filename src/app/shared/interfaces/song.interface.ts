@@ -3,6 +3,11 @@ export interface PlayerSong {
   stereo: string;
   channels: string[];
 }
+export interface PlaylistCardSong{
+  title: string;
+  stereo: string;
+  channels: string[];
+}
 
 export interface PlaylistSong {
   id: number;

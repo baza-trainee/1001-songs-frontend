@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
-import {Observable} from "rxjs";
-import {EducationSection} from "../../interfaces/science.interface";
+import { Observable, catchError, of } from 'rxjs';
+import { EducationSection } from '../../interfaces/science.interface';
+import { EducationSong } from '../../interfaces/science-song.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class EducationService {
   constructor(private http: HttpClient) {}
 
   fetchSongsByGenreId(genreId: string) {
-    return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.genre}/${genreId}/${StatEndpoints.songs}`);
+    return this.http.get(`${API_URL}${StatEndpoints.education}/${StatEndpoints.genre}/${genreId}/${StatEndpoints.songs}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return of([] as EducationSong[]);
+      })
+    );
   }
 
   fetchSongById(songId: string) {
