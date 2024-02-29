@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, Observable, Subject, catchError, of, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
@@ -20,8 +20,6 @@ import { EducationService } from 'src/app/shared/services/education/education.se
 import { EducationGenre } from 'src/app/shared/interfaces/science.interface';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 import { Breadcrumbs } from '../../../../../../shared/interfaces/breadcrumbs.interface';
-import { error } from 'selenium-webdriver';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 
@@ -61,7 +59,7 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   songs: EducationSong[] = [];
   title!: string;
   playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
-  order$: BehaviorSubject<{ id: number; type: string }> = new BehaviorSubject({ id: 0, type: '' });
+  orderToCards$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -81,10 +79,13 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.route.snapshot) return;
     const genreId = this.route.snapshot.params['idGenre'];
 
-    this.educationServices.fetchGenreById(genreId).subscribe((data) => {
-      this.genreData = data as EducationGenre;
-      this.breadcrumbs = this.getPathBreadcrumbs(this.genreData);
-    });
+    this.educationServices
+      .fetchGenreById(genreId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.genreData = data as EducationGenre;
+        this.breadcrumbs = this.getPathBreadcrumbs(this.genreData);
+      });
 
     this.store.dispatch(new FetchScienceSongs(genreId));
 
@@ -92,25 +93,30 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.songs = scienseSongs;
     });
 
-    // this.educationServices
-    //   .fetchSongsByGenreId(genreId)
-    //   .subscribe((songs: object) => {
-    //     const data = songs as { items: EducationSong[] };
-    //     this.songs = data.items;
-    //   });
   }
 
-  onPlayClicked(song: EducationSong) {
-    // console.log(song);
-    this.store.dispatch(new SelectSong(song.id + ''));
-    this.order$.next({ id: song.id, type: 'play' });
-    // if (!this.isSelect) {
-    //   this.store.dispatch(new SelectSong(this.song.id + ''));
-    //   this.isPlay = true;
-    // } else {
-    //   this.isPlay ? this.audioService.pause() : this.audioService.play();
-    //   this.isPlay = !this.isPlay;
-    // }
+  onDeatailsShow(event: Order) {
+    return event;
+  }
+  onPlayPauseClicked(order: Order) {
+    this.serveOrders(order);
+  }
+
+  getcardSong(song: EducationSong) {
+    return this.playerService.getPlayerListCardSong(song);
+  }
+
+  private serveOrders(order: Order) {
+    if (order.type && order.type === 'play') {
+      this.store.dispatch(new SelectSong(order.id + ''));
+      this.orderToCards$.next({ id: order.id, type: 'play' });
+      this.audioService.play();
+    }
+    if (order.type && order.type === 'pause') {
+      this.store.dispatch(new SelectSong(order.id + ''));
+      this.orderToCards$.next({ id: order.id, type: 'pause' });
+      this.audioService.pause();
+    }
   }
 
   getPathBreadcrumbs(genre: EducationGenre): Breadcrumbs[] {
@@ -159,8 +165,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
   }
 
-  handleIsPlayChange(isPlay: Order) {
-    this.isPlay = false;
+  handleIsPlayChange(order: Order) {
+    this.serveOrders(order);
   }
 
   changePage(page: number): void {

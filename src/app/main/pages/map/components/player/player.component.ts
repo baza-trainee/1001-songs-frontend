@@ -1,24 +1,14 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
 import { MultichanelPlayerComponent } from './multichanel-player/multichanel-player.component';
 import { PlaylistSongCardComponent } from './playlist-song-card/playlist-song-card.component';
-import { PlayerSong, PlaylistCardSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
+import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interface';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
@@ -70,7 +60,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    // private _translate: TranslateService,
     private playerService: PlayerService,
     private store: Store,
     private audioService: AudioService
@@ -88,7 +77,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   onPlayPauseClicked(order: Order) {
     this.handleOrders(order);
   }
-  
+
   onDeatailsShow(order: Order) {
     this.orderDetails$.next({ id: order.id, type: '' });
   }
