@@ -18,6 +18,12 @@
     max-width: 954px;
   }
 
+  &__slider {
+    &-mobile {
+      display: none;
+    }
+  }
+
   &__content {
     @include body-desktop($line-height: 28px, $font-size: 20px);
 
@@ -39,6 +45,14 @@
 
 @media (max-width: 1024px) {
   .about {
+    &__slider {
+      display: none;
+
+      &-mobile {
+        display: block;
+      }
+    }
+
     &__box {
       padding-left: 0;
     }

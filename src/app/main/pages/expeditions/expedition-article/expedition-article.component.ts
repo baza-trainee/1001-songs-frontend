@@ -68,7 +68,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
                 }))
                 .subscribe(({content, sliderItem}) => {
                   this.expeditionArticle = content;
-                  this.sliderItemsDesktop = sliderItem.items.slice(0, 4);
+                  this.sliderItemsDesktop = sliderItem.items.slice(0, 3);
                   this.sliderItems = this.sliderService.sliderItemFromExpedition(sliderItem.items);
                 })
         );
@@ -81,5 +81,9 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  navigateToExp(id: number) {
+    this.router.navigateByUrl(`/expeditions?id=${id}`);
   }
 }

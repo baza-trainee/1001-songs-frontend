@@ -30,6 +30,7 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
 
   private itemsPerPage: number = 12;
   public currentPage: number = 1;
+  public idParamsCategory: number = 0;
 
   constructor(
     private expeditionsService: ExpeditionsService,
@@ -49,9 +50,15 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
     if (!this.route.queryParams) return;
 
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+      this.idParamsCategory = params['id'];
+      let paramsObg: {search?: string, page: number, size: number} = {page: this.currentPage, size: this.itemsPerPage};
       params['search'] ? this.searchValue = params['search'] : this.searchValue = "";
 
-      this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({search: this.searchValue, page: this.currentPage, size: this.itemsPerPage});
+      if (this.searchValue) paramsObg = {search: this.searchValue, page: this.currentPage, size: this.itemsPerPage};
+
+      this.expeditionResponse$ = this.expeditionsService.fetchExpeditions(paramsObg);
+
+      if (this.idParamsCategory) this.filteredCategory(+params['id']);
       this.fetchTotalPage();
     });
   }
@@ -70,6 +77,7 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
   }
 
   filteredCategory(id: number): void {
+    this.idParamsCategory = id;
     this.currentPage = 1;
     this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({search: this.searchValue, page: this.currentPage, size: this.itemsPerPage, id: id});
     this.fetchTotalPage();

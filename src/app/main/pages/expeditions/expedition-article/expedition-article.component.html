@@ -24,8 +24,9 @@
         </div>
         <div class="article__slider-desktop" *ngIf="sliderItemsDesktop.length">
           <div class="article__sticky" >
+            <h2 class="article__slider-title">Пов’язані експедиції</h2>
             <div *ngFor="let item of sliderItemsDesktop">
-              <div class="event">
+              <div class="event" (click)="navigateTo(item.id)" (keydown)="navigateTo(item.id)" tabindex="0">
                 <img [src]="item.preview_photo" width="400" height="270" alt="photo">
                 <span class="event__date">{{ item.expedition_date }}</span>
                 <div class="event__container" style="cursor: pointer">
@@ -37,7 +38,7 @@
             <div class="article__router">
               <button
                 class="article__router-link"
-                [routerLink]="'/expeditions'"
+                (click)="navigateToExp(expeditionArticle.category.id)"
               >{{'home.home-expeditions.router-link' | translate}}
                 <svg class="article__router-arrow" width="24" height="24">
                   <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
