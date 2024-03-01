@@ -4,10 +4,15 @@
 @import '../../../../typography/buttons';
 
 .team {
-  font-weight: bold;
+  //font-weight: bold;
   color: var(--bg-color-accent);
-  text-decoration: underline;
+  opacity: .8;
   cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 footer.footer {
