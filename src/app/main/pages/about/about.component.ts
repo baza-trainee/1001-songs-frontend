@@ -12,6 +12,9 @@ import { SafeHtmlPipe } from "../../../shared/pipes/safe-html.pipe";
 import { Slide } from "../../../shared/interfaces/slide.interface";
 import { ProjectService } from "../../../shared/services/projects/project.service";
 import { ContentTextComponent } from "../../../shared/shared-components/content-text/content-text.component";
+import {AboutSliderComponent} from "./about-slider/about-slider.component";
+import {ProjectItem} from "../../../shared/interfaces/project.interface";
+import {Router, RouterLink} from "@angular/router";
 
 
 @Component({
@@ -19,7 +22,7 @@ import { ContentTextComponent } from "../../../shared/shared-components/content-
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent, FadeInCarouselComponent, SafeHtmlPipe, ContentTextComponent]
+  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent, FadeInCarouselComponent, SafeHtmlPipe, ContentTextComponent, AboutSliderComponent, RouterLink]
 })
 
 export class AboutComponent implements OnInit, OnDestroy {
@@ -28,12 +31,13 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   public aboutTeam$: Observable<AboutTeam[]>;
   public projectsSlides: Slide[] = [];
-
+  public projectsSlidesDesktop: ProjectItem[] = [];
 
   constructor(
     private translateService: TranslateService,
     private aboutService: AboutService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) {
     this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
     this.aboutTeam$ = this.aboutService.fetchAboutTeam();
@@ -41,8 +45,15 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(this.projectService.fetchProjects().subscribe(projects => {
-      if (projects.items) this.projectsSlides = projects.items.map(project => this.projectService.convertToSlide(project));
+      if (projects.items) {
+        this.projectsSlidesDesktop = projects.items.slice(0, 7);
+        this.projectsSlides = projects.items.map(project => this.projectService.convertToSlide(project));
+      }
     }));
+  }
+
+  navigateTo(id: number) {
+    this.router.navigate(['project/' + id]);
   }
 
   ngOnDestroy(): void {

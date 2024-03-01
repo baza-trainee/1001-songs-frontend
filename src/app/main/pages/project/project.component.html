@@ -2,8 +2,29 @@
     <div class="container">
         <section class="project">
             <h1>{{project.title}}</h1>
-            <div [innerHTML]="project.content | safeHtml"></div>
-
+            <div class="project__flex">
+              <div class="project__content">
+                <app-content-text [content]="project.content"></app-content-text>
+              </div>
+              <div class="project__slider" *ngIf="projectsSlidesDesktop">
+                <div class="project__slider-sticky">
+                  <h2 class="project__slider-title">Актуальні проєкти</h2>
+                  <div class="project__slider-page">
+                    <div *ngFor="let slide of projectsSlidesDesktop" (click)="navigateTo(slide.id)" (keydown)="navigateTo(slide.id)" tabindex="0">
+                      <app-about-slider [item]="slide"></app-about-slider>
+                    </div>
+                  </div>
+                  <div class="project__slider-nav">
+                    <a class="project__slider-next" href="/">
+                      На головну
+                      <svg class="project__slider-next-arrow" width="24" height="24">
+                        <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="project__box project__text">
                 <h2 class="project__sub-title">{{ 'expeditions.article.about-article.title' | translate }}</h2>
                 <div class="project__about">
@@ -33,10 +54,10 @@
                     </div>
                 </div>
             </div>
-            <app-share class="article__box"></app-share>
+            <app-share class="project__box"></app-share>
         </section>
     </div>
-    <div class="project__slider">
+    <div class="project__slider-mobile">
         <ng-container *ngIf="projectsSlides.length">
             <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
         </ng-container>

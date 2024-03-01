@@ -9,6 +9,7 @@ export interface Project {
     photographers: string[];
     recording: string[];
 }
+
 export interface ProjectData {
   items: ProjectItem[];
   total: number;

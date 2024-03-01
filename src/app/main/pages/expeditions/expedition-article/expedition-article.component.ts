@@ -19,6 +19,7 @@ import { SliderService } from "../../../../shared/services/slider/slider.service
 import {ContentTextComponent} from "../../../../shared/shared-components/content-text/content-text.component";
 import {Breadcrumbs} from "../../../../shared/interfaces/breadcrumbs.interface";
 import {ExpeditionCardComponent} from "../expedition-card/expedition-card.component";
+import {MatCardModule} from "@angular/material/card";
 
 @Component({
   selector: 'app-expedition-article',
@@ -34,7 +35,8 @@ import {ExpeditionCardComponent} from "../expedition-card/expedition-card.compon
     SafeHtmlPipe,
     FadeInCarouselComponent,
     ContentTextComponent,
-    ExpeditionCardComponent
+    ExpeditionCardComponent,
+    MatCardModule
   ],
   templateUrl: './expedition-article.component.html',
   styleUrls: ['./expedition-article.component.scss']
@@ -68,7 +70,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
                 }))
                 .subscribe(({content, sliderItem}) => {
                   this.expeditionArticle = content;
-                  this.sliderItemsDesktop = sliderItem.items.slice(0, 3);
+                  this.sliderItemsDesktop = sliderItem.items.slice(0, 7);
                   this.sliderItems = this.sliderService.sliderItemFromExpedition(sliderItem.items);
                 })
         );

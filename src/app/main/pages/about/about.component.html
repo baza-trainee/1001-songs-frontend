@@ -3,12 +3,27 @@
     <div class="about__box">
       <h2 class="about__title">{{ 'about.title' | translate }}</h2>
     </div>
-    <div>
+    <div class="about__flex">
       <div class="about__content" *ngIf="dataAboutContent$ | async as content">
         <app-content-text [content]="content.content"></app-content-text>
       </div>
-      <div class="about__slider">
-
+      <div class="about__slider" *ngIf="projectsSlidesDesktop">
+        <div class="about__slider-sticky">
+          <h2 class="about__slider-title">Актуальні проєкти</h2>
+          <div class="about__slider-page">
+            <div *ngFor="let slide of projectsSlidesDesktop" (click)="navigateTo(slide.id)" (keydown)="navigateTo(slide.id)" tabindex="0">
+              <app-about-slider [item]="slide"></app-about-slider>
+            </div>
+          </div>
+          <div class="about__slider-nav">
+            <a class="about__slider-next" href="/">
+              На головну
+              <svg class="about__slider-next-arrow" width="24" height="24">
+                <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -18,6 +33,6 @@
   <app-about-team [team]="team"></app-about-team>
 </ng-container>
 
-<ng-container class="about__slider-mobile" *ngIf="projectsSlides.length">
+<div class="about__slider-mobile" *ngIf="projectsSlides.length">
   <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
-</ng-container>
+</div>

@@ -1,0 +1,39 @@
+@import '../../../../../typography/typography';
+@import '../../../../../typography/buttons';
+
+.slider {
+  &-card {
+    background-color: var(--bg-color-screen);
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 20%), 0 1px 1px 0 rgba(0, 0, 0, 10%), 0 1px 3px 0 rgba(0, 0, 0, 20%);
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 213px;
+    transition: .3s all ease;
+
+    &:hover {
+      scale: 1.01;
+    }
+  }
+
+  &__img {
+    height: 135px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+  }
+
+  &__name {
+    @include h6-desktop($font-size: 16px, $line-height: 20px, $font-family: $primary-fonts);
+
+    margin-bottom: 5px;
+  }
+
+  &__location {
+    @include caption-desktop($font-size: 12px, $line-height: 14px, $color: var(----color-input));
+  }
+}

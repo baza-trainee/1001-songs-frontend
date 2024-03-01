@@ -27,8 +27,17 @@
   }
 
   &__slider {
-    background-color: var(--bg-color-screen);
     display: none;
+
+    &-page {
+      height: calc(100vh - 225px);
+      overflow-y: scroll;
+      display: flex;
+      padding: 3px 7px 3px 3px;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
 
     &-title {
       @include h2-desktop;
@@ -206,12 +215,10 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  width: 95%;
   margin: 0 auto;
   cursor: pointer;
   transition: all .3s ease-in-out;
   position: relative;
-  height: 100%;
 
   &:hover {
     scale: 1.01;

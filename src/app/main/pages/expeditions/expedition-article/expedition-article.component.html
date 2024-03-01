@@ -25,15 +25,19 @@
         <div class="article__slider-desktop" *ngIf="sliderItemsDesktop.length">
           <div class="article__sticky" >
             <h2 class="article__slider-title">Пов’язані експедиції</h2>
-            <div *ngFor="let item of sliderItemsDesktop">
-              <div class="event" (click)="navigateTo(item.id)" (keydown)="navigateTo(item.id)" tabindex="0">
-                <img [src]="item.preview_photo" width="400" height="270" alt="photo">
-                <span class="event__date">{{ item.expedition_date }}</span>
-                <div class="event__container" style="cursor: pointer">
-                  <p class="event__name" *ngIf="item.title">{{ item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title }}</p>
-                  <p class="event__location">{{ item.location }}</p>
-                </div>
-              </div>
+            <div class="article__slider-page">
+              <mat-card class="article__slider-card" *ngFor="let item of sliderItemsDesktop">
+                <mat-card-content (click)="navigateTo(item.id)" (keydown)="navigateTo(item.id)" tabindex="0">
+                    <div class="event">
+                      <img [src]="item.preview_photo" width="400" height="270" alt="photo">
+                      <span class="event__date">{{ item.expedition_date }}</span>
+                      <div class="event__container" style="cursor: pointer">
+                        <p class="event__name" *ngIf="item.title">{{ item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title }}</p>
+                        <p class="event__location">{{ item.location }}</p>
+                      </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
             </div>
             <div class="article__router">
               <button
