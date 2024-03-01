@@ -2,6 +2,34 @@
 @import '../../../../../../typography/fonts';
 @import '../../../../../../typography/colors';
 
+.fix {
+  position: fixed;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  
+  .counter__title,
+  .player__title {
+    display: none;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 100vw;
+    height: calc(100% + 50px);
+    z-index: -1;
+    box-shadow: 0 8px 16px 8px rgba(15, 15, 15, 20%);
+  }
+}
+
 .songs {
   padding: 50px 0 80px;
 
@@ -78,32 +106,6 @@
       grid-template-columns: 0.81fr 1.16fr;
       gap: 16px;
     }
-  }
-}
-
-.fix {
-  position: fixed;
-  max-width: 1280px;
-  margin: 0 auto;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  .counter__title, .player__title {
-    display: none;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    width: 100vw;
-    height: calc(100% + 50px);
-    z-index: -1;
-    box-shadow: 0 8px 16px 8px rgba(15, 15, 15, 20%);
   }
 }
 
