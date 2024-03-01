@@ -12,7 +12,7 @@
       <h4 class="cycle__title-sub">{{ sub.title }}</h4>
       <div class="cycle__subcategory">
         <div class="cycle__img-box">
-          <img class="cycle__subcategory-img" *ngIf="i === 0" [src]="sub.media" alt="Ілюстрація до категорії" />
+          <img class="cycle__subcategory-img" [src]="sub.media" alt="Ілюстрація до категорії" />
         </div>
         <div class="cycle__subcategory-box">
           <a href="#" class="cycle__subcategory-link" *ngFor="let link of sub.education_genres" [routerLink]="'genre/' + link.id">
