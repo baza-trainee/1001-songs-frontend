@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -68,7 +68,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     private store: Store,
     private educationServices: EducationService,
     private playerService: PlayerService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -92,11 +93,10 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
       this.songs = scienseSongs;
     });
-
   }
 
   onDeatailsShow(event: Order) {
-    return event;
+    this.router.navigateByUrl(`${this.router.url}/song/${event.id}`);
   }
   onPlayPauseClicked(order: Order) {
     this.serveOrders(order);
