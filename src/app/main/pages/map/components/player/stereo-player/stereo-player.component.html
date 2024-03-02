@@ -60,7 +60,9 @@
       </button>
     </div>
     <div class="player__volume">
+      <mat-icon class="mat__icon">volume_up</mat-icon>
       <input 
+        class="volume_up"
         #volumeRange
         type="range" 
         min="0"
@@ -68,7 +70,6 @@
         step="1" 
         (input)="setUpVolume($event)" 
       />
-      <mat-icon class="mat__icon">volume_up</mat-icon>
     </div>
     <div class="player__timeline">
       <input
