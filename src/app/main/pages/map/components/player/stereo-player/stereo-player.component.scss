@@ -38,12 +38,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 
   &__actions {
-    width: 250px;
+    // width: 250px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
 
     .btn__player {
       width: 31px;
@@ -55,31 +56,31 @@
       border: 0;
       background-color: transparent;
     }
+  }
 
-    .volume {
-      border: 1px solid rgba(0, 0, 0, 30%);
-      border-radius: 20px;
-      height: 35px;
-      padding: 0 5px 0 10px;
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
+  &__volume {
+    border: 1px solid rgba(0, 0, 0, 30%);
+    border-radius: 20px;
+    height: 35px;
+    padding: 0 5px 0 10px;
+    // margin-left: 10px;
+    display: flex;
+    align-items: center;
 
-      input[type='range'] {
-        accent-color: #192a56;
-        width: 60px;
-        height: 2px;
-        line-height: 5px;
-        cursor: pointer;
-      }
+    input[type='range'] {
+      accent-color: #192a56;
+      width: 60px;
+      height: 2px;
+      line-height: 5px;
+      cursor: pointer;
     }
   }
 
-  .player__actions__mobile {
+  &__actions__mobile {
     display: none;
   }
 
-  .player__timeline {
+  &__timeline {
     position: relative;
     width: 71%;
 
@@ -112,8 +113,8 @@
 }
 
 @media (max-width: 1439px) {
-  .player__container {
-    .player__actions {
+  .player {
+    &__actions {
       width: 240px;
       margin-right: 18px;
     }
@@ -121,38 +122,38 @@
 }
 
 @media (max-width: 1024px) {
-  .player__container {
-    .player__timeline {
+  .player {
+    &__timeline {
       width: 100%;
     }
   }
 }
 
 @media (max-width: 768px) {
-  .player__container {
+  .player {
     display: block;
 
-    .player__actions {
+    &__actions {
       width: 240px;
       margin: 0 auto 16px;
     }
 
-    .player__timeline {
+    &__timeline {
       width: 100%;
     }
   }
 }
 
 @media (max-width: 630px) {
-  .player__container {
+  .player {
     margin: 0 auto;
     padding: 16px;
 
-    .player__actions {
+    &__actions {
       display: none;
     }
 
-    .player__actions__mobile {
+    &__actions__mobile {
       min-width: 100%;
       display: flex;
       align-items: center;
