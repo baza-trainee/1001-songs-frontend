@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef, EventEmitter,
-  HostListener, Input,
-  OnDestroy,
-  OnInit, Output,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule, SlicePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -21,19 +14,18 @@ import { Router } from '@angular/router';
   templateUrl: './general-search.component.html',
   styleUrls: ['./general-search.component.scss']
 })
-
 export class GeneralSearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchField') searchField!: ElementRef;
   @Input() isPopup: boolean = false;
-  @Output() togglePopUp = new EventEmitter<boolean>;
+  @Output() togglePopUp = new EventEmitter<boolean>();
   search = new FormControl('search');
-  options: { title: string; id: string; img: string}[] = [];
+  options: { title: string; id: string; img: string }[] = [];
   showInputSearch = false;
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private expeditionsService: ExpeditionsService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +43,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
       )
       .subscribe((searchWord) => {
         this.expeditionsService.fetchExpeditions({ search: searchWord + '' }).subscribe((resp) => {
-          const data = resp as { items: { title: string; id: number; preview_photo: string}[] };
+          const data = resp as { items: { title: string; id: number; preview_photo: string }[] };
           this.options = data.items.map((el) => ({ title: el.title, id: el.id + '', img: el.preview_photo + '' }));
         });
       });
@@ -70,7 +62,7 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  onExpeditionSelected(ev:{id: number}) {
+  onExpeditionSelected(ev: { id: number }) {
     if (this.isPopup) this.togglePopUp.emit(true);
     this.search.setValue('');
     this.showInputSearch = false;
@@ -84,15 +76,15 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
   activateSearch() {
     setTimeout(() => {
       this.showInputSearch = !this.showInputSearch;
-    })
+    });
   }
 
   routerExpeditions() {
+    if(!this.options.length) return;
     if (this.isPopup) this.togglePopUp.emit(true);
     const searchValue = this.search.value;
     this.search.setValue('');
     this.showInputSearch = false;
     this.router.navigateByUrl(`/expeditions?search=${searchValue}`);
-
   }
 }
