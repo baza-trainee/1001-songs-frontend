@@ -10,7 +10,7 @@
 
       <div class="songs__player">
         <div class="player__title" *ngIf="selectedSong$ | async as song">
-          {{ 'map.player.player-title' | translate }} <b>{{ song.title }}</b>
+          {{ 'map.player.player-title' | translate }}
         </div>
 
         <app-stereo-player #stereoPlayer [autoplay]="true" (isPlay)="handleIsPlayChange($event)" [song$]="playerSong"></app-stereo-player>
