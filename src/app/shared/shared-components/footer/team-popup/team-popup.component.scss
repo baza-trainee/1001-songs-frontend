@@ -33,6 +33,7 @@ $close-btn-size: 20px;
 
   &__title {
     @include h4-desktop($line-height: 32px);
+
     text-align: center;
     padding-right: 15px;
     margin-bottom: 15px;
