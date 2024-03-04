@@ -1,33 +1,71 @@
-section {
-  padding: 50px;
+@import '../../../../../typography/typography';
+@import '../../../../../typography/buttons';
+
+$close-btn-size: 20px;
+
+.popup-team {
+  background-color: var(--bg-color-screen);
+  padding: 25px 10px 25px 25px;
+  position: relative;
+
+  &__scroll {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  &__close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    &-btn {
+      display: inline-flex;
+      align-self: flex-end;
+      height: $close-btn-size;
+      width: $close-btn-size;
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    @include h4-desktop($line-height: 32px);
+    text-align: center;
+    padding-right: 15px;
+    margin-bottom: 15px;
+
+    &-sub {
+      @include button-desktop($font-weight: 400);
+
+      margin-bottom: 5px;
+    }
+  }
+
+  &__person {
+    &--link-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(234px, 1fr));
+      grid-gap: 8px;
+      justify-items: start
+    }
+
+    &--link {
+      @include text-button;
+
+      font-size: 20px;
+    }
+  }
 }
 
-h2 {
-  color: var(--bg-color-accent);
-  text-align: center;
-  margin: 0;
-  font-size: 50px;
-}
-
-div {
-  display: flex;
-  flex-direction: column;
-}
-
-a {
-  color: #111;
-}
-
-h3 {
-  font-size: 26px;
-  color: var(--bg-color-yellow);
-}
-
-.flex {
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 60px;
+@media (max-width:  610px) {
+  .popup-team {
+    &__person {
+      &--link-wrapper {
+        grid-template-columns: repeat(1, minmax(234px, 1fr));
+      }
+    }
+  }
 }

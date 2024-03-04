@@ -214,3 +214,8 @@ app-news {
     border-radius: 12px;
   }
 }
+
+.mat-mdc-dialog-container .mdc-dialog__container {
+  border-radius: 12px;
+  overflow: hidden;
+}
