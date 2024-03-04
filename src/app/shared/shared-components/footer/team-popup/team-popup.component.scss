@@ -4,9 +4,11 @@
 $close-btn-size: 20px;
 
 .popup-team {
+  background-image: url("https://raw.githubusercontent.com/shytuleva24/photos-in-1001songs/main/image%202.png");
   background-color: var(--bg-color-screen);
   padding: 25px 10px 25px 25px;
   position: relative;
+
 
   &__scroll {
     display: flex;

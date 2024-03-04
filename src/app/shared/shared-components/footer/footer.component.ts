@@ -9,13 +9,14 @@ import { Observable } from 'rxjs';
 import {FooterData, FooterPartners} from '../../interfaces/footer';
 import { FooterService } from '../../services/footer/footer.service';
 import {TeamPopupComponent} from "./team-popup/team-popup.component";
+import {PartnersComponent} from "../partners/partners.component";
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, RouterLink, RouterLinkActive]
+  imports: [TranslateModule, CommonModule, RouterLink, RouterLinkActive, PartnersComponent]
 })
 export class FooterComponent implements OnInit {
   public navLinks = navLinksHeader;

@@ -1,0 +1,23 @@
+.carousel {
+  width: 225px;
+  overflow: hidden;
+  height: 100%;
+
+  &-container {
+    display: flex;
+    gap: 16px;
+    height: 100%;
+  }
+
+  &-item {
+    flex: 0 0 auto;
+    height: 100%;
+    width: 64px;
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+}
