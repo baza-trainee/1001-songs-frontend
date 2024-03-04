@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
 
     this.dialog.open(ShareModalComponent, dialogConfig);
   }

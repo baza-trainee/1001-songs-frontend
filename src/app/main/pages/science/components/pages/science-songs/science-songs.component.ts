@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -11,7 +11,6 @@ import { PaginationComponent } from '../../../../../../shared/shared-components/
 import { FetchScienceSongs, SelectSong } from 'src/app/store/education/es-player.actions';
 import { ESPlayerState } from 'src/app/store/education/es-player.state';
 import { EducationSong } from 'src/app/shared/interfaces/science-song.interface';
-import { ESPlaylistSongCardComponent } from '../../shared-components/es-playlist-song-card/es-playlist-song-card.component';
 import { PlaylistSongCardComponent } from '../../../../map/components/player/playlist-song-card/playlist-song-card.component';
 import { StereoPlayerComponent } from '../../../../map/components/player/stereo-player/stereo-player.component';
 import { PlayerSong } from '../../../../../../shared/interfaces/song.interface';
@@ -29,7 +28,6 @@ import { Order } from 'src/app/shared/interfaces/order.interface';
   imports: [
     CommonModule,
     BreadcrumbsComponent,
-    ESPlaylistSongCardComponent,
     TranslateModule,
     ImageSliderComponent,
     PaginationComponent,
@@ -68,7 +66,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     private store: Store,
     private educationServices: EducationService,
     private playerService: PlayerService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -92,11 +91,10 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
       this.songs = scienseSongs;
     });
-
   }
 
   onDeatailsShow(event: Order) {
-    return event;
+    this.router.navigateByUrl(`${this.router.url}/song/${event.id}`);
   }
   onPlayPauseClicked(order: Order) {
     this.serveOrders(order);

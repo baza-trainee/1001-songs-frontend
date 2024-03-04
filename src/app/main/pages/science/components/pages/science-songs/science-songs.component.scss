@@ -8,6 +8,10 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
+  
+  p {
+    display: none;
+  }
 
   &::before {
     content: '';
@@ -152,7 +156,7 @@
       flex-direction: column;
     }
 
-    &__playlist{
+    &__playlist {
       &-titles {
         display: none;
       }
@@ -190,5 +194,3 @@
     }
   }
 }
-
-
