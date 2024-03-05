@@ -154,6 +154,9 @@ SOFTWARE.
 ngx-clipboard
 MIT
 
+ngx-owl-carousel-o
+MIT
+
 ngx-window-token
 MIT
 
