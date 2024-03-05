@@ -67,7 +67,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     },
     nav: false,
     autoplay: true,
-    autoplayTimeout: 15000
+    autoplayTimeout: 3000
   }
 
   constructor(

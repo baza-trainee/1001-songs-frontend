@@ -146,6 +146,9 @@
 
     &__title {
       @include h2-mobile;
+
+      margin-bottom: 26px;
+
     }
 
     &__content {
