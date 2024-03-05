@@ -93,6 +93,8 @@
 
   &__title {
     @include h2-desktop($line-height: 48px);
+
+    margin-bottom: 32px;
   }
 
   &__description {
