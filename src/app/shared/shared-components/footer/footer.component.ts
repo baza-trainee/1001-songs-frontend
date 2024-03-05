@@ -10,6 +10,7 @@ import {FooterData, FooterPartners} from '../../interfaces/footer';
 import { FooterService } from '../../services/footer/footer.service';
 import {TeamPopupComponent} from "./team-popup/team-popup.component";
 import {PartnersComponent} from "../partners/partners.component";
+import {OwlOptions} from "ngx-owl-carousel-o";
 
 @Component({
   selector: 'app-footer',
@@ -26,6 +27,33 @@ export class FooterComponent implements OnInit {
   untamLink = 'https://knmau.com.ua/nauka/laboratoriya-etnomuzikologiyi/';
   lnmaLink = 'https://lnma.edu.ua/kafedry/kafedra-muzychnoji-folklorystyky-ta-pndlme/';
   bazaLink = 'https://baza-trainee.tech/ua';
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoplaySpeed: 2000,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 3
+      },
+      400: {
+        items: 3
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 3
+      }
+    },
+    nav: false,
+    autoplay: true,
+    autoplayTimeout: 10000
+  }
 
   constructor(
     private _translate: TranslateService,

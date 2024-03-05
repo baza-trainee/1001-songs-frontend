@@ -33,6 +33,13 @@
   <app-about-team [team]="team"></app-about-team>
 </ng-container>
 
+<div class="container" *ngIf="partners$ | async as partners">
+  <section class="about partners">
+<!--    <h2 class="about__title">Партнери</h2>-->
+    <app-partners [partners]="partners" [cardWidth]="200" [customOptions]="customOptions"></app-partners>
+  </section>
+</div>
+
 <div class="about__slider-mobile" *ngIf="projectsSlides.length">
   <app-slider [sliderItems]="projectsSlides" [title]="'home.home-actual.title'" [link]="'/project'"></app-slider>
 </div>

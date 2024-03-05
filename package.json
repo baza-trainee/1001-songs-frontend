@@ -34,6 +34,7 @@
     "e2e": "0.0.8",
     "lint-staged": "^13.2.2",
     "ngx-clipboard": "^16.0.0",
+    "ngx-owl-carousel-o": "^16.0.0",
     "ngx-window-token": "^7.0.0",
     "package": "^1.0.1",
     "prettier": "^3.0.0",

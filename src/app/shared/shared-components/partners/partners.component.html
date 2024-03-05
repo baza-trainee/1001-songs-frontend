@@ -1,10 +1,16 @@
-<div class="carousel">
-  <div class="carousel-container" [style.transform]="transformValue">
-    <div class="carousel-item" *ngFor="let partner of clonedPartners; let i = index">
-      <a [href]="partner.link" target="_blank">
+<owl-carousel-o [options]="customOptions">
+  <ng-template
+    carouselSlide
+    *ngFor="let partner of partners"
+  >
+    <div class="card">
+      <a
+        [style.height.px]="cardWidth"
+        [href]="partner.link"
+        target="_blank">
+
         <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
       </a>
     </div>
-  </div>
-</div>
-
+  </ng-template>
+</owl-carousel-o>

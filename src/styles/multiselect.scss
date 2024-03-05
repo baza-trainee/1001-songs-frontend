@@ -213,6 +213,15 @@ app-news {
   img {
     border-radius: 12px;
   }
+
+  a {
+    text-decoration: underline;
+    color: #006;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .mat-mdc-dialog-container .mdc-dialog__container {

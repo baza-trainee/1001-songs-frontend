@@ -26,12 +26,9 @@
       <div class="footer__partners">
         <div class="partners__title">{{ 'footer.partners' | translate }}</div>
         <div class="partners__items" *ngIf="footerPartners$ | async as partners">
-          <app-partners [partners]="partners"></app-partners>
-<!--          <div class="partners__item" *ngFor="let partner of partners">-->
-<!--            <a href="{{ partner.link }}" target="_blank">-->
-<!--              <img [src]="partner.photo" alt="" class="partners__logo" />-->
-<!--            </a>-->
-<!--          </div>-->
+          <div class="partners__items-container">
+            <app-partners [partners]="partners" [cardWidth]="64" [customOptions]="customOptions"></app-partners>
+          </div>
         </div>
       </div>
       <div class="footer__rules">
