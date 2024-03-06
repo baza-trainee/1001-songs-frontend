@@ -1,5 +1,5 @@
 <div class="player">
-  <img *ngIf="isPreviewDisplayed" [src]="previewUrl | sanitize" alt="Expedition image" />
+  <!-- <img *ngIf="isPreviewDisplayed" [src]="previewUrl | sanitize" alt="Expedition image" /> -->
   <button class="player__control"
           *ngIf="isPreviewDisplayed && widthIcon"
           [style.width.px]="widthIcon"
@@ -7,5 +7,6 @@
           (click)="playVideo()"
   >&#9658;
   </button>
-  <iframe #player class="player__iframe" [src]="embeddedUrl | sanitize" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  <!-- <iframe #player class="player__iframe" [src]="embeddedUrl | sanitize" frameborder="0" allow="autoplay" allowfullscreen></iframe> -->
+  <div class="player__iframe"  id="ytPlayer"></div>
 </div>
