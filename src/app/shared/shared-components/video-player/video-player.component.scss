@@ -1,7 +1,6 @@
 
-::ng-deep iframe {height: inherit;}
 .player {
-  height: 100% !important;
+  height: 360px !important;
   overflow: hidden;
   position: relative;
 
@@ -24,11 +23,6 @@
     height: 100%;
     object-fit: cover;
     filter: sepia(70%);
-  }
-
-  &__iframe {
-    // width: 100%;
-    // height: 100%;
   }
 }
 
