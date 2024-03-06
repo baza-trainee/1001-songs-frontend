@@ -1,4 +1,4 @@
 export interface Order {
   id: number;
-  type: 'play' | 'pause' | '';
+  type: 'stp-play' | 'stp-pause' | 'details-toggle' | 'yt-pause' | 'yt-playing' | 'stp-pause-all'|'';
 }

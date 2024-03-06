@@ -1,7 +1,9 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoService } from './video.service';
 import { SanitizePipe } from '../../pipes/sanitizer.pipe';
+import { Order } from '../../interfaces/order.interface';
+import { Observable, Subject, of, skip, takeUntil } from 'rxjs';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const YT: any;
@@ -16,6 +18,9 @@ declare const YT: any;
 export class VideoPlayerComponent implements OnInit {
   @Input() srcUrl: string = '';
   @Input() widthIcon: number = 48;
+  @Input() order$: Observable<Order> = of({ id: 0, type: '' });
+
+  @Output() ytStartsPlay = new EventEmitter<Order>();
 
   isPreviewDisplayed = true;
   previewUrl: string = '';
@@ -25,9 +30,18 @@ export class VideoPlayerComponent implements OnInit {
 
   @ViewChild('playerContainer', { static: true }) playerContainer!: ElementRef;
   playerId: string = 'ytplayer' + Math.random().toString(36).substring(2, 15); // Generate unique player ID;
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(private videoService: VideoService) {}
   ngOnInit(): void {
+     console.log(window)
+    this.order$.pipe(takeUntil(this.destroy$)).pipe(skip(1)).subscribe((order) => {
+      // this.ytPlayer.pauseVideo()
+      console.log(order);
+      if(order.type === 'yt-pause'){
+        this.ytPlayer.pauseVideo()
+      }
+    });
     // Initialize YouTube player
     this.ytPlayer = new YT.Player(this.playerContainer.nativeElement, {
       videoId: this.videoService.getIdFromUrl(this.srcUrl),
@@ -44,6 +58,9 @@ export class VideoPlayerComponent implements OnInit {
       console.log('Video paused');
       // Do something when the video is paused
     }
+    if (event.data === YT.PlayerState.PLAYING) {
+      this.ytStartsPlay.emit({id: 0, type: 'yt-playing'})
+    }
   }
 
   playVideo() {
@@ -51,5 +68,10 @@ export class VideoPlayerComponent implements OnInit {
     this.ytPlayer.playVideo();
     // const url = this.player.nativeElement.src;
     // this.player.nativeElement.src = url + '&autoplay=1';
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(void 0);
+    this.destroy$.unsubscribe();
   }
 }

@@ -74,12 +74,16 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
+  onYtStartsPlay(event: Order){
+    this.handleOrders(event)
+  }
+
   onPlayPauseClicked(order: Order) {
     this.handleOrders(order);
   }
 
   onDeatailsShow(order: Order) {
-    this.orderDetails$.next({ id: order.id, type: '' });
+    this.orderDetails$.next({ id: order.id, type: 'details-toggle' });
   }
 
   @HostListener('window:resize')
@@ -111,14 +115,19 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private handleOrders(order: Order) {
-    if (order.type && order.type === 'play') {
+    if (order.type && order.type === 'stp-play') {
+      this.orderDetails$.next({id: 0, type: 'yt-pause'})
       this.store.dispatch(new SelectSong(order.id));
-      this.orderToCards$.next({ id: order.id, type: 'play' });
+      this.orderToCards$.next({ id: order.id, type: 'stp-play' });
       this.audioService.play();
     }
-    if (order.type && order.type === 'pause') {
+    if (order.type && order.type === 'stp-pause') {
       this.store.dispatch(new SelectSong(order.id));
-      this.orderToCards$.next({ id: order.id, type: 'pause' });
+      this.orderToCards$.next({ id: order.id, type: 'stp-pause' });
+      this.audioService.pause();
+    }
+    if (order.type && order.type === 'yt-playing') {
+      this.orderToCards$.next({ id: -1, type: 'stp-pause-all' });
       this.audioService.pause();
     }
   }

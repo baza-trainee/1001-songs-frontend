@@ -1,9 +1,7 @@
 <div class="detail" [ngClass]="{'opened': isOpened}" *ngIf="isOpened">
     <div class="detail__video">
-      <app-video-player [srcUrl]="song.video_url"></app-video-player>
+      <app-video-player [srcUrl]="song.video_url" [order$]="order$" (ytStartsPlay)="onYtStartsPlay($event)"></app-video-player>
     </div>
-
-
 
     <div class="detail__info">
       <div class="info__date__record">

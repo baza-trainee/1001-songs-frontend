@@ -12,7 +12,6 @@ import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
 
-
 @Component({
   selector: 'app-playlist-song-card',
   standalone: true,
@@ -21,7 +20,6 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
   templateUrl: './playlist-song-card.component.html',
   styleUrls: ['./playlist-song-card.component.scss']
 })
-
 export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   screenWidth: number = 0;
   @Input() song: PlaylistCardSong = {} as PlaylistCardSong;
@@ -41,7 +39,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   constructor(
     private audioService: AudioService,
     private playerService: PlayerService
-
   ) {}
 
   ngOnInit(): void {
@@ -49,13 +46,14 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
     this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
       this.handleInputOrder(order);
     });
-
   }
 
   private handleInputOrder(order: Order) {
-    if (order.id === this.song.id && order.type === 'play') {
+    if (order.type === 'stp-pause-all') {
+      this.isPlay = false;
+    } else if (order.id === this.song.id && order.type === 'stp-play') {
       this.isPlay = true;
-    } else if (order.id === this.song.id && order.type === 'pause') {
+    } else if (order.id === this.song.id && order.type === 'stp-pause') {
       this.isPlay = false;
     } else {
       this.isPlay = false;
@@ -70,9 +68,9 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   playPauseSong() {
     if (this.isPlay) {
-      this.playPauseClicked.emit({ id: this.song.id, type: 'pause' });
+      this.playPauseClicked.emit({ id: this.song.id, type: 'stp-pause' });
     } else {
-      this.playPauseClicked.emit({ id: this.song.id, type: 'play' });
+      this.playPauseClicked.emit({ id: this.song.id, type: 'stp-play' });
     }
   }
 

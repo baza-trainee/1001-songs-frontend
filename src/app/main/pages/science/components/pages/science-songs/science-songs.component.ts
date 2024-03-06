@@ -105,14 +105,14 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private serveOrders(order: Order) {
-    if (order.type && order.type === 'play') {
+    if (order.type && order.type === 'stp-play') {
       this.store.dispatch(new SelectSong(order.id + ''));
-      this.orderToCards$.next({ id: order.id, type: 'play' });
+      this.orderToCards$.next({ id: order.id, type: 'stp-play' });
       this.audioService.play();
     }
-    if (order.type && order.type === 'pause') {
+    if (order.type && order.type === 'stp-pause') {
       this.store.dispatch(new SelectSong(order.id + ''));
-      this.orderToCards$.next({ id: order.id, type: 'pause' });
+      this.orderToCards$.next({ id: order.id, type: 'stp-pause' });
       this.audioService.pause();
     }
   }

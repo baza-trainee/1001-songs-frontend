@@ -42,7 +42,11 @@
             [order$]="orderToCards$"
             (showDeatails)="onDeatailsShow($event)"
           ></app-playlist-song-card>
-          <app-playlist-song-details  [song]="song" [order$]="orderDetails$"></app-playlist-song-details>
+          <app-playlist-song-details
+            [song]="song"
+            [order$]="orderDetails$"
+            (ytStartsPlay)="onYtStartsPlay($event)"
+          ></app-playlist-song-details>
         </div>
       </div>
     </div>
