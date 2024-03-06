@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoService } from './video.service';
 import { SanitizePipe } from '../../pipes/sanitizer.pipe';
@@ -15,7 +15,7 @@ declare const YT: any;
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss']
 })
-export class VideoPlayerComponent implements OnInit {
+export class VideoPlayerComponent implements OnInit, OnDestroy {
   @Input() srcUrl: string = '';
   @Input() widthIcon: number = 48;
   @Input() order$: Observable<Order> = of({ id: 0, type: '' });
@@ -34,10 +34,7 @@ export class VideoPlayerComponent implements OnInit {
 
   constructor(private videoService: VideoService) {}
   ngOnInit(): void {
-     console.log(window)
     this.order$.pipe(takeUntil(this.destroy$)).pipe(skip(1)).subscribe((order) => {
-      // this.ytPlayer.pauseVideo()
-      console.log(order);
       if(order.type === 'yt-pause'){
         this.ytPlayer.pauseVideo()
       }
@@ -50,12 +47,11 @@ export class VideoPlayerComponent implements OnInit {
       }
     });
     this.previewUrl = this.videoService.previewFromUrl(this.srcUrl);
-    // this.embeddedUrl = this.videoService.getEmbeddedUrl(this.srcUrl);
   }
 
   onPlayerStateChange(event: { data: string }) {
     if (event.data === YT.PlayerState.PAUSED) {
-      console.log('Video paused');
+      //console.log('Video paused');
       // Do something when the video is paused
     }
     if (event.data === YT.PlayerState.PLAYING) {
@@ -66,8 +62,6 @@ export class VideoPlayerComponent implements OnInit {
   playVideo() {
     this.isPreviewDisplayed = false;
     this.ytPlayer.playVideo();
-    // const url = this.player.nativeElement.src;
-    // this.player.nativeElement.src = url + '&autoplay=1';
   }
 
   ngOnDestroy(): void {

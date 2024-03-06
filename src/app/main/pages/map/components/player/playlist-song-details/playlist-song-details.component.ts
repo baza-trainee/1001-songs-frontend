@@ -26,7 +26,6 @@ export class PlaylistSongDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
-      // console.log('INPUT')
       this.handleInputOrder(order);
     });
   }
