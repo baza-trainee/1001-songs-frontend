@@ -8,14 +8,9 @@ export class VideoService {
 
   getIdFromUrl(url: string): string {
     const fragmets1 = url.split('/');
-    console.log(fragmets1)
     const conatainedId = fragmets1[fragmets1.length - 1];
-
     const fragmets2 = conatainedId.split('=');
-    console.log(fragmets2)
     const id = fragmets2[fragmets2.length - 1];
-    console.log(id)
-
     return id;
   }
 
