@@ -39,7 +39,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
         this.ytPlayer.pauseVideo()
       }
     });
-    // Initialize YouTube player
     this.ytPlayer = new YT.Player(this.playerContainer.nativeElement, {
       videoId: this.videoService.getIdFromUrl(this.srcUrl),
       events: {
@@ -50,10 +49,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   onPlayerStateChange(event: { data: string }) {
-    if (event.data === YT.PlayerState.PAUSED) {
-      //console.log('Video paused');
-      // Do something when the video is paused
-    }
     if (event.data === YT.PlayerState.PLAYING) {
       this.ytStartsPlay.emit({id: 0, type: 'yt-playing'})
     }
