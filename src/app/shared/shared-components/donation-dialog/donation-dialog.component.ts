@@ -19,18 +19,16 @@ export class DonationDialogComponent {
   donation$!: Observable<DonationData>;
 
   actions = { copy: 'Copy IBAN', bmc: 'Buy Me A Coffe', patreon: 'Patreon' };
-  purposeMessage = "Безповоротна фінансова допомога від прізвище, ім'я, по-батькові.";
-  register = '45284215';
-  iban = 'UA353052990000026006035028980';
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: unknown,
     public clipboard: Clipboard,
     private donationService: DonationService
   ) {
     this.donation$ = this.donationService.fetchLastDonation();
-  }
-
-  copyIBAN() {
-    this.clipboard.copy(this.iban);
+    // console.log(this.donationService.fetchLastDonation())
+    // this.donationService.fetchLastDonation().subscribe(response => {
+    //   console.log(response.headers.keys())
+    // })
   }
 }

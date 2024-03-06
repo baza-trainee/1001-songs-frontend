@@ -2,7 +2,7 @@ import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
+import {withInterceptorsFromDi, provideHttpClient, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
@@ -16,6 +16,7 @@ import { AppState } from './app/store/app/app.state';
 import { PlayerState } from './app/store/player/player.state';
 import { FilterMapState } from './app/store/filter-map/filter-map.state';
 import { ESPlayerState } from './app/store/education/es-player.state';
+import {CacheInterceptor} from "./app/shared/interceptor/cache.interceptor";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,6 +36,7 @@ bootstrapApplication(AppComponent, {
         }
       })
     ),
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(
       [
