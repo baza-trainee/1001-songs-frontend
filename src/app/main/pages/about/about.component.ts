@@ -15,6 +15,10 @@ import { ContentTextComponent } from "../../../shared/shared-components/content-
 import {AboutSliderComponent} from "./about-slider/about-slider.component";
 import {ProjectItem} from "../../../shared/interfaces/project.interface";
 import {Router, RouterLink} from "@angular/router";
+import {PartnersComponent} from "../../../shared/shared-components/partners/partners.component";
+import {FooterPartners} from "../../../shared/interfaces/footer";
+import {FooterService} from "../../../shared/services/footer/footer.service";
+import {OwlOptions} from "ngx-owl-carousel-o";
 
 
 @Component({
@@ -22,25 +26,60 @@ import {Router, RouterLink} from "@angular/router";
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent, FadeInCarouselComponent, SafeHtmlPipe, ContentTextComponent, AboutSliderComponent, RouterLink]
+  imports: [TranslateModule, CommonModule, AboutTeamComponent, SliderComponent, FadeInCarouselComponent, SafeHtmlPipe, ContentTextComponent, AboutSliderComponent, RouterLink, PartnersComponent]
 })
 
 export class AboutComponent implements OnInit, OnDestroy {
   readonly dataAboutContent$: Observable<DataAboutContent>;
   private subscriptions: Subscription[] = [];
+  public partners$!: Observable<FooterPartners[]>;
+
+
 
   public aboutTeam$: Observable<AboutTeam[]>;
   public projectsSlides: Slide[] = [];
   public projectsSlidesDesktop: ProjectItem[] = [];
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoplaySpeed: 4500,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      570: {
+        items: 3
+      },
+      780: {
+        items: 4
+      },
+      940: {
+        items: 5
+      }
+    },
+    nav: false,
+    autoplay: true,
+    autoplayTimeout: 3000
+  }
+
   constructor(
     private translateService: TranslateService,
     private aboutService: AboutService,
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private footerService: FooterService
   ) {
     this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
     this.aboutTeam$ = this.aboutService.fetchAboutTeam();
+    this.partners$ = this.footerService.fetchFooterPartners();
   }
 
   ngOnInit(): void {

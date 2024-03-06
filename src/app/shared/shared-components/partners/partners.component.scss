@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  height: 100%;
+
+  img {
+    object-fit: contain;
+    height: 100%;
+
+    &:hover {
+      filter: invert(1);
+    }
+  }
+
+  a {
+    display: inline-block;
+    height: 100%;
+  }
+}
+

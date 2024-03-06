@@ -93,6 +93,8 @@
 
   &__title {
     @include h2-desktop($line-height: 48px);
+
+    margin-bottom: 32px;
   }
 
   &__description {
@@ -146,6 +148,9 @@
 
     &__title {
       @include h2-mobile;
+
+      margin-bottom: 26px;
+
     }
 
     &__content {
@@ -176,4 +181,9 @@
   .container {
     margin: 0 16px;
   }
+}
+
+.partners {
+  margin-top: 0;
+  display: block;
 }

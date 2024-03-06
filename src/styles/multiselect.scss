@@ -152,7 +152,7 @@ app-news {
 
 .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom .gmnoprint {
   left: calc(100% - 40px) !important;
-  top: calc(100% - 140px) !important;
+  top: 5% !important;
   pointer-events: fill;
 }
 
@@ -212,6 +212,15 @@ app-news {
 
   img {
     border-radius: 12px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #006;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 

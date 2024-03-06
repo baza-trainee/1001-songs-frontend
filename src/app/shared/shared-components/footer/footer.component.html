@@ -26,21 +26,9 @@
       <div class="footer__partners">
         <div class="partners__title">{{ 'footer.partners' | translate }}</div>
         <div class="partners__items" *ngIf="footerPartners$ | async as partners">
-          <div class="partners__item" *ngFor="let partner of partners">
-            <a href="{{ partner.link }}" target="_blank">
-              <img [src]="partner.photo" alt="" class="partners__logo" />
-            </a>
+          <div class="partners__items-container">
+            <app-partners [partners]="partners" [cardWidth]="64" [customOptions]="customOptions"></app-partners>
           </div>
-<!--          <div class="partners__item">-->
-<!--            <a href="{{ lnmaLink }}" target="_blank">-->
-<!--              <img src="assets/img/partners/partner-2.png" alt="Лабораторія музичної етнології ЛНМА" class="partners__logo" />-->
-<!--            </a>-->
-<!--          </div>-->
-<!--          <div class="partners__item">-->
-<!--            <a href="{{ bazaLink }}" target="_blank">-->
-<!--              <img src="assets/img/partners/partner-3.png" alt="Baza Trainee Ukraine" class="partners__logo" />-->
-<!--            </a>-->
-<!--          </div>-->
         </div>
       </div>
       <div class="footer__rules">

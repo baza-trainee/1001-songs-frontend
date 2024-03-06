@@ -4,13 +4,11 @@
 @import '../../../../typography/buttons';
 
 .team {
-  color: var(--bg-color-accent);
-  opacity: .8;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
+    text-decoration: underline;
   }
 }
 
@@ -92,23 +90,9 @@ footer.footer {
         }
 
         .partners__items {
-          display: flex;
-          align-items: center;
-
-         .partners__item {
-           width: 64px;
-           height: 64px;
-           margin-right: 32px;
-
-           img {
-             max-width: 100%;
-             object-fit: contain;
-           }
-
-           &:last-child {
-             margin-right: 0;
-           }
-         }
+          &-container {
+            width: 230px;
+          }
         }
       }
 
@@ -238,10 +222,10 @@ footer.footer {
         .footer__rules {
           ul {
             flex-direction: column;
-            margin-bottom: 24px;
+            margin-bottom: 0;
 
             li {
-              width: 100%;
+              width: auto;
               margin-bottom: 0;
             }
           }
@@ -276,22 +260,10 @@ footer.footer {
       }
 
       .footer__bottom {
+        gap: 16px;
+
         .footer__partners{
           min-width: 219px;
-
-          .partners__items {
-            flex-wrap: wrap;
-            row-gap: 24px;
-
-            .partners__item {
-              margin-right: 24px;
-
-              &:last-child {
-                margin-right: 0;
-              }
-
-            }
-          }
         }
 
         .footer__rules {
@@ -299,8 +271,7 @@ footer.footer {
             min-width: 218px;
 
             li {
-              width: 100%;
-              margin-bottom: 24px;
+              margin-bottom: 0;
 
               &:last-child {
                 margin-bottom: 0;
@@ -310,7 +281,7 @@ footer.footer {
         }
 
         .footer__contacts {
-          min-width: 219px;
+          min-width: auto;
 
           .contacts__email {
             margin-bottom: 24px;
@@ -341,10 +312,11 @@ footer.footer {
       .footer__top {
         padding-bottom: 28px;
         row-gap: 20px;
-        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
 
         .footer__logo {
-          min-width: 171px;
+          min-width: 20%;
         }
 
         .footer__nav {
@@ -361,34 +333,19 @@ footer.footer {
         }
 
         .footer__donate {
-          width: 100%;
+          width: auto;
         }
       }
 
       .footer__bottom {
         margin: 28px 0;
         flex-wrap: wrap;
-        row-gap: 28px;
 
         .footer__partners{
-          min-width: 100%;
           order: 1;
 
           .partners__title {
             margin-bottom: 16px;
-          }
-
-          .partners__items {
-            flex-wrap: wrap;
-            row-gap: 24px;
-
-            .partners__item {
-              margin-right: 24px;
-
-              &:last-child {
-                margin-right: 0;
-              }
-            }
           }
         }
 
@@ -397,10 +354,9 @@ footer.footer {
           margin: 0;
 
           ul {
-            min-width: 100%;
+            flex-direction: row;
 
             li {
-              width: 100%;
               margin-bottom: 16px;
 
               &:last-child {
@@ -411,7 +367,6 @@ footer.footer {
         }
 
         .footer__contacts {
-          min-width: 100%;
           order: 2;
 
           .contacts__title {
@@ -426,6 +381,77 @@ footer.footer {
 
       .footer__rights {
         line-height: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  footer.footer {
+    .container {
+      .footer__top {
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .footer__logo {
+          min-width: auto;
+        }
+
+        .footer__nav {
+          width: 50%;
+
+          .nav__list {
+            min-width: auto;
+            flex-direction: column;
+            row-gap: 16px;
+
+            .nav__item {
+              min-width: auto;
+            }
+          }
+        }
+
+        .footer__donate {
+          width: 100%;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 442px) {
+  footer.footer {
+    .container {
+      .footer__bottom {
+        margin: 28px 0;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .footer__partners{
+          order: 1;
+
+          .partners__title {
+            margin-bottom: 16px;
+          }
+        }
+
+        .footer__rules {
+          order: 3;
+          margin: 0;
+
+          ul {
+            flex-direction: column;
+          }
+        }
+
+        .footer__contacts {
+          order: 2;
+          text-align: left;
+        }
       }
     }
   }
