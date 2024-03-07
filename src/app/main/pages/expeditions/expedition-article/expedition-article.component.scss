@@ -8,6 +8,10 @@
   flex-direction: column;
   gap: 28px;
 
+  &__header-ua {
+    min-width: 300px;
+  }
+
   &__flex {
     display: flex;
     gap: 28px;
