@@ -46,13 +46,13 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store
   ) {
-    this.store.dispatch(new FetchSongs(new SongFilter()));
+    //this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new InitFilterOptions());
+   // this.store.dispatch(new InitFilterOptions());
     this.store.dispatch(new FetchMarkers(new SongFilter()));
-    this.store.dispatch(new FetchSongs(new SongFilter()));
+   // this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
   openDialog(): void {
