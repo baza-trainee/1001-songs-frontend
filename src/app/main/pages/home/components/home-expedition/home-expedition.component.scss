@@ -29,12 +29,12 @@ img {
 
   &__main {
     width: 50%;
-    cursor: pointer;
 
     &-img {
       margin-bottom: 19px;
       border-radius: 16px;
       max-height: 384px;
+      cursor: pointer;
     }
 
     &-date,
@@ -48,6 +48,7 @@ img {
     &-date,
     &-btn {
       font-weight: 600;
+      cursor: pointer;
     }
 
     &-location {
@@ -58,6 +59,7 @@ img {
       @include h4-desktop($line-height: 36px);
 
       margin: 6px 0 11px;
+      cursor: pointer;
     }
 
     &-btn {

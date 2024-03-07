@@ -13,10 +13,8 @@ import { HomeExpeditionComponent } from './components/home-expedition/home-exped
 import { HomeNewsComponent } from './components/home-news/home-news.component';
 import { InteractiveMapComponent } from 'src/app/shared/shared-components/interactive-map/interactive-map.component';
 import { DonationDialogComponent } from 'src/app/shared/shared-components/donation-dialog/donation-dialog.component';
-import { FetchSongs } from '../../../store/player/player.actions';
 import { SongFilter } from '../../../shared/interfaces/map-marker';
 import { Store } from '@ngxs/store';
-import { InitFilterOptions } from 'src/app/store/filter-map/filter-map.actions';
 import { FetchMarkers } from 'src/app/store/map/map.actions';
 
 @Component({
@@ -46,13 +44,10 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store
   ) {
-    //this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
   ngOnInit(): void {
-   // this.store.dispatch(new InitFilterOptions());
     this.store.dispatch(new FetchMarkers(new SongFilter()));
-   // this.store.dispatch(new FetchSongs(new SongFilter()));
   }
 
   openDialog(): void {
@@ -66,7 +61,4 @@ export class HomeComponent implements OnInit {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
   }
 
-  // handleMapEmit(ev: any) {
-  //   console.log(ev);
-  // }
 }
