@@ -29,7 +29,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   @Output() playPauseClicked = new EventEmitter<Order>();
   @Output() showDeatails = new EventEmitter<Order>();
 
-  staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
 

@@ -42,7 +42,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   heightHeader!: number;
   paddingTop!: number;
   heightMap: number = 694;
-  staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   public itemsPerPage: number = 10;
   public currentPage: number = 1;
 
