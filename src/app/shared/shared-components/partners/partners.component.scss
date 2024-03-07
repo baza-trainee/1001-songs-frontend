@@ -7,7 +7,7 @@
 
   img {
     object-fit: contain;
-    height: 100%;
+    width: 100%;
 
     &:hover {
       filter: invert(1);
@@ -15,8 +15,30 @@
   }
 
   a {
+    width: auto;
     display: inline-block;
-    height: 100%;
+    height: auto;
   }
 }
 
+.about-partners {
+  a {
+    width: 200px;
+    display: inline-block;
+    height: 200px;
+  }
+}
+
+@media (max-width: 465px) {
+  .about-partners {
+    a {
+      width: 100%;
+      display: inline-block;
+      height: 300px;
+    }
+
+    img {
+      height: 100% !important;
+    }
+  }
+}

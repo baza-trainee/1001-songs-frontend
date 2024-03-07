@@ -156,6 +156,8 @@ app-news {
   pointer-events: fill;
 }
 
+
+
 @media (max-width: 1024px) {
   .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
     width: calc(100% - 96px) !important;
@@ -171,6 +173,10 @@ app-news {
 @media (max-width: 465px) {
   .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
     width: calc(100% - 32px) !important;
+  }
+
+  .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom .gmnoprint {
+    top: 10% !important;
   }
 }
 
@@ -206,6 +212,10 @@ app-news {
 }
 
 .content {
+  h1 {
+    line-height: normal;
+  }
+
   h2 {
     padding-bottom: 10px;
   }
