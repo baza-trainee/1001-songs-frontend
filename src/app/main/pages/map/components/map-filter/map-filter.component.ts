@@ -77,7 +77,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
         filter((emits) => {
           const search = emits[0];
           if (search && search.length < 3) this.autocompleteSongs = [];
-          return search && search.length > 2 ? true : false;
+          return search && search.trim().length > 2 ? true : false;
         })
       )
       .subscribe((combinedEmits) => {
