@@ -16,6 +16,7 @@ import { SelectSong } from 'src/app/store/player/player.actions';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 import { PlaylistSongDetailsComponent } from './playlist-song-details/playlist-song-details.component';
+import { MAP_PAGE_AMOUNT_SONGS } from 'src/app/shared/config/pagination.constatnts';
 
 @Component({
   selector: 'app-player',
@@ -42,7 +43,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   heightHeader!: number;
   paddingTop!: number;
   heightMap: number = 694;
-  public itemsPerPage: number = 10;
+ // public itemsPerPage: number = 10;
   public currentPage: number = 1;
 
   songs: PlaylistSong[] = [];
@@ -106,7 +107,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.songs.length / this.itemsPerPage);
+    return Math.ceil(this.songs.length / MAP_PAGE_AMOUNT_SONGS);
   }
 
   handleIsPlayChange(order: Order) {
@@ -132,10 +133,10 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   get itemsOnCurrentPage(): PlaylistSong[] {
-    if (this.songs.length <= this.itemsPerPage) return this.songs;
+    if (this.songs.length <= MAP_PAGE_AMOUNT_SONGS) return this.songs;
 
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.currentPage - 1) * MAP_PAGE_AMOUNT_SONGS;
+    const endIndex = startIndex + MAP_PAGE_AMOUNT_SONGS;
 
     return this.songs.slice(startIndex, endIndex);
   }

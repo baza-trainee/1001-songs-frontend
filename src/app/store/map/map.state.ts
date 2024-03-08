@@ -43,7 +43,7 @@ export class MapState {
   @Action(FetchMarkers)
   fetchMarkers(ctx: StateContext<MapStateModel>, action: FetchMarkers) {
     const state = ctx.getState();
-    this.mapService.fetchMarker(action.options).subscribe((response) => {
+    this.mapService.fetchMarkers(action.options).subscribe((response) => {
       ctx.setState({
         ...state,
         markersList: response

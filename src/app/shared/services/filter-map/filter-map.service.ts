@@ -14,6 +14,7 @@ import {
   SongFilter
 } from '../../interfaces/map-marker';
 import { PlaylistSong } from '../../interfaces/song.interface';
+import { MAP_PAGE_AMOUNT_SONGS } from '../../config/pagination.constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,9 @@ export class FilterMapService {
     );
   }
 
-  fetchSongsByFilter(options: SongFilter) {
+  fetchSongsByFilter(options: SongFilter, pagination = {page:1 ,size: MAP_PAGE_AMOUNT_SONGS}) {
     let fullRequest = `${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}`;
+    const paginationParams = `page=1&size=3`;
 
     const search = options.title ? `search=${options.title}` : '';
     const country = options.country.length ? options.country.map((country) => `country_id=${country}`) : '';
