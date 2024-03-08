@@ -26,7 +26,7 @@ export const StatEndpoints = {
   projects: 'projects',
   partners: 'patners',
   news: {
-    news: 'news/news',
+    news: 'news',
     categories: 'news/categories'
   },
   expeditions: {
