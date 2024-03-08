@@ -5,11 +5,5 @@
       <app-arrow-down [direction]="expansionSourcesArrow"></app-arrow-down>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <ul>
-    <li *ngFor="let link of recommendedLnks">
-      <span class="lit-link">{{ getLinkTitle(link) }}</span>
-      <br />
-      <a class="link" target="_blank" href="{{ link }}">{{ link | slice: 0 : 25 }}</a>
-    </li>
-  </ul>
+  <div class="recommendations-content" [innerHTML]="recommendedLinks | safeHtml"></div>
 </mat-expansion-panel>

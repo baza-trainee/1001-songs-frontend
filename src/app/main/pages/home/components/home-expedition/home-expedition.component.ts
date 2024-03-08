@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Router, RouterLink} from "@angular/router";
 import {Observable} from "rxjs";
@@ -9,7 +9,7 @@ import {ExpeditionsService} from "../../../../../shared/services/expeditions/exp
 @Component({
   selector: 'app-home-expedition',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterLink],
+  imports: [CommonModule, TranslateModule, RouterLink, NgOptimizedImage],
   templateUrl: './home-expedition.component.html',
   styleUrls: ['./home-expedition.component.scss']
 })
