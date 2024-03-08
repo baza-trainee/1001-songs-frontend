@@ -52,6 +52,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   private dragStartX: number = 0;
   private prevDragX: number = 0;
   private isDragging: boolean = false;
+  private isTouchStart: boolean = false;
 
   constructor(
     private router: Router,
@@ -72,17 +73,22 @@ export class SliderComponent implements OnInit, OnDestroy {
   onTouchStart(event: TouchEvent): void {
     const touch = event.touches[0];
     this.isDragging = true;
+    this.isTouchStart = true;
     this.dragStartX = touch.clientX;
     this.prevDragX = touch.clientX;
   }
 
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent): void {
-    if (this.isDragging) {
+    if (this.isDragging && this.isTouchStart) {
       const touch = event.touches[0];
       const diffX = touch.clientX - this.prevDragX;
 
-      this.translateX += diffX;
+      if (this.isTouchStart) {
+        const slideDistance = diffX > 0 ? this.defaultSlideWidth + this.gap : -(this.defaultSlideWidth + this.gap);
+        this.translateX += slideDistance;
+        this.isTouchStart = false;
+      }
       this.prevDragX = touch.clientX;
 
       if (this.translateX < this.minTranslateX) this.translateX = this.minTranslateX;
@@ -129,11 +135,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.prevIsDisabled = this.translateX === this.maxTranslateX;
     this.nextIsDisabled =  this.translateX === this.minTranslateX;
 
-    if (this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.gap <= this.sliderContainerWidth) {
-      this.isShowButton = false;
-    } else {
-      this.isShowButton = true;
-    }
+    this.isShowButton = this.sliderItems.length * (this.defaultSlideWidth + this.gap) - this.gap > this.sliderContainerWidth;
     this.cdr.detectChanges();
   }
 }

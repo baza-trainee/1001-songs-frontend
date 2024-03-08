@@ -10,7 +10,6 @@ import { AudioService } from '../../../../../../shared/services/audio/audio.serv
 import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
-import { PlayerService } from 'src/app/shared/services/player/player.service';
 
 @Component({
   selector: 'app-playlist-song-card',
@@ -30,7 +29,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   @Output() playPauseClicked = new EventEmitter<Order>();
   @Output() showDeatails = new EventEmitter<Order>();
 
-  staticVideoImgUrl: string = './assets/img/player/video_mock.png';
   hasMedia: boolean = true;
   isOpened: boolean = false;
 
@@ -38,11 +36,10 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
 
   constructor(
     private audioService: AudioService,
-    private playerService: PlayerService
   ) {}
 
   ngOnInit(): void {
-    this.hasMedia = this.song.stereo_audio ? true : false;
+    this.hasMedia = !!this.song.stereo_audio;
     this.order$.pipe(takeUntil(this.destroy$)).subscribe((order: Order) => {
       this.handleInputOrder(order);
     });
@@ -66,7 +63,8 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  playPauseSong() {
+  playPauseSong(event: Event) {
+    event.stopPropagation();
     if (this.isPlay) {
       this.playPauseClicked.emit({ id: this.song.id, type: 'stp-pause' });
     } else {

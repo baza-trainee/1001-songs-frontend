@@ -14,5 +14,6 @@ export class PartnersComponent {
   @Input() partners: FooterPartners[] = [];
   @Input() cardWidth: number = 200;
   @Input() customOptions: OwlOptions = {} as OwlOptions;
+  @Input() classContainer: string = '';
 
 }

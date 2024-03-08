@@ -2,7 +2,7 @@
 @import '../../../../typography/buttons';
 
 .home {
-  background: linear-gradient(13deg, rgba(18, 9, 1, 44%) 16.50%, rgba(18, 9, 1, 0%) 73.04%), url("../../../../assets/img/home/Header-min.png") no-repeat top/cover, fixed;
+  background: linear-gradient(13deg, rgba(18, 9, 1, 44%) 16.50%, rgba(18, 9, 1, 0%) 73.04%), url("../../../../assets/img/home/Header-min.jpg") no-repeat top/cover, fixed;
   height: 757px;
   position: relative;
 
@@ -43,7 +43,7 @@
     }
 
     &-img {
-      width: auto;
+      width: 17px;
       height: 11px;
       vertical-align: middle;
     }

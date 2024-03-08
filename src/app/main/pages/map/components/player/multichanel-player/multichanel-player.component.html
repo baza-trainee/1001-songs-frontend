@@ -32,13 +32,13 @@
         </svg>
       </button>
       <!-- <div class="volume">
-        <input 
+        <input
           #volumeRange
-          type="range" 
+          type="range"
           min="0"
-          max="10" 
-          step="1" 
-          (input)="setUpVolume($event)" 
+          max="10"
+          step="1"
+          (input)="setUpVolume($event)"
         />
         <mat-icon class="mat__icon">volume_up</mat-icon>
       </div> -->
@@ -67,14 +67,14 @@
     </div>
     <div class="player__volume">
       <mat-icon class="mat__icon">volume_up</mat-icon>
-      <input 
+      <input
         class="volume_up"
         #volumeRange
-        type="range" 
+        type="range"
         min="0"
-        max="10" 
-        step="1" 
-        (input)="setUpVolume($event)" 
+        max="10"
+        step="1"
+        (input)="setUpVolume($event)"
       />
     </div>
     <div class="player__timeline">
@@ -97,7 +97,7 @@
   <div class="player__multichanel__items" *ngIf="isVisible">
     <div class="multichanel__item" *ngFor="let state of multiState; let i = index">
       <div class="item__aside">
-        <div class="item__name">Chanel {{ i + 1 }}</div>
+        <div class="item__name">Канал {{ i + 1 }}</div>
         <div class="item__actions">
           <button mat-icon-button (click)="muteToggle(i)" [color]="state.muted ? 'warn' : ''" aria-label="mute unmute button">
             <mat-icon class="mat__icon" *ngIf="!state.muted">volume_up</mat-icon>

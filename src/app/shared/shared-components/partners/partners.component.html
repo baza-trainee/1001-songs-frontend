@@ -1,16 +1,17 @@
-<owl-carousel-o [options]="customOptions">
-  <ng-template
-    carouselSlide
-    *ngFor="let partner of partners"
-  >
-    <div class="card">
-      <a
-        [style.height.px]="cardWidth"
-        [href]="partner.link"
-        target="_blank">
+<section [class]="classContainer">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template
+      carouselSlide
+      *ngFor="let partner of partners"
+    >
+      <div class="card">
+        <a
+          [href]="partner.link"
+          target="_blank">
 
-        <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
-      </a>
-    </div>
-  </ng-template>
-</owl-carousel-o>
+          <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
+        </a>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</section>

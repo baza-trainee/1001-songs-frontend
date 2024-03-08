@@ -31,22 +31,22 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 25px;
+    gap: 24px;
   }
 
   &__image-item {
-    width: 75%;
+    width: calc(50% - 12px);
     height: 322px;
     border-radius: 12px;
     object-fit: cover;
   }
 
   &__title {
+    width: calc(50% - 12px);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    width: 75%;
   }
 
   &__title-name {
@@ -99,13 +99,10 @@
 @media (max-width: 889px) {
   .card {
     &__image-item {
-      width: 50%;
       height: 180px;
     }
 
     &__title {
-      width: 50%;
-
       &-name {
         font-size: 18px;
         line-height: 24px;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +20,7 @@ import {ActivatedRoute, RouterLink} from "@angular/router";
   imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent, PaginationComponent, RouterLink]
 })
 
-export class ExpeditionsComponent implements OnInit, OnDestroy {
+export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
   public expeditionCategories$!: Observable<Category[]>;
   private articlesSubscription?: Subscription;
   private queryParamsSubscription?: Subscription;
@@ -37,7 +37,7 @@ export class ExpeditionsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.fetchExpeditions();
     this.fetchCategory();
   }

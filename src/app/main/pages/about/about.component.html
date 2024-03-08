@@ -36,7 +36,7 @@
 <div class="container" *ngIf="partners$ | async as partners">
   <section class="about partners">
     <h2 class="about__title">Наші партнери</h2>
-    <app-partners [partners]="partners" [cardWidth]="200" [customOptions]="customOptions"></app-partners>
+    <app-partners [partners]="partners" [classContainer]="'about-partners'" [customOptions]="customOptions"></app-partners>
   </section>
 </div>
 

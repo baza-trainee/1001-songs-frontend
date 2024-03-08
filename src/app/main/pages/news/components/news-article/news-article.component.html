@@ -10,7 +10,7 @@
         <div class="article__content">
           <app-content-text [content]="article.content"></app-content-text>
         </div>
-        <div class="article__slider-desktop" *ngIf="sliderItemsDesktop.length">
+        <div class="article__slider-desktop" *ngIf="sliderItemsDesktop">
           <div class="article__sticky">
               <app-news-card-slider [items]="sliderItemsDesktop"></app-news-card-slider>
           </div>
