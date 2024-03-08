@@ -30,7 +30,6 @@ export class MapService {
   fetchMarkers(queryParams: SongFilter = new SongFilter()): Observable<MarkerOfLocation[]> {
  
     const requestParams: string = this.buildQueryStringFromParams(queryParams);
-    console.log('fetchMarkers :', requestParams);
     return this.http.get<MarkerOfLocation[]>(API_URL + StatEndpoints.map.geotag + requestParams).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);

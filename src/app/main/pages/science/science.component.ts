@@ -11,6 +11,7 @@ import { CategoryLinkComponent } from './components/shared-components/category-l
 import { EducationCategoryCard } from '../../../shared/interfaces/science.interface';
 import { EducationService } from 'src/app/shared/services/education/education.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-science',
@@ -41,7 +42,15 @@ export class ScienceComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private educationService: EducationService) {}
+  constructor(
+    private educationService: EducationService,
+    private meta: Meta
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Information about the classification and periodization of song folklore'
+    });
+  }
 
   ngOnInit(): void {
     this.educationService
