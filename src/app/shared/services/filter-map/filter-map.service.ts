@@ -14,7 +14,6 @@ import {
   SongFilter
 } from '../../interfaces/map-marker';
 import { PlaylistSong } from '../../interfaces/song.interface';
-import { MAP_PAGE_AMOUNT_SONGS } from '../../config/pagination.constatnts';
 
 @Injectable({
   providedIn: 'root'

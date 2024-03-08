@@ -45,7 +45,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   heightHeader!: number;
   paddingTop!: number;
   heightMap: number = 694;
-  // public itemsPerPage: number = 10;
   public currentPage: number = 1;
   totalAmountSong: number = 0;
 
@@ -57,7 +56,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @Select(FilterMapState.getSelectedValues) selectedValues$?: Observable<SongFilter>;
 
   currentFilter: SongFilter = {} as SongFilter;
-  
+
   isFixed: boolean = false;
 
   playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
@@ -76,7 +75,9 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
       if (data) this.songs = data.slice();
     });
     this.totalAmount$?.pipe(takeUntil(this.destroy$)).subscribe((amount) => (this.totalAmountSong = amount));
-    this.selectedValues$?.subscribe(filterValues =>{this.currentFilter = filterValues})
+    this.selectedValues$?.subscribe((filterValues) => {
+      this.currentFilter = filterValues;
+    });
   }
   ngOnInit(): void {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
@@ -145,8 +146,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   changePage(page: number): void {
     if (this.currentPage !== page) {
       this.currentPage = page;
-      console.log(this.currentPage);
-      this.store.dispatch(new FetchSongs(this.currentFilter,{page,size: 5}))
+      this.store.dispatch(new FetchSongs(this.currentFilter, { page, size: MAP_PAGE_AMOUNT_SONGS }));
     }
   }
 

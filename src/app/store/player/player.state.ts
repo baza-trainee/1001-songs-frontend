@@ -6,7 +6,6 @@ import { FetchSongById, FetchSongs, FindSongByTitle, ResetSong, SelectNext, Sele
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import { MAP_PAGE_AMOUNT_SONGS } from 'src/app/shared/config/pagination.constatnts';
 
 export interface PlayerStateModel {
   songsList: Song[];
