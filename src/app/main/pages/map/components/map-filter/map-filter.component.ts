@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, Observable, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -57,16 +57,18 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       this.store.dispatch(new SetSelectedValues(values as SongFilter));
     });
 
-    this.form
-      .get('title')
-      ?.valueChanges.pipe(
+    this.form?.valueChanges
+      .pipe(
         tap((search) => {
           this.songFound = false;
-          if (search === '') {
+          if (search.title === '') {
+            this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+            this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
             this.autocompleteSongs = [];
           }
         })
       )
+      .pipe(map((filter) => filter.title))
       .pipe(takeUntil(this.destroy$))
       .pipe(combineLatestWith(this.songs))
       .pipe(debounceTime(300))
@@ -80,7 +82,10 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       .pipe(
         filter((emits) => {
           const search = emits[0];
-          if (search && search.length < 3) this.autocompleteSongs = [];
+          if (search && search.length < 3) {
+            this.autocompleteSongs = [];
+            //this.emitCounter = 0;
+          }
           return search && search.trim().length > 2 ? true : false;
         })
       )
