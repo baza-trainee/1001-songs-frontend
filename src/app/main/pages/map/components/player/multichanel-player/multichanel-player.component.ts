@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
@@ -10,6 +10,7 @@ import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
 import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-multichanel-player',
@@ -20,8 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   private REWIND_STEP: number = 5;
-  // @Input() stereoOnly: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
+
+  @Output() isPlay: EventEmitter<Order> = new EventEmitter<Order>();
 
   isPreloader = false;
 
@@ -53,7 +55,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       // .pipe(skip(1))
       .subscribe((states) => {
         const loading = states.filter((state) => !state.playing);
-        // console.log(states)
         if (!loading.length) {
           this.isPreloader = false;
         }
@@ -61,7 +62,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         if (canPlay.length) {
           this.synchronizeTracs();
         }
-        // const nonPlayingTracks = states.filter((state) => !state.playing);
        
       });
 
@@ -83,7 +83,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   synchronizeTracs() {
     setTimeout(() => {
       this.multiAudioService.seekTo(Number(0));
-      //this.pause();
     }, 500);
   }
 
@@ -120,6 +119,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   play() {
     this.multiAudioService.play();
+    this.isPlay.emit({id: 0, type: 'stp-play'});
   }
 
   stop() {

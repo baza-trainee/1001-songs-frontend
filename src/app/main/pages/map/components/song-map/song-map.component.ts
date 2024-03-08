@@ -14,11 +14,12 @@ import { ResetSong } from '../../../../../store/player/player.actions';
 import { BreadcrumbsComponent } from '../../../../../shared/shared-components/breadcrumbs/breadcrumbs.component';
 import { FormatTextPipe } from '../../../../../shared/pipes/format-text.pipe';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import {VideoPlayerComponent} from "../../../../../shared/shared-components/video-player/video-player.component";
-import {Breadcrumbs} from "../../../../../shared/interfaces/breadcrumbs.interface";
-import {
-  FadeInCarouselComponent
-} from "../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
+import { VideoPlayerComponent } from '../../../../../shared/shared-components/video-player/video-player.component';
+import { Breadcrumbs } from '../../../../../shared/interfaces/breadcrumbs.interface';
+import { FadeInCarouselComponent } from '../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component';
+import { Order } from 'src/app/shared/interfaces/order.interface';
+import { AudioService } from 'src/app/shared/services/audio/audio.service';
+import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.service';
 
 @Component({
   selector: 'app-song-map',
@@ -39,7 +40,6 @@ import {
   styleUrls: ['./song-map.component.scss']
 })
 export class SongMapComponent implements OnInit, OnDestroy {
-  // @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<Song>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
 
   song$: BehaviorSubject<PlayerSong> = new BehaviorSubject<PlayerSong>({} as PlayerSong);
@@ -49,24 +49,38 @@ export class SongMapComponent implements OnInit, OnDestroy {
   slideIndex = 0;
 
   private subscriptions: Subscription[] = [];
-  breadcrumbs: Breadcrumbs[] = [{path: 'map', name: 'Мапа'}];
+  breadcrumbs: Breadcrumbs[] = [{ path: 'map', name: 'Мапа' }];
+
+  orderToYt$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   constructor(
     private route: ActivatedRoute,
     private store: Store,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private audioService: AudioService,
+    private multiAudioService: MultiAudioService
   ) {}
 
   ngOnInit() {
     const songId = this.route.snapshot.params['id'];
-    this.subscriptions.push(this.playerService.fetchSongById(songId).subscribe((response) => {
-      const data = response as Song;
-      this.song = data;
-      this.song$.next(this.playerService.getPlayerSong(data));
-      if (data.multichannels.length > 0) {
-        this.haveChannels = true;
-      }
-    }));
+    this.subscriptions.push(
+      this.playerService.fetchSongById(songId).subscribe((response) => {
+        const data = response as Song;
+        this.song = data;
+        this.song$.next(this.playerService.getPlayerSong(data));
+        if (data.multichannels.length > 0) {
+          this.haveChannels = true;
+        }
+      })
+    );
+  }
+
+  onYtStartsPlay() {
+    this.audioService.pause();
+    this.multiAudioService.pause();
+  }
+  onStereeoPlay() {
+    this.orderToYt$.next({ id: 0, type: 'yt-pause' });
   }
 
   ngOnDestroy(): void {

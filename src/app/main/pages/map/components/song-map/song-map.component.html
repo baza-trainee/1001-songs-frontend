@@ -4,7 +4,7 @@
 
     <div class="song-page__detail" *ngIf="song.id">
       <div class="song-page__video">
-        <app-video-player [srcUrl]="song.video_url"></app-video-player>
+        <app-video-player [srcUrl]="song.video_url" (ytStartsPlay)="onYtStartsPlay()" [order$]="orderToYt$"></app-video-player>
       </div>
       <div class="song-page__info">
         <div class="song-page__text">
@@ -31,9 +31,9 @@
       <div class="song-page__player">
         <p class="song-page__player-title">{{ 'map.song-page.listen-song' | translate }}</p>
 
-        <app-stereo-player [autoplay]="false" *ngIf="!haveChannels" [song$]="song$"></app-stereo-player>
+        <app-stereo-player [autoplay]="false" *ngIf="!haveChannels" [song$]="song$" (isPlay)="onStereeoPlay()"></app-stereo-player>
 
-        <app-multichanel-player *ngIf="haveChannels" [song$]="song$"></app-multichanel-player>
+        <app-multichanel-player *ngIf="haveChannels" [song$]="song$" (isPlay)="onStereeoPlay()"></app-multichanel-player>
       </div>
       <div class="song-page__song">
         <div class="song-page__song-box">
