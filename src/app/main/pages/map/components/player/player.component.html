@@ -35,7 +35,7 @@
         <div class="titles title__listen">{{ 'map.player.songs-list.titles.listen' | translate }}</div>
       </div>
       <div *ngIf="selectedSong$ | async as selectSong">
-        <div *ngFor="let song of itemsOnCurrentPage">
+        <div *ngFor="let song of songs$ | async">
           <app-playlist-song-card
             [song]="song"
             (playPauseClicked)="onPlayPauseClicked($event)"

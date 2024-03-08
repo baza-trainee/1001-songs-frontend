@@ -10,3 +10,9 @@ export class SetShownOptions {
 
   constructor(public formValue: SongFilter) {}
 }
+
+export class SetSelectedValues {
+  static readonly type = '[Filter Map] Set selected filter values';
+
+  constructor(public formValue: SongFilter) {}
+}

@@ -6,12 +6,13 @@ import { FetchSongById, FetchSongs, FindSongByTitle, ResetSong, SelectNext, Sele
 import { FilterMapService } from 'src/app/shared/services/filter-map/filter-map.service';
 import { MapService } from 'src/app/shared/services/map/map.service';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
+import { MAP_PAGE_AMOUNT_SONGS } from 'src/app/shared/config/pagination.constatnts';
 
 export interface PlayerStateModel {
   songsList: Song[];
   selecteSong: PlaylistSong;
   songs: PlaylistSong[];
-  totalSongsAmount: number
+  totalSongsAmount: number;
 }
 
 @State<PlayerStateModel>({
@@ -78,10 +79,10 @@ export class PlayerState {
   @Action(FetchSongs)
   fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
-    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
+    return this.filterMapService.fetchSongsByFilter(action.filter, action.pagination).pipe(
       tap((response: object) => {
-        const data = response as { items: PlaylistSong[], total: number };
-        console.log(data)
+        const data = response as { items: PlaylistSong[]; total: number };
+        //  console.log(data)
         // if (!data.items) {
         //   ctx.setState({
         //     ...state,

@@ -48,9 +48,9 @@ export class FilterMapService {
     );
   }
 
-  fetchSongsByFilter(options: SongFilter, pagination = {page:1 ,size: MAP_PAGE_AMOUNT_SONGS}) {
+  fetchSongsByFilter(options: SongFilter, pagination: { page: number; size: number }) {
     let fullRequest = `${API_URL}${StatEndpoints.markers}/${StatEndpoints.filter}/${StatEndpoints.songs}`;
-    const paginationParams = `page=1&size=3`;
+    const paginationParams = pagination.page ? `page=${pagination.page}&size=${pagination.size}` : '';
 
     const search = options.title ? `search=${options.title}` : '';
     const country = options.country.length ? options.country.map((country) => `country_id=${country}`) : '';
@@ -60,7 +60,7 @@ export class FilterMapService {
     const fund = options.fund.length ? options.fund.map((fund) => `fund_id=${fund}`) : '';
     const fullParams = [search, ...country, ...region, ...city, ...genre, ...fund];
 
-    const requestParams = fullParams.join('&');
+    const requestParams = fullParams.join('&') + paginationParams;
     fullRequest += requestParams.length > 0 ? '?' + requestParams : '';
 
     return this.http.get(fullRequest).pipe(

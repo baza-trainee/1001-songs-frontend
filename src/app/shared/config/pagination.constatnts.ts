@@ -1,2 +1,2 @@
 
-export const MAP_PAGE_AMOUNT_SONGS = 10;
+export const MAP_PAGE_AMOUNT_SONGS = 5;
