@@ -27,12 +27,14 @@ export class MapService {
     return queryStringParams.length > 0 ? `?${queryStringParams.join('&')}` : '';
   }
 
-  fetchMarker(queryParams: SongFilter = new SongFilter()): Observable<MarkerOfLocation[]> {
-    const strID: string = this.buildQueryStringFromParams(queryParams);
-    return this.http.get<MarkerOfLocation[]>(API_URL + StatEndpoints.map.geotag + strID).pipe(
+  fetchMarkers(queryParams: SongFilter = new SongFilter()): Observable<MarkerOfLocation[]> {
+ 
+    const requestParams: string = this.buildQueryStringFromParams(queryParams);
+    console.log('fetchMarkers :', requestParams);
+    return this.http.get<MarkerOfLocation[]>(API_URL + StatEndpoints.map.geotag + requestParams).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return of([]); 
+        return of([]);
       })
     );
   }

@@ -1,3 +1,4 @@
+import { AMOUNT_SONGS_MAP_PAGE } from 'src/app/shared/config/pagination.constatnts';
 import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 
 export class FetchSongsByLocation {
@@ -40,5 +41,8 @@ export class SelectPrev {
 export class FetchSongs {
   static readonly type = '[Player] Fetch songs';
 
-  constructor(public filter: SongFilter) {}
+  constructor(
+    public filter: SongFilter,
+    public pagination: { page: number; size: number } = { page: 1, size: AMOUNT_SONGS_MAP_PAGE }
+  ) {}
 }
