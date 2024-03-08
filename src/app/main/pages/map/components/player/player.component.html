@@ -22,7 +22,7 @@
     <div
       class="songs__playlist"
       *ngIf="songs$ | async as songs"
-      [ngStyle]="{ 'margin-top.px': isFixed ? fixedContainer.clientHeight : '0' }"
+      [ngStyle]="{ 'margin-top.px': isFixed ? initialHeight : '0' }"
     >
       <div class="playlist__titles">
         <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>

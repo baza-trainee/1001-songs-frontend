@@ -46,6 +46,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   public currentPage: number = 1;
 
   songs: PlaylistSong[] = [];
+  initialHeight: number = 0;
 
   @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
@@ -70,6 +71,13 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnInit(): void {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
       this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
+    });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
+      this.initialHeight = this.fixedContainer.nativeElement.clientHeight;
     });
   }
 
@@ -142,12 +150,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
 
   changePage(page: number): void {
     this.currentPage = page;
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
-    });
   }
 
   calculateDistanceToTop(): number {
