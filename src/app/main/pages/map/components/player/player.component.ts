@@ -16,9 +16,9 @@ import { FetchSongs, SelectSong } from 'src/app/store/player/player.actions';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 import { PlaylistSongDetailsComponent } from './playlist-song-details/playlist-song-details.component';
-import { MAP_PAGE_AMOUNT_SONGS } from 'src/app/shared/config/pagination.constatnts';
 import { SongFilter } from 'src/app/shared/interfaces/map-marker';
 import { FilterMapState } from 'src/app/store/filter-map/filter-map.state';
+import { AMOUNT_SONGS_MAP_PAGE } from 'src/app/shared/config/pagination.constatnts';
 
 @Component({
   selector: 'app-player',
@@ -118,7 +118,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.totalAmountSong / MAP_PAGE_AMOUNT_SONGS);
+    return Math.ceil(this.totalAmountSong / AMOUNT_SONGS_MAP_PAGE);
   }
 
   handleIsPlayChange(order: Order) {
@@ -146,7 +146,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   changePage(page: number): void {
     if (this.currentPage !== page) {
       this.currentPage = page;
-      this.store.dispatch(new FetchSongs(this.currentFilter, { page, size: MAP_PAGE_AMOUNT_SONGS }));
+      this.store.dispatch(new FetchSongs(this.currentFilter, { page, size: AMOUNT_SONGS_MAP_PAGE }));
     }
   }
 
