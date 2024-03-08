@@ -67,6 +67,29 @@ blockquote {
   }
 }
 
+.content {
+  h1 {
+    line-height: normal;
+  }
+
+  h2 {
+    padding-bottom: 10px;
+  }
+
+  img {
+    border-radius: 12px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #006;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
 @media (max-width:  1376px) {
   .container {
     max-width: 100%;
