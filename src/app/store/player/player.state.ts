@@ -11,6 +11,7 @@ export interface PlayerStateModel {
   songsList: Song[];
   selecteSong: PlaylistSong;
   songs: PlaylistSong[];
+  totalSongsAmount: number;
 }
 
 @State<PlayerStateModel>({
@@ -18,7 +19,8 @@ export interface PlayerStateModel {
   defaults: {
     songsList: [],
     selecteSong: {} as PlaylistSong,
-    songs: []
+    songs: [],
+    totalSongsAmount: 0
   }
 })
 @Injectable()
@@ -38,6 +40,11 @@ export class PlayerState {
   @Selector()
   static getSelectedSong(state: PlayerStateModel): PlaylistSong {
     return state.selecteSong as PlaylistSong;
+  }
+
+  @Selector()
+  static getTotalSongsAmount(state: PlayerStateModel): number {
+    return state.totalSongsAmount;
   }
 
   @Action(FindSongByTitle)
@@ -71,18 +78,20 @@ export class PlayerState {
   @Action(FetchSongs)
   fetchSongs(ctx: StateContext<PlayerStateModel>, action: FetchSongs) {
     const state = ctx.getState();
-    return this.filterMapService.fetchSongsByFilter(action.filter).pipe(
+    return this.filterMapService.fetchSongsByFilter(action.filter, action.pagination).pipe(
       tap((response: object) => {
-        const data = response as { items: PlaylistSong[] };
-        if (!data.items) {
-          ctx.setState({
-            ...state,
-            songs: [{} as PlaylistSong]
-          });
-        }
+        const data = response as { items: PlaylistSong[]; total: number };
+        //  console.log(data)
+        // if (!data.items) {
+        //   ctx.setState({
+        //     ...state,
+        //     songs: [{} as PlaylistSong]
+        //   });
+        // }
         ctx.setState({
           ...state,
-          songs: data.items
+          songs: data.items,
+          totalSongsAmount: data.total
         });
       })
     );

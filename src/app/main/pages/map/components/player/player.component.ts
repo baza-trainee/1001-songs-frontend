@@ -12,10 +12,13 @@ import { PlayerSong, PlaylistSong } from 'src/app/shared/interfaces/song.interfa
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PaginationComponent } from '../../../../../shared/shared-components/pagination/pagination.component';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import { SelectSong } from 'src/app/store/player/player.actions';
+import { FetchSongs, SelectSong } from 'src/app/store/player/player.actions';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 import { PlaylistSongDetailsComponent } from './playlist-song-details/playlist-song-details.component';
+import { SongFilter } from 'src/app/shared/interfaces/map-marker';
+import { FilterMapState } from 'src/app/store/filter-map/filter-map.state';
+import { AMOUNT_SONGS_MAP_PAGE } from 'src/app/shared/config/pagination.constatnts';
 
 @Component({
   selector: 'app-player',
@@ -42,14 +45,19 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   heightHeader!: number;
   paddingTop!: number;
   heightMap: number = 694;
-  public itemsPerPage: number = 10;
   public currentPage: number = 1;
+  totalAmountSong: number = 0;
 
   songs: PlaylistSong[] = [];
   initialHeight: number = 0;
 
   @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
+  @Select(PlayerState.getTotalSongsAmount) totalAmount$?: Observable<number>;
+  @Select(FilterMapState.getSelectedValues) selectedValues$?: Observable<SongFilter>;
+
+  currentFilter: SongFilter = {} as SongFilter;
+
   isFixed: boolean = false;
 
   playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
@@ -67,7 +75,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       if (data) this.songs = data.slice();
     });
+    this.totalAmount$?.pipe(takeUntil(this.destroy$)).subscribe((amount) => (this.totalAmountSong = amount));
+    this.selectedValues$?.subscribe((filterValues) => {
+      this.currentFilter = filterValues;
+    });
   }
+
   ngOnInit(): void {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
       this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
@@ -114,7 +127,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.songs.length / this.itemsPerPage);
+    return Math.ceil(this.totalAmountSong / AMOUNT_SONGS_MAP_PAGE);
   }
 
   handleIsPlayChange(order: Order) {
@@ -123,7 +136,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private handleOrders(order: Order) {
     if (order.type && order.type === 'stp-play') {
-      this.orderDetails$.next({id: 0, type: 'yt-pause'})
+      this.orderDetails$.next({ id: 0, type: 'yt-pause' });
       this.store.dispatch(new SelectSong(order.id));
       this.orderToCards$.next({ id: order.id, type: 'stp-play' });
       this.audioService.play();
@@ -139,17 +152,11 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  get itemsOnCurrentPage(): PlaylistSong[] {
-    if (this.songs.length <= this.itemsPerPage) return this.songs;
-
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-
-    return this.songs.slice(startIndex, endIndex);
-  }
-
   changePage(page: number): void {
-    this.currentPage = page;
+    if (this.currentPage !== page) {
+      this.currentPage = page;
+      this.store.dispatch(new FetchSongs(this.currentFilter, { page, size: AMOUNT_SONGS_MAP_PAGE }));
+    }
   }
 
   calculateDistanceToTop(): number {
