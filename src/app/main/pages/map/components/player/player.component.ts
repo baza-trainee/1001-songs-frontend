@@ -49,6 +49,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   totalAmountSong: number = 0;
 
   songs: PlaylistSong[] = [];
+  initialHeight: number = 0;
 
   @Select(PlayerState.getSongs) songs$!: Observable<PlaylistSong[]>;
   @Select(PlayerState.getSelectedSong) selectedSong$?: Observable<PlaylistSong>;
@@ -79,14 +80,22 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
       this.currentFilter = filterValues;
     });
   }
+
   ngOnInit(): void {
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
       this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
     });
   }
 
-  onYtStartsPlay(event: Order) {
-    this.handleOrders(event);
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
+      this.initialHeight = this.fixedContainer.nativeElement.clientHeight;
+    });
+  }
+
+  onYtStartsPlay(event: Order){
+    this.handleOrders(event)
   }
 
   onPlayPauseClicked(order: Order) {
@@ -150,11 +159,11 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
-    });
-  }
+  // ngAfterViewInit(): void {
+  //   setTimeout(() => {
+  //     if (this.songsContainer) this.distanceToTop = this.calculateDistanceToTop();
+  //   });
+  // }
 
   calculateDistanceToTop(): number {
     this.onResize();

@@ -19,6 +19,7 @@ export class ContentTextComponent implements OnInit {
   constructor(private formattingService: FormattingTextService) {}
 
   ngOnInit() {
-      this.renderedText = this.formattingService.splitText(this.content);
+    console.log(this.content)
+    this.renderedText = this.formattingService.splitText(this.content);
   }
 }

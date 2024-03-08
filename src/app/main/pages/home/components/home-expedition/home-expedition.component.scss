@@ -30,6 +30,10 @@ img {
   &__main {
     width: 50%;
 
+    &-video {
+      cursor: pointer;
+    }
+
     &-img {
       margin-bottom: 19px;
       border-radius: 16px;

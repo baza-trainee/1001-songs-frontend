@@ -30,12 +30,10 @@ import { Meta } from '@angular/platform-browser';
   ]
 })
 export class ScienceComponent implements OnInit, OnDestroy {
-  PAGE_SIZE = 5;
   categories: EducationCategoryCard[] = [];
   recommendations = '';
-  recommendedSources = [''];
-  recomendationPages: number[] = [1];
-  expansionRecomendationArrow = 'bottom';
+  recommendedSources: string = '';
+  expansionRecommendationArrow = 'bottom';
   expansionSourcesArrow = 'bottom';
   intro: string = '';
   title: string = '';
@@ -62,7 +60,7 @@ export class ScienceComponent implements OnInit, OnDestroy {
           description: string;
           calendar_and_ritual_categories: [];
           recommendations: string;
-          recommended_sources: string[];
+          recommended_sources: string;
         };
         this.title = data.title;
         this.intro = data.description;
@@ -82,9 +80,10 @@ export class ScienceComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  rotateRecomendationArrow() {
-    this.expansionRecomendationArrow = this.expansionRecomendationArrow === 'bottom' ? 'top' : 'bottom';
+  rotateRecommendationArrow() {
+    this.expansionRecommendationArrow = this.expansionRecommendationArrow === 'bottom' ? 'top' : 'bottom';
   }
+
   rotateSourcesArrow() {
     this.expansionSourcesArrow = this.expansionSourcesArrow === 'bottom' ? 'top' : 'bottom';
   }

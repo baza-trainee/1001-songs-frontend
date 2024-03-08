@@ -10,7 +10,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
-  
+
   .counter__title,
   .player__title {
     display: none;
@@ -24,7 +24,7 @@
     transform: translate(-50%, -50%);
     background-color: #fff;
     width: 100vw;
-    height: calc(100% + 50px);
+    height: calc(100% + 22px);
     z-index: -1;
     box-shadow: 0 8px 16px 8px rgba(15, 15, 15, 20%);
   }
@@ -245,7 +245,7 @@
         margin: 0 auto;
 
         &.fix {
-          padding-top: 0;
+          padding-top: 9px;
 
           .songs__counter {
             display: none;

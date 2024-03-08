@@ -24,7 +24,7 @@ export const StatEndpoints = {
     geotag: 'map/filter/geotag'
   },
   projects: 'projects',
-  partners: 'patners',
+  partners: 'partners',
   news: {
     news: 'news',
     categories: 'news/categories'
