@@ -81,13 +81,13 @@ export class PlayerState {
     return this.filterMapService.fetchSongsByFilter(action.filter, action.pagination).pipe(
       tap((response: object) => {
         const data = response as { items: PlaylistSong[]; total: number };
-        //  console.log(data)
-        // if (!data.items) {
-        //   ctx.setState({
-        //     ...state,
-        //     songs: [{} as PlaylistSong]
-        //   });
-        // }
+         //console.log(data)
+        if (!data.items) {
+          ctx.setState({
+            ...state,
+            songs: [{} as PlaylistSong]
+          });
+        }
         ctx.setState({
           ...state,
           songs: data.items,

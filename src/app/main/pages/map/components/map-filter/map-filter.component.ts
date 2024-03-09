@@ -65,6 +65,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
             this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
             this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
             this.autocompleteSongs = [];
+            this.emitCounter = 0;
           }
         })
       )
