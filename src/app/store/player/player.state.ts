@@ -81,7 +81,6 @@ export class PlayerState {
     return this.filterMapService.fetchSongsByFilter(action.filter, action.pagination).pipe(
       tap((response: object) => {
         const data = response as { items: PlaylistSong[]; total: number };
-         //console.log(data)
         if (!data.items) {
           ctx.setState({
             ...state,
@@ -100,27 +99,20 @@ export class PlayerState {
   @Action(SelectNext)
   selectNext(ctx: StateContext<PlayerStateModel>) {
     const state = ctx.getState();
-    const nextSongIndex = state.songs.indexOf(state.selecteSong) + 1;
-    const songsListLength = state.songs.length;
-    if (nextSongIndex === 0 || nextSongIndex === songsListLength) {
-      return;
-    }
+    const next = this.playerService.findNextWithAudio(state.selecteSong, state.songs);
     return ctx.setState({
       ...state,
-      selecteSong: state.songs[nextSongIndex]
+      selecteSong: next
     });
   }
 
   @Action(SelectPrev)
   selectPrev(ctx: StateContext<PlayerStateModel>) {
-    const state = ctx.getState();
-    const nextSongIndex = state.songs.indexOf(state.selecteSong) - 1;
-    if (nextSongIndex < 0) {
-      return;
-    }
+    const state = ctx.getState(); 
+    const previous = this.playerService.findPreviousWithAudio(state.selecteSong, state.songs)
     return ctx.setState({
       ...state,
-      selecteSong: state.songs[nextSongIndex]
+      selecteSong: previous
     });
   }
 

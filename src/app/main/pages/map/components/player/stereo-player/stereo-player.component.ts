@@ -68,8 +68,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   setUpVolume(eventObj: Event) {
     const event = eventObj as { target: object };
-    const target = event.target as {value: number};
-    this.audioService.setUpVolume(target.value );
+    const target = event.target as { value: number };
+    this.audioService.setUpVolume(target.value);
   }
 
   playStream(url: string) {
@@ -85,12 +85,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   pause() {
     this.audioService.pause();
-    this.isPlay.emit({id: this.currentSong.id, type: 'stp-pause'});
+    this.isPlay.emit({ id: this.currentSong.id, type: 'stp-pause' });
   }
 
   play() {
     this.audioService.play();
-    this.isPlay.emit({id: this.currentSong.id, type: 'stp-play'});
+    this.isPlay.emit({ id: this.currentSong.id, type: 'stp-play' });
   }
 
   stop() {
@@ -99,12 +99,12 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   next() {
     this.store.dispatch(new SelectNext());
-    this.isPlay.emit({id: this.currentSong.id, type: 'stp-play'});
+    this.isPlay.emit({ id: this.currentSong.id, type: 'stp-play' });
   }
 
   previous() {
     this.store.dispatch(new SelectPrev());
-    this.isPlay.emit({id: this.currentSong.id, type: 'stp-play'});
+    this.isPlay.emit({ id: this.currentSong.id, type: 'stp-play' });
   }
 
   backward(currentTime: number | undefined) {
