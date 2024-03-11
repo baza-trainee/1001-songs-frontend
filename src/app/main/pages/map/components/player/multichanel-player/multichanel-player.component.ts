@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/store/player/player.state';
-import { Observable, Subject, filter, of, skip, take, takeUntil } from 'rxjs';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { PlayerSong, Song } from 'src/app/shared/interfaces/song.interface';
 import { ResetSong, SelectNext, SelectPrev } from 'src/app/store/player/player.actions';
 import { StreamState } from 'src/app/shared/interfaces/stream-state.interface';
@@ -32,8 +32,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   state$: Observable<StreamState[]>;
 
   destroy$: Subject<void> = new Subject<void>();
-
-  // isPlaying = false;
 
   constructor(
     private multiAudioService: MultiAudioService,
