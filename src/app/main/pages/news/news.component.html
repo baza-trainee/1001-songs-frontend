@@ -8,18 +8,19 @@
       <div class="filter__wrap" *ngIf="categories$ | async as categories">
         <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
       </div>
-
-      <div class="cards__wrap" *ngIf="newsResponse$ | async as response">
-        <app-article-item
+      <ng-container *ngIf="newsResponse$ | async as response">
+        <div class="cards__wrap">
+          <app-article-item
             *ngFor="let item of response.items"
             [article]="item"
-        />
-      </div>
+          />
+        </div>
+        <app-pagination
+          [totalPages]="response.pages"
+          [currentPage]="currentPage"
+          (pageChange)="changePage($event)"
+        ></app-pagination>
+      </ng-container>
     </div>
-    <app-pagination
-      [totalPages]="totalPage"
-      [currentPage]="currentPage"
-      (pageChange)="changePage($event)"
-    ></app-pagination>
   </div>
 </section>

@@ -4,7 +4,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from "@angular/common";
 import {Observable, Subscription} from "rxjs";
 
-import {Category, NewsResponse} from "../../../shared/interfaces/article.interface";
+import {Category, NewsItem, NewsResponse} from "../../../shared/interfaces/article.interface";
 import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";
@@ -21,36 +21,18 @@ import {PaginationComponent} from "../../../shared/shared-components/pagination/
 
 export class NewsComponent implements OnInit, OnDestroy {
   public newsResponse$!: Observable<NewsResponse>;
+  public news!: NewsItem[];
   public categories$!: Observable<Category[]>;
   private articlesSubscription?: Subscription;
 
   private itemsPerPage: number = 3;
   public currentPage: number = 1;
-  public totalPage: number = 1;
 
   constructor(
       private articleService: ArticlesService
   ) {}
 
   ngOnInit() {
-    this.fetchNews();
-    this.fetchCategory();
-    this.fetchTotalPage();
-  }
-
-  fetchNews() {
-    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage});
-  }
-
-  fetchTotalPage() {
-    if (this.newsResponse$) {
-      this.articlesSubscription = this.newsResponse$.subscribe((response) => {
-        this.totalPage = response.pages;
-      })
-    }
-  }
-
-  fetchCategory() {
     this.categories$ = this.articleService.fetchCategory();
   }
 
@@ -62,7 +44,6 @@ export class NewsComponent implements OnInit, OnDestroy {
   filteredCategory(id: number): void {
     this.currentPage = 1;
     this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage, category_id: id});
-    this.fetchTotalPage();
   }
 
   ngOnDestroy() {

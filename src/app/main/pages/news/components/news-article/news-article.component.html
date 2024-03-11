@@ -1,6 +1,6 @@
-<ng-container *ngIf="article$ | async as article">
+<ng-container *ngIf="article">
   <div class="container">
-    <section class="article" *ngIf="article.id">
+    <section class="article">
       <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
       <h1 class="article__title">{{ article.title }}</h1>

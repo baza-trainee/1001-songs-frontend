@@ -14,7 +14,6 @@ export class ShareService {
     const searchParams = new URLSearchParams();
     searchParams.set('u', currentURL);
     const navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
-    // console.log(navUrl)
     window.open(navUrl, '_blank');
   }
 

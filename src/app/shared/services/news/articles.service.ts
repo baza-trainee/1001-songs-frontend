@@ -11,33 +11,33 @@ import {API_URL, StatEndpoints} from "../../config/endpoints/stat-endpoints";
 })
 
 export class ArticlesService {
-    constructor(private http: HttpClient) {}
 
-    fetchNewsById(id: string): Observable<NewsArticle> {
-        return this.http.get<NewsArticle>(`${API_URL}${StatEndpoints.news.news}/` + id).pipe(
-            catchError(error => {
-                console.error(error);
-                return of({} as NewsArticle);
-            })
-        );
-    }
+  constructor(private http: HttpClient) {}
 
-    fetchCategory(): Observable<Category[]> {
-        return this.http.get<Category[]>(`${API_URL}${StatEndpoints.news.categories}`).pipe(
-            catchError(error => {
-                console.error(error);
-                return of([]);
-            })
-        );
-    }
+  fetchNewsById(id: string): Observable<NewsArticle> {
+      return this.http.get<NewsArticle>(`${API_URL}${StatEndpoints.news.news}/` + id).pipe(
+          catchError(error => {
+              console.error(error);
+              return of({} as NewsArticle);
+          })
+      );
+  }
 
-    fetchNews(params?: { category_id?: number; page?: number; size?: number, news_exclude?: number}): Observable<NewsResponse> {
+  fetchCategory(): Observable<Category[]> {
+      return this.http.get<Category[]>(`${API_URL}${StatEndpoints.news.categories}`).pipe(
+          catchError(error => {
+              console.error(error);
+              return of([]);
+          })
+      );
+  }
 
-        return this.http.get<NewsResponse>(`${API_URL}${StatEndpoints.news.news}`, {params}).pipe(
-            catchError(error => {
-                console.error(error);
-                return of({} as NewsResponse);
-            })
-        );
-    }
+  fetchNews(params?: { category_id?: number; page?: number; size?: number, news_exclude?: number}): Observable<NewsResponse> {
+    return this.http.get<NewsResponse>(`${API_URL}${StatEndpoints.news.news}`, {params}).pipe(
+          catchError(error => {
+              console.error(error);
+              return of({} as NewsResponse);
+          })
+      );
+  }
 }

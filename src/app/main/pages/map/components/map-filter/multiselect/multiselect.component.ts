@@ -9,7 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MultiSelect, OptionsSongFilter} from "../../../../../../shared/interfaces/map-marker";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {Select} from "@ngxs/store";
 import {FilterMapState} from "../../../../../../store/filter-map/filter-map.state";
 
@@ -40,7 +40,7 @@ export class MultiselectComponent implements OnChanges {
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
 
   selectedOption: MultiSelect[] = [];
-  private subscription!: Subscription;
+  // private subscription!: Subscription;
 
   constructor(private _translate: TranslateService) {}
 
@@ -52,8 +52,6 @@ export class MultiselectComponent implements OnChanges {
     if (changes['options'] && changes['options'].currentValue) {
       const newOptions: MultiSelect[] = changes['options'].currentValue;
       this.selectedOption = newOptions.filter(option => this.control.value.includes(option.id));
-      // console.log(newOptions);
-      // this.selectedOption = newOptions;
     }
   }
 

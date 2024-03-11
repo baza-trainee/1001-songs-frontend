@@ -21,10 +21,7 @@ export interface NewsItem {
     short_description: string;
     preview_photo: string;
     created_at: string;
-    category: {
-        id: number;
-        name: string;
-    };
+    category: Category;
     location: string;
 }
 

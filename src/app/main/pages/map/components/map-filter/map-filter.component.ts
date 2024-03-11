@@ -13,7 +13,7 @@ import { mapFilter } from '../../../../../shared/enums/mapFilter';
 import { FetchSongs, FindSongByTitle } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { PlaylistSong } from 'src/app/shared/interfaces/song.interface';
-import { InitFilterOptions, SetSelectedValues, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
+import { SetSelectedValues, SetShownOptions } from '../../../../../store/filter-map/filter-map.actions';
 import { TransformToMultiselectPipe } from '../../../../../shared/pipes/transform-to-multiselect.pipe';
 import { FetchMarkers } from '../../../../../store/map/map.actions';
 
@@ -33,7 +33,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   isShowFilter = false;
   private destroy$ = new Subject<void>();
 
-  localSongs: string[] = [];
   emitCounter = 0;
   songFound = false;
 
@@ -51,8 +50,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new InitFilterOptions());
-
     this.form.valueChanges.subscribe((values) => {
       this.store.dispatch(new SetSelectedValues(values as SongFilter));
     });

@@ -1,7 +1,7 @@
 <div class="event">
   <!-- <app-video-player class="event__player" [widthIcon]="0" [srcUrl]="event.preview_photo"></app-video-player> -->
   <img [src]="event.preview_photo" width="400" height="270" alt="photo">
-  <span class="event__date">{{ event.expedition_date }}</span>
+  <span class="event__date">{{ event.expedition_date | date: 'dd.MM.yyyy' }}</span>
   <div class="event__container" style="cursor: pointer">
     <p class="event__location">{{ event.location }}</p>
     <p class="event__name" *ngIf="event.title">{{ event.title.length > 50 ? event.title.substring(0, 50) + '...' : event.title }}</p>

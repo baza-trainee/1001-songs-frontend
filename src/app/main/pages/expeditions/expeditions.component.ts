@@ -10,7 +10,7 @@ import { FilterComponent } from '../../../shared/shared-components/filter/filter
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { Category } from "../../../shared/interfaces/article.interface";
 import { PaginationComponent } from "../../../shared/shared-components/pagination/pagination.component";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-expeditions',
@@ -25,7 +25,6 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
   private articlesSubscription?: Subscription;
   private queryParamsSubscription?: Subscription;
   public expeditionResponse$!: Observable<ExpeditionListResponse>;
-  public totalPage: number = 1;
   public searchValue: string = "";
 
   private itemsPerPage: number = 12;
@@ -54,21 +53,14 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
       let paramsObg: {search?: string, page: number, size: number} = {page: this.currentPage, size: this.itemsPerPage};
       params['search'] ? this.searchValue = params['search'] : this.searchValue = "";
 
-      if (this.searchValue) paramsObg = {search: this.searchValue, page: this.currentPage, size: this.itemsPerPage};
+      if (this.searchValue) {
+        paramsObg = {search: this.searchValue, page: this.currentPage, size: this.itemsPerPage}
+        this.expeditionResponse$ = this.expeditionsService.fetchExpeditions(paramsObg);
+      }
 
-      this.expeditionResponse$ = this.expeditionsService.fetchExpeditions(paramsObg);
 
       if (this.idParamsCategory) this.filteredCategory(+params['id']);
-      this.fetchTotalPage();
     });
-  }
-
-  fetchTotalPage () {
-    if (this.expeditionResponse$) {
-      this.articlesSubscription = this.expeditionResponse$.subscribe(response => {
-        this.totalPage = response.pages;
-      })
-    }
   }
 
   changePage(page: number): void {
@@ -80,7 +72,6 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
     this.idParamsCategory = id;
     this.currentPage = 1;
     this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({search: this.searchValue, page: this.currentPage, size: this.itemsPerPage, id: id});
-    this.fetchTotalPage();
   }
 
   ngOnDestroy(): void {
