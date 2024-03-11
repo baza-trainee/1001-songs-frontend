@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -8,7 +8,7 @@ import { MarkerOfLocation, SongFilter } from 'src/app/shared/interfaces/map-mark
 import { MapState } from 'src/app/store/map/map.state';
 import { PlayerComponent } from './components/player/player.component';
 import { InteractiveMapComponent } from '../../../shared/shared-components/interactive-map/interactive-map.component';
-import { FetchSongs } from 'src/app/store/player/player.actions';
+import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 import { InitFilterOptions } from '../../../store/filter-map/filter-map.actions';
 import { FetchMarkers } from '../../../store/map/map.actions';
@@ -20,14 +20,11 @@ import { FetchMarkers } from '../../../store/map/map.actions';
   standalone: true,
   imports: [CommonModule, InteractiveMapComponent, RouterLink, RouterLinkActive, PlayerComponent, MapFilterComponent]
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
   isShowSongs = true;
 
-  constructor(
-    private store: Store 
-  ) 
-  {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
@@ -43,9 +40,14 @@ export class MapComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    // throw new Error('Method not implemented.');
+    this.store.dispatch(new ResetSong());
+  }
+
   onFilterChange(filter: SongFilter) {
-   // this.store.dispatch(new FetchSongs(filter));
-   return filter;
+    // this.store.dispatch(new FetchSongs(filter));
+    return filter;
   }
 
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
