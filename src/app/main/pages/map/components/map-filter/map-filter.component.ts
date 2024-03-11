@@ -158,9 +158,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     // this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
-  clearFilter(event: MouseEvent) {
-    const pointerEvent = event as PointerEvent;
-    if (!pointerEvent.pointerType) return;
+  clearFilter() {
     this.form.setValue(new SongFilter());
     this.store.dispatch(new FetchSongs(new SongFilter()));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));

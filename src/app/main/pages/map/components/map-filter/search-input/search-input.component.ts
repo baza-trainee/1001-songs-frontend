@@ -39,7 +39,9 @@ export class SearchInputComponent {
   constructor() {}
 
   onKeyPressed(event: KeyboardEvent) {
+    
     if (event.key === 'Enter') {
+      event.preventDefault()
       this.enterPressed.emit();
       this.autocompleteTrigger.closePanel();
     }
