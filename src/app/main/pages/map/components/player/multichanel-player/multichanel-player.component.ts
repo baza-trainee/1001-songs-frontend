@@ -58,10 +58,10 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
         if (!loading.length) {
           this.isPreloader = false;
         }
-        const canPlay = states.filter((state) => !state.canplay);
-        if (canPlay.length) {
-          this.synchronizeTracs();
-        }
+       // const canPlay = states.filter((state) => !state.canplay);
+        // if (canPlay.length) {
+        //   this.synchronizeTracs();
+        // }
        
       });
 
@@ -80,11 +80,11 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
       });
   }
 
-  synchronizeTracs() {
-    setTimeout(() => {
-      this.multiAudioService.seekTo(Number(0));
-    }, 500);
-  }
+  // synchronizeTracs() {
+  //   setTimeout(() => {
+  //     this.multiAudioService.seekTo(Number(0));
+  //   }, 500);
+  // }
 
   ngOnDestroy() {
     this.stop();
