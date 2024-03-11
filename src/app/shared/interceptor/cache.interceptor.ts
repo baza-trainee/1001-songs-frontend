@@ -26,7 +26,7 @@ export class CacheInterceptor implements HttpInterceptor {
         if (error.status === 304) {
           const cachedResponse = this.cacheService.get(req.urlWithParams);
           if (cachedResponse) {
-            return of(new HttpResponse<object>({ body: cachedResponse, status: 200 }));
+            return of(new HttpResponse<object>({ body: cachedResponse, status: 304 }));
           }
         }
         return throwError(error);

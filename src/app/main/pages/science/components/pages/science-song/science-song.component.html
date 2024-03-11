@@ -62,8 +62,7 @@
         </div>
         <div>
           <p class="song__info-title">{{ 'science.song-page.info.record' | translate }}</p>
-          <p class="song__info-detail" *ngFor="let collector of song.collectors">{{ collector }} </p>
-        </div>
+          <span class="song__info-detail" *ngFor="let collector of song.collectors; let last = last">{{ collector }}{{ last ? '' : ', ' }}</span>        </div>
         <div>
           <p class="song__info-title">{{ 'science.song-page.info.performers' | translate }}</p>
           <p class="song__info-detail">{{ song.performers }}</p>

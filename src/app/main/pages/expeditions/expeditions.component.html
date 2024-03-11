@@ -23,16 +23,16 @@
   <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
     <app-filter [selectedFilterId]="idParamsCategory" [categories]="categories" (filteredCategories)="filteredCategory($event)" />
   </div>
-  <div class="expeditions">
+  <div class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
     <div class="expeditions__box">
-      <div class="expeditions__gallery" *ngIf="expeditionResponse$ | async as expedition">
+      <div class="expeditions__gallery" >
         <div *ngFor="let event of expedition.items" class="expeditions__gallery-item">
           <app-expedition-card [routerLink]="event.id + ''" [event]="event"></app-expedition-card>
         </div>
       </div>
     </div>
     <app-pagination
-      [totalPages]="totalPage"
+      [totalPages]="expedition.pages"
       [currentPage]="currentPage"
       (pageChange)="changePage($event)"
     ></app-pagination>

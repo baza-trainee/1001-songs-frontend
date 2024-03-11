@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CacheService {
   private cacheKey = 'myAppCache';
 
@@ -19,8 +20,11 @@ export class CacheService {
   private cache: Map<string, { data: object, etag: string }>;
 
   get(key: string): object | undefined {
+    let deepCopiedValue;
     const cachedEntry = this.cache.get(key);
-    return cachedEntry ? cachedEntry.data : undefined;
+    if (cachedEntry) deepCopiedValue = JSON.parse(JSON.stringify(cachedEntry.data));
+
+    return cachedEntry ? deepCopiedValue : undefined;
   }
 
   getEtag(key: string): string | undefined {
@@ -29,12 +33,10 @@ export class CacheService {
   }
 
   set(key: string, etag: string, value: object): void {
-    this.cache.set(key, { data: value, etag: etag });
+    const isSet = this.getEtag(etag) === undefined
+    if (!isSet) return;
+    const deepCopiedValue = JSON.parse(JSON.stringify(value));
+    this.cache.set(key, { data: deepCopiedValue, etag: etag });
     localStorage.setItem(this.cacheKey, JSON.stringify(Array.from(this.cache.entries())));
-  }
-
-  clear(): void {
-    this.cache.clear();
-    localStorage.removeItem(this.cacheKey);
   }
 }

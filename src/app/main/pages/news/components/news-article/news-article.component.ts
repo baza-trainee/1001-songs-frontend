@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 
@@ -29,7 +29,7 @@ import {NewsCardSliderComponent} from "../news-card-slider/news-card-slider.comp
   styleUrls: ['./news-article.component.scss']
 })
 export class NewsArticleComponent implements OnInit, OnDestroy {
-  public article$!: Observable<NewsArticle>
+  public article!: NewsArticle;
   public sliderItems!: Slide[];
   public sliderItemsDesktop!: NewsItem[];
   private readonly subscriptions: Subscription[] = [];
@@ -43,32 +43,24 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToRouteParams();
-    this.fetchArticleContent();
   }
 
   private subscribeToRouteParams(): void {
     if (this.route.params) {
       this.subscriptions.push(this.route.params.subscribe(params => {
-        this.article$ = this.articleService.fetchNewsById(params['id']);
-      }));
-    }
-  }
-
-  private fetchArticleContent(): void {
-    if (this.article$) {
-      this.subscriptions.push(this.article$.subscribe(response => {
-        this.fetchSliderItems(response.id);
+        this.articleService.fetchNewsById(params['id']).subscribe(response => {
+          this.article = response;
+          this.fetchSliderItems(response.id);
+        });
       }));
     }
   }
 
   private fetchSliderItems(id: number): void {
-    this.subscriptions.push(
-        this.articleService.fetchNews({news_exclude: id}).subscribe(response => {
-          this.sliderItemsDesktop = response.items.slice(0, 3);
-          this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
-        })
-    );
+    this.articleService.fetchNews({news_exclude: id}).subscribe(response => {
+      this.sliderItemsDesktop = [... response.items];
+      this.sliderItems = this.sliderService.convertNewsToSlide(response.items);
+    })
   }
 
   ngOnDestroy(): void {

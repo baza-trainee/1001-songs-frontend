@@ -2,7 +2,7 @@
     <div class="container">
         <section class="project">
           <h1>{{project.title}}</h1>
-          <p>{{ project.location }}</p>
+          <p>{{ project.project_date | date: 'dd.MM.yyyy' }} • {{ project.location }}</p>
           <div class="project__flex">
               <div class="project__content">
                 <app-content-text [content]="project.content"></app-content-text>
