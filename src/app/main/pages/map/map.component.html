@@ -7,7 +7,6 @@
   ></app-interactive-map>
   <app-map-filter
     *ngIf="markers$ | async as markers"
-    (changeFilter)="onFilterChange($event)"
     class="map__filter container"
   ></app-map-filter>
   <div #player>
