@@ -46,38 +46,40 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isVisible = true;
     this.song$?.pipe(takeUntil(this.destroy$)).subscribe((song) => {
+      this.isPreloader = true;
       this.multiAudioService.stopAll();
       this.openFile(song);
+      this.isPreloader = false;
     });
 
-    this.state$
-      .pipe(takeUntil(this.destroy$))
-      // .pipe(skip(1))
-      .subscribe((states) => {
-        const loading = states.filter((state) => !state.playing);
-        if (!loading.length) {
-          this.isPreloader = false;
-        }
-       // const canPlay = states.filter((state) => !state.canplay);
-        // if (canPlay.length) {
-        //   this.synchronizeTracs();
-        // }
-       
-      });
+    // this.state$
+    //   .pipe(takeUntil(this.destroy$))
+    //   // .pipe(skip(1))
+    //   .subscribe((states) => {
+    //     const loading = states.filter((state) => !state.playing);
+    //     if (!loading.length) {
+    //       this.isPreloader = false;
+    //     }
+    //    // const canPlay = states.filter((state) => !state.canplay);
+    //     // if (canPlay.length) {
+    //     //   this.synchronizeTracs();
+    //     // }
 
-    this.state$
-      .pipe(takeUntil(this.destroy$))
-      .pipe(skip(1))
-      .pipe(
-        filter((states) => {
-          const canPlay = states.filter((state) => !state.canplay);
-          return !canPlay.length;
-        }),
-        take(1)
-      )
-      .subscribe(() => {
-        this.pause();
-      });
+    //   });
+
+    // this.state$
+    //   .pipe(takeUntil(this.destroy$))
+    //   // .pipe(skip(1))
+    //   .pipe(
+    //     filter((states) => {
+    //       const canPlay = states.filter((state) => !state.canplay);
+    //       return !canPlay.length;
+    //     }),
+    //     take(1)
+    //   )
+    //   .subscribe(() => {
+    //     this.pause();
+    //   });
   }
 
   // synchronizeTracs() {
@@ -103,7 +105,6 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   }
 
   openFile(file: PlayerSong) {
-    this.isPreloader = true;
     this.audioService.stop();
     this.multiAudioService.stopAll();
     this.playStream(file.channels);
@@ -119,7 +120,7 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
 
   play() {
     this.multiAudioService.play();
-    this.isPlay.emit({id: 0, type: 'stp-play'});
+    this.isPlay.emit({ id: 0, type: 'stp-play' });
   }
 
   stop() {

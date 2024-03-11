@@ -111,9 +111,9 @@ export class MultiAudioService {
 
         this.addEvents(audioObj, Object.values(events), handler);
 
-        audioObj.play().catch((error) => {
-          observer.error(error);
-        });
+        // audioObj.play().catch((error) => {
+        //   observer.error(error);
+        // });
 
         return () => {
           this.removeAudio(index);
