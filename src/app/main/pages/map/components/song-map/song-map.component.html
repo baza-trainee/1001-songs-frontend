@@ -3,7 +3,7 @@
     <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
     <div class="song-page__detail" *ngIf="song.id">
-      <div class="song-page__video">
+      <div class="song-page__video" *ngIf="song.video_url">
         <app-video-player [srcUrl]="song.video_url" (ytStartsPlay)="onYtStartsPlay()" [order$]="orderToYt$"></app-video-player>
       </div>
       <div class="song-page__info">
@@ -22,7 +22,7 @@
             </p>
           </div>
           <div class="song-page__text-content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
-          <div class="song-page__text-content" *ngIf="!song.song_text">No text available</div>
+          <div class="song-page__text-content" *ngIf="!song.song_text">Нажаль, тексту пісні немає наразі</div>
         </div>
         <div class="song-page__carousel">
           <app-fade-in-carousel [photos]="song.photos" [classInfo]="'column'"></app-fade-in-carousel>

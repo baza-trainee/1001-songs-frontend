@@ -56,25 +56,25 @@
       <div class="article__box article__text">
         <h2 class="article__sub-title">{{ 'expeditions.article.about-article.title' | translate }}</h2>
         <div class="article__about">
-          <div class="article__about-box">
+          <div class="article__about-box" >
             <h5 class="article__about-title">{{ 'expeditions.article.about-article.collectors' | translate }}:</h5>
             <div class="article__about-text" *ngFor="let author of expeditionArticle.authors">
               <p>{{ author }}</p>
             </div>
           </div>
-          <div class="article__about-box">
+          <div class="article__about-box" *ngIf="expeditionArticle.editors.length">
             <h5 class="article__about-title">{{ 'expeditions.article.about-article.editor' | translate }}:</h5>
               <div class="article__about-text" *ngFor="let editor of expeditionArticle.editors">
                   <p>{{ editor }}</p>
               </div>
           </div>
-          <div class="article__about-box">
+          <div class="article__about-box" *ngIf="expeditionArticle.photographers.length">
             <h5 class="article__about-title">{{ 'expeditions.article.about-article.video-editing' | translate }}:</h5>
               <div class="article__about-text" *ngFor="let photographer of expeditionArticle.photographers">
                   <p>{{ photographer }}</p>
               </div>
           </div>
-          <div class="article__about-box">
+          <div class="article__about-box" *ngIf="expeditionArticle.recording.length">
             <h5 class="article__about-title">{{ 'expeditions.article.about-article.record' | translate }}:</h5>
               <div class="article__about-text" *ngFor="let recording of expeditionArticle.recording">
                 <p>{{ recording }}</p>

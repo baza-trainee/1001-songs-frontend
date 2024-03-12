@@ -15,7 +15,9 @@
     </div>
 
     <div class="song__card__song__info">
-      <div class="song__info__genre">{{ song.genres && song.genres.length > 0 ? song.genres[0] : 'Unknown' }}</div>
+      <div class="song__info__genre">
+        <span *ngFor="let genre of song.genres">{{ genre }}</span>
+      </div>
       <div class="song__info__location">
         {{ song.city ? song.city : '...' }}
       </div>

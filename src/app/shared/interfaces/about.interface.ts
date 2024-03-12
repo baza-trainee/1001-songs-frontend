@@ -1,6 +1,7 @@
 export interface DataAboutContent {
   id: number;
-  content: string
+  title: string;
+  content: string;
 }
 
 export interface AboutTeam {

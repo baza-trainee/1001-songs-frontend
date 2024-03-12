@@ -1,8 +1,8 @@
 <div class="detail" [ngClass]="{'opened': isOpened}" *ngIf="isOpened">
     <div class="detail__video">
-      <app-video-player [srcUrl]="song.video_url" [order$]="order$" (ytStartsPlay)="onYtStartsPlay($event)"></app-video-player>
+      <app-video-player *ngIf="song.video_url" [srcUrl]="song.video_url" [order$]="order$" (ytStartsPlay)="onYtStartsPlay($event)"></app-video-player>
+      <img *ngIf="!song.video_url" [src]="song.photos[0]" alt="">
     </div>
-
     <div class="detail__info">
       <div class="info__date__record">
         <div class="date__record__title">{{ 'map.player.songs-list.song-card.song-card-detail.record-date' | translate }}</div>
@@ -41,6 +41,6 @@
 
     <div class="detail__song__text">
       <div class="song__text__content" *ngIf="song.song_text" [innerHTML]="song.song_text | formatText"></div>
-      <div class="song__text__content" *ngIf="!song.song_text">Текст пісні відсутній...</div>
+      <div class="song__text__content" *ngIf="!song.song_text">Нажаль, тексту пісні немає наразі</div>
     </div>
   </div>

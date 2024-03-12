@@ -54,12 +54,12 @@
         </div>
 
         <div class="contacts__social">
-          <a [href]="info.facebook_url" class="social__item" target="_blank">
+          <a *ngIf="info.facebook_url" [href]="info.facebook_url" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconFb"></use>
             </svg>
           </a>
-          <a [href]="info.youtube_url" class="social__item" target="_blank">
+          <a *ngIf="info.youtube_url" [href]="info.youtube_url" class="social__item" target="_blank">
             <svg width="40" height="40" viewBox="0 0 40 40">
               <use xlink:href="./assets/sprites.svg#iconYouTube"></use>
             </svg>

@@ -20,19 +20,19 @@
       <div class="article__box">
         <h2 class="article__sub-title">{{ 'news.article.about-article.title' | translate }}</h2>
         <div class="article__about">
-          <div class="article__about-box">
+          <div class="article__about-box" >
             <h5 class="article__about-title">{{ 'news.article.about-article.author' | translate }}:</h5>
             <p class="article__about-text" *ngFor="let author of article.authors">
               {{author}}
             </p>
           </div>
-          <div class="article__about-box">
+          <div class="article__about-box" *ngIf="article.editors.length">
             <h5 class="article__about-title">{{ 'news.article.about-article.editor' | translate }}:</h5>
             <p class="article__about-text" *ngFor="let editor of article.editors">
               {{editor}}
             </p>
           </div>
-          <div class="article__about-box">
+          <div class="article__about-box" *ngIf="article.photographers.length">
             <h5 class="article__about-title">{{ 'news.article.about-article.photos' | translate }}:</h5>
             <p class="article__about-text" *ngFor="let photographer of article.photographers">
               {{photographer}}

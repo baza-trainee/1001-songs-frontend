@@ -6,9 +6,8 @@
     >
       <div class="card">
         <a
-          [href]="partner.link"
+          [href]="partner.link ? partner.link : '#'"
           target="_blank">
-
           <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
         </a>
       </div>

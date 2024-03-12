@@ -35,22 +35,16 @@
                             <p>{{ author }}</p>
                         </div>
                     </div>
-                    <div class="project__about-box">
+                    <div class="project__about-box" *ngIf="project.editors.length">
                         <h5 class="project__about-title">{{ 'expeditions.article.about-article.editor' | translate }}:</h5>
                         <div class="project__about-text" *ngFor="let editor of project.editors">
                             <p>{{ editor }}</p>
                         </div>
                     </div>
-                    <div class="project__about-box">
-                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.video-editing' | translate }}:</h5>
+                    <div class="project__about-box" *ngIf="project.photographers">
+                        <h5 class="project__about-title">Cвітлини:</h5>
                         <div class="project__about-text" *ngFor="let photographer of project.photographers">
                             <p>{{ photographer }}</p>
-                        </div>
-                    </div>
-                    <div class="project__about-box">
-                        <h5 class="project__about-title">{{ 'expeditions.article.about-article.record' | translate }}:</h5>
-                        <div class="project__about-text" *ngFor="let recording of project.recording">
-                            <p>{{ recording }}</p>
                         </div>
                     </div>
                 </div>
