@@ -45,10 +45,10 @@ export class MapComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetSong());
   }
 
-  onFilterChange(filter: SongFilter) {
-    // this.store.dispatch(new FetchSongs(filter));
-    return filter;
-  }
+  // onFilterChange(filter: SongFilter) {
+  //   // this.store.dispatch(new FetchSongs(filter));
+  //   return filter;
+  // }
 
   handleMapEmit(marker: MarkerOfLocation, target: HTMLElement) {
     const filter = new SongFilter([marker.id + '']);

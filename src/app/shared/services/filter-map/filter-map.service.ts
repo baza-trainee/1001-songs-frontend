@@ -59,7 +59,7 @@ export class FilterMapService {
     const fund = options.fund.length ? options.fund.map((fund) => `fund_id=${fund}`) : '';
     const fullParams = [search, ...country, ...region, ...city, ...genre, ...fund, paginationParams];
 
-    const requestParams = fullParams.join('&') + paginationParams;
+    const requestParams = fullParams.join('&');
     fullRequest += requestParams.length > 0 ? '?' + requestParams : '';
 
     return this.http.get(fullRequest).pipe(

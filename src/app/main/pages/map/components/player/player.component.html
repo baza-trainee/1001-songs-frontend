@@ -4,7 +4,7 @@
       <div class="songs__counter" *ngIf="songs$ | async as songs">
         <div class="counter__title">{{ 'map.player.counter-title' | translate }}</div>
         <div class="counter__result">
-          <span>{{ songs.length }}</span>
+          <span>{{ totalAmountSong }}</span>
         </div>
       </div>
 
