@@ -1,7 +1,7 @@
 <div class="container">
   <section class="about">
     <div class="about__box">
-      <h2 class="about__title">{{ 'about.title' | translate }}</h2>
+      <h2 class="about__title" *ngIf="dataAboutContent$ | async as content">{{ content.title }}</h2>
     </div>
     <div class="about__flex">
       <div class="about__content" *ngIf="dataAboutContent$ | async as content">

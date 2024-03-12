@@ -17,7 +17,7 @@ export class AboutService {
     return this.http.get<DataAboutContent>(`${API_URL}${StatEndpoints.about}`).pipe(
       catchError(error => {
         console.error(error);
-        return of({ id: 0, content: '' });
+        return of({ id: 0, title: '', content: '' });
       })
     );
 }

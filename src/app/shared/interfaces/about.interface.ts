@@ -1,5 +1,6 @@
 export interface DataAboutContent {
   id: number;
+  title: string;
   content: string
 }
 
