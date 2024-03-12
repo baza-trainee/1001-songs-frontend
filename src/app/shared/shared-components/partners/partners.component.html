@@ -6,7 +6,13 @@
     >
       <div class="card">
         <a
-          [href]="partner.link ? partner.link : '#'"
+          *ngIf="partner.link"
+          [href]="partner.link"
+          target="_blank">
+          <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
+        </a>
+        <a
+          *ngIf="!partner.link"
           target="_blank">
           <img [src]="partner.photo" alt="Partner Logo" class="partners__logo">
         </a>
