@@ -6,7 +6,6 @@ import {
   ExpeditionListResponse
 } from '../../interfaces/expedition.interface';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
-import {Category} from "../../interfaces/article.interface";
 
 @Injectable({
   providedIn: 'root'

@@ -8,7 +8,6 @@ import {ExpeditionData, ExpeditionListResponse} from 'src/app/shared/interfaces/
 import { ExpeditionCardComponent } from 'src/app/main/pages/expeditions/expedition-card/expedition-card.component';
 import { FilterComponent } from '../../../shared/shared-components/filter/filter.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
-import { Category } from "../../../shared/interfaces/article.interface";
 import { PaginationComponent } from "../../../shared/shared-components/pagination/pagination.component";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 
