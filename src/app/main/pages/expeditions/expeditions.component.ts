@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ExpeditionListResponse } from 'src/app/shared/interfaces/expedition.interface';
+import {ExpeditionData, ExpeditionListResponse} from 'src/app/shared/interfaces/expedition.interface';
 import { ExpeditionCardComponent } from 'src/app/main/pages/expeditions/expedition-card/expedition-card.component';
 import { FilterComponent } from '../../../shared/shared-components/filter/filter.component';
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
@@ -21,7 +21,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 })
 
 export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
-  public expeditionCategories$?: Observable<Category[]>;
+  public expeditionCategories$?: Observable<ExpeditionData>;
   private articlesSubscription?: Subscription;
   private queryParamsSubscription?: Subscription;
   public expeditionResponse$!: Observable<ExpeditionListResponse>;

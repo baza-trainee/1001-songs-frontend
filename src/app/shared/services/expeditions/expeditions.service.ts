@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {catchError, map, Observable, of, switchMap, throwError} from 'rxjs';
 import {
-  ExpeditionArticle,
+  ExpeditionArticle, ExpeditionData,
   ExpeditionListResponse
 } from '../../interfaces/expedition.interface';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
@@ -15,11 +15,11 @@ import {Category} from "../../interfaces/article.interface";
 export class ExpeditionsService {
   constructor(private http: HttpClient) {}
 
-    fetchExpeditionCategories() : Observable<Category[]> {
-        return this.http.get<Category[]>(`${API_URL}${StatEndpoints.expeditions.categories}`).pipe(
+    fetchExpeditionCategories() : Observable<ExpeditionData> {
+        return this.http.get<ExpeditionData>(`${API_URL}${StatEndpoints.expeditions.categories}`).pipe(
             catchError(error => {
               console.error(error);
-              return of([]);
+              return of({} as ExpeditionData);
             })
         );
     }

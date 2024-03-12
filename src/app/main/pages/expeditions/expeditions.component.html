@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="expeditionCategories$ | async as data">
   <div class="expeditions">
     <ng-container *ngIf="searchValue; else noSearchResults">
       <ng-container *ngIf="expeditionResponse$ | async as expedition; else preloader">
@@ -14,14 +14,14 @@
       </ng-template>
     </ng-container>
     <ng-template #noSearchResults>
-      <h2  class="expeditions__title">{{ 'expeditions.title' | translate }}</h2>
+      <h2  class="expeditions__title">{{ data.title }}</h2>
       <p class="expeditions__description">
-        {{ 'expeditions.intro' | translate }}
+        {{ data.description }}
       </p>
     </ng-template>
   </div>
-  <div class="expeditions__categories" *ngIf="expeditionCategories$ | async as categories">
-    <app-filter [selectedFilterId]="idParamsCategory" [categories]="categories" (filteredCategories)="filteredCategory($event)" />
+  <div class="expeditions__categories">
+    <app-filter [selectedFilterId]="idParamsCategory" [categories]="data.categories" (filteredCategories)="filteredCategory($event)" />
   </div>
   <div class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
     <div class="expeditions__box">

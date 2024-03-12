@@ -1,3 +1,5 @@
+import {Category} from "./article.interface";
+
 export interface Expedition {
   id: number;
   title: string;
@@ -5,6 +7,12 @@ export interface Expedition {
   short_description: string;
   expedition_date: string;
   preview_photo: string;
+}
+
+export interface ExpeditionData {
+  title: string,
+  description: string,
+  categories: Category[]
 }
 
 export interface ExpeditionListResponse {
