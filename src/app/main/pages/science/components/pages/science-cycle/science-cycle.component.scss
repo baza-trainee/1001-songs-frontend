@@ -137,7 +137,10 @@ img {
     }
 
     &__description {
-      flex-direction: column;
+      &-box {
+        column-count: 1;
+      }
+
     }
 
     &__subcategory {
