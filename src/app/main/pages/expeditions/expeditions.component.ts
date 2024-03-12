@@ -21,7 +21,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 })
 
 export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
-  public expeditionCategories$!: Observable<Category[]>;
+  public expeditionCategories$?: Observable<Category[]>;
   private articlesSubscription?: Subscription;
   private queryParamsSubscription?: Subscription;
   public expeditionResponse$!: Observable<ExpeditionListResponse>;
@@ -29,7 +29,7 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
 
   private itemsPerPage: number = 12;
   public currentPage: number = 1;
-  public idParamsCategory: number = 0;
+  public idParamsCategory!: number;
 
   constructor(
     private expeditionsService: ExpeditionsService,
@@ -38,18 +38,13 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.fetchExpeditions();
-    this.fetchCategory();
-  }
-
-  fetchCategory() {
-    this.expeditionCategories$ = this.expeditionsService.fetchExpeditionCategories();
   }
 
   fetchExpeditions() {
     if (!this.route.queryParams) return;
 
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
-      this.idParamsCategory = params['id'];
+      this.idParamsCategory = params['id'] ? params['id'] : 0;
       let paramsObg: {search?: string, page: number, size: number} = {page: this.currentPage, size: this.itemsPerPage};
       params['search'] ? this.searchValue = params['search'] : this.searchValue = "";
 
@@ -58,8 +53,8 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
         this.expeditionResponse$ = this.expeditionsService.fetchExpeditions(paramsObg);
       }
 
-
       if (this.idParamsCategory) this.filteredCategory(+params['id']);
+      this.expeditionCategories$ = this.expeditionsService.fetchExpeditionCategories();
     });
   }
 

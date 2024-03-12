@@ -51,9 +51,11 @@ export class GeneralSearchComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    const clickedInside = this.searchField.nativeElement.contains(event.target);
-    if (!clickedInside && this.showInputSearch) {
-      this.showInputSearch = false;
+    if (this.searchField) {
+      const clickedInside = this.searchField.nativeElement.contains(event.target);
+      if (!clickedInside && this.showInputSearch) {
+        this.showInputSearch = false;
+      }
     }
   }
 

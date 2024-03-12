@@ -4,7 +4,7 @@ export interface EducationSong {
   stereo_audio: string;
   photos: [];
   recording_location: string;
-  genre: string;
+  genres: string;
 }
 
 export interface ScienceSong {

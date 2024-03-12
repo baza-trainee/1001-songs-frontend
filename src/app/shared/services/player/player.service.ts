@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { PlayerSong, PlaylistCardSong, PlaylistSong } from '../../interfaces/song.interface';
+import {EducationSong} from "../../interfaces/science-song.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -66,14 +67,13 @@ export class PlayerService {
     };
   }
 
-  getPlayerListCardSong<T>(song: T): PlaylistCardSong {
-    const songData = song as PlaylistCardSong;
+  getPlayerListCardSong(song: EducationSong): PlaylistCardSong {
     return {
-      id: songData.id,
-      title: songData.title,
-      genres: songData.genres,
-      stereo_audio: songData.stereo_audio,
-      city: songData.city
+      id: song.id,
+      title: song.title,
+      genres: [song.genres],
+      stereo_audio: song.stereo_audio,
+      city: song.recording_location
     };
   }
 }

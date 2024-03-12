@@ -48,6 +48,7 @@
     .song__card__song__info {
       display: grid;
       grid-template-columns: 0.81fr 1.16fr;
+      align-items: center;
       min-width: 255px;
       width: 100%;
       gap: 16px;
