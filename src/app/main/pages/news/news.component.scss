@@ -1,5 +1,9 @@
 @use '/src/typography/typography' as *;
 
+.no-result {
+  border-top: 1px solid #000;
+}
+
 .news {
   flex-grow: 1;
   display: flex;
@@ -18,7 +22,10 @@
   }
 
   &__box {
-    min-height: 550px;
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
   }
 
   &__title {

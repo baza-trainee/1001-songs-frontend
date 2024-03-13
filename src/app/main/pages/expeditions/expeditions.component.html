@@ -25,11 +25,19 @@
   </div>
   <div class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
     <div class="expeditions__box">
-      <div class="expeditions__gallery" >
-        <div *ngFor="let event of expedition.items" class="expeditions__gallery-item">
-          <app-expedition-card [routerLink]="event.id + ''" [event]="event"></app-expedition-card>
-        </div>
-      </div>
+        <ng-container *ngIf="expedition.items.length; else noResult">
+           <div class="expeditions__gallery" >
+            <div *ngFor="let event of expedition.items" class="expeditions__gallery-item">
+              <app-expedition-card [routerLink]="event.id + ''" [event]="event"></app-expedition-card>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #noResult>
+          <div class="no-result">
+            <span>Овва! Схоже, в данній категорії наразі відсутні експедиції</span>
+          </div>
+        </ng-template>
     </div>
     <app-pagination
       [totalPages]="expedition.pages"

@@ -112,12 +112,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     if (window.innerWidth > 768) {
       this.heightHeader = 108;
       this.paddingTop = 50;
-    } else if (window.innerWidth <= 768) {
-      this.heightHeader = 96;
-      this.paddingTop = 30;
-    } else if (window.innerWidth <= 630) {
+    } else if (window.innerWidth <= 421) {
       this.heightHeader = 80;
       this.paddingTop = 18;
+    } else if (window.innerWidth <= 630) {
+      this.heightHeader = 96;
+      this.paddingTop = 30;
     }
   }
 

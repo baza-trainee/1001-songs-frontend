@@ -10,13 +10,14 @@ import { FilterComponent } from '../../../shared/shared-components/filter/filter
 import { ExpeditionsService } from 'src/app/shared/services/expeditions/expeditions.service';
 import { PaginationComponent } from "../../../shared/shared-components/pagination/pagination.component";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import {ArticleItemComponent} from "../news/components/article-item/article-item.component";
 
 @Component({
   selector: 'app-expeditions',
   templateUrl: './expeditions.component.html',
   styleUrls: ['./expeditions.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent, PaginationComponent, RouterLink]
+  imports: [CommonModule, TranslateModule, ExpeditionCardComponent, HttpClientModule, FilterComponent, PaginationComponent, RouterLink, ArticleItemComponent]
 })
 
 export class ExpeditionsComponent implements AfterViewInit, OnDestroy {

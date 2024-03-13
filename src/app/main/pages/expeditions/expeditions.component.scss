@@ -33,6 +33,10 @@ section {
     min-height: 300px;
     transition: height 1s ease;
     margin-bottom: 24px;
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
   }
 
   &__gallery {

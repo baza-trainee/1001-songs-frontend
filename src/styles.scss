@@ -118,3 +118,24 @@ iframe  {
     height: 240px;
   }
 }
+
+.no-result {
+  position: relative;
+  margin-top: 5px;
+  flex-grow: 1;
+  padding: 15px 0;
+  opacity: .8;
+  min-height: 140px;
+
+  span {
+    @include h3-mobile($font-size: 23px, $color: var(--text-color-popup-menu), $text-transform: none);
+
+    transform: translate(-50%, -50%);
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    min-width: 280px;
+    max-width: 450px;
+    position: absolute;
+  }
+}

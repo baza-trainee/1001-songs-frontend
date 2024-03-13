@@ -79,6 +79,9 @@
     .nav {
       height: 82%;
       display: flex;
+      overflow-y: auto;
+      overflow-x: clip;
+      padding-bottom: 10px;
       justify-content: space-between;
 
       &__menu {
@@ -291,9 +294,9 @@
   }
 }
 
-@media (max-width: 421px) {
+@media (max-width: 463px) {
   .wrapper {
-    padding: 0 16px 35px;
+    padding: 0 16px 60px;
 
     &__header {
       padding-top: 4px;

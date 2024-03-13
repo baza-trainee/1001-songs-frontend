@@ -9,12 +9,19 @@
         <app-filter [categories]="categories" (filteredCategories)="filteredCategory($event)" />
       </div>
       <ng-container *ngIf="newsResponse$ | async as response">
-        <div class="cards__wrap">
-          <app-article-item
-            *ngFor="let item of response.items"
-            [article]="item"
-          />
-        </div>
+        <ng-container *ngIf="response.items; else noResult">
+          <div class="cards__wrap">
+            <app-article-item
+              *ngFor="let item of response.items"
+              [article]="item"
+            />
+          </div>
+        </ng-container>
+        <ng-template #noResult>
+          <div class="no-result">
+            <span>Овва! Схоже, в данній категорії наразі відсутні новини</span>
+          </div>
+        </ng-template>
         <app-pagination
           [totalPages]="response.pages"
           [currentPage]="currentPage"
