@@ -10,6 +10,8 @@ import { format } from 'date-fns';
 export class AudioService {
   private stop$: Subject<void> = new Subject<void>();
   private audioObj: HTMLAudioElement = new Audio();
+  private audioObj2: HTMLAudioElement = new Audio();
+  private audioObj3: HTMLAudioElement = new Audio();
 
   private state: StreamState = {
     playing: false,
@@ -23,12 +25,28 @@ export class AudioService {
 
   showStereoPlayer$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  tracks = ['assets/t01.mp3','assets/t02.mp3','assets/t03.mp3']
+
   private streamObservable(url: string) {
     return new Observable((observer) => {
       // Play audio
-      this.audioObj.src = url;
-      this.audioObj.load();
-      this.audioObj.play();
+      const AudioContext = window.AudioContext;
+      this.audioObj.src = this.tracks[0] 
+      this.audioObj2.src = this.tracks[1] 
+      this.audioObj3.src = this.tracks[2] 
+      const audioContext = new AudioContext();
+      const track = audioContext.createMediaElementSource(this.audioObj);
+      const track2 = audioContext.createMediaElementSource(this.audioObj2);
+      const track3 = audioContext.createMediaElementSource(this.audioObj3);
+      track.connect(audioContext.destination);
+      track2.connect(audioContext.destination);
+      track3.connect(audioContext.destination);
+      this.audioObj.play()
+      this.audioObj2.play()
+      this.audioObj3.play()
+      // this.audioObj.volume = 1;
+      // this.audioObj.load();
+      // this.audioObj.play();
 
       const handler = (event: Event) => {
         this.updateStateEvents(event);
@@ -48,8 +66,8 @@ export class AudioService {
     });
   }
 
-  setUpVolume(value: number){
-    this.audioObj.volume = value/10;
+  setUpVolume(value: number) {
+    this.audioObj.volume = value / 10;
   }
 
   playStream(url: string) {
