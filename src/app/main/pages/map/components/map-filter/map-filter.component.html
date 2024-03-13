@@ -52,6 +52,7 @@
               [options]="options.country | transformToMultiselect"
               [name]="filterCategory.country"
               (selectionOnBlur)="selectBlur()"
+              (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
 
             <app-multiselect
@@ -59,6 +60,7 @@
               [options]="options.region | transformToMultiselect"
               [name]="filterCategory.region"
               (selectionOnBlur)="selectBlur()"
+              (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
 
             <app-multiselect
@@ -66,6 +68,7 @@
               [options]="options.city | transformToMultiselect"
               [name]="filterCategory.city"
               (selectionOnBlur)="selectBlur()"
+              (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
 
           </div>
@@ -77,6 +80,7 @@
               [options]="options.genre | transformToMultiselect"
               [name]="filterCategory.genre"
               (selectionOnBlur)="selectBlur()"
+              (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
 
             <app-multiselect
@@ -84,6 +88,7 @@
               [options]="options.fund | transformToMultiselect"
               [name]="filterCategory.found"
               (selectionOnBlur)="selectBlur()"
+              (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
             <button class="filter__submit" type="submit" (click)="filterSongs()">{{ 'map.filter.button-submit' | translate }}</button>
           </div>

@@ -35,7 +35,9 @@ export class MultiselectComponent implements OnChanges {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) options!: MultiSelect[];
   @Input({ required: true }) name!: string;
+
   @Output() selectionOnBlur = new EventEmitter<string>();
+  @Output() selectionRemove = new EventEmitter<string>();
 
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
 
@@ -69,7 +71,7 @@ export class MultiselectComponent implements OnChanges {
     this.removeFirst(value, option);
     this.selectedOption = this.selectedOption.filter(item => item.id !== option);
     this.control.setValue(value);
-    this.selectionOnBlur.emit()
+    this.selectionRemove.emit()
   }
 
   clearSelections(): void {
