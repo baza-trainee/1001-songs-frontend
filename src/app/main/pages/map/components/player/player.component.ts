@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
@@ -70,7 +70,8 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     private playerService: PlayerService,
     private store: Store,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private scroller: ViewportScroller
   ) {
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       if (data) this.songs = data.slice();
@@ -94,8 +95,8 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
-  onYtStartsPlay(event: Order){
-    this.handleOrders(event)
+  onYtStartsPlay(event: Order) {
+    this.handleOrders(event);
   }
 
   onPlayPauseClicked(order: Order) {
@@ -155,7 +156,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   changePage(page: number): void {
     if (this.currentPage !== page) {
       this.currentPage = page;
-      this.store.dispatch(new FetchSongs(this.currentFilter, { page, size: AMOUNT_SONGS_MAP_PAGE }));
+      this.store
+        .dispatch(new FetchSongs(this.currentFilter, { page, size: AMOUNT_SONGS_MAP_PAGE }))
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          window.scrollTo({ top: 700, behavior: 'auto' });
+        });
     }
   }
 
