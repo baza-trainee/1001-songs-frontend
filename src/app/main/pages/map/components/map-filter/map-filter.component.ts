@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, skip, Subject, takeUntil, tap } from 'rxjs';
@@ -28,13 +28,12 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   @Select(FilterMapState.getSelectedOptions) selectedOptions$!: Observable<SongFilter>;
   @Select(FilterMapState.getShowOptions) showOptions$!: Observable<OptionsSongFilter>;
   @Select(PlayerState.getSongs) songs!: Observable<PlaylistSong[]>;
-  @Output() changeFilter = new EventEmitter<SongFilter>();
+ // @Output() changeFilter = new EventEmitter<SongFilter>();
   filterCategory = mapFilter;
   isShowFilter = false;
   private destroy$ = new Subject<void>();
 
   emitCounter = 0;
-  songFound = false;
 
   form = new FormGroup({
     country: new FormControl<string[]>([]),
@@ -59,7 +58,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
       .pipe(skip(1))
       .pipe(
         tap((values) => {
-          this.songFound = false;
           if (values.title === '') {
             this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
             this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
@@ -84,7 +82,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           const search = emits[0];
           if (search && search.length < 3) {
             this.autocompleteSongs = [];
-            //this.emitCounter = 0;
           }
           return search && search.trim().length > 2 ? true : false;
         })
@@ -98,7 +95,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
           this.autocompleteSongs = [];
         }
         this.emitCounter = 1;
-        if (this.songFound) return;
         this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
         this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
       });
@@ -131,7 +127,6 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   getSelectedSong(songTitle: string) {
-    this.songFound = true;
     this.store.dispatch(new FindSongByTitle(songTitle));
     const filter = new SongFilter();
     filter.title = songTitle;
@@ -142,14 +137,11 @@ export class MapFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
     this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
-    console.log('onSelectionRemove()')
   }
 
   selectBlur() {
-    //this.changeFilter.emit(this.form.value as SongFilter);
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
-    //this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
   searchBlur(ev: string) {
