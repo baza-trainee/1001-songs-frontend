@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, skip, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
