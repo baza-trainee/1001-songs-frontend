@@ -34,7 +34,7 @@
 
     <div class="song__card__listen">
       <mat-icon *ngIf="!hasMedia" class="nomedia" aria-hidden="false" aria-label="Example home icon" fontIcon="music_off"></mat-icon>
-      <button *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="playPauseSong($event)">
+      <button *ngIf="hasMedia" class="btn__listen" [disabled]="!hasMedia" (click)="playPauseSong($event)" aria-label="button play">
         <svg
           *ngIf="!isPlay"
           class="listen__desktop"

@@ -1,6 +1,7 @@
 <ng-container *ngIf="totalPages > 1">
     <ul class="pagination">
-        <li><a
+        <li><button
+          aria-label="go to first page"
           class="pagination__first"
           (click)="goToPage(1)"
           (keydown)="goToPage(1)"
@@ -11,8 +12,9 @@
             <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
                 <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
             </svg>
-        </a></li>
-        <li><a
+        </button></li>
+        <li><button
+          aria-label="go to prev page"
           class="pagination__prev"
           [class.disabled]="1 === currentPage"
           (click)="goToPrevPage()"
@@ -23,18 +25,19 @@
             <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
                 <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
             </svg>
-        </a></li>
+        </button></li>
         <li *ngIf="currentPage === totalPages && totalPages > maxVisiblePages" >
-            <a (click)="goToPage(1)" (keydown)="goToPage(1)" tabindex="0">{{ 1 }}</a>
+            <button aria-label="go to first page" (click)="goToPage(1)" (keydown)="goToPage(1)" tabindex="0">{{ 1 }}</button>
         </li>
         <li *ngFor="let page of getPagesToShow()" >
-            <a [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</a>
-            <span class="pagination__skip" *ngIf="page === 0">...</span>
+            <button aria-label="go to page" [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</button>
+            <button aria-label="pagination skip" class="pagination__skip" *ngIf="page === 0">...</button>
         </li>
         <li *ngIf="currentPage === 1 && totalPages > maxVisiblePages" >
-            <a (click)="goToPage(totalPages)" (keydown)="goToPage(totalPages)" tabindex="0">{{ totalPages }}</a>
+            <button (click)="goToPage(totalPages)" (keydown)="goToPage(totalPages)" tabindex="0" aria-label="go to first page">{{ totalPages }}</button>
         </li>
-        <li><a
+        <li><button
+          aria-label="go to next page"
           class="pagination__next"
           [class.disabled]="pages.length === currentPage"
           (click)="goToNextPage()"
@@ -45,8 +48,9 @@
             <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
                 <use xlink:href="./assets/sprites.svg#paginationPrevNext"></use>
             </svg>
-        </a></li>
-        <li><a
+        </button></li>
+        <li><button
+          aria-label="go to page"
           class="pagination__last"
           (click)="goToPage(pages.length)"
           (keydown)="goToPage(pages.length)"
@@ -57,7 +61,7 @@
             <svg width="24" height="24" viewBox="-2 -4 24 24" style="transform: rotate(180deg)">
                 <use xlink:href="./assets/sprites.svg#paginationFirstLast"></use>
             </svg>
-        </a></li>
+        </button></li>
     </ul>
 </ng-container>
 

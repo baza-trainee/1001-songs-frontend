@@ -30,7 +30,7 @@
       <app-stereo-player #stereoPlayer [song$]="playerSong$" (isPlay)="onStereoStartsPlay()"></app-stereo-player>
 
       <div class="song__player-btns">
-        <button class="song__player-download">
+        <button class="song__player-download" aria-label="song download">
           <svg width="24" height="24">
             <use xlink:href="./assets/sprites.svg#download"></use>
           </svg>

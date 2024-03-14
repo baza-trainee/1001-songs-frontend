@@ -3,6 +3,7 @@
   <p class="dialog__text">{{ ShareModalLink.text | translate }}</p>
   <button
     tabindex="0"
+    aria-label="close"
     (keyup)="closeDialog()"
     (click)="closeDialog()"
     class="dialog__close">
@@ -46,6 +47,7 @@
   <div class="dialog__action-block">
     <button
       type="button"
+      aria-label="copy Url"
       class="dialog__action-block--btn"
       (click)="copyCurrentUrl()"
       tabindex="0"

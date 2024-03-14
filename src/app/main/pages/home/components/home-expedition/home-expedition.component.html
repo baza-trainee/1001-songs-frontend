@@ -19,7 +19,7 @@
           </p>
           <h4 class="expeditions__main-title" >{{ expedition.title }}</h4>
           <p class="expeditions__main-location">{{ expedition.location }}</p>
-          <a class="expeditions__main-btn" (click)="redirectToNews(expedition.id)" (keydown)="redirectToNews(expedition.id)" tabindex="0">Переглянути</a>
+          <button class="expeditions__main-btn" (click)="redirectToNews(expedition.id)" (keydown)="redirectToNews(expedition.id)" tabindex="0" aria-label="navigate to main expedition">Переглянути</button>
         </div>
       </div>
       <div class="expeditions__all">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="expeditions__router">
-      <button class="expeditions__router-link" [routerLink]="'/expeditions'">Переглянути усі
+      <button class="expeditions__router-link" aria-label="navigate to all expedition" [routerLink]="'/expeditions'">Переглянути усі
         <svg class="expeditions__router-arrow" width="24" height="24">
           <use xlink:href="./assets/sprites.svg#arrowArticleItem"></use>
         </svg>

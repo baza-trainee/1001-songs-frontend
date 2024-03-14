@@ -21,7 +21,7 @@
           {{ option.name.length > 16 ? option.name.slice(0, 16) + '...' : option.name }} ({{ option.song_count }})
         </mat-chip>
       </mat-chip-listbox>
-      <button class="multiselect__clear" (click)="clearSelections()">
+      <button class="multiselect__clear" (click)="clearSelections()" aria-label="clear selections">
         <mat-icon>
           <svg width="12" height="12" viewBox="0 0 12 12">
             <use xlink:href="./assets/sprites.svg#selectClear"></use>

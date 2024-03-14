@@ -26,7 +26,7 @@
           <div class="filter__location">
             <div class="filter__search filter__title-container">
               <h3 class="filter__body-title">{{ 'map.filter.search' | translate }}</h3>
-              <button class="filter__clear" (click)="clearFilter()" >
+              <button class="filter__clear" (click)="clearFilter()" aria-label="clear filter">
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <use xlink:href="./assets/sprites.svg#filterClear"></use>
                 </svg>
@@ -90,7 +90,7 @@
               (selectionOnBlur)="selectBlur()"
               (selectionRemove)="onSelectionRemove()"
             ></app-multiselect>
-            <button class="filter__submit" type="submit" (click)="filterSongs()">Сховати фільтр</button>
+            <button class="filter__submit" aria-label="hide filter" type="submit" (click)="filterSongs()">Сховати фільтр</button>
           </div>
         </div>
       </form>

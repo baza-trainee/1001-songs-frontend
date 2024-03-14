@@ -6,54 +6,54 @@
     [class.loading]="isPreloader"
   >
     <div class="player__actions">
-      <button class="btn__player back" (click)="backward(state.currentTime)">
+      <button class="btn__player back" (click)="backward(state.currentTime)" aria-label="back">
         <svg width="22" height="15" viewBox="0 0 22 15">
           <use xlink:href="./assets/sprites.svg#backDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player prev" (click)="previous()">
+      <button class="btn__player prev" (click)="previous()" aria-label="previous">
         <svg width="15" height="19" viewBox="0 0 15 19">
           <use xlink:href="./assets/sprites.svg#prevDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player play" (click)="play()" [disabled]="state.error" *ngIf="!state.playing">
+      <button class="btn__player play" (click)="play()" aria-label="play" [disabled]="state.error" *ngIf="!state.playing">
         <svg width="31" height="31" viewBox="0 0 31 31">
           <use xlink:href="./assets/sprites.svg#playDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player pause" (click)="pause()" *ngIf="state.playing">
+      <button class="btn__player pause" (click)="pause()" aria-label="pause" *ngIf="state.playing">
         <svg width="31" height="31" viewBox="0 0 32 31">
           <use xlink:href="./assets/sprites.svg#pauseDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player next" (click)="next()">
+      <button class="btn__player next" (click)="next()" aria-label="next">
         <svg width="15" height="19" viewBox="0 0 15 19">
           <use xlink:href="./assets/sprites.svg#nextDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player forward" (click)="forward(state.currentTime)">
+      <button class="btn__player forward" (click)="forward(state.currentTime)" aria-label="forward">
         <svg width="22" height="15" viewBox="0 0 22 15">
           <use xlink:href="./assets/sprites.svg#forwardDesktopBtn"></use>
         </svg>
       </button>
     </div>
     <div class="player__actions__mobile">
-      <button class="btn__player__mobile backward" (click)="backward(state.currentTime)">
+      <button class="btn__player__mobile backward" (click)="backward(state.currentTime)" aria-label="backward">
         <svg width="47" height="32" viewBox="0 0 47 32">
           <use xlink:href="./assets/sprites.svg#backwardMobileBtn"></use>
         </svg>
       </button>
-      <button class="btn__player__mobile play" (click)="play()" [disabled]="state.error" *ngIf="!state.playing">
+      <button class="btn__player__mobile play" (click)="play()" aria-label="play" [disabled]="state.error" *ngIf="!state.playing">
         <svg width="55" height="55" viewBox="0 0 74 74">
           <use xlink:href="./assets/sprites.svg#playMobileBtn"></use>
         </svg>
       </button>
-      <button class="btn__player__mobile pause" (click)="pause()" *ngIf="state.playing">
+      <button class="btn__player__mobile pause" (click)="pause()" aria-label="pause" *ngIf="state.playing">
         <svg width="55" height="55" viewBox="0 0 74 74">
           <use xlink:href="./assets/sprites.svg#pauseMobileBtn"></use>
         </svg>
       </button>
-      <button class="btn__player__mobile forward" (click)="forward(state.currentTime)">
+      <button class="btn__player__mobile forward" aria-label="forward" (click)="forward(state.currentTime)">
         <svg width="47" height="32" viewBox="0 0 47 32">
           <use xlink:href="./assets/sprites.svg#forwardMobileBtn"></use>
         </svg>
@@ -61,14 +61,14 @@
     </div>
     <div class="player__volume">
       <mat-icon class="mat__icon">volume_up</mat-icon>
-      <input 
+      <input
         class="volume_up"
         #volumeRange
-        type="range" 
+        type="range"
         min="0"
-        max="10" 
-        step="1" 
-        (input)="setUpVolume($event)" 
+        max="10"
+        step="1"
+        (input)="setUpVolume($event)"
       />
     </div>
     <div class="player__timeline">

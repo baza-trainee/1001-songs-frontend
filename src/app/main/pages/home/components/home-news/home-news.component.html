@@ -4,7 +4,7 @@
     <div class="news__items" *ngIf="newsResponse$ | async as news">
       <div class="news__all">
         <ng-container *ngFor="let item of news.items.slice(1, 6)">
-          <a
+          <span
             class="news__all-item"
             *ngIf="item"
             (click)="redirectToNews(item.id)"
@@ -15,22 +15,23 @@
             <p class="news__all-date">{{ item.created_at | date: 'dd.MM.yyyy' }}</p>
             <h4 class="news__all-title">{{ item.title }}</h4>
             <p class="news__all-location">{{ item.location }}</p>
-          </a>
+          </span>
         </ng-container>
       </div>
       <div class="news__main" *ngIf="news.items[0] as item">
-        <a class="news__main-item" (click)="redirectToNews(item.id)" (keydown)="redirectToNews(item.id)" tabindex="0">
+        <span class="news__main-item" (click)="redirectToNews(item.id)" (keydown)="redirectToNews(item.id)" tabindex="0">
           <img class="news__main-img" [src]="item.preview_photo" alt="{{ item.title }}">
           <div class="news__main-info">
             <p class="news__main-date">{{ item.created_at | date: 'dd.MM.yyyy'}}</p>
             <h4 class="news__main-title">{{ item.title }}</h4>
             <p class="news__main-location">{{ item.location }}</p>
           </div>
-        </a>
+        </span>
       </div>
     </div>
     <div class="news__router">
       <button
+        aria-label="router-link to all news"
         class="news__router-link"
         [routerLink]="'/news'"
       >{{'home.home-news.router-link' | translate}}

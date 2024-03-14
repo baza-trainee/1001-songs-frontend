@@ -25,12 +25,12 @@
       </div>
     </div>
     <div class="slider__nav" *ngIf="isShowButton">
-      <button class="prev" (click)="prevSlide()" [disabled]="prevIsDisabled">
+      <button class="prev" (click)="prevSlide()" aria-label="prev slide" [disabled]="prevIsDisabled">
         <svg width="40" height="40" viewBox="0 0 48 48">
           <use xlink:href="./assets/sprites.svg#arrowForward"></use>
         </svg>
       </button>
-      <button class="next" (click)="nextSlide()" [disabled]="nextIsDisabled">
+      <button class="next" (click)="nextSlide()" [disabled]="nextIsDisabled" aria-label="next slide">
         <svg width="40" height="40" viewBox="0 0 48 48">
           <use xlink:href="./assets/sprites.svg#arrowForward"></use>
         </svg>
