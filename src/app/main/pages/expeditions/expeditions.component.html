@@ -23,10 +23,11 @@
   <div class="expeditions__categories">
     <app-filter [selectedFilterId]="idParamsCategory" [categories]="data.categories" (filteredCategories)="filteredCategory($event)" />
   </div>
-  <div class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
-    <div class="expeditions__box">
+  <div class="expeditions-cards">
+    <div class="expeditions" *ngIf="expeditionResponse$ | async as expedition">
+      <div class="expeditions__box">
         <ng-container *ngIf="expedition.items.length; else noResult">
-           <div class="expeditions__gallery" >
+          <div class="expeditions__gallery" >
             <div *ngFor="let event of expedition.items" class="expeditions__gallery-item">
               <app-expedition-card [routerLink]="event.id + ''" [event]="event"></app-expedition-card>
             </div>
@@ -38,11 +39,12 @@
             <span>Овва! Схоже, в данній категорії наразі відсутні експедиції</span>
           </div>
         </ng-template>
+      </div>
+      <app-pagination
+        [totalPages]="expedition.pages"
+        [currentPage]="currentPage"
+        (pageChange)="changePage($event)"
+      ></app-pagination>
     </div>
-    <app-pagination
-      [totalPages]="expedition.pages"
-      [currentPage]="currentPage"
-      (pageChange)="changePage($event)"
-    ></app-pagination>
   </div>
 </section>

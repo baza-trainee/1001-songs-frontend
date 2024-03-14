@@ -10,11 +10,11 @@
       </div>
 
       <div class="info__collectors">
-        <div class="collectors__title">{{ 'map.player.songs-list.song-card.song-card-detail.collectors' | translate }}</div>
+        <div class="collectors__title">Запис</div>
         <div class="collectors__names">
           <ul class="names__names__list">
             <li>
-              <span *ngFor="let collector of song.collectors; let last = last">
+              <span *ngFor="let collector of song.collectors.slice(0, 3); let last = last">
                 {{ collector }}{{ !last ? ', ' : '' }}
               </span>
             </li>
