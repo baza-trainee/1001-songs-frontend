@@ -53,9 +53,9 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
-        if (!this.autoplay) {
-          this.pause();
-        }
+        // if (this.autoplay) {
+        //  // this.pause();
+        // }
       }
     });
   }
