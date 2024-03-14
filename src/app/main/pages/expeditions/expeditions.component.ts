@@ -13,6 +13,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import {ArticleItemComponent} from "../news/components/article-item/article-item.component";
 import {AMOUNT_CARDS_EXPEDITIONS_PAGE} from "../../../shared/config/pagination.constatnts";
 
+
 @Component({
   selector: 'app-expeditions',
   templateUrl: './expeditions.component.html',
