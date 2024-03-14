@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, skip, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatestWith, debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -55,7 +55,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
 
     this.form?.valueChanges
       .pipe(distinctUntilChanged((prev,curr)=> prev.title === curr.title))
-      .pipe(skip(1))
+     // .pipe(skip(1))
       .pipe(
         tap((values) => {
           if (values.title === '') {
@@ -67,9 +67,9 @@ export class MapFilterComponent implements OnInit, OnDestroy {
         })
       )
       .pipe(map((filter) => filter.title))
-      .pipe(takeUntil(this.destroy$))
       .pipe(combineLatestWith(this.songs))
       .pipe(debounceTime(300))
+      .pipe(takeUntil(this.destroy$))
       .pipe(
         distinctUntilChanged((p, c) => {
           const [pSearch, pSongs] = p;
@@ -140,6 +140,7 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   selectBlur() {
+    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
     this.store.dispatch(new SetShownOptions(this.form.value as SongFilter));
     this.store.dispatch(new FetchMarkers(this.form.value as SongFilter));
   }
@@ -149,12 +150,14 @@ export class MapFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.form.setValue(new SongFilter());
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   filterSongs() {
-    this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
+    this.isShowFilter = false;
+    //this.store.dispatch(new FetchSongs(this.form.value as SongFilter));
   }
 
   clearFilter() {

@@ -12,7 +12,7 @@
           <p *ngFor="let genre of song.genres">{{ genre.title }}</p>
         </div>
         <div class="song__player-desctop">
-          <app-stereo-player #stereoPlayer [autoplay]="true" [song$]="playerSong$"></app-stereo-player>
+          <app-stereo-player #stereoPlayer [autoplay]="true" [song$]="playerSong$" (isPlay)="onStereoStartsPlay()"></app-stereo-player>
 
           <div class="song__player-btns">
             <a class="song__player-download" [href]="song.stereo_audio" [download]="song.stereo_audio" target="_blank">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="song__player-mobile">
-      <app-stereo-player #stereoPlayer [song$]="playerSong$"></app-stereo-player>
+      <app-stereo-player #stereoPlayer [song$]="playerSong$" (isPlay)="onStereoStartsPlay()"></app-stereo-player>
 
       <div class="song__player-btns">
         <button class="song__player-download">
@@ -62,7 +62,10 @@
         </div>
         <div>
           <p class="song__info-title">{{ 'science.song-page.info.record' | translate }}</p>
-          <span class="song__info-detail" *ngFor="let collector of song.collectors; let last = last">{{ collector }}{{ last ? '' : ', ' }}</span></div>
+          <span class="song__info-detail" *ngFor="let collector of song.collectors; let last = last"
+            >{{ collector }}{{ last ? '' : ', ' }}</span
+          >
+        </div>
         <div>
           <p class="song__info-title">{{ 'science.song-page.info.performers' | translate }}</p>
           <p class="song__info-detail">{{ song.performers }}</p>
@@ -75,7 +78,7 @@
       </div>
       <div class="song__video-box" *ngIf="song.video_url">
         <div class="song__video-container">
-          <app-video-player [srcUrl]="song.video_url"></app-video-player>
+          <app-video-player [srcUrl]="song.video_url" (ytStartsPlay)="onYtStartsPlay()" [order$]="orderYt$"></app-video-player>
         </div>
       </div>
     </div>
@@ -85,7 +88,7 @@
         <div class="song__info-descr" *ngIf="song.comment_map" [innerHTML]="song.comment_map | formatText"></div>
       </div>
       <div>
-        <div class="song__map-container" style="background-image: url({{song.map_photo}})"></div>
+        <div class="song__map-container" style="background-image: url({{ song.map_photo }})"></div>
       </div>
     </div>
   </section>

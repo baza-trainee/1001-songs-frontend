@@ -18,10 +18,9 @@ import { ESPlayerState } from '../../../../../../store/education/es-player.state
 import { VideoPlayerComponent } from '../../../../../../shared/shared-components/video-player/video-player.component';
 import { FetchSongById, ResetSongs } from 'src/app/store/education/es-player.actions';
 import { PlayerService } from 'src/app/shared/services/player/player.service';
-import { Breadcrumbs } from "../../../../../../shared/interfaces/breadcrumbs.interface";
-import {
-  FadeInCarouselComponent
-} from "../../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component";
+import { Breadcrumbs } from '../../../../../../shared/interfaces/breadcrumbs.interface';
+import { FadeInCarouselComponent } from '../../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component';
+import { Order } from 'src/app/shared/interfaces/order.interface';
 
 @Component({
   selector: 'app-science-song',
@@ -48,6 +47,7 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
   slideIndex = 0;
   playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
   destroy$: Subject<void> = new Subject<void>();
+  orderYt$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   constructor(
     private route: ActivatedRoute,
@@ -70,15 +70,23 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     });
   }
 
+  onYtStartsPlay() {
+    this.audioService.pause();
+  }
+
+  onStereoStartsPlay() {
+    this.orderYt$.next({ id: 0, type: "yt-pause" })
+  }
+
   getPathBreadcrumbs(genres: Genre[]): Breadcrumbs[] {
     const breadcrumbs: Breadcrumbs[] = [];
     const idGenre = this.route.snapshot.params['idGenre'];
     const idCategory = this.route.snapshot.params['idCategory'];
-    const genre: Genre | undefined = genres.find(item => item.id.toString() === idGenre.toString());
-    breadcrumbs.push({name: 'Освітній розділ', path: '/education'});
+    const genre: Genre | undefined = genres.find((item) => item.id.toString() === idGenre.toString());
+    breadcrumbs.push({ name: 'Освітній розділ', path: '/education' });
     if (genre) {
-      breadcrumbs.push({name: genre.main_category.title, path: `/education/category/${idCategory}`})
-      breadcrumbs.push({name: genre.title, path: `/education/category/${idCategory}/genre/${idGenre}`})
+      breadcrumbs.push({ name: genre.main_category.title, path: `/education/category/${idCategory}` });
+      breadcrumbs.push({ name: genre.title, path: `/education/category/${idCategory}/genre/${idGenre}` });
     }
     return breadcrumbs;
   }
