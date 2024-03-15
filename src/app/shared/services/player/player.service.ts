@@ -11,7 +11,7 @@ export class PlayerService {
   constructor(private http: HttpClient) {}
 
   findNextWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong {
-    let localSong = songs.find((el) => el.id === currentSong.id);
+    const localSong = songs.find((el) => el.id === currentSong.id);
     let currentIndex = localSong ? songs.indexOf(localSong) : -1;
 
     let nextSong = null;
