@@ -10,11 +10,12 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { Order } from 'src/app/shared/interfaces/order.interface';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stereo-player',
   standalone: true,
-  imports: [CommonModule, MatSliderModule, MatIconModule],
+  imports: [CommonModule, MatSliderModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './stereo-player.component.html',
   styleUrls: ['./stereo-player.component.scss']
 })
@@ -32,7 +33,11 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   isPreloader = false;
   currentSong!: PlayerSong;
 
+  isMuted = false;
+
   destroy$: Subject<void> = new Subject<void>();
+
+  volume = new FormControl(10);
 
   constructor(
     private audioService: AudioService,
@@ -45,6 +50,7 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
       if (playerSong.stereo) {
         this.currentSong = playerSong;
         this.openFile(playerSong);
+        this.audioService.setUpVolume(this.volume.value === 0? this.volume.value : 10);
       }
     });
 
@@ -53,9 +59,6 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.state$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
-        // if (this.autoplay) {
-        //  // this.pause();
-        // }
       }
     });
   }
@@ -64,6 +67,18 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
     this.stop();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
+  }
+
+  toggleMute() {
+    if (this.isMuted) {
+      this.audioService.setUpVolume(10);
+      this.isMuted = false;
+      this.volume.setValue(10);
+    } else {
+      this.audioService.setUpVolume(0);
+      this.isMuted = true;
+      this.volume.setValue(0);
+    }
   }
 
   setUpVolume(eventObj: Event) {

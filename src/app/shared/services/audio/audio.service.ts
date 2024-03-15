@@ -13,6 +13,7 @@ export class AudioService {
 
   private state: StreamState = {
     playing: false,
+    muted: false,
     readableCurrentTime: '',
     readableDuration: '',
     duration: undefined,
@@ -48,8 +49,14 @@ export class AudioService {
     });
   }
 
-  setUpVolume(value: number){
-    this.audioObj.volume = value/10;
+  setUpVolume(value: number) {
+    if (value == 0) {
+      this.state.muted = true;
+    } else {
+      this.state.muted = false;
+    }
+
+    this.audioObj.volume = value / 10;
   }
 
   playStream(url: string) {
@@ -121,6 +128,7 @@ export class AudioService {
   private resetState() {
     this.state = {
       playing: false,
+      muted: false,
       readableCurrentTime: '',
       readableDuration: '',
       duration: undefined,
