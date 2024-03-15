@@ -58,7 +58,7 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.audioService.pause();
+    // this.audioService.pause();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
   }

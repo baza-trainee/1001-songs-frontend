@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, StatEndpoints } from '../../config/endpoints/stat-endpoints';
 import { PlayerSong, PlaylistCardSong, PlaylistSong } from '../../interfaces/song.interface';
-import {EducationSong} from "../../interfaces/science-song.interface";
+import { EducationSong } from '../../interfaces/science-song.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,9 @@ export class PlayerService {
   constructor(private http: HttpClient) {}
 
   findNextWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong {
-    let currentIndex = songs.indexOf(currentSong);
+    let localSong = songs.find((el) => el.id === currentSong.id);
+    let currentIndex = localSong ? songs.indexOf(localSong) : -1;
+
     let nextSong = null;
     if (currentIndex + 1 === songs.length) {
       nextSong = currentSong;
@@ -32,7 +34,7 @@ export class PlayerService {
   findPreviousWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong {
     let currentIndex = songs.indexOf(currentSong);
     let nextSong = null;
-    if (currentIndex  === 0) {
+    if (currentIndex === 0) {
       nextSong = currentSong;
       return nextSong;
     }
