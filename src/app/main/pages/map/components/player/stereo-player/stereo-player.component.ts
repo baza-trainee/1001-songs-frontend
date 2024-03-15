@@ -50,7 +50,9 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
       if (playerSong.stereo) {
         this.currentSong = playerSong;
         this.openFile(playerSong);
-        this.audioService.setUpVolume(this.volume.value === 0? this.volume.value : 10);
+        if (this.isMuted) {
+          this.audioService.setUpVolume(0);
+        }
       }
     });
 
@@ -84,6 +86,11 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   setUpVolume(eventObj: Event) {
     const event = eventObj as { target: object };
     const target = event.target as { value: number };
+    if (target.value === 0) {
+      this.isMuted = true;
+    } else {
+      this.isMuted = false;
+    }
     this.audioService.setUpVolume(target.value);
   }
 
