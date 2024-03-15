@@ -11,6 +11,8 @@ import { ExpeditionsService } from 'src/app/shared/services/expeditions/expediti
 import { PaginationComponent } from "../../../shared/shared-components/pagination/pagination.component";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import {ArticleItemComponent} from "../news/components/article-item/article-item.component";
+import {AMOUNT_CARDS_EXPEDITIONS_PAGE} from "../../../shared/config/pagination.constatnts";
+
 
 @Component({
   selector: 'app-expeditions',
@@ -27,7 +29,7 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
   public expeditionResponse$!: Observable<ExpeditionListResponse>;
   public searchValue: string = "";
 
-  private itemsPerPage: number = 12;
+  private itemsPerPage: number = AMOUNT_CARDS_EXPEDITIONS_PAGE;
   public currentPage: number = 1;
   public idParamsCategory!: number;
 
@@ -61,6 +63,7 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
   changePage(page: number): void {
     this.currentPage = page;
     this.expeditionResponse$ = this.expeditionsService.fetchExpeditions({page: this.currentPage, size: this.itemsPerPage});
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
   filteredCategory(id: number): void {

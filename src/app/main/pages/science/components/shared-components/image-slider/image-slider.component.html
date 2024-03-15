@@ -20,12 +20,12 @@
       </p>
     </div>
     <div class="songs__carousel-nav">
-      <button class="songs__carousel-prev" (click)="prevImage()" [disabled]="currentImageIndex === 0" [ngClass]="{ 'disabled': currentImageIndex === 0}">
+      <button class="songs__carousel-prev" aria-label="carousel-prev" (click)="prevImage()" [disabled]="currentImageIndex === 0" [ngClass]="{ 'disabled': currentImageIndex === 0}">
         <svg width="40" height="40" viewBox="0 0 48 48">
           <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
         </svg>
       </button>
-      <button class="songs__carousel-next" (click)="nextImage()" [disabled]="isNextButtonDisabled()" [ngClass]="{ 'disabled': isNextButtonDisabled() }">
+      <button class="songs__carousel-next" aria-label="carousel-next" (click)="nextImage()" [disabled]="isNextButtonDisabled()" [ngClass]="{ 'disabled': isNextButtonDisabled() }">
         <svg width="40" height="40" viewBox="0 0 48 48">
           <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
         </svg>

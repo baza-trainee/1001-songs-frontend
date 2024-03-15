@@ -9,6 +9,7 @@ import {FilterComponent} from "../../../shared/shared-components/filter/filter.c
 import {ArticleItemComponent} from "./components/article-item/article-item.component";
 import {ArticlesService} from "../../../shared/services/news/articles.service";
 import {PaginationComponent} from "../../../shared/shared-components/pagination/pagination.component";
+import {AMOUNT_CARDS_NEWS_PAGE} from "../../../shared/config/pagination.constatnts";
 
 @Component({
   selector: 'app-news',
@@ -25,7 +26,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   public categories$!: Observable<Category[]>;
   private articlesSubscription?: Subscription;
 
-  private itemsPerPage: number = 3;
+  private itemsPerPage: number = AMOUNT_CARDS_NEWS_PAGE;
   public currentPage: number = 1;
 
   constructor(
@@ -39,6 +40,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   changePage(page: number): void {
     this.currentPage = page;
     this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage});
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
   filteredCategory(id: number): void {

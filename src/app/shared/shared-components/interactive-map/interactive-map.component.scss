@@ -98,7 +98,9 @@ img {
     padding-bottom: 10px;
   }
 
-  a {
+  span {
+    cursor: pointer;
+
     &:hover {
       text-decoration: underline;
     }

@@ -20,12 +20,12 @@
     <span> {{ title }}</span>
   </p>
   <div class="carousel-nav">
-  <button class="carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
+  <button class="carousel-prev" aria-label="carousel-prev" (click)="prevSlide()" [ngClass]="{ disabled: slideIndex === 0 }">
       <svg width="40" height="40" viewBox="0 0 48 48">
         <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
       </svg>
     </button>
-    <button class="carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === photos.length - 1 }">
+    <button class="carousel-next" aria-label="carousel-next" (click)="nextSlide()" [ngClass]="{ disabled: slideIndex === photos.length - 1 }">
       <svg width="40" height="40" viewBox="0 0 48 48">
         <use xlink:href="./assets/sprites.svg#sharedArrow"></use>
       </svg>

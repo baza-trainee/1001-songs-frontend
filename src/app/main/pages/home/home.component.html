@@ -9,18 +9,18 @@
           </p>
         </div>
         <div class="home__info-actions">
-          <a class="home__info-button-donat" (click)="openDonationDialog()" (keypress)="openDonationDialog()" tabindex="0">
+          <button class="home__info-button-donat" (click)="openDonationDialog()" (keypress)="openDonationDialog()" tabindex="0" aria-label="open donat info">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#infoButton"></use>
             </svg>
-            {{ 'home.actions.button-donate' | translate }}</a
+            {{ 'home.actions.button-donate' | translate }}</button
           >
-          <a class="home__info-button-share" (click)="openDialog()" (keypress)="openDialog()" tabindex="0">
+          <button class="home__info-button-share" (click)="openDialog()" (keypress)="openDialog()" tabindex="0" aria-label="open share info">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <use xlink:href="./assets/sprites.svg#shareButton"></use>
             </svg>
             {{ 'home.actions.button-share' | translate }}
-          </a
+          </button
           >
         </div>
       </div>

@@ -13,6 +13,10 @@ section {
     min-height: 33px;
   }
 
+  &-cards {
+    min-height: 305px;
+  }
+
   &__title {
     @include h2-desktop($line-height: 65px);
   }
