@@ -1,5 +1,5 @@
 <div *ngIf="state$ | async as multiState">
-  <div class="player"  [class.loading]="isPreloader">
+  <div class="player" [class.loading]="isPreloader">
     <div class="player__actions">
       <button class="btn__player back" (click)="backward(slider.value)" aria-label="backward">
         <svg width="22" height="15" viewBox="0 0 22 15">
@@ -49,7 +49,13 @@
           <use xlink:href="./assets/sprites.svg#backwardMobileBtn"></use>
         </svg>
       </button>
-      <button class="btn__player__mobile play" (click)="play()" aria-label="play" [disabled]="multiState[0].error" *ngIf="!multiState[0].playing">
+      <button
+        class="btn__player__mobile play"
+        (click)="play()"
+        aria-label="play"
+        [disabled]="multiState[0].error"
+        *ngIf="!multiState[0].playing"
+      >
         <svg width="74" height="74" viewBox="0 0 74 74">
           <use xlink:href="./assets/sprites.svg#playMobileBtn"></use>
         </svg>
@@ -66,16 +72,11 @@
       </button>
     </div>
     <div class="player__volume">
-      <mat-icon class="mat__icon">volume_up</mat-icon>
-      <input
-        class="volume_up"
-        #volumeRange
-        type="range"
-        min="0"
-        max="10"
-        step="1"
-        (input)="setUpVolume($event)"
-      />
+      <mat-icon class="mat__icon" *ngIf="!isAllMuted; else mute" (click)="toggleMuteAll()">volume_up</mat-icon>
+      <ng-template #mute>
+        <mat-icon class="mat__icon" (click)="toggleMuteAll()">volume_off</mat-icon>
+      </ng-template>
+      <input class="volume_up" #volumeRange type="range" min="0" max="10" step="1" (input)="setUpVolume($event)" [formControl]="volumeAll"/>
     </div>
     <div class="player__timeline">
       <input

@@ -11,11 +11,12 @@ import { MultiAudioService } from 'src/app/shared/services/audio/multi-audio.ser
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Order } from 'src/app/shared/interfaces/order.interface';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-multichanel-player',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './multichanel-player.component.html',
   styleUrls: ['./multichanel-player.component.scss']
 })
@@ -32,6 +33,9 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
   state$: Observable<StreamState[]>;
 
   destroy$: Subject<void> = new Subject<void>();
+
+  volumeAll = new FormControl(10);
+  isAllMuted: boolean = false;
 
   constructor(
     private multiAudioService: MultiAudioService,
@@ -92,9 +96,31 @@ export class MultichanelPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  toggleMuteAll() {
+    if (this.isAllMuted) {
+      this.multiAudioService.setUpVolume(10);
+      this.isAllMuted = false;
+      this.volumeAll.setValue(10)
+    } else {
+      this.multiAudioService.setUpVolume(0);
+      this.isAllMuted = true;
+      this.volumeAll.setValue(0)
+    }
+  }
+
+  checkAllMuted(states: StreamState[]): boolean {
+    const nonMuted = states.filter((state) => !state.muted);
+    return !!nonMuted.length;
+  }
+
   setUpVolume(eventObj: Event) {
     const event = eventObj as { target: object };
     const target = event.target as { value: number };
+    if (target.value == 0) {
+      this.isAllMuted = true;
+    } else {
+      this.isAllMuted = false;
+    }
     this.multiAudioService.setUpVolume(target.value);
   }
 
