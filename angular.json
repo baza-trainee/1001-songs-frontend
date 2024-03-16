@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",
+            "outputPath": "dist/1001-songs-frontend/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "baseHref": "/",
@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "1001-songs-frontend:build:production"
+              "buildTarget": "1001-songs-frontend:build:production"
             },
             "development": {
-              "browserTarget": "1001-songs-frontend:build:development"
+              "buildTarget": "1001-songs-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "1001-songs-frontend:build"
+            "buildTarget": "1001-songs-frontend:build"
           }
         },
         "test": {
@@ -110,6 +110,73 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/1001-songs-frontend/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ],
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "1001-songs-frontend:build:development",
+              "serverTarget": "1001-songs-frontend:server:development"
+            },
+            "production": {
+              "browserTarget": "1001-songs-frontend:build:production",
+              "serverTarget": "1001-songs-frontend:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "1001-songs-frontend:build:production",
+              "serverTarget": "1001-songs-frontend:server:production"
+            },
+            "development": {
+              "browserTarget": "1001-songs-frontend:build:development",
+              "serverTarget": "1001-songs-frontend:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
