@@ -8,7 +8,6 @@ import {provideRouter, withInMemoryScrolling} from '@angular/router';
 import {MainComponent} from './app/main/main.component';
 import {ErrorComponent} from './app/shared/shared-components/error/error.component';
 import {environment} from './environments/environment';
-
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {NgxsModule} from '@ngxs/store';
 import {MapState} from './app/store/map/map.state';
