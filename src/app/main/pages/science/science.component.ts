@@ -63,7 +63,7 @@ export class ScienceComponent implements OnInit, OnDestroy {
       },
       {
         name: 'og:image',
-        content: 'assets/logo.png'
+        content: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg'
       }
     ]);
   }
