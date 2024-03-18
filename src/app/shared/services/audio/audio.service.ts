@@ -61,13 +61,9 @@ export class AudioService {
   }
 
   setUpVolume(value: number) {
+    if (!this.audioObj) return;
 
-    if (value == 0) {
-      this.state.muted = true;
-    } else {
-      this.state.muted = false;
-    }
-
+    this.state.muted = value == 0;
 
     this.audioObj.volume = value / 10;
   }
