@@ -79,8 +79,7 @@
     .nav {
       height: 82%;
       display: flex;
-      overflow-y: auto;
-      overflow-x: clip;
+      overflow: clip auto;
       padding-bottom: 10px;
       justify-content: space-between;
 

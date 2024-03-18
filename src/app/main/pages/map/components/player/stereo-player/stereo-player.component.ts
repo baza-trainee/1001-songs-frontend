@@ -86,16 +86,19 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
   setUpVolume(eventObj: Event) {
     const event = eventObj as { target: object };
     const target = event.target as { value: number };
+
     if (target.value === 0) {
       this.isMuted = true;
     } else {
       this.isMuted = false;
     }
+
     this.audioService.setUpVolume(target.value);
   }
 
   playStream(url: string) {
-    this.audioService.playStream(url).subscribe();
+    const stream =  this.audioService.playStream(url);
+    if (stream) stream.subscribe();
   }
 
   openFile(file: PlayerSong) {

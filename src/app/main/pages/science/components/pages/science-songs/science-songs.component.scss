@@ -58,7 +58,7 @@
     display: flex;
     gap: 24px;
 
-    @include body-desktop($font-size: 20px, $line-height: 28px);
+    @include body-desktop($font-size: 16px, $line-height: 28px);
 
     &-box {
       column-count: 2;
@@ -79,8 +79,7 @@
     &-titles {
       display: grid;
       grid-template-columns: 0.25fr 0.9fr 1.91fr 0.65fr 0.2fr;
-      align-items: center;
-      justify-items: start;
+      place-items: center start;
       grid-gap: 16px;
       margin-bottom: 12px;
       padding: 0 12px;
