@@ -10,13 +10,31 @@ import { EducationSong } from '../../interfaces/science-song.interface';
 export class PlayerService {
   constructor(private http: HttpClient) {}
 
-  findNextWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong {
+  checkHasNext(id: number, songs: PlaylistSong[]) {
+    const currentSong = songs.find((el) => el.id === id);
+    if (currentSong) {
+      return this.findNextWithAudio(currentSong, songs);
+    } else {
+      return null;
+    }
+  }
+
+  checkHasPrevious(id: number, songs: PlaylistSong[]) {
+    const currentSong = songs.find((el) => el.id === id);
+    if (currentSong) {
+      return this.findPreviousWithAudio(currentSong, songs);
+    } else {
+      return null;
+    }
+  }
+
+  findNextWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong | null {
     const localSong = songs.find((el) => el.id === currentSong.id);
     let currentIndex = localSong ? songs.indexOf(localSong) : -1;
 
     let nextSong = null;
     if (currentIndex + 1 === songs.length) {
-      nextSong = currentSong;
+      // nextSong = currentSong;
       return nextSong;
     }
     while (!nextSong) {
@@ -27,27 +45,29 @@ export class PlayerService {
         return newSong;
       }
     }
-    nextSong = currentSong;
+    // nextSong = currentSong;
     return nextSong;
   }
 
-  findPreviousWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong {
+  findPreviousWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong | null {
     let currentIndex = songs.indexOf(currentSong);
-    let nextSong = null;
+    console.log(currentIndex);
+    let prevSong = null;
+    if (currentIndex < 0) return prevSong;
     if (currentIndex === 0) {
-      nextSong = currentSong;
-      return nextSong;
+      //nextSong = currentSong;
+      return prevSong;
     }
-    while (!nextSong) {
+    while (!prevSong) {
       currentIndex--;
       const newSong = songs[currentIndex];
       if (newSong.stereo_audio) {
-        nextSong = newSong;
+        prevSong = newSong;
         return newSong;
       }
     }
-    nextSong = currentSong;
-    return nextSong;
+    // nextSong = currentSong;
+    return prevSong;
   }
 
   fetchSongs() {

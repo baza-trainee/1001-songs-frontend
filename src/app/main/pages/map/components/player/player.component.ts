@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
@@ -60,22 +60,22 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
 
   isFixed: boolean = false;
 
-  playerSong: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+  playerSong$: BehaviorSubject<PlayerSong> = new BehaviorSubject({} as PlayerSong);
+  playerSong: PlaylistSong = {} as PlaylistSong;
 
   orderToCards$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
   orderDetails$: BehaviorSubject<Order> = new BehaviorSubject({ id: 0, type: '' } as Order);
 
   destroy$: Subject<void> = new Subject<void>();
 
+  hasNext: boolean = true;
+  hasPrevious: boolean = true;
+
   constructor(
     private playerService: PlayerService,
     private store: Store,
-    private audioService: AudioService,
-    private scroller: ViewportScroller
+    private audioService: AudioService
   ) {
-    this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
-      if (data) this.songs = data.slice();
-    });
     this.totalAmount$?.pipe(takeUntil(this.destroy$)).subscribe((amount) => (this.totalAmountSong = amount));
     this.selectedValues$?.subscribe((filterValues) => {
       this.currentFilter = filterValues;
@@ -83,8 +83,15 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      if (data) this.songs = data.slice();
+    });
+
     this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
-      this.playerSong.next(this.playerService.getPlayerSong(playlistSong));
+      this.playerSong$.next(this.playerService.getPlayerSong(playlistSong));
+      this.playerSong = playlistSong;
+      this.hasNext = !!this.playerService.checkHasNext(playlistSong.id, this.songs);
+      this.hasPrevious = !!this.playerService.checkHasPrevious(playlistSong.id, this.songs);
     });
   }
 
@@ -161,6 +168,8 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
           window.scrollTo({ top: 700, behavior: 'auto' });
+          this.hasNext = !!this.playerService.checkHasNext(this.playerSong.id, this.songs);
+          this.hasPrevious = !!this.playerService.checkHasPrevious(this.playerSong.id, this.songs);
         });
     }
   }

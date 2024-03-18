@@ -13,16 +13,18 @@
           {{ 'map.player.player-title' | translate }}
         </div>
 
-        <app-stereo-player #stereoPlayer [autoplay]="true" (isPlay)="handleIsPlayChange($event)" [song$]="playerSong"></app-stereo-player>
-
+        <app-stereo-player
+          #stereoPlayer
+          [autoplay]="true"
+          (isPlay)="handleIsPlayChange($event)"
+          [song$]="playerSong$"
+          [hasNext]="hasNext"
+          [hasPrevious]="hasPrevious"
+        ></app-stereo-player>
       </div>
     </div>
 
-    <div
-      class="songs__playlist"
-      *ngIf="songs$ | async as songs"
-      [ngStyle]="{ 'margin-top.px': isFixed ? initialHeight : '0' }"
-    >
+    <div class="songs__playlist" *ngIf="songs$ | async as songs" [ngStyle]="{ 'margin-top.px': isFixed ? initialHeight : '0' }">
       <div class="playlist__titles">
         <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>
         <div class="titles title__name">{{ 'map.player.songs-list.titles.name' | translate }}</div>

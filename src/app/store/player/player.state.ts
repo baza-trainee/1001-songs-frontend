@@ -102,17 +102,17 @@ export class PlayerState {
     const next = this.playerService.findNextWithAudio(state.selecteSong, state.songs);
     return ctx.setState({
       ...state,
-      selecteSong: next
+      selecteSong: next ? next : state.selecteSong
     });
   }
 
   @Action(SelectPrev)
   selectPrev(ctx: StateContext<PlayerStateModel>) {
-    const state = ctx.getState(); 
-    const previous = this.playerService.findPreviousWithAudio(state.selecteSong, state.songs)
+    const state = ctx.getState();
+    const previous = this.playerService.findPreviousWithAudio(state.selecteSong, state.songs);
     return ctx.setState({
       ...state,
-      selecteSong: previous
+      selecteSong: previous ? previous : state.selecteSong
     });
   }
 
