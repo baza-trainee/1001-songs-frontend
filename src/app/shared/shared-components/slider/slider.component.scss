@@ -16,7 +16,8 @@
       @include h2-desktop;
 
       margin: 0;
-      place-self: flex-start flex-start;
+      justify-self: flex-start;
+      align-self: flex-start;
     }
 
     &__container {

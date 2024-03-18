@@ -29,7 +29,8 @@
     display: grid;
     border-radius: 12px;
     grid-template-columns: 0.25fr 0.9fr 1.91fr 0.65fr 0.2fr;
-    place-items: center start;
+    justify-items: start;
+    align-items: center;
     grid-gap: 22px;
     box-shadow: 1px 4px 16px 8px rgba(15, 15, 15, 15%);
 

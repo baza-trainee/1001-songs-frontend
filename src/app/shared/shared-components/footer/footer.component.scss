@@ -51,7 +51,8 @@ footer.footer {
         .nav__list {
           display: flex;
           flex-wrap: wrap;
-          gap: 32px 24px;
+          row-gap: 32px;
+          column-gap: 24px;
 
           .nav__item {
             min-width: 193px;
@@ -359,6 +360,7 @@ footer.footer {
     .container {
       .footer__top {
         padding-bottom: 28px;
+        row-gap: 20px;
         justify-content: space-between;
         gap: 30px;
 
