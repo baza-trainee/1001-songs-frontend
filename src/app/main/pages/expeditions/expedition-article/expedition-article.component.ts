@@ -82,9 +82,7 @@ export class ExpeditionArticleComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-      if (this.subscriptions.length) {
-        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-      }
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   navigateToExp(id: number) {

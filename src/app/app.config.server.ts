@@ -1,50 +1,30 @@
 import {ApplicationConfig, importProvidersFrom} from "@angular/core";
 import {BrowserModule, provideClientHydration} from "@angular/platform-browser";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatInputModule} from "@angular/material/input";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ReactiveFormsModule} from "@angular/forms";
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {provideHttpClient, withFetch, withInterceptorsFromDi} from "@angular/common/http";
-import {provideRouter, withHashLocation, withInMemoryScrolling} from "@angular/router";
-import {MainComponent} from "./main/main.component";
-import {ErrorComponent} from "./shared/shared-components/error/error.component";
-import {NgxsModule} from "@ngxs/store";
-import {AppState} from "./store/app/app.state";
-import {MapState} from "./store/map/map.state";
-import {PlayerState} from "./store/player/player.state";
-import {FilterMapState} from "./store/filter-map/filter-map.state";
-import {ESPlayerState} from "./store/education/es-player.state";
-import {TranslateModule} from "@ngx-translate/core";
+
 
 export const config: ApplicationConfig = {
   providers: [
-    importProvidersFrom(
-      NgxsModule.forRoot([AppState, MapState, PlayerState, FilterMapState, ESPlayerState]),
-      BrowserModule,
-      TranslateModule.forRoot(),
-      MatIconModule,
-      MatInputModule,
-      MatDialogModule,
-      MatSelectModule,
-      ReactiveFormsModule
-    ),
+    importProvidersFrom(BrowserModule, MatMenuModule, MatButtonModule, MatIconModule, MatCardModule, MatTabsModule, MatSidenavModule, MatListModule, MatToolbarModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatDialogModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule),
     provideAnimations(),
-    provideRouter(
-      [
-        {
-          path: '',
-          component: MainComponent,
-          loadChildren: () => import('../app/main/main.routes').then((rm) => rm.MAIN_ROUTES)
-        },
-        {path: '404', component: ErrorComponent},
-        {path: '**', redirectTo: '404'}
-      ],
-
-      withInMemoryScrolling({scrollPositionRestoration: 'enabled'}),
-      withHashLocation()
-    ),
     provideHttpClient(withInterceptorsFromDi(), withFetch()), provideClientHydration()
   ]
 };

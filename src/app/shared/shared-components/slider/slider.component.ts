@@ -60,17 +60,13 @@ export class SliderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      this.resizeObservable$ = fromEvent(window, 'resize').pipe(debounceTime(300));
-      this.resizeSubscription$ = this.resizeObservable$.subscribe(() => this.setSliderWidths());
-      setTimeout(() => this.setSliderWidths());
-    }
+    this.resizeObservable$ = fromEvent(window, 'resize').pipe(debounceTime(300));
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(() => this.setSliderWidths());
+    setTimeout(() => this.setSliderWidths());
   }
 
   ngOnDestroy(): void {
-    if (this.resizeSubscription$) {
-      this.resizeSubscription$.unsubscribe();
-    }
+    this.resizeSubscription$.unsubscribe();
   }
 
   @HostListener('touchstart', ['$event'])

@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 })
 export class AudioService {
   private stop$: Subject<void> = new Subject<void>();
-  private audioObj?: HTMLAudioElement;
+  private audioObj: HTMLAudioElement = new Audio();
 
   private state: StreamState = {
     playing: false,
@@ -22,20 +22,10 @@ export class AudioService {
     error: false
   };
 
-  constructor() {
-    if (typeof Audio !== 'undefined') {
-      this.audioObj = new Audio();
-    } else {
-      console.error('Audio is not supported in this environment.');
-    }
-  }
-
   showStereoPlayer$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private streamObservable(url: string) {
-    if (!this.audioObj) return;
     return new Observable((observer) => {
-      if (!this.audioObj) return;
       // Play audio
       this.audioObj.src = url;
       this.audioObj.load();
@@ -48,7 +38,6 @@ export class AudioService {
 
       this.addEvents(this.audioObj, Object.values(events), handler);
       return () => {
-        if (!this.audioObj) return;
         // Stop Playing
         this.audioObj.pause();
         this.audioObj.currentTime = 0;
@@ -61,17 +50,17 @@ export class AudioService {
   }
 
   setUpVolume(value: number) {
-    if (!this.audioObj) return;
-
-    this.state.muted = value == 0;
+    if (value == 0) {
+      this.state.muted = true;
+    } else {
+      this.state.muted = false;
+    }
 
     this.audioObj.volume = value / 10;
   }
 
   playStream(url: string) {
-    const stream = this.streamObservable(url);
-    if(!stream) return
-    return stream.pipe(takeUntil(this.stop$));
+    return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }
 
   private addEvents(obj: HTMLAudioElement, events: string[], handler: (event: Event) => void) {
@@ -87,12 +76,10 @@ export class AudioService {
   }
 
   play() {
-    if (!this.audioObj) return;
     this.audioObj.play();
   }
 
   pause() {
-    if (!this.audioObj) return;
     this.audioObj.pause();
   }
 
@@ -103,7 +90,6 @@ export class AudioService {
   }
 
   seekTo(seconds: number) {
-    if (!this.audioObj) return;
     this.audioObj.currentTime = seconds;
   }
 
@@ -115,7 +101,6 @@ export class AudioService {
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
   private updateStateEvents(event: Event): void {
-    if (!this.audioObj) return;
     switch (event.type) {
       case 'canplay':
         this.state.duration = this.audioObj.duration;
