@@ -50,6 +50,18 @@ export class ScienceComponent implements OnInit, OnDestroy {
     });
     this.meta.addTags([
       {
+        name: 'og:title',
+        content: 'Education song folklore'
+      },
+      {
+        name: 'og:url',
+        content: 'https://baza-trainee.github.io/1001-songs-frontend/education'
+      },
+      {
+        name: 'og:description',
+        content: 'Information about the classification and periodization of song folklore'
+      },
+      {
         name: 'og:image',
         content: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg'
       }
