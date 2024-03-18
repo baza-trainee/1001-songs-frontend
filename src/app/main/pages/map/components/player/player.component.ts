@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
@@ -38,6 +38,7 @@ import { AMOUNT_SONGS_MAP_PAGE } from 'src/app/shared/config/pagination.constatn
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
+
 export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('fixedContainer', { static: true }) fixedContainer!: ElementRef;
   @ViewChild('songsContainer', { static: true }) songsContainer!: ElementRef;
@@ -71,7 +72,6 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     private playerService: PlayerService,
     private store: Store,
     private audioService: AudioService,
-    private scroller: ViewportScroller
   ) {
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       if (data) this.songs = data.slice();
@@ -80,6 +80,9 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
     this.selectedValues$?.subscribe((filterValues) => {
       this.currentFilter = filterValues;
     });
+    if (typeof window !== 'undefined') {
+      this.audioService = new AudioService();
+    }
   }
 
   ngOnInit(): void {
@@ -109,22 +112,26 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @HostListener('window:resize')
   onResize() {
-    if (window.innerWidth > 768) {
-      this.heightHeader = 108;
-      this.paddingTop = 50;
-    } else if (window.innerWidth <= 421) {
-      this.heightHeader = 80;
-      this.paddingTop = 18;
-    } else if (window.innerWidth <= 630) {
-      this.heightHeader = 96;
-      this.paddingTop = 30;
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth > 768) {
+        this.heightHeader = 108;
+        this.paddingTop = 50;
+      } else if (window.innerWidth <= 421) {
+        this.heightHeader = 80;
+        this.paddingTop = 18;
+      } else if (window.innerWidth <= 630) {
+        this.heightHeader = 96;
+        this.paddingTop = 30;
+      }
     }
   }
 
   @HostListener('window:scroll')
   onScroll() {
-    if (this.distanceToTop <= this.heightMap + this.heightHeader || !this.distanceToTop) this.distanceToTop = this.calculateDistanceToTop();
-    this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
+    if (typeof window !== 'undefined') {
+      if (this.distanceToTop <= this.heightMap + this.heightHeader || !this.distanceToTop) this.distanceToTop = this.calculateDistanceToTop();
+      this.isFixed = window.scrollY > this.distanceToTop - this.heightHeader;
+    }
   }
 
   get totalPages(): number {
@@ -172,9 +179,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   // }
 
   calculateDistanceToTop(): number {
-    this.onResize();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return this.songsContainer.nativeElement.getBoundingClientRect().top + this.paddingTop + scrollTop;
+    if (typeof window !== 'undefined') {
+      this.onResize();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      return this.songsContainer.nativeElement.getBoundingClientRect().top + this.paddingTop + scrollTop;
+    }
+    return 700;
   }
 
   ngOnDestroy(): void {

@@ -146,13 +146,15 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onResize() {
-    if (window.innerWidth > 768) {
-      this.heightHeader = 108;
-    } else if (window.innerWidth <= 768) {
-      this.heightHeader = 96;
-    } else if (window.innerWidth <= 421) {
-      this.gap = 32;
-      this.heightHeader = 80;
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth > 768) {
+        this.heightHeader = 108;
+      } else if (window.innerWidth <= 768) {
+        this.heightHeader = 96;
+      } else if (window.innerWidth <= 421) {
+        this.gap = 32;
+        this.heightHeader = 80;
+      }
     }
   }
 

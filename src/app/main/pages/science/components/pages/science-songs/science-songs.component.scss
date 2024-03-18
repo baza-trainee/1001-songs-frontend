@@ -58,7 +58,7 @@
     display: flex;
     gap: 24px;
 
-    @include body-desktop($font-size: 20px, $line-height: 28px);
+    @include body-desktop($font-size: 16px, $line-height: 28px);
 
     &-box {
       column-count: 2;

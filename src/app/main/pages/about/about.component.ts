@@ -111,6 +111,8 @@ export class AboutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    if (this.subscriptions.length) {
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }
   }
 }

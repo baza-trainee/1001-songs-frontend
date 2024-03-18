@@ -27,15 +27,17 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new InitFilterOptions());
-    if (history.state) {
-      const filter = history.state.filter as SongFilter;
-      if (filter && filter.city) {
-        this.store.dispatch(new FetchMarkers(filter));
-        this.store.dispatch(new FetchSongs(filter));
-      } else {
-        this.store.dispatch(new FetchMarkers(new SongFilter()));
-        this.store.dispatch(new FetchSongs(new SongFilter()));
+    if (typeof window !== 'undefined') {
+      this.store.dispatch(new InitFilterOptions());
+      if (history.state) {
+        const filter = history.state.filter as SongFilter;
+        if (filter && filter.city) {
+          this.store.dispatch(new FetchMarkers(filter));
+          this.store.dispatch(new FetchSongs(filter));
+        } else {
+          this.store.dispatch(new FetchMarkers(new SongFilter()));
+          this.store.dispatch(new FetchSongs(new SongFilter()));
+        }
       }
     }
   }
