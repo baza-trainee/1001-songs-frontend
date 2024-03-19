@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
@@ -24,7 +24,7 @@ export class RecomendationComponent implements OnChanges {
 
   constructor(private format: FormattingTextService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.totalParagraphs = this.format.splitText(this.recommendations);
     const pages = Math.ceil(this.totalParagraphs.length / size);
     this.recomendationPages = Array.from(Array(pages).keys()).map((el) => el + 1);
