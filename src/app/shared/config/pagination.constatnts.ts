@@ -2,3 +2,4 @@
 export const AMOUNT_SONGS_MAP_PAGE = 10;
 export const AMOUNT_CARDS_NEWS_PAGE = 3;
 export const AMOUNT_CARDS_EXPEDITIONS_PAGE = 12;
+export const AMOUNT_OF_RECOMENDATIONS_PAGE = 5;

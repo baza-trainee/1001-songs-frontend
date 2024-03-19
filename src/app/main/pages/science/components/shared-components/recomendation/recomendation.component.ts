@@ -1,28 +1,43 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
+import { AMOUNT_OF_RECOMENDATIONS_PAGE as size } from 'src/app/shared/config/pagination.constatnts';
+import { FormattingTextService } from 'src/app/shared/services/formatting-text/formating-text.service';
+import { Content } from 'src/app/shared/interfaces/about.interface';
+import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
 
 @Component({
   selector: 'app-recomendation',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, ArrowDownComponent],
+  imports: [CommonModule, MatExpansionModule, ArrowDownComponent, SafeHtmlPipe],
   templateUrl: './recomendation.component.html',
   styleUrls: ['./recomendation.component.scss']
 })
-export class RecomendationComponent  {
-
+export class RecomendationComponent implements OnChanges {
   @Input() recommendations: string = 'This is recomendation';
-  private PAGE_SIZE = 5;
   expansionRecomendationArrow = 'bottom';
   currentPage: number = 1;
+  totalParagraphs: Content[] = [];
+  pageParagraphs: Content[] = [];
   recomendationPages: number[] = [1];
 
-  
+  constructor(private format: FormattingTextService) {}
 
-  navigateToPage(specifiedPage: number) {
-    this.currentPage = specifiedPage;
-    this.updateRecomendationsList();
+  ngOnChanges(changes: SimpleChanges): void {
+    this.totalParagraphs = this.format.splitText(this.recommendations);
+    const pages = Math.ceil(this.totalParagraphs.length / size);
+    this.recomendationPages = Array.from(Array(pages).keys()).map((el) => el + 1);
+    this.setPageContent();
+  }
+
+  setPageContent() {
+    this.pageParagraphs = this.totalParagraphs.slice((this.currentPage - 1) * size, this.currentPage * (size + 1));
+  }
+
+  navigateToPage(selectedPage: number) {
+    this.currentPage = selectedPage;
+    this.setPageContent();
   }
 
   navigateToNextPage(pageNumber: number) {
@@ -31,12 +46,9 @@ export class RecomendationComponent  {
       return;
     }
     this.currentPage = nextPage;
-    this.updateRecomendationsList();
+    this.setPageContent();
   }
   rotateRecomendationArrow() {
     this.expansionRecomendationArrow = this.expansionRecomendationArrow === 'bottom' ? 'top' : 'bottom';
-  }
-
-  updateRecomendationsList() {
   }
 }
