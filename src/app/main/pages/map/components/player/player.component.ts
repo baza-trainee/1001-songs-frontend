@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostList
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, skip, takeUntil } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 
 import { StereoPlayerComponent } from './stereo-player/stereo-player.component';
@@ -87,7 +87,7 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
       if (data) this.songs = data.slice();
     });
 
-    this.selectedSong$?.pipe(takeUntil(this.destroy$)).subscribe((playlistSong) => {
+    this.selectedSong$?.pipe(takeUntil(this.destroy$)).pipe(skip(1)).subscribe((playlistSong) => {
       this.playerSong$.next(this.playerService.getPlayerSong(playlistSong));
       this.playerSong = playlistSong;
       this.hasNext = !!this.playerService.checkHasNext(playlistSong.id, this.songs);

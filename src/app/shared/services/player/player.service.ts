@@ -34,7 +34,6 @@ export class PlayerService {
 
     let nextSong = null;
     if (currentIndex + 1 === songs.length) {
-      // nextSong = currentSong;
       return nextSong;
     }
     while (!nextSong) {
@@ -45,17 +44,14 @@ export class PlayerService {
         return newSong;
       }
     }
-    // nextSong = currentSong;
     return nextSong;
   }
 
   findPreviousWithAudio(currentSong: PlaylistSong, songs: PlaylistSong[]): PlaylistSong | null {
     let currentIndex = songs.indexOf(currentSong);
-    console.log(currentIndex);
     let prevSong = null;
     if (currentIndex < 0) return prevSong;
     if (currentIndex === 0) {
-      //nextSong = currentSong;
       return prevSong;
     }
     while (!prevSong) {
@@ -66,7 +62,6 @@ export class PlayerService {
         return newSong;
       }
     }
-    // nextSong = currentSong;
     return prevSong;
   }
 
