@@ -26,13 +26,15 @@ export class RecomendationComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.totalParagraphs = this.format.splitText(this.recommendations);
+    this.totalParagraphs.shift();
+    this.totalParagraphs.pop();
     const pages = Math.ceil(this.totalParagraphs.length / size);
     this.recomendationPages = Array.from(Array(pages).keys()).map((el) => el + 1);
     this.setPageContent();
   }
 
   setPageContent() {
-    this.pageParagraphs = this.totalParagraphs.slice((this.currentPage - 1) * size, this.currentPage * (size + 1));
+    this.pageParagraphs = this.totalParagraphs.slice((this.currentPage - 1) * size, this.currentPage * size);
   }
 
   navigateToPage(selectedPage: number) {
