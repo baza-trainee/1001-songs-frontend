@@ -14,12 +14,13 @@ export class AudioService {
   private state: StreamState = {
     playing: false,
     muted: false,
+    ended: false,
     readableCurrentTime: '',
     readableDuration: '',
     duration: undefined,
     currentTime: undefined,
     canplay: false,
-    error: false
+    error: false,
   };
 
   showStereoPlayer$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -109,13 +110,18 @@ export class AudioService {
         break;
       case 'playing':
         this.state.playing = true;
+        this.state.ended = false;
         break;
       case 'pause':
         this.state.playing = false;
         break;
       case 'timeupdate':
+        this.state.ended = false;
         this.state.currentTime = this.audioObj.currentTime;
         this.state.readableCurrentTime = this.formatTime(this.state.currentTime);
+        break;
+      case 'ended':
+        this.state.ended = true;
         break;
       case 'error':
         this.resetState();
@@ -129,6 +135,7 @@ export class AudioService {
     this.state = {
       playing: false,
       muted: false,
+      ended: false,
       readableCurrentTime: '',
       readableDuration: '',
       duration: undefined,

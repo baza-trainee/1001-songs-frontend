@@ -64,6 +64,9 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
       if (ev.canplay && this.isPreloader) {
         this.isPreloader = false;
       }
+      if (ev.ended) {
+        this.isPlay.emit({ id: this.currentSong.id, type: 'stp-pause' });
+      }
     });
   }
 

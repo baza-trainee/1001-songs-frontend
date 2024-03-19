@@ -1,6 +1,7 @@
 export interface StreamState {
   playing: boolean;
   muted?: boolean;
+  ended?: boolean;
   readableCurrentTime: string;
   readableDuration: string;
   duration: number | undefined;
