@@ -24,10 +24,6 @@ export class FooterComponent implements OnInit {
   public footerInfo$!: Observable<FooterData>;
   public footerPartners$!: Observable<FooterPartners[]>;
 
-  untamLink = 'https://knmau.com.ua/nauka/laboratoriya-etnomuzikologiyi/';
-  lnmaLink = 'https://lnma.edu.ua/kafedry/kafedra-muzychnoji-folklorystyky-ta-pndlme/';
-  bazaLink = 'https://baza-trainee.tech/ua';
-
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
