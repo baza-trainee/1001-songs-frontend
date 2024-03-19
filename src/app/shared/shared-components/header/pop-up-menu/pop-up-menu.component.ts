@@ -6,6 +6,9 @@ import { navLinksHeader } from 'src/app/shared/enums/navLinks.enum';
 import {ShareService} from "../../../services/share/share.service";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {GeneralSearchComponent} from "../general-search/general-search.component";
+import {Observable} from "rxjs";
+import {FooterData} from "../../../interfaces/footer";
+import {FooterService} from "../../../services/footer/footer.service";
 
 @Component({
   selector: 'app-pop-up-menu',
@@ -21,15 +24,18 @@ export class PopUpMenuComponent implements OnInit {
   public lang!: boolean;
   public navLinks = navLinksHeader;
   public isPopupOpen: boolean = true;
+  public footerInfo$!: Observable<FooterData>;
 
   constructor(
     private _translate: TranslateService,
     private shareService: ShareService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private footerService: FooterService
   ) {}
 
   ngOnInit(): void {
     this.checkLang();
+    this.footerInfo$ = this.footerService.fetchFooterInfo();
   }
 
   checkLang() {

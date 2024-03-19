@@ -24,6 +24,8 @@ export class StereoPlayerComponent implements OnInit, OnDestroy {
 
   @Input() autoplay: boolean = false;
   @Input() song$: Observable<PlayerSong> = of({} as PlayerSong);
+  @Input() hasNext: boolean = true;
+  @Input() hasPrevious: boolean = true;
 
   @Output() isPlay: EventEmitter<Order> = new EventEmitter<Order>();
   showStereoPlayer: boolean = true;

@@ -6,7 +6,7 @@
           <use xlink:href="./assets/sprites.svg#backDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player prev" (click)="previous()" aria-label="previous">
+      <button class="btn__player prev" (click)="previous()" aria-label="previous" [class.inactive]="!hasPrevious">
         <svg width="15" height="19" viewBox="0 0 15 19">
           <use xlink:href="./assets/sprites.svg#prevDesktopBtn"></use>
         </svg>
@@ -21,7 +21,7 @@
           <use xlink:href="./assets/sprites.svg#pauseDesktopBtn"></use>
         </svg>
       </button>
-      <button class="btn__player next" (click)="next()" aria-label="next">
+      <button class="btn__player next" (click)="next()" aria-label="next" [class.inactive]="!hasNext">
         <svg width="15" height="19" viewBox="0 0 15 19">
           <use xlink:href="./assets/sprites.svg#nextDesktopBtn"></use>
         </svg>
