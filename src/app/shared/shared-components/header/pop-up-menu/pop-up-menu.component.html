@@ -30,10 +30,18 @@
             </li>
           </ul>
         </div>
-        <div class="social__network">
+        <div class="social__network" *ngIf="footerInfo$ | async as info">
           <ul class="networks">
-            <li class="networks__item"><img src="./assets/img/header/social-facebook.png" alt="facebook" /></li>
-            <li class="networks__item"><img src="./assets/img/header/social-youtube.png" alt="youtube" /></li>
+            <li class="networks__item">
+              <a *ngIf="info.facebook_url" [href]="info.facebook_url">
+                <img src="./assets/img/header/social-facebook.png" alt="facebook" />
+              </a>
+            </li>
+            <li class="networks__item">
+              <a *ngIf="info.youtube_url" [href]="info.youtube_url">
+                <img src="./assets/img/header/social-youtube.png" alt="youtube" />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
