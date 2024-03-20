@@ -145,7 +145,12 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
   private handleOrders(order: Order) {
     if (order.type && order.type === 'stp-play') {
       this.orderDetails$.next({ id: 0, type: 'yt-pause' });
-      this.store.dispatch(new SelectSong(order.id));
+      if(order.id === this.playerSong.id){
+        this.playerSong$.next(this.playerService.getPlayerSong(this.playerSong));
+      } else {
+        this.store.dispatch(new SelectSong(order.id));
+      }
+     // 
       this.orderToCards$.next({ id: order.id, type: 'stp-play' });
       this.audioService.play();
     }
