@@ -3,7 +3,7 @@ import { AppComponent } from './app/app.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {withInterceptorsFromDi, provideHttpClient, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { BrowserModule, bootstrapApplication, provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { MainComponent } from './app/main/main.component';
 import { ErrorComponent } from './app/shared/shared-components/error/error.component';
@@ -53,7 +53,7 @@ bootstrapApplication(AppComponent, {
       // withHashLocation()
     ),
 
-    provideAnimations()
+    provideAnimations(), provideClientHydration()
   ]
 }).catch((err) => console.error(err));
 
