@@ -48,7 +48,6 @@ bootstrapApplication(AppComponent, {
         { path: '404', component: ErrorComponent },
         { path: '**', redirectTo: '404' }
       ],
-
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
       withHashLocation()
     ),
