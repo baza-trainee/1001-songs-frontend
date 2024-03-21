@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PlaylistCardSong } from 'src/app/shared/interfaces/song.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { AudioService } from '../../../../../../shared/services/audio/audio.service';
 import { SafeHtmlPipe } from '../../../../../../shared/pipes/safe-html.pipe';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces/order.interface';
@@ -35,7 +34,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private audioService: AudioService,
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +56,6 @@ export class PlaylistSongCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.audioService.pause();
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
   }

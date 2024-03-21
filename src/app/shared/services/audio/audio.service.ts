@@ -20,7 +20,7 @@ export class AudioService {
     duration: undefined,
     currentTime: undefined,
     canplay: false,
-    error: false,
+    error: false
   };
 
   showStereoPlayer$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -102,6 +102,11 @@ export class AudioService {
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
   private updateStateEvents(event: Event): void {
+    //console.log(event.type)
+    if (this.state.ended) {
+      this.state.ended = false;
+      //console.log(event.type)
+    }
     switch (event.type) {
       case 'canplay':
         this.state.duration = this.audioObj.duration;
@@ -110,18 +115,20 @@ export class AudioService {
         break;
       case 'playing':
         this.state.playing = true;
-        this.state.ended = false;
+        // this.state.ended = false;
         break;
       case 'pause':
         this.state.playing = false;
         break;
       case 'timeupdate':
-        this.state.ended = false;
+        //  this.state.ended = false;
         this.state.currentTime = this.audioObj.currentTime;
         this.state.readableCurrentTime = this.formatTime(this.state.currentTime);
         break;
       case 'ended':
         this.state.ended = true;
+        this.state.currentTime = 0;
+        // console.log('ENDED');
         break;
       case 'error':
         this.resetState();

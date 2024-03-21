@@ -140,24 +140,33 @@ export class PlayerComponent implements AfterViewInit, OnDestroy, OnInit {
 
   handleIsPlayChange(order: Order) {
     this.handleOrders(order);
+    // console.log(order)
   }
 
   private handleOrders(order: Order) {
+    // console.log(order)
     if (order.type && order.type === 'stp-play') {
       this.orderDetails$.next({ id: 0, type: 'yt-pause' });
-      if(order.id === this.playerSong.id){
-        this.playerSong$.next(this.playerService.getPlayerSong(this.playerSong));
-      } else {
+      // if(order.id === this.playerSong.id){
+      //   //this.playerSong$.next(this.playerService.getPlayerSong(this.playerSong));
+      //   this.audioService.play()
+      // } else {
         this.store.dispatch(new SelectSong(order.id));
-      }
+     // }
      // 
       this.orderToCards$.next({ id: order.id, type: 'stp-play' });
       this.audioService.play();
     }
     if (order.type && order.type === 'stp-pause') {
-      this.store.dispatch(new SelectSong(order.id));
+     // this.store.dispatch(new SelectSong(order.id));
       this.orderToCards$.next({ id: order.id, type: 'stp-pause' });
       this.audioService.pause();
+    }
+    if (order.type && order.type === 'stp-ended') {
+     // this.store.dispatch(new SelectSong(order.id));
+    // console.log('ENDED')
+      this.orderToCards$.next({ id: order.id, type: 'stp-pause' });
+      // this.audioService.pause();
     }
     if (order.type && order.type === 'yt-playing') {
       this.orderToCards$.next({ id: -1, type: 'stp-pause-all' });
