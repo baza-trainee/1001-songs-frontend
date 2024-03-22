@@ -93,6 +93,12 @@ export class AboutComponent implements OnInit, OnDestroy {
       name: 'description',
       content: 'Information about people who look after and preserve the cultural heritage of Ukrainian cultural heritage'
     });
+    this.meta.addTags([
+      {
+        name: 'description',
+        content: 'Information about people who look after and preserve the cultural heritage of Ukrainian cultural heritage'
+      }
+    ]);
   }
 
   ngOnInit(): void {
