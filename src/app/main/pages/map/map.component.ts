@@ -29,17 +29,15 @@ export class MapComponent implements OnInit, OnDestroy {
     private store: Store,
     private meta: Meta
   ) {
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Мапа архаїчної музики: Традиції української музичної спадщини'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Мапа архаїчної музики: Традиції української музичної спадщини'
+    }),
+      this.meta.updateTag({
         name: 'description',
         content:
           'Знайдіть на музичній мапі українські народні пісні і фольклористів-дослідників вашої місцевості, допоможіть зберегти архіви і зробити їх публічними'
-      }
-    ]);
+      });
   }
 
   ngOnInit(): void {

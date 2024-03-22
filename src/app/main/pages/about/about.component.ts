@@ -89,17 +89,14 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
     this.aboutTeam$ = this.aboutService.fetchAboutTeam();
     this.partners$ = this.footerService.fetchFooterPartners();
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Світ української музичної культури - 1000 і 1 пісня'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Світ української музичної культури - 1000 і 1 пісня'
+    }),
+      this.meta.updateTag({
         name: 'description',
-        content:
-          'Про проєкт: вивчення та освіта української музичної спадщини'
-      }
-    ]);
+        content: 'Про проєкт: вивчення та освіта української музичної спадщини'
+      });
   }
 
   ngOnInit(): void {

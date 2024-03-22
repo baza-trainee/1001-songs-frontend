@@ -46,16 +46,14 @@ export class ExpeditionsComponent implements AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private meta: Meta
   ) {
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Експедиції: Дослідження українського фольклору - 1000 і 1 пісня'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Експедиції: Дослідження українського фольклору - 1000 і 1 пісня'
+    }),
+      this.meta.updateTag({
         name: 'description',
         content: 'Давні і сучасні фольклористичні експедиції – це світ дослідників. Навчись записувати фольклор!'
-      }
-    ]);
+      });
   }
 
   ngAfterViewInit(): void {

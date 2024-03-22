@@ -13,16 +13,15 @@ import { Meta } from '@angular/platform-browser';
 })
 export class MainComponent {
   constructor(private meta: Meta) {
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Світ української музичної культури - 1000 і 1 пісня'
-      },
-      {
-        name: 'description',
-        content:
-          'Дізнайтесь про українські пісні у традиційному виконанні з закритого і таємничого світу державних і приватних архівів та колекцій'
-      }
-    ]);
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Світ української музичної культури - 1000 і 1 пісня'
+    });
+
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Дізнайтесь про українські пісні у традиційному виконанні з закритого і таємничого світу державних і приватних архівів та колекцій'
+    });
   }
 }

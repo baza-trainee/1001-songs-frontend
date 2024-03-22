@@ -33,17 +33,15 @@ export class NewsComponent implements OnInit, OnDestroy {
     private articleService: ArticlesService,
     private meta: Meta
   ) {
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Останні новини: Події світу української музики - 1000 і 1 пісня'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Останні новини: Події світу української музики - 1000 і 1 пісня'
+    }),
+      this.meta.updateTag({
         name: 'description',
         content:
           'Дізнавайтеся про актуальні події, наукові дослідження та освітні ініціативи у фольклористичному житті України на сторінці "Новини" проєкту "1000 і 1 пісня".'
-      }
-    ]);
+      });
   }
 
   ngOnInit() {
