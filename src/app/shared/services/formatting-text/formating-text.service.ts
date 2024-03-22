@@ -13,6 +13,14 @@ export class FormattingTextService {
     return res;
   }
 
+  getParagraphs(src: string) {
+    console.log(src)
+    const pattern = /<p>(.*?)<\/p>/g;
+    const res = src.match(pattern);
+    console.log(res);
+    return res ? res: [];
+  }
+
   splitText(htmlString: string): Content[] {
     const contents = htmlString.split(/<\/?p>/).filter(Boolean);
 
