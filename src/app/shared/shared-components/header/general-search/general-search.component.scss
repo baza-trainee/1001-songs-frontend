@@ -7,6 +7,7 @@
     right: -7px;
     top: 50%;
     width: 0;
+    height: 40px;
     transform: translateY(-50%);
     color: var(--color-input);
     border-radius: 12px;
@@ -72,10 +73,12 @@
   &__box {
     position: absolute;
     left: -5px;
+    height: 50px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--color-input);
-    border-radius: 12px;
+    border-radius: 25px;
+    overflow: hidden;
     transition: all .3s ease;
     width: 100%;
   }
