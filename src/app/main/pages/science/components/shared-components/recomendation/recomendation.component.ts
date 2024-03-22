@@ -4,7 +4,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ArrowDownComponent } from 'src/app/main/pages/science/components/shared-components/arrow-down/arrow-down.component';
 import { AMOUNT_OF_RECOMENDATIONS_PAGE as size } from 'src/app/shared/config/pagination.constatnts';
 import { FormattingTextService } from 'src/app/shared/services/formatting-text/formating-text.service';
-import { Content } from 'src/app/shared/interfaces/about.interface';
 import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
 
 @Component({
