@@ -89,17 +89,14 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.dataAboutContent$ = this.aboutService.fetchDataAboutContent();
     this.aboutTeam$ = this.aboutService.fetchAboutTeam();
     this.partners$ = this.footerService.fetchFooterPartners();
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Світ української музичної культури - 1000 і 1 пісня'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Світ української музичної культури - 1000 і 1 пісня'
+    }),
+      this.meta.updateTag({
         name: 'description',
-        content:
-          'Про проєкт: вивчення та освіта української музичної спадщини'
-      }
-    ]);
+        content: 'Про проєкт: вивчення та освіта української музичної спадщини'
+      });
   }
 
   ngOnInit(): void {
@@ -111,16 +108,6 @@ export class AboutComponent implements OnInit, OnDestroy {
         }
       })
     );
-
-    this.meta.addTags([
-      { property: 'og:title', content: 'Education folklore' },
-      {
-        property: 'og:description',
-        content:
-          'Пріоритети сучасних – заповнення «білих плям» на фольклористичній карті України (східна Волинь, Наддніпрянщина, південна Чернігівщина, Сумщина,'
-      },
-      { property: 'og:image', content: 'assets/ogimage.png' }
-    ]);
   }
 
   navigateTo(id: number) {

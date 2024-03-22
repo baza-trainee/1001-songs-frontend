@@ -44,16 +44,14 @@ export class ScienceComponent implements OnInit, OnDestroy {
     private educationService: EducationService,
     private meta: Meta
   ) {
-    this.meta.addTags([
-      {
-        name: 'title',
-        content: 'Освітній розділ - матеріали для вивчення української народної музики'
-      },
-      {
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Освітній розділ - матеріали для вивчення української народної музики'
+    }),
+      this.meta.updateTag({
         name: 'description',
         content: 'Українська народна пісня для освітнього процесу в школі, коледжі і ВНЗ – фахова добірка і рекомендації від фольклористів'
-      }
-    ]);
+      });
   }
 
   ngOnInit(): void {
