@@ -15,8 +15,13 @@ export class MainComponent {
   constructor(private meta: Meta) {
     this.meta.addTags([
       {
+        name: 'title',
+        content: 'Світ української музичної культури - 1000 і 1 пісня'
+      },
+      {
         name: 'description',
-        content: 'Information about people who look after and preserve the cultural heritage of Ukrainian cultural heritage'
+        content:
+          'Дізнайтесь про українські пісні у традиційному виконанні з закритого і таємничого світу державних і приватних архівів та колекцій'
       }
     ]);
   }

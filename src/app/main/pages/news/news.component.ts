@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {TranslateModule} from '@ngx-translate/core';
-import {CommonModule} from "@angular/common";
-import {Observable, Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { Observable, Subscription } from 'rxjs';
 
-import {Category, NewsItem, NewsResponse} from "../../../shared/interfaces/article.interface";
-import {FilterComponent} from "../../../shared/shared-components/filter/filter.component";
-import {ArticleItemComponent} from "./components/article-item/article-item.component";
-import {ArticlesService} from "../../../shared/services/news/articles.service";
-import {PaginationComponent} from "../../../shared/shared-components/pagination/pagination.component";
-import {AMOUNT_CARDS_NEWS_PAGE} from "../../../shared/config/pagination.constatnts";
+import { Category, NewsItem, NewsResponse } from '../../../shared/interfaces/article.interface';
+import { FilterComponent } from '../../../shared/shared-components/filter/filter.component';
+import { ArticleItemComponent } from './components/article-item/article-item.component';
+import { ArticlesService } from '../../../shared/services/news/articles.service';
+import { PaginationComponent } from '../../../shared/shared-components/pagination/pagination.component';
+import { AMOUNT_CARDS_NEWS_PAGE } from '../../../shared/config/pagination.constatnts';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news',
@@ -19,7 +20,6 @@ import {AMOUNT_CARDS_NEWS_PAGE} from "../../../shared/config/pagination.constatn
   imports: [TranslateModule, RouterOutlet, RouterLink, ArticleItemComponent, FilterComponent, CommonModule, PaginationComponent],
   providers: [{ provide: ArticlesService, useClass: ArticlesService }]
 })
-
 export class NewsComponent implements OnInit, OnDestroy {
   public newsResponse$!: Observable<NewsResponse>;
   public news!: NewsItem[];
@@ -30,8 +30,21 @@ export class NewsComponent implements OnInit, OnDestroy {
   public currentPage: number = 1;
 
   constructor(
-      private articleService: ArticlesService
-  ) {}
+    private articleService: ArticlesService,
+    private meta: Meta
+  ) {
+    this.meta.addTags([
+      {
+        name: 'title',
+        content: 'Останні новини: Події світу української музики - 1000 і 1 пісня'
+      },
+      {
+        name: 'description',
+        content:
+          'Новини фольклористичного життя України: події, наука, освіта'
+      }
+    ]);
+  }
 
   ngOnInit() {
     this.categories$ = this.articleService.fetchCategory();
@@ -39,13 +52,13 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage});
+    this.newsResponse$ = this.articleService.fetchNews({ page: this.currentPage, size: this.itemsPerPage });
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
   filteredCategory(id: number): void {
     this.currentPage = 1;
-    this.newsResponse$ = this.articleService.fetchNews({page: this.currentPage, size: this.itemsPerPage, category_id: id});
+    this.newsResponse$ = this.articleService.fetchNews({ page: this.currentPage, size: this.itemsPerPage, category_id: id });
   }
 
   ngOnDestroy() {

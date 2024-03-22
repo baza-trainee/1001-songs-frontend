@@ -12,6 +12,7 @@ import { FetchSongs, ResetSong } from 'src/app/store/player/player.actions';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 import { InitFilterOptions } from '../../../store/filter-map/filter-map.actions';
 import { FetchMarkers } from '../../../store/map/map.actions';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-map',
@@ -24,7 +25,22 @@ export class MapComponent implements OnInit, OnDestroy {
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
   isShowSongs = true;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private meta: Meta
+  ) {
+    this.meta.addTags([
+      {
+        name: 'title',
+        content: 'Мапа архаїчної музики: Традиції української музичної спадщини'
+      },
+      {
+        name: 'description',
+        content:
+          'Знайдіть на музичній мапі українські народні пісні і фольклористів-дослідників вашої місцевості, допоможіть зберегти архіви і зробити їх публічними'
+      }
+    ]);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new InitFilterOptions());
