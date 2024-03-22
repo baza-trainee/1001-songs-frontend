@@ -14,10 +14,8 @@ export class FormattingTextService {
   }
 
   getParagraphs(src: string) {
-    console.log(src)
     const pattern = /<p>(.*?)<\/p>/g;
     const res = src.match(pattern);
-    console.log(res);
     return res ? res: [];
   }
 

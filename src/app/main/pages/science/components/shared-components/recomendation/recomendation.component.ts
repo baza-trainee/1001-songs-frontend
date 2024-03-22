@@ -25,14 +25,7 @@ export class RecomendationComponent implements OnChanges {
   constructor(private format: FormattingTextService) {}
 
   ngOnChanges(): void {
-    //this.totalParagraphs = this.format.splitText(this.recommendations); //.filter(el => this.format.checkEmptyElement(el.text));
     this.totalParagraphs = this.format.getParagraphs(this.recommendations);
-  //  console.log(this.recommendations);
-    // if (this.recommendations.length > 1) {
-    //   this.totalParagraphs.pop();
-    //   this.totalParagraphs.shift();
-    // }
-
     const pages = Math.ceil(this.totalParagraphs.length / size);
     this.recomendationPages = Array.from(Array(pages).keys()).map((el) => el + 1);
     this.setPageContent();
