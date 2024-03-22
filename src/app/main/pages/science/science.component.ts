@@ -44,10 +44,16 @@ export class ScienceComponent implements OnInit, OnDestroy {
     private educationService: EducationService,
     private meta: Meta
   ) {
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Information about the classification and periodization of song folklore'
-    });
+    this.meta.addTags([
+      {
+        name: 'title',
+        content: 'Освітній розділ - матеріали для вивчення української народної музики'
+      },
+      {
+        name: 'description',
+        content: 'Українська народна пісня для освітнього процесу в школі, коледжі і ВНЗ – фахова добірка і рекомендації від фольклористів'
+      }
+    ]);
   }
 
   ngOnInit(): void {
