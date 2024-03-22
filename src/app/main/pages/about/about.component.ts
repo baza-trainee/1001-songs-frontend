@@ -108,16 +108,6 @@ export class AboutComponent implements OnInit, OnDestroy {
         }
       })
     );
-
-    this.meta.addTags([
-      { property: 'og:title', content: 'Education folklore' },
-      {
-        property: 'og:description',
-        content:
-          'Пріоритети сучасних – заповнення «білих плям» на фольклористичній карті України (східна Волинь, Наддніпрянщина, південна Чернігівщина, Сумщина,'
-      },
-      { property: 'og:image', content: 'assets/ogimage.png' }
-    ]);
   }
 
   navigateTo(id: number) {
