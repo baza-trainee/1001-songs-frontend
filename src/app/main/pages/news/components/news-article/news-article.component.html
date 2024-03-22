@@ -12,11 +12,10 @@
         </div>
         <div class="article__slider-desktop" *ngIf="sliderItemsDesktop">
           <div class="article__sticky">
-              <app-news-card-slider [items]="sliderItemsDesktop"></app-news-card-slider>
+              <app-news-card-slider [items]="sliderItemsDesktop.slice(0, 3)"></app-news-card-slider>
           </div>
         </div>
       </div>
-
       <div class="article__box">
         <h2 class="article__sub-title">{{ 'news.article.about-article.title' | translate }}</h2>
         <div class="article__about">
