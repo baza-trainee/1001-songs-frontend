@@ -12,7 +12,7 @@ import { Content } from '../../interfaces/about.interface';
   templateUrl: './content-text.component.html',
   styleUrls: ['./content-text.component.scss']
 })
-export class ContentTextComponent implements OnInit, OnChanges {
+export class ContentTextComponent implements OnChanges {
   @Input({ required: true }) content: string = '';
   public renderedText!: Content[];
 
@@ -21,7 +21,4 @@ export class ContentTextComponent implements OnInit, OnChanges {
     this.renderedText = this.formattingService.splitText(this.content);
   }
 
-  ngOnInit() {
-   // this.renderedText = this.formattingService.splitText(this.content);
-  }
 }
