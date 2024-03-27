@@ -53,6 +53,8 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
   isFixed: boolean = false;
   gap: number = 48;
   genreData = {} as EducationGenre;
+  initialHeight: number = 0;
+
 
   songs: EducationSong[] = [];
   title!: string;
@@ -90,6 +92,13 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.songs$.pipe(takeUntil(this.destroy$)).subscribe((scienseSongs) => {
       this.songs = scienseSongs;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.playerContainer) this.distanceToTop = this.calculateDistanceToTop();
+      this.initialHeight = this.fixedContainer.nativeElement.clientHeight;
     });
   }
 
@@ -169,12 +178,6 @@ export class ScienceSongsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changePage(page: number): void {
     this.currentPage = page;
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.playerContainer) this.distanceToTop = this.calculateDistanceToTop();
-    });
   }
 
   calculateDistanceToTop(): number {

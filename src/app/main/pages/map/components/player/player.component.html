@@ -1,6 +1,6 @@
 <section class="songs" #songsContainer>
   <div class="container">
-    <div class="songs__info" #fixedContainer [ngClass]="{ fix: isFixed }" [ngStyle]="{ 'top.px': isFixed ? heightHeader : 'auto' }">
+    <div class="songs__info" #fixedContainer [ngClass]="{ fix: isFixed && songs.length > 1 }" [ngStyle]="{ 'top.px': isFixed ? heightHeader : 'auto' }">
       <div class="songs__counter" *ngIf="songs$ | async as songs">
         <div class="counter__title">{{ 'map.player.counter-title' | translate }}</div>
         <div class="counter__result">

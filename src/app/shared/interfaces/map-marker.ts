@@ -85,5 +85,6 @@ export interface MarkerOfLocation {
   city: string;
   latitude: number;
   longitude: number;
+  photo: string | null;
   song_count: number;
 }

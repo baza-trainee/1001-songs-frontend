@@ -21,7 +21,7 @@
     transform: translate(-50%, -50%);
     background-color: #fff;
     width: 100vw;
-    height: calc(100% + 50px);
+    height: calc(100% + 22px);
     z-index: -1;
     box-shadow: 0 8px 16px 8px rgba(15, 15, 15, 20%);
   }
@@ -107,6 +107,10 @@
 }
 
 @media (max-width: 1440px) {
+  .fix {
+    max-width: calc(100% - 160px);
+  }
+
   .container {
     max-width: 1280px;
     margin: 0 80px;
@@ -126,6 +130,10 @@
 }
 
 @media (max-width: 1024px) {
+  .fix {
+    max-width: calc(100% - 96px);
+  }
+
   .container {
     margin: 0 48px;
   }
@@ -150,6 +158,10 @@
     margin: 0 32px;
   }
 
+  .fix {
+    max-width: calc(100% - 64px);
+  }
+
   .songs {
     &__description {
       &-box {
@@ -162,6 +174,12 @@
         display: none;
       }
     }
+  }
+}
+
+@media (max-width: 630px) {
+  .fix {
+    max-width: calc(100% - 32px);
   }
 }
 

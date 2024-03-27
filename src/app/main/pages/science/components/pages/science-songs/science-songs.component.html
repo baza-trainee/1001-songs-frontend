@@ -13,7 +13,7 @@
     </div>
     <h4 class="songs__title-sub">Фольклорні записи</h4>
     <div #playerContainer>
-      <div class="songs__player" #fixedContainer [ngClass]="{ fix: isFixed }" [ngStyle]="{ 'top.px': isFixed ? heightHeader : '0' }">
+      <div class="songs__player" #fixedContainer [ngClass]="{ fix: isFixed && songs.length > 1}" [ngStyle]="{ 'top.px': isFixed ? heightHeader : '0' }">
         <p class="songs__player-title">{{ 'science.songs.player-title' | translate }}</p>
 
         <app-stereo-player #stereoPlayer [autoplay]="true" (isPlay)="handleIsPlayChange($event)" [song$]="playerSong$"></app-stereo-player>
@@ -23,7 +23,7 @@
     <div
       class="songs__playlist"
       *ngIf="songs$ | async as songs"
-      [ngStyle]="{ 'margin-top.px': isFixed ? fixedContainer.clientHeight : '0' }"
+      [ngStyle]="{ 'margin-top.px': isFixed ? initialHeight : '0' }"
     >
       <div class="songs__playlist-titles">
         <div class="titles title__photo">{{ 'map.player.songs-list.titles.photo' | translate }}</div>

@@ -8,7 +8,6 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Song } from '../../interfaces/song.interface';
-import { srcPopapImgInMap } from '../../../static-data/img-popap-map';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,6 +24,7 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
     {
       id: 0,
       city: 'string',
+      photo: null,
       latitude: 55.02,
       longitude: 33.02,
       song_count: 2
@@ -33,7 +33,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   @Output() markerClicked = new EventEmitter<MarkerOfLocation>();
   @Select(MapState.getMarkersList) markers$!: Observable<MarkerOfLocation[]>;
   @Select(PlayerState.getSongs) songs$!: Observable<Song[]>;
-  imgSrs: string[] = srcPopapImgInMap;
   destroy$: Subject<void> = new Subject<void>();
   public randomIndex: number = 0;
   private currentInfoWindow: MapInfoWindow | null = null;
@@ -61,20 +60,12 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.zoomControl) this.mapOptions.options.zoomControl = this.zoomControl;
-    this.randomIndex = this.getRandomIndex();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
   }
-
-  // formatCords(cords: string) {
-  //   const localcords = cords.split(',');
-  //   const lat = Number.parseFloat(localcords[0]);
-  //   const lng = Number.parseFloat(localcords[1]);
-  //   return { lat, lng };
-  // }
 
   public openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow, elem: MarkerOfLocation) {
     if (this.currentInfoWindow) {
@@ -93,7 +84,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
   }
 
   onMarkerClick(marker: MarkerOfLocation) {
-    if (this.selectedMarker?.city !== marker.city) this.randomIndex = this.getRandomIndex();
     this.selectedMarker = marker;
     this.showInfoWindow = true;
   }
@@ -110,10 +100,6 @@ export class InteractiveMapComponent implements OnInit, OnDestroy {
           ? './assets/img/home/icons/place-hover.svg'
           : './assets/img/home/icons/place.svg'
     };
-  }
-
-  getRandomIndex(): number {
-    return Math.floor(Math.random() * this.imgSrs.length);
   }
 
   navigateTo(marker: MarkerOfLocation) {
