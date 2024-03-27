@@ -1,7 +1,7 @@
 <div class="detail" [ngClass]="{'opened': isOpened}" *ngIf="isOpened">
     <div class="detail__video">
       <app-video-player *ngIf="song.video_url" [srcUrl]="song.video_url" [order$]="order$" (ytStartsPlay)="onYtStartsPlay($event)"></app-video-player>
-      <img *ngIf="!song.video_url" [src]="song.photos[0]" alt="">
+      <img *ngIf="!song.video_url && song.photos[0]" [src]="song.photos[0]" alt="ethnographic photo">
     </div>
     <div class="detail__info">
       <div class="info__date__record">
