@@ -29,6 +29,7 @@ export const google = {
 export const fakeSelectedMarker: MarkerOfLocation = {
   id: 0,
   city: 'string',
+  photo: null,
   latitude: 44,
   longitude: 55,
   song_count: 2
