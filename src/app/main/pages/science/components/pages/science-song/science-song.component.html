@@ -72,7 +72,7 @@
         </div>
       </div>
     </div>
-    <div class="song__box song__video">
+    <div class="song__box song__video" *ngIf="song.video_url">
       <div>
         <h4 class="song__title-sub">{{ 'science.song-page.video' | translate }}</h4>
       </div>
