@@ -27,7 +27,7 @@
             <h2 class="article__slider-title">Пов’язані експедиції</h2>
             <div class="article__slider-page">
               <mat-card class="article__slider-card" *ngFor="let item of sliderItemsDesktop">
-                <mat-card-content (click)="navigateTo(item.id)" (keydown)="navigateTo(item.id)" tabindex="0">
+                <mat-card-content (click)="navigateTo(item.id)" (keydown.enter)="navigateTo(item.id)" tabindex="0">
                     <div class="event">
                       <img [src]="item.preview_photo" width="400" height="270" alt="photo">
                       <span class="event__date">{{ item.expedition_date | date: 'dd.MM.yyyy' }}</span>

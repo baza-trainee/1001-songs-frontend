@@ -5,7 +5,7 @@
             class="share-link"
             aria-label="share link"
             (click)="shareOnFacebook()"
-            (keyup)="shareOnFacebook()"
+            (keyup.enter)="shareOnFacebook()"
     >
       <svg width="24" height="24">
         <use xlink:href="./assets/sprites.svg#fbNews"></use>
@@ -24,7 +24,7 @@
             class="share-link"
             aria-label="share link"
             (click)="shareOnTelegram()"
-            (keyup)="shareOnTelegram()"
+            (keyup.enter)="shareOnTelegram()"
     >
       <svg width="24" height="24">
         <use xlink:href="./assets/sprites.svg#tgNews"></use>
@@ -34,7 +34,7 @@
             aria-label="copy Url"
             class="share-link"
             (click)="copyCurrentUrl()"
-            (keyup)="copyCurrentUrl()"
+            (keyup.enter)="copyCurrentUrl()"
     >
       <svg width="24" height="24">
         <use xlink:href="./assets/sprites.svg#copyNews"></use>

@@ -4,7 +4,7 @@
           aria-label="go to first page"
           class="pagination__first"
           (click)="goToPage(1)"
-          (keydown)="goToPage(1)"
+          (keydown.enter)="goToPage(1)"
           tabindex="0"
           [class.disabled]="1 === currentPage"
           [attr.disabled]="1 === currentPage ? true : null"
@@ -18,7 +18,7 @@
           class="pagination__prev"
           [class.disabled]="1 === currentPage"
           (click)="goToPrevPage()"
-          (keydown)="goToPrevPage()"
+          (keydown.enter)="goToPrevPage()"
           tabindex="0"
           [attr.disabled]="1 === currentPage ? true : null"
         >
@@ -27,21 +27,21 @@
             </svg>
         </button></li>
         <li *ngIf="currentPage === totalPages && totalPages > maxVisiblePages" >
-            <button aria-label="go to first page" (click)="goToPage(1)" (keydown)="goToPage(1)" tabindex="0">{{ 1 }}</button>
+            <button aria-label="go to first page" (click)="goToPage(1)" (keydown.enter)="goToPage(1)" tabindex="0">{{ 1 }}</button>
         </li>
         <li *ngFor="let page of getPagesToShow()" >
-            <button aria-label="go to page" [class.active]="page === currentPage" (click)="goToPage(page)" (keydown)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</button>
+            <button aria-label="go to page" [class.active]="page === currentPage" (click)="goToPage(page)" (keydown.enter)="goToPage(page)" tabindex="0" *ngIf="page !== 0">{{ page }}</button>
             <button aria-label="pagination skip" class="pagination__skip" *ngIf="page === 0">...</button>
         </li>
         <li *ngIf="currentPage === 1 && totalPages > maxVisiblePages" >
-            <button (click)="goToPage(totalPages)" (keydown)="goToPage(totalPages)" tabindex="0" aria-label="go to first page">{{ totalPages }}</button>
+            <button (click)="goToPage(totalPages)" (keydown.enter)="goToPage(totalPages)" tabindex="0" aria-label="go to first page">{{ totalPages }}</button>
         </li>
         <li><button
           aria-label="go to next page"
           class="pagination__next"
           [class.disabled]="pages.length === currentPage"
           (click)="goToNextPage()"
-          (keydown)="goToNextPage()"
+          (keydown.enter)="goToNextPage()"
           tabindex="0"
           [attr.disabled]="pages.length === currentPage ? true : null"
         >
@@ -53,7 +53,7 @@
           aria-label="go to page"
           class="pagination__last"
           (click)="goToPage(pages.length)"
-          (keydown)="goToPage(pages.length)"
+          (keydown.enter)="goToPage(pages.length)"
           tabindex="0"
           [class.disabled]="pages.length === currentPage"
           [attr.disabled]="pages.length === currentPage ? true : null"

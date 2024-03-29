@@ -6,7 +6,7 @@
         class="news__all-item"
         *ngIf="item"
         (click)="redirectToNews(item.id)"
-        (keydown)="redirectToNews(item.id)"
+        (keydown.enter)="redirectToNews(item.id)"
         tabindex="0"
       >
         <span class="news__all-link"></span>

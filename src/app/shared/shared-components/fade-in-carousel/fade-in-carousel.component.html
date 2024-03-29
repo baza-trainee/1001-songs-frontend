@@ -8,7 +8,7 @@
         [src]="photo"
         [alt]="'photo' + i"
         (click)="openImagePopup(photos, i)"
-        (keydown)="openImagePopup(photos, i)"
+        (keydown.enter)="openImagePopup(photos, i)"
         tabindex="0"
       />
     </div>

@@ -1,9 +1,9 @@
 <div class="container">
   <div class="science">
     <h2 class="science__title">{{ title }}</h2>
-    <p class="science__introduction">
-      {{ intro }}
-    </p>
+    <div class="science__description">
+      <div class="science__description-box">{{ intro }}</div>
+    </div>
     <div class="science__gallery">
       <div class="science__gallery-item" *ngFor="let category of categories">
         <app-category-link

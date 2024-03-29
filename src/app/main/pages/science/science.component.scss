@@ -15,11 +15,17 @@
     margin-bottom: 10px;
   }
 
-  &__introduction {
-    @include body-desktop;
+  &__description {
+    display: flex;
+    gap: 24px;
 
-    max-width: 628px;
-    padding-top: 5px;
+    @include body-desktop($font-size: 16px, $line-height: 28px);
+
+    &-box {
+      column-count: 2;
+      column-gap: 40px;
+      white-space: pre-line;
+    }
   }
 
   &__gallery {
@@ -68,6 +74,12 @@
 
   .science {
     width: 100%;
+
+    &__description {
+      &-box {
+        column-count: 1;
+      }
+    }
   }
 }
 

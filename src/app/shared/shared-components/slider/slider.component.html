@@ -8,7 +8,7 @@
             class="slide__item"
             [ngStyle]="{ 'width': defaultSlideWidth + 'px' }"
             (click)="navigateTo(item.id)"
-            (keydown)="navigateTo(item.id)"
+            (keydown.enter)="navigateTo(item.id)"
             tabindex="0"
           >
             <img class="slide__item-img" src="{{ item.img }}" alt="Project photo" />

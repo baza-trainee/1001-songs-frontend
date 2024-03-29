@@ -21,6 +21,8 @@ import { PlayerService } from 'src/app/shared/services/player/player.service';
 import { Breadcrumbs } from '../../../../../../shared/interfaces/breadcrumbs.interface';
 import { FadeInCarouselComponent } from '../../../../../../shared/shared-components/fade-in-carousel/fade-in-carousel.component';
 import { Order } from 'src/app/shared/interfaces/order.interface';
+import {ImagePopupComponent} from "../../shared-components/image-popup/image-popup.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-science-song',
@@ -53,7 +55,8 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store,
     private audioService: AudioService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -95,5 +98,11 @@ export class ScienceSongComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ResetSong());
     this.destroy$.next(void 0);
     this.destroy$.unsubscribe();
+  }
+
+  openImagePopup(photo: string) {
+    this.dialog.open(ImagePopupComponent, {
+      data: { images: [photo], index: 0 }
+    });
   }
 }

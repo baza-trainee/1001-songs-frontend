@@ -11,7 +11,7 @@
         <div class="about__slider-sticky">
           <h2 class="about__slider-title">Актуальні проєкти</h2>
           <div class="about__slider-page">
-            <div *ngFor="let slide of projectsSlidesDesktop" (click)="navigateTo(slide.id)" (keydown)="navigateTo(slide.id)" tabindex="0">
+            <div *ngFor="let slide of projectsSlidesDesktop" (click)="navigateTo(slide.id)" (keydown.enter)="navigateTo(slide.id)" tabindex="0">
               <app-about-slider [item]="slide"></app-about-slider>
             </div>
           </div>

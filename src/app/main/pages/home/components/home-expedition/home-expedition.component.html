@@ -6,7 +6,7 @@
         <div class="expeditions__main-video"
              *ngIf="expedition.items[0] as expedition"
              (click)="redirectToNews(expedition.id)"
-             (keydown)="redirectToNews(expedition.id)"
+             (keydown.enter)="redirectToNews(expedition.id)"
              tabindex="0"
         >
           <img
@@ -19,7 +19,7 @@
           </p>
           <h4 class="expeditions__main-title" >{{ expedition.title }}</h4>
           <p class="expeditions__main-location">{{ expedition.location }}</p>
-          <button class="expeditions__main-btn" (click)="redirectToNews(expedition.id)" (keydown)="redirectToNews(expedition.id)" tabindex="0" aria-label="navigate to main expedition">Переглянути</button>
+          <button class="expeditions__main-btn" (click)="redirectToNews(expedition.id)" (keydown.enter)="redirectToNews(expedition.id)" tabindex="0" aria-label="navigate to main expedition">Переглянути</button>
         </div>
       </div>
       <div class="expeditions__all">
@@ -27,7 +27,7 @@
           class="expeditions__all-video"
           *ngFor="let item of expedition.items.slice(1, 5)"
           (click)="redirectToNews(item.id)"
-          (keydown)="redirectToNews(item.id)"
+          (keydown.enter)="redirectToNews(item.id)"
           tabindex="0"
         >
           <div class="expeditions__all-img">
