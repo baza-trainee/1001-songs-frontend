@@ -21,6 +21,10 @@
     top: 120px;
   }
 
+  &__content {
+    width: 70%;
+  }
+
   &__slider {
     background-color: var(--bg-color-screen);
     display: none;
@@ -116,6 +120,11 @@
   }
 
   .article {
+
+    &__content {
+      width: 100%;
+    }
+
     &__slider {
       display: block;
 

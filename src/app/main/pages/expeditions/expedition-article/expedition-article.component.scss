@@ -316,16 +316,16 @@
       }
     }
 
+    &__content {
+      width: 100%;
+    }
+
     &__slider {
       display: block;
 
       &-desktop {
         display: none;
       }
-    }
-
-    &__contant {
-      width: 100%;
     }
 
     &__player {

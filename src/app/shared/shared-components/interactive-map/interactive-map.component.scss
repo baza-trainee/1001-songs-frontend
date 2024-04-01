@@ -126,12 +126,6 @@ img {
     padding: 60px 0;
     margin: 0 32px;
   }
-
-  .popup {
-    &-map {
-      top: 16.4%;
-    }
-  }
 }
 
 @media (max-width: 500px) {
@@ -142,7 +136,6 @@ img {
 
   .popup {
     &-map {
-      top: 12%;
       width: 96%;
 
       &__title {
