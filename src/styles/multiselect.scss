@@ -214,6 +214,13 @@ app-news {
 .mat-mdc-dialog-container .mdc-dialog__container {
   border-radius: 12px;
   overflow: hidden;
+  max-height: 90vh !important;
+}
+
+@media (max-width: 465px) {
+  .cdk-overlay-pane.mat-mdc-dialog-panel {
+    max-width: 95vw !important;
+  }
 }
 
 .recommendations {
