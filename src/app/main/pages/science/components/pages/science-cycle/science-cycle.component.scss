@@ -42,6 +42,7 @@ img {
 
   &__subcategory {
     display: flex;
+    align-items: flex-start;
     gap: 24px;
 
     &-box,
@@ -50,7 +51,6 @@ img {
     }
 
     &-img {
-      min-height: 384px;
       border-radius: 12px;
       overflow: hidden;
     }
