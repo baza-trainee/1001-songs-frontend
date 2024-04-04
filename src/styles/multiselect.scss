@@ -214,6 +214,7 @@ app-news {
 .mat-mdc-dialog-container .mdc-dialog__container {
   border-radius: 12px;
   overflow: hidden;
+  height: auto !important;
   max-height: 90vh !important;
 }
 

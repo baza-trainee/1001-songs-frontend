@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Homepage } from '../../../shared/enums/icons.enum';
 import { ErrorComponent } from '../../../shared/shared-components/error/error.component';
 import { HomeTapeComponent } from '../../../shared/shared-components/home-tape/home-tape.component';
-import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ShareModalComponent } from '../../../shared/shared-components/share-modal/share-modal.component';
 import { HomeActualComponent } from './components/home-actual/home-actual.component';
 import { HomeExpeditionComponent } from './components/home-expedition/home-expedition.component';
@@ -51,14 +51,10 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-
-    this.dialog.open(ShareModalComponent, dialogConfig);
+    this.dialog.open(ShareModalComponent, { panelClass: 'custom-modalbox' });
   }
 
   openDonationDialog() {
     this.dialog.open(DonationDialogComponent, { panelClass: 'custom-modalbox' });
   }
-
 }

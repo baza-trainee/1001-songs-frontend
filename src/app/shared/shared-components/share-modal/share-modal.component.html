@@ -1,63 +1,65 @@
-<mat-dialog-content class="dialog">
-  <img class="dialog__image" [src]="ShareModal.dialogImage" alt="dialog share image">
-  <p class="dialog__text">{{ ShareModalLink.text | translate }}</p>
-  <button
-    tabindex="0"
-    aria-label="close"
-    (keyup)="closeDialog()"
-    (click)="closeDialog()"
-    class="dialog__close">
-    <img [src]="ShareModal.close" alt="close" class="dialog__close-img">
-  </button>
-</mat-dialog-content>
-<mat-dialog-actions class="dialog__action">
-  <div class="dialog__action-block">
-    <a
-      tabindex="0"
-      href="#"
-      (click)="shareOnFacebook()"
-      (keyup)="shareOnFacebook()"
-    >
-      <img [src]="ShareModal.facebook" alt="facebook share icon">
-    </a>
-    <a class="dialog__action-block--text" href="#">{{ ShareModalLink.facebook | translate }}</a>
-  </div>
-<!--  <div class="dialog__action-block dialog__action-inst">-->
-<!--    <a-->
-<!--      tabindex="0"-->
-<!--      href="#"-->
-<!--      (click)="shareOnInstagram()"-->
-<!--      (keyup)="shareOnInstagram()"-->
-<!--    >-->
-<!--      <img [src]="ShareModal.instagram" alt="instagram share icon">-->
-<!--    </a>-->
-<!--    <a class="dialog__action-block&#45;&#45;text" href="#">{{ ShareModalLink.instagram | translate }}</a>-->
-<!--  </div>-->
-  <div class="dialog__action-block">
-    <a
-      tabindex="0"
-      href="#"
-      (click)="shareOnTelegram()"
-      (keyup)="shareOnTelegram()"
-    >
-      <img [src]="ShareModal.telegram" alt="telegram share icon">
-    </a>
-    <a class="dialog__action-block--text" href="#">{{ ShareModalLink.telegram | translate }}</a>
-  </div>
-  <div class="dialog__action-block">
+<div class="share-dialog">
+  <div class="dialog">
+    <img class="dialog__image" [src]="ShareModal.dialogImage" alt="dialog share image">
+    <p class="dialog__text">{{ ShareModalLink.text | translate }}</p>
     <button
-      type="button"
-      aria-label="copy Url"
-      class="dialog__action-block--btn"
-      (click)="copyCurrentUrl()"
       tabindex="0"
-    >
-      <img [src]="ShareModal.copy" alt="copy share icon">
+      aria-label="close"
+      (keyup)="closeDialog()"
+      (click)="closeDialog()"
+      class="dialog__close">
+      <img [src]="ShareModal.close" alt="close" class="dialog__close-img">
     </button>
-    <p
-      (click)="copyCurrentUrl()"
-      (keypress)="copyCurrentUrl()"
-      tabindex="0"
-      class="dialog__action-block--text"> {{ ShareModalLink.copy | translate }}</p>
   </div>
-</mat-dialog-actions>
+  <div class="dialog__action">
+    <div class="dialog__action-block">
+      <a
+        tabindex="0"
+        href="#"
+        (click)="shareOnFacebook()"
+        (keyup)="shareOnFacebook()"
+      >
+        <img [src]="ShareModal.facebook" alt="facebook share icon">
+      </a>
+      <a class="dialog__action-block--text" href="#">{{ ShareModalLink.facebook | translate }}</a>
+    </div>
+    <!--  <div class="dialog__action-block dialog__action-inst">-->
+    <!--    <a-->
+    <!--      tabindex="0"-->
+    <!--      href="#"-->
+    <!--      (click)="shareOnInstagram()"-->
+    <!--      (keyup)="shareOnInstagram()"-->
+    <!--    >-->
+    <!--      <img [src]="ShareModal.instagram" alt="instagram share icon">-->
+    <!--    </a>-->
+    <!--    <a class="dialog__action-block&#45;&#45;text" href="#">{{ ShareModalLink.instagram | translate }}</a>-->
+    <!--  </div>-->
+    <div class="dialog__action-block">
+      <a
+        tabindex="0"
+        href="#"
+        (click)="shareOnTelegram()"
+        (keyup)="shareOnTelegram()"
+      >
+        <img [src]="ShareModal.telegram" alt="telegram share icon">
+      </a>
+      <a class="dialog__action-block--text" href="#">{{ ShareModalLink.telegram | translate }}</a>
+    </div>
+    <div class="dialog__action-block">
+      <button
+        type="button"
+        aria-label="copy Url"
+        class="dialog__action-block--btn"
+        (click)="copyCurrentUrl()"
+        tabindex="0"
+      >
+        <img [src]="ShareModal.copy" alt="copy share icon">
+      </button>
+      <p
+        (click)="copyCurrentUrl()"
+        (keypress)="copyCurrentUrl()"
+        tabindex="0"
+        class="dialog__action-block--text"> {{ ShareModalLink.copy | translate }}</p>
+    </div>
+  </div>
+</div>

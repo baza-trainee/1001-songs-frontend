@@ -9,9 +9,7 @@
       </div>
 
       <div class="songs__player">
-        <div class="player__title" *ngIf="selectedSong$ | async as song">
-          {{ 'map.player.player-title' | translate }}
-        </div>
+        <div class="player__title" *ngIf="selectedSong$ | async as song">Слухати пісню</div>
 
         <app-stereo-player
           #stereoPlayer

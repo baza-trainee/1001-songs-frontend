@@ -7,7 +7,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogRef } from '@angular/cdk/dialog';
 import { ShareModal } from '../../enums/icons.enum';
 import { ShareModalLink } from '../../enums/navLinks.enum';
-import {ShareService} from "../../services/share/share.service";
+import { ShareService } from "../../services/share/share.service";
 
 @Component({
   selector: 'app-share-modal',

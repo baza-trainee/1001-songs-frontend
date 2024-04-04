@@ -7,7 +7,7 @@ export enum Homepage {
 }
 
 export enum ShareModal {
-  dialogImage = `${shareModalPath}dialog-image.png`,
+  dialogImage = `${shareModalPath}image.jpg`,
   facebook = `${shareModalPath}facebook.svg`,
   instagram = `${shareModalPath}instagram.svg`,
   telegram = `${shareModalPath}telegram.svg`,

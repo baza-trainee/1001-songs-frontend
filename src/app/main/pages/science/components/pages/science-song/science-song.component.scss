@@ -81,6 +81,11 @@
   }
 
   &__info {
+    &-descr {
+      text-indent: each-line;
+      white-space: pre-wrap;
+    }
+
     &-title {
       @include body-desktop($color: var(--text-color-popup-menu));
 
