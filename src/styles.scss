@@ -69,8 +69,25 @@ blockquote {
 }
 
 .content {
+  display: inline-block;
+  width: 100%;
+
+  img {
+    border-radius: 12px;
+  }
+
   h1 {
     line-height: normal;
+  }
+
+  p {
+    padding-bottom: 8px;
+  }
+
+  .text {
+    img {
+      margin: 8px 0;
+    }
   }
 
   ul {
@@ -86,8 +103,8 @@ blockquote {
     padding-bottom: 10px;
   }
 
-  img {
-    border-radius: 12px;
+  .carousel {
+    margin: 8px 0;
   }
 
   a {
@@ -96,6 +113,17 @@ blockquote {
 
     &:hover {
       text-decoration: none;
+    }
+  }
+}
+
+.quill {
+  &_p {
+    &_separator {
+      padding: 0;
+      display: block;
+      height: 12px;
+      width: 1100%;
     }
   }
 }
