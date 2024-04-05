@@ -27,6 +27,10 @@
     max-height: 400px;
     cursor: pointer;
     overflow: hidden;
+
+    img {
+      object-fit: contain;
+    }
   }
 
   &__info {
