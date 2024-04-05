@@ -100,7 +100,8 @@ blockquote {
     padding-left: 20px;
   }
 
-  h2 {
+  h2, h3, h4, h5, h6 {
+    margin: 0;
     padding-bottom: 10px;
   }
 
@@ -121,10 +122,10 @@ blockquote {
 .quill {
   &_p {
     &_separator {
-      padding: 0;
+      padding: 0 !important;
       display: block;
       height: 12px;
-      width: 1100%;
+      width: 100%;
     }
   }
 }
